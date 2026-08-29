@@ -6,7 +6,7 @@ import styles from './home-agent-foundations.module.css';
 
 export const AGENT_FOUNDATIONS = [
   { id: 'brand', title: 'Your company brand', description: 'Reflect your company’s voice and sales approach, using the business guidance and enquiry process you approve.' },
-  { id: 'inventory', title: 'Your product inventory', description: 'Use your catalogue and, on supported plans, connected inventory to narrow down the products relevant to each enquiry.' },
+  { id: 'inventory', title: 'Your product catalogue', description: 'Give the Agent approved product details and, on supported plans, connected inventory context to identify relevant options for each enquiry.' },
   { id: 'specifications', title: 'Your technical specifications', description: 'Ground product answers in approved specifications, manuals and application details. Clarify missing information before suggesting a fit.' },
   { id: 'recommendations', title: 'Suitable recommendations', description: 'Match buyer requirements with supplied product information, explain the shortlist, and flag what your team still needs to confirm.' },
 ] as const;
@@ -75,7 +75,7 @@ function RecommendationScene() {
     <div className={styles.shortlistPanel}>
       <div className={styles.shortlistProduct}>
         <img src="/images/verified-equipment/linde-e16-p.png" alt="" width="124" height="108" loading="lazy" />
-        <span><small>Illustrative shortlist</small><strong>Option to review</strong><span className={styles.matchTag}><GraphicIcon kind="filter" />Based on supplied data</span></span>
+        <span><strong>Option to review</strong><span className={styles.matchTag}><GraphicIcon kind="filter" />Based on supplied data</span></span>
       </div>
       <div className={styles.reviewNote}><GraphicIcon kind="review" /><span>Confirm suitability, availability and commercial terms.</span></div>
     </div>
@@ -89,7 +89,7 @@ export function HomeAgentFoundations() {
     <div className={styles.frame}>
       <div className={styles.intro}>
         <p className={styles.eyebrow}>Built around your business</p>
-        <h2 id="home-agent-foundations">Your AI Sales Agent. <span>Your business at its core.</span></h2>
+        <h2 id="home-agent-foundations">Your AI Sales Agent <span>Your business at its core</span></h2>
         <p>Bring your brand, inventory and technical knowledge into every enquiry, so buyers can explore suitable options with clearer guidance.</p>
       </div>
       <div className={styles.grid}>
@@ -101,7 +101,6 @@ export function HomeAgentFoundations() {
           </article>;
         })}
       </div>
-      <p className={styles.disclaimer}>Illustrative workflows. Inventory connections depend on your plan and setup; your team confirms final suitability and commercial details.</p>
     </div>
   </section>;
 }

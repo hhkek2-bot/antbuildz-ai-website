@@ -6,6 +6,8 @@ import { simplifyAgreementHub, syncAgreementMetadata } from '../lib/agreement-hu
 import { EMMA_PORTRAIT_ALT, EMMA_PORTRAIT_SRC, standardiseAgentPortraits } from '../lib/agent-identity';
 import { correctSalesAgentCopy } from '../lib/ai-sales-agent-copy';
 import { HOMEPAGE_SEO, syncHomepageMetadata } from '../lib/homepage-seo';
+import { applyPublicMarketingTypographyTrial } from '../lib/public-marketing-typography';
+import { removeHeadingFullStops } from '../lib/title-punctuation';
 
 const ORIGINAL_STYLESHEET_ID = 'antbuildz-original-styles';
 const ORIGINAL_SCRIPT_ID = 'antbuildz-original-app';
@@ -17,6 +19,17 @@ const ROUTE_ALIASES: Record<string, string> = {
   '/app': '/ai-agent-console',
   '/develop-admin': '/ai-agent-console',
 };
+
+const WHO_WE_SERVE_PATHS = new Set([
+  '/rental-businesses',
+  '/manufacturers-brands',
+  '/dealers-distributors',
+  '/industrial-mro',
+  '/hardware-trade-supplies',
+  '/building-engineering',
+  '/parts-aftermarket',
+  '/buggies-commercial-vehicles',
+]);
 
 const PAGE_TITLES: Record<string, string> = {
   '/': HOMEPAGE_SEO.title,
@@ -153,7 +166,12 @@ function correctPublicDrawer() {
     });
 }
 
-function createHeaderMenuIntro(eyebrow: string, title: string, description: string, action: string, href: string) {
+function createHeaderMenuIntro(
+  eyebrow: string,
+  title: string,
+  description: string,
+  action?: { label: string; href: string },
+) {
   const intro = document.createElement('div');
   intro.className = 'antbuildz-industries-menu__intro';
   const copy = document.createElement('div');
@@ -165,11 +183,15 @@ function createHeaderMenuIntro(eyebrow: string, title: string, description: stri
   const text = document.createElement('p');
   text.textContent = description;
   copy.append(kicker, heading, text);
-  const link = document.createElement('a');
-  link.className = 'antbuildz-industries-menu__overview-action';
-  link.href = href;
-  link.textContent = action;
-  intro.append(copy, link);
+  const link = action ? document.createElement('a') : null;
+  if (link && action) {
+    link.className = 'antbuildz-industries-menu__overview-action';
+    link.href = action.href;
+    link.textContent = action.label;
+    intro.append(copy, link);
+  } else {
+    intro.appendChild(copy);
+  }
   return { intro, link };
 }
 
@@ -226,10 +248,12 @@ function correctResourcesMenu(root: HTMLElement) {
     const { intro, link: overview } = createHeaderMenuIntro(
       'RESOURCES', 'Practical guides for industrial AI',
       'Understand your Agent, explore the platform and prepare your team.',
-      'All resources', '/resources',
+      { label: 'All resources', href: '/resources' },
     );
-    overview.classList.add('antbuildz-resources-menu__link');
-    bindResourceNavigation(overview);
+    if (overview) {
+      overview.classList.add('antbuildz-resources-menu__link');
+      bindResourceNavigation(overview);
+    }
     const links = document.createElement('div');
     links.className = 'antbuildz-industries-menu__links antbuildz-resources-menu__links';
     RESOURCE_MENU_GROUPS.forEach((topicGroup, index) => {
@@ -800,7 +824,6 @@ function createDesktopIndustriesMenu() {
   const { intro } = createHeaderMenuIntro(
     'WHO WE SERVE', 'Industrial AI by business model',
     'Practical AI sales workflows for products, rental, parts and technical supply.',
-    'View AI products', '/ai-webstore-suite',
   );
 
   const links = document.createElement('div');
@@ -864,11 +887,6 @@ function correctIndustriesMenu(root: HTMLElement) {
 
 function correctHeaderLayout(root: HTMLElement) {
   const utilities = root.querySelector<HTMLElement>('.bright-nav-utilities');
-  const signIn = utilities?.querySelector<HTMLElement>('.bright-nav-sign-in');
-  const languageUtilities = utilities?.querySelector<HTMLElement>('.antbuildz-header-utilities');
-  if (utilities && signIn && languageUtilities && languageUtilities.nextElementSibling !== signIn) {
-    utilities.insertBefore(languageUtilities, signIn);
-  }
 
   if (utilities && !utilities.querySelector('.antbuildz-header-demo')) {
     const demoLink = document.createElement('a');
@@ -995,6 +1013,11 @@ function correctLinks(root: HTMLElement) {
     if (label === 'AI Webstore Suite') link.setAttribute('href', '/ai-webstore-suite');
     if (label === 'Pricing') link.setAttribute('href', '/pricing');
     if (link.closest('.bright-nav-product-links')
+      && ['AI Sales Agent', 'AI Webstore Suite', 'Pricing'].includes(label ?? '')) {
+      if (link.getAttribute('href') === window.location.pathname) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    }
+    if (link.closest('.bright-nav-product-links')
       && (label === 'Backend Admin' || label === 'AI Agent Console' || label === 'Resources')) {
       if (label !== 'Resources') link.textContent = 'Resources';
       link.setAttribute('href', '/resources');
@@ -1084,6 +1107,20 @@ function correctFooter(root: HTMLElement) {
 
   footer.setAttribute('aria-label', 'Antbuildz AI footer');
   footer.querySelector<HTMLElement>('nav[aria-label="Marketplace"]')?.setAttribute('hidden', '');
+
+  const languageUtilities = root.querySelector<HTMLElement>('.antbuildz-header-utilities');
+  const footerBottom = footer.querySelector<HTMLElement>('.abz-public-footer__bottom-inner');
+  if (languageUtilities && footerBottom && languageUtilities.parentElement !== footerBottom) {
+    languageUtilities.classList.add('antbuildz-footer-language');
+    footerBottom.appendChild(languageUtilities);
+  }
+
+  const aiProducts = footer.querySelector<HTMLElement>('nav[aria-label="AI Products"]');
+  const salesAgentItem = aiProducts?.querySelector<HTMLAnchorElement>('a[href="/ai-sales-agent"]')?.closest('li');
+  const webstoreItem = aiProducts?.querySelector<HTMLAnchorElement>('a[href="/ai-webstore-suite"]')?.closest('li');
+  if (salesAgentItem && webstoreItem && salesAgentItem !== webstoreItem.previousElementSibling) {
+    webstoreItem.parentElement?.insertBefore(salesAgentItem, webstoreItem);
+  }
 
   const brandCopy = footer.querySelector<HTMLElement>('.abz-public-footer__brand p');
   setPricingText(brandCopy, 'Industrial AI Sales Agent, AI Webstore Suite and AI Agent Console for product-led B2B teams.');
@@ -1300,7 +1337,7 @@ function createHomeIndustriesSection() {
   eyebrow.textContent = 'WHO WE SERVE';
   const title = document.createElement('h2');
   title.id = 'antbuildz-home-industries-title';
-  title.textContent = 'AI sales workflows shaped around industrial work.';
+  title.textContent = 'AI sales workflows shaped around industrial work';
   const description = document.createElement('p');
   description.className = 'antbuildz-home-industries__description';
   description.textContent = 'From rental dates and site conditions to technical specifications and parts fitment, Antbuildz AI captures the details your team needs before an enquiry reaches sales.';
@@ -1463,7 +1500,20 @@ function setupHomeHeroConversationRuntime(
   const renderConversation = (resetToTop = false) => {
     messageNodes.forEach((message, index) => {
       message.classList.toggle('is-visible', index <= currentStep);
+      message.classList.toggle('is-fade-top', false);
+      message.classList.toggle('is-fade-near-top', false);
+      message.classList.toggle('is-fade-near-bottom', false);
+      message.classList.toggle('is-fade-bottom', false);
     });
+    const visibleMessages = messageNodes.slice(0, currentStep + 1);
+    if (visibleMessages.length > 1) {
+      visibleMessages[0]?.classList.toggle('is-fade-top', true);
+      visibleMessages.at(-1)?.classList.toggle('is-fade-bottom', true);
+    }
+    if (visibleMessages.length > 3) {
+      visibleMessages[1]?.classList.toggle('is-fade-near-top', true);
+      visibleMessages.at(-2)?.classList.toggle('is-fade-near-bottom', true);
+    }
     typing?.classList.toggle(
       'is-visible',
       conversationActive && !reducedMotion.matches && currentStep < messageNodes.length - 1,
@@ -1492,7 +1542,7 @@ function setupHomeHeroConversationRuntime(
       const title = hero.querySelector<HTMLElement>('.antbuildz-ai-home-intro') || hero.querySelector<HTMLElement>('.ai-marketplace-hero-copy h1');
       if (title) {
         const heroBounds = hero.getBoundingClientRect();
-        const titleGap = heroBounds.width <= 767 ? 24 : 40;
+        const titleGap = heroBounds.width <= 767 ? 32 : 48;
         const chatTop = title.getBoundingClientRect().bottom - heroBounds.top + titleGap;
         hero.style.setProperty('--antbuildz-home-chat-top', `${chatTop}px`);
         hero.style.setProperty('--antbuildz-home-chat-height', `${Math.max(200, Math.min(430, heroBounds.height - chatTop - 28))}px`);
@@ -1885,6 +1935,22 @@ function correctPublicTypography(root: HTMLElement) {
   root.querySelector('article h1')?.closest('article')?.classList.add('antbuildz-article-typography');
 }
 
+function correctIndustryTrustPlacement(root: HTMLElement) {
+  const isWhoWeServePage = WHO_WE_SERVE_PATHS.has(window.location.pathname);
+  root.querySelectorAll<HTMLElement>('.si-sierra-stage--trust').forEach((section) => {
+    if (isWhoWeServePage) {
+      section.dataset.antbuildzHomepageOnly = 'true';
+      section.hidden = true;
+      section.setAttribute('inert', '');
+      return;
+    }
+    if (section.dataset.antbuildzHomepageOnly !== 'true') return;
+    section.hidden = false;
+    section.removeAttribute('inert');
+    delete section.dataset.antbuildzHomepageOnly;
+  });
+}
+
 function applyAntbuildzAiCorrections(root: HTMLElement) {
   correctWordmarks(root);
   correctLinks(root);
@@ -1902,7 +1968,10 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   syncAgreementMetadata(document, window.location.pathname);
   scopeAiHelpExperience(root, window.location.pathname);
   standardiseAgentPortraits(root);
+  correctIndustryTrustPlacement(root);
   correctPublicTypography(root);
+  applyPublicMarketingTypographyTrial(root, window.location.pathname);
+  removeHeadingFullStops(root, window.location.pathname);
 
   const pageTitle = PAGE_TITLES[window.location.pathname];
   if (pageTitle) document.title = pageTitle;

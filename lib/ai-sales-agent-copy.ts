@@ -42,12 +42,12 @@ export const SALES_AGENT_COPY = {
     'Review conversations, buyer details and enquiry signals so your team knows where to follow up.',
   ],
   consoleTabs: [
-    ['Define Your Agent’s Role.', 'Set your agent’s role, tone and response boundaries.'],
-    ['Manage Your Business Knowledge.', 'Add catalogues, documents and business information for your agent to use.'],
-    ['Guide Qualification and Handover.', 'Set instructions for qualification, product recommendations and handover to your team.'],
-    ['Review Buyer Conversations.', 'Review buyer questions and agent responses so your team can continue with context.'],
-    ['Review Buyer Details.', 'Review contact details and product requirements for follow-up.'],
-    ['Understand Quotation Interest.', 'Review urgency, budget and quotation interest to prioritise enquiries.'],
+    ['Define Your Agent’s Role', 'Set your agent’s role, tone and response boundaries.'],
+    ['Manage Your Business Knowledge', 'Add catalogues, documents and business information for your agent to use.'],
+    ['Guide Qualification and Handover', 'Set instructions for qualification, product recommendations and handover to your team.'],
+    ['Review Buyer Conversations', 'Review buyer questions and agent responses so your team can continue with context.'],
+    ['Review Buyer Details', 'Review contact details and product requirements for follow-up.'],
+    ['Understand Quotation Interest', 'Review urgency, budget and quotation interest to prioritise enquiries.'],
   ],
   connection: 'Start with the AI Sales Agent. Add the AI Webstore Suite to connect conversations with product listings, inventory and sales or rental workflows. Available connections and workflows depend on your plan and setup.',
   channelsIntro: 'Give buyers a way to ask product questions wherever they discover your business. Use your website and shared agent link to turn interest into enquiries your team can follow up.',
@@ -121,7 +121,7 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
 
   set('.bright-hero h1 .bright-hero-title-line:nth-child(1)', 'The AI Sales Agent');
   set('.bright-hero h1 .bright-hero-title-line:nth-child(2)', '');
-  set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Built for Industrial Business.']);
+  set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Built for Industrial Business']);
   set('.bright-subtitle', SALES_AGENT_COPY.hero);
   action('.bright-hero-actions-block .bright-btn-primary', 'Build Your AI Agent ');
   action('.bright-hero-actions-block .bright-btn-secondary', 'Book a Demo');
@@ -137,7 +137,7 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
   SALES_AGENT_COPY.quotationLabels.forEach((label, i) => set(`.bv-task-${i + 1} > span:last-child`, label));
 
   set('.si-headline-line:first-child', ['AI Agent ', 'Features', '']);
-  set('.si-headline-line:last-child', 'Built for Industrial Sales.');
+  set('.si-headline-line:last-child', 'Built for Industrial Sales');
   set('.si-sub', SALES_AGENT_COPY.featuresIntro);
   SALES_AGENT_COPY.features.forEach(([visual, title, description]) => {
     page.querySelectorAll(`.si-visual-${visual}`).forEach(illustration => {
@@ -147,7 +147,7 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     });
   });
 
-  set('.pain-bento-header h2', ['Why Enquiries Still ', 'Slip Through.']);
+  set('.pain-bento-header h2', ['Why Enquiries Still ', 'Slip Through']);
   set('.pain-bento-header > p', SALES_AGENT_COPY.problemsIntro);
   SALES_AGENT_COPY.problems.forEach(([area, title, description]) => {
     set(`.pain-area-${area} .pain-body h3`, title);
@@ -156,8 +156,8 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
   set('.pv-drop', 'Questions unanswered');
 
   set('.af-section-eyebrow', 'AI Agent Console');
-  set('.af-section-title-line:first-child', 'Manage Your Agent. ');
-  set('.af-section-title-line:last-child', 'Manage Your Enquiries.');
+  set('.af-section-title-line:first-child', 'Manage Your Agent ');
+  set('.af-section-title-line:last-child', 'Manage Your Enquiries');
   SALES_AGENT_COPY.consoleIntro.forEach((text, i) => set(`.af-section-desc-line:nth-child(${i + 1})`, text));
   const activeTab = Array.from(page.querySelectorAll('.af-pill')).findIndex(tab => tab.getAttribute('aria-selected') === 'true');
   const tabCopy = SALES_AGENT_COPY.consoleTabs[activeTab];
@@ -167,10 +167,10 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
   }
 
   set('.flexible-ai-platform__eyebrow', 'Connected Catalogue and Inventory');
-  set('#flexible-ai-platform-heading', ['Extend Your Agent Into a ', 'Complete Sales System.']);
+  set('#flexible-ai-platform-heading', ['Extend Your Agent Into a ', 'Complete Sales System']);
   set('.flexible-ai-platform__heading > p', SALES_AGENT_COPY.connection);
 
-  set('.dt-title', ['One ', 'AI Sales Agent.']);
+  set('.dt-title', ['One ', 'AI Sales Agent']);
   set('.dt-subtitle', 'More Ways to Start a Conversation.');
   set('.dt-desc', SALES_AGENT_COPY.channelsIntro);
   page.querySelectorAll('.dt-card').forEach((card, i) => {
@@ -180,7 +180,7 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     setSalesAgentText(card.querySelector('.dt-card-desc'), copy[1]);
   });
 
-  set('.aisl-intro h2', ['Help Your Team ', 'Take the Next Step.']);
+  set('.aisl-intro h2', ['Help Your Team ', 'Take the Next Step']);
   set('.aisl-intro-copy', SALES_AGENT_COPY.nextStepIntro);
   const capabilities = page.querySelector('.aisl-metrics');
   capabilities?.setAttribute('aria-label', 'AI Sales Agent capabilities');
@@ -193,7 +193,7 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     setSalesAgentText(cell.querySelector('.aisl-stat-label'), copy[1]);
   });
 
-  set('.ws-cta-title', ['Build', ' Your AI Sales Agent.']);
+  set('.ws-cta-title', ['Build', ' Your AI Sales Agent']);
   action('.ws-cta-btn-primary', 'Build Your AI Agent ');
   action('.ws-cta-btn-outline', 'Book a Demo');
   page.querySelectorAll('.ws-cta-float').forEach((card, i) => {

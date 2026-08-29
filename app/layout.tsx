@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   authors: [{ name: 'Antbuildz', url: 'https://antbuildz.ai' }],
   creator: 'Antbuildz',
   publisher: 'Antbuildz',
+  icons: {
+    icon: [{ url: '/develop-admin-assets/logo-a.png', type: 'image/png' }],
+    shortcut: '/develop-admin-assets/logo-a.png',
+  },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
   openGraph: {
     title: 'Antbuildz AI | Industrial AI Sales Ecosystem',

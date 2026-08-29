@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import { OriginalAntbuildzApp } from '../original-antbuildz-app';
 import { EmmaAvatar } from '../emma-avatar';
 import { correctWebstoreCopy } from '../../lib/ai-webstore-copy';
+import { removeHeadingFullStops } from '../../lib/title-punctuation';
 import { CHAT_TURNS, DEMO_PRODUCTS, INVENTORY_PRODUCTS, INVENTORY_FIELDS, STORY_STAGES, advanceStoryTime, getStoryFrame, productDemoPath } from './storyboard';
 import { PREVIEW_PAGE, syncPreviewMetadata } from './preview-metadata';
 import styles from './webstore-concept.module.css';
@@ -321,6 +322,7 @@ export function WebstoreConceptPage() {
       attachHeader();
       // Reapply to newly mounted tabs/FAQs even after the visual is attached.
       correctWebstoreCopy(root, window.location.pathname);
+      removeHeadingFullStops(root, window.location.pathname);
       if (container?.isConnected) return;
       const visual = root.querySelector<HTMLElement>('.ws2-hero-visual');
       if (!visual) return;

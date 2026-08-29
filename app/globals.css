@@ -506,6 +506,63 @@ button, summary { font: inherit; }
    flatten their different heading, body, question and control roles here.
    The --type-* tokens above serve source-owned additions only. */
 
+/* Reversible public-marketing typography trial. Role markers are applied by
+   the source compatibility layer; Console and embedded demonstration content
+   are deliberately absent from the selector map. */
+#root.antbuildz-original-root.antbuildz-typography-trial {
+  --antbuildz-trial-hero-title-size: clamp(44px, 4.5vw, 64px);
+  --antbuildz-trial-section-title-size: clamp(40px, 3.334vw, 48px);
+  --antbuildz-trial-major-intro-size: clamp(17px, 1.25vw, 18px);
+  --antbuildz-trial-section-title-weight: 700;
+  --antbuildz-trial-hero-title-line: 1.03;
+  --antbuildz-trial-section-title-line: 1.08;
+  --antbuildz-trial-section-title-tracking: -.03em;
+  --antbuildz-trial-major-intro-line: 1.55;
+}
+
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="hero-title"],
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="hero-title"] :where(span) {
+  font-family: var(--font-heading) !important;
+  font-size: var(--antbuildz-trial-hero-title-size) !important;
+  font-weight: 800 !important;
+  line-height: var(--antbuildz-trial-hero-title-line) !important;
+  letter-spacing: -.04em !important;
+}
+
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="hero-title"] {
+  max-width: 1180px;
+}
+
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="section-title"],
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="section-title"] :where(span) {
+  font-family: var(--font-heading) !important;
+  font-size: var(--antbuildz-trial-section-title-size) !important;
+  font-weight: var(--antbuildz-trial-section-title-weight) !important;
+  line-height: var(--antbuildz-trial-section-title-line) !important;
+  letter-spacing: var(--antbuildz-trial-section-title-tracking) !important;
+  white-space: normal !important;
+}
+
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="major-intro"],
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="major-intro"] > :where(span) {
+  font-family: var(--font-body) !important;
+  font-size: var(--antbuildz-trial-major-intro-size) !important;
+  font-weight: 400 !important;
+  line-height: var(--antbuildz-trial-major-intro-line) !important;
+  white-space: normal !important;
+}
+
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="section-title"][data-antbuildz-type-align="center"] {
+  width: min(100%, 900px);
+  margin-inline: auto !important;
+}
+
+#root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-type-role="major-intro"][data-antbuildz-type-align="center"] {
+  width: min(100%, 800px);
+  max-width: 800px !important;
+  margin-inline: auto !important;
+}
+
 /* Words replacing Sales Agent statistics use the responsive heading scale,
    not the oversized numeral scale. Keep the four-block layout unchanged. */
 #root.antbuildz-public-typography .aisl-metrics[data-antbuildz-capabilities] .aisl-stat-value {
@@ -561,6 +618,12 @@ button, summary { font: inherit; }
     --type-section-heading: clamp(2rem, 9vw, 2.75rem);
     --type-subsection-heading: clamp(1.5rem, 6.2vw, 1.75rem);
     --type-lead: 1rem;
+  }
+
+  #root.antbuildz-original-root.antbuildz-typography-trial {
+    --antbuildz-trial-hero-title-size: clamp(36px, 9.5vw, 38px);
+    --antbuildz-trial-section-title-size: clamp(30px, 8vw, 32px);
+    --antbuildz-trial-major-intro-size: 16px;
   }
 }
 
@@ -632,12 +695,6 @@ button, summary { font: inherit; }
   #root.antbuildz-original-root .antbuildz-header-demo { padding-inline: 14px; font-size: 13px; }
 }
 
-@media (min-width: 981px) and (max-width: 1179px), (max-width: 767px) {
-  #root.antbuildz-original-root .antbuildz-language-trigger { width: 44px; min-width: 44px; padding: 0; justify-content: center; }
-  #root.antbuildz-original-root .antbuildz-language-trigger > span,
-  #root.antbuildz-original-root .antbuildz-language-trigger::after { display: none; }
-}
-
 @media (max-width: 767px) {
   #root.antbuildz-original-root .bright-nav { padding-inline: 12px; gap: 8px; }
   #root.antbuildz-original-root .bright-nav-utilities { gap: 4px; }
@@ -683,7 +740,7 @@ button, summary { font: inherit; }
   letter-spacing: normal;
 }
 
-#root.antbuildz-original-root .antbuildz-public-header .antbuildz-language-trigger {
+#root.antbuildz-original-root .antbuildz-footer-language .antbuildz-language-trigger {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 750;
@@ -695,11 +752,36 @@ button, summary { font: inherit; }
   .antbuildz-public-header { --header-nav-font-size: 13px; }
 }
 
-.antbuildz-public-header .bright-nav-product-link[aria-current] {
-  text-decoration: underline;
-  text-decoration-color: var(--yellow);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 8px;
+.antbuildz-public-header :is(.bright-nav-product-link, .antbuildz-industries-menu__trigger) {
+  position: relative;
+  border-radius: 0;
+  text-decoration: none;
+}
+
+.antbuildz-public-header :is(.bright-nav-product-link, .antbuildz-industries-menu__trigger)::before {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: 1px;
+  left: 8px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--yellow);
+  opacity: 0;
+  transform: scaleX(.55);
+  transform-origin: center;
+  transition: opacity .18s ease, transform .18s ease;
+  pointer-events: none;
+}
+
+.antbuildz-public-header .bright-nav-product-link[aria-current]::before,
+.antbuildz-industries-menu:has(a[aria-current]) > .antbuildz-industries-menu__trigger::before,
+.antbuildz-public-header .bright-nav-product-link[aria-current][hidden] + .antbuildz-resources-menu > .antbuildz-industries-menu__trigger::before,
+.antbuildz-industries-menu[open] > .antbuildz-industries-menu__trigger::before,
+.antbuildz-resources-menu[open] > .antbuildz-industries-menu__trigger::before,
+.antbuildz-public-header :is(.bright-nav-product-link, .antbuildz-industries-menu__trigger):focus-visible::before {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .bright-resource-topic-list button[aria-controls="antbuildz-resource-role-links"] {
@@ -778,6 +860,15 @@ button, summary { font: inherit; }
   }
 }
 
+/* Align the wide desktop header controls with the same 1280px content frame
+   used by homepage section two. The header surface still spans the
+   viewport, and the primary navigation remains centred to the viewport. */
+@media (min-width: 1400px) {
+  #root.antbuildz-original-root .antbuildz-public-header .bright-nav {
+    padding-inline: max(5%, calc((100% - 1280px) / 2));
+  }
+}
+
 .antbuildz-industries-menu__trigger {
   display: flex;
   height: 44px;
@@ -801,12 +892,14 @@ button, summary { font: inherit; }
 
 .antbuildz-industries-menu__trigger::-webkit-details-marker { display: none; }
 
-/* Menu indicators inherit both light and dark header colours. */
-.antbuildz-public-header :is(.antbuildz-industries-menu__trigger, .antbuildz-language-trigger) {
+/* Menu indicators inherit their current header or footer colour. */
+.antbuildz-public-header .antbuildz-industries-menu__trigger,
+.antbuildz-footer-language .antbuildz-language-trigger {
   gap: 8px;
 }
 
-.antbuildz-public-header :is(.antbuildz-industries-menu__trigger, .antbuildz-language-trigger)::after {
+.antbuildz-public-header .antbuildz-industries-menu__trigger::after,
+.antbuildz-footer-language .antbuildz-language-trigger::after {
   content: "";
   display: block;
   width: 8px;
@@ -819,19 +912,22 @@ button, summary { font: inherit; }
   pointer-events: none;
 }
 
-.antbuildz-public-header :is(.antbuildz-industries-menu__trigger, .antbuildz-language-trigger)[aria-expanded="true"]::after {
+.antbuildz-public-header .antbuildz-industries-menu__trigger[aria-expanded="true"]::after,
+.antbuildz-footer-language .antbuildz-language-trigger[aria-expanded="true"]::after {
   transform: translateY(2px) rotate(225deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .antbuildz-public-header :is(.antbuildz-industries-menu__trigger, .antbuildz-language-trigger)::after {
+  .antbuildz-public-header :is(.bright-nav-product-link, .antbuildz-industries-menu__trigger)::before,
+  .antbuildz-public-header .antbuildz-industries-menu__trigger::after,
+  .antbuildz-footer-language .antbuildz-language-trigger::after {
     transition: none;
   }
 }
 
 .antbuildz-industries-menu[open] .antbuildz-industries-menu__trigger,
 .antbuildz-resources-menu[open] .antbuildz-industries-menu__trigger {
-  background: rgb(255 255 255 / 15%);
+  background: transparent;
 }
 
 .antbuildz-industries-menu__panel {
@@ -1163,6 +1259,14 @@ body:has(.antbuildz-public-header) :is(
   outline-offset: 2px;
 }
 
+body:has(.antbuildz-public-header) #root.antbuildz-original-root .antbuildz-public-header :is(
+  .bright-nav-product-link,
+  .antbuildz-industries-menu__trigger
+):focus-visible {
+  outline: none;
+  outline-offset: 0;
+}
+
 body:has(.antbuildz-public-header) :is(.antbuildz-language-close, .antbuildz-drawer-close) {
   color: var(--ink);
   background: var(--soft);
@@ -1192,6 +1296,37 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
 .abz-public-footer__grid {
   grid-template-columns: minmax(240px, 1.35fr) repeat(4, minmax(120px, .9fr)) !important;
+}
+
+.antbuildz-footer-language {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+#root.antbuildz-original-root .antbuildz-footer-language .antbuildz-language-trigger {
+  display: inline-flex;
+  width: auto;
+  min-width: 76px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid var(--menu-border);
+  border-radius: 999px;
+  background: var(--canvas);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+#root.antbuildz-original-root .antbuildz-footer-language .antbuildz-language-trigger:hover {
+  background: var(--soft);
+}
+
+#root.antbuildz-original-root .antbuildz-footer-language .antbuildz-language-trigger > svg {
+  display: block;
+  width: 18px;
+  height: 18px;
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-stage {
@@ -1541,8 +1676,26 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 .antbuildz-home-hero-conversation__bubble.is-visible {
   max-height: 240px;
   overflow: visible;
-  opacity: var(--home-chat-message-opacity, 1);
+  opacity: calc(var(--home-chat-message-opacity, 1) * var(--home-chat-edge-opacity, 1));
   transform: none;
+}
+
+/* Soften the first and last rows of all five conversation layers without
+   masking their ancestor, which would flatten the glass backdrop effect. */
+.antbuildz-home-hero-conversation__bubble.is-fade-top {
+  --home-chat-edge-opacity: .58;
+}
+
+.antbuildz-home-hero-conversation__bubble.is-fade-near-top {
+  --home-chat-edge-opacity: .8;
+}
+
+.antbuildz-home-hero-conversation__bubble.is-fade-near-bottom {
+  --home-chat-edge-opacity: .84;
+}
+
+.antbuildz-home-hero-conversation__bubble.is-fade-bottom {
+  --home-chat-edge-opacity: .64;
 }
 
 .antbuildz-home-hero-conversation__bubble:not(.is-visible),

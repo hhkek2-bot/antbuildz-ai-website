@@ -167,6 +167,18 @@ Historical placement: the latest removal above moves Market Shift to section two
 - **Separate findings/limits:** Existing rendered canonical/structured-data URLs still contain localhost/antbuildzai.com; metadata was intentionally preserved under the brief. The Console has an operational layout with a hidden Overview H1, so its smoke check used the visible Your Agents section. Concurrent changes appeared in the separate Webstore preview component, CSS and PRODUCT-SOURCES.md during this task; those files were not edited or reverted here, and an exact preview baseline comparison is not claimed.
 - Evidence, implementation file list and desktop/mobile screenshots: `artifacts/homepage-education-20260828/HANDOVER.md`. No configuration changes, service restarts, file deletions, dependency installations, deployment or reference-project edits.
 
+### Homepage catalogue-to-shortlist graphic redesign — 2026-08-29
+
+- **Design mode:** Reduced the four-step process footprint and replaced the generic stage graphics with one specific industrial workflow: ingest a reach chart into structured coordinate data, reason over the buyer's stated requirement to choose the next useful question, retrieve and compare supported catalogue/inventory records, then present an explained recommendation for sales review.
+- The reasoning graphic shows only user-facing decision stages and the follow-up question; it does not expose private chain-of-thought. Product matches remain explicitly illustrative, and availability, site suitability and commercial terms remain subject to the sales team's review.
+- Used lightweight native React/CSS motion instead of embedding a Remotion video. Scan, transfer, comparison and status cues stop under `prefers-reduced-motion`. On mobile, each title and explanation now precedes its matching graphic so the associations remain clear while scrolling.
+- Browser QA passed at 1440×1000 and 390×844 with no horizontal overflow, clipped section text or console errors. All 59 tests, source-scoped ESLint and the production build pass. Port 8081 remained available and was not restarted; no configuration, deployment, dependency or reference-project changes were made.
+
+### Wide desktop header frame alignment — 2026-08-29
+
+- **System mode:** On desktop widths from 1400px, the shared public header aligns its left wordmark and right utilities to the same 1280px content frame used by homepage section two. The full-width header surface and viewport-centred primary navigation are preserved; compact desktop and mobile navigation rules are unchanged.
+- Browser QA at 2048×1000 measured matching 384px left and right edges, a primary-navigation centre of 1024px and no horizontal overflow. The Resources panel stayed inside the viewport. Compact 1024×768 and mobile 390×844 states retained their existing padding and controls without overflow. All 60 tests, targeted ESLint and the production build pass; port 8081 returns HTTP 200 and was not restarted.
+
 ## AI Webstore Suite positioning audit — 2026-08-28
 
 - **Current scope correction:** The user clarified that the attached wording brief is for `/webstore-2-ai-webstore-preview`, not the original page. The mistaken main-page implementation is reversed. Copy now runs only from the preview component and has a strict preview-path guard. Current evidence: `artifacts/webstore-preview-wording-20260828/HANDOVER.md`. Earlier original-page QA below is historical, not the current implementation.
@@ -219,14 +231,14 @@ Current background colour trial (28 August 2026): the preview hero retains its e
 ## Shared global decisions
 
 - The hamburger drawer uses six direct links in this order: AI Sales Agent, AI Webstore Suite, AI Agent Console, Pricing, Resources and About Us. No collapsible groups, Marketplace/Blog links or expanded resource/industry sublists. Sign-in, account controls, close and modal focus behaviour remain unchanged.
-- Public Footer is AI-only: Marketplace is hidden; Company contains About Us, AI Agreements & Policies, AI Help Centre and Resources. Resources no longer appears under AI Products.
+- Public Footer is AI-only: Marketplace is hidden; Company contains About Us, AI Agreements & Policies, AI Help Centre and Resources. Resources no longer appears under AI Products. The shared language selector sits in the footer bottom bar rather than the public header.
 - Public Header excludes `Add Listing` and `Backend Admin`.
 - Public Header uses the Antbuildz.AI wordmark and a grouped Resources dropdown in the former AI Agent Console slot. All resources and the six library topics link to the Resources library and its filtered collections; the hamburger links directly to the Resources overview. AI Agent Console remains available in the main navigation drawer.
 - Resources includes an expandable AI Agent Roles topic with direct links to Sales Specialist, Customer Service, Technical Support, Product Specialist and After-Sales Support; existing topic filtering is preserved.
 - Public Header includes an accessible Industries dropdown with all eight Who We Serve destinations; these detailed links also remain in the shared footer, but are omitted from the simplified hamburger menu.
 - Primary header order is AI Sales Agent, AI Webstore Suite, Pricing, Industries, Resources; all header text controls share the same Inter navigation typography tokens.
 - Public dropdowns and menus share the `--menu-*` system: Plus Jakarta Sans headings, Inter labels/copy, canvas surfaces, subtle borders, 24px floating-panel corners, 12px item corners, soft hover, yellow selection and blue focus. This covers Industries, language selection, the public drawer and inline AI Agent Roles links without changing their destinations.
-- Public Header centres the desktop product navigation independently of the left wordmark and right utilities; the right utility order is Translation, Sign in, then Menu.
+- Public Header centres the desktop product navigation independently of the left wordmark and right utilities; the right side contains Sign in, Book a Demo and Menu, while Translation lives in the footer.
 - The equipment marketplace listing section is not part of the Antbuildz.AI homepage.
 - The homepage marketplace search is omitted; the hero leads with Antbuildz.AI positioning and product CTAs.
 - The requested homepage Webstore and Sales Agent promotional sections are omitted.
@@ -550,3 +562,153 @@ Browser inspection confirms a 0.9 visual-to-layout ratio for all four graphics a
 Design refinement limited to the vertical spine in the homepage Ingest–Reason–Retrieve–Recommend flow. Replaced the pale single-colour rule with the established AI Sales Agent title sequence: violet through blue to restrained gold. Increased the line from 1px to 2px for clear but understated continuity; stage cards, numbered markers, copy and layout remain unchanged.
 
 Browser inspection confirms the gradient at 1440×900 and 390×844, correct centre/mobile alignment and no horizontal overflow. No configuration, service restart, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — Secondary Webstore scale and fact-checked positioning
+
+Design and copy refinement limited to the homepage Agent-plus-Webstore relationship section. On viewports 768px and wider, the optional AI Webstore Suite card now renders proportionally at 80% and is vertically centred, so its top and bottom no longer align with the primary AI Sales Agent card. Mobile retains the full-size stacked cards for readable text and touch interaction.
+
+Cross-checked the copy against the approved Webstore positioning, product comparison, inventory caveats and reference implementation. Replaced the unsupported absolute “accurate product context” claim with a clearer role: a browsable, structured product library that the Agent can reference. Dedicated product pages are described as supporting—not guaranteeing—SEO and GEO discovery, while inventory freshness and visibility remain qualified by data, plan, connections and indexing. Browser inspection at 1440×900 and 390×844 confirms the intended 0.8 desktop ratio, full-width mobile cards and no horizontal overflow. No configuration, service restart, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — Secondary catalogue scale in Agent foundations
+
+Applied the same product hierarchy to the homepage “Your business at its core” bento without changing its approved asymmetric layout. On viewports 768px and wider, the Product Catalogue card renders proportionally at 80% and remains centred within its original grid area; mobile keeps the card at full size for legibility. Its copy now distinguishes approved product details from supported connected-inventory context and avoids implying universal or real-time inventory accuracy. The Company Brand, Technical Specifications and Suitable Recommendations cards remain unchanged.
+
+## 2026-08-29 — Enlarged catalogue-to-shortlist flow
+
+Increased the visual hierarchy of the four homepage progress stages without changing their sequence, wording or alternating composition. Desktop step titles now use a 28–34px responsive scale, the timeline width and centre gutter are moderately larger, and each technical illustration has a 132px canvas with larger controls, labels and diagram details. Mobile uses a restrained 24px step title and 112px illustration canvas to preserve readable wrapping and prevent horizontal overflow.
+
+## 2026-08-29 — Five-conversation edge fade
+
+Design refinement limited to the homepage hero’s five animated conversation layers. The first and last visible message boxes now recede through a restrained two-step opacity falloff, while the middle of each exchange remains fully legible. The treatment extends the existing top-scroll fade with a matching lower edge and uses per-message opacity rather than an ancestor mask, preserving the coloured glass backdrop blur.
+
+Browser-inspected at 1440×900 with all five layers active and at 390×844 with the established centre-only mobile composition. The fade classes and computed opacity are present, the glass surfaces remain intact, and neither viewport has horizontal overflow. All 58 tests, targeted ESLint and production build pass. No copy, dimensions, colours, timing, configuration, service restart, reference-project change or deployment.
+
+## 2026-08-29 — Coloured Agent and Webstore cards
+
+Design refinement limited to the homepage Agent-plus-Webstore relationship section. The primary AI Sales Agent card now uses a restrained warm cream-to-blush surface with its yellow edge, while the optional AI Webstore Suite card uses a pale violet-to-blue surface. The connecting plus marker carries a very light blend of both palettes. Hover states deepen the same colours slightly instead of introducing a new hue.
+
+The Agent remains the larger dominant card and the Webstore retains its 80% desktop scale and full-size mobile stack. Copy, graphics, destinations, typography, dimensions and product positioning remain unchanged. Browser-inspected at 1440×900 and 390×844 with readable contrast and no horizontal overflow. All 58 tests, targeted ESLint and production build pass. No configuration, service restart, reference-project change or deployment.
+
+## 2026-08-29 — Restored full-size Product Catalogue card
+
+Corrected the homepage “Your business at its core” bento after the earlier secondary-card instruction was applied to the wrong section. The Product Catalogue card now fills its original grid area again and aligns with the Company Brand card on desktop. The approved asymmetric bento, copy, responsive stacking and 90% internal illustration scale remain unchanged.
+
+## 2026-08-29 — Larger, clearer product relationship graphics
+
+Refined the homepage Agent-plus-Webstore relationship section without changing its approved hierarchy, copy or destinations. Both graphic canvases now use more of their available card width and render closer to their natural scale. The Agent visual now shows Emma clarifying an industrial buyer’s forklift requirements and preparing a structured requirement profile for sales review, replacing the generic document-to-document handover. The Webstore visual remains the smaller supporting card but its storefront fills the internal canvas more effectively.
+
+## 2026-08-29 — Photographic Who We Serve carousel
+
+Replaced the homepage’s text-only Who We Serve grid with one horizontal, scroll-snap carousel inspired by the supplied large-format reference. The eight cards reuse the established hero photograph and destination from each corresponding Who We Serve page. Each card combines a dark readability gradient, concise industry context and one full-card native link. Touch, trackpad and keyboard scrolling are supported, alongside labelled previous/next buttons; reduced-motion preferences disable smooth transitions. Desktop shows a large lead card with the next card visible, while mobile uses an 84vw card to preserve the horizontal-scroll cue.
+
+The latest correction keeps only half of the earlier desktop extension: the track is mathematically midway between the standard 1320px/90% content frame and the viewport edge. At 1440px this is 1368px, centred with 36px outer margins, instead of 1440px edge to edge. Previous and next controls remain vertically centred at the resized track edges. Mobile retains its full-width touch carousel. Browser-inspected at 1440×900 and 390×844; the controls scroll correctly, preserve text clearance and introduce no horizontal page overflow. All 59 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Editorial catalogue-to-shortlist process
+
+Replaced the narrow central homepage timeline with four alternating visual-and-copy chapters inspired by the supplied editorial reference. The approved `Ingest → Reason → Retrieve → Recommend` sequence, industrial technical diagrams and human-review boundaries remain intact. Each chapter now pairs an enlarged interface illustration with a concise editorial heading, while mobile stacks the visual before its explanation.
+
+Browser-inspected at 1440×900 and 390×844. All four chapters alternate correctly on desktop, stack visual-first on mobile and preserve zero horizontal overflow. All 58 tests, targeted ESLint and the production build pass. No configuration, service restart, reference-project change or deployment.
+
+## 2026-08-29 — Marketing heading punctuation standardisation
+
+Removed standalone full stops from visible H1–H6 marketing headings on the homepage, AI Sales Agent, AI Webstore Suite and Webstore preview. The rule applies to rich multi-span headings and dynamically rendered transferred-page sections without flattening their typography. Question marks remain where grammatically required, deliberate product-name truncation ellipses remain intact, and paragraph, metadata and body-copy punctuation is unchanged.
+
+Browser-audited every visible heading on all four routes at 1440px and 390px: no standalone heading full stops remain and no route introduces horizontal overflow. All 59 tests, targeted ESLint and the production build pass. No configuration, service restart, reference-project change or deployment.
+
+## 2026-08-29 — Reversible public-marketing typography trial
+
+System-mode trial maps only public hero titles, major section titles and their introductory descriptions to semantic source-level roles. It applies across Home, product, pricing, resource, help, company, demo, agreement and all eight Who We Serve routes; AI Agent Console, embedded demonstrations, cards, FAQs, navigation, controls, pricing details, tables and article content remain outside the role map. The trial keeps Plus Jakarta Sans/Inter and uses the approved 64/48/18px wide-desktop and 36/30/16px narrow-mobile endpoints, with centred title/description frames capped at 900px/800px where appropriate.
+
+All 17 scoped routes pass rendered QA at 1440×900, 1024×768, 390×844 and 320×740: one H1, natural wrapping, no role clipping or overlap, no horizontal overflow and no role leakage into excluded UI. Before/after evidence for the six representative routes is in `artifacts/typography-trial-20260829`; all 61 content tests, targeted ESLint and the production build pass. The trial remains reversible and is not yet recorded as an approved permanent rule in `DESIGN.md`.
+
+## 2026-08-29 — Brighter Reason-stage accent
+
+Changed only the homepage `Reason` chapter in the Ingest–Reason–Retrieve–Recommend sequence from dark teal to the established Antbuildz blue token. The brighter blue now carries the numbered marker, label, diagram accent, pale surface and border while the copy, geometry and other three stage colours remain unchanged. Browser-checked at 1440×900, 1024×768 and 390×844 with no horizontal overflow; all 61 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Webstore plug-in relationship
+
+Design-mode refinement of the homepage Agent-plus-Webstore relationship section. Moved the existing relationship description directly below the section title, where it now uses the major-intro typography role. Replaced the ambiguous plus badge with a labelled cable-and-plug connector showing the optional AI Webstore Suite feeding into the primary AI Sales Agent; the connector rotates upward between the stacked cards on mobile. Product copy, card hierarchy, demonstrations and destinations remain unchanged.
+
+Browser-inspected at 1440×900, 1024×768, 390×844 and 320×740. The title and description stay together, the connector points toward the Agent on desktop and mobile, the label remains in bounds, and there is no horizontal overflow. All 61 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Shadow-free Who We Serve cards
+
+Removed the soft drop shadow from the homepage Who We Serve carousel cards while preserving their borders, rounded corners, image readability overlays, navigation controls, dimensions and interactions. Browser-inspected at 1440×900, 1024×768 and 390×844; the computed card shadow is `none` and there is no horizontal page overflow. All 61 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Ninety-percent detailed selection graphics
+
+Expanded all four homepage Ingest–Reason–Retrieve–Recommend illustrations to approximately 90% of both dimensions of their visual panels, removing the excessive internal top and bottom space. Added source context, known and missing requirement fields, catalogue filters, illustrative comparison reasons, open checks and an explicit sales-review boundary. Replaced model-like placeholder codes and unsupported numeric product specifications with neutral illustrative options.
+
+Forklift qualification details were checked against manufacturer guidance: rated capacity is considered with load centre and lift height, while aisle suitability also depends on load dimensions, truck geometry and clearance. Availability remains unassumed and final suitability, site fit and commercial terms remain with the sales team. Browser-inspected at 1440×900, 1024×768, 390×844 and 320×740; all four graphics measure approximately 89.4–89.7% after borders, remain unclipped and introduce no horizontal page overflow. All 61 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Direct-link Industries menu
+
+Removed the `View AI products` overview action from the desktop Industries menu because there is no master Who We Serve route. The eight descriptive industry links remain the menu's only destinations and continue to open their respective pages. The shared intro helper now makes its overview action optional, while the Resources menu retains `All resources`. Browser-checked the Industries panel at 1440×900 and 1024×768, exercised the Rental & Leasing destination, and confirmed the mobile header remains overflow-free. All 61 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Yellow-underlined public header tabs
+
+Replaced the blue rounded focus/open treatment on public primary navigation tabs with a 3px Antbuildz yellow underline. The state persists for the selected AI Sales Agent, AI Webstore Suite and Pricing pages, the selected Industries or Resources collection, open dropdowns and keyboard focus; the tab background remains transparent and no circular outline is shown. Dropdown links, utility controls, the mobile drawer and AI Agent Console controls remain unchanged.
+
+Browser-checked open Resources at 1440×900, open Industries at 1024×768, selected direct/product-group routes at 1440×900, and the unchanged mobile header at 390×844 and 320×740. All checked viewports have zero horizontal overflow. All 61 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Antbuildz browser-tab identity
+
+Replaced the inherited Lovable browser-tab identity with the existing approved red-and-white Antbuildz “a” mark through shared root metadata. The favicon applies to every route, including the Webstore preview, without changing route titles, page content, Open Graph imagery or operational Console visuals.
+
+Rendered-head checks on Home and the Webstore preview show only the Antbuildz shortcut/icon links; the PNG responds with HTTP 200 and no Lovable icon reference remains. All 62 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Translation selector moved to the footer
+
+Moved the existing React-owned language selector from the public header into the shared footer bottom bar. The same control, language state and dialog are preserved; no duplicate selector is created. The footer presentation is a compact 44px outlined control with the translation icon, language code and chevron. The header now retains only Sign in, Book a Demo and Menu on its utility side.
+
+Browser-checked the relocated control at 1440×900, 1024×768, 390×844 and 320×740. The dialog opens, Escape closes it and returns focus to the footer trigger; the header contains no translation trigger and all checked viewports have zero horizontal overflow. All 62 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — One-and-a-half-card Who We Serve focus
+
+Refined the homepage Who We Serve carousel to follow the supplied customer-story reference. Desktop now holds one dominant full-colour industry card plus approximately half of the next card at both standard and wide viewports, instead of revealing an increasing number of cards as the screen widens. Every non-active photograph is deliberately brighter, lower-contrast and strongly desaturated; its original colour and full content emphasis return when scrolling, arrow navigation or keyboard focus makes that card active.
+
+The eight destinations, copy, photography, shadow-free cards, labelled controls, native links, scroll snapping and 84vw mobile cue remain intact. Reduced-motion preferences also remove the new colour and emphasis transitions.
+
+Browser-inspected at 2048×1000, 1440×900, 1024×768, 390×844 and 320×740. The desktop composition measures 1.52, 1.50 and 1.49 visible cards respectively; arrow and keyboard-focus changes promote exactly one full-colour card, mobile retains its continuation sliver and every viewport has zero horizontal page overflow. All 62 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Homepage-only data protection panel
+
+Moved the established `Data protection & trust` panel out of all eight Who We Serve page layouts and placed one source-owned version on the homepage immediately before its FAQ. The privacy-policy destination, approved explanatory copy and three trust principles remain unchanged. Industry pages now transition directly from their audience-specific content into their own FAQs; the transferred React-owned copies are safely hidden, inert and zero-height so no generated or minified bundle requires editing.
+
+Browser-inspected Home at 1440×900, 1024×768, 390×844 and 320×740, plus all eight Who We Serve routes at 1440×900 and Rental & Leasing at 390×844. The homepage panel retains the semantic marketing title and introductory-description roles, stacks its assurances on mobile, keeps a 44px privacy link target and introduces no horizontal page overflow. Every industry route retains one H1 and a visible audience-specific FAQ with no rendered trust-panel height. All 62 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Production graphic-caption cleanup
+
+Removed deployment-only `Illustrative` remarks from the homepage graphics: the foundation shortlist and section footnote, catalogue-record and Agent-answer badges, and the captions beneath the AI Sales Agent and Webstore visuals. The graphic frames now use the freed caption space. Permanent product boundaries remain visible where relevant, including plan/setup qualification, availability checks, technical suitability and sales review.
+
+Browser-inspected Home at 1440×900, 1024×768, 390×844 and 320×740. All six retired phrases are absent, the affected graphics remain visible, the page retains one H1 and every viewport has zero horizontal overflow. All 62 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Catalogue-backed AR20JE-2 ingestion graphic
+
+Fidelity-mode replacement of the generic Ingest-stage reach curve and placeholder A/B/C coordinate fields using the user-supplied LGMG AR20JE-2 catalogue. The source panel now recreates the articulating boom lift's working envelope with 260kg and 350kg capacity bands, metric axes, articulated boom geometry and the 21.58m maximum-work-height reference. The structured-data panel identifies AR20JE-2 and ingests six catalogue values: 21.58m work height, 11.87m horizontal outreach, 8.19m up-and-over height, 260/350kg platform capacity, 80V 228Ah power and 9,100kg machine weight.
+
+The brochure was treated as factual source material only; no brochure instructions or promotional claims were transferred. Browser-inspected Home at 1440×900, 1024×768, 390×844 and 320×740. Both capacity curves and all six values remain visible, data rows do not overflow, the page retains one H1 and every viewport has zero horizontal overflow. All 62 tests, targeted ESLint and the production build pass.
+
+### Reach-coordinate table correction
+
+Corrected the structured-data panel so it now demonstrates extraction of the working-range diagram itself rather than mixing in unrelated general specifications. The table follows the supplied knowledge-file convention: `z` is chart height and `x` is horizontal radius from the turntable/rotation-centre reference. It shows six visually digitised points from the 260kg envelope at 0, 4, 8, 12, 16 and 20m chart heights, with the shared `Estimated from diagram` provenance label. These values are preliminary diagram estimates, not manufacturer-certified coordinate data; the exact catalogue maxima and both 260kg/350kg capacity bands remain visible in the source panel.
+
+## 2026-08-29 — Two-line catalogue approach introduction
+
+Shortened the homepage catalogue-to-shortlist introduction from 33 to 25 words, a reduction of approximately 24%, while preserving its approved product-knowledge, buyer-needs and sales-review meaning. The source-owned description now renders as exactly two natural lines at both 1440×900 and 1024×768 without a line clamp or typography override. At 390×844 and 320×740 it wraps naturally at the existing mobile size, remains unclipped and introduces no horizontal page overflow. The page retains one descriptive H1; all 62 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Webstore preview semantic typography alignment
+
+System-mode alignment of `/webstore-2-ai-webstore-preview` with the reversible public-marketing typography roles. The preview hero, all genuine major section titles and their introductory descriptions now inherit the shared Plus Jakarta Sans/Inter tokens instead of preview-only title and description sizes. Computed hero/section/description sizes are 64/48/18px at 1440×900, 46.08/40/17px at 1024×768, 37.05/31.2/16px at 390×844 and 36/30/16px at 320×740. Centred title and description frames use the shared 900px/800px limits where appropriate.
+
+Browser inspection confirms one H1, natural wrapping, no title/description/action overlap, no horizontal page overflow and no semantic-role leakage into the embedded Webstore demonstration at all four viewports. Navigation, buttons, storyboard controls, content, animation and the original `/ai-webstore-suite` route remain unchanged. All 62 tests, targeted ESLint and the production build pass; `DESIGN.md` remains unchanged because the typography trial is not yet approved as a permanent shared rule.
+
+## 2026-08-29 — Inventory-grounded Agent relationship proof
+
+Refined the homepage AI Sales Agent plus AI Webstore Suite relationship section. The Agent graphic is now a longer conversation: the buyer supplies load, lift, aisle and hire requirements; the Agent checks the connected Webstore catalogue; the result explicitly reports no confirmed five-tonne match and routes suitability and availability to team review. This demonstrates better-grounded answers without inventing stock certainty. Replaced the labelled plug illustration with a compact, text-free directional data connector and balanced both product descriptions at exactly 30 words.
+
+Browser-inspected at 1440×900, 1024×768, 390×844 and 320×740. The Agent frame computes to 332px at wide desktop and 344px at compact desktop/mobile, all conversation and requirement details remain visible, both descriptions retain their 30-word balance, the connector remains label-free and directional, the page keeps one H1 and every viewport has zero horizontal overflow. All 62 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-29 — Homepage hero conversation spacing
+
+Increased the calculated separation between the homepage hero title and its animated conversation field from 40px to 48px on desktop and from 24px to 32px at 767px and below. The existing title position, conversation animation, industrial video, transcript behaviour and responsive banner composition remain unchanged. Browser-inspected at 1440×900, 1024×768, 390×844 and 320×740 with one H1, no title/conversation overlap and zero horizontal page overflow.

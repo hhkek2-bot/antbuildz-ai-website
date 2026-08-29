@@ -1,24 +1,24 @@
 'use client';
 
-/* eslint-disable @next/next/no-html-link-for-pages -- Native navigation lets the transferred router initialise each destination; Next client transitions cannot own its separately mounted React tree. */
+/* eslint-disable @next/next/no-html-link-for-pages, @next/next/no-img-element -- Native navigation lets the transferred router initialise each destination; industry cards reuse local responsive source imagery without an image service. */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { mountHomeEducation, type HomeEducationTargets } from '../lib/home-education-mount';
 import styles from './home-education.module.css';
-import { AgentGraphic, CatalogueGraphic, IndustryGraphic, SelectionGraphic, WebstoreGraphic } from './home-graphics';
+import { AgentGraphic, CatalogueGraphic, SelectionGraphic, WebstoreGraphic } from './home-graphics';
 import { HomeMarketShift } from './home-market-shift';
 import { HomeAgentFoundations } from './home-agent-foundations';
 
 export const HOME_INDUSTRIES = [
-  ['Rental & Leasing', '/rental-businesses', 'Clarify capacity, site conditions and hire dates before fleet review.'],
-  ['Manufacturers & OEMs', '/manufacturers-brands', 'Guide model selection using approved specifications and application requirements.'],
-  ['Dealers & Distributors', '/dealers-distributors', 'Narrow multi-brand ranges around the buyer’s job and product needs.'],
-  ['Industrial & MRO', '/industrial-mro', 'Gather maintenance requirements and technical attributes for quotation review.'],
-  ['Hardware & Trade', '/hardware-trade-supplies', 'Identify tools and supplies around the material and task.'],
-  ['Building & Engineering', '/building-engineering', 'Capture grades, standards, quantities and project delivery requirements.'],
-  ['Parts & Aftermarket', '/parts-aftermarket', 'Clarify asset details and check supplied fitment information.'],
-  ['Buggies & Vehicles', '/buggies-commercial-vehicles', 'Capture seating, payload and route requirements for fleet enquiries.'],
+  ['Rental & Leasing', '/rental-businesses', 'Clarify capacity, site conditions and hire dates before fleet review.', '/images/solution-rental.jpg', 'Rental boom lift fleet prepared for industrial hire'],
+  ['Manufacturers & OEMs', '/manufacturers-brands', 'Guide model selection using approved specifications and application requirements.', '/images/solution-manufacturers.jpg', 'Engineer reviewing industrial machinery in a manufacturing facility'],
+  ['Dealers & Distributors', '/dealers-distributors', 'Narrow multi-brand ranges around the buyer’s job and product needs.', '/images/solution-dealers.jpg', 'Industrial equipment dealer reviewing products in a warehouse showroom'],
+  ['Industrial & MRO', '/industrial-mro', 'Gather maintenance requirements and technical attributes for quotation review.', '/images/solution-mro.jpg', 'Maintenance engineer inspecting industrial pump equipment'],
+  ['Hardware & Trade', '/hardware-trade-supplies', 'Identify tools and supplies around the material and task.', '/images/solution-hardware.jpg', 'Trade buyer selecting tools and supplies at a hardware counter'],
+  ['Building & Engineering', '/building-engineering', 'Capture grades, standards, quantities and project delivery requirements.', '/images/solution-building.jpg', 'Construction professionals reviewing project requirements on site'],
+  ['Parts & Aftermarket', '/parts-aftermarket', 'Clarify asset details and check supplied fitment information.', '/images/solution-parts.jpg', 'Industrial parts specialist checking bearings and fitment information'],
+  ['Buggies & Vehicles', '/buggies-commercial-vehicles', 'Capture seating, payload and route requirements for fleet enquiries.', '/images/solution-vehicles.png', 'Commercial vehicles and utility buggy outside a distribution facility'],
 ] as const;
 
 export const HOME_QUESTIONS = [
@@ -33,14 +33,123 @@ function Arrow() {
   return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 }
 
+function ProductConnector() {
+  return (
+    <div className={styles.productConnector} aria-hidden="true">
+      <svg viewBox="0 0 112 48">
+        <circle className={`${styles.connectorNode} ${styles.connectorAgentNode}`} cx="20" cy="24" r="16" />
+        <path className={styles.connectorAgentMark} d="m20 15 2.2 5.2 5.3 2.2-5.3 2.2L20 30l-2.2-5.4-5.3-2.2 5.3-2.2L20 15Z" />
+        <path className={styles.connectorCable} d="M38 24h36" />
+        <path className={styles.connectorArrow} d="m45 17-7 7 7 7" />
+        <circle className={`${styles.connectorNode} ${styles.connectorStoreNode}`} cx="92" cy="24" r="16" />
+        <path className={styles.connectorStoreMark} d="M84 18h16M84 24h16M84 30h16" />
+      </svg>
+    </div>
+  );
+}
+
+function ShieldIcon() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8.2-7 10-4.2-1.8-7-5.4-7-10V6l7-3Z" /><path d="m9.5 12 1.7 1.7 3.6-4" /></svg>;
+}
+
+function DataIcon() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="7" ry="3" /><path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" /></svg>;
+}
+
+function TeamIcon() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" /><circle cx="9.5" cy="7" r="4" /><path d="M17 11a4 4 0 0 1 4 4v2M16 3.3a4 4 0 0 1 0 7.4" /></svg>;
+}
+
+export function HomeTrustPanel() {
+  return (
+    <section className={styles.trust} aria-labelledby="home-data-trust-heading">
+      <div className={styles.trustFrame}>
+        <div className={styles.trustPanel}>
+          <div className={styles.trustMark} aria-hidden="true"><ShieldIcon /></div>
+          <div className={styles.trustCopy}>
+            <span className={styles.trustEyebrow}>Data protection &amp; trust</span>
+            <h2 id="home-data-trust-heading">We care about your business data</h2>
+            <p>Antbuildz AI is designed to protect the company knowledge, customer conversations and operational information you use with your Agent. Access remains limited to authorised users, while your team controls the approved knowledge and important business decisions.</p>
+            <a className={styles.trustReview} href="/legal/privacy">Read our privacy policy</a>
+          </div>
+          <ul className={styles.trustAssurances} aria-label="Data protection and trust principles">
+            <li><ShieldIcon /><div><strong>Protected business data</strong><span>Your company knowledge, operational information and customer conversations are treated as protected business information.</span></div></li>
+            <li><DataIcon /><div><strong>Authorised access</strong><span>Company knowledge and console access remain limited to authorised users.</span></div></li>
+            <li><TeamIcon /><div><strong>Your team stays in control</strong><span>Your team manages what knowledge the Agent uses and retains oversight of important decisions.</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export const HOME_SELECTION_STEPS = [
-  ['Ingest', 'Diagrams to structured data', 'Ingest approved catalogues, specification tables and technical diagrams such as reach charts. Extract dimensions and coordinate points into structured product data the Agent can use when reasoning about buyer requirements.'],
-  ['Reason', 'The buyer’s requirements', 'Interpret the buyer’s application, technical requirements and constraints. Ask for missing details to establish what a suitable product needs to do.'],
-  ['Retrieve', 'Relevant product options', 'Find relevant products and specifications in your approved catalogue and supported inventory data. Filter the options against the buyer’s stated requirements.'],
-  ['Recommend', 'A shortlist with reasons', 'Suggest suitable options and explain why they fit. Flag what your team still needs to confirm, including technical suitability, availability and commercial terms.'],
+  ['Ingest', 'Turn technical diagrams into structured data', 'Convert approved catalogues, specification tables and technical diagrams into structured product data the Agent can use.'],
+  ['Reason', 'Decide the next useful question', 'Interpret the buyer’s requirement, identify missing constraints and choose the most useful next question.'],
+  ['Retrieve', 'Query inventory for the closest match', 'Search approved catalogue and supported inventory data, then compare relevant options against the stated requirements.'],
+  ['Recommend', 'Answer with an explained recommendation', 'Present a suitable option and explain the match, while flagging availability, final suitability and commercial terms for review.'],
 ] as const;
 
 export function HomeEducationBody() {
+  const industryTrack = useRef<HTMLUListElement>(null);
+  const [activeIndustry, setActiveIndustry] = useState(0);
+
+  useEffect(() => {
+    const track = industryTrack.current;
+    if (!track) return;
+
+    let frame = 0;
+    const syncActiveIndustry = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const cards = Array.from(track.children) as HTMLElement[];
+        const trackRect = track.getBoundingClientRect();
+        const paddingLeft = Number.parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+        const snapEdge = trackRect.left + paddingLeft;
+        let nearestIndex = 0;
+        let nearestDistance = Number.POSITIVE_INFINITY;
+
+        cards.forEach((card, index) => {
+          const distance = Math.abs(card.getBoundingClientRect().left - snapEdge);
+          if (distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestIndex = index;
+          }
+        });
+
+        setActiveIndustry((current) => current === nearestIndex ? current : nearestIndex);
+      });
+    };
+
+    syncActiveIndustry();
+    track.addEventListener('scroll', syncActiveIndustry, { passive: true });
+    window.addEventListener('resize', syncActiveIndustry);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      track.removeEventListener('scroll', syncActiveIndustry);
+      window.removeEventListener('resize', syncActiveIndustry);
+    };
+  }, []);
+
+  const scrollIndustryTo = (index: number) => {
+    const track = industryTrack.current;
+    const card = track?.children[index] as HTMLElement | undefined;
+    if (!track || !card) return;
+    const trackRect = track.getBoundingClientRect();
+    const paddingLeft = Number.parseFloat(window.getComputedStyle(track).paddingLeft) || 0;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    setActiveIndustry(index);
+    track.scrollTo({
+      left: track.scrollLeft + card.getBoundingClientRect().left - trackRect.left - paddingLeft,
+      behavior: reducedMotion ? 'auto' : 'smooth',
+    });
+  };
+
+  const scrollIndustries = (direction: -1 | 1) => {
+    const nextIndustry = Math.max(0, Math.min(HOME_INDUSTRIES.length - 1, activeIndustry + direction));
+    scrollIndustryTo(nextIndustry);
+  };
   return (
     <><HomeMarketShift /><HomeAgentFoundations />
     <div className={styles.body}>
@@ -48,7 +157,7 @@ export function HomeEducationBody() {
         <div className={`${styles.frame} ${styles.context}`}>
           <div>
             <p className={styles.eyebrow}>Industrial product knowledge</p>
-            <h2 id="home-industrial-context">Built for the complexity of industrial products.</h2>
+            <h2 id="home-industrial-context">Built for the complexity of industrial products</h2>
             <CatalogueGraphic />
           </div>
           <div>
@@ -66,19 +175,19 @@ export function HomeEducationBody() {
         <div className={styles.frame}>
           <div className={styles.intro}>
             <p className={styles.eyebrow}>The Antbuildz approach</p>
-            <h2 id="home-selection-approach">From your catalogue to <span className={styles.selectionEmphasis}>a suitable shortlist.</span></h2>
-            <p>Start with approved product knowledge across documents, tables and technical diagrams. The Agent structures that information, interprets each buyer’s needs, finds relevant options and explains its recommendations for your sales team to review.</p>
+            <h2 id="home-selection-approach">From your catalogue to <span className={styles.selectionEmphasis}>a suitable shortlist</span></h2>
+            <p>Start with approved product knowledge from documents, tables and technical diagrams. The Agent structures it, interprets buyer needs and explains relevant options for sales review.</p>
           </div>
           <ol className={styles.stages} aria-label="Ingest, Reason, Retrieve, Recommend: from catalogue to shortlist">
             {HOME_SELECTION_STEPS.map(([title, label, description], index) => (
               <li key={title}>
-                <span className={styles.step} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                <article className={styles.stageCard}>
+                <div className={styles.stageVisual}>
                   <SelectionGraphic step={index} />
-                  <h3>{title}</h3>
-                  <span className={styles.stageLabel}>{label}</span>
+                </div>
+                <article className={styles.stageCopy}>
+                  <span className={styles.stageKicker}><b aria-hidden="true">{String(index + 1).padStart(2, '0')}</b>{title}</span>
+                  <h3>{label}</h3>
                   <p>{description}</p>
-                  <div className={styles.stageProgress} aria-hidden="true"><span style={{ width: `${(index + 1) * 25}%` }} /></div>
                 </article>
               </li>
             ))}
@@ -90,37 +199,58 @@ export function HomeEducationBody() {
         <div className={styles.frame}>
           <div className={styles.intro}>
             <p className={styles.eyebrow}>One connected workflow</p>
-            <h2 id="home-product-relationship" className={styles.productHeading}><span>Your AI Sales Agent.</span>{' '}<span>Plus a connected Webstore.</span></h2>
+            <h2 id="home-product-relationship" className={styles.productHeading}><span>Your AI Sales Agent</span>{' '}<span>Plus a connected Webstore</span></h2>
+            <p className={styles.connection}>Start with the AI Sales Agent. Add AI Webstore Suite when you need a browsable catalogue, supported inventory context and dedicated product pages that can support SEO and GEO discovery. Inventory freshness and visibility depend on your data, plan, connections and indexing.</p>
           </div>
           <div className={styles.products}>
             <article className={styles.agentProduct}>
               <AgentGraphic />
               <div className={styles.productIdentity}><p className={styles.productLabel}>AI Sales Agent</p><span className={styles.productBadge}>Start here</span></div>
-              <h3>Turn buyer questions into informed enquiries.</h3>
-              <p>Give buyers clear answers and suitable recommendations. Your Agent interprets requirements, asks for missing details and prepares enquiries for your team, using your approved product and business knowledge.</p>
+              <h3>Turn buyer questions into informed enquiries</h3>
+              <p>Give buyers clearer answers and suitable recommendations. Your Agent clarifies requirements, checks approved product information and supported inventory, then prepares the details your team needs to confirm suitability and availability.</p>
               <a className={styles.textLink} href="/ai-sales-agent">Explore AI Sales Agent <Arrow /></a>
             </article>
-            <span className={styles.productPlus} aria-hidden="true">+</span>
+            <ProductConnector />
             <article className={styles.webstoreProduct}>
               <WebstoreGraphic />
               <div className={styles.productIdentity}><p className={styles.productLabel}>AI Webstore Suite</p><span className={styles.productBadge}>Optional addition</span></div>
-              <h3>Accurate product context. Built for discovery.</h3>
-              <p>Connect a branded industrial storefront with a dedicated URL for each product, then organise approved specifications and supported inventory data in one library. Give the Agent more reliable product context for better-informed recommendations, while structured pages support organic visibility in search engines (SEO) and generative AI discovery (GEO).</p>
+              <h3>A searchable product library for buyers and your Agent</h3>
+              <p>Give buyers a browsable catalogue with a dedicated page for each product. Structured specifications and supported inventory help your Agent answer product questions and recommend suitable options with clearer context.</p>
               <a className={styles.textLink} href="/ai-webstore-suite">Explore AI Webstore Suite <Arrow /></a>
             </article>
           </div>
-          <p className={styles.connection}>Start with the Agent. Add Webstore when you need connected product and inventory context, plus greater organic exposure through SEO and GEO. Inventory freshness depends on the data, plan and connections configured during setup.</p>
           <p className={styles.console}>Manage your agent’s knowledge, instructions and conversations through <a href="/ai-agent-console">AI Agent Console</a>.</p>
         </div>
       </section>
 
       <section className={`${styles.section} ${styles.industries}`} aria-labelledby="home-industries-heading">
         <div className={styles.frame}>
-          <p className={styles.eyebrow}>Who we serve</p>
-          <h2 id="home-industries-heading">Built around the way industrial businesses sell.</h2>
-          <ul className={styles.industryGrid}>
-            {HOME_INDUSTRIES.map(([name, href, description], index) => (
-              <li key={href}><h3><a href={href}><IndustryGraphic index={index} /><span className={styles.industryName}>{name}</span><Arrow /></a></h3><p>{description}</p></li>
+          <div className={styles.industryHeader}>
+            <div>
+              <p className={styles.eyebrow}>Who we serve</p>
+              <h2 id="home-industries-heading">Built around the way industrial businesses sell</h2>
+            </div>
+          </div>
+        </div>
+        <div className={styles.industryCarousel}>
+          <div className={styles.industryControls} aria-label="Who We Serve carousel controls">
+            <button type="button" onClick={() => scrollIndustries(-1)} aria-label="Show previous industries"><span aria-hidden="true">←</span></button>
+            <button type="button" onClick={() => scrollIndustries(1)} aria-label="Show next industries"><span aria-hidden="true">→</span></button>
+          </div>
+          <ul className={styles.industryGrid} ref={industryTrack} tabIndex={0} aria-label="Who We Serve industries">
+            {HOME_INDUSTRIES.map(([name, href, description, image, alt], index) => (
+              <li className={styles.industryCard} data-active={index === activeIndustry} key={href}>
+                <a href={href} onFocus={() => scrollIndustryTo(index)}>
+                  <img src={image} alt={alt} loading="lazy" width="1600" height="1000" />
+                  <span className={styles.industryShade} aria-hidden="true" />
+                  <span className={styles.industryContent}>
+                    <span className={styles.industryIndex}>{String(index + 1).padStart(2, '0')}</span>
+                    <h3>{name}</h3>
+                    <span className={styles.industryDescription}>{description}</span>
+                    <span className={styles.industryLink}>Explore <Arrow /></span>
+                  </span>
+                </a>
+              </li>
             ))}
           </ul>
         </div>
@@ -135,7 +265,7 @@ export function HomeEducationFaq() {
       <div className="si-container">
         <div className="si-sierra-heading si-sierra-heading--centered">
           <span className={`si-eyebrow ${styles.faqEyebrow}`}>FAQ</span>
-          <h2 id="home-faq-heading">Your AI Sales Agent questions, answered.</h2>
+          <h2 id="home-faq-heading">Your AI Sales Agent questions, answered</h2>
           <p>What to prepare, how recommendations work and where your team stays involved.</p>
         </div>
         <div className="si-sierra-faq-list">
@@ -162,5 +292,5 @@ export function HomeEducation() {
     return mountHomeEducation(root, styles.retired, setTargets);
   }, []);
   if (!targets) return null;
-  return <>{createPortal(<HomeEducationBody />, targets.body)}{createPortal(<HomeEducationFaq />, targets.faq)}</>;
+  return <>{createPortal(<HomeEducationBody />, targets.body)}{createPortal(<><HomeTrustPanel /><HomeEducationFaq /></>, targets.faq)}</>;
 }

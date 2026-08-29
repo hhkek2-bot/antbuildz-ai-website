@@ -1,4 +1,4 @@
-/* Static, illustrative homepage graphics. No controls or live product claims. */
+/* Static homepage graphics. No controls or live product claims. */
 /* eslint-disable @next/next/no-img-element -- Small local product assets inside a labelled illustration; no image service required. */
 import type { ReactNode } from 'react';
 import styles from './home-graphics.module.css';
@@ -47,43 +47,102 @@ export function SelectionGraphic({ step }: { step: number }) {
   return <div className={styles.selectionScene} aria-hidden="true">
     {step === 0 && <div className={styles.ingestionScene}>
       <div className={styles.reachSource}>
-        <span className={styles.ingestionTitle}><GraphicIcon kind="catalogue" />Reach diagram</span>
-        <svg viewBox="0 0 112 58" fill="none" aria-hidden="true" focusable="false">
-          <path className={styles.reachGrid} d="M15 8v40h88M15 38h88M15 28h88M15 18h88M35 8v40M55 8v40M75 8v40M95 8v40" />
-          <path className={styles.reachCurve} d="M18 46c19-1 34-6 45-16 9-8 15-15 24-20" />
-          <path className={styles.reachBoom} d="m27 44 34-17 25-17M22 47l8-3" />
-          <circle className={styles.reachPoint} cx="43" cy="39" r="2.5" /><circle className={styles.reachPoint} cx="64" cy="29" r="2.5" /><circle className={styles.reachPoint} cx="86" cy="10" r="2.5" />
-          <text x="4" y="11">H</text><text x="101" y="56">R</text>
+        <span className={styles.visualEyebrow}><GraphicIcon kind="catalogue" />AR20JE-2 working range</span>
+        <span className={styles.sourceFile}>LGMG catalogue · Metric</span>
+        <svg className={styles.reachChart} viewBox="0 0 150 132" fill="none" aria-hidden="true" focusable="false">
+          <path className={styles.reachGrid} d="M25 12v108h112M25 102h112M25 84h112M25 66h112M25 48h112M25 30h112M43.5 12v108M62 12v108M80.5 12v108M99 12v108M117.5 12v108M136 12v108" />
+          <path className={styles.reachAxis} d="M25 9v111h115M22 12l3-3 3 3M137 117l3 3-3 3" />
+          <path className={styles.reachEnvelopeOuter} d="M68 14C91 17 118 40 128 67C134 83 133 101 126 116L111 120" />
+          <path className={styles.reachEnvelopeInner} d="M68 14C82 25 101 45 109 67C112 76 112 86 109 94" />
+          <path className={styles.reachBoom} d="M34 108L43 80L38 70L52 39L68 14L78 16M43 80L61 79L105 79L123 81" />
+          <path className={styles.reachChassis} d="M28 108h20l4 6H27zM29 104h16v4H29z" />
+          <circle className={styles.reachWheel} cx="32" cy="116" r="4" /><circle className={styles.reachWheel} cx="46" cy="116" r="4" />
+          <circle className={styles.reachJoint} cx="43" cy="80" r="2.4" /><circle className={styles.reachJoint} cx="38" cy="70" r="2.4" /><circle className={styles.reachJoint} cx="52" cy="39" r="2.4" /><circle className={styles.reachJoint} cx="68" cy="14" r="2.4" />
+          <path className={styles.reachPlatform} d="M121 75h10v11h-10zM123 75v-4h6v4" />
+          <text className={styles.reachTick} x="18" y="121">0</text><text className={styles.reachTick} x="14" y="104">4</text><text className={styles.reachTick} x="14" y="86">8</text><text className={styles.reachTick} x="10" y="68">12</text><text className={styles.reachTick} x="10" y="50">16</text><text className={styles.reachTick} x="10" y="32">20</text>
+          <text className={styles.reachTick} x="23" y="130">0m</text><text className={styles.reachTick} x="60" y="130">4m</text><text className={styles.reachTick} x="97" y="130">8m</text><text className={styles.reachTick} x="130" y="130">12m</text>
+          <text className={styles.reachAxisLabel} x="2" y="72" transform="rotate(-90 2 72)">z height</text><text className={styles.reachAxisLabel} x="104" y="127">x radius</text>
+          <text className={styles.reachCapacity} x="104" y="47">260kg</text><text className={styles.reachCapacity} x="87" y="61">350kg</text>
+          <text className={styles.reachMaximum} x="72" y="10">21.58m max</text>
         </svg>
+        <i className={styles.scanLine} />
+        <span className={styles.sourceMeta}><b>Source: LGMG AR20JE-2</b><small>Working envelope and rated capacity bands</small></span>
       </div>
-      <span className={styles.ingestionArrow}>→</span>
+      <span className={styles.ingestionArrow}><i />→<small>Extract</small></span>
       <div className={styles.coordinateTable}>
-        <span className={styles.ingestionTitle}>Structured coordinates</span>
-        <div className={styles.coordinateHead}><span>Point</span><span>Height</span><span>Reach</span></div>
-        {['A', 'B', 'C'].map((point, index) => <div className={styles.coordinateRow} key={point}><b>{point}</b><span>H<sub>{index + 1}</sub></span><span>R<sub>{index + 1}</sub></span></div>)}
+        <span className={styles.visualEyebrow}>AR20JE-2 reach coordinates</span>
+        <span className={styles.dataType}>Estimated from diagram · 260 kg</span>
+        <div className={styles.coordinateHead}><span>Chart height (z)</span><span>Max. radius (x)</span></div>
+        {[
+          ['0.0 m', '11.4 m'],
+          ['4.0 m', '11.7 m'],
+          ['8.0 m', '11.9 m'],
+          ['12.0 m', '11.3 m'],
+          ['16.0 m', '9.5 m'],
+          ['20.0 m', '6.9 m'],
+        ].map(([height, radius]) => <div className={styles.coordinateRow} key={height}><b>{height}</b><span>{radius}</span></div>)}
+        <span className={styles.readyState}><i />Six preliminary coordinates extracted</span>
       </div>
     </div>}
-    {step === 1 && <div className={styles.selectionChat}>
-      <span className={styles.selectionQuestion}>Application &amp; requirements</span>
-      <span className={styles.selectionReply}><GraphicIcon kind="clarify" />Clarify missing details</span>
+    {step === 1 && <div className={styles.reasonScene}>
+      <div className={styles.reasonQuestion}><small>Buyer question</small><strong>We need a 5 t electric forklift for a narrow warehouse aisle</strong></div>
+      <div className={styles.requirementFacts}>
+        <span><small>Known</small><b>5 t · electric · indoor warehouse</b></span>
+        <span><small>Still needed</small><b>Lift height · aisle + load geometry · hire period</b></span>
+      </div>
+      <div className={styles.reasonFlow}>
+        <span><small>Recognise</small><b>Capacity + application</b></span><i>→</i>
+        <span><small>Check gaps</small><b>Lift · aisle/load · hire</b></span><i>→</i>
+        <span><small>Next step</small><b>Ask for constraints</b></span>
+      </div>
+      <div className={styles.nextQuestion}>
+        <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" />
+        <span><small>Emma asks next</small><strong>What lift height, aisle width, load dimensions and hire period do you need?</strong></span>
+      </div>
     </div>}
-    {step === 2 && <div className={styles.selectionDocuments}>
-      <span className={styles.selectionRow}><GraphicIcon kind="requirement" />Search catalogue &amp; inventory</span>
-      <span className={styles.selectionRow}><GraphicIcon kind="catalogue" />Relevant specifications</span>
+    {step === 2 && <div className={styles.retrieveScene}>
+      <span className={styles.selectionSearch}><GraphicIcon kind="requirement" /><span><small>Requirement query</small><strong>5 t · 6 m lift · 4.2 m aisle · electric</strong></span></span>
+      <div className={styles.filterChips}><span>Capacity</span><span>Lift height</span><span>Power</span><span>Aisle + load</span></div>
+      <div className={styles.inventoryHeader}><span><GraphicIcon kind="catalogue" />Approved catalogue + supported inventory</span></div>
+      <div className={styles.inventoryStack}>
+        <span className={styles.inventoryMatch}><i>A</i><span><strong>Electric forklift option</strong><small>Capacity + lift meet · aisle review open</small></span><b>Closest match</b></span>
+        <span><i>B</i><span><strong>Electric forklift option</strong><small>Rated capacity below requirement</small></span><b>Capacity gap</b></span>
+        <span><i>C</i><span><strong>IC forklift option</strong><small>Requested electric power not met</small></span><b>Power mismatch</b></span>
+      </div>
+      <span className={styles.queryProgress}><i />Comparing supported product records</span>
+      <span className={styles.inventoryNote}>Availability is not assumed · confirm connected status</span>
     </div>}
-    {step === 3 && <div className={styles.selectionReview}>
-      <GraphicIcon kind="review" />
-      <div><span className={styles.selectionRow}>Why it fits</span><span className={styles.selectionRow}>Confirm with your team</span></div>
+    {step === 3 && <div className={styles.recommendScene}>
+      <span className={styles.selectionAgent}><img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" /><span><strong>Emma</strong><small>AI Sales Agent</small></span></span>
+      <div className={styles.answerBubble}>Option A is the closest supported match to review for the stated capacity, lift and power requirements</div>
+      <div className={styles.matchReasons}><span><i />Capacity meets</span><span><i />Lift height meets</span><span><i />Electric power</span></div>
+      <div className={styles.openChecks}><small>Open checks</small><span>Aisle + load geometry</span><span>Connected availability</span></div>
+      <div className={styles.reviewBoundary}><GraphicIcon kind="review" /><span><strong>Sales review</strong><small>Confirm availability, site suitability and commercial terms</small></span></div>
     </div>}
   </div>;
 }
 
 export function AgentGraphic() {
-  return <div className={`${styles.productScene} ${styles.agentScene}`} role="img" aria-label="Illustrative handover from a buyer requirement brief to the sales team's review">
-    <div className={styles.briefSheet}><span className={styles.documentTitle}><GraphicIcon kind="requirement" /> Buyer requirement</span><div className={styles.documentRules}><i /><i /><i /></div><span className={styles.briefTag}>Product context</span></div>
-    <svg className={styles.handoverArrow} viewBox="0 0 48 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><path d="M2 12h42M36 5l8 7-8 7" /></svg>
-    <div className={styles.reviewSheet}><GraphicIcon kind="review" /><span>Sales review</span><div className={styles.documentRules}><i /><i /></div></div>
-    <span className={styles.sceneCaption}>Illustrative handover</span>
+  return <div className={`${styles.productScene} ${styles.agentScene}`} role="img" aria-label="Illustration of Emma using connected Webstore catalogue information to identify that no listed electric forklift is confirmed for a buyer's five-tonne requirement and prepare the enquiry for team review">
+    <div className={styles.agentPanel}>
+      <div className={styles.agentHeader}>
+        <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" />
+        <span><strong>Emma</strong><small>AI Sales Agent</small></span>
+        <i aria-hidden="true" />
+      </div>
+      <div className={styles.agentConversation}>
+        <span className={styles.agentBuyerMessage}>We need a 5 t electric forklift.</span>
+        <span className={styles.agentReply}>What lift height, aisle width and hire period do you need?</span>
+        <span className={styles.agentBuyerMessage}>6 m lift · 3.4 m aisle · 12-week hire</span>
+        <span className={styles.agentInventoryCheck}><span><small>Webstore catalogue checked</small><strong>No confirmed 5 t match</strong></span><b>2 models reviewed</b></span>
+        <span className={`${styles.agentReply} ${styles.agentAnswer}`}>Your listed electric forklifts do not meet the 5 t requirement. I’ll prepare this enquiry for your team to confirm a suitable model and availability.</span>
+      </div>
+      <div className={styles.enquirySummary}>
+        <GraphicIcon kind="review" />
+        <span><small>Requirement profile</small><strong>5 t electric · 6 m lift · 3.4 m aisle · 12-week hire</strong></span>
+        <b>Ready for review</b>
+      </div>
+    </div>
   </div>;
 }
 
@@ -100,7 +159,6 @@ export function WebstoreGraphic() {
       <div className={styles.storeProducts}>{catalogueImages.map(([src, label]) => <div key={src}><img src={src} alt="" loading="lazy" width="120" height="96" /><span>{label}</span></div>)}</div>
       <div className={styles.productUrl}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="m9 15 6-6M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m0 12a4 4 0 0 0 6 0l5-5a4 4 0 0 0-6-6l-1 1" /></svg><span>/products/your-product</span></div>
     </div>
-    <span className={styles.sceneCaption}>Illustrative storefront</span>
   </div>;
 }
 
