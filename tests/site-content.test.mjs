@@ -468,6 +468,12 @@ test('shared footer keeps Company navigation focused on Antbuildz AI', async () 
     get textContent() { return this.text; },
     set textContent(value) { copyWrites++; this.text = value; },
   });
+  const createElement = (tagName = '') => ({
+    ...element(), tagName: tagName.toUpperCase(), children: [],
+    appendChild(child) { this.children.push(child); child.parentElement = this; },
+    set href(value) { this.attributes.href = value; },
+    get href() { return this.attributes.href; },
+  });
   const companyLink = element('Blogs');
   companyLink.attributes.href = '/blogs';
   const policyLink = element('Agreement & Policy');
@@ -486,6 +492,23 @@ test('shared footer keeps Company navigation focused on Antbuildz AI', async () 
   };
   const footerBottom = {
     appendChild(child) { child.parentElement = this; languageMoves++; },
+  };
+  const marketplaceLinks = [];
+  const companyList = {
+    querySelector(selector) {
+      assert.equal(selector, '[data-antbuildz-marketplace-link="true"]');
+      return marketplaceLinks[0] ?? null;
+    },
+    appendChild(item) {
+      item.parentElement = this;
+      marketplaceLinks.push(item.children[0]);
+    },
+  };
+  const companyNav = {
+    querySelector(selector) {
+      assert.equal(selector, 'ul');
+      return companyList;
+    },
   };
   const aiProductOrder = [];
   const aiProductsList = {
@@ -506,6 +529,7 @@ test('shared footer keeps Company navigation focused on Antbuildz AI', async () 
     },
   };
   const footer = element();
+  footer.ownerDocument = { createElement };
   footer.querySelector = selector => {
     if (selector === 'nav[aria-label="Marketplace"]') return marketplace;
     if (selector === '.abz-public-footer__bottom-inner') return footerBottom;
@@ -513,6 +537,7 @@ test('shared footer keeps Company navigation focused on Antbuildz AI', async () 
     if (selector === '.abz-public-footer__brand p') return brand;
     if (selector === 'nav[aria-label="Company"] a[href="/agreements"]') return policyLink;
     if (selector.includes('nav[aria-label="Company"] a[href="/help"]')) return helpLink;
+    if (selector === 'nav[aria-label="Company"] ul') return companyNav.querySelector('ul');
     if (selector.startsWith('nav[aria-label="Company"]')) return companyLink;
     if (selector === 'nav[aria-label="AI Products"] a[href="/resources"]') return { closest: () => duplicateRow };
     throw new Error(`Unexpected footer selector: ${selector}`);
@@ -530,6 +555,10 @@ test('shared footer keeps Company navigation focused on Antbuildz AI', async () 
   assert.equal(policyLink.attributes.href, '/agreements');
   assert.equal(helpLink.textContent, 'AI Help Centre');
   assert.equal(helpLink.attributes.href, '/help/ai');
+  assert.equal(marketplaceLinks.length, 1, 'repeated observer passes must not duplicate Marketplace');
+  assert.equal(marketplaceLinks[0].textContent, 'Marketplace');
+  assert.equal(marketplaceLinks[0].attributes.href, 'https://antbuildz.com');
+  assert.equal(brand.textContent, 'We are Building the Intelligence Layer for Industrial Businesses.');
   assert.deepEqual(aiProductOrder, [salesAgentItem, webstoreItem]);
   assert.equal(duplicateRow.attributes.hidden, '');
   assert.equal(languageMoves, 1, 'the React-owned language control moves into the footer only once');
@@ -694,12 +723,13 @@ test('homepage uses the approved Antbuildz AI industrial hero', async () => {
   assert.match(source, /\/images\/industrial-ai\.png/);
 });
 
-test('homepage uses a five-second reduced-motion-safe industrial hero loop', async () => {
+test('homepage uses a longer forward-cut reduced-motion-safe industrial hero story', async () => {
   const [source, styles] = await Promise.all([
     readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
   ]);
-  assert.match(source, /video\.src = '\/videos\/home-hero-industrial-loop\.mp4'/);
+  assert.match(source, /video\.src = '\/videos\/home-hero-industrial-story\.mp4'/);
+  assert.doesNotMatch(source, /video\.src = '\/videos\/home-hero-industrial-loop\.mp4'/);
   assert.match(source, /video\.poster = poster/);
   assert.match(source, /video\.muted = true/);
   assert.match(source, /video\.loop = true/);
@@ -708,9 +738,14 @@ test('homepage uses a five-second reduced-motion-safe industrial hero loop', asy
   assert.match(source, /prefers-reduced-motion: reduce/);
   assert.match(source, /Industrial equipment fleet in a dusty machinery yard/);
   assert.match(styles, /\.antbuildz-ai-home \.antbuildz-home-hero-video \{[\s\S]*?object-fit: cover/);
+  assert.match(styles, /--home-hero-media-blur: 22px/);
+  assert.match(styles, /--home-hero-media-scale: 1\.09/);
+  assert.match(styles, /filter: blur\(var\(--home-hero-media-blur\)\) saturate\(\.72\) contrast\(1\.16\) brightness\(\.88\)/);
+  assert.match(styles, /\.antbuildz-ai-home \.ai-marketplace-hero-overlay \{[\s\S]*?linear-gradient\(180deg, rgb\(6 17 31 \/ \.38\)/);
+  assert.match(styles, /--home-hero-media-blur: 16px/);
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.antbuildz-ai-home \.antbuildz-home-hero-video \{ display: none; \}/);
   await Promise.all([
-    access(new URL('../public/videos/home-hero-industrial-loop.mp4', import.meta.url)),
+    access(new URL('../public/videos/home-hero-industrial-story.mp4', import.meta.url)),
     access(new URL('../public/images/home-hero-industrial-loop-poster.jpg', import.meta.url)),
   ]);
 });
@@ -1035,6 +1070,38 @@ test('the reversible marketing typography trial uses semantic roles and excludes
   assert.doesNotMatch(previewStyles, /\.ws2-hero-shell \.ws2-hero-desc\)[^{]*\{[^}]*\b(?:font-size|max-width)\s*:/, 'the Webstore preview inherits the semantic introduction scale and frame');
 });
 
+test('public marketing sections use approved responsive spacing and semantic surfaces', async () => {
+  const [system, source, styles, agents, design] = await Promise.all([
+    readFile(new URL('../lib/public-marketing-sections.ts', import.meta.url), 'utf8'),
+    readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
+    readFile(new URL('../AGENTS.md', import.meta.url), 'utf8'),
+    readFile(new URL('../DESIGN.md', import.meta.url), 'utf8'),
+  ]);
+
+  assert.match(source, /applyPublicMarketingSectionSystem\(root, window\.location\.pathname\)/);
+  assert.match(system, /TITLE_ROLE_SELECTOR = '\[data-antbuildz-type-role="section-title"\]'/);
+  assert.match(system, /resolveSectionOwner\(title\)/);
+  assert.match(system, /section\?\.matches\('\.next-step-panel'\)/);
+  assert.match(system, /section\.closest<HTMLElement>\('\.si-sierra-stage--cta'\)/);
+  assert.match(system, /\.ws2-how-section/);
+  assert.match(system, /pricing-section:has\(\.pricing-card\[data-antbuildz-plan\]\)/);
+  assert.doesNotMatch(system, /ai-agent-console|exact-ai-console/);
+  assert.match(styles, /--section-space-major: 96px/);
+  assert.match(styles, /--section-space-compact: 64px/);
+  assert.match(styles, /@media \(max-width: 1179px\)[\s\S]*?--section-space-major: 80px/);
+  assert.match(styles, /@media \(max-width: 1179px\)[\s\S]*?--section-space-compact: 56px/);
+  assert.match(styles, /@media \(max-width: 767px\)[\s\S]*?--section-space-major: 64px/);
+  assert.match(styles, /--section-space-compact: 48px/);
+  assert.match(styles, /\.si-sierra-stage--cta \.next-step-panel \{[\s\S]*?margin-top: 0/);
+  for (const role of ['canvas', 'clean', 'soft', 'dark']) {
+    assert.match(styles, new RegExp(`data-antbuildz-section-surface="${role}"`));
+  }
+  assert.match(agents, /96px top and bottom at 1180px and above, 80px from 768–1179px, and 64px at 767px and below/);
+  assert.match(design, /Major public marketing sections use 96px vertical padding at 1180px and above/);
+  assert.match(design, /four canonical surface roles: canvas, clean, soft and dark/);
+});
+
 test('reference typography is inherited by public components and mapped onto new homepage sections', async () => {
   const styles = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
   const home = await readFile(new URL('../app/home-education.module.css', import.meta.url), 'utf8');
@@ -1047,6 +1114,14 @@ test('reference typography is inherited by public components and mapped onto new
   assert.match(home, /font: 500 1\.05rem\/1\.375 var\(--font-heading\)/);
   assert.match(home, /font: 400 \.95rem\/1\.7 var\(--font-heading\)/);
   assert.match(home, /font-size: clamp\(1\.9rem, 7\.5vw, 2\.35rem\)/);
+});
+
+test('Who We Serve audience introductions align with the shared section frame', async () => {
+  const styles = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
+  assert.match(
+    styles,
+    /\.solutions-insurance-page \.si-sierra-stage--rental-audience \.si-sierra-copy\s*\{\s*padding-inline: 0;/,
+  );
 });
 
 test('public typography is removed for Console and marks long-form articles without changing their content', async () => {
@@ -1082,6 +1157,12 @@ test('transferred public shell is corrected for the Antbuildz AI brand', async (
   assert.match(source, /We Make Industrial Possible/);
   assert.match(source, /With Antbuildz AI/);
   assert.match(source, /antbuildz-ai-wordmark/);
+  assert.match(source, /brandImage\.src = '\/images\/antbuildz-wordmark\.png'/);
+  assert.match(source, /brandImage\.width = 1471/);
+  assert.match(source, /brandImage\.height = 225/);
+  assert.match(styles, /\.antbuildz-ai-wordmark__brand \{[\s\S]*?overflow: hidden/);
+  assert.match(styles, /#root\.antbuildz-original-root \.antbuildz-ai-wordmark__brand-image \{[\s\S]*?height: 1\.28em !important/);
+  assert.match(styles, /\.antbuildz-ai-wordmark__ai \{[\s\S]*?color: var\(--yellow\)/);
   assert.match(source, /AI Agent Console/);
   assert.match(source, /AI Webstore Suite/);
   assert.match(source, /function createHomeHeroConversation/);
@@ -1929,7 +2010,6 @@ test('homepage education has the approved concise flow, eight destinations and f
     if (name.endsWith('home-education-mount')) return {};
     if (name.endsWith('home-graphics')) return graphics;
     if (name.endsWith('home-enquiry-gap')) return gap;
-    if (name.endsWith('home-market-shift')) return market;
     if (name.endsWith('home-agent-foundations')) return foundations;
     throw new Error(`Unexpected homepage dependency: ${name}`);
   } });
@@ -1961,6 +2041,9 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(originalAppSource, /querySelectorAll<HTMLElement>\('\.si-sierra-stage--trust'\)/);
   assert.match(originalAppSource, /section\.hidden = true;[\s\S]*section\.setAttribute\('inert', ''\)/);
   assert.match(originalAppSource, /correctIndustryTrustPlacement\(root\)/);
+  assert.match(originalAppSource, /querySelectorAll<HTMLElement>\('\.solutions-insurance-page \.si-location-trail'\)/);
+  assert.match(originalAppSource, /\.forEach\(\(trail\) => trail\.remove\(\)\)/);
+  assert.match(originalAppSource, /removeWhoWeServeBreadcrumb\(root\)/);
   assert.equal(exports.HOME_SELECTION_STEPS.length, 4);
   assert.equal((body.match(/<div class="stageVisual">/g) || []).length, 4);
   assert.equal((body.match(/<article class="stageCopy">/g) || []).length, 4);
@@ -1988,16 +2071,22 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(educationCss, /\.stages h3 \{[^}]*font-size: clamp\(30px, 3vw, 42px\)/, 'step titles retain hierarchy within the more compact sequence');
   assert.match(educationCss, /\.stages li, \.stages li:nth-child\(even\) \{ grid-template-columns: minmax\(0, 1fr\)/, 'mobile steps stack without overflow');
   for (const path of requestedRoutes.slice(10)) assert.ok(body.includes(`href="/${path}"`), path);
-  for (const path of ['ai-sales-agent', 'ai-webstore-suite', 'ai-agent-console']) assert.ok(body.includes(`href="/${path}"`));
+  for (const path of ['ai-sales-agent', 'ai-webstore-suite']) assert.ok(body.includes(`href="/${path}"`));
+  assert.doesNotMatch(body, /href="\/ai-agent-console"/, 'the removed Console note must not leave a hidden destination');
   assert.ok(faq.includes('href="/book-a-demo"'));
-  assert.equal((body.match(/<h2\b/g) || []).length, 6);
+  assert.equal((body.match(/<h2\b/g) || []).length, 5);
   const gapHtml = renderToStaticMarkup(react.createElement(gap.HomeEnquiryGap));
   const marketHtml = renderToStaticMarkup(react.createElement(market.HomeMarketShift));
   const foundationsHtml = renderToStaticMarkup(react.createElement(foundations.HomeAgentFoundations));
   // React may hoist an image preload before the first section.
   const bodySections = body.replace(/<link\b[^>]*>/g, '');
-  assert.ok(bodySections.startsWith(marketHtml), 'Market Shift is the first body section immediately after the hero');
-  assert.match(bodySections.slice(marketHtml.length), /^<section class="section" aria-labelledby="home-agent-foundations">/, 'the four foundations are homepage section three');
+  assert.match(bodySections, /^<section class="section" aria-labelledby="home-agent-foundations">/, 'the four foundations are the first body section immediately after the hero');
+  assert.ok(
+    body.indexOf('aria-labelledby="home-product-relationship"') < body.indexOf('aria-labelledby="home-industrial-context"')
+      && body.indexOf('aria-labelledby="home-industrial-context"') < body.indexOf('aria-labelledby="home-industries-heading"'),
+    'industrial product knowledge sits immediately before Who We Serve, after the connected-product section',
+  );
+  assert.doesNotMatch(body, /home-market-shift|AI Is Changing|Industrial Enquiries Start Online/, 'the removed Market Shift section must not render on the homepage');
   assert.equal(foundations.AGENT_FOUNDATIONS.length, 4);
   assert.equal((foundationsHtml.match(/<article\b/g) || []).length, 4);
   for (const title of ['Your company brand', 'Your product catalogue', 'Your technical specifications', 'Suitable recommendations']) assert.ok(foundationsHtml.includes(title));
@@ -2013,12 +2102,12 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(foundationsCss, /grid-template-columns: minmax\(0, 1fr\)/);
   assert.match(foundationsCss, /\.grid \{ display: grid; grid-template-columns: repeat\(3, minmax\(0, 1fr\)\); gap: 24px; \}/);
   assert.match(foundationsCss, /\.scene \{ min-width: 0; min-height: 296px; flex: 1; padding: 32px;[^}]*transform: scale\(\.9\); transform-origin: center;/);
-  assert.doesNotMatch(foundationsCss, /@media \(min-width: 980px\)/, 'the original desktop bento is not compacted or rescaled');
+  assert.match(foundationsCss, /@media \(min-width: 980px\) \{\s*\.frame \{ width: 76\.5%; zoom: \.85; \}/, 'the complete desktop composition is proportionally scaled to 85%');
   assert.match(foundationsCss, /\.buyerMessage \{ align-self: flex-end/);
   assert.match(foundationsCss, /\.agentMessage \{ align-self: flex-start/);
   assert.doesNotMatch(body, /home-enquiry-gap|Why Industrial Product Enquiries/, 'the removed Gap section must not render on the homepage');
   assert.equal((marketHtml.match(/<article\b/g) || []).length, 4);
-  for (const title of ['Industrial Enquiries Start Online', 'Fast Product Answers Are Expected', 'Product Discovery Is Self-Directed', 'AI Influences Supplier Shortlists']) assert.ok(marketHtml.includes(title));
+  for (const title of ['Industrial Enquiries Start Online', 'Fast Product Answers Are Expected', 'Product Discovery Is Self-Directed', 'AI Helps Shape Supplier Shortlists']) assert.ok(marketHtml.includes(title));
   assert.match(marketHtml, /AI Is Changing<\/span> How Industrial Buyers Choose/);
   assert.match(marketHtml, /aria-labelledby="home-market-shift"/);
   assert.doesNotMatch(marketHtml, /Pause Market Shift illustrations|Pause illustrations/);
@@ -2055,7 +2144,7 @@ test('homepage education has the approved concise flow, eight destinations and f
     assert.ok(faq.includes(answer));
   }
   assert.doesNotMatch(html, /<h1\b|<iframe\b|<form\b|<video\b|aria-sales-agent-cta|ai-marketplace-hero|guaranteed/i);
-  assert.doesNotMatch(html.replace(marketHtml, ''), /Marketplace|confidence/i, 'the existing educational copy keeps its original scope; Market Shift retains the requested reference wording');
+  assert.doesNotMatch(html, /Marketplace|confidence/i, 'the existing educational copy keeps its original Antbuildz AI scope');
   assert.equal((body.match(/<img\b/g) || []).length, 19, 'seven local product illustrations, four established Emma portraits and eight industry-page images');
   for (const src of [...body.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) {
     assert.ok(src.startsWith('/images/verified-equipment/') || src.startsWith('/images/solution-') || src === '/images/emma-sales-agent.jpg');
@@ -2107,10 +2196,14 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(body, /support SEO and GEO discovery/);
   assert.match(body, /Start with the AI Sales Agent/);
   const productSection = body.split('aria-labelledby="home-product-relationship"')[1].split('</section>')[0];
+  assert.match(productSection, /class="intro productIntro"/);
+  assert.match(educationCss, /\.productIntro \{ max-width: none; \}/);
+  assert.match(educationCss, /\.productIntro > p:last-child:not\(\.eyebrow\) \{ width: 100%; max-width: none; \}/);
   assert.match(productSection, /<article class="agentProduct">/);
   assert.match(productSection, /<div class="productConnector" aria-hidden="true"><svg/);
   assert.doesNotMatch(productSection, /Webstore plugs into Agent/);
   assert.match(productSection, /<article class="webstoreProduct">/);
+  assert.doesNotMatch(productSection, /Manage your agent’s knowledge, instructions and conversations through|AI Agent Console/);
   assert.ok(productSection.indexOf('agentProduct') < productSection.indexOf('webstoreProduct'));
   assert.ok(productSection.indexOf('Start with the AI Sales Agent') < productSection.indexOf('class="products"'), 'the relationship description belongs directly below its title');
   const productCards = [...productSection.matchAll(/<article\b[^>]*>([\s\S]*?)<\/article>/g)];
@@ -2179,9 +2272,10 @@ test('homepage mounts beside protected sections, restores legacy nodes and remai
     removeAttribute(name) { this.attributes.delete(name); }
     querySelector(selector) { return this.children.find(e => selector === `:scope > ${e.key}`) ?? null; }
     insertAdjacentElement(position, element) {
-      assert.equal(position, 'afterend');
+      assert.ok(position === 'afterend' || position === 'beforebegin');
       element.parentElement = this.parentElement;
-      this.parentElement.children.splice(this.parentElement.children.indexOf(this) + 1, 0, element);
+      const offset = position === 'afterend' ? 1 : 0;
+      this.parentElement.children.splice(this.parentElement.children.indexOf(this) + offset, 0, element);
     }
     remove() {
       if (this.parentElement) this.parentElement.children.splice(this.parentElement.children.indexOf(this), 1);
@@ -2210,7 +2304,7 @@ test('homepage mounts beside protected sections, restores legacy nodes and remai
   assert.equal(changes.length, 0, 'other routes must not mount content');
   window.location.pathname = '/'; notify();
   const targets = changes[0];
-  assert.deepEqual(main.children, [hero, targets.body, industries, emma, targets.faq, faq]);
+  assert.deepEqual(main.children, [hero, targets.body, industries, targets.faq, emma, faq]);
   assert.equal(industries.getAttribute('hidden'), '');
   assert.equal(faq.getAttribute('inert'), '');
   assert.equal(hero.attributes.size, 0);

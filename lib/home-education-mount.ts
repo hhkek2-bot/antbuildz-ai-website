@@ -50,7 +50,7 @@ export function mountHomeEducation(
       body.dataset.homeEducationSlot = 'body';
       faq.dataset.homeEducationSlot = 'faq';
       hero.insertAdjacentElement('afterend', body);
-      emma.insertAdjacentElement('afterend', faq);
+      emma.insertAdjacentElement('beforebegin', faq);
       targets = { body, faq };
       onTargets(targets);
     }

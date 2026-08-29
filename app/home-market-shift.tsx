@@ -34,7 +34,7 @@ export function HomeMarketShift() {
               { eyebrow: "Online", title: "Industrial Enquiries Start Online", desc: "Help buyers find your products, understand the specifications and see how to make an enquiry.", tone: "blue", visual: "search" },
               { eyebrow: "Speed", title: "Fast Product Answers Are Expected", desc: "Answer routine product questions promptly. Flag availability, delivery and commercial details that your team needs to confirm.", tone: "peach", visual: "clock" },
               { eyebrow: "Self-Serve", title: "Product Discovery Is Self-Directed", desc: "Let buyers browse your catalogue, compare options and explore product fit before speaking with sales.", tone: "mint", visual: "browse" },
-              { eyebrow: "AI Influence", title: "AI Influences Supplier Shortlists", desc: "Clear, structured product pages help buyers and AI-assisted search understand what you supply.", tone: "lavender", visual: "bot" },
+              { eyebrow: "AI Influence", title: "AI Helps Shape Supplier Shortlists", desc: "Clear, structured product pages help buyers and AI-assisted search understand what you supply.", tone: "lavender", visual: "bot" },
             ].map((c, i) => {
               const tones: Record<string, { color: string; soft: string }> = {
                 blue: { color: "#2563eb", soft: "#eff6ff" },

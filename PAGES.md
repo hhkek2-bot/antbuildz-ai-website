@@ -13,7 +13,7 @@ This register preserves route intent and design status between sessions. Read it
 
 | Route | Primary visitor job | Preferred primary CTA | Design source | Current status |
 | --- | --- | --- | --- | --- |
-| `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero now uses a five-second muted industrial-yard loop with warm grain, a static reduced-motion/loading fallback and the existing conversation overlay. Rechecked at 1440×900, 1024×768 and 390×844; 57 tests, targeted lint and build pass. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
+| `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero now uses a 16.8-second muted forward-cut industrial story across equipment, tools, parts and warehouse operations, with a static reduced-motion/loading fallback and the existing conversation overlay. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
 | `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Get an AI Webstore Suite Demo | `/webstore-2` on 8080 | Original wording restored after the user clarified that the new copy belongs only to the preview. Shared adapter and route metadata exactly match the pre-wording backups; original headline, comparison summary, descriptions and original visual checked in the browser. Previous positioning audit remains advisory, not an applied rewrite |
 | `/ai-sales-agent` | Understand standalone AI-guided qualification and handover | Build Your AI Agent | `/aiagent` on 8080 | Review required: phone-width and description-size corrections saved after user feedback. Build, targeted lint and 41 tests pass. Restarted 8081 with permission and confirmed its listener; desktop/mobile verification is blocked by Browser Use URL policy. Earlier copy and capability-label checks remain historical |
 | `/ai-agent-console` | Understand how teams control knowledge, instructions and conversations | Book a Demo | `/app` on 8080 | Reference matched; operational typography unchanged against baseline |
@@ -231,7 +231,7 @@ Current background colour trial (28 August 2026): the preview hero retains its e
 ## Shared global decisions
 
 - The hamburger drawer uses six direct links in this order: AI Sales Agent, AI Webstore Suite, AI Agent Console, Pricing, Resources and About Us. No collapsible groups, Marketplace/Blog links or expanded resource/industry sublists. Sign-in, account controls, close and modal focus behaviour remain unchanged.
-- Public Footer is AI-only: Marketplace is hidden; Company contains About Us, AI Agreements & Policies, AI Help Centre and Resources. Resources no longer appears under AI Products. The shared language selector sits in the footer bottom bar rather than the public header.
+- Public Footer is AI-focused and describes Antbuildz AI as “Building the Intelligence Layer for Industrial Businesses.” The legacy Marketplace column remains hidden; Company contains About Us, AI Agreements & Policies, AI Help Centre, Resources and a Marketplace link to `https://antbuildz.com`. Resources no longer appears under AI Products. The shared language selector sits in the footer bottom bar rather than the public header.
 - Public Header excludes `Add Listing` and `Backend Admin`.
 - Public Header uses the Antbuildz.AI wordmark and a grouped Resources dropdown in the former AI Agent Console slot. All resources and the six library topics link to the Resources library and its filtered collections; the hamburger links directly to the Resources overview. AI Agent Console remains available in the main navigation drawer.
 - Resources includes an expandable AI Agent Roles topic with direct links to Sales Specialist, Customer Service, Technical Support, Product Specialist and After-Sales Support; existing topic filtering is preserved.
@@ -712,3 +712,49 @@ Browser-inspected at 1440×900, 1024×768, 390×844 and 320×740. The Agent fram
 ## 2026-08-29 — Homepage hero conversation spacing
 
 Increased the calculated separation between the homepage hero title and its animated conversation field from 40px to 48px on desktop and from 24px to 32px at 767px and below. The existing title position, conversation animation, industrial video, transcript behaviour and responsive banner composition remain unchanged. Browser-inspected at 1440×900, 1024×768, 390×844 and 320×740 with one H1, no title/conversation overlap and zero horizontal page overflow.
+
+## 2026-08-29 — Market Shift section removed from Home
+
+Fidelity-mode homepage composition change. Removed the complete `Market Shift / AI Is Changing How Industrial Buyers Choose` section from the rendered homepage. Its source component and styles remain untouched for reversibility; no files were deleted. The `Your business at its core` Agent-foundations section now follows the industrial hero directly. Other homepage sections, wording, routes, CTAs, graphics and shared design rules remain unchanged.
+
+## 2026-08-29 — Industrial product knowledge moved before Who We Serve
+
+Fidelity-mode homepage order change. Moved the existing `Built for the complexity of industrial products` section from directly after the Agent foundations to immediately before the photographic Who We Serve carousel. Its wording, graphic, typography, spacing and responsive behaviour remain unchanged; no other section was reordered.
+
+## 2026-08-29 — Emma CTA moved above the Home footer
+
+Fidelity-mode homepage order change. Moved the existing `Talk to Emma, Our AI Sales Agent` section from above the data-trust and FAQ content to the final visible position immediately above the shared footer. The trust panel and FAQ now precede Emma; Emma's image, wording, CTA behaviour, typography and responsive design remain unchanged. The transferred component stays mounted so route cleanup remains safe.
+
+## 2026-08-29 — Who We Serve audience-title alignment
+
+Fidelity-mode shared-layout correction across all eight Who We Serve routes. Removed the desktop and compact-desktop inset from the `Who it’s for` introduction so its eyebrow and title align with the standard 1180px section frame and the other left-aligned section titles. The paired description now reaches the frame’s right edge; audience cards, wording, typography and already-aligned mobile layout remain unchanged.
+
+## 2026-08-29 — Shared section rhythm and surface system
+
+System-mode standardisation of public marketing sections. Major narrative sections use semantic source-level roles with 96px vertical padding at 1180px and above, 80px from 768–1179px, and 64px at 767px and below. Compact support bands use 64px, 56px and 48px at the same breakpoints. Heroes, footers, the operational AI Agent Console, embedded demonstrations, Pricing's composed plan grid and deliberate scroll-led narratives remain component-owned. The final Who We Serve CTA now assigns the rhythm to its outer narrative section and neutralises the nested panel margin, removing the only measured stacked gap.
+
+Section backgrounds now resolve to the approved canvas, clean, soft or dark roles while preserving component-owned gradients and the homepage trust panel. The compatibility layer marks sections through their existing semantic marketing-title roles instead of applying a blanket rule to every `<section>` element. `AGENTS.md` and `DESIGN.md` record the approved values and exceptions.
+
+Every public route was browser-audited at 1440×900 in one reusable tab: Home, AI Sales Agent, AI Webstore Suite, Webstore preview, Pricing, Resources, AI Help Centre, About, Book a Demo, Agreements, Rental & Leasing, Manufacturers & OEMs, Dealers & Distributors, Industrial & MRO, Hardware & Trade, Building & Engineering, Parts & Aftermarket, and Buggies & Vehicles. Home, AI Sales Agent, AI Webstore Suite, Pricing, Resources and Manufacturers & OEMs were additionally checked at 1024×768, 390×844 and 320×740. Every visible public route retained one descriptive H1 and zero horizontal overflow; marked sections resolved to 96/80/64px major or 64/56/48px compact padding with zero section margins. AI Agent Console and embedded demonstrations received no marketing-section roles. All 64 tests, targeted ESLint and the production build pass.
+
+## 2026-08-29 — Who We Serve hero breadcrumb removed
+
+Fidelity-mode simplification across all eight Who We Serve routes. Removed the redundant `Who We Serve / current audience` breadcrumb from the top of each audience hero so visitors reach the descriptive H1 directly. Route URLs, canonical metadata, header Industries navigation, hero wording, CTA behaviour and the one-H1 structure remain unchanged.
+
+## 2026-08-29 — Atmospheric blurred Home hero video
+
+Design-mode homepage hero refinement informed by Sierra Horizon’s blurred moving backdrop. The existing industrial-yard loop and reduced-motion poster now use a strong optical blur, restrained desaturation, increased contrast and a slightly enlarged media plane, while a deeper navy overlay strengthens separation behind the white/yellow title and Agent conversations. Antbuildz footage, wording, animation sequence, navigation, speaker glass, title spacing and reduced-motion playback behaviour remain unchanged; the treatment stays homepage-scoped.
+
+## 2026-08-29 — Shared Antbuildz.AI wordmark artwork
+
+Fidelity-mode brand update for the shared public header and footer. Replaced the CSS-typed `antbuildz` approximation with the supplied 1471×225 Antbuildz wordmark artwork, cropped non-destructively before its legacy `.com` suffix. A live `.ai` suffix uses the existing Plus Jakarta Sans 850 wordmark typography and the Antbuildz yellow token, preserving crisp scaling while keeping the source artwork untouched. The accessible `Antbuildz AI home` label, home destination and shared header/footer structure remain unchanged.
+
+## 2026-08-29 — Centred Agent-foundations composition
+
+Scaled the complete homepage `Your AI Sales Agent / Your business at its core` composition to 85% at desktop widths and centred it around the section frame. The title, description, four cards and their internal product graphics retain their original proportions. The established single-column mobile composition remains at full scale to preserve readable text and touch-friendly spacing.
+
+## 2026-08-29 — Longer forward-cut Home hero film
+
+Replaced the five-second forward/reverse hero loop with a 16.83-second forward-moving industrial story. The sequence moves from the equipment yard through tools, parts inventory and warehouse operations, using restrained 0.8-second dissolves before returning to the matching equipment-yard loop frame. No segment plays in reverse. The new silent H.264 asset remains 1280×720 at 24fps, uses fast-start metadata and is approximately 2.9MB.
+
+Browser-inspected active playback at 1440×900, 1024×768 and 390×844. The new source loads and plays at all three sizes, the existing blur and contrast treatment remains legible behind the title, navigation and title geometry are unchanged, each route check retains one H1 and there is no horizontal overflow. Reduced-motion visitors still receive the static poster instead of visible video playback.

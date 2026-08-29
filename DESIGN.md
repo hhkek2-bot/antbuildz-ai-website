@@ -23,8 +23,10 @@ Browser tabs use the approved red-and-white Antbuildz “a” mark. Do not reuse
 
 | Role | Token/value | Use |
 | --- | --- | --- |
-| Canvas | `#F8F7FF` | Primary marketing background |
-| Soft surface | `#F1EFF8` | Alternating sections and subtle grouping |
+| Canvas | `#F8F7FF` | Default public marketing section background |
+| Clean surface | `#FFFFFF` | Product proof, interface and FAQ sections |
+| Soft surface | `#F1EFF8` | Deliberate narrative reset or subtle grouping |
+| Dark section surface | `#0F172A` | Operational proof and high-contrast bands only |
 | Heading ink | `#0F172A` | Main headings and high-emphasis text |
 | Body | `#475569` | Paragraphs and explanatory copy |
 | Muted | `#64748B` | Secondary labels and supporting metadata |
@@ -65,7 +67,10 @@ The `--type-*` tokens in `app/globals.css` support source-owned additions. New h
 
 - Standard content frame: maximum 1320px with approximately 5% side padding.
 - Base spacing rhythm: multiples of 4px.
-- Major sections: normally 80–130px vertical padding on desktop.
+- Major public marketing sections use 96px vertical padding at 1180px and above, 80px from 768–1179px, and 64px at 767px and below.
+- Dense support bands may use 64px desktop and 48px mobile.
+- Sections own their spacing through padding; do not create double gaps with adjacent section margins.
+- Heroes, footers, operational Console screens, embedded demonstrations and deliberate scroll-led narratives are component-owned exceptions.
 - On desktop landscape, standard non-progress marketing sections should aim to present their heading and primary content within one viewport. Compact padding, gaps and illustration scale before extending the section vertically. Deliberate progress timelines and scroll-led narratives are exempt.
 - On tablet and mobile, readable type, touch targets and natural stacking take priority over single-viewport section height; never compress content below the established accessibility and typography rules merely to make it fit.
 - Marketing layouts may be expressive; operational Console layouts prioritise scanning and task efficiency.
@@ -84,6 +89,8 @@ The `--type-*` tokens in `app/globals.css` support source-owned additions. New h
 
 ## Colour discipline
 
+- Public section backgrounds use the four canonical surface roles: canvas, clean, soft and dark. Do not introduce a new near-white or neutral shade when a canonical role works.
+- Gradients may add restrained atmosphere, but must resolve to one canonical base surface and must not create a new section-background role.
 - Yellow means primary action or important commercial emphasis.
 - Red identifies Antbuildz and selected editorial emphasis; it should not compete with every CTA.
 - Violet, blue and gold may form one restrained gradient on one important phrase in a major heading.
@@ -110,13 +117,15 @@ Reuse these patterns before creating variants:
 
 When a component changes, check every route that consumes it. New variants need a functional reason, not only a different appearance.
 
-The Public Footer is scoped to Antbuildz AI. Keep the Marketplace column hidden; Marketplace navigation and support belong on antbuildz.com. Under Company, list About Us, AI Agreements & Policies, AI Help Centre and Resources. AI Help Centre links directly to the AI-only FAQ library at `/help/ai`; the old `/help` and `/faqs` paths redirect there. Do not duplicate Resources in the AI Products column. The existing language selector belongs in the footer bottom bar, with its full keyboard and dialog behaviour preserved. Preserve the existing footer typography and spacing.
+The Public Footer is scoped to Antbuildz AI. Its company description is “We are Building the Intelligence Layer for Industrial Businesses.” Keep the Marketplace column hidden; Marketplace navigation and support belong on antbuildz.com. Under Company, list About Us, AI Agreements & Policies, AI Help Centre, Resources and Marketplace; Marketplace links directly to `https://antbuildz.com`. AI Help Centre links directly to the AI-only FAQ library at `/help/ai`; the old `/help` and `/faqs` paths redirect there. Do not duplicate Resources in the AI Products column. The existing language selector belongs in the footer bottom bar, with its full keyboard and dialog behaviour preserved. Preserve the existing footer typography and spacing.
 
 The homepage Who We Serve section uses a photographic horizontal carousel with all eight audience destinations. Desktop presents one dominant full-colour card and approximately half of the next card as a continuation cue; non-active imagery is brighter and strongly desaturated until its card becomes active. Mobile keeps one touch-readable 84vw card with a partial next-card cue. Cards remain full native links with labelled previous/next controls, keyboard focus activation, scroll snapping and reduced-motion support.
 
 The Data protection & trust panel appears once on the homepage immediately before the homepage FAQ. Do not repeat it on the eight Who We Serve pages; those routes move directly from their AI Agent control section to their audience-specific FAQ. Preserve the panel's privacy-policy destination, three assurance principles and restrained blue trust surface.
 
 The desktop Public Header uses a three-zone alignment: Antbuildz.AI wordmark on the left, primary product navigation centred to the viewport, and utility controls on the right. Translation is not a header control; the right side retains Sign in, Book a Demo and Menu. Compact and mobile states may collapse navigation items while preserving that order.
+
+The shared Public Header and Footer wordmark uses the supplied high-resolution red `antbuildz` artwork without its legacy `.com` suffix. Append `.ai` in the established Plus Jakarta Sans 850 wordmark typography and Antbuildz yellow `#FFC501`; keep the accessible home label and responsive scaling intact.
 
 Primary navigation order is AI Sales Agent, AI Webstore Suite, Pricing, Industries, Resources. Header links, the Industries trigger and Sign in use the reference Inter 750 weight, normal tracking and 1.65 line-height, at 14px desktop / 13px compact. The language label retains its reference 13px / 1 line-height and 750 weight. The Industries trigger uses the same 44px control height as the links, not a full-header-height pill. Selected product pages, open Industries/Resources disclosures and keyboard focus use a 3px Antbuildz yellow underline; primary navigation tabs do not use circular or pill-shaped selected outlines.
 

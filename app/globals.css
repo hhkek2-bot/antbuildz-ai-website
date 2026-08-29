@@ -1,7 +1,9 @@
 :root {
   --canvas: #f8f7ff;
+  --clean: #fff;
   --soft: #f1eff8;
   --ink: #0f172a;
+  --dark-surface: var(--ink);
   --body: #475569;
   --muted: #64748b;
   --yellow: #ffc501;
@@ -29,6 +31,8 @@
   --type-heading-line: 1.06;
   --type-body-line: 1.65;
   --type-heading-tracking: -.04em;
+  --section-space-major: 96px;
+  --section-space-compact: 64px;
   --menu-surface: color-mix(in srgb, var(--canvas) 98%, transparent);
   --menu-border: var(--line);
   --menu-shadow: var(--shadow);
@@ -563,6 +567,56 @@ button, summary { font: inherit; }
   margin-inline: auto !important;
 }
 
+/* Shared public-section rhythm and surface roles. Semantic markers are added
+   by the source compatibility layer so operational Console screens, heroes,
+   embedded demonstrations and deliberate progress narratives stay component-owned. */
+#root.antbuildz-original-root.antbuildz-section-system [data-antbuildz-section-space="major"] {
+  margin-block: 0 !important;
+  padding-block: var(--section-space-major) !important;
+}
+
+#root.antbuildz-original-root.antbuildz-section-system [data-antbuildz-section-space="compact"] {
+  margin-block: 0 !important;
+  padding-block: var(--section-space-compact) !important;
+}
+
+/* The Who We Serve CTA panel sits inside the narrative CTA section. Let the
+   outer section own the shared rhythm instead of stacking the panel margin. */
+#root.antbuildz-original-root.antbuildz-section-system .si-sierra-stage--cta .next-step-panel {
+  margin-top: 0;
+}
+
+#root.antbuildz-original-root.antbuildz-section-system [data-antbuildz-section-surface="canvas"] {
+  background-color: var(--canvas) !important;
+}
+
+#root.antbuildz-original-root.antbuildz-section-system [data-antbuildz-section-surface="clean"] {
+  background-color: var(--clean) !important;
+}
+
+#root.antbuildz-original-root.antbuildz-section-system [data-antbuildz-section-surface="soft"] {
+  background-color: var(--soft) !important;
+}
+
+#root.antbuildz-original-root.antbuildz-section-system [data-antbuildz-section-surface="dark"] {
+  background-color: var(--dark-surface) !important;
+}
+
+@media (max-width: 1179px) {
+  #root.antbuildz-original-root.antbuildz-section-system {
+    --section-space-major: 80px;
+    --section-space-compact: 56px;
+  }
+}
+
+/* Align the shared Who We Serve audience introduction with the 1180px
+   section frame. The transferred template already removes this inset on
+   mobile; desktop and compact desktop should use the same left edge as the
+   other left-aligned section titles. */
+#root.antbuildz-original-root .solutions-insurance-page .si-sierra-stage--rental-audience .si-sierra-copy {
+  padding-inline: 0;
+}
+
 /* Words replacing Sales Agent statistics use the responsive heading scale,
    not the oversized numeral scale. Keep the four-block layout unchanged. */
 #root.antbuildz-public-typography .aisl-metrics[data-antbuildz-capabilities] .aisl-stat-value {
@@ -625,6 +679,11 @@ button, summary { font: inherit; }
     --antbuildz-trial-section-title-size: clamp(30px, 8vw, 32px);
     --antbuildz-trial-major-intro-size: 16px;
   }
+
+  #root.antbuildz-original-root.antbuildz-section-system {
+    --section-space-major: 64px;
+    --section-space-compact: 48px;
+  }
 }
 
 .antbuildz-ai-wordmark-link {
@@ -638,7 +697,9 @@ button, summary { font: inherit; }
 .antbuildz-ai-wordmark-link > img[hidden] { display: none !important; }
 
 .antbuildz-ai-wordmark {
-  color: var(--red);
+  display: inline-flex;
+  align-items: center;
+  height: 1.05em;
   font-family: var(--font-heading) !important;
   font-size: clamp(1.08rem, 1.7vw, 1.38rem);
   font-weight: 850;
@@ -647,9 +708,31 @@ button, summary { font: inherit; }
   white-space: nowrap;
 }
 
-.antbuildz-ai-wordmark__ai { color: var(--ink); }
-.is-homepage-overlay .antbuildz-ai-wordmark__ai { color: #fff; }
-.is-homepage-overlay.is-scrolled .antbuildz-ai-wordmark__ai { color: var(--ink); }
+.antbuildz-ai-wordmark__brand {
+  position: relative;
+  display: block;
+  flex: 0 0 5.47em;
+  width: 5.47em;
+  height: 1.05em;
+  overflow: hidden;
+}
+
+#root.antbuildz-original-root .antbuildz-ai-wordmark__brand-image {
+  position: absolute;
+  top: -.13em;
+  left: 0;
+  display: block;
+  width: auto !important;
+  max-width: none !important;
+  height: 1.28em !important;
+}
+
+.antbuildz-ai-wordmark__ai {
+  margin-left: .01em;
+  color: var(--yellow);
+  font: inherit;
+  letter-spacing: inherit;
+}
 
 .antbuildz-industries-menu,
 .antbuildz-resources-menu {
@@ -1330,6 +1413,8 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-stage {
+  --home-hero-media-blur: 22px;
+  --home-hero-media-scale: 1.09;
   height: clamp(1220px, 175svh, 1680px) !important;
   min-height: 1220px;
 }
@@ -1347,6 +1432,15 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   z-index: -4 !important;
 }
 
+/* Sierra-inspired atmospheric treatment: keep the industrial footage as
+   evidence, but soften it into a calm field behind the title and Agent proof. */
+.antbuildz-ai-home .ai-marketplace-hero-image,
+.antbuildz-ai-home .antbuildz-home-hero-video {
+  filter: blur(var(--home-hero-media-blur)) saturate(.72) contrast(1.16) brightness(.88);
+  transform: scale(var(--home-hero-media-scale)) !important;
+  transform-origin: center;
+}
+
 .antbuildz-ai-home .antbuildz-home-hero-video {
   position: absolute;
   inset: 0;
@@ -1358,6 +1452,13 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   object-fit: cover;
   object-position: center;
   pointer-events: none;
+}
+
+.antbuildz-ai-home .ai-marketplace-hero-overlay {
+  background:
+    linear-gradient(180deg, rgb(6 17 31 / .38), rgb(6 18 34 / .52) 50%, rgb(3 10 22 / .9)),
+    radial-gradient(72% 68% at 50% 34%, rgb(59 130 246 / .12), transparent 66%),
+    linear-gradient(90deg, rgb(4 13 26 / .36), transparent 48%, rgb(4 13 26 / .42));
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-stage.is-pinned > .ai-marketplace-hero {
@@ -3324,5 +3425,12 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   .antbuildz-ai-home .antbuildz-home-hero-conversation.is-outer-left,
   .antbuildz-ai-home .antbuildz-home-hero-conversation.is-outer-right {
     display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .antbuildz-ai-home .ai-marketplace-hero-stage {
+    --home-hero-media-blur: 16px;
+    --home-hero-media-scale: 1.12;
   }
 }

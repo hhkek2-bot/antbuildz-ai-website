@@ -24,13 +24,15 @@
 ## Public design system
 
 - Visual character: light, product-led, practical, and industrial rather than generic corporate technology.
-- Canvas: `#F8F7FF`; soft surface: `#F1EFF8`; heading ink: `#0F172A`; body: `#475569`; muted text: `#64748B`.
+- Canvas: `#F8F7FF`; clean surface: `#FFFFFF`; soft surface: `#F1EFF8`; heading ink and dark section surface: `#0F172A`; body: `#475569`; muted text: `#64748B`.
 - Primary CTA: yellow `#FFC501`; hover: `#F5B70A`; brand accent: red `#E3180A`.
 - Use the established restrained violet-to-blue-to-gold gradient only for one important phrase in a major heading.
 - Marketing headings use Plus Jakarta Sans with Inter as fallback, 700–850 weight, tight tracking, and compact line-height. Body copy uses Inter.
 - Hero titles use a maximum 1180px title frame, `1.06` line-height or tighter, and intentional block-level spans for two-line titles.
 - Standard content frame: maximum 1320px with approximately 5% side padding.
-- Standard major-section rhythm: 80–130px vertical padding; preserve a simple 4px-based spacing scale.
+- Public marketing sections own their vertical rhythm through padding, not stacked section margins: 96px top and bottom at 1180px and above, 80px from 768–1179px, and 64px at 767px and below.
+- Dense support bands may use 64px desktop and 48px mobile only when they are not complete narrative sections. Heroes, footers, operational Console screens, embedded product demonstrations and deliberate scroll-led narratives retain component-owned spacing.
+- The default public section background is canvas `#F8F7FF`. Use clean white `#FFFFFF` for proof, interface or FAQ sections; soft `#F1EFF8` for a deliberate narrative reset; and ink `#0F172A` only for operational or high-contrast bands. Reuse these roles instead of introducing page-specific neutral shades. Gradients must sit on one of these base surfaces.
 - Buttons are pill-shaped and at least 54px high for primary marketing actions.
 - Large software visuals use approximately 28px radii; marketing cards use 22–24px radii with subtle borders and soft shadows.
 - Use industrial photography and real product/interface mock-ups. Do not replace them with generic stock technology graphics.

@@ -7,7 +7,6 @@ import { createPortal } from 'react-dom';
 import { mountHomeEducation, type HomeEducationTargets } from '../lib/home-education-mount';
 import styles from './home-education.module.css';
 import { AgentGraphic, CatalogueGraphic, SelectionGraphic, WebstoreGraphic } from './home-graphics';
-import { HomeMarketShift } from './home-market-shift';
 import { HomeAgentFoundations } from './home-agent-foundations';
 
 export const HOME_INDUSTRIES = [
@@ -151,26 +150,8 @@ export function HomeEducationBody() {
     scrollIndustryTo(nextIndustry);
   };
   return (
-    <><HomeMarketShift /><HomeAgentFoundations />
+    <><HomeAgentFoundations />
     <div className={styles.body}>
-      <section className={styles.section} aria-labelledby="home-industrial-context">
-        <div className={`${styles.frame} ${styles.context}`}>
-          <div>
-            <p className={styles.eyebrow}>Industrial product knowledge</p>
-            <h2 id="home-industrial-context">Built for the complexity of industrial products</h2>
-            <CatalogueGraphic />
-          </div>
-          <div>
-            <p className={styles.lead}>Industrial buyers need to know whether a product fits the job. Antbuildz.AI helps them work through specifications, application requirements and suitable options using your technical catalogue.</p>
-            <ul className={styles.points}>
-              <li>Bring scattered product documents into the conversation.</li>
-              <li>Clarify the application before suggesting equipment.</li>
-              <li>Check specifications and supported inventory data.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
       <section className={`${styles.section} ${styles.approach}`} aria-labelledby="home-selection-approach">
         <div className={styles.frame}>
           <div className={styles.intro}>
@@ -197,7 +178,7 @@ export function HomeEducationBody() {
 
       <section className={styles.section} aria-labelledby="home-product-relationship">
         <div className={styles.frame}>
-          <div className={styles.intro}>
+          <div className={`${styles.intro} ${styles.productIntro}`}>
             <p className={styles.eyebrow}>One connected workflow</p>
             <h2 id="home-product-relationship" className={styles.productHeading}><span>Your AI Sales Agent</span>{' '}<span>Plus a connected Webstore</span></h2>
             <p className={styles.connection}>Start with the AI Sales Agent. Add AI Webstore Suite when you need a browsable catalogue, supported inventory context and dedicated product pages that can support SEO and GEO discovery. Inventory freshness and visibility depend on your data, plan, connections and indexing.</p>
@@ -219,7 +200,24 @@ export function HomeEducationBody() {
               <a className={styles.textLink} href="/ai-webstore-suite">Explore AI Webstore Suite <Arrow /></a>
             </article>
           </div>
-          <p className={styles.console}>Manage your agent’s knowledge, instructions and conversations through <a href="/ai-agent-console">AI Agent Console</a>.</p>
+        </div>
+      </section>
+
+      <section className={styles.section} aria-labelledby="home-industrial-context">
+        <div className={`${styles.frame} ${styles.context}`}>
+          <div>
+            <p className={styles.eyebrow}>Industrial product knowledge</p>
+            <h2 id="home-industrial-context">Built for the complexity of industrial products</h2>
+            <CatalogueGraphic />
+          </div>
+          <div>
+            <p className={styles.lead}>Industrial buyers need to know whether a product fits the job. Antbuildz.AI helps them work through specifications, application requirements and suitable options using your technical catalogue.</p>
+            <ul className={styles.points}>
+              <li>Bring scattered product documents into the conversation.</li>
+              <li>Clarify the application before suggesting equipment.</li>
+              <li>Check specifications and supported inventory data.</li>
+            </ul>
+          </div>
         </div>
       </section>
 

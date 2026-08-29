@@ -6,6 +6,7 @@ import { simplifyAgreementHub, syncAgreementMetadata } from '../lib/agreement-hu
 import { EMMA_PORTRAIT_ALT, EMMA_PORTRAIT_SRC, standardiseAgentPortraits } from '../lib/agent-identity';
 import { correctSalesAgentCopy } from '../lib/ai-sales-agent-copy';
 import { HOMEPAGE_SEO, syncHomepageMetadata } from '../lib/homepage-seo';
+import { applyPublicMarketingSectionSystem } from '../lib/public-marketing-sections';
 import { applyPublicMarketingTypographyTrial } from '../lib/public-marketing-typography';
 import { removeHeadingFullStops } from '../lib/title-punctuation';
 
@@ -903,12 +904,21 @@ function createWordmark() {
   wordmark.className = 'antbuildz-ai-wordmark';
   wordmark.setAttribute('aria-hidden', 'true');
 
-  const name = document.createElement('span');
-  name.textContent = 'antbuildz';
+  const brand = document.createElement('span');
+  brand.className = 'antbuildz-ai-wordmark__brand';
+  const brandImage = document.createElement('img');
+  brandImage.className = 'antbuildz-ai-wordmark__brand-image';
+  brandImage.src = '/images/antbuildz-wordmark.png';
+  brandImage.alt = '';
+  brandImage.width = 1471;
+  brandImage.height = 225;
+  brandImage.decoding = 'async';
+  brand.appendChild(brandImage);
+
   const ai = document.createElement('span');
   ai.className = 'antbuildz-ai-wordmark__ai';
   ai.textContent = '.ai';
-  wordmark.appendChild(name);
+  wordmark.appendChild(brand);
   wordmark.appendChild(ai);
   return wordmark;
 }
@@ -1123,7 +1133,7 @@ function correctFooter(root: HTMLElement) {
   }
 
   const brandCopy = footer.querySelector<HTMLElement>('.abz-public-footer__brand p');
-  setPricingText(brandCopy, 'Industrial AI Sales Agent, AI Webstore Suite and AI Agent Console for product-led B2B teams.');
+  setPricingText(brandCopy, 'We are Building the Intelligence Layer for Industrial Businesses.');
 
   const companyResources = footer.querySelector<HTMLAnchorElement>(
     'nav[aria-label="Company"] a[href="/blogs"], nav[aria-label="Company"] a[href="/resources"]',
@@ -1156,6 +1166,17 @@ function correctFooter(root: HTMLElement) {
   if (companyHelp) {
     setPricingText(companyHelp, 'AI Help Centre');
     companyHelp.setAttribute('href', '/help/ai');
+  }
+
+  const companyList = footer.querySelector<HTMLElement>('nav[aria-label="Company"] ul');
+  if (companyList && !companyList.querySelector('[data-antbuildz-marketplace-link="true"]')) {
+    const marketplaceItem = footer.ownerDocument.createElement('li');
+    const marketplaceLink = footer.ownerDocument.createElement('a');
+    marketplaceLink.dataset.antbuildzMarketplaceLink = 'true';
+    marketplaceLink.href = 'https://antbuildz.com';
+    marketplaceLink.textContent = 'Marketplace';
+    marketplaceItem.appendChild(marketplaceLink);
+    companyList.appendChild(marketplaceItem);
   }
 }
 
@@ -1382,7 +1403,7 @@ function setupHomeHeroVideo(hero: HTMLElement) {
   if (!video) {
     video = document.createElement('video');
     video.className = 'antbuildz-home-hero-video';
-    video.src = '/videos/home-hero-industrial-loop.mp4';
+    video.src = '/videos/home-hero-industrial-story.mp4';
     video.poster = poster;
     video.muted = true;
     video.defaultMuted = true;
@@ -1951,6 +1972,13 @@ function correctIndustryTrustPlacement(root: HTMLElement) {
   });
 }
 
+function removeWhoWeServeBreadcrumb(root: HTMLElement) {
+  if (!WHO_WE_SERVE_PATHS.has(window.location.pathname)) return;
+  root
+    .querySelectorAll<HTMLElement>('.solutions-insurance-page .si-location-trail')
+    .forEach((trail) => trail.remove());
+}
+
 function applyAntbuildzAiCorrections(root: HTMLElement) {
   correctWordmarks(root);
   correctLinks(root);
@@ -1969,8 +1997,10 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   scopeAiHelpExperience(root, window.location.pathname);
   standardiseAgentPortraits(root);
   correctIndustryTrustPlacement(root);
+  removeWhoWeServeBreadcrumb(root);
   correctPublicTypography(root);
   applyPublicMarketingTypographyTrial(root, window.location.pathname);
+  applyPublicMarketingSectionSystem(root, window.location.pathname);
   removeHeadingFullStops(root, window.location.pathname);
 
   const pageTitle = PAGE_TITLES[window.location.pathname];

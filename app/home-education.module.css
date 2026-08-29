@@ -44,6 +44,8 @@
 .selectionEmphasis { color: transparent; background: linear-gradient(110deg, var(--purple), var(--blue) 45%, var(--yellow-hover)); background-clip: text; -webkit-background-clip: text; }
 .intro { max-width: 840px; }
 .intro > p:last-child:not(.eyebrow) { max-width: 720px; margin-top: 24px; font-size: var(--type-lead); line-height: 1.62; }
+.productIntro { max-width: none; }
+.productIntro > p:last-child:not(.eyebrow) { width: 100%; max-width: none; }
 .stages { list-style: none; padding: 0; margin: 56px auto 0; max-width: 1120px; display: grid; gap: clamp(60px, 6vw, 84px); }
 .stages li { --stage-color: var(--purple); display: grid; grid-template-columns: minmax(0, .98fr) minmax(300px, .78fr); align-items: center; gap: clamp(40px, 5vw, 72px); }
 .stages li:nth-child(2) { --stage-color: var(--blue); }
@@ -101,8 +103,6 @@
 .body a:focus-visible, .faq a:focus-visible, .faq summary:focus-visible { outline: var(--menu-focus); outline-offset: 4px; border-radius: 4px; }
 .body a svg { flex-shrink: 0; }
 .body .connection { margin-top: 24px; }
-.body .console { margin-top: 4px; }
-.console a { text-decoration: underline; text-underline-offset: 4px; display: inline-block; min-height: 44px; padding-block: 8px; }
 .industries { border-top: 1px solid var(--line); }
 .industryHeader { display: flex; align-items: end; justify-content: space-between; gap: 40px; }
 .industryHeader > div:first-child { max-width: 840px; }
