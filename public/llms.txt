@@ -1,0 +1,34 @@
+# Antbuildz AI
+
+> Antbuildz AI helps industrial rental, equipment, parts, manufacturing and technical product businesses turn approved product knowledge into useful buyer conversations and qualified sales handovers.
+
+Canonical website: https://antbuildz.ai
+
+## Core products
+
+- [AI Webstore Suite](https://antbuildz.ai/ai-webstore-suite): AI-ready product and rental Webstores connected to buyer conversations and enquiry workflows.
+- [AI Sales Agent](https://antbuildz.ai/ai-sales-agent): Qualifies industrial requirements, recommends supported options from approved knowledge, and prepares human handovers.
+- [AI Agent Console](https://antbuildz.ai/ai-agent-console): Manages knowledge, instructions, testing, conversations, workflows and performance.
+- [Pricing](https://antbuildz.ai/pricing): Current Antbuildz AI Webstore Suite pricing and plan information.
+- [Book a Demo](https://antbuildz.ai/book-a-demo): Share your name and work email, then choose and confirm a demo time in Calendly.
+
+## Learning and support
+
+- [Resources](https://antbuildz.ai/resources): Practical industrial AI guides and readiness material.
+- [AI Agent Roles](https://antbuildz.ai/ai-agent-roles): Sales, product specialist, customer service, technical support and after-sales AI roles.
+- [Antbuildz AI FAQs](https://antbuildz.ai/faqs): AI-only product, knowledge, Webstore and onboarding answers.
+- [About Antbuildz](https://antbuildz.ai/about): Company history, principles and industrial AI direction.
+- [Agreements & Policies](https://antbuildz.ai/agreements): Existing product, privacy and marketplace policy documents.
+
+## Industries served
+
+- [Rental and leasing](https://antbuildz.ai/rental-businesses)
+- [Manufacturers and OEMs](https://antbuildz.ai/manufacturers-brands)
+- [Dealers and distributors](https://antbuildz.ai/dealers-distributors)
+- [Industrial and MRO suppliers](https://antbuildz.ai/industrial-mro)
+- [Hardware and trade supplies](https://antbuildz.ai/hardware-trade-supplies)
+- [Building and engineering products](https://antbuildz.ai/building-engineering)
+- [Parts and aftermarket](https://antbuildz.ai/parts-aftermarket)
+- [Buggies and commercial vehicles](https://antbuildz.ai/buggies-commercial-vehicles)
+
+Antbuildz AI provides qualification and product-guidance tools. Final technical suitability, availability, pricing and commercial commitments remain with the relevant business and its specialists.

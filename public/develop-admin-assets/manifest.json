@@ -1,0 +1,501 @@
+{
+  "assets": [
+    {
+      "contentType": "",
+      "id": "66f29e8804d5404d",
+      "kind": "stylesheet",
+      "name": "css2",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/66f29e8804d5404d",
+      "url": "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+    },
+    {
+      "contentType": "",
+      "id": "c1b22ac3ac202293",
+      "kind": "stylesheet",
+      "name": "mapbox-gl.css",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/c1b22ac3ac202293.css",
+      "url": "https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css"
+    },
+    {
+      "contentType": "",
+      "id": "07340e1536759aa5",
+      "kind": "stylesheet",
+      "name": "mapbox-gl-geocoder.css",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/07340e1536759aa5.css",
+      "url": "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+    },
+    {
+      "contentType": "",
+      "id": "fba1f87ae19dfb63",
+      "kind": "stylesheet",
+      "name": "leaflet.css",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/fba1f87ae19dfb63.css",
+      "url": "https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    },
+    {
+      "contentType": "",
+      "id": "48ce722b8f65deb8",
+      "kind": "stylesheet",
+      "name": "main.5ecbded8.css",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/48ce722b8f65deb8.css",
+      "url": "https://developpanel.antbuildz.com/static/css/main.5ecbded8.css"
+    },
+    {
+      "contentType": "image/png",
+      "id": "0c92cfbd1065ecd2",
+      "kind": "image",
+      "name": "logo-a.png",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/0c92cfbd1065ecd2.png",
+      "url": "https://developpanel.antbuildz.com/images/logo-a.png"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "849fd052c1b4249a",
+      "kind": "image",
+      "name": "carrow.svg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/849fd052c1b4249a.svg",
+      "url": "https://developpanel.antbuildz.com/images/carrow.svg"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "91589196336a4daa",
+      "kind": "image",
+      "name": "082-quality.svg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/91589196336a4daa.svg",
+      "url": "https://developpanel.antbuildz.com/images/icons2/082-quality.svg"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "ab5903626fdc531f",
+      "kind": "image",
+      "name": "pie-chart.svg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/ab5903626fdc531f.svg",
+      "url": "https://developpanel.antbuildz.com/images/icons2/pie-chart.svg"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "1d36a3bc43e8c8db",
+      "kind": "image",
+      "name": "028-monitor.svg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/1d36a3bc43e8c8db.svg",
+      "url": "https://developpanel.antbuildz.com/images/icons2/028-monitor.svg"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "16ce89328b0964fb",
+      "kind": "image",
+      "name": "notification.svg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/16ce89328b0964fb.svg",
+      "url": "https://developpanel.antbuildz.com/images/notification.svg"
+    },
+    {
+      "contentType": "image/png",
+      "id": "8d89c7ca3258f1c1",
+      "kind": "image",
+      "name": "male.png",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/8d89c7ca3258f1c1.png",
+      "url": "https://developpanel.antbuildz.com/images/male.png"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "b9ca9ea69622f6f5",
+      "kind": "image",
+      "name": "1.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/b9ca9ea69622f6f5.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/1.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "4ec73202763ec1b5",
+      "kind": "image",
+      "name": "2.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/4ec73202763ec1b5.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/2.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "b89e6b356f965dbc",
+      "kind": "image",
+      "name": "back1.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/b89e6b356f965dbc.jpg",
+      "url": "https://developpanel.antbuildz.com/images/back1.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "d961fbc142e86e3e",
+      "kind": "image",
+      "name": "3.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/d961fbc142e86e3e.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/3.jpg"
+    },
+    {
+      "contentType": "image/png",
+      "id": "99d7930ffff25526",
+      "kind": "image",
+      "name": "user.png",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/99d7930ffff25526.png",
+      "url": "https://developpanel.antbuildz.com/images/user.png"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "040ccaae7a400e60",
+      "kind": "image",
+      "name": "7.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/040ccaae7a400e60.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/7.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "9617305b2040b7bc",
+      "kind": "image",
+      "name": "subThings.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/9617305b2040b7bc.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/subThings.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "d40819e4e81b81aa",
+      "kind": "image",
+      "name": "4.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/d40819e4e81b81aa.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/4.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "e1c13082009d440c",
+      "kind": "image",
+      "name": "6.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/e1c13082009d440c.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/6.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "78a4f194a7c9ee70",
+      "kind": "image",
+      "name": "myThings.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/78a4f194a7c9ee70.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/myThings.jpg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "a2a2d1f9c4aa3c18",
+      "kind": "image",
+      "name": "dashboards.jpg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/a2a2d1f9c4aa3c18.jpg",
+      "url": "https://developpanel.antbuildz.com/images/covers/dashboards.jpg"
+    },
+    {
+      "contentType": "image/png",
+      "id": "40e8d00ba34342e5",
+      "kind": "image",
+      "name": "menu.png",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/40e8d00ba34342e5.png",
+      "url": "https://developpanel.antbuildz.com/images/menu.png"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "96b1fb336d1645d2",
+      "kind": "image",
+      "name": "thumb-e60c24b8b9b9a8a88c64ed86.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/96b1fb336d1645d2.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-e60c24b8b9b9a8a88c64ed86.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "580e4e306f6d6b61",
+      "kind": "image",
+      "name": "thumb-5470436078f08415b4088f60.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/580e4e306f6d6b61.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-5470436078f08415b4088f60.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "bcec2006e74b054c",
+      "kind": "image",
+      "name": "thumb-4707d9c8068ecb73be9bf8e8.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/bcec2006e74b054c.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-4707d9c8068ecb73be9bf8e8.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "a741184a58a1a4c3",
+      "kind": "image",
+      "name": "thumb-df7fe082b7a5952283780297.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/a741184a58a1a4c3.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-df7fe082b7a5952283780297.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "76a25c18ec136de9",
+      "kind": "image",
+      "name": "thumb-94ef4d32f1204e4f42b3f40b.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/76a25c18ec136de9.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-94ef4d32f1204e4f42b3f40b.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "a35d4b01e8ee86ae",
+      "kind": "image",
+      "name": "thumb-15c823a0af51b8a763480ddb.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/a35d4b01e8ee86ae.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-15c823a0af51b8a763480ddb.jpeg"
+    },
+    {
+      "contentType": "image/png",
+      "id": "f7102c8090e92ba4",
+      "kind": "image",
+      "name": "commentsIcon.png",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/f7102c8090e92ba4.png",
+      "url": "https://developpanel.antbuildz.com/images/icons/commentsIcon.png"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "21fa027775f46160",
+      "kind": "image",
+      "name": "thumb-19bca060f97ff7f5c5269707.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/21fa027775f46160.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-19bca060f97ff7f5c5269707.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "544e53586bcf6661",
+      "kind": "image",
+      "name": "thumb-c5db9ab8f6d535c160ed1323.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/544e53586bcf6661.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-c5db9ab8f6d535c160ed1323.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "d15f81cf7c2caf83",
+      "kind": "image",
+      "name": "thumb-ccb982a20a19fcf3d9d395b1.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/d15f81cf7c2caf83.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-ccb982a20a19fcf3d9d395b1.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "16c19df18f4b6377",
+      "kind": "image",
+      "name": "thumb-9848fb540ecd4bd510ffaa6c.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/16c19df18f4b6377.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-9848fb540ecd4bd510ffaa6c.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "4feab6d80f19628c",
+      "kind": "image",
+      "name": "thumb-d9ce0d6932371e3db99f316e.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/4feab6d80f19628c.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-d9ce0d6932371e3db99f316e.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "237d217390507ff1",
+      "kind": "image",
+      "name": "thumb-078709202a04a802dec50aca.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/237d217390507ff1.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-078709202a04a802dec50aca.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "22da66870d13d2eb",
+      "kind": "image",
+      "name": "thumb-a596d585254672cb51530057.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/22da66870d13d2eb.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-a596d585254672cb51530057.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "087139de94342359",
+      "kind": "image",
+      "name": "thumb-a814646ac8f517bb97683289.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/087139de94342359.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-a814646ac8f517bb97683289.jpeg"
+    },
+    {
+      "contentType": "image/png",
+      "id": "50b03e04c5cc43d5",
+      "kind": "image",
+      "name": "thumb-70be28cc0ac00d96b51a2545.png",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/50b03e04c5cc43d5.png",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-70be28cc0ac00d96b51a2545.png"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "67f4557eec174380",
+      "kind": "image",
+      "name": "thumb-69994a1cb482ac30feca2f2d.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/67f4557eec174380.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-69994a1cb482ac30feca2f2d.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "bb458b00d46e31b0",
+      "kind": "image",
+      "name": "thumb-1c97d84794c980cbd6fd3d54.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/bb458b00d46e31b0.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-1c97d84794c980cbd6fd3d54.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "c536763040546d68",
+      "kind": "image",
+      "name": "thumb-2b9b3fe2122ab66d428fba82.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/c536763040546d68.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-2b9b3fe2122ab66d428fba82.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "03ff5cd67970e7bb",
+      "kind": "image",
+      "name": "thumb-14d4bde945117357164daea7.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/03ff5cd67970e7bb.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-14d4bde945117357164daea7.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "b653591d862d114e",
+      "kind": "image",
+      "name": "thumb-a920224fe2417c3c4341cdd6.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/b653591d862d114e.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-a920224fe2417c3c4341cdd6.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "91907aede88d2479",
+      "kind": "image",
+      "name": "thumb-20aebf16c52f5e256738123b.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/91907aede88d2479.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-20aebf16c52f5e256738123b.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "4bf4100691d13f85",
+      "kind": "image",
+      "name": "thumb-69e287e679888f5e5d6d284a.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/4bf4100691d13f85.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-69e287e679888f5e5d6d284a.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "82225ef4c20c5452",
+      "kind": "image",
+      "name": "thumb-7539280e50c9a10cdd2a895a.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/82225ef4c20c5452.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-7539280e50c9a10cdd2a895a.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "b53c6ebd65d13963",
+      "kind": "image",
+      "name": "thumb-84f5175619a6b91197e5de84.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/b53c6ebd65d13963.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-84f5175619a6b91197e5de84.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "c305aac324586ec0",
+      "kind": "image",
+      "name": "thumb-71b6f40e4c65084948a39079.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/c305aac324586ec0.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-71b6f40e4c65084948a39079.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "8fd91db17485ab71",
+      "kind": "image",
+      "name": "thumb-f1b972cbd61751e6d94563e9.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/8fd91db17485ab71.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-f1b972cbd61751e6d94563e9.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "e838af8771e786f7",
+      "kind": "image",
+      "name": "thumb-ecb3d052111a536525719ef9.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/e838af8771e786f7.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-ecb3d052111a536525719ef9.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "104a40b43a039e68",
+      "kind": "image",
+      "name": "thumb-13a7587c859ef9045cac55ae.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/104a40b43a039e68.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-13a7587c859ef9045cac55ae.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "0bccb1b1fb34c7fb",
+      "kind": "image",
+      "name": "thumb-820c6feb9d69d86ee419540c.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/0bccb1b1fb34c7fb.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-820c6feb9d69d86ee419540c.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "103936c3470c7cb3",
+      "kind": "image",
+      "name": "thumb-fbb5ef6de63ca3dfcbead988.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/103936c3470c7cb3.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-fbb5ef6de63ca3dfcbead988.jpeg"
+    },
+    {
+      "contentType": "image/webp",
+      "id": "3c8e29021d77ca6f",
+      "kind": "image",
+      "name": "thumb-defaultImage1.webp",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/3c8e29021d77ca6f.webp",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-defaultImage1.webp"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "ce38e438457bb8dd",
+      "kind": "image",
+      "name": "thumb-da148b61c85b13020bef0075.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/ce38e438457bb8dd.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-da148b61c85b13020bef0075.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "bb9e5eb71a1efdc4",
+      "kind": "image",
+      "name": "thumb-f9a24c5d8a6501ee70b862c9.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/bb9e5eb71a1efdc4.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-f9a24c5d8a6501ee70b862c9.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "a47be61425c7e247",
+      "kind": "image",
+      "name": "thumb-21bad9ddc3821f076f0843bf.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/a47be61425c7e247.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-21bad9ddc3821f076f0843bf.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "c87cbe02fb8be7eb",
+      "kind": "image",
+      "name": "thumb-cb27aee269b0e047abc081d0.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/c87cbe02fb8be7eb.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-cb27aee269b0e047abc081d0.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "3b4b616f9aa68b90",
+      "kind": "image",
+      "name": "thumb-e08d1c751b19cf0f60ad90fd.jpeg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/3b4b616f9aa68b90.jpeg",
+      "url": "https://pub-c213f9a11cb74fbc95b439b04d3e21dc.r2.dev/assets/images/main/thumb-e08d1c751b19cf0f60ad90fd.jpeg"
+    },
+    {
+      "contentType": "image/svg+xml",
+      "id": "a775d42a96887052",
+      "kind": "image",
+      "name": "close.svg",
+      "path": "/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/browser-use/assets/4e7b17f0-23f9-47dc-af70-a59b7a767d7c/a775d42a96887052.svg",
+      "url": "https://developpanel.antbuildz.com/images/close.svg"
+    }
+  ],
+  "failures": []
+}

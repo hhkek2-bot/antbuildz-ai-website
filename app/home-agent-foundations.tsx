@@ -1,0 +1,107 @@
+/* Illustrative product scenes, not live settings, inventory or recommendations. */
+/* eslint-disable @next/next/no-img-element -- Reuse local industrial product assets without an image service. */
+import { EmmaAvatar } from './emma-avatar';
+import { GraphicIcon } from './home-graphics';
+import styles from './home-agent-foundations.module.css';
+
+export const AGENT_FOUNDATIONS = [
+  { id: 'brand', title: 'Your company brand', description: 'Reflect your company’s voice and sales approach, using the business guidance and enquiry process you approve.' },
+  { id: 'inventory', title: 'Your product inventory', description: 'Use your catalogue and, on supported plans, connected inventory to narrow down the products relevant to each enquiry.' },
+  { id: 'specifications', title: 'Your technical specifications', description: 'Ground product answers in approved specifications, manuals and application details. Clarify missing information before suggesting a fit.' },
+  { id: 'recommendations', title: 'Suitable recommendations', description: 'Match buyer requirements with supplied product information, explain the shortlist, and flag what your team still needs to confirm.' },
+] as const;
+
+const inventory = [
+  ['/images/verified-equipment/linde-e16-p.png', 'Equipment', 'Product details'],
+  ['/images/verified-equipment/bosch-gbh-2-26-dre.png', 'Tools', 'Specifications'],
+  ['/images/verified-equipment/nsk-6205-catalogue.jpg', 'Parts', 'Model references'],
+];
+
+function BrandScene() {
+  return <div className={`${styles.scene} ${styles.brandScene}`} aria-hidden="true">
+    <div className={styles.guidancePanel}>
+      <div className={styles.panelHeader}><span className={styles.companyMark}>YC</span><strong>Your company</strong></div>
+      <span className={styles.panelCaption}>Brand &amp; guidance</span>
+      <dl className={styles.guidanceFields}>
+        <div><dt>Voice</dt><dd>Clear and practical</dd></div>
+        <div><dt>Knowledge</dt><dd>Approved business guidance</dd></div>
+      </dl>
+      <span className={styles.guidanceNote}><GraphicIcon kind="review" />Your sales approach</span>
+    </div>
+    <div className={styles.chatPanel}>
+      <div className={styles.panelHeader}><EmmaAvatar size={32} decorative /><span><strong>Emma</strong><small>Your AI Sales Agent</small></span></div>
+      <div className={styles.chatMessages}>
+        <span className={styles.buyerMessage}>Can you help me choose?</span>
+        <span className={styles.agentMessage}>Tell me what you need the equipment to do.</span>
+      </div>
+    </div>
+  </div>;
+}
+
+function InventoryScene() {
+  return <div className={`${styles.scene} ${styles.inventoryScene}`} aria-hidden="true">
+    <div className={styles.inventoryPanel}>
+      <div className={styles.panelHeader}><GraphicIcon kind="dealer" /><strong>Product catalogue</strong></div>
+      <div className={styles.inventoryRows}>{inventory.map(([src, name, detail]) => <div key={name}>
+        <img src={src} alt="" width="64" height="56" loading="lazy" />
+        <span><strong>{name}</strong><small>{detail}</small></span>
+        <GraphicIcon kind="catalogue" />
+      </div>)}</div>
+    </div>
+  </div>;
+}
+
+function SpecificationsScene() {
+  return <div className={`${styles.scene} ${styles.specScene}`} aria-hidden="true">
+    <div className={styles.specPanel}>
+      <div className={styles.specHeading}><GraphicIcon kind="catalogue" /><span><strong>Technical specification</strong><small>Approved source</small></span></div>
+      <dl className={styles.specFields}>
+        <div><dt>Capacity</dt><dd>Product data</dd></div>
+        <div><dt>Dimensions</dt><dd>Product data</dd></div>
+        <div><dt>Application</dt><dd>Usage guidance</dd></div>
+      </dl>
+      <span className={styles.specNote}><GraphicIcon kind="clarify" />Missing details? Ask first.</span>
+    </div>
+  </div>;
+}
+
+function RecommendationScene() {
+  return <div className={`${styles.scene} ${styles.recommendationScene}`} aria-hidden="true">
+    <div className={styles.requirementPanel}>
+      <span className={styles.panelCaption}>Buyer requirement</span>
+      <strong>Equipment for warehouse use</strong>
+      <span>Application · Capacity · Site access</span>
+    </div>
+    <div className={styles.shortlistPanel}>
+      <div className={styles.shortlistProduct}>
+        <img src="/images/verified-equipment/linde-e16-p.png" alt="" width="124" height="108" loading="lazy" />
+        <span><small>Illustrative shortlist</small><strong>Option to review</strong><span className={styles.matchTag}><GraphicIcon kind="filter" />Based on supplied data</span></span>
+      </div>
+      <div className={styles.reviewNote}><GraphicIcon kind="review" /><span>Confirm suitability, availability and commercial terms.</span></div>
+    </div>
+  </div>;
+}
+
+const scenes = [BrandScene, InventoryScene, SpecificationsScene, RecommendationScene];
+
+export function HomeAgentFoundations() {
+  return <section className={styles.section} aria-labelledby="home-agent-foundations">
+    <div className={styles.frame}>
+      <div className={styles.intro}>
+        <p className={styles.eyebrow}>Built around your business</p>
+        <h2 id="home-agent-foundations">Your AI Sales Agent. <span>Your business at its core.</span></h2>
+        <p>Bring your brand, inventory and technical knowledge into every enquiry, so buyers can explore suitable options with clearer guidance.</p>
+      </div>
+      <div className={styles.grid}>
+        {AGENT_FOUNDATIONS.map(({ id, title, description }, index) => {
+          const Scene = scenes[index];
+          return <article key={id} className={`${styles.card} ${styles[id]}`} data-foundation={id}>
+            <div className={styles.cardCopy}><h3>{title}</h3><p>{description}</p></div>
+            <Scene />
+          </article>;
+        })}
+      </div>
+      <p className={styles.disclaimer}>Illustrative workflows. Inventory connections depend on your plan and setup; your team confirms final suitability and commercial details.</p>
+    </div>
+  </section>;
+}

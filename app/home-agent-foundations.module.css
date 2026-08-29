@@ -1,0 +1,143 @@
+.section { padding: 104px 0; background: #fff; color: var(--body); font: var(--type-body-weight) var(--type-body)/var(--type-body-line) var(--font-body); }
+.frame { width: 90%; max-width: 1320px; margin-inline: auto; }
+.intro { max-width: 940px; margin-bottom: 48px; }
+.eyebrow { margin: 0 0 20px; color: var(--red); font: 800 var(--type-label)/1 var(--font-heading); letter-spacing: .24em; text-transform: uppercase; }
+.intro h2 { margin: 0; color: var(--ink); font: var(--type-heading-weight) var(--type-section-heading)/var(--type-heading-line) var(--font-heading); letter-spacing: var(--type-heading-tracking); }
+.intro h2 span { display: block; text-wrap: balance; color: var(--ink); }
+.intro > p:last-child { max-width: 760px; margin: 24px 0 0; font-size: var(--type-lead); line-height: 1.62; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(160deg, white 24%, color-mix(in srgb, var(--red) 5%, white)); }
+.brand, .recommendations { grid-column: span 2; }
+.inventory { background: linear-gradient(160deg, white 24%, var(--canvas)); }
+.specifications { background: linear-gradient(160deg, white 24%, color-mix(in srgb, var(--yellow) 8%, white)); }
+.recommendations { background: linear-gradient(160deg, white 24%, color-mix(in srgb, var(--blue) 5%, white)); }
+.cardCopy { padding: 32px 32px 0; }
+.card h3 { margin: 0 0 12px; color: var(--ink); font: 700 var(--type-subsection-heading)/1.25 var(--font-heading); letter-spacing: -.025em; }
+.card p { max-width: 560px; margin: 0; }
+.scene { min-width: 0; min-height: 296px; flex: 1; padding: 32px; font-size: 12px; line-height: 1.5; }
+.scene strong { display: block; color: var(--ink); font-size: 13px; font-weight: 600; }
+.scene small { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+.scene svg { width: 20px; height: 20px; flex: 0 0 20px; }
+.scene img { object-fit: contain; }
+.panelHeader { display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); padding: 16px; }
+.panelHeader img { width: 32px; height: 32px; border-radius: 50%; flex: 0 0 32px; object-fit: cover; }
+.panelCaption { display: block; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .03em; }
+.brandScene { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: start; max-width: 700px; width: 100%; align-self: center; padding-top: 44px; padding-bottom: 40px; }
+.guidancePanel, .chatPanel, .inventoryPanel, .specPanel, .shortlistPanel { min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 16px 40px -28px rgb(15 23 42 / 24%); }
+.guidancePanel { margin-top: 32px; margin-right: -24px; padding-bottom: 16px; }
+.companyMark { display: grid; place-items: center; width: 28px; height: 28px; color: var(--ink); background: var(--yellow); border-radius: 8px; font-size: 10px; font-weight: 700; }
+.guidancePanel > .panelCaption { padding: 16px 20px 0; }
+.guidanceFields { display: grid; gap: 12px; margin: 12px 20px; padding: 0; }
+.guidanceFields dt { font-size: 10px; color: var(--muted); }
+.guidanceFields dd { margin: 2px 0 0; color: var(--ink); }
+.guidanceNote { display: flex; align-items: center; gap: 8px; padding: 4px 20px; color: var(--body); }
+.chatPanel { position: relative; z-index: 1; margin-left: -12px; }
+.chatMessages { display: flex; flex-direction: column; gap: 16px; padding: 20px 16px 24px; }
+.buyerMessage, .agentMessage { max-width: 88%; padding: 12px; border-radius: 14px; }
+.buyerMessage { align-self: flex-end; background: var(--soft); border-bottom-right-radius: 4px; }
+.agentMessage { align-self: flex-start; border: 1px solid var(--line); border-bottom-left-radius: 4px; color: var(--ink); }
+.inventoryScene { display: grid; align-items: center; }
+.inventoryRows { padding: 4px 16px; }
+.inventoryRows > div { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+.inventoryRows > div + div { border-top: 1px solid var(--line); }
+.inventoryRows img { width: 56px; height: 48px; }
+.inventoryRows > div > span { flex: 1; min-width: 0; }
+.inventoryRows > div > svg { color: var(--muted); width: 16px; height: 16px; flex-basis: 16px; }
+.specScene { display: grid; align-items: center; }
+.specPanel { padding: 20px; }
+.specHeading { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+.specHeading > svg { width: 28px; height: 28px; flex-basis: 28px; color: var(--muted); }
+.specFields { margin: 0; }
+.specFields > div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.specFields dt { color: var(--muted); }
+.specFields dd { margin: 0; color: var(--ink); text-align: right; }
+.specNote { display: flex; align-items: center; gap: 8px; padding-top: 16px; color: var(--body); font-size: 11px; }
+.recommendationScene { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 24px; }
+.requirementPanel { position: relative; padding: 20px; background: color-mix(in srgb, var(--blue) 7%, white); border: 1px solid color-mix(in srgb, var(--blue) 18%, white); border-radius: 16px; }
+.requirementPanel::after { content: ''; position: absolute; width: 24px; height: 1px; right: -25px; top: 50%; background: color-mix(in srgb, var(--blue) 35%, white); }
+.requirementPanel > strong { font-size: 16px; line-height: 1.4; margin: 12px 0; }
+.requirementPanel > span:last-child { display: block; color: var(--muted); font-size: 11px; }
+.shortlistPanel { padding: 20px; }
+.shortlistProduct { display: flex; align-items: center; gap: 12px; }
+.shortlistProduct img { width: 96px; height: 96px; flex-shrink: 0; }
+.shortlistProduct > span { min-width: 0; }
+.shortlistProduct strong { margin: 4px 0 8px; }
+.matchTag { display: flex; gap: 4px; align-items: center; color: var(--body); font-size: 10px; }
+.matchTag svg { width: 14px; height: 14px; flex-basis: 14px; }
+.reviewNote { display: flex; gap: 8px; align-items: flex-start; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--body); font-size: 11px; }
+.disclaimer { margin: 24px 0 0; color: var(--muted); font-size: var(--type-caption); }
+@media (min-width: 980px) {
+  .section { padding-block: 28px; }
+  .intro { max-width: 1060px; margin-bottom: 24px; }
+  .eyebrow { margin-bottom: 10px; }
+  .intro h2 span { display: inline; }
+  .intro h2 span::before { content: ' '; }
+  .intro > p:last-child { max-width: 900px; margin-top: 12px; font-size: var(--type-body); line-height: 1.5; }
+  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .brand, .recommendations { grid-column: auto; }
+  .card { border-radius: 20px; }
+  .cardCopy { padding: 20px 20px 0; }
+  .card h3 { margin-bottom: 8px; font-size: 22px; line-height: 1.18; }
+  .card p { font-size: 14px; line-height: 1.48; }
+  .scene { min-height: 196px; padding: 14px; }
+  .scene strong { font-size: 11px; }
+  .scene small, .panelCaption { font-size: 9px; }
+  .scene svg { width: 16px; height: 16px; flex-basis: 16px; }
+  .panelHeader { gap: 8px; padding: 10px; }
+  .brandScene { position: relative; display: block; width: 100%; max-width: none; min-height: 196px; padding: 0; }
+  .guidancePanel { position: absolute; left: 4px; top: 36px; width: 72%; margin: 0; padding-bottom: 8px; transform: scale(.76); transform-origin: top left; }
+  .chatPanel { position: absolute; right: 4px; top: 12px; width: 72%; margin: 0; transform: scale(.78); transform-origin: top right; }
+  .guidancePanel > .panelCaption, .guidanceNote { display: none; }
+  .guidanceFields { gap: 6px; margin: 8px 12px; }
+  .chatMessages { gap: 8px; padding: 10px; }
+  .buyerMessage, .agentMessage { padding: 7px 9px; }
+  .inventoryScene { padding: 14px; }
+  .inventoryRows { padding: 2px 10px; }
+  .inventoryRows > div { gap: 8px; padding: 7px 0; }
+  .inventoryRows img { width: 38px; height: 32px; }
+  .inventoryRows > div > svg { width: 13px; height: 13px; flex-basis: 13px; }
+  .specPanel { padding: 12px; }
+  .specHeading { gap: 8px; margin-bottom: 10px; }
+  .specHeading > svg { width: 22px; height: 22px; flex-basis: 22px; }
+  .specFields > div { padding: 7px 0; }
+  .specNote { gap: 6px; padding-top: 8px; font-size: 9px; }
+  .recommendationScene { grid-template-columns: 1fr; align-content: center; gap: 8px; padding: 12px; }
+  .requirementPanel, .shortlistPanel { padding: 10px; border-radius: 12px; }
+  .requirementPanel::after { display: none; }
+  .requirementPanel > strong { margin: 5px 0; font-size: 12px; }
+  .requirementPanel > span:last-child { font-size: 9px; }
+  .shortlistProduct { gap: 8px; }
+  .shortlistProduct img { width: 52px; height: 52px; }
+  .shortlistProduct strong { margin: 2px 0 4px; }
+  .reviewNote { margin-top: 8px; padding-top: 7px; font-size: 9px; }
+  .disclaimer { margin-top: 12px; font-size: 11px; line-height: 1.4; }
+}
+@media (max-width: 979px) {
+  .section { padding-block: 80px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .brand, .recommendations { grid-column: auto; }
+  .cardCopy { padding: 24px 24px 0; }
+  .card h3 { font-size: 24px; }
+  .scene { padding: 24px; }
+  .brandScene { grid-template-columns: 1fr; max-width: 360px; gap: 16px; }
+  .guidancePanel { margin: 0 24px 0 0; }
+  .guidancePanel > .panelCaption, .guidanceNote { display: none; }
+  .guidanceFields { gap: 8px; }
+  .chatPanel { margin-left: 24px; }
+  .chatMessages { padding: 12px; gap: 8px; }
+  .buyerMessage, .agentMessage { padding: 8px 12px; }
+  .recommendationScene { grid-template-columns: 1fr; gap: 16px; }
+  .requirementPanel::after { width: 1px; height: 16px; right: auto; left: 50%; top: 100%; }
+  .requirementPanel > strong { margin: 8px 0; }
+  .shortlistProduct img { width: 80px; height: 80px; }
+}
+@media (max-width: 767px) {
+  .section { padding-block: 64px; }
+  .intro { margin-bottom: 32px; }
+  .intro h2 { text-wrap: balance; }
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .card h3 { font-size: var(--type-card-heading); }
+  .scene { min-height: 0; padding: 28px 20px; }
+  .brandScene { gap: 16px; }
+  .specPanel { padding: 16px; }
+}

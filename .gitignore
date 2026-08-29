@@ -1,0 +1,21 @@
+# dependencies
+/node_modules
+
+# framework output
+/.next
+/dist
+/out
+/preview-dist
+/.npm-cache
+
+# local tooling
+/.wrangler
+*.tsbuildinfo
+next-env.d.ts
+
+# local environment
+.env*
+!.env.example
+
+# macOS
+.DS_Store
