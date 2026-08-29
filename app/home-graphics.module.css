@@ -21,6 +21,24 @@
 .selectionScene { display: flex; align-items: center; min-height: 92px; padding: 12px; border-radius: 12px; background: color-mix(in srgb, var(--stage-color) 9%, white); color: var(--body); font: 500 11px/1.4 var(--font-body); }
 .selectionScene svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--stage-color); }
 .selectionDocuments, .selectionChat { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.ingestionScene { display: grid; grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1.08fr); align-items: center; gap: 6px; width: 100%; }
+.reachSource, .coordinateTable { min-width: 0; height: 76px; padding: 6px; border: 1px solid color-mix(in srgb, var(--stage-color) 18%, white); border-radius: 8px; background: white; }
+.ingestionTitle { display: flex; align-items: center; gap: 5px; min-width: 0; color: var(--ink); font-size: 9px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.ingestionTitle > svg { width: 12px; height: 12px; }
+.reachSource > svg { display: block; width: 100%; height: 52px; margin-top: 2px; overflow: visible; color: var(--muted); }
+.reachGrid { stroke: color-mix(in srgb, var(--stage-color) 15%, white); stroke-width: .75; }
+.reachCurve { stroke: var(--stage-color); stroke-width: 1.8; }
+.reachBoom { stroke: var(--ink); stroke-width: 1.4; }
+.reachPoint { fill: white; stroke: var(--stage-color); stroke-width: 1.5; }
+.reachSource text { fill: var(--muted); font: 700 7px/1 var(--font-body); }
+.ingestionArrow { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--stage-color); color: white; font-size: 11px; line-height: 1; }
+.coordinateTable { display: flex; flex-direction: column; }
+.coordinateHead, .coordinateRow { display: grid; grid-template-columns: .8fr 1fr 1fr; align-items: center; min-width: 0; }
+.coordinateHead { margin-top: 5px; padding-bottom: 3px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 7px; }
+.coordinateRow { flex: 1; border-bottom: 1px solid color-mix(in srgb, var(--stage-color) 9%, white); color: var(--body); font-size: 8px; }
+.coordinateRow:last-child { border-bottom: 0; }
+.coordinateRow b { color: var(--stage-color); }
+.coordinateRow sub { font-size: 6px; }
 .selectionRow { display: flex; align-items: center; gap: 8px; padding: 5px 8px; background: white; border-radius: 6px; }
 .selectionQuestion, .selectionReply { display: flex; align-items: center; gap: 6px; max-width: 94%; padding: 6px 8px; border-radius: 8px; background: white; }
 .selectionQuestion { align-self: flex-end; }
@@ -72,6 +90,9 @@
   .frontSheet { right: 1%; }
   .rearSheet > svg { height: 100px; }
   .selectionScene { padding: 8px; }
+  .ingestionScene { grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1.05fr); gap: 4px; }
+  .ingestionArrow { width: 16px; height: 16px; }
+  .ingestionTitle { font-size: 8px; }
   .productScene { height: 208px; margin: 0 0 24px; }
   .agentScene { gap: 24px; padding-inline: 12px; }
   .briefSheet { width: 55%; padding: 14px 12px; }

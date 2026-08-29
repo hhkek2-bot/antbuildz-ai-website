@@ -53,6 +53,12 @@
 /* Agreement master page only. The linked legal documents retain their
    original content; reduce duplicate directory furniture and nested boxes. */
 #root .antbuildz-agreement-hub [hidden] { display: none !important; }
+#root .antbuildz-ai-help-directory [hidden],
+#root .antbuildz-ai-help-centre [hidden] { display: none !important; }
+#root .antbuildz-ai-help-directory .help-directory__cards {
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
+}
 #root .antbuildz-agreement-hub {
   --legal-ink: var(--ink);
   --legal-muted: var(--body);
@@ -511,6 +517,12 @@ button, summary { font: inherit; }
 #root [data-antbuildz-sales-agent] .bright-hero-copy-block,
 #root [data-antbuildz-sales-agent] .bright-hero-text-block { min-width: 0; }
 #root [data-antbuildz-sales-agent] .bright-hero-title-line { white-space: normal; }
+
+/* The Console gradient line needs a little room below its line box so the
+   lower curves render fully before the supporting copy begins. */
+#root [data-antbuildz-sales-agent] .af-section-header .af-section-title-line:last-child {
+  padding-bottom: .12em;
+}
 
 @media (min-width: 981px) {
   #root [data-antbuildz-sales-agent] .bright-hero-split {
@@ -1196,6 +1208,23 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   overflow: hidden;
 }
 
+.antbuildz-ai-home .ai-marketplace-hero-image {
+  z-index: -4 !important;
+}
+
+.antbuildz-ai-home .antbuildz-home-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
 .antbuildz-ai-home .ai-marketplace-hero-stage.is-pinned > .ai-marketplace-hero {
   position: fixed !important;
   inset: 0 0 auto !important;
@@ -1249,8 +1278,10 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
 .antbuildz-home-hero-conversation {
   /* Role-tinted glass keeps the industrial scene visible beneath each exchange. */
-  --home-chat-glass-fill: color-mix(in srgb, var(--blue) 34%, transparent);
-  --home-chat-glass-buyer-fill: color-mix(in srgb, var(--yellow) 24%, transparent);
+  --home-chat-agent-accent: var(--blue);
+  --home-chat-buyer-accent: var(--yellow);
+  --home-chat-glass-fill: color-mix(in srgb, var(--home-chat-agent-accent) 34%, transparent);
+  --home-chat-glass-buyer-fill: color-mix(in srgb, var(--home-chat-buyer-accent) 24%, transparent);
   --home-chat-glass-radius: 22px;
   --home-chat-glass-blur: 6px;
   --home-chat-text: rgb(255 255 255 / 96%);
@@ -1261,6 +1292,12 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-rotation: 0deg;
   --home-chat-offset-x: 0px;
   --home-chat-offset-y: 0px;
+  --home-chat-bubble-width: 340px;
+  --home-chat-font-size: .875rem;
+  --home-chat-bubble-gap: 8px;
+  --home-chat-avatar-size: 24px;
+  --home-chat-avatar-margin: 4px;
+  --home-chat-surface-padding: 12px 14px;
   position: absolute;
   z-index: 5;
   top: calc(var(--antbuildz-home-chat-top, 36%) + var(--home-chat-offset-y));
@@ -1285,13 +1322,21 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-offset-y: 52px;
   --home-chat-scale: .88;
   --home-chat-rotation: -3deg;
-  --home-chat-glass-fill: color-mix(in srgb, var(--blue) 24%, transparent);
-  --home-chat-glass-buyer-fill: color-mix(in srgb, var(--yellow) 16%, transparent);
-  --home-chat-reply-edge: color-mix(in srgb, var(--blue) 40%, transparent);
-  --home-chat-reply-halo: color-mix(in srgb, var(--blue) 8%, transparent);
+  --home-chat-agent-accent: var(--purple);
+  --home-chat-buyer-accent: #fb7185;
+  --home-chat-glass-fill: color-mix(in srgb, var(--home-chat-agent-accent) 24%, transparent);
+  --home-chat-glass-buyer-fill: color-mix(in srgb, var(--home-chat-buyer-accent) 16%, transparent);
+  --home-chat-reply-edge: color-mix(in srgb, var(--home-chat-agent-accent) 40%, transparent);
+  --home-chat-reply-halo: color-mix(in srgb, var(--home-chat-agent-accent) 8%, transparent);
   --home-chat-text: rgb(255 255 255 / 86%);
   --home-chat-glass-blur: 8px;
   --home-chat-shadow: 0 8px 24px -16px rgb(0 0 0 / 12%);
+  --home-chat-bubble-width: 300px;
+  --home-chat-font-size: .772rem;
+  --home-chat-bubble-gap: 7px;
+  --home-chat-avatar-size: 22px;
+  --home-chat-avatar-margin: 3px;
+  --home-chat-surface-padding: 10px 12px;
 }
 
 .antbuildz-home-hero-conversation.is-right {
@@ -1301,13 +1346,21 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-offset-y: 116px;
   --home-chat-scale: .78;
   --home-chat-rotation: 4deg;
-  --home-chat-glass-fill: color-mix(in srgb, var(--blue) 22%, transparent);
-  --home-chat-glass-buyer-fill: color-mix(in srgb, var(--yellow) 14%, transparent);
-  --home-chat-reply-edge: color-mix(in srgb, var(--blue) 32%, transparent);
-  --home-chat-reply-halo: color-mix(in srgb, var(--blue) 6%, transparent);
+  --home-chat-agent-accent: #14b8a6;
+  --home-chat-buyer-accent: var(--yellow);
+  --home-chat-glass-fill: color-mix(in srgb, var(--home-chat-agent-accent) 22%, transparent);
+  --home-chat-glass-buyer-fill: color-mix(in srgb, var(--home-chat-buyer-accent) 14%, transparent);
+  --home-chat-reply-edge: color-mix(in srgb, var(--home-chat-agent-accent) 32%, transparent);
+  --home-chat-reply-halo: color-mix(in srgb, var(--home-chat-agent-accent) 6%, transparent);
   --home-chat-text: rgb(255 255 255 / 82%);
   --home-chat-glass-blur: 10px;
   --home-chat-shadow: none;
+  --home-chat-bubble-width: 270px;
+  --home-chat-font-size: .695rem;
+  --home-chat-bubble-gap: 6px;
+  --home-chat-avatar-size: 20px;
+  --home-chat-avatar-margin: 3px;
+  --home-chat-surface-padding: 9px 11px;
 }
 
 /* Two additional Who We Serve examples frame the existing three conversations. */
@@ -1322,9 +1375,21 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-text: rgb(255 255 255 / 76%);
   --home-chat-glass-blur: 8px;
   --home-chat-shadow: none;
+  --home-chat-bubble-width: 240px;
+  --home-chat-font-size: .618rem;
+  --home-chat-bubble-gap: 6px;
+  --home-chat-avatar-size: 18px;
+  --home-chat-avatar-margin: 2px;
+  --home-chat-surface-padding: 8px 10px;
 }
 
 .antbuildz-home-hero-conversation.is-outer-left {
+  --home-chat-agent-accent: #6366f1;
+  --home-chat-buyer-accent: #f97316;
+  --home-chat-glass-fill: color-mix(in srgb, var(--home-chat-agent-accent) 18%, transparent);
+  --home-chat-glass-buyer-fill: color-mix(in srgb, var(--home-chat-buyer-accent) 12%, transparent);
+  --home-chat-reply-edge: color-mix(in srgb, var(--home-chat-agent-accent) 24%, transparent);
+  --home-chat-reply-halo: color-mix(in srgb, var(--home-chat-agent-accent) 5%, transparent);
   --home-chat-offset-x: clamp(-640px, -42vw, -440px);
   --home-chat-offset-y: 164px;
   --home-chat-scale: .72;
@@ -1332,6 +1397,12 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 }
 
 .antbuildz-home-hero-conversation.is-outer-right {
+  --home-chat-agent-accent: #0891b2;
+  --home-chat-buyer-accent: #eab308;
+  --home-chat-glass-fill: color-mix(in srgb, var(--home-chat-agent-accent) 18%, transparent);
+  --home-chat-glass-buyer-fill: color-mix(in srgb, var(--home-chat-buyer-accent) 12%, transparent);
+  --home-chat-reply-edge: color-mix(in srgb, var(--home-chat-agent-accent) 24%, transparent);
+  --home-chat-reply-halo: color-mix(in srgb, var(--home-chat-agent-accent) 5%, transparent);
   --home-chat-offset-x: clamp(440px, 42vw, 640px);
   --home-chat-offset-y: 32px;
   --home-chat-scale: .68;
@@ -1448,8 +1519,8 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  width: 340px;
+  gap: var(--home-chat-bubble-gap);
+  width: var(--home-chat-bubble-width);
   max-width: 100%;
   flex: 0 0 auto;
   max-height: 0;
@@ -1459,7 +1530,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   transform: translateY(12px) scale(.98);
   transition: opacity .34s ease, transform .34s ease, max-height .34s ease;
   color: var(--home-chat-text);
-  font-size: .875rem;
+  font-size: var(--home-chat-font-size);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: -.025em;
@@ -1492,10 +1563,10 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
 .antbuildz-home-hero-conversation__avatar {
   display: block;
-  width: 24px;
-  height: 24px;
-  flex: 0 0 24px;
-  margin-top: 4px;
+  width: var(--home-chat-avatar-size);
+  height: var(--home-chat-avatar-size);
+  flex: 0 0 var(--home-chat-avatar-size);
+  margin-top: var(--home-chat-avatar-margin);
   border: 0;
   border-radius: 50%;
   object-fit: cover;
@@ -1511,7 +1582,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 .antbuildz-home-hero-conversation__surface {
   min-width: 0;
   flex: 1;
-  padding: 12px 14px;
+  padding: var(--home-chat-surface-padding);
   border: 0;
   border-radius: var(--home-chat-glass-radius);
   background: var(--home-chat-glass-fill);
@@ -1539,20 +1610,20 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
 .antbuildz-home-hero-conversation__surface > span {
   color: var(--yellow);
-  font-size: .61rem;
+  font-size: .7em;
   font-weight: 850;
   letter-spacing: .11em;
 }
 
 .antbuildz-home-hero-conversation__surface > strong {
-  font-size: .85rem;
+  font-size: 1em;
   font-weight: 600;
   line-height: 1.42;
 }
 
 .antbuildz-home-hero-conversation__surface > small {
   color: rgb(255 255 255 / 85%);
-  font-size: .75rem;
+  font-size: .86em;
 }
 
 .antbuildz-home-hero-conversation__typing {
@@ -2726,6 +2797,8 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  .antbuildz-ai-home .antbuildz-home-hero-video { display: none; }
+  .antbuildz-ai-home .ai-marketplace-hero-image { z-index: -3 !important; }
 }
 
 /* Unified pricing — one capability-led Launch → Growth → Enterprise → Custom path. */

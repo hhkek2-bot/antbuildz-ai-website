@@ -13,7 +13,7 @@ const pageTitles: Record<string, [string, string]> = {
   'ai-agent-roles': ['AI Agent Roles', 'Specialised AI roles for sales, product, service, technical support and after-sales workflows.'],
   faqs: ['AI FAQs', 'Answers about the Antbuildz AI Sales Agent, AI Webstore Suite and AI Agent Console.'],
   about: ['About Antbuildz', 'Built from industrial rental and sales experience, designed for practical AI commerce.'],
-  agreements: ['Agreements & Policies', 'Find policies for Antbuildz products, privacy and marketplace activity.'],
+  agreements: ['Antbuildz AI Agreements & Policies', 'Find privacy, data-handling and product policies for Antbuildz AI services.'],
 };
 
 export function generateStaticParams() {
@@ -45,6 +45,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   }
   if (slug === 'ai-agent-roles') {
     redirect('/resources/ai-agent-roles');
+  }
+  if (slug === 'help' || slug === 'faqs') {
+    redirect('/help/ai');
   }
 
   return <OriginalAntbuildzApp />;

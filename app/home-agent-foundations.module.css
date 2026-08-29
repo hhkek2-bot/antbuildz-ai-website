@@ -14,7 +14,7 @@
 .cardCopy { padding: 32px 32px 0; }
 .card h3 { margin: 0 0 12px; color: var(--ink); font: 700 var(--type-subsection-heading)/1.25 var(--font-heading); letter-spacing: -.025em; }
 .card p { max-width: 560px; margin: 0; }
-.scene { min-width: 0; min-height: 296px; flex: 1; padding: 32px; font-size: 12px; line-height: 1.5; }
+.scene { min-width: 0; min-height: 296px; flex: 1; padding: 32px; font-size: 12px; line-height: 1.5; transform: scale(.9); transform-origin: center; }
 .scene strong { display: block; color: var(--ink); font-size: 13px; font-weight: 600; }
 .scene small { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
 .scene svg { width: 20px; height: 20px; flex: 0 0 20px; }
@@ -66,52 +66,6 @@
 .matchTag svg { width: 14px; height: 14px; flex-basis: 14px; }
 .reviewNote { display: flex; gap: 8px; align-items: flex-start; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--body); font-size: 11px; }
 .disclaimer { margin: 24px 0 0; color: var(--muted); font-size: var(--type-caption); }
-@media (min-width: 980px) {
-  .section { padding-block: 28px; }
-  .intro { max-width: 1060px; margin-bottom: 24px; }
-  .eyebrow { margin-bottom: 10px; }
-  .intro h2 span { display: inline; }
-  .intro h2 span::before { content: ' '; }
-  .intro > p:last-child { max-width: 900px; margin-top: 12px; font-size: var(--type-body); line-height: 1.5; }
-  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-  .brand, .recommendations { grid-column: auto; }
-  .card { border-radius: 20px; }
-  .cardCopy { padding: 20px 20px 0; }
-  .card h3 { margin-bottom: 8px; font-size: 22px; line-height: 1.18; }
-  .card p { font-size: 14px; line-height: 1.48; }
-  .scene { min-height: 196px; padding: 14px; }
-  .scene strong { font-size: 11px; }
-  .scene small, .panelCaption { font-size: 9px; }
-  .scene svg { width: 16px; height: 16px; flex-basis: 16px; }
-  .panelHeader { gap: 8px; padding: 10px; }
-  .brandScene { position: relative; display: block; width: 100%; max-width: none; min-height: 196px; padding: 0; }
-  .guidancePanel { position: absolute; left: 4px; top: 36px; width: 72%; margin: 0; padding-bottom: 8px; transform: scale(.76); transform-origin: top left; }
-  .chatPanel { position: absolute; right: 4px; top: 12px; width: 72%; margin: 0; transform: scale(.78); transform-origin: top right; }
-  .guidancePanel > .panelCaption, .guidanceNote { display: none; }
-  .guidanceFields { gap: 6px; margin: 8px 12px; }
-  .chatMessages { gap: 8px; padding: 10px; }
-  .buyerMessage, .agentMessage { padding: 7px 9px; }
-  .inventoryScene { padding: 14px; }
-  .inventoryRows { padding: 2px 10px; }
-  .inventoryRows > div { gap: 8px; padding: 7px 0; }
-  .inventoryRows img { width: 38px; height: 32px; }
-  .inventoryRows > div > svg { width: 13px; height: 13px; flex-basis: 13px; }
-  .specPanel { padding: 12px; }
-  .specHeading { gap: 8px; margin-bottom: 10px; }
-  .specHeading > svg { width: 22px; height: 22px; flex-basis: 22px; }
-  .specFields > div { padding: 7px 0; }
-  .specNote { gap: 6px; padding-top: 8px; font-size: 9px; }
-  .recommendationScene { grid-template-columns: 1fr; align-content: center; gap: 8px; padding: 12px; }
-  .requirementPanel, .shortlistPanel { padding: 10px; border-radius: 12px; }
-  .requirementPanel::after { display: none; }
-  .requirementPanel > strong { margin: 5px 0; font-size: 12px; }
-  .requirementPanel > span:last-child { font-size: 9px; }
-  .shortlistProduct { gap: 8px; }
-  .shortlistProduct img { width: 52px; height: 52px; }
-  .shortlistProduct strong { margin: 2px 0 4px; }
-  .reviewNote { margin-top: 8px; padding-top: 7px; font-size: 9px; }
-  .disclaimer { margin-top: 12px; font-size: 11px; line-height: 1.4; }
-}
 @media (max-width: 979px) {
   .section { padding-block: 80px; }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

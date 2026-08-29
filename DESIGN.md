@@ -108,7 +108,7 @@ Reuse these patterns before creating variants:
 
 When a component changes, check every route that consumes it. New variants need a functional reason, not only a different appearance.
 
-The Public Footer lists Resources under Company, replacing Blogs. Do not duplicate Resources in the AI Products column. Preserve the existing footer typography, spacing and remaining link groups.
+The Public Footer is scoped to Antbuildz AI. Keep the Marketplace column hidden; Marketplace navigation and support belong on antbuildz.com. Under Company, list About Us, AI Agreements & Policies, AI Help Centre and Resources. AI Help Centre links directly to the AI-only FAQ library at `/help/ai`; the old `/help` and `/faqs` paths redirect there. Do not duplicate Resources in the AI Products column. Preserve the existing footer typography and spacing.
 
 The homepage Who We Serve journey uses four alternating framed compositions: a warm cream copy surface transitions into a restrained soft-lilac industrial image area, switching image-right and image-left between chapters. Chapter headings use the shared 24–32px subsection scale, with the second audience retained as an inset proof image. The treatment is homepage-specific and preserves the existing summaries, workflow steps and audience links.
 

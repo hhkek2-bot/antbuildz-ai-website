@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type SVGProps } from 'react';
+import type { SVGProps } from 'react';
 import baseStyles from './home-enquiry-gap.module.css';
 import styles from './home-market-shift.module.css';
 
@@ -15,9 +15,8 @@ function Sparkles(props: SVGProps<SVGSVGElement>) { return <Icon {...props}><pat
 function Check(props: SVGProps<SVGSVGElement>) { return <Icon {...props}><path d="m20 6-11 11-5-5" /></Icon>; }
 
 export function HomeMarketShift() {
-  const [paused, setPaused] = useState(false);
   return (
-      <section className={`${baseStyles.section} ${styles.section}`} aria-labelledby="home-market-shift" data-paused={paused}>
+      <section className={`${baseStyles.section} ${styles.section}`} aria-labelledby="home-market-shift">
         <div className="max-w-7xl mx-auto">
           <div className="ws2-market-heading max-w-[1180px] mx-auto text-center mb-14">
             <p className="mkt-section-eyebrow ws2-eyebrow-orange">Market Shift</p>
@@ -162,7 +161,6 @@ export function HomeMarketShift() {
             })}
           </div>
         </div>
-        <div className={`${baseStyles.motionControl} ${styles.controls}`}><p>Illustrative buyer journey, not live search results.</p><button type="button" onClick={() => setPaused(!paused)} aria-pressed={paused} aria-label={paused ? "Play Market Shift illustrations" : "Pause Market Shift illustrations"}>{paused ? "Play illustrations" : "Pause illustrations"}</button></div>
       </section>
   );
 }

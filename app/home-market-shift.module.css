@@ -1,11 +1,8 @@
-/* Reuse the preceding transferred section's typography, cards and motion control. */
+/* Reuse the preceding transferred section's typography and cards. */
 .section { background: #fff; }
 .section :global(.ws2-eyebrow-orange) { color: #f97316; }
 .section :global(.ws2-market-desc) { margin: 20px auto 0; width: 100%; max-width: 1240px; font-size: var(--type-lead); line-height: 1.62; }
 .section :global(.mkt-desc-line) { display: block; white-space: normal; }
-.controls { gap: 16px; align-items: center; justify-content: space-between; }
-.controls p { margin: 0; color: var(--muted); font-size: var(--type-caption); line-height: 1.6; }
-.controls button { flex-shrink: 0; }
 .clockPulse { animation: clock-ping 3.8s cubic-bezier(0,0,0.2,1) infinite; }
 /* Keep the reference's four-card stagger on wide screens without squeezing graphics on tablets. */
 @media (min-width: 768px) and (max-width: 1179px) {
@@ -13,7 +10,6 @@
   .section .cards > article { margin-top: 0; }
 }
 @keyframes clock-ping { 75%, 100% { transform: scale(2); opacity: 0; } }
-@media (max-width: 767px) { .controls { flex-direction: column; align-items: flex-start; } }
 @media (max-width: 767px) {
   .section :global(.ws2-market-desc) { line-height: 1.55; }
   .section :global(.ws2-market-heading) { margin-bottom: 32px; }
@@ -22,6 +18,4 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .clockPulse { animation: none; }
-  .controls { display: flex; }
-  .controls button { display: none; }
 }

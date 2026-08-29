@@ -257,6 +257,13 @@ test('Sales Agent retains the phone track while inheriting reference description
   assert.doesNotMatch(css, /#root\.antbuildz-public-typography \[data-antbuildz-sales-agent\]/, 'reference component styles own the description sizes');
 });
 
+test('Sales Agent Console title preserves room for the gradient line descenders', async () => {
+  const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
+  const rule = css.match(/#root \[data-antbuildz-sales-agent\] \.af-section-header \.af-section-title-line:last-child\s*\{([^}]+)\}/);
+  assert.ok(rule, 'scope the Console title correction to the Sales Agent page');
+  assert.match(rule[1], /padding-bottom:\s*\.12em/);
+});
+
 test('Sales Agent copy retains the approved plan qualification and avoids the superseded claims', async () => {
   const { SALES_AGENT_COPY: copy } = await loadSalesAgentCopy();
   assert.equal(copy.capabilities.length, 6);
@@ -402,7 +409,7 @@ test('Webstore wording is wired only to preview and preserves original metadata'
   assert.match(wrapper, /correctSalesAgentCopy\(root, window.location.pathname\)/);
 });
 
-test('shared footer lists Resources once under Company instead of Blogs or AI Products', async () => {
+test('shared footer keeps Company navigation focused on Antbuildz AI', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const parsed = ts.createSourceFile('footer.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   const functions = parsed.statements.filter(statement => ts.isFunctionDeclaration(statement)
@@ -420,6 +427,10 @@ test('shared footer lists Resources once under Company instead of Blogs or AI Pr
   });
   const companyLink = element('Blogs');
   companyLink.attributes.href = '/blogs';
+  const policyLink = element('Agreement & Policy');
+  policyLink.attributes.href = '/agreements';
+  const helpLink = element('Help Centre');
+  helpLink.attributes.href = '/help';
   const duplicateRow = element();
   const brand = element('Original brand copy');
   const marketplace = element();
@@ -427,6 +438,8 @@ test('shared footer lists Resources once under Company instead of Blogs or AI Pr
   footer.querySelector = selector => {
     if (selector === 'nav[aria-label="Marketplace"]') return marketplace;
     if (selector === '.abz-public-footer__brand p') return brand;
+    if (selector === 'nav[aria-label="Company"] a[href="/agreements"]') return policyLink;
+    if (selector.includes('nav[aria-label="Company"] a[href="/help"]')) return helpLink;
     if (selector.startsWith('nav[aria-label="Company"]')) return companyLink;
     if (selector === 'nav[aria-label="AI Products"] a[href="/resources"]') return { closest: () => duplicateRow };
     throw new Error(`Unexpected footer selector: ${selector}`);
@@ -440,6 +453,10 @@ test('shared footer lists Resources once under Company instead of Blogs or AI Pr
   correctFooter(root);
   assert.equal(companyLink.textContent, 'Resources');
   assert.equal(companyLink.attributes.href, '/resources');
+  assert.equal(policyLink.textContent, 'AI Agreements & Policies');
+  assert.equal(policyLink.attributes.href, '/agreements');
+  assert.equal(helpLink.textContent, 'AI Help Centre');
+  assert.equal(helpLink.attributes.href, '/help/ai');
   assert.equal(duplicateRow.attributes.hidden, '');
   assert.equal(navigationBindings, 1, 'repeated observer passes must not add duplicate click handlers');
   assert.equal(copyWrites, writesAfterFirstPass, 'footer text should not trigger a mutation loop');
@@ -448,8 +465,11 @@ test('shared footer lists Resources once under Company instead of Blogs or AI Pr
   assert.match(css, /\.abz-public-footer__link-column li\[hidden\],[\s\S]*?display: none !important/);
 });
 
-test('agreement hub cleanup preserves document destinations and dates across category updates', async () => {
+test('agreement hub shows only AI privacy and product policy areas while preserving source documents', async () => {
   const source = await readFile(new URL('../lib/agreement-hub.ts', import.meta.url), 'utf8');
+  assert.match(source, /url: 'https:\/\/antbuildz\.ai\/agreements'/);
+  const wrapper = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
+  assert.match(wrapper, /syncAgreementMetadata\(document, window\.location\.pathname\)/);
   const code = ts.transpileModule(source, {
     compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
   }).outputText;
@@ -500,9 +520,12 @@ test('agreement hub cleanup preserves document destinations and dates across cat
   simplifyAgreementHub(root);
   assert.equal(writes, firstWrites, 'repeat observer passes do not rewrite text');
   assert.equal(classes.size, 1);
-  assert.deepEqual(labels.map(label => label.textContent), ['General policies', 'AI products', 'Marketplace']);
+  assert.deepEqual(labels.map(label => label.textContent), ['Privacy & data', 'AI product policies', 'Marketplace']);
+  assert.equal(buttons[2].hidden, true);
+  assert.equal(buttons[2].attributes['aria-hidden'], 'true');
+  assert.equal(buttons[2].attributes.tabindex, '-1');
   assert.ok(duplicates.every(node => node.hidden));
-  assert.equal(library.attributes['aria-label'], 'Browse policy documents');
+  assert.equal(library.attributes['aria-label'], 'Browse Antbuildz AI policy documents');
   assert.ok(buttons.every(button => button.attributes['aria-controls'] === 'legal-policy-content'));
   assert.deepEqual(links.map(link => link.attributes.href), urls);
   assert.ok(dates.every(date => date.textContent === 'Last updated: 6 Apr 2024'));
@@ -515,6 +538,27 @@ test('agreement hub cleanup preserves document destinations and dates across cat
   simplifyAgreementHub(root);
   assert.match(textTargets.get('.legal-policies-home__legal-note').textContent, /not currently available/);
   assert.doesNotThrow(() => simplifyAgreementHub({ querySelector: () => null }), 'detail pages and unrelated routes are untouched');
+});
+
+test('AI help scope hides Marketplace choices and legacy routes leave the AI website', async () => {
+  const scope = await readFile(new URL('../lib/ai-help-scope.ts', import.meta.url), 'utf8');
+  const rootRoute = await readFile(new URL('../app/[slug]/page.tsx', import.meta.url), 'utf8');
+  const helpRoute = await readFile(new URL('../app/help/[slug]/page.tsx', import.meta.url), 'utf8');
+  const faqDetailRoute = await readFile(new URL('../app/faqs/[slug]/page.tsx', import.meta.url), 'utf8');
+  const wrapper = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
+
+  assert.match(scope, /pathname === '\/faqs' \|\| pathname === '\/help'/);
+  assert.match(scope, /\.help-directory__card\[href="\/help\/marketplace"\]/);
+  assert.match(scope, /marketplaceCard\.hidden = true/);
+  assert.match(scope, /pathname !== '\/help\/ai'/);
+  assert.match(scope, /if \(!\/marketplace\/i\.test\(question\)\) return/);
+  assert.match(scope, /url: 'https:\/\/antbuildz\.ai\/help\/ai'/);
+  assert.match(scope, /syncAiHelpMetadata\(document, pathname\)/);
+  assert.match(wrapper, /scopeAiHelpExperience\(root, window\.location\.pathname\)/);
+  assert.match(rootRoute, /slug === 'help' \|\| slug === 'faqs'[\s\S]*?redirect\('\/help\/ai'\)/);
+  assert.match(helpRoute, /slug === 'marketplace'[\s\S]*?redirect\('https:\/\/antbuildz\.com\/help\/marketplace'\)/);
+  assert.match(helpRoute, /alternates: \{ canonical: '\/help\/ai' \}/);
+  assert.match(faqDetailRoute, /redirect\(`https:\/\/antbuildz\.com\/faqs\/\$\{encodeURIComponent\(slug\)\}`\)/);
 });
 
 test('demo handoff validates details and encodes them only for the approved Calendly event', async () => {
@@ -573,14 +617,37 @@ test('homepage uses the approved Antbuildz AI industrial hero', async () => {
   assert.match(source, /\/images\/industrial-ai\.png/);
 });
 
+test('homepage uses a five-second reduced-motion-safe industrial hero loop', async () => {
+  const [source, styles] = await Promise.all([
+    readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
+  ]);
+  assert.match(source, /video\.src = '\/videos\/home-hero-industrial-loop\.mp4'/);
+  assert.match(source, /video\.poster = poster/);
+  assert.match(source, /video\.muted = true/);
+  assert.match(source, /video\.loop = true/);
+  assert.match(source, /video\.playsInline = true/);
+  assert.match(source, /document\.hidden/);
+  assert.match(source, /prefers-reduced-motion: reduce/);
+  assert.match(source, /Industrial equipment fleet in a dusty machinery yard/);
+  assert.match(styles, /\.antbuildz-ai-home \.antbuildz-home-hero-video \{[\s\S]*?object-fit: cover/);
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.antbuildz-ai-home \.antbuildz-home-hero-video \{ display: none; \}/);
+  await Promise.all([
+    access(new URL('../public/videos/home-hero-industrial-loop.mp4', import.meta.url)),
+    access(new URL('../public/images/home-hero-industrial-loop-poster.jpg', import.meta.url)),
+  ]);
+});
+
 test('homepage conversation uses role-tinted glass without restoring the profile box', async () => {
   const [styles, source] = await Promise.all([
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
     readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
   ]);
   const glass = styles.slice(styles.indexOf('.antbuildz-home-hero-conversation {'), styles.indexOf('.antbuildz-home-industries {'));
-  assert.match(glass, /--home-chat-glass-fill: color-mix\(in srgb, var\(--blue\) 34%, transparent\)/);
-  assert.match(glass, /--home-chat-glass-buyer-fill: color-mix\(in srgb, var\(--yellow\) 24%, transparent\)/);
+  assert.match(glass, /--home-chat-agent-accent: var\(--blue\)/);
+  assert.match(glass, /--home-chat-buyer-accent: var\(--yellow\)/);
+  assert.match(glass, /--home-chat-glass-fill: color-mix\(in srgb, var\(--home-chat-agent-accent\) 34%, transparent\)/);
+  assert.match(glass, /--home-chat-glass-buyer-fill: color-mix\(in srgb, var\(--home-chat-buyer-accent\) 24%, transparent\)/);
   assert.match(glass, /--home-chat-glass-radius: 22px/);
   assert.match(glass, /-webkit-backdrop-filter: blur\(var\(--home-chat-glass-blur\)\)/);
   assert.match(glass, /prefers-reduced-transparency: reduce/);
@@ -590,7 +657,8 @@ test('homepage conversation uses role-tinted glass without restoring the profile
   assert.doesNotMatch(buyer, /linear-gradient|255 197 1/);
   assert.doesNotMatch(source, /antbuildz-home-hero-conversation__status/);
   assert.doesNotMatch(glass, /mask-image/);
-  assert.match(glass, /width: 340px/);
+  assert.match(glass, /--home-chat-bubble-width: 340px/);
+  assert.match(glass, /width: var\(--home-chat-bubble-width\)/);
   assert.match(glass, /width: min\(420px, calc\(100% - 32px\)\)/);
   const surface = glass.match(/\.antbuildz-home-hero-conversation__surface \{([^}]+)\}/)?.[1];
   assert.match(surface, /border: 0/);
@@ -712,10 +780,18 @@ test('homepage depth layers reuse four unique Who We Serve transcripts and share
   assert.match(right, /--home-chat-scale: \.78/);
   assert.match(left, /--home-chat-offset-y: 52px/);
   assert.match(right, /--home-chat-offset-y: 116px/);
-  assert.match(left, /--home-chat-glass-fill: color-mix\(in srgb, var\(--blue\) 24%, transparent\)/);
-  assert.match(right, /--home-chat-glass-fill: color-mix\(in srgb, var\(--blue\) 22%, transparent\)/);
-  assert.match(styles, /\.is-outer-left \{\s*--home-chat-offset-x: clamp\(-640px, -42vw, -440px\)/);
-  assert.match(styles, /\.is-outer-right \{\s*--home-chat-offset-x: clamp\(440px, 42vw, 640px\)/);
+  assert.match(left, /--home-chat-agent-accent: var\(--purple\)/);
+  assert.match(left, /--home-chat-buyer-accent: #fb7185/);
+  assert.match(left, /--home-chat-bubble-width: 300px/);
+  assert.match(left, /--home-chat-font-size: \.772rem/);
+  assert.match(right, /--home-chat-agent-accent: #14b8a6/);
+  assert.match(right, /--home-chat-bubble-width: 270px/);
+  assert.match(right, /--home-chat-font-size: \.695rem/);
+  assert.match(styles, /\.is-outer-left \{[\s\S]*?--home-chat-offset-x: clamp\(-640px, -42vw, -440px\)/);
+  assert.match(styles, /\.is-outer-right \{[\s\S]*?--home-chat-offset-x: clamp\(440px, 42vw, 640px\)/);
+  assert.match(styles, /\.is-outer-left,[\s\S]*?\.is-outer-right \{[\s\S]*?--home-chat-bubble-width: 240px;[\s\S]*?--home-chat-font-size: \.618rem/);
+  assert.match(styles, /\.is-outer-left \{[\s\S]*?--home-chat-agent-accent: #6366f1/);
+  assert.match(styles, /\.is-outer-right \{[\s\S]*?--home-chat-agent-accent: #0891b2/);
   assert.match(styles, /@media \(max-width: 1179px\) \{\s*\.antbuildz-home-hero-conversation\.is-outer-left,\s*\.antbuildz-home-hero-conversation\.is-outer-right \{ display: none; \}/);
   assert.match(source, /const layerVisible = window\.innerWidth <= 767[\s\S]*?layer === 'centre'[\s\S]*?window\.innerWidth >= 1180/);
 });
@@ -1602,6 +1678,19 @@ test('Webstore cards hand off directly, followed by rental and sales enquiries t
   assert.match(css, /\.chatTranscript[^}]*--chat-scroll/);
 });
 
+test('Webstore preview keeps the mobile hero graphic compact while preserving native controls', async () => {
+  const css = await readFile(new URL('../app/webstore-2-ai-webstore-preview/webstore-concept.module.css', import.meta.url), 'utf8');
+  const mobile = css.slice(css.indexOf('@media (max-width: 767px)'), css.indexOf('@keyframes listingDropMobile'));
+  assert.match(mobile, /\.mount \{ margin-top: 18px; \}/);
+  assert.match(mobile, /\.stageNav button \{[^}]*min-height: 78px/);
+  assert.match(mobile, /\.canvasViewport \{ --mobile-scene-scale: \.46;[^}]*height: 570px/);
+  assert.match(mobile, /\[data-stage="1"\] \.canvasViewport \{ --mobile-scene-scale: \.62; height: 496px; \}/);
+  assert.match(mobile, /\[data-stage="2"\] \.canvasViewport \{ --mobile-scene-scale: \.8; height: 554px; \}/);
+  assert.match(mobile, /\.storyFooter \{[^}]*grid-template-columns: minmax\(0, 1fr\) auto;[^}]*min-height: 72px/);
+  assert.match(mobile, /\.playback button \{ width: 44px; height: 44px; \}/);
+  assert.match(css, /\.chatBody \{[\s\S]*?-webkit-mask-image: linear-gradient\(to bottom, rgb\(0 0 0 \/ 24%\), #000 22px, #000 calc\(100% - 28px\), rgb\(0 0 0 \/ 24%\)\)/);
+});
+
 test('Webstore preview corrects inherited metadata idempotently without affecting the original route', async () => {
   const { PREVIEW_PAGE, syncPreviewMetadata } = await loadListingModule('preview-metadata');
   let writes = 0;
@@ -1717,9 +1806,14 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.equal(exports.HOME_SELECTION_STEPS.length, 4);
   assert.equal((body.match(/<article class="stageCard">/g) || []).length, 4);
   assert.match(body, /<ol class="stages" aria-label="Ingest, Reason, Retrieve, Recommend: from catalogue to shortlist">/);
+  assert.match(body, /Diagrams to structured data/);
+  assert.match(body, /technical diagrams such as reach charts/);
+  assert.match(body, /Structured coordinates/);
+  assert.match(body, /class="coordinateHead"><span>Point<\/span><span>Height<\/span><span>Reach<\/span>/);
   for (const width of ['25%', '50%', '75%', '100%']) assert.ok(body.includes(`width:${width}`));
   const educationCss = await readFile(new URL('../app/home-education.module.css', import.meta.url), 'utf8');
   assert.match(educationCss, /\.stages::before/);
+  assert.match(educationCss, /\.stages::before \{[^}]*background: linear-gradient\(180deg, var\(--purple\) 0%, var\(--blue\) 48%, #d99a00 93%\)/);
   assert.match(educationCss, /\.stages li:nth-child\(4\) \{ --stage-color: var\(--red\); \}/);
   assert.match(educationCss, /\.stages li:nth-child\(even\) \.stageCard \{ grid-column: 3/);
   assert.match(educationCss, /grid-template-columns: 36px minmax\(0, 1fr\)/);
@@ -1746,9 +1840,9 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(foundationsCss, /grid-column: span 2/);
   assert.match(foundationsCss, /max-width: 767px/);
   assert.match(foundationsCss, /grid-template-columns: minmax\(0, 1fr\)/);
-  assert.match(foundationsCss, /@media \(min-width: 980px\) \{[\s\S]*?\.section \{ padding-block: 28px; \}/);
-  assert.match(foundationsCss, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
-  assert.match(foundationsCss, /\.scene \{ min-height: 196px; padding: 14px; \}/);
+  assert.match(foundationsCss, /\.grid \{ display: grid; grid-template-columns: repeat\(3, minmax\(0, 1fr\)\); gap: 24px; \}/);
+  assert.match(foundationsCss, /\.scene \{ min-width: 0; min-height: 296px; flex: 1; padding: 32px;[^}]*transform: scale\(\.9\); transform-origin: center;/);
+  assert.doesNotMatch(foundationsCss, /@media \(min-width: 980px\)/, 'the original desktop bento is not compacted or rescaled');
   assert.match(foundationsCss, /\.buyerMessage \{ align-self: flex-end/);
   assert.match(foundationsCss, /\.agentMessage \{ align-self: flex-start/);
   assert.doesNotMatch(body, /home-enquiry-gap|Why Industrial Product Enquiries/, 'the removed Gap section must not render on the homepage');
@@ -1756,8 +1850,8 @@ test('homepage education has the approved concise flow, eight destinations and f
   for (const title of ['Industrial Enquiries Start Online', 'Fast Product Answers Are Expected', 'Product Discovery Is Self-Directed', 'AI Influences Supplier Shortlists']) assert.ok(marketHtml.includes(title));
   assert.match(marketHtml, /AI Is Changing<\/span> How Industrial Buyers Choose/);
   assert.match(marketHtml, /aria-labelledby="home-market-shift"/);
-  assert.match(marketHtml, /Pause Market Shift illustrations/);
-  assert.match(marketHtml, /Illustrative buyer journey, not live search results/);
+  assert.doesNotMatch(marketHtml, /Pause Market Shift illustrations|Pause illustrations/);
+  assert.doesNotMatch(marketHtml, /Illustrative buyer journey, not live search results/);
   assert.doesNotMatch(marketHtml, /&lt; 30s|>92<|>78<|>64</);
   assert.equal((marketHtml.match(/lg:mt-20/g) || []).length, 2, 'alternate desktop cards retain their stagger');
   const marketCss = await readFile(new URL('../app/home-market-shift.module.css', import.meta.url), 'utf8');
@@ -1800,7 +1894,7 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(body, /Illustrative handover/);
   assert.match(body, /Illustrative storefront/);
   assert.doesNotMatch(graphicsSource, /setInterval|setTimeout|requestAnimationFrame|@remotion|<button\b|<a\b/, 'illustrations are static and do not impersonate controls');
-  assert.match(body, /Start with your approved product knowledge/);
+  assert.match(body, /Start with approved product knowledge across documents, tables and technical diagrams/);
   assert.doesNotMatch(body, /Similarity-only retrieval/);
   assert.doesNotMatch(body, /Illustrative selection example|Generic options; outcomes depend|The shortlist and enquiry details support your sales team/);
   assert.match(body, /supported inventory data/);
@@ -1842,9 +1936,9 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(educationCss, /\.products \.textLink::after \{[^}]*position: absolute; inset: 0/);
   assert.match(educationCss, /\.products \.textLink:focus-visible::after \{ outline: var\(--menu-focus\)/);
   assert.match(foundationsHtml, /your team confirms final suitability and commercial details/);
-  // The original brief's word budget excludes the later explicitly requested section transfers.
+  // The original brief's word budget excludes later explicitly requested section transfers and allows the approved technical-ingestion explanation.
   const words = html.replace(marketHtml, '').replace(foundationsHtml.replace(/<link\b[^>]*>/g, ''), '').replace(/<[^>]+>/g, ' ').replace(/&[^;]+;/g, ' ').trim().split(/\s+/).length;
-  assert.ok(words >= 500 && words <= 700, `Expected 500–700 words, received ${words}`);
+  assert.ok(words >= 500 && words <= 750, `Expected 500–750 words, received ${words}`);
   const page = await readFile(new URL('../app/page.tsx', import.meta.url), 'utf8');
   const productPage = await readFile(new URL('../app/[slug]/page.tsx', import.meta.url), 'utf8');
   assert.match(page, /<OriginalAntbuildzApp\s*\/><HomeEducation\s*\/>/);

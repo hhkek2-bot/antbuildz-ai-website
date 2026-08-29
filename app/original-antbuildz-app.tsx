@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { simplifyAgreementHub } from '../lib/agreement-hub';
+import { scopeAiHelpExperience, syncAiHelpMetadata } from '../lib/ai-help-scope';
+import { simplifyAgreementHub, syncAgreementMetadata } from '../lib/agreement-hub';
 import { EMMA_PORTRAIT_ALT, EMMA_PORTRAIT_SRC, standardiseAgentPortraits } from '../lib/agent-identity';
 import { correctSalesAgentCopy } from '../lib/ai-sales-agent-copy';
 import { HOMEPAGE_SEO, syncHomepageMetadata } from '../lib/homepage-seo';
@@ -15,7 +16,6 @@ const ROUTE_ALIASES: Record<string, string> = {
   '/webstore-2': '/ai-webstore-suite',
   '/app': '/ai-agent-console',
   '/develop-admin': '/ai-agent-console',
-  '/help/ai': '/faqs',
 };
 
 const PAGE_TITLES: Record<string, string> = {
@@ -26,9 +26,10 @@ const PAGE_TITLES: Record<string, string> = {
   '/pricing': 'Pricing | Antbuildz AI',
   '/resources': 'Industrial AI Resources | Antbuildz AI',
   '/faqs': 'AI FAQs | Antbuildz AI',
+  '/help/ai': 'AI Help Centre | Antbuildz AI',
   '/about': 'About Antbuildz AI | Antbuildz AI',
   '/book-a-demo': 'Book a Demo | Antbuildz AI',
-  '/agreements': 'Agreements & Policies | Antbuildz AI',
+  '/agreements': 'Antbuildz AI Agreements & Policies | Antbuildz AI',
 };
 
 const DEMO_REQUEST_PATH = '/book-a-demo';
@@ -700,6 +701,8 @@ const HOME_HERO_CONVERSATION: ReadonlyArray<{
 
 let homeHeroRuntimeElement: HTMLElement | null = null;
 let homeHeroRuntimeCleanup: (() => void) | null = null;
+let homeHeroVideoElement: HTMLVideoElement | null = null;
+let homeHeroVideoCleanup: (() => void) | null = null;
 
 // Reuse distinct Who We Serve hero transcripts, not variations of the rental chat.
 const HOME_BACKGROUND_CONVERSATIONS = [
@@ -1010,7 +1013,7 @@ function correctLinks(root: HTMLElement) {
     if (label === 'Resources') link.setAttribute('href', '/resources');
     if (label === 'AI Product FAQs') {
       link.textContent = 'AI FAQs';
-      link.setAttribute('href', '/faqs');
+      link.setAttribute('href', '/help/ai');
     }
     if (label === 'Pricing Plan') {
       link.textContent = 'Pricing';
@@ -1100,6 +1103,22 @@ function correctFooter(root: HTMLElement) {
     // from both the layout and keyboard/accessibility navigation.
     footer.querySelector('nav[aria-label="AI Products"] a[href="/resources"]')
       ?.closest('li')?.setAttribute('hidden', '');
+  }
+
+  const companyPolicies = footer.querySelector<HTMLAnchorElement>(
+    'nav[aria-label="Company"] a[href="/agreements"]',
+  );
+  if (companyPolicies) {
+    setPricingText(companyPolicies, 'AI Agreements & Policies');
+    companyPolicies.setAttribute('href', '/agreements');
+  }
+
+  const companyHelp = footer.querySelector<HTMLAnchorElement>(
+    'nav[aria-label="Company"] a[href="/help"], nav[aria-label="Company"] a[href="/help/ai"], nav[aria-label="Company"] a[href="/faqs"]',
+  );
+  if (companyHelp) {
+    setPricingText(companyHelp, 'AI Help Centre');
+    companyHelp.setAttribute('href', '/help/ai');
   }
 }
 
@@ -1306,6 +1325,61 @@ function resetHomeHeroRuntime() {
   homeHeroRuntimeElement = null;
 }
 
+function resetHomeHeroVideo() {
+  homeHeroVideoCleanup?.();
+  homeHeroVideoCleanup = null;
+  homeHeroVideoElement = null;
+}
+
+function setupHomeHeroVideo(hero: HTMLElement) {
+  const poster = '/images/home-hero-industrial-loop-poster.jpg';
+  const heroImage = hero.querySelector<HTMLImageElement>('.ai-marketplace-hero-image');
+  if (heroImage) {
+    heroImage.src = poster;
+    heroImage.alt = 'Industrial equipment fleet in a dusty machinery yard';
+    heroImage.width = 1280;
+    heroImage.height = 720;
+  }
+
+  let video = hero.querySelector<HTMLVideoElement>('.antbuildz-home-hero-video');
+  if (!video) {
+    video = document.createElement('video');
+    video.className = 'antbuildz-home-hero-video';
+    video.src = '/videos/home-hero-industrial-loop.mp4';
+    video.poster = poster;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('aria-hidden', 'true');
+    video.tabIndex = -1;
+    heroImage?.after(video);
+  }
+  if (homeHeroVideoElement === video) return;
+
+  resetHomeHeroVideo();
+  homeHeroVideoElement = video;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncPlayback = () => {
+    if (!video) return;
+    const shouldPlay = !reducedMotion.matches && !document.hidden;
+    video.autoplay = shouldPlay;
+    video.preload = shouldPlay ? 'metadata' : 'none';
+    if (shouldPlay) void video.play().catch(() => undefined);
+    else video.pause();
+  };
+  reducedMotion.addEventListener('change', syncPlayback);
+  document.addEventListener('visibilitychange', syncPlayback);
+  syncPlayback();
+  homeHeroVideoCleanup = () => {
+    reducedMotion.removeEventListener('change', syncPlayback);
+    document.removeEventListener('visibilitychange', syncPlayback);
+    video?.pause();
+  };
+}
+
 function setupHomeHeroRuntime(root: HTMLElement) {
   const stage = root.querySelector<HTMLElement>('.ai-marketplace-hero-stage');
   const hero = root.querySelector<HTMLElement>('.ai-marketplace-hero');
@@ -1478,6 +1552,8 @@ function correctHomepage(root: HTMLElement) {
   const existingIndustries = root.querySelector<HTMLElement>('.antbuildz-home-industries');
   if (!isHomepage) {
     resetHomeHeroRuntime();
+    resetHomeHeroVideo();
+    root.querySelector<HTMLVideoElement>('.antbuildz-home-hero-video')?.remove();
     root.querySelectorAll<HTMLElement>('.antbuildz-home-hero-conversation').forEach((chat) => chat.remove());
     existingIndustries?.remove();
     return;
@@ -1500,6 +1576,7 @@ function correctHomepage(root: HTMLElement) {
   heroCopy?.querySelector('.antbuildz-ai-home-intro')?.remove();
 
   const hero = root.querySelector<HTMLElement>('.ai-marketplace-hero');
+  if (hero) setupHomeHeroVideo(hero);
   if (hero && !hero.querySelector('.antbuildz-home-hero-conversation')) {
     hero.appendChild(createHomeHeroConversation());
     HOME_BACKGROUND_CONVERSATIONS.forEach(({ messages, layer, label, summary, source }) => {
@@ -1822,6 +1899,8 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   correctDemoRequest(root);
   correctSalesAgentCopy(root, window.location.pathname);
   simplifyAgreementHub(root);
+  syncAgreementMetadata(document, window.location.pathname);
+  scopeAiHelpExperience(root, window.location.pathname);
   standardiseAgentPortraits(root);
   correctPublicTypography(root);
 
@@ -1875,7 +1954,11 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
 
     const observer = new MutationObserver(scheduleCorrections);
     observer.observe(root, { childList: true, subtree: true, characterData: true });
-    const headObserver = new MutationObserver(() => syncHomepageMetadata(document, window.location.pathname));
+    const headObserver = new MutationObserver(() => {
+      syncHomepageMetadata(document, window.location.pathname);
+      syncAiHelpMetadata(document, window.location.pathname);
+      syncAgreementMetadata(document, window.location.pathname);
+    });
     headObserver.observe(document.head, { childList: true, subtree: true, characterData: true, attributes: true });
     document.addEventListener('click', scheduleCorrections);
     document.addEventListener('pointerdown', dismissHeaderDropdowns);

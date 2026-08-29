@@ -45,9 +45,23 @@ export function CatalogueGraphic() {
 
 export function SelectionGraphic({ step }: { step: number }) {
   return <div className={styles.selectionScene} aria-hidden="true">
-    {step === 0 && <div className={styles.selectionDocuments}>
-      <span className={styles.selectionRow}><GraphicIcon kind="catalogue" />Approved catalogues</span>
-      <span className={styles.selectionRow}><GraphicIcon kind="catalogue" />Specifications &amp; guidance</span>
+    {step === 0 && <div className={styles.ingestionScene}>
+      <div className={styles.reachSource}>
+        <span className={styles.ingestionTitle}><GraphicIcon kind="catalogue" />Reach diagram</span>
+        <svg viewBox="0 0 112 58" fill="none" aria-hidden="true" focusable="false">
+          <path className={styles.reachGrid} d="M15 8v40h88M15 38h88M15 28h88M15 18h88M35 8v40M55 8v40M75 8v40M95 8v40" />
+          <path className={styles.reachCurve} d="M18 46c19-1 34-6 45-16 9-8 15-15 24-20" />
+          <path className={styles.reachBoom} d="m27 44 34-17 25-17M22 47l8-3" />
+          <circle className={styles.reachPoint} cx="43" cy="39" r="2.5" /><circle className={styles.reachPoint} cx="64" cy="29" r="2.5" /><circle className={styles.reachPoint} cx="86" cy="10" r="2.5" />
+          <text x="4" y="11">H</text><text x="101" y="56">R</text>
+        </svg>
+      </div>
+      <span className={styles.ingestionArrow}>→</span>
+      <div className={styles.coordinateTable}>
+        <span className={styles.ingestionTitle}>Structured coordinates</span>
+        <div className={styles.coordinateHead}><span>Point</span><span>Height</span><span>Reach</span></div>
+        {['A', 'B', 'C'].map((point, index) => <div className={styles.coordinateRow} key={point}><b>{point}</b><span>H<sub>{index + 1}</sub></span><span>R<sub>{index + 1}</sub></span></div>)}
+      </div>
     </div>}
     {step === 1 && <div className={styles.selectionChat}>
       <span className={styles.selectionQuestion}>Application &amp; requirements</span>

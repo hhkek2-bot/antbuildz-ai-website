@@ -16,9 +16,9 @@ Canonical website: https://antbuildz.ai
 
 - [Resources](https://antbuildz.ai/resources): Practical industrial AI guides and readiness material.
 - [AI Agent Roles](https://antbuildz.ai/ai-agent-roles): Sales, product specialist, customer service, technical support and after-sales AI roles.
-- [Antbuildz AI FAQs](https://antbuildz.ai/faqs): AI-only product, knowledge, Webstore and onboarding answers.
+- [Antbuildz AI Help Centre](https://antbuildz.ai/help/ai): AI-only product, knowledge, Webstore and onboarding answers.
 - [About Antbuildz](https://antbuildz.ai/about): Company history, principles and industrial AI direction.
-- [Agreements & Policies](https://antbuildz.ai/agreements): Existing product, privacy and marketplace policy documents.
+- [Antbuildz AI Agreements & Policies](https://antbuildz.ai/agreements): Privacy, data-handling and product policy documents for Antbuildz AI services.
 
 ## Industries served
 

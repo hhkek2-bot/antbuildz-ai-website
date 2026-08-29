@@ -993,3 +993,17 @@ Evidence and prioritised report: `artifacts/homepage-mobile-seo-20260829/AUDIT.m
 Mode: **Design**, scoped to the homepage hero. Removed the supporting paragraph under the H1 to simplify the title area. Reduced the conversation avatars from 32px to 24px, removed their coloured outlines and shadows, retained Emma's shared portrait for AI replies, and introduced a distinct realistic industrial buyer portrait from the existing local brand-film footage.
 
 Checked the initial and animated states at 1440×900 and 390×844. The title remains centred and readable, the two speaker identities remain visually distinct, all sampled avatars load at 24px with `border: 0` and `box-shadow: none`, and the mobile document width equals the viewport. Five scoped tests and targeted ESLint pass. Motion timing, transcripts, hero photograph, header, downstream sections and shared design rules are unchanged.
+
+## 2026-08-29 — Grainy industrial homepage hero loop
+
+Mode: **Design**, homepage media only. The visual thesis is a quiet, documentary-style equipment-yard moment behind the existing product conversation: real industrial context first, restrained motion second. A five-second 1280×720 H.264 loop was produced from the existing local equipment-yard brand-film footage with a warm dusty grade, subdued saturation, vignette and low film grain. Forward/reverse timing returns to the first frame without a hard visual cut.
+
+The video is decorative, muted, inline and approximately 810 KB. A matching JPEG poster stays underneath for loading/error fallback. Playback pauses on hidden documents; reduced-motion styling hides the video and restores the poster layer. Existing overlay darkness preserves the white/yellow heading and conversation contrast.
+
+Rendered QA covered 1440×900, 1024×768 and 390×844, plus the active chat state on mobile. Playback advanced without blocking, no page overflow was measured, and the title remained readable throughout sampled frames. `ffprobe` confirms 5.000 seconds at 24 fps. All 57 tests, targeted ESLint and production build pass. Evidence: `artifacts/home-hero-video-20260829/contact-sheet.jpg`. No shared design-system, dependency or configuration changes.
+
+## 2026-08-29 — Mobile Webstore preview compaction
+
+Mode: **Audit → Design**, limited to the preview hero at 767px and below. The visual thesis is a compact browser storyboard: the full interface remains recognisable, while stage navigation, explanatory copy and playback controls remain native rather than shrinking with the scene. The original 390px composition measured 1,468.39px for the storyboard and 2,090.27px for the hero. The revised first stage measures 735px and the full hero approximately 1,346.88px. Stage-specific scene viewports are 570px for inventory, 496px for the Webstore and 554px for chat. All controls remain 44px and no horizontal overflow is present.
+
+Added a subtle vertical mask to the phone transcript so the upper and lower messages fade as they pass the visible conversation edges. The phone header, Emma portrait and composer are outside the masked region and remain sharp. Inspected all three stages at 390×844, plus the unchanged wide and compact layouts at 1440×900 and 1024×768. All 58 tests, targeted ESLint and production build pass. No configuration, service restart, shared design-system, reference-project or deployment changes.

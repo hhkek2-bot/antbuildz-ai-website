@@ -201,7 +201,17 @@
 .chatHeader > div > strong { display: block; font-size: 13px; font-weight: 600; }
 .connected { display: flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 9px; color: var(--muted); }
 .connected > i { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
-.chatBody { position: absolute; top: 76px; bottom: 62px; left: 0; right: 0; padding: 12px; overflow: hidden; }
+.chatBody {
+  position: absolute;
+  top: 76px;
+  bottom: 62px;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 24%), #000 22px, #000 calc(100% - 28px), rgb(0 0 0 / 24%));
+  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 24%), #000 22px, #000 calc(100% - 28px), rgb(0 0 0 / 24%));
+}
 .chatTranscript { position: relative; transform: translateY(calc(-1 * var(--chat-scroll, 0px))); transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
 .chatFollowups { position: absolute; top: calc(var(--recommendation-top) - 88px + 3 * var(--recommendation-height) + 2 * var(--recommendation-gap) + 18px); left: 0; right: 0; }
 .chatTurn { min-height: 170px; opacity: 0; transition: opacity .4s; }
@@ -280,11 +290,11 @@
   .syncSummary > div > span { font-size: 11px; }
 }
 @media (max-width: 767px) {
-  .mount { margin-top: 28px; }
+  .mount { margin-top: 18px; }
   .glassFrame { border-radius: 24px; }
   .stageNav { gap: 4px; padding: 6px; border-radius: 24px 24px 0 0; }
-  .stageNav button { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px 8px; min-height: 102px; border-radius: 16px; }
-  .stageNumber { width: 24px; height: 24px; flex-basis: 24px; font-size: 10px; }
+  .stageNav button { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 8px 6px; min-height: 78px; border-radius: 16px; }
+  .stageNumber { width: 22px; height: 22px; flex-basis: 22px; font-size: 9px; }
   .stageNav strong { font-size: 11px; line-height: 1.3; }
   .stageNav small, .stageArrow { display: none; }
   .canvas { --store-top: 76px; --catalogue-top: 304px; --store-preview-left: calc(4cqw + 9px); --store-preview-width: calc(92cqw - 18px); --listing-width: calc(var(--store-preview-width) - 20px); --listing-height: 124px; --phone-width: min(300px, 92cqw); --phone-left: calc((100cqw - var(--phone-width)) / 2); --phone-top: 108px; height: 1240px; }
@@ -377,9 +387,18 @@
   .syncSummary { left: 5%; top: calc(var(--phone-top) - 38px); width: 90%; text-align: center; }
   .syncPill { font-size: 10px; padding: 5px 8px; }
   .syncSummary > strong, .syncSummary > p, .syncSummary > div, .syncArrow { display: none; }
-  .storyFooter { grid-template-columns: minmax(0, 1fr); padding: 12px 14px; min-height: 104px; gap: 4px; border-radius: 0 0 24px 24px; }
-  .storyFooter p { grid-column: 1; font-size: 12px; }
-  .playback { grid-column: 1; grid-row: 2; justify-content: center; }
+  /* Keep the detailed scene as a legible illustration instead of letting its
+     mobile stack turn the hero into a two-screen-tall browser. Each stage has
+     its own scale so inventory, storefront and phone remain recognisable. */
+  .canvasViewport { --mobile-scene-scale: .46; position: relative; height: 570px; overflow: hidden; transition: height .35s ease; }
+  .canvas { position: absolute; top: 0; left: 50%; width: 217.3913%; transform: translateX(-50%) scale(var(--mobile-scene-scale)); transform-origin: top center; }
+  [data-stage="1"] .canvasViewport { --mobile-scene-scale: .62; height: 496px; }
+  [data-stage="1"] .canvas { width: 161.2903%; }
+  [data-stage="2"] .canvasViewport { --mobile-scene-scale: .8; height: 554px; }
+  [data-stage="2"] .canvas { width: 125%; }
+  .storyFooter { grid-template-columns: minmax(0, 1fr) auto; padding: 8px 12px; min-height: 72px; gap: 8px; border-radius: 0 0 24px 24px; }
+  .storyFooter p { grid-column: 1; grid-row: 1; justify-self: center; font-size: 11px; line-height: 1.45; }
+  .playback { grid-column: 2; grid-row: 1; justify-content: flex-end; }
   .playback button { width: 44px; height: 44px; }
 }
 @keyframes listingDropMobile { 0% { opacity: 1; transform: none; } 65% { opacity: .85; } 100% { opacity: 0; transform: translate(calc(var(--item) * -100% - var(--item) * 4px), calc(190px + var(--item) * 108px)) rotate(2deg) scale(.9); } }

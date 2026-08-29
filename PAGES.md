@@ -13,17 +13,17 @@ This register preserves route intent and design status between sessions. Read it
 
 | Route | Primary visitor job | Preferred primary CTA | Design source | Current status |
 | --- | --- | --- | --- | --- |
-| `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Mobile, copy and SEO audit applied and reverified 2026-08-29: clearer industrial-buyer wording, a cleaner single-conversation mobile hero, shorter narrow-screen hero, accessible heading spacing, 44px footer targets and consistent `en-SG` metadata. Representative 320–1440px browser checks; 54 tests, targeted lint and build pass. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
+| `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero now uses a five-second muted industrial-yard loop with warm grain, a static reduced-motion/loading fallback and the existing conversation overlay. Rechecked at 1440×900, 1024×768 and 390×844; 57 tests, targeted lint and build pass. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
 | `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Get an AI Webstore Suite Demo | `/webstore-2` on 8080 | Original wording restored after the user clarified that the new copy belongs only to the preview. Shared adapter and route metadata exactly match the pre-wording backups; original headline, comparison summary, descriptions and original visual checked in the browser. Previous positioning audit remains advisory, not an applied rewrite |
 | `/ai-sales-agent` | Understand standalone AI-guided qualification and handover | Build Your AI Agent | `/aiagent` on 8080 | Review required: phone-width and description-size corrections saved after user feedback. Build, targeted lint and 41 tests pass. Restarted 8081 with permission and confirmed its listener; desktop/mobile verification is blocked by Browser Use URL policy. Earlier copy and capability-label checks remain historical |
 | `/ai-agent-console` | Understand how teams control knowledge, instructions and conversations | Book a Demo | `/app` on 8080 | Reference matched; operational typography unchanged against baseline |
 | `/pricing` | Compare approved product plans and choose a next step | Build Your AI Agent, Book a Demo or Contact Sales | Transferred content; Gorgias-inspired wider plan layout | Three standard cards with shorter, balanced descriptions and shared price/allowance/CTA baselines; checked at 1440px, 1100px, 1024px and 390px. Ivory/gold hover, Custom panel and commercial terms retained; legacy entitlement decisions pending below |
 | `/resources` | Discover practical industrial AI education | Explore a Guide | `/resources` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA; grouped header dropdown, all topic destinations and mobile access verified |
 | `/resources/ai-agent-roles` | Understand specialist AI roles and their boundaries | Build Your AI Agent | Resources role library | Review required: direct route renders Article not found; the Resources role collection and existing individual guides remain available |
-| `/faqs` | Resolve Antbuildz AI product and setup questions | Book a Demo | Intended AI-only FAQ | Review required: currently renders combined AI/Marketplace Help Directory; typography checked, content scope unresolved |
+| `/help/ai` | Resolve Antbuildz AI product and setup questions | Browse AI FAQs | Transferred AI Help Centre | AI-only FAQ library; Marketplace-specific questions are excluded. `/help` and `/faqs` redirect here; Marketplace help routes leave this website for antbuildz.com |
 | `/about` | Understand the industrial history and reason Antbuildz AI exists | Book a Demo | `/about` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA |
 | `/book-a-demo` | Share contact details, then choose a demo time | Continue to Calendly | Existing transferred demo-request form | Header-to-form navigation, validation and Calendly handoff verified at 1440px. 8081 restarted with permission; final responsive QA blocked by Browser Use URL policy. No separate lead storage or booking confirmation implemented |
-| `/agreements` | Find the applicable policy document | View Terms | Existing transferred agreement directory | Source cleanup implemented: repeated headings, counts and intermediate navigation suppressed; shared typography and flatter layout. Review required: desktop/mobile rendering is blocked by the browser's stale connection-error page |
+| `/agreements` | Find Antbuildz AI privacy and product policies | View Terms | Existing transferred agreement directory | AI-only presentation: privacy/data and AI product policies remain; Marketplace policy categories and notes are hidden without detaching source documents |
 
 ## Reference typography restored — 2026-08-28
 
@@ -219,7 +219,7 @@ Current background colour trial (28 August 2026): the preview hero retains its e
 ## Shared global decisions
 
 - The hamburger drawer uses six direct links in this order: AI Sales Agent, AI Webstore Suite, AI Agent Console, Pricing, Resources and About Us. No collapsible groups, Marketplace/Blog links or expanded resource/industry sublists. Sign-in, account controls, close and modal focus behaviour remain unchanged.
-- Public Footer lists Resources under Company in the former Blogs position, linking to `/resources`; Resources no longer appears under AI Products. Existing styles and all other footer links are preserved.
+- Public Footer is AI-only: Marketplace is hidden; Company contains About Us, AI Agreements & Policies, AI Help Centre and Resources. Resources no longer appears under AI Products.
 - Public Header excludes `Add Listing` and `Backend Admin`.
 - Public Header uses the Antbuildz.AI wordmark and a grouped Resources dropdown in the former AI Agent Console slot. All resources and the six library topics link to the Resources library and its filtered collections; the hamburger links directly to the Resources overview. AI Agent Console remains available in the main navigation drawer.
 - Resources includes an expandable AI Agent Roles topic with direct links to Sales Specialist, Customer Service, Technical Support, Product Specialist and After-Sales Support; existing topic filtering is preserved.
@@ -268,6 +268,13 @@ Current background colour trial (28 August 2026): the preview hero retains its e
 - **2026-08-28 footer navigation cleanup (System mode):** Replaced Company → Blogs with Resources and hid the duplicate AI Products row without detaching React-owned nodes. Reused the existing Resources navigation handler to avoid the copied router's stale Blogs destination. Footer copy is now idempotent across observer passes. Production build, 34 tests and targeted ESLint pass; the new mocked-DOM test covers placement, URL, duplicate removal and one-time event binding. Browser tab discovery still returns the earlier connection-error page; desktop/mobile visual and live click QA remain pending. No configuration, service restart, reference-project or copied-bundle changes.
 
 Record results in the current task or add a short dated note below when a route receives a substantial audit.
+
+### 2026-08-29 — AI-only footer, policies and Help Centre
+
+- Scoped the shared footer to Antbuildz AI: the Marketplace column stays hidden, Company uses AI Agreements & Policies and AI Help Centre, and Resources remains under Company only.
+- `/agreements` now presents only privacy/data and AI product policies. Marketplace category controls, collections and other-market notes remain mounted but hidden from the layout, keyboard order and accessibility tree.
+- `/help/ai` is the canonical AI FAQ library. `/help` and `/faqs` redirect there; `/help/marketplace` and legacy `/faqs/*` detail paths redirect to their antbuildz.com equivalents. The sitemap and `llms.txt` list only the AI Help Centre and AI policy scope.
+- Live checks passed at 1440×900 and 390×844 with no horizontal overflow or visible Marketplace content. Mobile policy controls exceed 51px and AI FAQ controls are 64px or taller. All 55 tests, targeted ESLint and the production build pass. The existing 8081 service stayed running and returned HTTP 200; no restart, config edit, copied bundle edit or deployment was required.
 
 - Desktop rendered inspection
 - Mobile rendered inspection
@@ -475,3 +482,71 @@ Inspected at 1440x1000, 1024x900 and 390x844 with no page overflow. Visible pric
 Design mode, homepage-only refinement. Removed the descriptive paragraph below the hero H1 while keeping the existing eyebrow, title, industrial photograph, conversation copy and animation timing. Reduced Emma and buyer portraits from 32px to 24px and removed their coloured rings and shadows. Emma retains the shared AI Sales Agent portrait; buyer messages now use a separate industrial buyer portrait extracted from the existing local `industrial-owner-v1.mp4` brand-film asset.
 
 Browser-inspected the initial and animated hero at 1440×900 and 390×844. The description is absent, both portrait sources are distinct, portraits render at 24px with no border or shadow, and the mobile page width matches its 390px viewport. Five scoped homepage tests and targeted ESLint pass. No configuration, service restart, reference-project change or deployment.
+
+## 2026-08-29 — Removed homepage Market Shift controls
+
+Design mode, homepage-only cleanup. Removed the “Illustrative buyer journey, not live search results.” note and the Pause/Play illustrations control from the Market Shift section. The four educational cards, their illustrative graphics and the clock animation remain unchanged; the existing reduced-motion preference still prevents animation for visitors who request it.
+
+Browser-inspected at 1440×900 and 390×844. Both removed elements are absent, the Market Shift section meets the following section with no extra gap, and neither viewport has horizontal overflow. All 55 tests, targeted ESLint and production build pass; the live homepage returns HTTP 200 on port 8081. No configuration, service restart, shared design-system, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — Differentiated homepage flow colours
+
+Design mode, homepage-only colour refinement. Changed stage 02 “Reason” from blue to deep teal so it no longer reads as the same hue as stage 01 “Ingest”. The four-stage sequence is now purple, teal, gold and red; all copy, graphics, layout and flow behaviour remain unchanged.
+
+Verified the computed colours at 1440×900 and 390×844 with no horizontal overflow. All 55 tests, targeted ESLint and production build pass. No configuration, service restart, shared design-system, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — Technical diagram ingestion story
+
+Design and copy refinement scoped to stage 01 of the homepage Ingest–Reason–Retrieve–Recommend flow. Replaced the two generic document rows with an illustrative reach diagram that becomes a structured coordinate table. The stage label now says “Diagrams to structured data”, and its concise copy explains that approved catalogues, specification tables and technical diagrams can be converted into structured product data for later reasoning over buyer requirements. The section introduction now names documents, tables and technical diagrams.
+
+The coordinate labels are symbolic rather than specifications for a real machine, so the illustration does not introduce unapproved product data or an accuracy claim. Browser-inspected at 1440×900 and 390×844: the diagram, extraction arrow, table headings and three coordinate rows render within the card, text remains readable, and neither viewport has horizontal overflow. All 55 tests, targeted ESLint and production build pass. No configuration, service restart, shared design-system, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — AI Agent Console heading clearance
+
+Fidelity fix scoped to the AI Agent Console section on `/ai-sales-agent`. Added a small lower text buffer to the second gradient title line so “Manage Your Enquiries.” renders fully before the supporting description begins. Copy, font size, weight, line height, section composition and the operational Console visual remain unchanged.
+
+Browser-inspected at 1280px desktop and 390px mobile. The gradient line has 6.14px desktop / 4.21px mobile lower clearance, the title and description no longer visually collide, and neither viewport has horizontal overflow. All 56 tests, targeted ESLint and production build pass. No configuration, service restart, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — Restored compact Agent-foundations bento
+
+Fidelity correction to the homepage “Your business at its core” section. Reverted the temporary four-equal-column desktop composition and restored the approved asymmetric bento: wide Company Brand beside narrow Product Inventory, followed by narrow Technical Specifications beside wide Suitable Recommendations. Scaled the existing cards, interface scenes, gaps and section spacing instead of changing their layout or copy.
+
+The section measures approximately 731px at the 1280px rendered desktop width and 783px at 1024px, compared with the former two-row presentation exceeding a typical desktop view. Mobile retains the readable single-card stack. Browser inspection at 1280px, 1024px and 390px confirms the intended spans, complete card content and no horizontal overflow. Production build and targeted ESLint pass; the full content suite passes after updating its layout assertions. No configuration, service restart, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — Full Agent-foundations design revert
+
+At the user's direction, removed the entire desktop compaction layer from the homepage “Your business at its core” section. This restores the original approved 2026-08-28 implementation exactly: 104px section padding, 24px grid gaps, 24px card corners, full heading/body sizing, 296px illustrative scenes, and the asymmetric wide/narrow then narrow/wide bento. No scaled panel transforms or compact desktop typography remain.
+
+Browser inspection confirms the original card proportions and full internal illustrations at desktop, plus the unchanged readable mobile stack. There is no horizontal overflow. All content tests, targeted ESLint and production build pass. No copy, route, configuration, service, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — Varied and proportionally scaled hero conversations
+
+Design refinement confined to the homepage hero animation. The central rental conversation retains its blue AI / gold buyer treatment. The four supporting Who We Serve conversations now use restrained violet/rose, teal/gold, indigo/orange and cyan/gold accent pairs, preserving cool AI replies and warmer buyer prompts while creating visible variety across the scene.
+
+Supporting layers now scale their bubble width, type, portrait, gap and padding together: 300px/12.35px for the left layer, 270px/11.12px for the right layer, and 240px/9.89px for the outer layers, against the 340px/14px centre. This keeps approximate text measure proportional and prevents full-size copy from being squeezed into smaller cards. Desktop inspection confirms five distinct palettes, no surface overflow and no page overflow. At 390px, the existing centre-only mobile composition remains 14px and the background layers stay hidden. Copy, timings, positions, industrial video and title are unchanged.
+
+## 2026-08-29 — Five-second grainy industrial hero video
+
+Design mode, homepage-only media refinement inspired by the restrained editorial motion of the Sierra reference. Replaced the static hero presentation with a silent five-second loop derived from the existing `equipment-yard-v1.mp4` brand-film asset. The shot moves through a real industrial equipment yard, uses a dusty warm grade, restrained vignette and subtle film grain, then reverses into its opening frame for a clean repeat. The H.264 asset is 1280×720, 24 fps and approximately 810 KB.
+
+The original image layer remains as a matching poster/fallback. The native video is muted, inline, looping and decorative; playback pauses when the document is hidden. `prefers-reduced-motion` users receive the static poster and no visible video. The hero title, Emma/buyer conversations, scroll animation, CTA/header and downstream content are unchanged.
+
+Browser-inspected playback and composition at 1440×900, 1024×768 and 390×844, including the active mobile conversation. The loop advances at every size, title contrast remains clear and measured page width matches each viewport. `ffprobe` confirms exactly 5.000 seconds, H.264/yuv420p at 24 fps. All 57 tests, targeted ESLint and production build pass. No dependency, configuration, service restart, reference-project change or deployment. Visual sequence evidence: `artifacts/home-hero-video-20260829/contact-sheet.jpg`.
+
+## 2026-08-29 — Compact mobile Webstore preview and transcript fade
+
+Design refinement scoped to `/webstore-2-ai-webstore-preview` at 767px and below. Replaced the full-height stacked storyboard with stage-specific scaled scenes while leaving the stage tabs, centred explanatory note and native playback controls at readable sizes. At 390×844, the first-stage storyboard now measures 735px instead of 1,468.39px and the complete hero measures approximately 1,346.88px instead of 2,090.27px. The inventory, store and chat scene viewports are 570px, 496px and 554px respectively; the controls retain 44px touch targets and the page has no horizontal overflow.
+
+The phone transcript now uses a soft top-and-bottom opacity mask so messages approaching either edge recede naturally. Emma's header and the message composer stay crisp because the fade is limited to the scrollable conversation body. Browser-inspected all three stages at 390×844 and confirmed the unchanged composition at 1440×900 and 1024×768. All 58 tests, targeted ESLint and production build pass. No copy, product data, configuration, service restart, reference-project change or deployment.
+
+## 2026-08-29 — Ten-percent Agent-foundations graphic reduction
+
+Fidelity adjustment confined to the four internal illustrations in the homepage “Your business at its core” section. Each illustration wrapper now renders at 90% from its centre. The restored asymmetric card layout, card dimensions, typography, copy, spacing and responsive stacking remain unchanged.
+
+Browser inspection confirms a 0.9 visual-to-layout ratio for all four graphics at 1440×900 and 390×844, with no horizontal overflow. All 58 tests, targeted ESLint and production build pass. No configuration, service restart, copied bundle, reference-project or deployment changes.
+
+## 2026-08-29 — Gradient homepage progress spine
+
+Design refinement limited to the vertical spine in the homepage Ingest–Reason–Retrieve–Recommend flow. Replaced the pale single-colour rule with the established AI Sales Agent title sequence: violet through blue to restrained gold. Increased the line from 1px to 2px for clear but understated continuity; stage cards, numbered markers, copy and layout remain unchanged.
+
+Browser inspection confirms the gradient at 1440×900 and 390×844, correct centre/mobile alignment and no horizontal overflow. No configuration, service restart, copied bundle, reference-project or deployment changes.

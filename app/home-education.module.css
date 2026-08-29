@@ -45,9 +45,9 @@
 .intro { max-width: 840px; }
 .intro > p:last-child:not(.eyebrow) { max-width: 720px; margin-top: 24px; font-size: var(--type-lead); line-height: 1.62; }
 .stages { position: relative; list-style: none; padding: 0; margin: 64px auto 0; max-width: 1040px; display: grid; gap: 56px; }
-.stages::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: color-mix(in srgb, var(--purple) 28%, white); }
+.stages::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; border-radius: 999px; background: linear-gradient(180deg, var(--purple) 0%, var(--blue) 48%, #d99a00 93%); }
 .stages li { --stage-color: var(--purple); position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr); align-items: start; }
-.stages li:nth-child(2) { --stage-color: var(--blue); }
+.stages li:nth-child(2) { --stage-color: #0f766e; }
 .stages li:nth-child(3) { --stage-color: var(--yellow-hover); }
 .stages li:nth-child(4) { --stage-color: var(--red); }
 .step { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); display: grid; place-items: center; width: 80px; height: 80px; border-radius: 50%; background: var(--stage-color); color: #fff; box-shadow: 0 0 0 6px white; font: 700 26px/1 var(--font-heading); font-variant-numeric: tabular-nums; }

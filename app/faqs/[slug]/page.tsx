@@ -1,5 +1,6 @@
-import { OriginalAntbuildzApp } from '../../original-antbuildz-app';
+import { redirect } from 'next/navigation';
 
-export default function FaqPage() {
-  return <OriginalAntbuildzApp />;
+export default async function FaqPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  redirect(`https://antbuildz.com/faqs/${encodeURIComponent(slug)}`);
 }

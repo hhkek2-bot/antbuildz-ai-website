@@ -34,7 +34,7 @@ function Arrow() {
 }
 
 export const HOME_SELECTION_STEPS = [
-  ['Ingest', 'Your product knowledge', 'Bring approved catalogues, specifications and business guidance into the Agent’s knowledge base. Build the product context needed to answer buyer enquiries.'],
+  ['Ingest', 'Diagrams to structured data', 'Ingest approved catalogues, specification tables and technical diagrams such as reach charts. Extract dimensions and coordinate points into structured product data the Agent can use when reasoning about buyer requirements.'],
   ['Reason', 'The buyer’s requirements', 'Interpret the buyer’s application, technical requirements and constraints. Ask for missing details to establish what a suitable product needs to do.'],
   ['Retrieve', 'Relevant product options', 'Find relevant products and specifications in your approved catalogue and supported inventory data. Filter the options against the buyer’s stated requirements.'],
   ['Recommend', 'A shortlist with reasons', 'Suggest suitable options and explain why they fit. Flag what your team still needs to confirm, including technical suitability, availability and commercial terms.'],
@@ -67,7 +67,7 @@ export function HomeEducationBody() {
           <div className={styles.intro}>
             <p className={styles.eyebrow}>The Antbuildz approach</p>
             <h2 id="home-selection-approach">From your catalogue to <span className={styles.selectionEmphasis}>a suitable shortlist.</span></h2>
-            <p>Start with your approved product knowledge. The Agent interprets each buyer’s needs, finds relevant options and explains its recommendations for your sales team to review.</p>
+            <p>Start with approved product knowledge across documents, tables and technical diagrams. The Agent structures that information, interprets each buyer’s needs, finds relevant options and explains its recommendations for your sales team to review.</p>
           </div>
           <ol className={styles.stages} aria-label="Ingest, Reason, Retrieve, Recommend: from catalogue to shortlist">
             {HOME_SELECTION_STEPS.map(([title, label, description], index) => (

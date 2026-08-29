@@ -2,6 +2,33 @@
  * Keep the original document rows, URLs, dates and category handlers intact.
  * Hide React-owned duplicate elements instead of detaching its DOM nodes.
  */
+export const AGREEMENT_SEO = {
+  title: 'Antbuildz AI Agreements & Policies | Antbuildz AI',
+  description: 'Find privacy, data-handling and product policies for Antbuildz AI services.',
+  url: 'https://antbuildz.ai/agreements',
+} as const;
+
+export function syncAgreementMetadata(doc: Document, pathname: string) {
+  if (pathname !== '/agreements') return;
+  if (doc.title !== AGREEMENT_SEO.title) doc.title = AGREEMENT_SEO.title;
+  const values: Record<string, string> = {
+    'meta[name="description"]': AGREEMENT_SEO.description,
+    'meta[property="og:title"]': AGREEMENT_SEO.title,
+    'meta[property="og:description"]': AGREEMENT_SEO.description,
+    'meta[property="og:url"]': AGREEMENT_SEO.url,
+    'meta[name="twitter:title"]': AGREEMENT_SEO.title,
+    'meta[name="twitter:description"]': AGREEMENT_SEO.description,
+  };
+  for (const [selector, value] of Object.entries(values)) {
+    for (const element of doc.querySelectorAll(selector)) {
+      if (element.getAttribute('content') !== value) element.setAttribute('content', value);
+    }
+  }
+  for (const link of doc.querySelectorAll('link[rel="canonical"]')) {
+    if (link.getAttribute('href') !== AGREEMENT_SEO.url) link.setAttribute('href', AGREEMENT_SEO.url);
+  }
+}
+
 export function simplifyAgreementHub(root: HTMLElement) {
   const hub = root.querySelector<HTMLElement>('.legal-policies-home');
   if (!hub) return;
@@ -23,28 +50,35 @@ export function simplifyAgreementHub(root: HTMLElement) {
     '[aria-labelledby="legal-collection-general"] .legal-policies-home__agreement-group-heading',
     '.legal-agreement-row > div > p:first-child',
     '.legal-policies-home__status-note h3',
-    '.legal-policies-home__other-markets-note > div > p',
-    '.legal-policies-home__other-markets-note > a',
+    '.legal-policies-home__other-markets-note',
   ];
   hub.querySelectorAll<HTMLElement>(redundant.join(',')).forEach(element => { element.hidden = true; });
   const library = hub.querySelector('.legal-policies-home__library');
   library?.removeAttribute('aria-labelledby');
-  library?.setAttribute('aria-label', 'Browse policy documents');
+  library?.setAttribute('aria-label', 'Browse Antbuildz AI policy documents');
 
-  setText('.legal-policies-home__intro', 'Find policies for Antbuildz products, privacy and marketplace activity.');
-  setText('#legal-collection-general', 'General policies');
-  setText('#legal-collection-ai-products', 'AI products');
-  setText('[aria-labelledby="legal-collection-general"] .legal-policies-home__collection-header > div > p:last-child', 'Privacy and data handling.');
-  setText('[aria-labelledby="legal-collection-ai-products"] .legal-policies-home__collection-header > div > p:last-child', 'Policies for Antbuildz software services.');
-  setText('[aria-labelledby="legal-collection-marketplace"] .legal-policies-home__collection-header > div > p:last-child', 'Listing and transaction policies for the Antbuildz Marketplace on antbuildz.com.');
-  setText('.legal-policies-home__status-note p', 'A separate Platform Terms document is not currently available.');
+  setText('.legal-policies-home__hero h1', 'Antbuildz AI Agreements & Policies');
+  setText('.legal-policies-home__intro', 'Find privacy, data-handling and product policies for Antbuildz AI services.');
+  setText('#legal-collection-general', 'Privacy & data');
+  setText('#legal-collection-ai-products', 'AI product policies');
+  setText('[aria-labelledby="legal-collection-general"] .legal-policies-home__collection-header > div > p:last-child', 'Privacy and data handling for Antbuildz AI services.');
+  setText('[aria-labelledby="legal-collection-ai-products"] .legal-policies-home__collection-header > div > p:last-child', 'Policies for the AI Webstore Suite and related Antbuildz AI services.');
+  setText('.legal-policies-home__status-note p', 'A separate Antbuildz AI platform terms document is not currently available.');
   setText('.legal-policies-home__legal-note', 'A separate AI Sales Agent agreement is not currently available.');
-  setText('.legal-policies-home__other-markets-note h3', 'Other markets');
   hub.querySelectorAll('.legal-policies-home__topic-list button').forEach((button, index) => {
     const label = button.querySelector('span');
-    const text = ['General policies', 'AI products', 'Marketplace'][index];
+    const text = ['Privacy & data', 'AI product policies'][index];
     if (label && text && label.textContent !== text) label.textContent = text;
     button.setAttribute('aria-controls', 'legal-policy-content');
+    if (index >= 2 || /marketplace/i.test(button.textContent ?? '')) {
+      (button as HTMLElement).hidden = true;
+      button.setAttribute('aria-hidden', 'true');
+      button.setAttribute('tabindex', '-1');
+    }
+  });
+  hub.querySelectorAll<HTMLElement>('[aria-labelledby="legal-collection-marketplace"]').forEach((collection) => {
+    collection.hidden = true;
+    collection.setAttribute('aria-hidden', 'true');
   });
   hub.querySelectorAll('.legal-agreement-row').forEach(row => {
     const title = row.querySelector('h3')?.textContent?.trim();
