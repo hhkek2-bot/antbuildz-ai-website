@@ -743,7 +743,7 @@ test('homepage uses the approved static mountain-logistics hero with an immediat
   assert.match(styles, /\.antbuildz-ai-home \.ai-marketplace-hero-overlay \{[\s\S]*?linear-gradient\(180deg, rgb\(4 16 34 \/ \.5\)/);
   assert.match(styles, /top: clamp\(132px, 19svh, 184px\)/);
   assert.match(styles, /left: max\(5%, calc\(\(100% - 1320px\) \/ 2\)\)/);
-  assert.match(styles, /right: clamp\(36px, 6vw, 96px\)/);
+  assert.match(styles, /right: max\(24px, calc\(\(100% - 1280px\) \/ 2\)\)/);
   assert.match(styles, /bottom: clamp\(28px, 5\.5svh, 54px\)/);
   assert.match(styles, /opacity: var\(--antbuildz-home-chat-opacity, 1\)/);
   assert.doesNotMatch(styles, /\.antbuildz-ai-home \.antbuildz-home-hero-video/);
@@ -772,6 +772,7 @@ test('homepage conversation uses role-tinted glass without restoring the profile
   assert.match(glass, /--home-chat-bubble-width: 340px/);
   assert.match(glass, /width: var\(--home-chat-bubble-width\)/);
   assert.match(glass, /width: min\(470px, 42vw\)/);
+  assert.match(glass, /right: max\(24px, calc\(\(100% - 1280px\) \/ 2\)\)/);
   const surface = glass.match(/\.antbuildz-home-hero-conversation__surface \{([^}]+)\}/)?.[1];
   assert.match(surface, /border: 0/);
   assert.match(surface, /background: var\(--home-chat-glass-fill\)/);
@@ -818,8 +819,8 @@ test('every homepage conversation uses round Emma and buyer portraits with stabl
       assert.equal(avatar.width, 24);
       assert.equal(avatar.height, 24);
       assert.equal(avatar.draggable, false);
-      assert.equal(avatar.src, message.kind === 'buyer' ? '/images/industrial-buyer-avatar.jpg' : emmaSrc);
-      assert.equal(avatar.alt, message.kind === 'buyer' ? 'Example industrial buyer' : emmaAlt);
+      assert.equal(avatar.src, message.kind === 'buyer' ? '/images/industrial-buyer-avatar-asian-v2.jpg' : emmaSrc);
+      assert.equal(avatar.alt, message.kind === 'buyer' ? 'Example Asian industrial buyer' : emmaAlt);
       await access(new URL(`../public${avatar.src}`, import.meta.url));
       if (message.kind !== 'requirement') assert.equal(surface.textContent, message.text);
       else assert.equal(surface.children[1].textContent, message.text);
@@ -1183,15 +1184,15 @@ test('homepage inventory Agent card leads with product knowledge and the Emma ta
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
   ]);
   assert.match(source, /function correctHomeInventoryAgentCard/);
-  assert.match(source, /title: 'Built to Understand Your Inventory'/);
-  assert.match(source, /catalogue, technical specifications, pricing guidance and availability rules you approve/);
-  assert.match(source, /suitable recommendations for your team to review/);
+  assert.match(source, /title: 'An AI Agent That Understands Your Inventory'/);
+  assert.match(source, /With connected inventory data, it understands your industry and guides buyers using current, approved product information/);
   assert.match(source, /eyebrow: null/);
   assert.match(source, /eyebrow\.hidden = !copy\.eyebrow/);
   assert.match(source, /button: 'Explore AI Sales Agent'/);
   assert.match(source, /buttonHref: '\/ai-sales-agent'/);
   assert.match(source, /badge: 'AI Sales Agent'/);
-  assert.doesNotMatch(source, /An AI Agent that truly knows your inventory/);
+  const inventoryDescription = source.match(/description: 'With connected inventory data, ([^']+)'/)?.[0] ?? '';
+  assert.ok(inventoryDescription.replace(/^description: '/, '').replace(/'$/, '').trim().split(/\s+/).length <= 20);
   assert.match(source, /\/images\/emma-inventory-tablet-v1\.png/);
   assert.match(source, /Emma checking approved industrial product inventory on a tablet/);
   assert.match(source, /correctHomeInventoryAgentCard\(root, isHomepage\)/);

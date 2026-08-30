@@ -1271,12 +1271,12 @@ function createHomeHeroConversation(
     bubble.className = `antbuildz-home-hero-conversation__bubble is-${message.kind}`;
     bubble.dataset.step = String(index);
     // Reuse Emma's shared identity and keep the illustrative buyer visually
-    // distinct with an existing industrial-team image.
+    // distinct with the approved Asian industrial-buyer portrait.
     const isBuyer = message.kind === 'buyer';
     const avatar = document.createElement('img');
     avatar.className = `antbuildz-home-hero-conversation__avatar${isBuyer ? '' : ' antbuildz-emma-portrait'}`;
-    avatar.src = isBuyer ? '/images/industrial-buyer-avatar.jpg' : EMMA_PORTRAIT_SRC;
-    avatar.alt = isBuyer ? 'Example industrial buyer' : EMMA_PORTRAIT_ALT;
+    avatar.src = isBuyer ? '/images/industrial-buyer-avatar-asian-v2.jpg' : EMMA_PORTRAIT_SRC;
+    avatar.alt = isBuyer ? 'Example Asian industrial buyer' : EMMA_PORTRAIT_ALT;
     avatar.width = 24;
     avatar.height = 24;
     avatar.draggable = false;
@@ -1744,8 +1744,8 @@ const HOME_AGENT_CARD_INVENTORY = {
   image: '/images/emma-inventory-tablet-v1.png',
   imageAlt: 'Emma checking approved industrial product inventory on a tablet',
   eyebrow: null,
-  title: 'Built to Understand Your Inventory',
-  description: 'Your AI Sales Agent works from the catalogue, technical specifications, pricing guidance and availability rules you approve. It can answer detailed product questions, compare relevant options and guide buyers towards suitable recommendations for your team to review.',
+  title: 'An AI Agent That Understands Your Inventory',
+  description: 'With connected inventory data, it understands your industry and guides buyers using current, approved product information.',
   button: 'Explore AI Sales Agent',
   buttonAria: 'Explore the Antbuildz AI Sales Agent',
   buttonHref: '/ai-sales-agent',

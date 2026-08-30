@@ -986,3 +986,29 @@ Browser-inspected at 1440×900 and 390×844. The FAQ precedes the panel in both 
 Fidelity-plus-Design refinement scoped to the two `One connected workflow` cards. Replaced the repeated visible AI Sales Agent and AI Webstore Suite action labels with restrained circular arrow icons at the bottom-right. Each card retains one native link, its extended card hit area, visible focus treatment and a descriptive accessible label. Destinations remain `/ai-sales-agent` and `/ai-webstore-suite`.
 
 Browser-inspected at 1440×900 and 390×844. Desktop icons retain the existing responsive card scaling and sit at the visual lower-right inset; mobile icons are 52px touch targets with 24px right and bottom insets. Both destinations were followed successfully and both viewports have zero horizontal overflow. The card change adds no browser error; visiting the existing Webstore destination still emits its pre-existing Remotion licence notice. All 69 tests pass. No card copy, graphic, connector, destination, section layout, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Homepage hero conversation aligned to the header rail
+
+Fidelity correction scoped to the homepage hero conversation's desktop horizontal anchor. The conversation now remains inside the shared 1280px header rail, so its outer right edge aligns with the Book a Demo utility edge instead of extending towards the viewport edge. The lower-right composition, 470px conversation frame, glass bubbles, speaker sides, message sequence and animation remain unchanged.
+
+Browser-measured at 1553×1091 and 1440×900: the conversation and Book a Demo now share the exact same right coordinate at both widths. At 1024×768 the compact header and conversation likewise end at the same coordinate; the 390×844 mobile layout remains contained with zero horizontal overflow. All 69 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-30 — Homepage hero buyer uses an Asian industrial portrait
+
+Fidelity refinement scoped only to the buyer identity in the homepage hero conversation. Replaced the former buyer photograph with a new realistic Asian male industrial-buyer portrait in a navy work shirt and softly blurred warehouse setting. Emma's portrait, avatar size and crop, buyer-right / Agent-left speaker alignment, glass bubbles, message sequence, animation, hero composition and header alignment remain unchanged.
+
+Browser-inspected at 1440×900 and 390×844. The 512px portrait loads successfully, remains centred and recognisable inside the existing 24px circular avatar, and both viewports retain zero horizontal overflow. All 69 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-30 — Inventory Agent card uses a shorter connected-data promise
+
+Copy refinement scoped to the homepage inventory Agent card. The heading is now `An AI Agent That Understands Your Inventory`. Its 16-word description reads: `With connected inventory data, it understands your industry and guides buyers using current, approved product information.` This preserves the user's live-information intent while avoiding an unsupported real-time availability promise. The image, CTA, badge, panel layout and typography remain unchanged.
+
+Browser-inspected at 1440×900 and 390×844. The shorter copy remains readable over the established photograph, the description is 16 words at both widths and neither viewport has horizontal overflow. All 69 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-30 — AI Sales Agent hero gains consistent header breathing room
+
+Fidelity correction scoped only to the top inset of the AI Sales Agent hero. The hero background still extends behind the transparent header, and the header still restores its glass surface after scrolling. The tall Agent phone now begins 64px below the desktop header instead of 15px, matching the visual breathing room used by the other public product heroes; the gap scales to 56px on compact layouts and 48px on mobile.
+
+The title, description, actions, phone graphic, animation, content width, column layout and responsive stacking remain unchanged.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The top-state header remains transparent, the scrolled header restores its canvas-and-glass surface, and all three viewports retain zero horizontal overflow. All 69 tests, `git diff --check` and the production build pass.

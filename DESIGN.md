@@ -131,8 +131,10 @@ conversation is part of the initial hero composition and must be visible when
 the page first loads; page scrolling must not control its appearance. Preserve
 the high-left title and description with one concentrated Agent conversation
 anchored at the lower right. The four supporting depth conversations stay
-hidden in this composition. Routine hero refinements may adjust the contents of
-the primary conversation, but must not reverse this spatial hierarchy unless
+hidden in this composition. Keep the foreground conversation inside the shared
+header rail, with its outer right edge aligned to the Book a Demo utility edge
+rather than to the viewport. Routine hero refinements may adjust the contents
+of the primary conversation, but must not reverse this spatial hierarchy unless
 the user explicitly asks to unlock it.
 
 When a component changes, check every route that consumes it. New variants need a functional reason, not only a different appearance.
@@ -184,7 +186,7 @@ This is a decision framework, not a mandatory section count. Remove any section 
 
 - Demonstrations must use believable industrial data and coherent states.
 - Do not show staging remarks such as `Illustrative workflow`, `Illustrative records`, `Illustrative answer` or `Illustrative storefront` in or below permanent marketing graphics. Keep necessary product boundaries—plan/setup dependencies, availability checks, technical suitability and human commercial review—in the relevant product copy or workflow state.
-- In all homepage hero conversations, AI replies, requirement profiles and AI typing indicators sit on the left; buyer questions sit on the right. Emma's round portrait replaces the repeated AI name label, and an illustrative buyer portrait accompanies questions. Use blue-tinted glass for Emma and warm yellow-tinted glass for buyers, retaining the industrial backdrop and subdued mobile background layers. Apply the same speaker alignment on desktop, mobile and reduced-motion states.
+- In all homepage hero conversations, AI replies, requirement profiles and AI typing indicators sit on the left; buyer questions sit on the right. Emma's round portrait replaces the repeated AI name label, and the approved Asian male industrial-buyer portrait accompanies questions. Use blue-tinted glass for Emma and warm yellow-tinted glass for buyers, retaining the industrial backdrop and subdued mobile background layers. Apply the same speaker alignment on desktop, mobile and reduced-motion states.
 - A clickable UI demo must not imply a working backend.
 - Controls need hover, focus and active states; forms also need disabled, loading, success and error states when relevant.
 - Show how an enquiry becomes useful: requirements, matching, quotation context and handover.

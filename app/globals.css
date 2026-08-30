@@ -647,6 +647,14 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 #root [data-antbuildz-sales-agent] .bright-hero-text-block { min-width: 0; }
 #root [data-antbuildz-sales-agent] .bright-hero-title-line { white-space: normal; }
 
+/* Keep the Sales Agent hero on the shared transparent-header surface while
+   giving its tall phone visual the same breathing room as the other public
+   product heroes. The transferred hero's 96px inset otherwise leaves only
+   15px between the fixed 81px header and the phone frame. */
+#root [data-antbuildz-sales-agent] .bright-hero.antbuildz-public-hero-surface {
+  padding-top: calc(var(--public-header-height, 81px) + 64px);
+}
+
 /* The Console gradient line needs a little room below its line box so the
    lower curves render fully before the supporting copy begins. */
 #root [data-antbuildz-sales-agent] .af-section-header .af-section-title-line:last-child {
@@ -669,6 +677,9 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 }
 
 @media (max-width: 980px) {
+  #root [data-antbuildz-sales-agent] .bright-hero.antbuildz-public-hero-surface {
+    padding-top: calc(var(--public-header-height, 81px) + 56px);
+  }
   #root [data-antbuildz-sales-agent] .bright-hero-split {
     display: flex;
     flex-direction: column;
@@ -685,6 +696,9 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 }
 
 @media (max-width: 767px) {
+  #root [data-antbuildz-sales-agent] .bright-hero.antbuildz-public-hero-surface {
+    padding-top: calc(var(--public-header-height, 75px) + 48px);
+  }
   #root.antbuildz-public-typography {
     --type-hero-heading: clamp(2rem, 9vw, 2.75rem);
     --type-section-heading: clamp(2rem, 9vw, 2.75rem);
@@ -1587,7 +1601,8 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-surface-padding: 12px 14px;
   position: absolute;
   z-index: 5;
-  right: clamp(36px, 6vw, 96px);
+  /* Match the right edge of the shared 1280px header rail (Book a Demo). */
+  right: max(24px, calc((100% - 1280px) / 2));
   bottom: clamp(28px, 5.5svh, 54px);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
