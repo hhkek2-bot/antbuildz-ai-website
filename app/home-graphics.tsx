@@ -50,62 +50,72 @@ export function CatalogueGraphic() {
  */
 export function SelectionOverviewGraphic({ step }: { step: number }) {
   return <div className={styles.selectionOverview} aria-hidden="true">
-    {step === 0 && <div className={styles.overviewFlow}>
-      <div className={styles.overviewCard}>
+    {step === 0 && <div className={`${styles.overviewFlow} ${styles.overviewIngest}`}>
+      <div className={`${styles.overviewCard} ${styles.overviewSource}`}>
         <span className={styles.overviewLabel}>Approved knowledge</span>
         <strong>Product catalogue</strong>
         <small>Specifications · diagrams · rules</small>
-      </div>
-      <span className={styles.overviewArrow}>→</span>
-      <div className={styles.overviewCard}>
-        <span className={styles.overviewLabel}>Structured data</span>
-        <div className={styles.overviewList}>
-          <span>Product details</span>
-          <span>Technical fields</span>
-          <span>Availability rules</span>
+        <div className={styles.overviewDocumentRows}>
+          <span><b>Category</b><small>Electric forklift</small></span>
+          <span><b>Rated load</b><small>Approved field</small></span>
+          <span><b>Power</b><small>Approved field</small></span>
         </div>
       </div>
+      <span className={styles.overviewArrow}><i /></span>
+      <div className={`${styles.overviewCard} ${styles.overviewRecord}`}>
+        <span className={styles.overviewLabel}>Structured data</span>
+        <strong>Product record</strong>
+        <div className={styles.overviewList}>
+          <span><b>Product details</b><i>Mapped</i></span>
+          <span><b>Technical fields</b><i>Mapped</i></span>
+          <span><b>Availability rules</b><i>Mapped</i></span>
+        </div>
+        <small className={styles.overviewStatus}>Ready for approved use</small>
+      </div>
     </div>}
 
-    {step === 1 && <div className={styles.overviewStack}>
+    {step === 1 && <div className={`${styles.overviewStack} ${styles.overviewReason}`}>
       <div className={styles.overviewQuestion}>
         <span className={styles.overviewLabel}>Buyer need</span>
-        <strong>5 t electric forklift</strong>
+        <strong>5 t electric forklift for warehouse use</strong>
       </div>
       <div className={styles.overviewSplit}>
-        <span><small>Known</small><b>Load · power</b></span>
-        <span><small>Still needed</small><b>Lift · aisle · load</b></span>
+        <span><small>Known</small><b>Rated load · power</b><i>2 requirements captured</i></span>
+        <span><small>Still needed</small><b>Lift · aisle · load</b><i>3 constraints to clarify</i></span>
       </div>
       <div className={styles.overviewOutcome}>
-        <span>Next action</span>
-        <strong>Clarify before matching</strong>
+        <span><small>Next action</small><strong>Clarify before matching</strong></span>
+        <b>Ask for site constraints</b>
       </div>
     </div>}
 
-    {step === 2 && <div className={styles.overviewStack}>
+    {step === 2 && <div className={`${styles.overviewStack} ${styles.overviewRetrieve}`}>
       <div className={styles.overviewSearch}>
-        <span className={styles.overviewLabel}>Search</span>
-        <strong>Approved catalogue + supported inventory</strong>
+        <span><span className={styles.overviewLabel}>Search</span><strong>Approved catalogue + supported inventory</strong></span>
+        <small>Approved sources only</small>
       </div>
+      <div className={styles.overviewFilters}><span>Category</span><span>Power</span><span>Rated load</span></div>
       <div className={styles.overviewOptions}>
-        <span><b>Electric forklift</b><small>Relevant category</small></span>
-        <span className={styles.overviewOptionActive}><b>Closest supported option</b><small>Ready to compare</small></span>
-        <span><b>Other equipment</b><small>Outside the need</small></span>
+        <span><b>Electric forklift</b><small>Relevant category</small><i>Included</i></span>
+        <span className={styles.overviewOptionActive}><b>Closest supported option</b><small>Ready to compare</small><i>Review</i></span>
+        <span><b>Other equipment</b><small>Outside the need</small><i>Excluded</i></span>
       </div>
     </div>}
 
-    {step === 3 && <div className={styles.overviewStack}>
+    {step === 3 && <div className={`${styles.overviewStack} ${styles.overviewRecommend}`}>
       <div className={styles.overviewAgent}>
         <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="32" height="32" />
         <span><strong>Emma</strong><small>AI Sales Agent</small></span>
+        <i>For team review</i>
       </div>
       <div className={styles.overviewBuyer}>Which option best fits?</div>
       <div className={styles.overviewAnswer}>
         <span className={styles.overviewLabel}>Recommendation</span>
         <strong>Closest supported option</strong>
-        <small>Explained for sales review</small>
+        <small>Explained against the buyer’s stated requirements</small>
+        <div className={styles.overviewRecommendationFacts}><span>Rated load</span><span>Power</span><span>Application</span></div>
       </div>
-      <div className={styles.overviewReview}>Team confirms suitability, availability and terms</div>
+      <div className={styles.overviewReview}><span>Sales review</span><strong>Team confirms suitability, availability and terms</strong></div>
     </div>}
   </div>;
 }

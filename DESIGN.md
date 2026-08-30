@@ -116,13 +116,24 @@ Reuse these patterns before creating variants:
 - Final CTA band
 
 The homepage `From your inventory to recommendation` composition is locked by
-direct user instruction. Preserve the centred eyebrow, title and description;
-the four equal visual-first columns on wide desktop; the 2 × 2 compact layout;
-and the single-column mobile stack with each graphic immediately before its
-matching label, title and description. Routine refinements may change only the
-contents inside the four graphic panels. Do not change the section frame,
-column structure, order, typography hierarchy or copy placement unless the
-user explicitly asks to unlock the layout.
+direct user instruction. Preserve the centred eyebrow, title and description,
+then four large graphic-and-copy rows. On desktop the graphic alternates left,
+right, left, right; on mobile the matching label, title and description appear
+before the graphic. Routine refinements may change only the contents inside the
+four graphic panels. Do not change the section frame, alternating structure,
+order, typography hierarchy or copy placement unless the user explicitly asks
+to unlock the layout.
+
+The homepage hero uses the approved static mountain-logistics photograph at
+`/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png`. Do not
+replace it with a video or a scroll-controlled media reveal. The Agent
+conversation is part of the initial hero composition and must be visible when
+the page first loads; page scrolling must not control its appearance. Preserve
+the high-left title and description with one concentrated Agent conversation
+anchored at the lower right. The four supporting depth conversations stay
+hidden in this composition. Routine hero refinements may adjust the contents of
+the primary conversation, but must not reverse this spatial hierarchy unless
+the user explicitly asks to unlock it.
 
 When a component changes, check every route that consumes it. New variants need a functional reason, not only a different appearance.
 
@@ -134,7 +145,7 @@ The Data protection & trust panel appears once on the homepage immediately befor
 
 The desktop Public Header uses a three-zone alignment: Antbuildz.AI wordmark on the left, primary product navigation centred to the viewport, and utility controls on the right. Translation is not a header control; the right side retains Sign in and Book a Demo. Because the complete primary navigation is visible at 981px and wider, the hamburger is hidden there and reserved for the transferred shell's compact/mobile state at 980px and below. This public-header rule does not remove operational sidebar or menu controls from the signed-in AI Agent Console.
 
-At the top of public marketing routes, the fixed Public Header is transparent and the route's own hero surface continues behind it unless the route has an approved component-owned header relationship. Preserve each overlaid hero's original content position with a header-height spacer rather than copying a page-specific colour into the navigation. The AI Sales Agent is the current exception: it retains the transferred separate header band followed by the hero's original 96px content inset. After the visitor scrolls 24px on overlaid routes, restore the shared canvas-and-white blurred header surface for legibility. Home and the canonical AI Webstore Suite retain their established dark-image overlay contrast; the signed-in AI Agent Console remains outside this public treatment. Header dropdown panels retain a lightly translucent canvas-glass surface with enough blur and contrast to remain legible at every scroll position.
+At the top of public marketing routes, the fixed Public Header is transparent and the route's own hero surface continues behind it unless the route has an approved component-owned header relationship. Preserve each overlaid hero's original content position with a header-height spacer rather than copying a page-specific colour into the navigation. AI Sales Agent follows this shared transparent-top relationship. After the visitor scrolls 24px on overlaid routes, restore the shared canvas-and-white blurred header surface for legibility. Home and the canonical AI Webstore Suite retain their established dark-image overlay contrast; the signed-in AI Agent Console remains outside this public treatment. Header dropdown panels retain a lightly translucent canvas-glass surface with enough blur and contrast to remain legible at every scroll position.
 
 The shared Public Header and Footer wordmark uses the supplied high-resolution red `antbuildz` artwork without its legacy `.com` suffix. Append `.ai` in the established Plus Jakarta Sans 850 wordmark typography and Antbuildz yellow `#FFC501`; keep the accessible home label and responsive scaling intact.
 

@@ -1365,3 +1365,144 @@ final result: passed
 The complete source and implementation dimensions, full-view and focused same-input comparisons, responsive evidence, findings, comparison history and verification for the latest build are recorded above under `Homepage connected-workflow refinement`. Evidence is saved in `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/connected-workflow-refinement-20260830/`.
 
 final result: passed
+
+# Design QA — Homepage process graphics
+
+**Source visual truth**
+
+- Path: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-process-sierra-graphics-20260830/source-sierra-reference.png`
+- Pixels: 2864 × 848.
+- Intended use: graphic-style reference only. The source page composition, heading and four-column layout are not implementation targets because the Antbuildz alternating section layout is explicitly locked.
+
+**Implementation evidence**
+
+- Desktop stage 01: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-process-sierra-graphics-20260830/desktop-stage-01.png`
+- Desktop stage 04: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-process-sierra-graphics-20260830/desktop-stage-04.png`
+- Mobile stage 01: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-process-sierra-graphics-20260830/mobile-stage-01.png`
+- Mobile stage 04: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-process-sierra-graphics-20260830/mobile-stage-04.png`
+- Combined comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-process-sierra-graphics-20260830/design-qa-comparison.png`
+- Route: `http://localhost:8081/`.
+- Desktop viewport and capture: 1440 × 900 CSS px, 1440 × 900 output px, density normalised at 1 output pixel per CSS pixel.
+- Mobile viewport and capture: 390 × 844 CSS px, 390 × 844 output px, density normalised at 1 output pixel per CSS pixel.
+- State: homepage process section at the Ingest and Recommend stages; the connector pulse was allowed to render naturally.
+
+**Full-view comparison evidence**
+
+- The combined comparison places the supplied source reference above the two desktop implementation states.
+- The source's key visual cues—pale panel surfaces, crisp white inset cards, thin cool borders, minimal elevation, generous internal whitespace and compact UI labels—are present in the redesigned Antbuildz graphics.
+- The implementation intentionally keeps the established violet, blue, warm gold and rose stage tints and the locked alternating layout rather than copying the reference's uniform pale-blue four-column composition.
+
+**Focused region comparison evidence**
+
+- Ingest was reviewed for two-card balance, connector alignment, field-row legibility and clear source-to-record direction.
+- Reason was reviewed for the public `Known`, `Still needed` and `Next action` states; it exposes no private chain-of-thought.
+- Retrieve was reviewed for short-list hierarchy, approved-source labelling and the highlighted review option.
+- Recommend was reviewed for Emma identity, buyer-message hierarchy, recommendation explanation and the sales-review boundary.
+- Mobile Ingest and Recommend were inspected at 390 × 844 to confirm copy precedes the graphic, all content remains inside the 351 × 310px panels and no text or controls are clipped.
+
+**Required fidelity surfaces**
+
+- Fonts and typography: existing Plus Jakarta Sans and Inter roles are preserved. Compact graphic labels use restrained optical weights and remain legible at desktop and mobile sizes.
+- Spacing and layout rhythm: the locked section frame, four alternating rows, stage gaps, panel sizes, copy placement and responsive order are unchanged. Inner graphics use wider breathing room and fewer elements than before.
+- Colours and visual tokens: approved stage tints remain, with white surfaces, low-opacity borders and muted ink mapped to existing Antbuildz tokens. Contrast remains clear without the reference's appearance being copied literally.
+- Image quality and asset fidelity: the only raster asset in the process graphics is the existing Emma portrait; it remains sharp, circular and correctly cropped. No placeholder imagery or approximated product art was introduced.
+- Copy and content: all public section headings and descriptions remain unchanged. New graphic microcopy is concise, industrially grounded and avoids unsupported model, inventory, availability or performance claims.
+
+**Findings**
+
+- No actionable P0, P1 or P2 mismatch remains.
+- Accepted intentional difference: stage-specific Antbuildz colours replace the source's uniform pale blue so the graphics remain part of the established four-stage system.
+- P3 follow-up only: the connector pulse could be made even slower after real-user observation, but its current 4.8-second cycle is already quiet and fully disabled for reduced motion.
+
+**Comparison history**
+
+- Pass 1: the first combined source/implementation comparison found no actionable P0, P1 or P2 differences. No visual correction loop was required.
+
+**Interaction and browser checks**
+
+- The graphics are intentionally illustrative and non-interactive; there is no control state to exercise.
+- The browser console returned no warnings or errors.
+- Horizontal overflow is 0px at 1440 × 900 and 390 × 844.
+- `prefers-reduced-motion` removes the connector animation.
+
+**Implementation checklist**
+
+- [x] Preserve the locked section composition and copy placement.
+- [x] Replace only the four inner graphics.
+- [x] Match the Sierra-inspired density and surface treatment without copying its content.
+- [x] Keep industrial data and review boundaries truthful.
+- [x] Verify desktop and mobile containment.
+- [x] Check browser console and horizontal overflow.
+
+final result: passed
+
+---
+
+# Design QA — Homepage hero high-left / lower-right composition
+
+**Source visual truth**
+
+- Live reference: `https://sierra.ai/`.
+- Captured source: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-hero-sierra-layout-20260830/sierra-desktop.png`.
+- Source viewport and capture: 1280 × 720 CSS px, 1280 × 720 output px, density normalised at 1 output pixel per CSS pixel.
+- Intended use: macro composition reference only—high-left promise, lower-right conversation proof and generous negative space. Sierra imagery, copy, type and interface styling are not implementation targets.
+
+**Implementation evidence**
+
+- Desktop initial state: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-hero-sierra-layout-20260830/implementation-desktop-final.png`.
+- Desktop later conversation state: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-hero-sierra-layout-20260830/implementation-desktop-progress.png`.
+- Mobile active conversation state: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-hero-sierra-layout-20260830/implementation-mobile-final.png`.
+- Same-input desktop comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-hero-sierra-layout-20260830/comparison-desktop.png`.
+- Route: `http://localhost:8081/`.
+- Desktop viewport and capture: 1280 × 720 CSS px, 1280 × 720 output px, density normalised at 1 output pixel per CSS pixel.
+- Mobile viewport and capture: 390 × 844 CSS px, 390 × 844 output px, density normalised at 1 output pixel per CSS pixel.
+
+**Full-view comparison evidence**
+
+- The combined comparison places the Sierra source on the left and the Antbuildz implementation on the right at the same desktop viewport.
+- The implementation reproduces the requested spatial principle: the promise occupies a high-left reading zone, one live conversation proof occupies the lower-right, and the centre remains visually open.
+- Antbuildz intentionally retains its dark blue industrial photograph, Plus Jakarta Sans/Inter type system, yellow accent, public header and industrial enquiry content.
+
+**Focused region comparison evidence**
+
+- A separate crop was not required because the task targets the full hero's macro spatial relationship, and both required regions remain legible in the 2584 × 720 combined source/implementation board.
+- The title frame, description measure, conversation anchor and remaining negative space were inspected directly in that full-resolution comparison.
+- The later conversation state was reviewed independently to confirm that the transcript grows inside the lower-right stage instead of changing the hero layout.
+
+**Required fidelity surfaces**
+
+- Fonts and typography: existing Antbuildz public-marketing fonts, heading weight, gradient phrase and body roles are preserved.
+- Spacing and layout rhythm: desktop copy begins at x64/y137 and the 470px conversation stage ends 77px from the right and 40px from the bottom. Mobile copy begins at x20/y116 and the 358px conversation ends 24px above the bottom.
+- Colours and visual tokens: the approved industrial photograph, restrained dark overlay, white copy, yellow accent and role-tinted conversation glass remain in use.
+- Image quality and asset fidelity: the approved static mountain-logistics asset is used directly; no video, generic technology image or generated substitute was introduced.
+- Copy and content: the original H1 and Agent eyebrow remain. The supporting description reuses approved local Antbuildz product language and makes no unsupported performance, integration or availability claim.
+
+**Findings**
+
+- No actionable P0, P1 or P2 mismatch remains.
+- Accepted intentional differences from Sierra: industrial subject matter, Antbuildz typography, dark brand palette, public navigation and product-specific conversation UI.
+- The four background conversation layers remain hidden by design so the main proof is concentrated and the photograph stays readable.
+
+**Comparison history**
+
+- Pass 1: the same-input desktop comparison confirmed the requested hierarchy and revealed no actionable layout correction.
+- Responsive pass: the 390 × 844 implementation preserved the hierarchy with no overlap, clipping or horizontal overflow.
+
+**Interaction and browser checks**
+
+- The main conversation is visible on first load and continues through its existing timed sequence without scroll control.
+- The later transcript remains internally scrollable and contained in the 331px desktop stage.
+- At `scrollY: 0` the fixed header is transparent; after 240px it restores the `#F8F7FF` surface and `is-scrolled` state.
+- Browser logs contain only Vite connection messages and the React development notice; no warnings or errors were recorded.
+- Horizontal overflow is 0px at 1280 × 720 and 390 × 844.
+
+**Implementation checklist**
+
+- [x] Keep the approved static industrial hero asset.
+- [x] Move title and description to a high-left frame.
+- [x] Anchor one live Agent conversation at the lower right.
+- [x] Show the conversation on the first visit without scroll control.
+- [x] Preserve the rest of the homepage layout.
+- [x] Verify desktop, later animation state and mobile containment.
+
+final result: passed

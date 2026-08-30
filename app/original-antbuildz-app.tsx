@@ -726,8 +726,6 @@ const HOME_HERO_CONVERSATION: ReadonlyArray<{
 
 let homeHeroRuntimeElement: HTMLElement | null = null;
 let homeHeroRuntimeCleanup: (() => void) | null = null;
-let homeHeroVideoElement: HTMLVideoElement | null = null;
-let homeHeroVideoCleanup: (() => void) | null = null;
 let publicHeroHeaderCleanup: (() => void) | null = null;
 let publicHeroHeaderElement: HTMLElement | null = null;
 let publicHeroSurfaceElement: HTMLElement | null = null;
@@ -1453,12 +1451,6 @@ function resetHomeHeroRuntime() {
   homeHeroRuntimeElement = null;
 }
 
-function resetHomeHeroVideo() {
-  homeHeroVideoCleanup?.();
-  homeHeroVideoCleanup = null;
-  homeHeroVideoElement = null;
-}
-
 function resetPublicHeroHeader() {
   publicHeroHeaderCleanup?.();
   publicHeroHeaderCleanup = null;
@@ -1470,11 +1462,10 @@ function correctPublicHeroHeader(root: HTMLElement) {
   const header = root.querySelector<HTMLElement>('.antbuildz-public-header');
   const path = window.location.pathname;
   // Home and the canonical AI Webstore Suite own darker, fixed overlay-header
-  // treatments. AI Sales Agent retains its transferred separate header band
-  // and component-owned hero inset. The Console has no public header.
+  // treatments. Other public product routes reuse the shared transparent-top
+  // and scrolled-glass behaviour. The Console has no public header.
   const usesExistingOverlay = path === '/' || path === '/ai-webstore-suite';
-  const preservesHeaderGap = path === '/ai-sales-agent';
-  if (!header || usesExistingOverlay || preservesHeaderGap) {
+  if (!header || usesExistingOverlay) {
     if (publicHeroHeaderElement || publicHeroSurfaceElement) resetPublicHeroHeader();
     return;
   }
@@ -1523,78 +1514,37 @@ function correctPublicHeroHeader(root: HTMLElement) {
   };
 }
 
-function setupHomeHeroVideo(hero: HTMLElement) {
-  const poster = '/images/home-hero-industrial-loop-poster.jpg';
+function setupHomeHeroMedia(hero: HTMLElement) {
   const heroImage = hero.querySelector<HTMLImageElement>('.ai-marketplace-hero-image');
   if (heroImage) {
-    heroImage.src = poster;
-    heroImage.alt = 'Industrial equipment fleet in a dusty machinery yard';
-    heroImage.width = 1280;
-    heroImage.height = 720;
+    heroImage.src = '/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png';
+    heroImage.alt = 'Heavy-haul truck transporting an excavator along a mountain road above an industrial valley at blue hour';
+    heroImage.width = 1672;
+    heroImage.height = 941;
+    heroImage.loading = 'eager';
+    heroImage.decoding = 'async';
+    heroImage.fetchPriority = 'high';
   }
-
-  let video = hero.querySelector<HTMLVideoElement>('.antbuildz-home-hero-video');
-  if (!video) {
-    video = document.createElement('video');
-    video.className = 'antbuildz-home-hero-video';
-    video.src = '/videos/home-hero-industrial-story.mp4';
-    video.poster = poster;
-    video.muted = true;
-    video.defaultMuted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '');
-    video.setAttribute('aria-hidden', 'true');
-    video.tabIndex = -1;
-    heroImage?.after(video);
-  }
-  if (homeHeroVideoElement === video) return;
-
-  resetHomeHeroVideo();
-  homeHeroVideoElement = video;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const syncPlayback = () => {
-    if (!video) return;
-    const shouldPlay = !reducedMotion.matches && !document.hidden;
-    video.autoplay = shouldPlay;
-    video.preload = shouldPlay ? 'metadata' : 'none';
-    if (shouldPlay) void video.play().catch(() => undefined);
-    else video.pause();
-  };
-  reducedMotion.addEventListener('change', syncPlayback);
-  document.addEventListener('visibilitychange', syncPlayback);
-  syncPlayback();
-  homeHeroVideoCleanup = () => {
-    reducedMotion.removeEventListener('change', syncPlayback);
-    document.removeEventListener('visibilitychange', syncPlayback);
-    video?.pause();
-  };
+  hero.querySelector<HTMLVideoElement>('.antbuildz-home-hero-video')?.remove();
 }
 
 function setupHomeHeroRuntime(root: HTMLElement) {
-  const stage = root.querySelector<HTMLElement>('.ai-marketplace-hero-stage');
   const hero = root.querySelector<HTMLElement>('.ai-marketplace-hero');
   const conversation = root.querySelector<HTMLElement>('.antbuildz-home-hero-conversation.is-centre');
-  if (!stage || !hero || !conversation || homeHeroRuntimeElement === conversation) return;
+  if (!hero || !conversation || homeHeroRuntimeElement === conversation) return;
 
   resetHomeHeroRuntime();
   homeHeroRuntimeElement = conversation;
   const cleanups = Array.from(hero.querySelectorAll<HTMLElement>('.antbuildz-home-hero-conversation'))
-    .map((chat, layerIndex) => setupHomeHeroConversationRuntime(stage, hero, chat, layerIndex));
+    .map((chat, layerIndex) => setupHomeHeroConversationRuntime(hero, chat, layerIndex));
   homeHeroRuntimeCleanup = () => {
     cleanups.forEach((cleanup) => cleanup());
-    hero.style.removeProperty('--antbuildz-home-title-top');
-    hero.style.removeProperty('--antbuildz-home-title-scale');
-    hero.style.removeProperty('--antbuildz-home-chat-opacity');
-    hero.style.removeProperty('--antbuildz-home-chat-shift');
     hero.style.removeProperty('--antbuildz-home-chat-top');
     hero.style.removeProperty('--antbuildz-home-chat-height');
   };
 }
 
 function setupHomeHeroConversationRuntime(
-  stage: HTMLElement,
   hero: HTMLElement,
   conversation: HTMLElement,
   layerIndex: number,
@@ -1606,8 +1556,7 @@ function setupHomeHeroConversationRuntime(
   const transcript = conversation.querySelector<HTMLElement>('.antbuildz-home-hero-conversation__transcript');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let currentStep = reducedMotion.matches ? messageNodes.length - 1 : 0;
-  let conversationActive = false;
-  let scrollFrame = 0;
+  let conversationActive = true;
   let transcriptFrame = 0;
   let transcriptTimer = 0;
 
@@ -1676,45 +1625,19 @@ function setupHomeHeroConversationRuntime(
     scheduleTranscriptPosition(resetToTop);
   };
 
-  const updateScrollProgress = () => {
-    scrollFrame = 0;
-    const bounds = stage.getBoundingClientRect();
-    const travel = Math.max(1, bounds.height - window.innerHeight);
-    const progress = Math.min(1, Math.max(0, -bounds.top / travel));
-    const titleProgress = reducedMotion.matches ? 1 : Math.min(1, progress / .38);
-    const easedTitleProgress = 1 - ((1 - titleProgress) ** 3);
-    const conversationProgress = reducedMotion.matches
-      ? 1
-      : Math.min(1, Math.max(0, (progress - .12) / .23));
-
+  const updateLayout = () => {
     if (conversation.dataset.layer === 'centre') {
-      const titleTravel = window.innerWidth <= 767 ? 20 : 25;
-      hero.style.setProperty('--antbuildz-home-title-top', `${50 - (titleTravel * easedTitleProgress)}%`);
-      hero.style.setProperty('--antbuildz-home-title-scale', `${1 - (.1 * easedTitleProgress)}`);
-      hero.style.setProperty('--antbuildz-home-chat-opacity', `${conversationProgress}`);
-      hero.style.setProperty('--antbuildz-home-chat-shift', `${44 * (1 - conversationProgress)}px`);
-      // Anchor to the actual title, including wrapping and short desktop heights.
-      const title = hero.querySelector<HTMLElement>('.antbuildz-ai-home-intro') || hero.querySelector<HTMLElement>('.ai-marketplace-hero-copy h1');
-      if (title) {
-        const heroBounds = hero.getBoundingClientRect();
-        const titleGap = heroBounds.width <= 767 ? 32 : 48;
-        const chatTop = title.getBoundingClientRect().bottom - heroBounds.top + titleGap;
-        hero.style.setProperty('--antbuildz-home-chat-top', `${chatTop}px`);
-        hero.style.setProperty('--antbuildz-home-chat-height', `${Math.max(200, Math.min(430, heroBounds.height - chatTop - 28))}px`);
-      }
+      const heroBounds = hero.getBoundingClientRect();
+      const chatHeight = heroBounds.width <= 767
+        ? Math.min(340, Math.max(280, heroBounds.height * .38))
+        : Math.min(370, Math.max(300, heroBounds.height * .46));
+      hero.style.setProperty('--antbuildz-home-chat-height', `${chatHeight}px`);
     }
     const layer = conversation.dataset.layer;
-    const layerVisible = window.innerWidth <= 767
-      ? layer === 'centre'
-      : !layer?.startsWith('outer-') || window.innerWidth >= 1180;
-    conversationActive = layerVisible && conversationProgress > .72 && bounds.bottom > 0 && bounds.top < window.innerHeight;
+    const layerVisible = layer === 'centre';
+    conversationActive = layerVisible;
     conversation.classList.toggle('is-active', conversationActive);
     renderConversation();
-  };
-
-  const scheduleScrollProgress = () => {
-    if (scrollFrame) return;
-    scrollFrame = window.requestAnimationFrame(updateScrollProgress);
   };
 
   const advanceConversation = window.setInterval(() => {
@@ -1728,23 +1651,20 @@ function setupHomeHeroConversationRuntime(
   const handleMotionPreference = () => {
     currentStep = reducedMotion.matches ? messageNodes.length - 1 : 0;
     renderConversation();
-    scheduleScrollProgress();
+    updateLayout();
   };
 
-  window.addEventListener('scroll', scheduleScrollProgress, { passive: true });
-  window.addEventListener('resize', scheduleScrollProgress);
+  window.addEventListener('resize', updateLayout);
   transcript?.addEventListener('scroll', updateTranscriptFade, { passive: true });
   reducedMotion.addEventListener('change', handleMotionPreference);
   renderConversation();
-  updateScrollProgress();
+  updateLayout();
 
   return () => {
     window.clearInterval(advanceConversation);
-    window.removeEventListener('scroll', scheduleScrollProgress);
-    window.removeEventListener('resize', scheduleScrollProgress);
+    window.removeEventListener('resize', updateLayout);
     transcript?.removeEventListener('scroll', updateTranscriptFade);
     reducedMotion.removeEventListener('change', handleMotionPreference);
-    if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
     if (transcriptFrame) window.cancelAnimationFrame(transcriptFrame);
     if (transcriptTimer) window.clearTimeout(transcriptTimer);
   };
@@ -1758,7 +1678,6 @@ function correctHomepage(root: HTMLElement) {
   const existingIndustries = root.querySelector<HTMLElement>('.antbuildz-home-industries');
   if (!isHomepage) {
     resetHomeHeroRuntime();
-    resetHomeHeroVideo();
     root.querySelector<HTMLVideoElement>('.antbuildz-home-hero-video')?.remove();
     root.querySelectorAll<HTMLElement>('.antbuildz-home-hero-conversation').forEach((chat) => chat.remove());
     existingIndustries?.remove();
@@ -1779,10 +1698,16 @@ function correctHomepage(root: HTMLElement) {
     eyebrow.textContent = 'AI Sales Agent for industrial businesses';
     heroCopy.prepend(eyebrow);
   }
+  if (heroCopy && !heroCopy.querySelector('.antbuildz-ai-home-description')) {
+    const description = document.createElement('p');
+    description.className = 'antbuildz-ai-home-description';
+    description.textContent = 'Turn complex product knowledge into useful buyer conversations with an AI Sales Agent, AI Webstore Suite and one operational Console—built for industrial rental and sales.';
+    heroCopy.appendChild(description);
+  }
   heroCopy?.querySelector('.antbuildz-ai-home-intro')?.remove();
 
   const hero = root.querySelector<HTMLElement>('.ai-marketplace-hero');
-  if (hero) setupHomeHeroVideo(hero);
+  if (hero) setupHomeHeroMedia(hero);
   if (hero && !hero.querySelector('.antbuildz-home-hero-conversation')) {
     hero.appendChild(createHomeHeroConversation());
     HOME_BACKGROUND_CONVERSATIONS.forEach(({ messages, layer, label, summary, source }) => {

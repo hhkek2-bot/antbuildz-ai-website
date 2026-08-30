@@ -1,14 +1,14 @@
-/* Illustrative product scenes, not live settings, inventory or recommendations. */
+/* Illustrative product and process scenes, not live settings or inventory. */
 /* eslint-disable @next/next/no-img-element -- Reuse local industrial product assets without an image service. */
 import { EmmaAvatar } from './emma-avatar';
 import { GraphicIcon } from './home-graphics';
 import styles from './home-agent-foundations.module.css';
 
 export const AGENT_FOUNDATIONS = [
-  { id: 'brand', title: 'Your company brand', description: 'Reflect your company’s voice and sales approach, using the business guidance and enquiry process you approve.' },
-  { id: 'inventory', title: 'Your product catalogue', description: 'Give the Agent approved product details and, on supported plans, connected inventory context to identify relevant options for each enquiry.' },
-  { id: 'specifications', title: 'Your technical specifications', description: 'Ground product answers in approved specifications, manuals and application details. Clarify missing information before suggesting a fit.' },
-  { id: 'recommendations', title: 'Suitable recommendations', description: 'Match buyer requirements with supplied product information, explain the shortlist, and flag what your team still needs to confirm.' },
+  { id: 'brand', title: 'Company Brand', description: 'Reflect your company’s voice and sales approach, using the business guidance and enquiry process you approve.' },
+  { id: 'inventory', title: 'Product Catalogue', description: 'Give the Agent approved product details and, on supported plans, connected inventory context to identify relevant options for each enquiry.' },
+  { id: 'specifications', title: 'Technical Specifications', description: 'Ground product answers in approved specifications, manuals and application details. Clarify missing information before suggesting a fit.' },
+  { id: 'processes', title: 'SOPs and Process Knowledge', description: 'Give the Agent your approved qualification steps, escalation rules and handover procedures. It can follow what to ask, when to pause and what needs human sign-off.' },
 ] as const;
 
 const inventory = [
@@ -65,24 +65,24 @@ function SpecificationsScene() {
   </div>;
 }
 
-function RecommendationScene() {
+function ProcessScene() {
   return <div className={`${styles.scene} ${styles.recommendationScene}`} aria-hidden="true">
     <div className={styles.requirementPanel}>
-      <span className={styles.panelCaption}>Buyer requirement</span>
-      <strong>Equipment for warehouse use</strong>
-      <span>Application · Capacity · Site access</span>
+      <span className={styles.panelCaption}>Approved SOP</span>
+      <strong>Warehouse equipment enquiry</strong>
+      <span>Qualify · Escalate · Handover</span>
     </div>
     <div className={styles.shortlistPanel}>
       <div className={styles.shortlistProduct}>
         <img src="/images/verified-equipment/linde-e16-p.png" alt="" width="124" height="108" loading="lazy" />
-        <span><strong>Option to review</strong><span className={styles.matchTag}><GraphicIcon kind="filter" />Based on supplied data</span></span>
+        <span><strong>Approved next step</strong><span className={styles.matchTag}><GraphicIcon kind="review" />Following your SOP</span></span>
       </div>
-      <div className={styles.reviewNote}><GraphicIcon kind="review" /><span>Confirm suitability, availability and commercial terms.</span></div>
+      <div className={styles.reviewNote}><GraphicIcon kind="review" /><span>Capture the required details and hand over for team approval.</span></div>
     </div>
   </div>;
 }
 
-const scenes = [BrandScene, InventoryScene, SpecificationsScene, RecommendationScene];
+const scenes = [BrandScene, InventoryScene, SpecificationsScene, ProcessScene];
 
 export function HomeAgentFoundations() {
   return <section className={styles.section} aria-labelledby="home-agent-foundations">
@@ -90,7 +90,7 @@ export function HomeAgentFoundations() {
       <div className={styles.intro}>
         <p className={styles.eyebrow}>Built around your business</p>
         <h2 id="home-agent-foundations">Your AI Sales Agent <span>Your business at its core</span></h2>
-        <p>Bring your brand, inventory and technical knowledge into every enquiry, so buyers can explore suitable options with clearer guidance.</p>
+        <p>Bring your brand, product knowledge and approved processes into every enquiry, so buyers receive clear guidance while your team keeps control.</p>
       </div>
       <div className={styles.grid}>
         {AGENT_FOUNDATIONS.map(({ id, title, description }, index) => {

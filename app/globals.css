@@ -1483,89 +1483,70 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-stage {
-  --home-hero-media-blur: 22px;
-  --home-hero-media-scale: 1.09;
-  height: clamp(1220px, 175svh, 1680px) !important;
-  min-height: 1220px;
+  height: max(100svh, 720px) !important;
+  min-height: 720px;
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-stage > .ai-marketplace-hero {
   position: relative !important;
   inset: auto !important;
   width: 100%;
-  height: 100svh !important;
+  height: 100% !important;
   min-height: 680px;
   overflow: hidden;
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-image {
-  z-index: -4 !important;
-}
-
-/* Sierra-inspired atmospheric treatment: keep the industrial footage as
-   evidence, but soften it into a calm field behind the title and Agent proof. */
-.antbuildz-ai-home .ai-marketplace-hero-image,
-.antbuildz-ai-home .antbuildz-home-hero-video {
-  filter: blur(var(--home-hero-media-blur)) saturate(.72) contrast(1.16) brightness(.88);
-  transform: scale(var(--home-hero-media-scale)) !important;
+  z-index: -3 !important;
+  filter: saturate(.88) contrast(1.06) brightness(.82);
+  transform: scale(1.01) !important;
   transform-origin: center;
-}
-
-.antbuildz-ai-home .antbuildz-home-hero-video {
-  position: absolute;
-  inset: 0;
-  z-index: -3;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
   object-fit: cover;
   object-position: center;
-  pointer-events: none;
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-overlay {
   background:
-    linear-gradient(180deg, rgb(6 17 31 / .38), rgb(6 18 34 / .52) 50%, rgb(3 10 22 / .9)),
-    radial-gradient(72% 68% at 50% 34%, rgb(59 130 246 / .12), transparent 66%),
-    linear-gradient(90deg, rgb(4 13 26 / .36), transparent 48%, rgb(4 13 26 / .42));
-}
-
-.antbuildz-ai-home .ai-marketplace-hero-stage.is-pinned > .ai-marketplace-hero {
-  position: fixed !important;
-  inset: 0 0 auto !important;
-}
-
-.antbuildz-ai-home .ai-marketplace-hero-stage.is-complete > .ai-marketplace-hero {
-  position: absolute !important;
-  inset: auto 0 0 !important;
+    linear-gradient(180deg, rgb(4 16 34 / .5), rgb(4 17 35 / .58) 52%, rgb(2 10 23 / .88)),
+    radial-gradient(70% 64% at 50% 34%, rgb(31 91 146 / .08), transparent 68%),
+    linear-gradient(90deg, rgb(3 12 25 / .62), rgb(3 12 25 / .18) 52%, rgb(3 12 25 / .42));
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-copy {
   z-index: 5;
-  top: var(--antbuildz-home-title-top, 50%) !important;
-  width: min(100%, 1180px) !important;
-  padding-inline: 5% !important;
-  transform: translate(-50%, -50%) scale(var(--antbuildz-home-title-scale, 1)) !important;
-  transform-origin: center;
+  top: clamp(132px, 19svh, 184px) !important;
+  left: max(5%, calc((100% - 1320px) / 2)) !important;
+  width: min(680px, 53vw) !important;
+  padding: 0 !important;
+  transform: none !important;
+  transform-origin: top left;
   pointer-events: none;
-  will-change: top, transform;
+  text-align: left;
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-copy h1 {
-  max-width: 1180px;
+  max-width: 680px;
+  margin-inline: 0;
+  text-wrap: balance;
 }
 
-.antbuildz-ai-home-eyebrow {
-  position: absolute;
-  bottom: calc(100% + 20px);
-  left: 50%;
-  width: 90%;
-  margin: 0;
-  transform: translateX(-50%);
-  color: white;
-  font: 600 var(--type-caption)/1.4 var(--font-body);
-  text-align: center;
+.antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-eyebrow {
+  position: static;
+  width: fit-content;
+  margin: 0 0 18px;
+  color: rgb(255 255 255 / 84%);
+  font: 700 var(--type-caption)/1.4 var(--font-body);
+  letter-spacing: .01em;
+  text-align: left;
+}
+
+.antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-description {
+  max-width: 560px;
+  margin: 22px 0 0;
+  color: rgb(255 255 255 / 78%);
+  font: 400 clamp(15px, 1.25vw, 18px)/1.62 var(--font-body);
+  letter-spacing: -.012em;
+  text-wrap: pretty;
 }
 
 @media (max-width: 1179px) {
@@ -1606,15 +1587,15 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-surface-padding: 12px 14px;
   position: absolute;
   z-index: 5;
-  top: calc(var(--antbuildz-home-chat-top, 36%) + var(--home-chat-offset-y));
-  left: calc(50% + var(--home-chat-offset-x));
+  right: clamp(36px, 6vw, 96px);
+  bottom: clamp(28px, 5.5svh, 54px);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  width: min(420px, calc(100% - 32px));
+  width: min(470px, 42vw);
   align-content: start;
-  opacity: var(--antbuildz-home-chat-opacity, 0);
-  transform: translate(-50%, var(--antbuildz-home-chat-shift, 44px)) rotate(var(--home-chat-rotation)) scale(var(--home-chat-scale));
-  transform-origin: 50% 0;
+  opacity: var(--antbuildz-home-chat-opacity, 1);
+  transform: none;
+  transform-origin: right bottom;
   pointer-events: none;
   transition: opacity .16s linear;
   /* Promoting opacity here would isolate the bubbles from the hero backdrop. */
@@ -1643,6 +1624,10 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-avatar-size: 22px;
   --home-chat-avatar-margin: 3px;
   --home-chat-surface-padding: 10px 12px;
+}
+
+.antbuildz-ai-home .antbuildz-home-hero-conversation:not(.is-centre) {
+  display: none;
 }
 
 .antbuildz-home-hero-conversation.is-right {
@@ -2478,23 +2463,46 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   }
 
   .antbuildz-ai-home .ai-marketplace-hero-stage {
-    height: clamp(980px, 135svh, 1120px) !important;
-    min-height: 980px;
+    height: max(100svh, 844px) !important;
+    min-height: 844px;
   }
 
-  .antbuildz-ai-home .ai-marketplace-hero-stage > .ai-marketplace-hero,
-  .antbuildz-ai-home .ai-marketplace-hero-stage.is-pinned > .ai-marketplace-hero,
-  .antbuildz-ai-home .ai-marketplace-hero-stage.is-complete > .ai-marketplace-hero {
-    height: 100svh !important;
-    min-height: 640px;
+  .antbuildz-ai-home .ai-marketplace-hero-stage > .ai-marketplace-hero {
+    height: 100% !important;
+    min-height: 844px;
   }
 
   .antbuildz-ai-home .ai-marketplace-hero-copy {
-    top: var(--antbuildz-home-title-top, 50%) !important;
-    padding-inline: 20px !important;
+    top: 116px !important;
+    left: 20px !important;
+    width: calc(100% - 40px) !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
+  .antbuildz-ai-home .ai-marketplace-hero-copy h1 {
+    max-width: 12ch;
+    margin-inline: 0;
+  }
+
+  .antbuildz-ai-home .ai-marketplace-hero-copy h1 .ai-hero-line:first-child {
+    white-space: normal;
+  }
+
+  .antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-description {
+    max-width: 34ch;
+    margin-top: 16px;
+    font-size: 15px;
+    line-height: 1.55;
   }
 
   .antbuildz-home-hero-conversation {
+    right: 16px;
+    bottom: 24px;
     width: calc(100% - 32px);
   }
 
@@ -3121,7 +3129,6 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-  .antbuildz-ai-home .antbuildz-home-hero-video { display: none; }
   .antbuildz-ai-home .ai-marketplace-hero-image { z-index: -3 !important; }
 }
 
@@ -3498,15 +3505,9 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   }
 }
 
-@media (max-width: 767px) {
-  .antbuildz-ai-home .ai-marketplace-hero-stage {
-    --home-hero-media-blur: 16px;
-    --home-hero-media-scale: 1.12;
-  }
-}
-
 /* Homepage inventory-aware Agent CTA variant with Emma reviewing a tablet. */
 #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__panel {
+  max-width: 1320px;
   border-color: rgba(255, 197, 1, .34);
   background: #fffaf1;
   box-shadow: 0 30px 64px -46px rgba(15, 23, 42, .52);
@@ -3521,9 +3522,10 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   max-width: 620px;
 }
 #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card h2 {
-  font-size: clamp(26px, 1.95vw, 28px) !important;
-  line-height: 1.2 !important;
-  letter-spacing: -.025em !important;
+  font-size: var(--type-section-heading) !important;
+  font-weight: var(--type-heading-weight) !important;
+  line-height: var(--type-heading-line) !important;
+  letter-spacing: var(--type-heading-tracking) !important;
 }
 #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__description {
   max-width: 52ch;
@@ -3542,8 +3544,5 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   }
   #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__background {
     object-position: 70% center;
-  }
-  #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card h2 {
-    font-size: 24px !important;
   }
 }

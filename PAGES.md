@@ -13,7 +13,7 @@ This register preserves route intent and design status between sessions. Read it
 
 | Route | Primary visitor job | Preferred primary CTA | Design source | Current status |
 | --- | --- | --- | --- | --- |
-| `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero now uses a 16.8-second muted forward-cut industrial story across equipment, tools, parts and warehouse operations, with a static reduced-motion/loading fallback and the existing conversation overlay. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
+| `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero uses the approved static mountain-logistics photograph. The Agent conversations are visible on the first frame and no longer depend on page scrolling. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
 | `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Book a Demo | Selected Webstore listing workflow formerly reviewed at `/webstore-2-ai-webstore-preview` | Canonical product page now uses the approved dusty-ochre listing workflow, mixed-category catalogue enrichment, product-page handoff and Emma recommendation experience. Canonical metadata is indexable at `https://antbuildz.ai/ai-webstore-suite`; the former preview URL redirects here. Desktop, compact and mobile QA pass with one H1 and no horizontal overflow |
 | `/ai-sales-agent` | Understand standalone AI-guided qualification and handover | Build Your AI Agent | `/aiagent` on 8080 | Separate shared-header band and original 96px hero inset restored from the reference relationship; current copy, navigation, phone graphic and hero composition remain unchanged. Responsive QA details are recorded below |
 | `/ai-agent-console` | Understand how teams control knowledge, instructions and conversations | Book a Demo | `/app` on 8080 | Reference matched; operational typography unchanged against baseline |
@@ -926,3 +926,63 @@ This decision supersedes the earlier `Original alternating process layout restor
 Fidelity-mode correction following the user's explicit instruction that the attached `From your inventory to recommendation` composition must not change. The approved layout is now a durable section contract: centred eyebrow/title/description, four equal visual-first columns on wide desktop, a 2 × 2 compact layout and a single-column mobile stack with every graphic immediately before its own label, title and description. Future requests to refine this section are graphic-only unless the user explicitly asks to unlock the layout.
 
 No visible layout, copy, route, CTA or graphic changed in this correction because the current implementation already matches the supplied composition. Source comments, design-system guidance and regression assertions now guard the column structure, introduction alignment, panel spacing and visual-before-copy order.
+
+## 2026-08-30 — Alternating homepage process composition restored and locked
+
+Fidelity-mode correction after the user clarified that the compact four-column composition was not the intended layout. Restored the earlier approved four-row process composition from the saved QA reference: large graphic left for Ingest, right for Reason, left for Retrieve and right for Recommend. Mobile keeps each stage's label, title and description before its matching graphic. The current simplified customer-facing graphics remain unchanged inside the restored large panels.
+
+This decision supersedes both `Sierra-inspired compact selection overview` and the mistaken `Homepage process composition locked` entry above. The alternating composition is now the locked layout; future routine requests may change only the four inner graphics unless the user explicitly asks to unlock the section.
+
+Browser-inspected at 1440×1000, 1024×768 and 390×844. Wide panels measure 582×410px, compact panels 477×360px and mobile panels 351×310px. Alternation is correct at both desktop widths; all four mobile stages render copy before graphic. Every checked viewport has zero horizontal overflow and the route retains one H1. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No inner graphic, copy, route, CTA, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — AI Sales Agent hero extends behind the top header
+
+System-mode correction requested for `/ai-sales-agent`. Removed the route-specific separate-header exception so the shared fixed Public Header is transparent before scrolling and the AI Sales Agent hero surface continues behind it, matching the homepage interaction. The existing header-height spacer preserves the hero content position. After 24px of scrolling, the shared canvas-and-white blurred header surface returns for legibility.
+
+This decision supersedes `AI Sales Agent header-to-hero spacing restored`. The hero copy, phone graphic, actions, navigation order and mobile drawer remain unchanged.
+
+Browser-inspected at 1440×900 and 390×844 in both top and scrolled states. At the top, the header and navigation are transparent, the hero begins at y=0 and the responsive spacer measures 81px desktop / 75px mobile. After scrolling, the shared canvas-and-white blurred surface appears. Both viewports retain one H1 and zero horizontal overflow. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No hero copy, visual, action, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Static homepage hero restored with immediate conversation
+
+Fidelity-mode homepage correction requested against the supplied earlier hero reference. Restored the approved blue-hour mountain logistics photograph showing the heavy-haul truck and excavator. Removed the decorative industrial video setup and its blur treatment; the photograph now uses a restrained dark overlay that maintains heading and navigation contrast.
+
+The homepage hero is no longer a scroll-led reveal. Its title uses the settled upper position, every responsive layout shows the primary Agent conversation on the first frame, and the hero moves normally with the document instead of pinning. The message sequence may continue inside the visible conversation, but page scrolling does not control its appearance. This static first-load relationship is recorded in `DESIGN.md` as the durable homepage hero rule.
+
+Browser-inspected at 1440×900 and 390×844. Both first frames load the approved image at `scrollY: 0`, contain no hero video element, display the primary conversation at opacity 1 and have zero horizontal overflow. Desktop scrolling moves the relative-positioned hero with the page rather than fixing it. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No route, CTA, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Homepage foundation card reframed around company SOPs
+
+Copy refinement within the existing locked four-card `Your business at its core` composition. Replaced the fourth `Suitable recommendations` card with `Your SOPs and process knowledge`. The description now covers approved qualification steps, escalation rules, handover procedures and human sign-off. Its illustrative labels follow the same idea: Approved SOP → warehouse equipment enquiry → approved next step → team approval. The card layout, proportions, industrial product image and surrounding three cards remain unchanged.
+
+Browser-inspected at 1440×900 and 390×844. The heading remains one line on wide desktop and wraps cleanly to two lines on mobile; the process graphic remains inside its card and both viewports have zero horizontal overflow. All 69 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-30 — Locked homepage process graphics adopt a quieter Sierra-style interface language
+
+Fidelity-plus-Design refinement scoped only to the four inner graphics in `From your inventory to recommendation`. The locked centred introduction, alternating left/right rows, stage order, copy, typography hierarchy, spacing and mobile copy-before-graphic order remain unchanged. Each graphic now presents one restrained piece of interface evidence on the existing stage tint: approved catalogue fields becoming a structured record, known and missing buyer requirements leading to a clarification action, approved-source retrieval producing a short review list, and Emma explaining a supported option inside a clear sales-review boundary.
+
+The supplied Sierra reference informed the airy density, pale surfaces, white inset panels, hairline borders and minimal elevation; no Sierra copy, assets or product UI was copied. A single low-key connector pulse illustrates the knowledge handoff and stops under `prefers-reduced-motion`. Remotion motion guidance informed the timing, while the implementation remains native responsive React/CSS so the established live section does not acquire an unnecessary video runtime.
+
+Browser-inspected at 1440×900 and 390×844. All four desktop graphics fit the existing 582×410px panels, all four mobile graphics fit the existing 351×310px panels, the alternating composition and mobile order remain unchanged, the route retains one H1, the browser console has no warnings or errors and both viewports have zero horizontal overflow. Evidence is saved in `artifacts/home-process-sierra-graphics-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint and `git diff --check` pass. No section layout, route copy, CTA, capability claim, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Homepage hero adopts a high-left promise and lower-right Agent proof
+
+Fidelity-plus-Design refinement scoped only to the homepage hero. The live Sierra hero informed the macro spatial hierarchy: a compact promise in the high-left reading zone and one conversation proof growing upward from the lower right. Antbuildz keeps its approved static mountain-logistics photograph, industrial copy, brand typography, navigation, glass treatment and first-load conversation sequence; no Sierra asset, copy, type or interface component was copied.
+
+The title, new supporting description and Agent eyebrow now share a left-aligned 680px desktop frame. The primary Agent conversation is anchored to the lower-right corner and remains visible immediately; the four supporting depth conversations are hidden so the industrial photograph retains breathing room. On mobile the same hierarchy becomes one safe vertical composition with the copy at the top and the conversation at the bottom. Scrolling still does not control the conversation, while the existing fixed header remains transparent at the top and restores its canvas surface after scrolling.
+
+Browser-inspected at 1280×720 and 390×844, including a later desktop conversation state. Both viewports retain one H1 and zero horizontal overflow; the full later transcript scrolls inside its lower-right stage without escaping the hero. The browser console has no warnings or errors. Evidence and the same-input source/implementation comparison are saved in `artifacts/home-hero-sierra-layout-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No route, CTA, navigation item, shared process-section layout, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Inventory-aware Agent panel moves below the homepage FAQ
+
+Fidelity-plus-Design homepage refinement requested for `Built to Understand Your Inventory`. The complete panel now follows the homepage FAQ and precedes the footer, superseding its earlier placement before `Who we serve`. Its heading now uses the shared homepage section-heading scale and tracking, while the existing description size, copy, industrial photograph, badge and action remain unchanged.
+
+The panel expands to the standard 1320px content-frame maximum so it has more room on both sides without changing the internal copy frame or introducing horizontal overflow. At a 1440px viewport the standard 5% page inset produces a 1296px panel; on mobile it remains contained within the established page gutters.
+
+Browser-inspected at 1440×900 and 390×844. The FAQ precedes the panel in both DOM and visual order, the heading wraps cleanly to two lines, the description retains its existing 15–16px responsive size and both viewports have zero horizontal overflow. All 69 tests pass. No copy, image, CTA, route, configuration, service restart, reference-project, deployment or file-deletion change was made.
+
+## 2026-08-30 — Connected product cards use icon-only destinations
+
+Fidelity-plus-Design refinement scoped to the two `One connected workflow` cards. Replaced the repeated visible AI Sales Agent and AI Webstore Suite action labels with restrained circular arrow icons at the bottom-right. Each card retains one native link, its extended card hit area, visible focus treatment and a descriptive accessible label. Destinations remain `/ai-sales-agent` and `/ai-webstore-suite`.
+
+Browser-inspected at 1440×900 and 390×844. Desktop icons retain the existing responsive card scaling and sit at the visual lower-right inset; mobile icons are 52px touch targets with 24px right and bottom insets. Both destinations were followed successfully and both viewports have zero horizontal overflow. The card change adds no browser error; visiting the existing Webstore destination still emits its pre-existing Remotion licence notice. All 69 tests pass. No card copy, graphic, connector, destination, section layout, configuration, service restart, reference-project or deployment change was made.

@@ -41,22 +41,25 @@
 .intro > p:last-child:not(.eyebrow) { max-width: 720px; margin-top: 24px; font-size: var(--type-lead); line-height: 1.62; }
 .productIntro { max-width: none; }
 .productIntro > p:last-child:not(.eyebrow) { width: 100%; max-width: none; }
-/* LOCKED COMPOSITION — preserve the centred intro and visual-first four-stage
-   layout. Graphic-only changes belong in home-graphics.* unless the user
+/* LOCKED COMPOSITION — preserve the four large alternating graphic-and-copy
+   rows. Graphic-only changes belong in home-graphics.* unless the user
    explicitly asks to unlock this section. */
-.stages { display: grid; max-width: 1280px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2vw, 28px); margin: 60px auto 0; padding: 0; list-style: none; }
-.stages li { --stage-color: var(--purple); display: flex; min-width: 0; flex-direction: column; gap: 24px; }
+.stages { display: grid; max-width: 1120px; gap: 84px; margin: 72px auto 0; padding: 0; list-style: none; }
+.stages li { --stage-color: var(--purple); display: grid; min-width: 0; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: 72px; }
 .stages li:nth-child(2) { --stage-color: var(--blue); }
 .stages li:nth-child(3) { --stage-color: var(--yellow-hover); }
 .stages li:nth-child(4) { --stage-color: var(--red); }
-.stageVisual { display: flex; width: 100%; min-width: 0; height: clamp(260px, 22vw, 300px); align-items: stretch; overflow: hidden; border: 1px solid color-mix(in srgb, var(--stage-color) 13%, var(--line)); border-radius: 22px; background: color-mix(in srgb, var(--stage-color) 5%, var(--canvas)); box-shadow: none; }
-.stageVisual > div { width: 100%; min-height: 100%; padding: clamp(14px, 1.5vw, 20px); border-radius: inherit; background: transparent; }
-.stageCopy { display: flex; min-width: 0; max-width: none; flex-direction: column; align-items: flex-start; padding-inline: 2px; }
-.stageKicker { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; color: color-mix(in srgb, var(--stage-color) 72%, var(--ink)); font-family: var(--font-heading); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.stageKicker b { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid color-mix(in srgb, var(--stage-color) 28%, var(--line)); border-radius: 50%; background: color-mix(in srgb, var(--stage-color) 12%, white); color: color-mix(in srgb, var(--stage-color) 82%, var(--ink)); font-size: 10px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.stages li:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+.stages li:nth-child(even) .stageVisual { grid-column: 2; grid-row: 1; }
+.stages li:nth-child(even) .stageCopy { grid-column: 1; grid-row: 1; }
+.stageVisual { display: flex; width: 100%; min-width: 0; height: 410px; align-items: stretch; overflow: hidden; border: 1px solid color-mix(in srgb, var(--stage-color) 13%, var(--line)); border-radius: 24px; background: color-mix(in srgb, var(--stage-color) 5%, var(--canvas)); box-shadow: none; }
+.stageVisual > div { width: 100%; min-height: 100%; padding: clamp(22px, 2.4vw, 32px); border-radius: inherit; background: transparent; }
+.stageCopy { display: flex; min-width: 0; max-width: 480px; flex-direction: column; align-items: flex-start; }
+.stageKicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 20px; color: color-mix(in srgb, var(--stage-color) 72%, var(--ink)); font-family: var(--font-heading); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.stageKicker b { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid color-mix(in srgb, var(--stage-color) 28%, var(--line)); border-radius: 50%; background: color-mix(in srgb, var(--stage-color) 12%, white); color: color-mix(in srgb, var(--stage-color) 82%, var(--ink)); font-size: 11px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
 .stages li:nth-child(3) .stageKicker b { color: var(--ink); }
-.stages h3 { margin: 0 0 10px; font-size: clamp(20px, 1.6vw, 24px); line-height: 1.18; letter-spacing: -.025em; text-wrap: balance; }
-.stageCopy p { color: var(--muted); font-size: 15px; line-height: 1.55; }
+.stages h3 { margin: 0 0 16px; font-size: clamp(30px, 3vw, 42px); line-height: 1.1; letter-spacing: -.035em; text-wrap: balance; }
+.stageCopy p { color: var(--muted); font-size: 17px; line-height: 1.62; }
 .productHeading span { display: block; }
 .products { display: grid; grid-template-columns: minmax(0, 1.2fr) clamp(76px, 7vw, 104px) minmax(0, 1fr); margin-top: 40px; }
 .products article { position: relative; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; background: white; border: 0; border-radius: 24px; padding: 36px; }
@@ -66,8 +69,11 @@
 .products .webstoreProduct {
   background: linear-gradient(145deg, #f8f5ff 0%, #fff 56%, #f3f8ff 100%);
 }
-.productConnector { align-self: center; display: flex; width: 100%; min-width: 0; height: 32px; align-items: center; padding-inline: 8px; }
+.productConnector { position: relative; z-index: 1; align-self: center; display: flex; width: 100%; min-width: 0; height: 32px; align-items: center; padding-inline: 0; overflow: visible; }
 .connectorTrack { position: relative; display: block; width: 100%; height: 0; border-top: 1px dotted color-mix(in srgb, var(--purple) 52%, var(--line)); }
+.connectorTrack::before, .connectorTrack::after { content: ''; position: absolute; top: 50%; width: 4px; height: 4px; border-radius: 50%; background: color-mix(in srgb, var(--purple) 58%, var(--line)); transform: translateY(-50%); }
+.connectorTrack::before { left: -2px; }
+.connectorTrack::after { right: -2px; }
 .connectorPulse { position: absolute; top: 50%; left: calc(100% - 6px); width: 6px; height: 6px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 0 4px color-mix(in srgb, var(--purple) 12%, transparent), 0 0 12px color-mix(in srgb, var(--purple) 72%, transparent); transform: translateY(-50%); animation: webstoreIntoAgent 2.2s ease-in-out infinite; }
 @keyframes webstoreIntoAgent { 0% { left: calc(100% - 6px); opacity: 0; } 14%, 84% { opacity: 1; } 100% { left: 0; opacity: 0; } }
 .productIdentity { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 16px; }
@@ -75,13 +81,15 @@
 .productBadge { padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--yellow) 18%, white); color: var(--ink); font-size: var(--type-label); font-weight: var(--type-control-weight); line-height: 1.4; }
 .webstoreProduct .productBadge { background: var(--soft); color: var(--body); }
 .products h3 { font-size: var(--type-subsection-heading); margin-bottom: 16px; }
-.products .textLink { margin-top: auto; padding-top: 28px; }
+.products .textLink { display: grid; width: 52px; height: 52px; min-height: 52px; margin-top: auto; margin-left: auto; padding: 0; place-items: center; border: 1px solid color-mix(in srgb, var(--ink) 14%, var(--line)); border-radius: 50%; background: rgb(255 255 255 / 82%); color: var(--ink); box-shadow: 0 12px 24px -18px color-mix(in srgb, var(--ink) 38%, transparent); transition: border-color 160ms ease, background 160ms ease, transform 160ms ease; }
+.products .textLink svg { width: 20px; height: 20px; transform: rotate(-45deg); transition: transform 160ms ease; }
 /* One native link per card: the pseudo-element extends its hit area without nested links. */
 .products .textLink::after { content: ''; position: absolute; inset: 0; border-radius: 24px; }
 .products article:hover { box-shadow: 0 12px 32px -20px color-mix(in srgb, var(--ink) 24%, transparent); }
 .products .agentProduct:hover { background: linear-gradient(145deg, #fff9df 0%, #fff 54%, #fff1ec 100%); }
 .products .webstoreProduct:hover { background: linear-gradient(145deg, #f1eaff 0%, #fff 56%, #eaf3ff 100%); }
-.products article:hover .textLink { text-decoration: underline; text-underline-offset: 4px; }
+.products article:hover .textLink { border-color: color-mix(in srgb, var(--purple) 36%, var(--line)); background: color-mix(in srgb, var(--purple) 8%, white); text-decoration: none; transform: translateY(-2px); }
+.products article:hover .textLink svg { transform: translate(2px, -2px) rotate(-45deg); }
 .products .textLink:focus-visible::after { outline: var(--menu-focus); outline-offset: 4px; }
 .body a { color: var(--ink); }
 .textLink { display: inline-flex; gap: 12px; align-items: center; min-height: 44px; font-weight: var(--type-control-weight); text-decoration: none; }
@@ -163,28 +171,36 @@
 
 @media (max-width: 1100px) {
   .section { padding-block: 80px; }
-  .stages { max-width: 900px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 52px 24px; }
-  .stageVisual { height: 300px; }
+  .stages { gap: 72px; }
+  .stages li { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; }
+  .stages li:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+  .stageVisual { height: 360px; }
+  .stages h3 { font-size: clamp(28px, 3.4vw, 36px); }
 }
 @media (min-width: 768px) {
-  .products .webstoreProduct { align-self: center; transform: scale(.8); transform-origin: center; }
+  .products .webstoreProduct { align-self: center; transform: scale(.8); transform-origin: left center; }
 }
 @media (max-width: 767px) {
   .section { padding-block: 64px; }
   .products { grid-template-columns: minmax(0, 1fr); }
   .approach { padding-block: 64px; }
-  .stages { grid-template-columns: minmax(0, 1fr); gap: 48px; margin-block: 40px 0; }
-  .stages li { gap: 20px; }
-  .stageVisual { height: 290px; border-radius: 20px; }
+  .stages { gap: 56px; margin-block: 48px 0; }
+  .stages li, .stages li:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .stages li .stageVisual, .stages li:nth-child(even) .stageVisual { grid-column: 1; grid-row: 2; }
+  .stages li .stageCopy, .stages li:nth-child(even) .stageCopy { grid-column: 1; grid-row: 1; }
+  .stageVisual { height: 310px; border-radius: 20px; }
   .stageVisual > div { padding: 16px; }
   .stageCopy { max-width: none; }
-  .stageKicker { margin-bottom: 10px; }
-  .stages h3 { margin-bottom: 10px; font-size: 24px; }
+  .stageKicker { margin-bottom: 16px; }
+  .stages h3 { margin-bottom: 12px; font-size: 30px; }
   .stageCopy p { font-size: 1rem; }
   .products article { padding: 24px; }
   .products { row-gap: 0; }
   .productConnector { width: 100%; height: 80px; justify-content: center; padding-inline: 0; }
-  .connectorTrack { width: 0; height: 56px; border-top: 0; border-left: 1px dotted color-mix(in srgb, var(--purple) 52%, var(--line)); }
+  .connectorTrack { width: 0; height: 100%; border-top: 0; border-left: 1px dotted color-mix(in srgb, var(--purple) 52%, var(--line)); }
+  .connectorTrack::before, .connectorTrack::after { left: 50%; transform: translateX(-50%); }
+  .connectorTrack::before { top: -2px; }
+  .connectorTrack::after { top: auto; right: auto; bottom: -2px; }
   .connectorPulse { top: calc(100% - 6px); left: 50%; transform: translateX(-50%); animation-name: webstoreIntoAgentMobile; }
   .industryHeader { align-items: flex-start; flex-direction: column; gap: 24px; }
   .industryCarousel { width: 100%; margin-top: 28px; }

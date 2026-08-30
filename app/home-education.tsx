@@ -84,22 +84,7 @@ export const HOME_SELECTION_STEPS = [
 
 export function HomeEducationBody() {
   const industryTrack = useRef<HTMLUListElement>(null);
-  const emmaPlacement = useRef<HTMLDivElement>(null);
   const [activeIndustry, setActiveIndustry] = useState(0);
-
-  useEffect(() => {
-    const placement = emmaPlacement.current;
-    const emma = document.getElementById('meet-aria');
-    const originalParent = emma?.parentElement;
-    const originalNextSibling = emma?.nextSibling ?? null;
-    if (!placement || !emma || !originalParent) return;
-
-    placement.appendChild(emma);
-    return () => {
-      if (originalNextSibling?.parentNode === originalParent) originalParent.insertBefore(emma, originalNextSibling);
-      else originalParent.appendChild(emma);
-    };
-  }, []);
 
   useEffect(() => {
     const track = industryTrack.current;
@@ -167,9 +152,9 @@ export function HomeEducationBody() {
             <h2 id="home-selection-approach">From your inventory to <span className={styles.selectionEmphasis}>recommendation</span></h2>
             <p>Start with approved product knowledge. The Agent clarifies the buyer’s needs, finds relevant options and explains what your team should review.</p>
           </div>
-          {/* Layout lock: keep the four-stage visual-first composition. Future
-              refinements belong inside SelectionOverviewGraphic only unless the
-              user explicitly asks to unlock this section layout. */}
+          {/* Layout lock: preserve the four large alternating graphic-and-copy
+              rows. Future refinements belong inside SelectionOverviewGraphic
+              only unless the user explicitly asks to unlock this layout. */}
           <ol className={styles.stages} aria-label="Ingest, Reason, Retrieve, Recommend: from inventory to recommendation">
             {HOME_SELECTION_STEPS.map(([title, label, description], index) => (
               <li key={title}>
@@ -200,7 +185,7 @@ export function HomeEducationBody() {
               <div className={styles.productIdentity}><p className={styles.productLabel}>AI Sales Agent</p><span className={styles.productBadge}>Start here</span></div>
               <h3>Turn buyer questions into informed enquiries</h3>
               <p>Give buyers clearer answers and suitable recommendations. Your Agent clarifies requirements, checks approved product information and supported inventory, then prepares the details your team needs to confirm suitability and availability.</p>
-              <a className={styles.textLink} href="/ai-sales-agent">AI Sales Agent <Arrow /></a>
+              <a className={styles.textLink} href="/ai-sales-agent" aria-label="Explore AI Sales Agent"><Arrow /></a>
             </article>
             <ProductConnector />
             <article className={styles.webstoreProduct}>
@@ -208,13 +193,11 @@ export function HomeEducationBody() {
               <div className={styles.productIdentity}><p className={styles.productLabel}>AI Webstore Suite</p><span className={styles.productBadge}>Optional addition</span></div>
               <h3>A searchable product library for buyers and your Agent</h3>
               <p>Give buyers a browsable catalogue with a dedicated page for each product. Structured specifications and supported inventory help your Agent answer product questions and recommend suitable options with clearer context.</p>
-              <a className={styles.textLink} href="/ai-webstore-suite">AI Webstore Suite <Arrow /></a>
+              <a className={styles.textLink} href="/ai-webstore-suite" aria-label="Explore AI Webstore Suite"><Arrow /></a>
             </article>
           </div>
         </div>
       </section>
-
-      <div ref={emmaPlacement} className={styles.emmaPlacement} data-home-emma-placement="" />
 
       <section className={`${styles.section} ${styles.industries}`} aria-labelledby="home-industries-heading">
         <div className={styles.frame}>
@@ -253,27 +236,46 @@ export function HomeEducationBody() {
 }
 
 export function HomeEducationFaq() {
+  const emmaPlacement = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const placement = emmaPlacement.current;
+    const emma = document.getElementById('meet-aria');
+    const originalParent = emma?.parentElement;
+    const originalNextSibling = emma?.nextSibling ?? null;
+    if (!placement || !emma || !originalParent) return;
+
+    placement.appendChild(emma);
+    return () => {
+      if (originalNextSibling?.parentNode === originalParent) originalParent.insertBefore(emma, originalNextSibling);
+      else originalParent.appendChild(emma);
+    };
+  }, []);
+
   return (
-    <section className={`si-sierra-stage si-sierra-stage--faqs ${styles.faq}`} aria-labelledby="home-faq-heading">
-      <div className="si-container">
-        <div className="si-sierra-heading si-sierra-heading--centered">
-          <span className={`si-eyebrow ${styles.faqEyebrow}`}>FAQ</span>
-          <h2 id="home-faq-heading">Your AI Sales Agent questions, answered</h2>
-          <p>What to prepare, how recommendations work and where your team stays involved.</p>
+    <>
+      <section className={`si-sierra-stage si-sierra-stage--faqs ${styles.faq}`} aria-labelledby="home-faq-heading">
+        <div className="si-container">
+          <div className="si-sierra-heading si-sierra-heading--centered">
+            <span className={`si-eyebrow ${styles.faqEyebrow}`}>FAQ</span>
+            <h2 id="home-faq-heading">Your AI Sales Agent questions, answered</h2>
+            <p>What to prepare, how recommendations work and where your team stays involved.</p>
+          </div>
+          <div className="si-sierra-faq-list">
+            {HOME_QUESTIONS.map(([question, answer]) => (
+              <details className="si-sierra-faq-item" key={question}>
+                <summary>{question}<span aria-hidden="true">+</span></summary>
+                <div className="si-sierra-faq-answer"><p>{answer}</p></div>
+              </details>
+            ))}
+          </div>
+          <div className={styles.faqActions}>
+            <a className={`mkt-btn mkt-btn-primary ${styles.demo}`} href="/book-a-demo">Book a Demo <Arrow /></a>
+          </div>
         </div>
-        <div className="si-sierra-faq-list">
-          {HOME_QUESTIONS.map(([question, answer]) => (
-            <details className="si-sierra-faq-item" key={question}>
-              <summary>{question}<span aria-hidden="true">+</span></summary>
-              <div className="si-sierra-faq-answer"><p>{answer}</p></div>
-            </details>
-          ))}
-        </div>
-        <div className={styles.faqActions}>
-          <a className={`mkt-btn mkt-btn-primary ${styles.demo}`} href="/book-a-demo">Book a Demo <Arrow /></a>
-        </div>
-      </div>
-    </section>
+      </section>
+      <div ref={emmaPlacement} className={styles.emmaPlacement} data-home-emma-placement="" />
+    </>
   );
 }
 
