@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { allStaticSlugs, getSolution } from '@/lib/site-content';
 import { OriginalAntbuildzApp } from '../original-antbuildz-app';
+import { WebstoreConceptPage } from '../webstore-2-ai-webstore-preview/webstore-concept';
 
 const pageTitles: Record<string, [string, string]> = {
-  'ai-webstore-suite': ['AI Webstore Suite', 'Launch an AI-ready Webstore for industrial sales, rental, parts and technical product catalogues.'],
+  'ai-webstore-suite': ['AI Webstore Suite', 'Extend your AI Sales Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.'],
   'ai-sales-agent': ['Industrial AI Sales Agent', 'Qualify complex industrial enquiries, recommend supported products and prepare sales-ready handovers.'],
   'ai-agent-console': ['AI Agent Console', 'Manage AI knowledge, instructions, conversations, workflows, testing and performance in one workspace.'],
   pricing: ['Pricing', 'Explore Antbuildz AI Webstore Suite and AI Sales Agent plans.'],
@@ -48,6 +49,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   }
   if (slug === 'help' || slug === 'faqs') {
     redirect('/help/ai');
+  }
+  if (slug === 'ai-webstore-suite') {
+    return <WebstoreConceptPage />;
   }
 
   return <OriginalAntbuildzApp />;

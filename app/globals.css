@@ -42,7 +42,7 @@
   --menu-label-size: 14px;
   --menu-copy-size: 13px;
   --menu-group-size: 12px;
-  --menu-label-weight: var(--type-control-weight);
+  --menu-label-weight: 600;
   --menu-item-height: 44px;
   --menu-item-padding: 12px;
   --menu-hover: var(--soft);
@@ -59,6 +59,7 @@
 #root .antbuildz-agreement-hub [hidden] { display: none !important; }
 #root .antbuildz-ai-help-directory [hidden],
 #root .antbuildz-ai-help-centre [hidden] { display: none !important; }
+#root .about-final-section .about-final-action[hidden] { display: none !important; }
 #root .antbuildz-ai-help-directory .help-directory__cards {
   grid-template-columns: minmax(0, 760px);
   justify-content: center;
@@ -174,6 +175,13 @@ button, summary { font: inherit; }
 .antbuildz-ai-pricing #ai-webstore-suite,
 .antbuildz-ai-pricing #ai-webstore-suite + .pricing-section-divider {
   display: none !important;
+}
+
+/* The consolidated Pricing H1 is intentionally longer than the transferred
+   revenue headline. Give it the standard major-title frame so its authored
+   break remains two balanced lines on desktop. */
+.antbuildz-ai-pricing .pricing-hero {
+  max-width: min(1180px, 90vw);
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] .pricing-price {
@@ -602,6 +610,16 @@ button, summary { font: inherit; }
   background-color: var(--dark-surface) !important;
 }
 
+/* Pricing uses one continuous clean surface. The transferred section fills
+   stop at the content frame and otherwise appear as unrelated lavender boxes. */
+body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
+#root.antbuildz-original-root.antbuildz-ai-pricing,
+#root.antbuildz-original-root.antbuildz-ai-pricing .pricing-page,
+#root.antbuildz-original-root.antbuildz-ai-pricing .pricing-section {
+  background-color: var(--clean) !important;
+  background-image: none !important;
+}
+
 @media (max-width: 1179px) {
   #root.antbuildz-original-root.antbuildz-section-system {
     --section-space-major: 80px;
@@ -747,6 +765,48 @@ button, summary { font: inherit; }
   --header-nav-line-height: 1.65;
 }
 
+/* At the top of every public marketing route, pull the hero surface beneath
+   the sticky header. The spacer preserves each hero's existing content
+   position while its own colour or gradient continues behind navigation. */
+.antbuildz-public-header.is-public-hero-overlay {
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  background: transparent !important;
+}
+
+.antbuildz-public-header.is-public-hero-overlay:not(.is-scrolled) .bright-nav {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.antbuildz-public-header.is-public-hero-overlay.is-scrolled {
+  background: var(--canvas) !important;
+}
+
+.antbuildz-public-header.is-public-hero-overlay.is-scrolled .bright-nav {
+  border-color: rgb(50 46 69 / 6%) !important;
+  background: rgb(255 255 255 / 94.5%) !important;
+  box-shadow: 0 14px 34px -30px rgb(15 23 42 / 50%) !important;
+  backdrop-filter: blur(18px) saturate(1.5) !important;
+}
+
+.antbuildz-public-hero-surface {
+  margin-top: 0;
+}
+
+.antbuildz-public-hero-spacer {
+  display: block;
+  width: 100%;
+  height: var(--public-header-height, 81px);
+  flex: 0 0 var(--public-header-height, 81px);
+  pointer-events: none;
+}
+
 .antbuildz-public-header .antbuildz-header-demo {
   position: relative;
   z-index: 2;
@@ -770,6 +830,14 @@ button, summary { font: inherit; }
 
 .antbuildz-public-header .antbuildz-header-demo:hover { background: var(--yellow-hover); }
 .antbuildz-public-header .antbuildz-header-demo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+/* The full public navigation is already visible on desktop, so the drawer
+   trigger is reserved for the transferred shell's compact/mobile state. */
+@media (min-width: 981px) {
+  #root.antbuildz-original-root .antbuildz-public-header .antbuildz-menu-trigger {
+    display: none !important;
+  }
+}
 
 @media (min-width: 981px) and (max-width: 1399px) {
   #root.antbuildz-original-root .bright-nav { padding-inline: 24px; gap: 12px; }
@@ -1014,8 +1082,6 @@ button, summary { font: inherit; }
 }
 
 .antbuildz-industries-menu__panel {
-  --menu-label-weight: 500;
-  --menu-title-size: 22px;
   position: fixed;
   z-index: 220;
   top: 88px;
@@ -1026,7 +1092,9 @@ button, summary { font: inherit; }
   padding: 28px;
   border: 1px solid var(--menu-border);
   border-radius: var(--menu-radius);
-  background: var(--canvas);
+  background: color-mix(in srgb, var(--canvas) 90%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
   box-shadow: var(--menu-shadow);
   color: var(--ink);
   transform: translateX(-50%);
@@ -1064,10 +1132,12 @@ button, summary { font: inherit; }
 
 .antbuildz-industries-menu__intro-copy > span {
   color: var(--red);
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .08em;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .24em;
+  text-transform: uppercase;
 }
 
 .antbuildz-industries-menu__intro-copy > p {
@@ -3432,5 +3502,48 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   .antbuildz-ai-home .ai-marketplace-hero-stage {
     --home-hero-media-blur: 16px;
     --home-hero-media-scale: 1.12;
+  }
+}
+
+/* Homepage inventory-aware Agent CTA variant with Emma reviewing a tablet. */
+#root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__panel {
+  border-color: rgba(255, 197, 1, .34);
+  background: #fffaf1;
+  box-shadow: 0 30px 64px -46px rgba(15, 23, 42, .52);
+}
+#root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__panel::after {
+  background: linear-gradient(90deg, rgba(255, 252, 246, .99) 0%, rgba(255, 252, 246, .98) 43%, rgba(255, 252, 246, .74) 60%, rgba(255, 252, 246, 0) 79%);
+}
+#root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__background {
+  object-position: 54% center;
+}
+#root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__copy {
+  max-width: 620px;
+}
+#root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card h2 {
+  font-size: clamp(26px, 1.95vw, 28px) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -.025em !important;
+}
+#root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__description {
+  max-width: 52ch;
+  color: var(--body);
+  font-size: clamp(15px, 1.05vw, 16px) !important;
+  line-height: 1.55 !important;
+}
+#root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__button {
+  min-height: 54px;
+  border-radius: 999px;
+}
+
+@media (max-width: 760px) {
+  #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__panel::after {
+    background: linear-gradient(180deg, rgba(255, 252, 246, 0), rgba(255, 252, 246, .12) 37%, rgba(255, 252, 246, .98) 56%, #fffaf1 70%);
+  }
+  #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__background {
+    object-position: 70% center;
+  }
+  #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card h2 {
+    font-size: 24px !important;
   }
 }

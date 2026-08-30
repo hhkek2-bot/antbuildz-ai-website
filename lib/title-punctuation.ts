@@ -2,7 +2,6 @@ const TITLE_PUNCTUATION_ROUTES = new Set([
   '/',
   '/ai-sales-agent',
   '/ai-webstore-suite',
-  '/webstore-2-ai-webstore-preview',
 ]);
 
 const STANDALONE_FULL_STOP = /(?<!\.)\.(?!\.)/g;

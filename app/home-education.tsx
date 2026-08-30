@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { mountHomeEducation, type HomeEducationTargets } from '../lib/home-education-mount';
 import styles from './home-education.module.css';
-import { AgentGraphic, CatalogueGraphic, SelectionGraphic, WebstoreGraphic } from './home-graphics';
+import { AgentGraphic, SelectionOverviewGraphic, WebstoreGraphic } from './home-graphics';
 import { HomeAgentFoundations } from './home-agent-foundations';
 
 export const HOME_INDUSTRIES = [
@@ -35,14 +35,7 @@ function Arrow() {
 function ProductConnector() {
   return (
     <div className={styles.productConnector} aria-hidden="true">
-      <svg viewBox="0 0 112 48">
-        <circle className={`${styles.connectorNode} ${styles.connectorAgentNode}`} cx="20" cy="24" r="16" />
-        <path className={styles.connectorAgentMark} d="m20 15 2.2 5.2 5.3 2.2-5.3 2.2L20 30l-2.2-5.4-5.3-2.2 5.3-2.2L20 15Z" />
-        <path className={styles.connectorCable} d="M38 24h36" />
-        <path className={styles.connectorArrow} d="m45 17-7 7 7 7" />
-        <circle className={`${styles.connectorNode} ${styles.connectorStoreNode}`} cx="92" cy="24" r="16" />
-        <path className={styles.connectorStoreMark} d="M84 18h16M84 24h16M84 30h16" />
-      </svg>
+      <span className={styles.connectorTrack}><span className={styles.connectorPulse} /></span>
     </div>
   );
 }
@@ -83,15 +76,30 @@ export function HomeTrustPanel() {
 }
 
 export const HOME_SELECTION_STEPS = [
-  ['Ingest', 'Turn technical diagrams into structured data', 'Convert approved catalogues, specification tables and technical diagrams into structured product data the Agent can use.'],
-  ['Reason', 'Decide the next useful question', 'Interpret the buyer’s requirement, identify missing constraints and choose the most useful next question.'],
-  ['Retrieve', 'Query inventory for the closest match', 'Search approved catalogue and supported inventory data, then compare relevant options against the stated requirements.'],
-  ['Recommend', 'Answer with an explained recommendation', 'Present a suitable option and explain the match, while flagging availability, final suitability and commercial terms for review.'],
+  ['Ingest', 'Structure product knowledge', 'Turn approved catalogues, specification tables and diagrams into structured product knowledge.'],
+  ['Reason', 'Clarify the buyer’s needs', 'Identify known requirements, missing constraints and the right next action before matching.'],
+  ['Retrieve', 'Find supported options', 'Search approved catalogue and supported inventory records for relevant options.'],
+  ['Recommend', 'Explain the recommendation', 'Explain the strongest option and flag suitability, availability and commercial checks for review.'],
 ] as const;
 
 export function HomeEducationBody() {
   const industryTrack = useRef<HTMLUListElement>(null);
+  const emmaPlacement = useRef<HTMLDivElement>(null);
   const [activeIndustry, setActiveIndustry] = useState(0);
+
+  useEffect(() => {
+    const placement = emmaPlacement.current;
+    const emma = document.getElementById('meet-aria');
+    const originalParent = emma?.parentElement;
+    const originalNextSibling = emma?.nextSibling ?? null;
+    if (!placement || !emma || !originalParent) return;
+
+    placement.appendChild(emma);
+    return () => {
+      if (originalNextSibling?.parentNode === originalParent) originalParent.insertBefore(emma, originalNextSibling);
+      else originalParent.appendChild(emma);
+    };
+  }, []);
 
   useEffect(() => {
     const track = industryTrack.current;
@@ -156,14 +164,17 @@ export function HomeEducationBody() {
         <div className={styles.frame}>
           <div className={styles.intro}>
             <p className={styles.eyebrow}>The Antbuildz approach</p>
-            <h2 id="home-selection-approach">From your catalogue to <span className={styles.selectionEmphasis}>a suitable shortlist</span></h2>
-            <p>Start with approved product knowledge from documents, tables and technical diagrams. The Agent structures it, interprets buyer needs and explains relevant options for sales review.</p>
+            <h2 id="home-selection-approach">From your inventory to <span className={styles.selectionEmphasis}>recommendation</span></h2>
+            <p>Start with approved product knowledge. The Agent clarifies the buyer’s needs, finds relevant options and explains what your team should review.</p>
           </div>
-          <ol className={styles.stages} aria-label="Ingest, Reason, Retrieve, Recommend: from catalogue to shortlist">
+          {/* Layout lock: keep the four-stage visual-first composition. Future
+              refinements belong inside SelectionOverviewGraphic only unless the
+              user explicitly asks to unlock this section layout. */}
+          <ol className={styles.stages} aria-label="Ingest, Reason, Retrieve, Recommend: from inventory to recommendation">
             {HOME_SELECTION_STEPS.map(([title, label, description], index) => (
               <li key={title}>
                 <div className={styles.stageVisual}>
-                  <SelectionGraphic step={index} />
+                  <SelectionOverviewGraphic step={index} />
                 </div>
                 <article className={styles.stageCopy}>
                   <span className={styles.stageKicker}><b aria-hidden="true">{String(index + 1).padStart(2, '0')}</b>{title}</span>
@@ -189,7 +200,7 @@ export function HomeEducationBody() {
               <div className={styles.productIdentity}><p className={styles.productLabel}>AI Sales Agent</p><span className={styles.productBadge}>Start here</span></div>
               <h3>Turn buyer questions into informed enquiries</h3>
               <p>Give buyers clearer answers and suitable recommendations. Your Agent clarifies requirements, checks approved product information and supported inventory, then prepares the details your team needs to confirm suitability and availability.</p>
-              <a className={styles.textLink} href="/ai-sales-agent">Explore AI Sales Agent <Arrow /></a>
+              <a className={styles.textLink} href="/ai-sales-agent">AI Sales Agent <Arrow /></a>
             </article>
             <ProductConnector />
             <article className={styles.webstoreProduct}>
@@ -197,29 +208,13 @@ export function HomeEducationBody() {
               <div className={styles.productIdentity}><p className={styles.productLabel}>AI Webstore Suite</p><span className={styles.productBadge}>Optional addition</span></div>
               <h3>A searchable product library for buyers and your Agent</h3>
               <p>Give buyers a browsable catalogue with a dedicated page for each product. Structured specifications and supported inventory help your Agent answer product questions and recommend suitable options with clearer context.</p>
-              <a className={styles.textLink} href="/ai-webstore-suite">Explore AI Webstore Suite <Arrow /></a>
+              <a className={styles.textLink} href="/ai-webstore-suite">AI Webstore Suite <Arrow /></a>
             </article>
           </div>
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="home-industrial-context">
-        <div className={`${styles.frame} ${styles.context}`}>
-          <div>
-            <p className={styles.eyebrow}>Industrial product knowledge</p>
-            <h2 id="home-industrial-context">Built for the complexity of industrial products</h2>
-            <CatalogueGraphic />
-          </div>
-          <div>
-            <p className={styles.lead}>Industrial buyers need to know whether a product fits the job. Antbuildz.AI helps them work through specifications, application requirements and suitable options using your technical catalogue.</p>
-            <ul className={styles.points}>
-              <li>Bring scattered product documents into the conversation.</li>
-              <li>Clarify the application before suggesting equipment.</li>
-              <li>Check specifications and supported inventory data.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+      <div ref={emmaPlacement} className={styles.emmaPlacement} data-home-emma-placement="" />
 
       <section className={`${styles.section} ${styles.industries}`} aria-labelledby="home-industries-heading">
         <div className={styles.frame}>

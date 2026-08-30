@@ -5,7 +5,6 @@ export const PUBLIC_MARKETING_TYPOGRAPHY_PATHS = new Set([
   '/',
   '/ai-sales-agent',
   '/ai-webstore-suite',
-  '/webstore-2-ai-webstore-preview',
   '/pricing',
   '/resources',
   '/help/ai',

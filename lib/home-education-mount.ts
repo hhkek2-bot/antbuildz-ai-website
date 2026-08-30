@@ -36,7 +36,8 @@ export function mountHomeEducation(
     }
     const main = root.querySelector<HTMLElement>('.ai-platform-page > main');
     const hero = main?.querySelector<HTMLElement>(':scope > .ai-hero-section');
-    const emma = main?.querySelector<HTMLElement>(':scope > #meet-aria');
+    const emma = main?.querySelector<HTMLElement>(':scope > #meet-aria')
+      ?? main?.querySelector<HTMLElement>('#meet-aria');
     const legacyFaq = main?.querySelector<HTMLElement>(':scope > .ai-faq-section');
     if (!main || !hero || !emma || !legacyFaq) {
       clear();

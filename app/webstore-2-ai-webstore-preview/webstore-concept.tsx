@@ -7,10 +7,10 @@ import { EmmaAvatar } from '../emma-avatar';
 import { correctWebstoreCopy } from '../../lib/ai-webstore-copy';
 import { removeHeadingFullStops } from '../../lib/title-punctuation';
 import { CHAT_TURNS, DEMO_PRODUCTS, INVENTORY_PRODUCTS, INVENTORY_FIELDS, STORY_STAGES, advanceStoryTime, getStoryFrame, productDemoPath } from './storyboard';
-import { PREVIEW_PAGE, syncPreviewMetadata } from './preview-metadata';
+import { AI_WEBSTORE_PAGE, syncWebstoreMetadata } from './preview-metadata';
 import styles from './webstore-concept.module.css';
 
-const PREVIEW_PATH = PREVIEW_PAGE.path;
+const AI_WEBSTORE_PATH = AI_WEBSTORE_PAGE.path;
 type Product = typeof DEMO_PRODUCTS[number];
 
 function ProductImage({ product, className = '' }: { product: Product; className?: string }) {
@@ -279,11 +279,7 @@ export function ListingStory() {
   </div>;
 }
 
-/**
- * A separate, unindexed preview using a route already supported by the copied
- * router. The original module and canonical page stay untouched. The portal,
- * copy pass and reuse of the homepage overlay header are preview-only.
- */
+/** Canonical AI Webstore Suite page using the selected listing workflow. */
 export function WebstoreConceptPage() {
   const [mount, setMount] = useState<HTMLElement | null>(null);
 
@@ -318,7 +314,7 @@ export function WebstoreConceptPage() {
       syncHeaderScroll();
     };
     const attach = () => {
-      if (window.location.pathname !== PREVIEW_PATH) return;
+      if (window.location.pathname !== AI_WEBSTORE_PATH) return;
       attachHeader();
       // Reapply to newly mounted tabs/FAQs even after the visual is attached.
       correctWebstoreCopy(root, window.location.pathname);
@@ -337,13 +333,13 @@ export function WebstoreConceptPage() {
       visual.insertAdjacentElement('afterend', container);
       setMount(container);
     };
-    // Native navigation leaves the preview document cleanly. The copied router
-    // must not carry a preview-only portal into the approved product page.
+    // Native navigation leaves the product document cleanly. The copied router
+    // must not carry the portal into another public page.
     const navigate = (event: MouseEvent) => {
       const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[href]') : null;
       if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.download || (link.target && link.target !== '_self')) return;
       const target = new URL(link.href, location.href);
-      if (target.origin !== location.origin || target.pathname === PREVIEW_PATH) return;
+      if (target.origin !== location.origin || target.pathname === AI_WEBSTORE_PATH) return;
       event.preventDefault();
       event.stopImmediatePropagation();
       location.assign(target.href);
@@ -360,7 +356,7 @@ export function WebstoreConceptPage() {
     };
     const observer = new MutationObserver(scheduleAttach);
     observer.observe(root, { childList: true, subtree: true, characterData: true });
-    const syncHead = () => syncPreviewMetadata(document, window.location.pathname);
+    const syncHead = () => syncWebstoreMetadata(document, window.location.pathname);
     const headObserver = new MutationObserver(syncHead);
     headObserver.observe(document.head, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['content', 'href'] });
     document.addEventListener('click', navigate, true);

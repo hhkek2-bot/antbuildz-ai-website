@@ -138,6 +138,214 @@ final result: passed
 
 ---
 
+# Homepage connected-workflow refinement
+
+Date: 2026-08-30. Mode: **Fidelity + scoped Design**, limited to the two product cards in `One connected workflow`.
+
+## Comparison target
+
+- Source visual truth: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-5d40b741-ac07-454c-944a-676a172c46a3.png`.
+- Aligned implementation capture: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/antbuildz-connected-workflow-implementation-aligned.png`.
+- Full-view same-input comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/connected-workflow-refinement-20260830/full-comparison.png`.
+- Focused same-input comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/connected-workflow-refinement-20260830/comparison.png`.
+- Focused source and implementation regions: `source-focus.png` and `implementation-focus.png` in the same evidence folder.
+- Mobile evidence: `implementation-mobile.png` and `implementation-mobile-connector.png` in the same evidence folder.
+- Route and state: homepage, `One connected workflow`, both product cards visible and the connector animation active.
+
+## Normalisation
+
+- Source pixels: 3348 × 1878, corresponding to the supplied 1674 × 939 viewport at device scale factor 2.
+- Implementation viewport: 1674 × 939 CSS px at device scale factor 1.
+- Full-view comparison: 3348 × 939 pixels with source on the left and implementation on the right.
+- Focused card region: both source and implementation normalised to 1320 × 732 pixels; focused comparison is 2640 × 732 pixels.
+- Representative responsive checks: 1440 × 900, 1024 × 768 and 390 × 844 CSS px.
+
+## Findings
+
+- No actionable P0, P1 or P2 findings remain.
+- Layout and hierarchy: the established wide two-card composition, asymmetric Agent/Webstore emphasis, copy hierarchy, card radii and mobile stacking remain unchanged. Only the outer card outlines were removed, leaving the soft surfaces and restrained shadows to define each product area.
+- Product image consistency: the drill, bearing and forklift now share a fixed 76px media frame. Per-asset visual scaling compensates for the forklift PNG's transparent margins and the drill's canvas-filling crop, producing comparable apparent product size without replacing the approved local assets.
+- Integration direction: the former symbol cluster is replaced by a one-pixel dotted connector with a restrained violet glow moving from Webstore to Agent. The compact/mobile connector rotates vertically and travels from the lower Webstore card towards the upper Agent card. Reduced-motion visitors receive a static pulse resting at the Agent end.
+- CTA wording: `Explore AI Sales Agent` and `Explore AI Webstore Suite` are shortened to `AI Sales Agent` and `AI Webstore Suite`; their arrows and destinations remain `/ai-sales-agent` and `/ai-webstore-suite`.
+- Accessibility and responsiveness: the connector is decorative and hidden from assistive technology; text carries the relationship. All checked viewports report zero horizontal overflow, and the existing native links remain keyboard-operable.
+- Browser console: no warning or error entries were present after the final responsive inspection.
+
+## Comparison history
+
+1. The source showed strong yellow and violet card outlines, mismatched catalogue image scale and a static centre symbol. These were the user-requested fidelity exceptions rather than unrelated redesign targets.
+2. The first image-normalisation pass still left the bearing visually smaller than the drill and forklift. The bearing scale was increased and the forklift scale slightly reduced; the final same-input comparison shows the three catalogue thumbnails at a balanced apparent size.
+3. Desktop animation sampling confirmed the pulse travels right-to-left. Mobile sampling confirmed bottom-to-top travel, preserving the same Webstore-to-Agent meaning after the cards stack.
+
+## Verification
+
+- `npm test`: 67 tests passed.
+- Targeted ESLint: passed for `app/home-education.tsx`, `app/home-graphics.tsx` and `tests/site-content.test.mjs`.
+- `git diff --check`: passed.
+- Production build: passed.
+- Browser diagnostics: zero console warnings/errors; zero horizontal overflow at 1440 × 900, 1024 × 768 and 390 × 844.
+
+final result: passed
+
+# Simplified homepage process cards — superseded
+
+Date: 2026-08-30. Mode: **Design**, using the supplied Sierra layout as a structural reference rather than a fidelity target.
+
+## Source and implementation evidence
+
+- Source visual truth: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-68194e62-a7e8-44b5-a6de-db2c81459365.png`
+- Source pixels: 3642 × 1812.
+- Wide implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-simple-20260830/viewport-1440-cards-raw.png`
+- Wide implementation pixels and CSS viewport: 1440 × 900 at device scale factor 1.
+- Additional responsive evidence: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-simple-20260830/viewport-1024-top.png`, `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-simple-20260830/viewport-1024-bottom.png`, `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-simple-20260830/viewport-390-top.png`, `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-simple-20260830/viewport-390-middle.png`, and `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-simple-20260830/viewport-390-bottom.png`.
+- Same-input comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-simple-20260830/design-qa-comparison.png`, rendered at 4640 × 1000 pixels.
+- Comparison normalisation: both sections are aspect-filled into equal logical panels because the source is a structural reference with different brand copy and page context; no density normalisation was needed for the implementation capture.
+- Route and state: public homepage, static `From your inventory to recommendation` section.
+
+## Findings
+
+- No actionable P0, P1 or P2 findings remain.
+- Fonts and typography: the implementation retains the approved Plus Jakarta Sans and Inter hierarchy while adopting the reference's compact card-title and description rhythm.
+- Spacing and layout: four equal cards render in one row at 1440px, a 2 × 2 grid at 1024px and one column at 390px. All three viewports have zero horizontal overflow.
+- Colours and visual tokens: pale visual panels, white cards, dark ink and restrained stage accents stay inside the Antbuildz design system rather than copying Sierra's blue treatment.
+- Image quality and asset fidelity: the Recommend card reuses the established local Emma portrait. The remaining visuals are intentionally code-native interface summaries because the source reference also uses interface cards; no photograph, logo or illustration was approximated.
+- Copy and content: each stage communicates one customer-facing idea—approved knowledge, requirement clarification, supported retrieval and a review-bound recommendation. Hidden chain-of-thought, model names, costs, scores and invented operational metrics are not shown.
+- Motion: Remotion guidance was used to reconsider the presentation. No Remotion player or new animation was added because a static four-card overview explains the sequence more clearly and avoids unnecessary runtime weight. Existing reduced-motion handling elsewhere is unaffected.
+- P3: the Antbuildz visual labels are slightly denser than the Sierra reference because they preserve the industrial workflow and review boundaries. They remain readable and materially simpler than the previous technical scenes.
+
+## Comparison history and verification
+
+1. The previous homepage treatment expanded each step into a large alternating technical chapter. This made the section feel like a product dashboard rather than a quick explanation.
+2. The revised section uses one equal visual, one short title and one concise explanation for each of Ingest, Reason, Retrieve and Recommend.
+3. The first same-input comparison found no P0, P1 or P2 mismatch, so no corrective fidelity loop was required.
+4. Browser checks at 1440 × 900, 1024 × 768 and 390 × 844 show clear layouts, zero horizontal overflow and no warning or error logs.
+5. All 67 content tests, targeted ESLint, `git diff --check` and the production build pass.
+
+final result: superseded by the restored alternating layout below
+
+# Restored alternating homepage process layout
+
+Date: 2026-08-30. Mode: **Fidelity**, targeting the section composition that existed immediately before the four-column reinterpretation.
+
+## Scope and evidence
+
+- User correction screenshot: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-3fbcd331-167f-493e-81cf-214ec61e53df.png`
+- Restored wide implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-layout-restored-1440.png`
+- Restored mobile implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/process-layout-restored-390-process.png`
+- Route and state: public homepage, static `From your inventory to recommendation` section.
+
+## Findings
+
+- No actionable P0, P1 or P2 findings remain.
+- The original editorial structure is restored: four separate large rows, each pairing one visual with one copy block. Visuals alternate left/right on desktop; mobile consistently places copy before its visual.
+- At 1440 × 900, each visual measures approximately 584 × 410px and each copy block is limited to 420px. At 1024 × 768, visuals measure approximately 495 × 360px. At 390 × 844, every visual measures 351 × 310px.
+- The simplified customer-facing scenes remain inside those original frames. They show only approved knowledge, requirement clarification, supported retrieval and a review-bound recommendation; the rejected four-card grid is not used.
+- The established Plus Jakarta Sans/Inter type roles, stage colours, 24px visual radii, alternating spacing and editorial heading scale are restored.
+- All checked viewports have zero horizontal overflow. Mobile preserves a readable copy-first sequence and the simplified scene fits without clipping.
+- No new motion, Remotion runtime or interactive control was added.
+- All 67 content tests, targeted ESLint, `git diff --check` and the production build pass.
+
+final result: passed
+
+---
+
+# Homepage recommendation-phone scale
+
+Date: 2026-08-30. Mode: **Fidelity + scoped Design**.
+
+## Comparison target
+
+- Source visual truth: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-c8d639bb-56c1-4adf-97ff-d7e1df761138.png`
+- Wide implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/recommend-phone-scale-20260830/after-1280-final.jpg`
+- Compact implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/recommend-phone-scale-20260830/after-1024.jpg`
+- Mobile implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/recommend-phone-scale-20260830/after-390.jpg`
+- Full-view same-input comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/recommend-phone-scale-20260830/comparison-full.png`
+- Focused stage comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/recommend-phone-scale-20260830/comparison-stage.png`
+- Route and state: homepage, static `04 Recommend` chapter with the complete recommendation conversation visible.
+
+## Normalisation
+
+- Source screenshot: 1388 × 1076 pixels at 2× image density. Its 1084 × 718 pixel stage was normalised to a 584 × 410 logical comparison panel.
+- Wide implementation: 1280 × 720 CSS/screenshot pixels at device scale factor 1. The rendered stage is 588 × 409.6 CSS pixels.
+- Compact implementation: 1024 × 768 CSS/screenshot pixels. The stage is 495.3 × 360 and the phone is 280 × 309.3.
+- Mobile implementation: 390 × 844 CSS/screenshot pixels. The stage is 351 × 360 and the phone is 257.6 × 309.3.
+- The focused AppKit comparison is 2336 × 820 pixels at 2× output density. The full-view comparison is 4640 × 1000 pixels at 2× output density.
+
+## Findings
+
+- No actionable P0, P1 or P2 findings remain.
+- Fonts and typography: the existing interface type hierarchy is unchanged. The wider surface gives the question, answer, three-row comparison and sales-review boundary more room without altering the surrounding marketing typography.
+- Spacing and layout rhythm: on the wide stage the phone now occupies approximately 45% of the background width and 86% of its height, visually matching the requested half-width / roughly-80%-height direction. Compact and mobile widths rise to approximately 57% and 73% respectively so the graphic remains dominant rather than shrinking back into the stage.
+- Colours and visual tokens: the warm stage, outline-free white phone surface, yellow buyer/review accents, red closest-match state and soft shadow remain unchanged.
+- Image quality and asset fidelity: Emma continues to use the established local portrait. No new or substitute visual asset was introduced.
+- Copy and content: the fact-checked Toyota, Hyster and Linde records, catalogue boundary and team-review language are unchanged and all remain visible.
+- Responsiveness and accessibility: the complete phone contents fit at 1280, 1024 and 390 widths with zero page or phone overflow. The illustration remains decorative because the adjacent chapter copy conveys the recommendation workflow.
+- Browser console: the final responsive checks show no warning or error entries.
+
+## Comparison history
+
+1. The first percentage-width pass resolved against an implicit shrink-to-fit grid track, producing a 160px-wide phone and compressing the recommendation table. This was a P2 proportion and legibility issue.
+2. The scene now defines explicit 100% grid tracks. The phone resolves against the full stage scene, while its 96% height preserves all three rows and the sales-review boundary.
+3. The final full-view and focused same-input comparisons confirm that the phone is materially more prominent while the established rounded, bezel-free treatment and complete workflow stay intact.
+
+## Verification
+
+- `node --test tests/site-content.test.mjs`: 67 tests passed.
+- Targeted ESLint: passed for `app/home-graphics.tsx` and `tests/site-content.test.mjs`.
+- `git diff --check`: passed.
+- Production build: passed.
+
+final result: passed
+
+# Homepage fact-checked retrieval graphic
+
+Date: 2026-08-30. Mode: **Audit → Design**.
+
+## Comparison target
+
+- Source visual truth: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-7bd0378e-48be-48d9-8dac-1b46e52e0338.png`
+- Rendered implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-retrieve-fact-checked-desktop-1440x900.jpg`
+- Compact implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-retrieve-fact-checked-compact-1024x768.jpg`
+- Mobile implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-retrieve-fact-checked-mobile-390x844.jpg`
+- Full-view same-input comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/design-qa-home-retrieve-comparison.png`
+- Focused same-input comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/design-qa-home-retrieve-focused-comparison.png`
+- Route and state: homepage, static `03 Retrieve` graphic with the related `04 Recommend` state visible immediately after it.
+
+## Normalisation
+
+- Source: 2280 × 1246 pixels at 144 dpi.
+- Desktop implementation: 1440 × 900 CSS pixels at device scale factor 1; screenshot saved as 1440 × 900 pixels.
+- Full-view comparison: each source/implementation panel is normalised to 1160 × 500 logical pixels; the local AppKit renderer emitted a 4640 × 1000 pixel `@2x` comparison.
+- Focused comparison: the source card crop is 1050 × 740 source pixels and the implementation card crop is 584 × 410 CSS/source pixels. Each is normalised to a 584 × 410 logical panel; the local renderer emitted a 2336 × 820 pixel `@2x` comparison.
+- The focused comparison is required because the five-column equipment table is too small to judge accurately in the full-section comparison.
+
+## Findings
+
+- No actionable P0, P1 or P2 findings remain.
+- Fonts and typography: the established interface typography, weight hierarchy and uppercase table labels are retained. Wider mobile rows improve the small table copy without changing the surrounding marketing type scale; no measured table cell truncates at 1440, 1024, 390 or 320 pixels.
+- Spacing and layout rhythm: the source card structure, warm stage, query, chips, catalogue table, funnel and review progression remain recognisable. The seven rows now occupy exactly seven row tracks, with negative measured table/funnel overlap and no console clipping at final desktop, compact or mobile checks.
+- Colours and visual tokens: the existing yellow Retrieve accent, pale warm surface, white table, subtle borders and highlighted closest-match row remain aligned with the source and Antbuildz tokens.
+- Image quality and asset fidelity: this graphic contains interface surfaces and the existing line icon only; no target photograph, logo or raster asset was replaced. The adjacent Emma recommendation continues to reuse the established local portrait.
+- Copy and content: the invented `FLT-*` identifiers and unsupported record counts are intentionally replaced by fact-checked manufacturer models, honest measurement labels, internally reconciling counts and a visible example-year boundary. The surrounding Retrieve title and description remain unchanged.
+- Responsiveness and accessibility: all seven records remain visible at 1440 × 900, 1024 × 768, 390 × 844 and 320 × 740; page width equals viewport width. The illustration remains hidden from assistive technology because the adjacent ordered-stage copy conveys its meaning, and reduced-motion handling for the scan line is preserved.
+- Primary interactions tested: responsive viewport changes and static stage visibility. The changed graphic has no interactive controls. Browser warning/error logs are empty.
+
+## Comparison history
+
+1. The first compact-desktop comparison found a P2 clipping issue: the fixed 176px table retained space for an eighth row, overflowed its shortened console and overlapped the funnel. The table now uses seven 22px rows (154px), the Retrieve scene uses 96% of its stage, and the compact Retrieve stage receives the space needed for the full record set. The revised 1024 capture shows all seven rows, `clippedByConsole: false` and an 11.45px separation before the funnel.
+2. The first mobile comparison preserved all rows but rendered them at 14px row height with overly compressed small type. The mobile Retrieve stage now grows to 380px, rows use 20px tracks and the table labels receive a modest size increase. The revised 390 capture shows every row, `clippedByConsole: false`, 20.09px separation before the funnel and zero horizontal page overflow. The 320px check also reports no clipped cells or page overflow.
+3. The final full-view and focused same-input comparisons confirm that the intentional data correction preserves the original composition while making the interface materially more credible.
+
+## Verification
+
+- `npm test -- --runInBand`: 67 tests passed.
+- Targeted ESLint: passed for the changed TypeScript and test files.
+- `git diff --check`: passed for the changed source, documentation and QA files.
+- Production build: passed.
+
+final result: passed
+
+---
+
 # Homepage hero conversation — glass material fidelity QA
 
 Date: 2026-08-27
@@ -1007,3 +1215,153 @@ Rendered QA covered 1440×900, 1024×768 and 390×844, plus the active chat stat
 Mode: **Audit → Design**, limited to the preview hero at 767px and below. The visual thesis is a compact browser storyboard: the full interface remains recognisable, while stage navigation, explanatory copy and playback controls remain native rather than shrinking with the scene. The original 390px composition measured 1,468.39px for the storyboard and 2,090.27px for the hero. The revised first stage measures 735px and the full hero approximately 1,346.88px. Stage-specific scene viewports are 570px for inventory, 496px for the Webstore and 554px for chat. All controls remain 44px and no horizontal overflow is present.
 
 Added a subtle vertical mask to the phone transcript so the upper and lower messages fade as they pass the visible conversation edges. The phone header, Emma portrait and composer are outside the masked region and remain sharp. Inspected all three stages at 390×844, plus the unchanged wide and compact layouts at 1440×900 and 1024×768. All 58 tests, targeted ESLint and production build pass. No configuration, service restart, shared design-system, reference-project or deployment changes.
+
+---
+
+# Homepage recommendation phone
+
+Date: 2026-08-30. Mode: **Fidelity + scoped Design**.
+
+## Comparison target
+
+- Source visual truth: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-2d9f0e9a-a66c-4989-a577-3058ee2156f3.png`
+- Rendered implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-recommend-phone-desktop-1100x720.png`
+- Focused implementation region: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-recommend-phone-stage.png`
+- Same-input comparison evidence: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/design-qa-phone-comparison.png`
+- Mobile evidence: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-recommend-phone-mobile-390x844.png`
+- Route and state: homepage, `04 Recommend` stage, static recommendation conversation visible.
+
+## Normalisation
+
+- Source pixels: 1838 × 1488. The relevant 1106 × 774 recommendation panel was cropped from the supplied screenshot and normalised to 534 × 360 for the focused comparison.
+- Implementation viewport: 1100 × 720 CSS px at device scale factor 1.
+- Implementation stage: 534 × 360 CSS px and 534 × 360 saved pixels.
+- Comparison composite: 1068 × 360 pixels, source on the left and implementation on the right.
+- Mobile viewport: 390 × 844 CSS px at device scale factor 1. The stage measures 351 × 360 and the phone surface measures approximately 171 × 322.
+
+## Findings
+
+- No actionable P0, P1 or P2 findings remain.
+- Fonts and typography: the existing Inter-based interface hierarchy, weights and copy are preserved; the UI is proportionally reduced to the phone surface without clipping or truncating the recommendation state.
+- Spacing and layout rhythm: the conversation, recommendation table and sales-review handoff are contained inside a centred 9:17 portrait surface. Rounded clipping and a soft surface shadow establish the phone shape without a bezel, outline or device chrome.
+- Colours and visual tokens: the existing pale peach stage, yellow buyer message, white reply/table surfaces, red closest-match state and yellow review handoff remain consistent with the source.
+- Image quality and asset fidelity: the existing Emma source portrait is reused, remains circular and is visibly sharp at the checked desktop and mobile sizes.
+- Copy and content: all supplied buyer, Agent, inventory option and sales-review copy is unchanged and remains inside the phone surface.
+- Responsiveness: the desktop and mobile phone proportions remain centred, and both checked viewports report zero horizontal page overflow.
+- Browser console: no warning or error entries were present after the final render.
+
+## Comparison history
+
+1. Initial implementation rendered the 9:17 phone surface against the left edge of the stage because an inherited grid `justify-content: space-between` value positioned the implicit track at the start. This was treated as a P2 composition issue. Added `place-content: center`, reloaded the page and confirmed the phone is centred within the stage.
+2. The first 390 × 844 capture used the previous 310px stage height, producing a roughly 147 × 277 phone and excessively small conversation copy. This was treated as a P2 responsive legibility issue. Increased only the final stage to 360px on mobile and raised the two message sizes. The revised capture measures roughly 171 × 322, retains the realistic portrait proportion and contains every conversation element.
+3. The final same-input comparison confirms the requested intentional change from a full-width conversation dashboard to a contained phone presentation while preserving the source content, colour hierarchy and sales-review boundary.
+
+## Focused region evidence
+
+Focused comparison was required because the conversation and four-column recommendation table are too small to judge accurately in a full-page screenshot. The saved comparison places the supplied source panel and the rendered stage together at equal 534 × 360 dimensions.
+
+## Verification
+
+- `npm test`: 67 tests passed.
+- Targeted ESLint: passed for `app/home-graphics.tsx` and `tests/site-content.test.mjs`.
+- Production build: passed.
+- Full-repository ESLint remains blocked by pre-existing generated files under `public/assets` and `public/marketplace`; the changed source files introduce no lint findings.
+
+final result: passed
+
+---
+
+# Latest QA report — Homepage fact-checked retrieval graphic
+
+The complete source/implementation normalisation, required fidelity surfaces, comparison history, responsive evidence and verification for this latest build are recorded above under `Homepage fact-checked retrieval graphic`.
+
+final result: passed
+
+---
+
+# Homepage Reason decision layer
+
+Date: 2026-08-30. Mode: **Audit → scoped Design**.
+
+## Comparison target
+
+- Source visual truth: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-230f1f53-2861-49f2-8e0b-7ca8167901df.png`
+- Secondary inspiration only: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-9bdbb4e2-359a-49f2-9b12-df6d36e73f8a.png`. Its model names, call stages, durations, token totals and costs are intentionally not reproduced.
+- Desktop implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-reason-decision-desktop-1440x900.jpg`
+- Compact implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-reason-decision-compact-1024x768.jpg`
+- Mobile implementation: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/home-reason-decision-mobile-390x844.jpg`
+- Full-view same-input comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/design-qa-home-reason-comparison.png`
+- Focused same-input comparison: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/design-qa-home-reason-focused-comparison.png`
+- Route and state: homepage, static `02 Reason` chapter showing a buyer requirement, qualification facts, decision layer, current decision and Emma's next question.
+
+## Normalisation
+
+- Source pixels: 2022 × 1308. The relevant Reason panel was cropped from the supplied source and normalised from approximately 570 × 401 source points to 584 × 410 comparison pixels.
+- Desktop implementation viewport: 1440 × 900 CSS px at device scale factor 1. The rendered stage is approximately 584 × 410 CSS px and was compared at 584 × 410 pixels.
+- Compact viewport: 1024 × 768 CSS px; the Reason stage is approximately 495 × 390 CSS px.
+- Mobile viewport: 390 × 844 CSS px; the Reason stage is 351 × 310 CSS px.
+- Full-view comparison composite: 4640 × 1000 pixels. Focused comparison composite: 2336 × 820 pixels.
+
+## Findings
+
+- No actionable P0, P1 or P2 findings remain.
+- Fonts and typography: the existing Plus Jakarta Sans chapter hierarchy and Inter interface copy remain intact. The new stage and outcome labels use the established miniature-interface scale without truncation; the adjacent semantic copy carries the full explanation at readable marketing sizes.
+- Spacing and layout rhythm: the supplied four-band structure is preserved, while the former generic three-box flow is tightened into confirmed inputs, a bounded decision layer, a visible current decision and Emma's follow-up. Desktop, compact and mobile states have no child or page overflow.
+- Colours and visual tokens: the existing blue Reason accent, white interface surfaces and restrained pale blue-violet stage remain unchanged. State meaning is repeated in text rather than colour alone.
+- Image quality and asset fidelity: Emma continues to use the established local red-top portrait; no new generated or substitute asset is introduced.
+- Copy and content: the public graphic shows requirements, industrial suitability checks and next-action categories. It does not expose model vendors, prompts, tokens, costs, scores, private routing or chain-of-thought. `Clarify before matching` avoids implying a best option before lift, load and aisle constraints are known.
+- Responsiveness: the stage measures 410px at wide desktop, 390px at compact desktop and the established 310px on mobile. All content remains contained and every checked viewport reports zero horizontal page overflow.
+- Browser console: the final 8081 page returned no warning or error entries after responsive inspection.
+
+## Comparison history
+
+1. The first compact 1024 × 768 implementation used the previous 360px stage height. The expanded decision layer pushed Emma's follow-up below the visible panel, a P2 containment issue.
+2. Increased only the Reason stage to 390px from 768–1100px and allowed its internal scene to use 98% of the stage height. The revised compact capture contains the buyer question, requirement fields, decision layer, outcome and Emma follow-up.
+3. The final combined source/implementation comparison confirms the intended product change: the source's simple interpret/gap/action flow becomes a more explicit but customer-safe requirements → checks → action decision trace, without copying proprietary telemetry.
+
+## Focused region evidence
+
+Focused comparison was required because the decision-stage labels and outcome line are too small to judge accurately in the full-page composition. The saved focused composite puts the supplied source panel and final implementation together at equal 584 × 410 dimensions.
+
+## Verification
+
+- `npm test -- --runInBand`: 67 tests passed.
+- Targeted ESLint: passed for `app/home-graphics.tsx`, `app/home-education.tsx` and `tests/site-content.test.mjs`.
+- `git diff --check`: passed.
+- Production build: passed.
+
+final result: passed
+
+---
+
+# Latest QA report — Homepage recommendation-phone scale
+
+The complete source/implementation normalisation, required fidelity surfaces, comparison history, responsive evidence and verification for the latest build are recorded above under `Homepage recommendation-phone scale`.
+
+final result: passed
+
+---
+
+# Homepage Agent-card upper-phone crop
+
+Date: 2026-08-30. Mode: **Fidelity**, scoped to the AI Sales Agent illustration inside `One connected workflow`.
+
+- User reference: `/var/folders/t8/8r5lddpx6zbg8czjdm9xcxym0000gn/T/codex-clipboard-da8d432a-6bbb-45f9-ae17-546a61e58480.png`.
+- Wide evidence: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/agent-phone-fade-1440-detail.png`.
+- Mobile evidence: `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/agent-phone-fade-390.png`.
+- The surrounding product-card layout, copy, labels, destination and connected Webstore card are unchanged.
+- The former pale rectangular conversation stage is removed from the Agent illustration. A centred portrait phone now contains the existing Emma conversation, with a subtle speaker slot and rounded device surface.
+- A static transparency mask keeps the upper phone visible and gradually fades its lower portion into the product card. The fade does not rely on animation and remains understandable with reduced motion.
+- At 1440px, the visible crop is approximately 505 × 332px and the phone is 303 × 560px. At 1024px, the crop is 387 × 320px and the phone is 263 × 540px. At 390px, the crop is 301 × 280px and the phone is 253 × 500px.
+- All three checked viewports have zero horizontal overflow. The buyer/Emma alignment, catalogue check and team-review boundary remain present in the source phone conversation.
+- All 67 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+final result: passed
+
+---
+
+# Latest QA report — Homepage connected-workflow refinement
+
+The complete source and implementation dimensions, full-view and focused same-input comparisons, responsive evidence, findings, comparison history and verification for the latest build are recorded above under `Homepage connected-workflow refinement`. Evidence is saved in `/Users/kekheanhooi/Documents/ChatGPT/ANTBUILDZ AI Website/artifacts/connected-workflow-refinement-20260830/`.
+
+final result: passed

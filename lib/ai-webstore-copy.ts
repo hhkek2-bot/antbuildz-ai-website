@@ -1,8 +1,7 @@
-// The user clarified that the wording brief applies ONLY to the local preview.
-// The approved /ai-webstore-suite route retains its original wording.
+// Canonical AI Webstore Suite copy for the promoted listing workflow.
 import { setSalesAgentText as setText } from './ai-sales-agent-copy';
 
-// Select only the Webstore preview. Exact text replacements preserve the
+// Select only the canonical Webstore route. Exact text replacements preserve the
 // transferred React nodes, layouts, animations, FAQ behaviour and link targets.
 export const WEBSTORE_DESCRIPTION = 'Extend your AI Sales Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.';
 
@@ -123,7 +122,7 @@ export const WEBSTORE_REPLACEMENTS = [
 const replacements = new Map<string, string>(WEBSTORE_REPLACEMENTS);
 
 export function correctWebstoreCopy(root: HTMLElement, pathname: string) {
-  if (pathname !== '/webstore-2-ai-webstore-preview') return;
+  if (pathname !== '/ai-webstore-suite') return;
   const page = root.querySelector('.webstore2-page');
   if (!page) return;
 

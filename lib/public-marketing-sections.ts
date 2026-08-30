@@ -45,7 +45,12 @@ const CLEAN_SECTION_SELECTORS = [
 
 const CLEAN_TITLE_SELECTORS = [
   '#home-agent-foundations',
+  '#home-product-relationship',
   '#home-faq-heading',
+].join(',');
+
+const CANVAS_TITLE_SELECTORS = [
+  '#home-data-trust-heading',
 ].join(',');
 
 const SOFT_SECTION_SELECTORS = [
@@ -59,11 +64,6 @@ const SOFT_SECTION_SELECTORS = [
   '.about-team-section',
 ].join(',');
 
-const SOFT_TITLE_SELECTORS = [
-  '#home-product-relationship',
-  '#home-data-trust-heading',
-].join(',');
-
 function matches(element: HTMLElement, selectors: string) {
   return Boolean(selectors) && element.matches(selectors);
 }
@@ -71,7 +71,8 @@ function matches(element: HTMLElement, selectors: string) {
 function inferSurface(section: HTMLElement, title: HTMLElement): SectionSurfaceRole {
   if (matches(section, DARK_SECTION_SELECTORS)) return 'dark';
   if (matches(section, CLEAN_SECTION_SELECTORS) || matches(title, CLEAN_TITLE_SELECTORS)) return 'clean';
-  if (matches(section, SOFT_SECTION_SELECTORS) || matches(title, SOFT_TITLE_SELECTORS)) return 'soft';
+  if (matches(title, CANVAS_TITLE_SELECTORS)) return 'canvas';
+  if (matches(section, SOFT_SECTION_SELECTORS)) return 'soft';
 
   const style = window.getComputedStyle(section);
   const channels = style.backgroundColor.match(/[\d.]+/g)?.map(Number) ?? [];

@@ -14,8 +14,8 @@ This register preserves route intent and design status between sessions. Read it
 | Route | Primary visitor job | Preferred primary CTA | Design source | Current status |
 | --- | --- | --- | --- | --- |
 | `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero now uses a 16.8-second muted forward-cut industrial story across equipment, tools, parts and warehouse operations, with a static reduced-motion/loading fallback and the existing conversation overlay. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
-| `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Get an AI Webstore Suite Demo | `/webstore-2` on 8080 | Original wording restored after the user clarified that the new copy belongs only to the preview. Shared adapter and route metadata exactly match the pre-wording backups; original headline, comparison summary, descriptions and original visual checked in the browser. Previous positioning audit remains advisory, not an applied rewrite |
-| `/ai-sales-agent` | Understand standalone AI-guided qualification and handover | Build Your AI Agent | `/aiagent` on 8080 | Review required: phone-width and description-size corrections saved after user feedback. Build, targeted lint and 41 tests pass. Restarted 8081 with permission and confirmed its listener; desktop/mobile verification is blocked by Browser Use URL policy. Earlier copy and capability-label checks remain historical |
+| `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Book a Demo | Selected Webstore listing workflow formerly reviewed at `/webstore-2-ai-webstore-preview` | Canonical product page now uses the approved dusty-ochre listing workflow, mixed-category catalogue enrichment, product-page handoff and Emma recommendation experience. Canonical metadata is indexable at `https://antbuildz.ai/ai-webstore-suite`; the former preview URL redirects here. Desktop, compact and mobile QA pass with one H1 and no horizontal overflow |
+| `/ai-sales-agent` | Understand standalone AI-guided qualification and handover | Build Your AI Agent | `/aiagent` on 8080 | Separate shared-header band and original 96px hero inset restored from the reference relationship; current copy, navigation, phone graphic and hero composition remain unchanged. Responsive QA details are recorded below |
 | `/ai-agent-console` | Understand how teams control knowledge, instructions and conversations | Book a Demo | `/app` on 8080 | Reference matched; operational typography unchanged against baseline |
 | `/pricing` | Compare approved product plans and choose a next step | Build Your AI Agent, Book a Demo or Contact Sales | Transferred content; Gorgias-inspired wider plan layout | Three standard cards with shorter, balanced descriptions and shared price/allowance/CTA baselines; checked at 1440px, 1100px, 1024px and 390px. Ivory/gold hover, Custom panel and commercial terms retained; legacy entitlement decisions pending below |
 | `/resources` | Discover practical industrial AI education | Explore a Guide | `/resources` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA; grouped header dropdown, all topic destinations and mobile access verified |
@@ -201,9 +201,9 @@ Historical placement: the latest removal above moves Market Shift to section two
 
 | Route | Purpose | Primary CTA | Status |
 | --- | --- | --- | --- |
-| `/webstore-2-ai-webstore-preview` | Preview the AI Webstore Suite as an optional catalogue, product-page and inventory extension to the AI Sales Agent | Book a Demo (inherited) | Latest: a company-led store banner with placeholder branding and showroom imagery, faster chat responses (about one second), five aligned inventory rows, three featured product cards with daily rental / monthly rental / sale price columns, and a continuous card-to-chat handoff followed by rental and sales enquiries. Uses Get Quote placeholders, not invented rates; commercial modes are illustrative. Bright glass, dusty ochre background, Emma portrait, shared overlay-header behaviour and centred laptop-sized hero preserved. Desktop 1440×900, laptop 1280×720, compact 1024×768 and mobile 390×844 inspected; Seven Webstore timing tests, targeted ESLint and production build pass; latest full-suite homepage test limitation is recorded below. Original public route unchanged. Local noindex/nofollow preview; manufacturer image publication rights remain unconfirmed. Evidence: `artifacts/webstore-pricing-chat-20260828/`. Earlier decisions and QA follow below. |
+| `/webstore-2-ai-webstore-preview` | Preserve old review links after the selected design became the canonical AI Webstore Suite | Redirect to AI Webstore Suite | HTTP 307 redirect to `/ai-webstore-suite`; no separate header link, indexable page or competing canonical remains. Historical preview design decisions below now describe the experience promoted to the canonical product route. |
 
-The preview reuses the copied router's existing preview alias so the canonical `/ai-webstore-suite` implementation and all other page sections can remain intact. Its source and CSS are isolated in `app/webstore-2-ai-webstore-preview/`; it is not a new approved shared design pattern or a published product route.
+The selected Webstore experience remains isolated in `app/webstore-2-ai-webstore-preview/` for implementation continuity, but now renders only from canonical `/ai-webstore-suite`. The former preview route is a compatibility redirect and no longer owns metadata or navigation.
 
 Current background colour trial (28 August 2026): the preview hero retains its equipment-yard photograph with a muted blue-grey treatment and a subtle warm highlight. White heading text, glass surfaces, product imagery and the internal store banner are unchanged. All 45 tests and the production build pass; the preview returns HTTP 200. Rendered review remains pending because browser discovery reports crashed/unreachable tabs. This is a local colour experiment, not an approved shared design rule.
 
@@ -238,7 +238,7 @@ Current background colour trial (28 August 2026): the preview hero retains its e
 - Public Header includes an accessible Industries dropdown with all eight Who We Serve destinations; these detailed links also remain in the shared footer, but are omitted from the simplified hamburger menu.
 - Primary header order is AI Sales Agent, AI Webstore Suite, Pricing, Industries, Resources; all header text controls share the same Inter navigation typography tokens.
 - Public dropdowns and menus share the `--menu-*` system: Plus Jakarta Sans headings, Inter labels/copy, canvas surfaces, subtle borders, 24px floating-panel corners, 12px item corners, soft hover, yellow selection and blue focus. This covers Industries, language selection, the public drawer and inline AI Agent Roles links without changing their destinations.
-- Public Header centres the desktop product navigation independently of the left wordmark and right utilities; the right side contains Sign in, Book a Demo and Menu, while Translation lives in the footer.
+- Public Header centres the desktop product navigation independently of the left wordmark and right utilities; the desktop right side contains Sign in and Book a Demo, while Translation lives in the footer. The hamburger is reserved for the compact/mobile header at 980px and below; operational Console navigation remains unchanged.
 - The equipment marketplace listing section is not part of the Antbuildz.AI homepage.
 - The homepage marketplace search is omitted; the hero leads with Antbuildz.AI positioning and product CTAs.
 - The requested homepage Webstore and Sales Agent promotional sections are omitted.
@@ -758,3 +758,171 @@ Scaled the complete homepage `Your AI Sales Agent / Your business at its core` c
 Replaced the five-second forward/reverse hero loop with a 16.83-second forward-moving industrial story. The sequence moves from the equipment yard through tools, parts inventory and warehouse operations, using restrained 0.8-second dissolves before returning to the matching equipment-yard loop frame. No segment plays in reverse. The new silent H.264 asset remains 1280×720 at 24fps, uses fast-start metadata and is approximately 2.9MB.
 
 Browser-inspected active playback at 1440×900, 1024×768 and 390×844. The new source loads and plays at all three sizes, the existing blur and contrast treatment remains legible behind the title, navigation and title geometry are unchanged, each route check retains one H1 and there is no horizontal overflow. Reduced-motion visitors still receive the static poster instead of visible video playback.
+
+## 2026-08-29 — About ecosystem destinations
+
+The About page retains three platform pillars, now named `Agentic AI`, `Webstore Suite` and `Marketplace`. Its closing `Build Your AI Powered Industrial Business` panel presents only `Antbuildz AI Agent` and `Marketplace`: the Agent links directly to `https://antbuildz.ai`, while Marketplace links directly to `https://antbuildz.com`. The transferred production bundle remains unchanged; the adjustment is applied through the source-level compatibility layer. Browser-checked the changed sections at 1280×720 and 390×844 with one H1 and no horizontal overflow; both closing links were exercised and reached their requested domains.
+
+## 2026-08-30 — Emma inventory card replaces industrial-product section
+
+Fidelity-mode homepage composition change. Removed the source-owned `Built for the complexity of industrial products` section and relocated the existing `Talk to Emma, Our AI Sales Agent` inventory card into its position immediately before the photographic Who We Serve carousel. The original Emma component, tablet photography, inventory-aware wording and `/chat` action are reused rather than duplicated. Route cleanup restores the transferred component correctly when leaving and returning to Home.
+
+Browser-inspected at 1440×900 and 390×844. The homepage renders one Emma section, the retired industrial-product section is absent, the card precedes Who We Serve, its image loads, the page retains one H1 and both viewports have zero horizontal overflow. Pricing-to-Home navigation also preserves the placement. All 66 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-30 — Emma inventory-tablet CTA photography
+
+Fidelity-mode homepage refinement of the final `Talk to Emma, Our AI Sales Agent` section. Replaced the interim portrait with a new versioned 1672×941 image derived from the read-only 8080 Emma reference: the same red-top identity now checks an industrial product catalogue on a tablet within a credible inventory setting. The wide composition retains bright copy space on desktop and reframes Emma, the tablet and the existing identity badge above the copy on mobile. No readable prices, quantities, availability states, logos or stock claims appear in the image.
+
+The established warm card, border, typography, inventory-aware wording and `/chat` action remain unchanged. Browser-inspected at 1440×900, 1024×768 and 390×844: the image loads at its native dimensions, the CTA remains 54px high, every viewport retains one H1 and zero horizontal page overflow, and browser logs are clear. All 66 content tests, targeted ESLint, `git diff --check` and the production build pass. The 8080 project, previous image asset, configuration, services and deployment remain untouched.
+
+## 2026-08-30 — Inventory knowledge replaces the Emma introduction
+
+Design-mode homepage copy correction. Removed the visible `Meet Emma` eyebrow and changed the inventory card from a persona introduction to a product-capability explanation. The new heading is `Built to Understand Your Inventory`; supporting copy covers approved catalogue information, technical specifications, pricing guidance, availability rules, product comparison and suitable recommendations with team review. The image badge now reads `AI Sales Agent`, and the action is `Explore AI Sales Agent` linking to `/ai-sales-agent` instead of the chat demonstration. The established Emma tablet photography, warm card treatment and responsive composition remain unchanged.
+
+## 2026-08-30 — Smaller inventory-card heading
+
+Design-mode homepage typography refinement. Reduced only the `Built to Understand Your Inventory` heading to 28px at wide desktop, 26px at compact desktop and 24px on mobile so it sits closer to the supporting-description scale. The description remains 18px, 17px and 16px at the same breakpoints; the card copy, image, badge, action and shared heading system remain unchanged.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The title keeps its intended two-line hierarchy, the mobile card remains readable and touch-friendly, and all checked viewports retain zero horizontal overflow. All 66 content tests, targeted ESLint and the production build pass.
+
+## 2026-08-30 — Desktop hamburger removed from the public header
+
+System-mode shared-header refinement. The complete public navigation already exposes AI Sales Agent, AI Webstore Suite, Pricing, Industries and Resources on desktop, so the redundant hamburger is now hidden from 981px upwards. Sign in and Book a Demo remain visible desktop utilities. At 980px and below, the established hamburger and six-link drawer remain available; the signed-in AI Agent Console and its operational navigation controls are outside this public-header rule.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. Wide and compact desktop retain the centred full navigation, Sign in and Book a Demo with no hamburger or horizontal overflow; the 1024px navigation keeps 4px clearance before Sign in. On mobile, the hamburger opens the established six-link drawer, its close control dismisses the drawer and returns focus to the trigger, and the page has zero horizontal overflow. All 67 content tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-30 — Recommendation conversation contained in a phone surface
+
+Fidelity-plus-Design refinement of the homepage `04 Recommend` illustration. The existing Emma conversation, buyer question, supported-inventory comparison and sales-review boundary now sit inside a centred 9:17 portrait phone surface rather than stretching across the full stage. The phone uses rounded clipping, a light surface and restrained shadow without a bezel, outline, device chrome or added controls. All existing copy, colour hierarchy and inventory-review safeguards remain unchanged.
+
+Browser-inspected at 1100×720 and 390×844. The phone measures approximately 171×324px at compact desktop and 171×322px on mobile; the mobile stage alone grows to 360px so the content remains recognisable while retaining the portrait proportion. Both viewports have zero horizontal page overflow and clear browser logs. The supplied source and rendered stage were compared together in `artifacts/design-qa-phone-comparison.png`; the final QA result is `passed`. All 67 content tests, targeted ESLint, `git diff --check` and the production build pass. Full-repository ESLint continues to report unrelated pre-existing issues in generated Marketplace assets.
+
+## 2026-08-30 — Fact-checked mixed-equipment retrieval graphic
+
+Audit followed by Design-mode refinement of the homepage `03 Retrieve` and `04 Recommend` illustrations. Replaced the invented `FLT-*` records and arbitrary large funnel counts with seven recognisable manufacturer models spanning electric and diesel forklifts, a telehandler, an articulating boom lift, a scissor lift and a compact excavator. The displayed ratings retain their correct measurement type: forklift rated load, telehandler maximum lift capacity, access-platform capacity and excavator operating weight. Manufacturer sources and interpretation boundaries are recorded in `app/HOME-EQUIPMENT-SOURCES.md`.
+
+Year and approximate age are visibly labelled as example fleet metadata rather than manufacturer specifications or live Antbuildz inventory. The filtering counts now reconcile to the seven visible records, and the recommendation stage continues the same Toyota, Hyster and Linde models while keeping mast, load-centre, site-suitability and availability confirmation with the sales team.
+
+Browser-inspected at 1440×900, 1024×768, 390×844 and 320×740. A first compact-desktop pass exposed table clipping; the Retrieve scene now uses its available stage height, the seven-row table no longer reserves an unused eighth row, and the stage grows only where required at compact and mobile widths. The final render shows every row with no table/funnel overlap, no clipped cells and zero horizontal page overflow. Full-view and focused same-input comparisons are saved under `artifacts/`; the final QA result is `passed`.
+
+## 2026-08-30 — Customer-safe reasoning and decision layer
+
+Audit followed by Design-mode refinement of the homepage `02 Reason` chapter. The graphic now shows a public decision trace from confirmed buyer inputs through essential industrial suitability checks to one of three next actions: clarify, retrieve supported options or route to review. The current example stops at `Clarify before matching` because lift height, load geometry and aisle clearance are incomplete. Emma asks for those constraints before the later retrieval and recommendation stages.
+
+Forklift qualification wording was cross-checked against OSHA load-centre/nameplate guidance, Toyota's aisle-width calculation factors and Hyster's right-angle-stack clearance tables. The public trace includes rated load, load centre, mast/lift configuration, load geometry and aisle clearance, while explicitly avoiding model names, prompts, durations, token totals, costs, scores, hidden routing and chain-of-thought. Source links and the product boundary are recorded in `app/HOME-EQUIPMENT-SOURCES.md`.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The first compact pass exposed a clipped Emma follow-up; only the Reason stage now grows to 390px at compact desktop, while mobile retains the established 310px stage. The final implementation contains every state, has zero horizontal page overflow and clear browser logs. Full-view and focused same-input comparisons are saved under `artifacts/`; the final QA result is `passed`. All 67 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-30 — Larger recommendation phone
+
+Fidelity-plus-Design refinement of the homepage `04 Recommend` chapter. Enlarged the outline-free phone from a narrow 9:17 presentation to a broader surface that occupies approximately 45% of the wide stage and 86% of its height. Compact desktop and mobile increase its share to approximately 57% and 73% of the stage width so the conversation remains the dominant visual. The rounded clipping, light phone surface, soft shadow, Emma portrait, fact-checked catalogue records and sales-review boundary remain unchanged.
+
+Browser-inspected at 1280×720, 1024×768 and 390×844. An initial percentage-width pass resolved against a shrink-to-fit grid track and compressed the table; explicit full-size grid tracks now keep all three option rows and the review handoff visible. Every checked viewport has zero page and phone overflow and clear browser logs. Full-view and focused same-input comparisons are saved in `artifacts/recommend-phone-scale-20260830/`; the final QA result is `passed`. All 67 tests, targeted ESLint, `git diff --check` and the production build pass.
+
+## 2026-08-30 — Simplified four-card selection process — superseded
+
+Design-mode homepage refinement inspired by the supplied Sierra feature layout. Replaced the long alternating technical chapters on Home with one compact four-card overview: Ingest, Reason, Retrieve and Recommend. Each card now carries one simple customer-facing idea, one short heading and one concise explanation. Wide desktop uses one row, tablet uses a 2 × 2 grid and mobile stacks the cards. The detailed fact-checked scenes remain in source for reversibility and possible product-detail use but are no longer rendered in this homepage section.
+
+Remotion guidance was used to reconsider motion; no player or animation was added because the static four-card explanation communicates the sequence more clearly and avoids adding runtime weight. Existing capability boundaries remain visible: approved knowledge, missing constraints, supported catalogue and inventory, and team review for suitability, availability and commercial terms.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844 with zero horizontal overflow and clear browser logs. The Sierra source and implementation comparison is saved at `artifacts/process-simple-20260830/design-qa-comparison.png`; the final QA result is `passed`. All 67 tests, targeted ESLint, `git diff --check` and the production build pass. No configuration, service restart, reference-project change or deployment was performed.
+
+## 2026-08-30 — Original alternating process layout restored
+
+Fidelity-mode correction following the user's clarification that the Sierra reference applied only to simplifying the inner graphics, not to changing the established section composition. Restored the four large alternating graphic-and-copy rows on Home. Wide and compact desktop alternate the visual left and right; mobile keeps each stage's copy before its visual. The concise Ingest, Reason, Retrieve and Recommend scenes remain inside the original large frames.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. Wide visuals measure approximately 584×410px, compact visuals approximately 495×360px, and mobile visuals 351×310px. Every checked viewport has zero horizontal overflow and the mobile copy-first reading order is intact. Evidence is saved as `artifacts/process-layout-restored-1440.png` and `artifacts/process-layout-restored-390-process.png`; the final QA result is `passed`. All 67 tests, targeted ESLint, `git diff --check` and the production build pass. No configuration, service restart, reference-project change or deployment was performed.
+
+## 2026-08-30 — Agent conversation becomes a fading upper-phone visual
+
+Fidelity-mode homepage refinement scoped to the AI Sales Agent illustration in `One connected workflow`. Removed the pale rectangular conversation stage while retaining the existing Emma conversation inside a centred portrait phone. Only the upper portion of the phone is shown; a static gradient mask gradually fades the device and conversation into the product card below. The product-card layout, copy, `Start here` label, destination, connector and Webstore card remain unchanged.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The phone remains centred and readable, the fade is gradual at all three sizes, and every checked viewport has zero horizontal overflow. Evidence is saved as `artifacts/agent-phone-fade-1440-detail.png` and `artifacts/agent-phone-fade-390.png`; the final QA result is `passed`. All 67 tests, targeted ESLint, `git diff --check` and the production build pass. No configuration, service restart, reference-project change or deployment was performed.
+
+## 2026-08-30 — Lighter connected-product cards and directional integration
+
+Fidelity-plus-Design refinement of the homepage `One connected workflow` product pairing. Removed the yellow and violet outer outlines from the AI Sales Agent and AI Webstore Suite cards while preserving their established layout, soft surfaces, radii, responsive stacking and product hierarchy. The two action labels now read `AI Sales Agent` and `AI Webstore Suite`; their arrows and destinations are unchanged.
+
+The Webstore catalogue thumbnails now use one fixed media frame with per-source optical correction, balancing the apparent scale of the drill, bearing and forklift without replacing the approved local product images. Replaced the static centre symbol with a thin dotted integration line whose restrained glow travels from Webstore into the Agent. On mobile the same relationship becomes bottom-to-top, and reduced-motion users receive a static endpoint rather than continuous motion.
+
+Browser-inspected at 1674×939, 1440×900, 1024×768 and 390×844. The card outlines are absent, the three products are visually balanced, the connector direction is correct in both orientations, CTA destinations are preserved, every checked viewport has zero horizontal overflow and browser logs are clear. Full-view, focused and mobile evidence is saved in `artifacts/connected-workflow-refinement-20260830/`; the final QA result is `passed`. All 67 tests, targeted ESLint, `git diff --check` and the production build pass. No shared design-system, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Webstore 2 shared-header shortcut
+
+Design-mode shared-header addition requested for the Webstore 2 preview. Added `Webstore 2` directly after `AI Webstore Suite` in the public desktop navigation, linking to `/webstore-2-ai-webstore-preview`. It reuses the established navigation-link typography, spacing, focus state and yellow active underline, leaving Book a Demo as the dominant header action. Added the same direct destination to the flat mobile drawer so the preview remains reachable below the desktop-navigation breakpoint.
+
+Browser-inspected the preview at 1440×900 and 1024×768, and opened the drawer at 390×844. The new link reaches the requested route, receives `aria-current="page"` on the preview, retains a 44px mobile target, and all checked viewports have zero horizontal overflow. The page retains one H1. The existing Remotion licensing notice remains in the browser console and is unrelated to this navigation change. All 67 tests, targeted ESLint and `git diff --check` pass.
+
+## 2026-08-30 — Lighter global Sales Agent section
+
+Design-mode refinement scoped to the `24/7 Sales Agent` band on the Webstore 2 preview. Replaced the heavy ink background with the approved soft violet surface and restrained violet/blue radial light. The globe, language orbit, layout, copy and primary action remain unchanged; heading and description colours now use the public ink/body roles, the eyebrow uses a deeper brand blue, and the secondary Demo action uses a quiet translucent white treatment.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The desktop two-column and mobile stacked compositions remain intact, all checked viewports have zero horizontal overflow, and the route retains one H1. Evidence is saved in `artifacts/webstore-global-agent-light-20260830/`; the final QA result is `passed`. All 68 tests, targeted ESLint and `git diff --check` pass. No shared design-system, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Lighter connected-workflow page surface
+
+Design-mode homepage refinement scoped to `One connected workflow`. Remapped this section from the stronger soft surface (`#F1EFF8`) to the default public canvas (`#F8F7FF`) so it sits more quietly between the clean white process section and the following homepage content. The existing Agent/Webstore layout, warm and cool card treatments, phone fade, dotted integration direction, copy, destinations and responsive stacking remain unchanged. No new page-specific colour was introduced.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The canvas role is applied at all three widths, the two product actions remain 54px high on mobile, the route retains one H1 and every checked viewport has zero horizontal overflow. Evidence is saved in `artifacts/connected-workflow-lighter-surface-20260830/`; the final QA result is `passed`. All 68 tests, targeted ESLint, `git diff --check` and the production build pass. No shared design token, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Trust panel returns to the page canvas
+
+Design-mode homepage refinement scoped to `Data protection & trust`. Removed the stronger soft-lavender section fill by remapping the outer band from the soft surface (`#F1EFF8`) to the default public canvas (`#F8F7FF`), matching the surrounding homepage. The restrained blue trust panel remains the section’s only coloured surface; its copy, privacy-policy destination, three assurance principles, border, layout and responsive behaviour are unchanged.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The canvas role is applied at all three widths, the panel remains contained, the privacy link retains a 44px mobile target, the route retains one H1 and every checked viewport has zero horizontal overflow. Evidence is saved in `artifacts/trust-section-canvas-20260830/`; the final QA result is `passed`. All 68 tests, targeted ESLint, `git diff --check` and the production build pass. No shared design token, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Smaller inventory-card description
+
+Design-mode homepage typography refinement scoped to the `Built to Understand Your Inventory` card. Reduced the supporting description from the inherited introduction scale to `clamp(15px, 1.05vw, 16px)` with a 1.55 line-height, while preserving its restrained 52-character measure. The heading, copy, image, badge, action, card geometry and destinations remain unchanged.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The description computes to 15px at all three checked widths, wraps cleanly, the mobile action remains 54px high, the route retains one H1 and every viewport has zero horizontal overflow. Evidence is saved in `artifacts/inventory-description-smaller-20260830/`; the final QA result is `passed`. All 68 tests, targeted ESLint, `git diff --check` and the production build pass. No shared design token, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Public heroes extend behind the shared header
+
+System-mode Public Header refinement applied across the public marketing route system. At the top of each route, the fixed header is transparent and the page's own hero surface now continues behind it. A responsive header-height spacer preserves every hero's established content position instead of copying route-specific colours into the navigation. After 24px of scrolling, the header returns to the shared canvas-and-white blurred surface. Home and the Webstore 2 preview retain their established dark-image overlay contrast, while the signed-in AI Agent Console remains outside the public treatment.
+
+Browser-inspected the AI Sales Agent, AI Webstore Suite, Pricing, Resources, About, Agreements, AI Help and all eight Who We Serve routes at 1440×900, with representative product and industry checks at 390×844. Every checked top state uses its own hero surface behind the header, the scrolled header remains fixed and legible, the mobile drawer opens normally, the original H1 positions are preserved and every viewport has zero horizontal overflow. Home, Webstore 2 and Console exclusions were also confirmed. Evidence is saved in `artifacts/public-hero-header-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No route copy, CTA, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Pricing hero consolidated around customer channels
+
+Fidelity-plus-Design refinement of the Pricing page hierarchy. Replaced the previous `One Conversation. Thousands in Revenue.` hero with `Deploy Your AI Sales Agent Across Your Customer Channels.` and the concise, qualified supporting line `One business conversation may turn into thousands in revenue.` The repeated AI Sales Agent section heading immediately above the billing controls is hidden, leaving one page title while preserving the monthly/annual control and all plan cards.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The authored break produces a balanced two-line desktop title, the mobile title and description wrap cleanly, the route retains one visible H1 and every checked viewport has zero horizontal overflow. Monthly and annual selection continue to update the plan price correctly. Evidence is saved in `artifacts/pricing-hero-consolidated-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No pricing, limits, CTA destinations, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Shared header dropdowns use restrained canvas glass
+
+System-mode refinement of the shared Industries and Resources desktop dropdowns. Replaced the opaque canvas fill with a 90% canvas-glass surface and 18px backdrop blur, retaining the established border, broad shadow, 24px corners, centred frame and content grouping. Standardised both dropdowns to the approved menu type roles: Plus Jakarta Sans 24px/700 for the panel title, Plus Jakarta Sans 12px/800 for the eyebrow, Inter 14px/600 for link titles, Inter 13px/400 for supporting descriptions and Inter 12px/600 for group labels.
+
+Browser-inspected Resources at 1440×900 and both shared dropdowns at 1024×768, with the compact/mobile exclusion checked at 390×844. The translucent surface remains legible above page content, both menus share the same computed typography, opening one closes the other, Escape closes the active menu and returns focus to its trigger, and every checked viewport has zero horizontal overflow. Evidence is saved in `artifacts/header-dropdown-glass-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No route content, destination, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Selected Webstore experience becomes the canonical product page
+
+Fidelity/System route promotion requested for AI Webstore Suite. `/ai-webstore-suite` now renders the complete selected Webstore listing workflow previously reviewed at `/webstore-2-ai-webstore-preview`, preserving its dusty-ochre hero, catalogue enrichment storyboard, mixed industrial products, product-page handoff, Emma recommendation conversation, responsive layout and existing actions. The canonical title, description, social URL and canonical URL now use `https://antbuildz.ai/ai-webstore-suite` with index/follow metadata. The old preview URL returns a 307 redirect to the canonical page so saved review links continue to work without competing in search.
+
+Removed the temporary `Webstore 2` shortcut from the desktop Public Header and the mobile drawer. The desktop order is again AI Sales Agent, AI Webstore Suite, Pricing, Industries and Resources; the flat mobile drawer contains AI Sales Agent, AI Webstore Suite, AI Agent Console, Pricing, Resources and About Us. AI Webstore Suite retains its active state and the established transparent overlay header above the dark industrial hero.
+
+Browser-inspected the canonical route at 1440×900, 1024×768 and 390×844. The selected design renders at every width, the former preview link is absent, the mobile drawer contains exactly six intended destinations, canonical metadata is correct, the old URL redirects, the route retains one H1 and every checked viewport has zero horizontal overflow. Evidence is saved in `artifacts/ai-webstore-canonical-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No pricing, claims, product data, configuration, service restart, reference-project, deployment or file-deletion change was made.
+
+## 2026-08-30 — AI Sales Agent header-to-hero spacing restored
+
+Fidelity-mode correction scoped to `/ai-sales-agent`. Restored the transferred header and hero relationship from the read-only `/aiagent` reference: the shared header remains in its own band, followed by the hero's original 96px content inset. The current H1, supporting copy, CTAs, navigation order, Emma phone graphic, hero dimensions and responsive composition remain unchanged. This route-specific decision supersedes the AI Sales Agent portion of the earlier public-hero overlay treatment without changing the other public routes.
+
+Browser-inspected at 1440×1000, 1024×768 and 390×844. The header remains in normal sticky flow, the hero begins directly below it and the content inset computes to 96px at every checked width. The route retains one H1, the temporary Webstore 2 navigation item remains absent and every viewport has zero horizontal overflow. The 44px mobile menu trigger opens and closes the six-link drawer normally. Evidence is saved in `artifacts/ai-sales-agent-header-gap-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No hero copy, CTA, phone graphic, navigation order, configuration, service restart, reference-project, deployment or file-deletion change was made.
+
+## 2026-08-30 — Connected workflow uses a clean white surface
+
+Design-mode homepage refinement scoped to `One connected workflow`. Remapped the section's outer surface from the default canvas (`#F8F7FF`) to the approved clean surface (`#FFFFFF`) so it matches the surrounding white sections. The warm AI Sales Agent card, cool AI Webstore Suite card, fading phone, dotted integration direction, copy, spacing, destinations and responsive stacking remain unchanged. This supersedes the earlier canvas-surface choice for this section only.
+
+Browser-inspected at 1440×1000, 1024×768 and 390×844. The section computes to the clean white surface at all three widths, both product destinations remain unchanged, the two mobile actions remain above 54px and every checked viewport has zero horizontal overflow. Evidence is saved in `artifacts/connected-workflow-white-surface-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No copy, card treatment, illustration, spacing, interaction, shared token, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Sierra-inspired compact selection overview
+
+Design-mode homepage refinement based on the user-supplied Sierra feature-grid reference. Replaced the oversized alternating `From your inventory to recommendation` chapters with one lean editorial workflow row: four evenly aligned customer-facing interface panels on wide desktop, a 2 × 2 tablet grid and a visual-first single-column mobile sequence. The established Antbuildz title, four-stage order, approved catalogue and inventory boundaries, Emma recommendation handoff, review language and violet/blue/gold/red stage identities remain unchanged. No Sierra copy, assets or product components were copied.
+
+This decision supersedes the earlier `Original alternating process layout restored` composition for this homepage section. Browser-inspected at 1440×1000, 1024×768 and 390×844. Every panel fits its frame without internal clipping, the source order remains visual then supporting copy, the route retains one H1 and every checked viewport has zero horizontal overflow. Evidence is saved in `artifacts/process-sierra-redesign-20260830/`; the final QA result is `passed`. All 69 tests, targeted ESLint, `git diff --check` and the production build pass. No copy, capability claim, route, CTA, shared design token, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-30 — Homepage process composition locked
+
+Fidelity-mode correction following the user's explicit instruction that the attached `From your inventory to recommendation` composition must not change. The approved layout is now a durable section contract: centred eyebrow/title/description, four equal visual-first columns on wide desktop, a 2 × 2 compact layout and a single-column mobile stack with every graphic immediately before its own label, title and description. Future requests to refine this section are graphic-only unless the user explicitly asks to unlock the layout.
+
+No visible layout, copy, route, CTA or graphic changed in this correction because the current implementation already matches the supplied composition. Source comments, design-system guidance and regression assertions now guard the column structure, introduction alignment, panel spacing and visual-before-copy order.

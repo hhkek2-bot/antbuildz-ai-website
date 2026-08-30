@@ -728,6 +728,9 @@ let homeHeroRuntimeElement: HTMLElement | null = null;
 let homeHeroRuntimeCleanup: (() => void) | null = null;
 let homeHeroVideoElement: HTMLVideoElement | null = null;
 let homeHeroVideoCleanup: (() => void) | null = null;
+let publicHeroHeaderCleanup: (() => void) | null = null;
+let publicHeroHeaderElement: HTMLElement | null = null;
+let publicHeroSurfaceElement: HTMLElement | null = null;
 
 // Reuse distinct Who We Serve hero transcripts, not variations of the rental chat.
 const HOME_BACKGROUND_CONVERSATIONS = [
@@ -887,7 +890,12 @@ function correctIndustriesMenu(root: HTMLElement) {
 }
 
 function correctHeaderLayout(root: HTMLElement) {
+  const productLinks = root.querySelector<HTMLElement>('.bright-nav-product-links');
   const utilities = root.querySelector<HTMLElement>('.bright-nav-utilities');
+
+  if (productLinks) {
+    productLinks.querySelectorAll('.antbuildz-header-webstore-two').forEach(link => link.remove());
+  }
 
   if (utilities && !utilities.querySelector('.antbuildz-header-demo')) {
     const demoLink = document.createElement('a');
@@ -1180,6 +1188,68 @@ function correctFooter(root: HTMLElement) {
   }
 }
 
+const ABOUT_AI_DESTINATION = 'https://antbuildz.ai';
+const ABOUT_MARKETPLACE_DESTINATION = 'https://antbuildz.com';
+
+function bindAboutDestination(link: HTMLAnchorElement, destination: string) {
+  link.setAttribute('href', destination);
+  link.removeAttribute('target');
+  link.removeAttribute('rel');
+  link.dataset.antbuildzAboutDestination = destination;
+  if (link.dataset.antbuildzAboutDestinationBound === 'true') return;
+  link.dataset.antbuildzAboutDestinationBound = 'true';
+  link.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey
+      || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.assign(link.dataset.antbuildzAboutDestination ?? destination);
+  }, true);
+}
+
+function correctAboutEcosystem(root: HTMLElement) {
+  if (window.location.pathname !== '/about') return;
+
+  const buildSection = root.querySelector<HTMLElement>('.about-build-section');
+  if (buildSection) {
+    const headingCopy = buildSection.querySelector<HTMLElement>('.about-section-heading > p');
+    setPricingText(
+      headingCopy,
+      'Antbuildz brings Agentic AI, Webstore Suite, and Marketplace together to power the full industrial rental and sales journey — from product discovery and customer intent to smart recommendations, qualified enquiries, and closed opportunities.',
+    );
+    const pillarTitles = Array.from(buildSection.querySelectorAll<HTMLElement>('.about-build-card > h3'));
+    ['Agentic AI', 'Webstore Suite', 'Marketplace'].forEach((title, index) => {
+      setPricingText(pillarTitles[index], title);
+    });
+  }
+
+  const finalSection = root.querySelector<HTMLElement>('.about-final-section');
+  if (!finalSection) return;
+  const actions = finalSection.querySelector<HTMLElement>('.about-final-actions');
+  actions?.setAttribute('aria-label', 'Explore Antbuildz AI Agent or Marketplace');
+
+  Array.from(finalSection.querySelectorAll<HTMLAnchorElement>('a.about-final-action')).forEach((link) => {
+    const label = link.querySelector<HTMLElement>('span')?.textContent?.trim();
+    if (label === 'AI Agent' || label === 'Antbuildz AI Agent') {
+      setPricingText(link.querySelector('span'), 'Antbuildz AI Agent');
+      link.hidden = false;
+      link.removeAttribute('inert');
+      bindAboutDestination(link, ABOUT_AI_DESTINATION);
+      return;
+    }
+    if (label === 'AI-Powered Webstore') {
+      link.hidden = true;
+      link.setAttribute('inert', '');
+      return;
+    }
+    if (label === 'Marketplace') {
+      link.hidden = false;
+      link.removeAttribute('inert');
+      bindAboutDestination(link, ABOUT_MARKETPLACE_DESTINATION);
+    }
+  });
+}
+
 function createHomeHeroConversation(
   messages: typeof HOME_HERO_CONVERSATION = HOME_HERO_CONVERSATION,
   layer: 'centre' | 'left' | 'right' | 'outer-left' | 'outer-right' = 'centre',
@@ -1387,6 +1457,70 @@ function resetHomeHeroVideo() {
   homeHeroVideoCleanup?.();
   homeHeroVideoCleanup = null;
   homeHeroVideoElement = null;
+}
+
+function resetPublicHeroHeader() {
+  publicHeroHeaderCleanup?.();
+  publicHeroHeaderCleanup = null;
+  publicHeroHeaderElement = null;
+  publicHeroSurfaceElement = null;
+}
+
+function correctPublicHeroHeader(root: HTMLElement) {
+  const header = root.querySelector<HTMLElement>('.antbuildz-public-header');
+  const path = window.location.pathname;
+  // Home and the canonical AI Webstore Suite own darker, fixed overlay-header
+  // treatments. AI Sales Agent retains its transferred separate header band
+  // and component-owned hero inset. The Console has no public header.
+  const usesExistingOverlay = path === '/' || path === '/ai-webstore-suite';
+  const preservesHeaderGap = path === '/ai-sales-agent';
+  if (!header || usesExistingOverlay || preservesHeaderGap) {
+    if (publicHeroHeaderElement || publicHeroSurfaceElement) resetPublicHeroHeader();
+    return;
+  }
+
+  const page = header.nextElementSibling as HTMLElement | null;
+  const directHero = page?.querySelector<HTMLElement>(
+    ':scope > .bright-hero, :scope > section[class~="bg-hero"]',
+  );
+  const surface = directHero ?? page;
+  if (!surface) {
+    resetPublicHeroHeader();
+    return;
+  }
+
+  if (header === publicHeroHeaderElement && surface === publicHeroSurfaceElement) return;
+  resetPublicHeroHeader();
+  publicHeroHeaderElement = header;
+  publicHeroSurfaceElement = surface;
+  header.classList.add('is-public-hero-overlay');
+  surface.classList.add('antbuildz-public-hero-surface');
+
+  const spacer = document.createElement('div');
+  spacer.className = 'antbuildz-public-hero-spacer';
+  spacer.setAttribute('aria-hidden', 'true');
+  surface.prepend(spacer);
+
+  const syncHeaderHeight = () => {
+    root.style.setProperty('--public-header-height', `${header.getBoundingClientRect().height}px`);
+  };
+  const syncHeaderScroll = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 24);
+  };
+  const headerSizeObserver = new ResizeObserver(syncHeaderHeight);
+  headerSizeObserver.observe(header);
+  window.addEventListener('scroll', syncHeaderScroll, { passive: true });
+  syncHeaderHeight();
+  syncHeaderScroll();
+
+  publicHeroHeaderCleanup = () => {
+    window.removeEventListener('scroll', syncHeaderScroll);
+    headerSizeObserver.disconnect();
+    header.classList.remove('is-public-hero-overlay', 'is-scrolled');
+    surface.classList.remove('antbuildz-public-hero-surface');
+    spacer.remove();
+    root.style.removeProperty('--public-header-height');
+  };
 }
 
 function setupHomeHeroVideo(hero: HTMLElement) {
@@ -1620,6 +1754,7 @@ function correctHomepage(root: HTMLElement) {
   const isHomepage = window.location.pathname === '/';
   root.classList.toggle('antbuildz-ai-home', isHomepage);
   document.body.classList.toggle('antbuildz-ai-home-active', isHomepage);
+  correctHomeInventoryAgentCard(root, isHomepage);
   const existingIndustries = root.querySelector<HTMLElement>('.antbuildz-home-industries');
   if (!isHomepage) {
     resetHomeHeroRuntime();
@@ -1666,6 +1801,56 @@ function correctHomepage(root: HTMLElement) {
   if (heroSection && !existingIndustries) {
     heroSection.insertAdjacentElement('afterend', createHomeIndustriesSection());
   }
+}
+
+const HOME_AGENT_CARD_ORIGINAL = {
+  image: '/marketplace/how-it-works/assets/aria-cta-background-v2.jpg',
+  imageAlt: 'Emma, Antbuildz AI Sales Agent',
+  eyebrow: 'Meet Emma',
+  title: 'Talk to Emma, Our AI Sales Agent',
+  description: 'Tell Emma what you need, whether you’re looking to rent or buy, and any product preferences. She’ll guide you to the right option.',
+  button: 'Talk to Emma',
+  buttonAria: 'Talk to Emma in the Antbuildz AI Agent terminal',
+  buttonHref: '/chat',
+  badge: 'Emma · AI Sales Agent',
+} as const;
+
+const HOME_AGENT_CARD_INVENTORY = {
+  image: '/images/emma-inventory-tablet-v1.png',
+  imageAlt: 'Emma checking approved industrial product inventory on a tablet',
+  eyebrow: null,
+  title: 'Built to Understand Your Inventory',
+  description: 'Your AI Sales Agent works from the catalogue, technical specifications, pricing guidance and availability rules you approve. It can answer detailed product questions, compare relevant options and guide buyers towards suitable recommendations for your team to review.',
+  button: 'Explore AI Sales Agent',
+  buttonAria: 'Explore the Antbuildz AI Sales Agent',
+  buttonHref: '/ai-sales-agent',
+  badge: 'AI Sales Agent',
+} as const;
+
+function correctHomeInventoryAgentCard(root: HTMLElement, isHomepage: boolean) {
+  const section = root.querySelector<HTMLElement>('#meet-aria');
+  if (!section) return;
+  const copy = isHomepage ? HOME_AGENT_CARD_INVENTORY : HOME_AGENT_CARD_ORIGINAL;
+  section.classList.toggle('antbuildz-inventory-agent-card', isHomepage);
+  const image = section.querySelector<HTMLImageElement>('.aria-sales-agent-cta__background');
+  if (image) {
+    image.src = copy.image;
+    image.alt = copy.imageAlt;
+  }
+  const eyebrow = section.querySelector<HTMLElement>('.aria-sales-agent-cta__eyebrow');
+  if (eyebrow) {
+    eyebrow.hidden = !copy.eyebrow;
+    if (copy.eyebrow) setPricingText(eyebrow, copy.eyebrow);
+  }
+  setPricingText(section.querySelector('h2'), copy.title);
+  setPricingText(section.querySelector('.aria-sales-agent-cta__description'), copy.description);
+  const button = section.querySelector<HTMLAnchorElement>('.aria-sales-agent-cta__button');
+  if (button) {
+    setPricingText(button.querySelector('span'), copy.button);
+    button.setAttribute('aria-label', copy.buttonAria);
+    button.setAttribute('href', copy.buttonHref);
+  }
+  setPricingText(section.querySelector('.aria-sales-agent-cta__name'), copy.badge);
 }
 
 function setPricingText(element: Element | null | undefined, value: string) {
@@ -1720,8 +1905,33 @@ function correctPricingComparison(
 }
 
 function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLElement) {
-  setPricingText(root.querySelector('.pricing-hero p'), 'One AI Sales Agent. Four plans to grow with your business.');
-  setPricingText(agentSection.querySelector('.pricing-section-header p'), PRICING_USAGE_COPY.principle);
+  const heroTitle = root.querySelector<HTMLElement>('.pricing-hero h1');
+  if (heroTitle && heroTitle.dataset.antbuildzPricingTitle !== 'channels') {
+    heroTitle.dataset.antbuildzPricingTitle = 'channels';
+    heroTitle.replaceChildren(
+      document.createTextNode('Deploy Your '),
+      Object.assign(document.createElement('span'), {
+        className: 'pricing-gradient-text',
+        textContent: 'AI Sales Agent',
+      }),
+      document.createElement('br'),
+      document.createTextNode('Across Your Customer Channels.'),
+    );
+  }
+  setPricingText(
+    root.querySelector('.pricing-hero p'),
+    'One business conversation may turn into thousands in revenue.',
+  );
+
+  // The copied page repeats the product title directly above the billing
+  // controls. Keep the primary hero and remove only this duplicate heading
+  // block so the controls and cards retain their transferred positions.
+  const duplicateSectionHeader = agentSection.querySelector<HTMLElement>('.pricing-section-header');
+  if (duplicateSectionHeader) {
+    duplicateSectionHeader.hidden = true;
+    duplicateSectionHeader.setAttribute('aria-hidden', 'true');
+    duplicateSectionHeader.setAttribute('inert', '');
+  }
   setPricingText(
     agentSection.querySelector('.pricing-conversation-note p'),
     `A conversation means one meaningful live AI-agent session; Playground is for test prompts inside the AI console. ${PRICING_USAGE_COPY.monthly} Plan, Purchased Credit and Pay-As-You-Go prices are in USD; the existing Additional AI Agent price is shown separately in SGD.`,
@@ -1984,10 +2194,12 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   correctLinks(root);
   correctIndustriesMenu(root);
   correctHeaderLayout(root);
+  correctPublicHeroHeader(root);
   correctResourceRoles(root);
   correctResourcesMenu(root);
   correctPublicDrawer();
   correctFooter(root);
+  correctAboutEcosystem(root);
   correctHomepage(root);
   correctPricing(root);
   correctDemoRequest(root);
@@ -2068,6 +2280,7 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
 
     return () => {
       resetHomeHeroRuntime();
+      resetPublicHeroHeader();
       observer.disconnect();
       headObserver.disconnect();
       document.removeEventListener('click', scheduleCorrections);

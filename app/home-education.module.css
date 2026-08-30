@@ -31,12 +31,7 @@
   text-transform: uppercase;
   margin-bottom: 20px;
 }
-.context { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; align-items: start; }
-.context h2 { max-width: 520px; }
-.body .lead { font-size: var(--type-lead); line-height: 1.62; }
-.points { list-style: none; margin: 28px 0 0; padding: 0; }
-.points li { border-top: 1px solid var(--line); padding: 16px 0 16px 20px; position: relative; }
-.points li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--ink); position: absolute; left: 0; top: 28px; }
+.emmaPlacement { display: contents; }
 .approach { padding-block: clamp(80px, 7vw, 96px); background: #fff; }
 .approach .intro { max-width: 1120px; margin-inline: auto; text-align: center; }
 .approach .intro > p:last-child { max-width: 900px; margin-inline: auto; }
@@ -46,44 +41,35 @@
 .intro > p:last-child:not(.eyebrow) { max-width: 720px; margin-top: 24px; font-size: var(--type-lead); line-height: 1.62; }
 .productIntro { max-width: none; }
 .productIntro > p:last-child:not(.eyebrow) { width: 100%; max-width: none; }
-.stages { list-style: none; padding: 0; margin: 56px auto 0; max-width: 1120px; display: grid; gap: clamp(60px, 6vw, 84px); }
-.stages li { --stage-color: var(--purple); display: grid; grid-template-columns: minmax(0, .98fr) minmax(300px, .78fr); align-items: center; gap: clamp(40px, 5vw, 72px); }
+/* LOCKED COMPOSITION — preserve the centred intro and visual-first four-stage
+   layout. Graphic-only changes belong in home-graphics.* unless the user
+   explicitly asks to unlock this section. */
+.stages { display: grid; max-width: 1280px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2vw, 28px); margin: 60px auto 0; padding: 0; list-style: none; }
+.stages li { --stage-color: var(--purple); display: flex; min-width: 0; flex-direction: column; gap: 24px; }
 .stages li:nth-child(2) { --stage-color: var(--blue); }
 .stages li:nth-child(3) { --stage-color: var(--yellow-hover); }
 .stages li:nth-child(4) { --stage-color: var(--red); }
-.stageVisual { display: flex; align-items: stretch; min-width: 0; height: clamp(350px, 32vw, 410px); overflow: hidden; border: 1px solid color-mix(in srgb, var(--stage-color) 20%, var(--line)); border-radius: 24px; background: color-mix(in srgb, var(--stage-color) 7%, white); box-shadow: 0 22px 56px -44px color-mix(in srgb, var(--stage-color) 40%, transparent); }
-.stageVisual > div { width: 100%; min-height: 100%; padding: 0; border-radius: inherit; background: transparent; }
-.stageCopy { min-width: 0; max-width: 420px; }
-.stageKicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; color: color-mix(in srgb, var(--stage-color) 72%, var(--ink)); font-family: var(--font-heading); font-size: var(--type-caption); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.stageKicker b { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--stage-color); color: white; font-size: 12px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.stageVisual { display: flex; width: 100%; min-width: 0; height: clamp(260px, 22vw, 300px); align-items: stretch; overflow: hidden; border: 1px solid color-mix(in srgb, var(--stage-color) 13%, var(--line)); border-radius: 22px; background: color-mix(in srgb, var(--stage-color) 5%, var(--canvas)); box-shadow: none; }
+.stageVisual > div { width: 100%; min-height: 100%; padding: clamp(14px, 1.5vw, 20px); border-radius: inherit; background: transparent; }
+.stageCopy { display: flex; min-width: 0; max-width: none; flex-direction: column; align-items: flex-start; padding-inline: 2px; }
+.stageKicker { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; color: color-mix(in srgb, var(--stage-color) 72%, var(--ink)); font-family: var(--font-heading); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.stageKicker b { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid color-mix(in srgb, var(--stage-color) 28%, var(--line)); border-radius: 50%; background: color-mix(in srgb, var(--stage-color) 12%, white); color: color-mix(in srgb, var(--stage-color) 82%, var(--ink)); font-size: 10px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
 .stages li:nth-child(3) .stageKicker b { color: var(--ink); }
-.stages h3 { margin: 0 0 16px; font-size: clamp(30px, 3vw, 42px); line-height: 1.08; letter-spacing: -.04em; text-wrap: balance; }
-.stageCopy p { font-size: clamp(15px, 1.35vw, 18px); line-height: 1.58; }
-.stages li:nth-child(even) { grid-template-columns: minmax(300px, .78fr) minmax(0, .98fr); }
-.stages li:nth-child(even) .stageVisual { grid-column: 2; grid-row: 1; }
-.stages li:nth-child(even) .stageCopy { grid-column: 1; grid-row: 1; }
+.stages h3 { margin: 0 0 10px; font-size: clamp(20px, 1.6vw, 24px); line-height: 1.18; letter-spacing: -.025em; text-wrap: balance; }
+.stageCopy p { color: var(--muted); font-size: 15px; line-height: 1.55; }
 .productHeading span { display: block; }
 .products { display: grid; grid-template-columns: minmax(0, 1.2fr) clamp(76px, 7vw, 104px) minmax(0, 1fr); margin-top: 40px; }
-.products article { position: relative; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; background: white; border: 1px solid var(--line); border-radius: 24px; padding: 36px; }
+.products article { position: relative; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; background: white; border: 0; border-radius: 24px; padding: 36px; }
 .products .agentProduct {
-  border-color: color-mix(in srgb, var(--yellow-hover) 42%, var(--line));
-  border-top: 3px solid var(--yellow);
-  padding-top: 34px;
   background: linear-gradient(145deg, #fffdf4 0%, #fff 54%, #fff7f4 100%);
 }
 .products .webstoreProduct {
-  border-color: color-mix(in srgb, var(--purple) 18%, var(--line));
   background: linear-gradient(145deg, #f8f5ff 0%, #fff 56%, #f3f8ff 100%);
 }
-.productConnector { align-self: center; display: grid; place-items: center; min-width: 0; color: var(--purple); }
-.productConnector svg { display: block; width: 100%; max-width: 96px; height: auto; overflow: visible; }
-.connectorNode { stroke-width: 1.5; }
-.connectorAgentNode { fill: color-mix(in srgb, var(--yellow) 16%, white); stroke: color-mix(in srgb, var(--yellow-hover) 74%, var(--ink)); }
-.connectorStoreNode { fill: color-mix(in srgb, var(--purple) 8%, white); stroke: color-mix(in srgb, var(--purple) 68%, var(--ink)); }
-.connectorAgentMark { fill: var(--yellow); stroke: color-mix(in srgb, var(--yellow-hover) 74%, var(--ink)); stroke-linejoin: round; stroke-width: 1; }
-.connectorStoreMark { fill: none; stroke: color-mix(in srgb, var(--purple) 72%, var(--ink)); stroke-linecap: round; stroke-width: 1.5; }
-.connectorCable, .connectorArrow { fill: none; stroke: color-mix(in srgb, var(--purple) 55%, var(--line)); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
-.connectorArrow { stroke: color-mix(in srgb, var(--purple) 72%, var(--ink)); }
+.productConnector { align-self: center; display: flex; width: 100%; min-width: 0; height: 32px; align-items: center; padding-inline: 8px; }
+.connectorTrack { position: relative; display: block; width: 100%; height: 0; border-top: 1px dotted color-mix(in srgb, var(--purple) 52%, var(--line)); }
+.connectorPulse { position: absolute; top: 50%; left: calc(100% - 6px); width: 6px; height: 6px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 0 4px color-mix(in srgb, var(--purple) 12%, transparent), 0 0 12px color-mix(in srgb, var(--purple) 72%, transparent); transform: translateY(-50%); animation: webstoreIntoAgent 2.2s ease-in-out infinite; }
+@keyframes webstoreIntoAgent { 0% { left: calc(100% - 6px); opacity: 0; } 14%, 84% { opacity: 1; } 100% { left: 0; opacity: 0; } }
 .productIdentity { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 16px; }
 .products .productLabel { color: var(--ink); font-size: var(--type-caption); font-weight: var(--type-control-weight); }
 .productBadge { padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--yellow) 18%, white); color: var(--ink); font-size: var(--type-label); font-weight: var(--type-control-weight); line-height: 1.4; }
@@ -92,9 +78,9 @@
 .products .textLink { margin-top: auto; padding-top: 28px; }
 /* One native link per card: the pseudo-element extends its hit area without nested links. */
 .products .textLink::after { content: ''; position: absolute; inset: 0; border-radius: 24px; }
-.products article:hover { border-color: var(--yellow-hover); box-shadow: 0 12px 32px -20px color-mix(in srgb, var(--ink) 24%, transparent); }
+.products article:hover { box-shadow: 0 12px 32px -20px color-mix(in srgb, var(--ink) 24%, transparent); }
 .products .agentProduct:hover { background: linear-gradient(145deg, #fff9df 0%, #fff 54%, #fff1ec 100%); }
-.products .webstoreProduct:hover { border-color: var(--purple); background: linear-gradient(145deg, #f1eaff 0%, #fff 56%, #eaf3ff 100%); }
+.products .webstoreProduct:hover { background: linear-gradient(145deg, #f1eaff 0%, #fff 56%, #eaf3ff 100%); }
 .products article:hover .textLink { text-decoration: underline; text-underline-offset: 4px; }
 .products .textLink:focus-visible::after { outline: var(--menu-focus); outline-offset: 4px; }
 .body a { color: var(--ink); }
@@ -177,33 +163,29 @@
 
 @media (max-width: 1100px) {
   .section { padding-block: 80px; }
-  .context { gap: 48px; }
-  .stages li { grid-template-columns: minmax(0, 1fr) minmax(280px, .78fr); gap: 40px; }
-  .stages li:nth-child(even) { grid-template-columns: minmax(280px, .78fr) minmax(0, 1fr); }
-  .stageVisual { height: 360px; }
+  .stages { max-width: 900px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 52px 24px; }
+  .stageVisual { height: 300px; }
 }
 @media (min-width: 768px) {
   .products .webstoreProduct { align-self: center; transform: scale(.8); transform-origin: center; }
 }
 @media (max-width: 767px) {
   .section { padding-block: 64px; }
-  .context, .products { grid-template-columns: minmax(0, 1fr); }
-  .context { gap: 28px; }
+  .products { grid-template-columns: minmax(0, 1fr); }
   .approach { padding-block: 64px; }
-  .stages { margin-block: 36px 0; gap: 52px; }
-  .stages li, .stages li:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .stageVisual, .stages li:nth-child(even) .stageVisual { grid-column: 1; grid-row: 2; height: 310px; border-radius: 22px; }
-  .stageVisual > div { padding: 0; }
-  .stageCopy, .stages li:nth-child(even) .stageCopy { grid-column: 1; grid-row: 1; max-width: none; }
-  .stageKicker { margin-bottom: 16px; }
-  .stageKicker b { width: 36px; height: 36px; }
-  .stages h3 { margin-bottom: 14px; font-size: clamp(28px, 8vw, 34px); }
+  .stages { grid-template-columns: minmax(0, 1fr); gap: 48px; margin-block: 40px 0; }
+  .stages li { gap: 20px; }
+  .stageVisual { height: 290px; border-radius: 20px; }
+  .stageVisual > div { padding: 16px; }
+  .stageCopy { max-width: none; }
+  .stageKicker { margin-bottom: 10px; }
+  .stages h3 { margin-bottom: 10px; font-size: 24px; }
   .stageCopy p { font-size: 1rem; }
   .products article { padding: 24px; }
-  .products .agentProduct { padding-top: 22px; }
   .products { row-gap: 0; }
-  .productConnector { width: 100%; height: 80px; }
-  .productConnector svg { width: 76px; transform: rotate(90deg); }
+  .productConnector { width: 100%; height: 80px; justify-content: center; padding-inline: 0; }
+  .connectorTrack { width: 0; height: 56px; border-top: 0; border-left: 1px dotted color-mix(in srgb, var(--purple) 52%, var(--line)); }
+  .connectorPulse { top: calc(100% - 6px); left: 50%; transform: translateX(-50%); animation-name: webstoreIntoAgentMobile; }
   .industryHeader { align-items: flex-start; flex-direction: column; gap: 24px; }
   .industryCarousel { width: 100%; margin-top: 28px; }
   .industryControls button { width: 44px; height: 44px; font-size: 21px; }
@@ -228,8 +210,13 @@
   .faq :global(.si-sierra-faq-item) summary { min-height: 68px; gap: 18px; }
   .faq :global(.si-sierra-faq-answer) { margin-right: 0; }
 }
+@keyframes webstoreIntoAgentMobile { 0% { top: calc(100% - 6px); opacity: 0; } 14%, 84% { opacity: 1; } 100% { top: 0; opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
+  .connectorPulse { left: 0; opacity: .9; animation: none; }
   .faq :global(.si-sierra-faq-item) summary span { transition: none; }
   .industryGrid { scroll-behavior: auto; }
   .industryControls button, .industryCard img, .industryShade, .industryContent, .industryLink svg { transition: none; }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .connectorPulse { top: 0; left: 50%; }
 }

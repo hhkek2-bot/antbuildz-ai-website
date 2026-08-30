@@ -18,6 +18,33 @@
 .conceptPage :global(.webstore2-page .ws2-hero-desc) { color: rgb(255 255 255 / 94%) !important; }
 /* Remove only the preview hero link; other Sales Agent links remain available. */
 .conceptPage :global(.webstore2-page .ws2-hero-secondary-link) { display: none !important; }
+
+/* Keep the multilingual globe composition, but move the section off the heavy
+   operational surface and onto the site's softer public-marketing palette. */
+.conceptPage:global(#root.antbuildz-original-root.antbuildz-section-system) :global(.ws2-global-agent-section[data-antbuildz-section-surface="dark"]) {
+  color: var(--ink) !important;
+  background:
+    radial-gradient(circle at 12% 16%, color-mix(in srgb, var(--purple) 9%, transparent), transparent 38%),
+    radial-gradient(circle at 88% 78%, color-mix(in srgb, var(--blue) 8%, transparent), transparent 36%),
+    #f1eff8 !important;
+  background-color: #f1eff8 !important;
+}
+.conceptPage :global(.ws2-global-agent-section > .blur-3xl) { opacity: .34; }
+.conceptPage :global(.ws2-global-agent-section .mkt-section-title),
+.conceptPage :global(.ws2-global-agent-section .ws2-global-agent-word) { color: var(--ink) !important; }
+.conceptPage :global(.ws2-global-agent-section .ws2-eyebrow-green) { color: color-mix(in srgb, var(--blue) 72%, var(--ink)) !important; }
+.conceptPage :global(.ws2-global-agent-section .ws2-global-agent-desc) { color: var(--body) !important; }
+.conceptPage :global(.ws2-global-agent-section .ws2-btn-dark-outline) {
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+  background: rgb(255 255 255 / 76%) !important;
+  box-shadow: 0 12px 26px -22px rgb(15 23 42 / 34%);
+}
+.conceptPage :global(.ws2-global-agent-section .ws2-btn-dark-outline:hover) {
+  color: var(--ink) !important;
+  border-color: color-mix(in srgb, var(--blue) 24%, var(--line)) !important;
+  background: white !important;
+}
 .conceptPage:has(.story[data-visible="true"]) :global(.live-chat-launcher) { visibility: hidden; pointer-events: none; }
 .canvasViewport { min-width: 0; }
 .mount { order: 6; width: 100%; margin: 28px auto 0; }

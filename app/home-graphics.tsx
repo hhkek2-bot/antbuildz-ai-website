@@ -43,6 +43,73 @@ export function CatalogueGraphic() {
   </div>;
 }
 
+/**
+ * A compact, customer-facing summary of the four selection stages.
+ * The detailed technical scenes below remain available for future product-detail use,
+ * while the homepage keeps one simple idea per panel.
+ */
+export function SelectionOverviewGraphic({ step }: { step: number }) {
+  return <div className={styles.selectionOverview} aria-hidden="true">
+    {step === 0 && <div className={styles.overviewFlow}>
+      <div className={styles.overviewCard}>
+        <span className={styles.overviewLabel}>Approved knowledge</span>
+        <strong>Product catalogue</strong>
+        <small>Specifications · diagrams · rules</small>
+      </div>
+      <span className={styles.overviewArrow}>→</span>
+      <div className={styles.overviewCard}>
+        <span className={styles.overviewLabel}>Structured data</span>
+        <div className={styles.overviewList}>
+          <span>Product details</span>
+          <span>Technical fields</span>
+          <span>Availability rules</span>
+        </div>
+      </div>
+    </div>}
+
+    {step === 1 && <div className={styles.overviewStack}>
+      <div className={styles.overviewQuestion}>
+        <span className={styles.overviewLabel}>Buyer need</span>
+        <strong>5 t electric forklift</strong>
+      </div>
+      <div className={styles.overviewSplit}>
+        <span><small>Known</small><b>Load · power</b></span>
+        <span><small>Still needed</small><b>Lift · aisle · load</b></span>
+      </div>
+      <div className={styles.overviewOutcome}>
+        <span>Next action</span>
+        <strong>Clarify before matching</strong>
+      </div>
+    </div>}
+
+    {step === 2 && <div className={styles.overviewStack}>
+      <div className={styles.overviewSearch}>
+        <span className={styles.overviewLabel}>Search</span>
+        <strong>Approved catalogue + supported inventory</strong>
+      </div>
+      <div className={styles.overviewOptions}>
+        <span><b>Electric forklift</b><small>Relevant category</small></span>
+        <span className={styles.overviewOptionActive}><b>Closest supported option</b><small>Ready to compare</small></span>
+        <span><b>Other equipment</b><small>Outside the need</small></span>
+      </div>
+    </div>}
+
+    {step === 3 && <div className={styles.overviewStack}>
+      <div className={styles.overviewAgent}>
+        <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="32" height="32" />
+        <span><strong>Emma</strong><small>AI Sales Agent</small></span>
+      </div>
+      <div className={styles.overviewBuyer}>Which option best fits?</div>
+      <div className={styles.overviewAnswer}>
+        <span className={styles.overviewLabel}>Recommendation</span>
+        <strong>Closest supported option</strong>
+        <small>Explained for sales review</small>
+      </div>
+      <div className={styles.overviewReview}>Team confirms suitability, availability and terms</div>
+    </div>}
+  </div>;
+}
+
 export function SelectionGraphic({ step }: { step: number }) {
   return <div className={styles.selectionScene} aria-hidden="true">
     {step === 0 && <div className={styles.ingestionScene}>
@@ -87,60 +154,102 @@ export function SelectionGraphic({ step }: { step: number }) {
     {step === 1 && <div className={styles.reasonScene}>
       <div className={styles.reasonQuestion}><small>Buyer question</small><strong>We need a 5 t electric forklift for a narrow warehouse aisle</strong></div>
       <div className={styles.requirementFacts}>
-        <span><small>Known</small><b>5 t · electric · indoor warehouse</b></span>
-        <span><small>Still needed</small><b>Lift height · aisle + load geometry · hire period</b></span>
+        <span><small>Confirmed</small><b>5 t requested · electric · indoor use</b></span>
+        <span><small>Required to qualify</small><b>Lift · load centre + geometry · clear aisle · hire</b></span>
       </div>
       <div className={styles.reasonFlow}>
-        <span><small>Recognise</small><b>Capacity + application</b></span><i>→</i>
-        <span><small>Check gaps</small><b>Lift · aisle/load · hire</b></span><i>→</i>
-        <span><small>Next step</small><b>Ask for constraints</b></span>
+        <div className={styles.decisionHeader}><small>Reasoning + decision layer</small></div>
+        <div className={styles.decisionStages}>
+          <span><small>1 · Understand need</small><b>Equipment · task · power</b></span><i>→</i>
+          <span><small>2 · Check constraints</small><b>Rated load · load centre · mast · aisle</b></span><i>→</i>
+          <span><small>3 · Choose action</small><b>Clarify · retrieve · review</b></span>
+        </div>
+        <div className={styles.decisionOutcome}>
+          <span><small>Decision now</small><b>Clarify before matching</b></span>
+          <em>Lift · geometry · aisle clearance missing</em>
+        </div>
       </div>
       <div className={styles.nextQuestion}>
         <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" />
-        <span><small>Emma asks next</small><strong>What lift height, aisle width, load dimensions and hire period do you need?</strong></span>
+        <span><small>Emma asks next</small><strong>What lift height, load dimensions, available aisle width and hire period do you need?</strong></span>
       </div>
     </div>}
     {step === 2 && <div className={styles.retrieveScene}>
-      <span className={styles.selectionSearch}><GraphicIcon kind="requirement" /><span><small>Requirement query</small><strong>5 t · 6 m lift · 4.2 m aisle · electric</strong></span></span>
-      <div className={styles.filterChips}><span>Capacity</span><span>Lift height</span><span>Power</span><span>Aisle + load</span></div>
-      <div className={styles.inventoryHeader}><span><GraphicIcon kind="catalogue" />Approved catalogue + supported inventory</span></div>
-      <div className={styles.inventoryStack}>
-        <span className={styles.inventoryMatch}><i>A</i><span><strong>Electric forklift option</strong><small>Capacity + lift meet · aisle review open</small></span><b>Closest match</b></span>
-        <span><i>B</i><span><strong>Electric forklift option</strong><small>Rated capacity below requirement</small></span><b>Capacity gap</b></span>
-        <span><i>C</i><span><strong>IC forklift option</strong><small>Requested electric power not met</small></span><b>Power mismatch</b></span>
+      <span className={styles.selectionSearch}><GraphicIcon kind="requirement" /><span><small>Requirement query</small><strong>≈ 5 t rated load · electric counterbalance forklift</strong></span></span>
+      <div className={styles.filterChips}><span>Category</span><span>Power</span><span>Rated load</span><span>Fleet year</span></div>
+      <div className={styles.inventoryConsole}>
+        <div className={styles.inventoryHeader}>
+          <span><GraphicIcon kind="catalogue" />Approved catalogue + example fleet</span>
+          <b><i />7 mixed equipment records</b>
+        </div>
+        <div className={styles.inventoryColumns}><span>Brand + model</span><span>Category</span><span>Key rating</span><span>Year / age*</span><span>Result</span></div>
+        <div className={styles.inventoryTable}>
+          {[
+            ['Toyota 8FBMT50', 'Elec. forklift', '4,990 kg rated', '2022 / ~4 yr', 'Closest match'],
+            ['Hyster J3.5XN', 'Elec. forklift', '3,500 kg rated', '2021 / ~5 yr', 'Capacity gap'],
+            ['Linde H50D', 'Diesel forklift', '5,000 kg rated', '2020 / ~6 yr', 'Power mismatch'],
+            ['JCB 540-180', 'Telehandler', '4,000 kg max', '2019 / ~7 yr', 'Category gap'],
+            ['JLG E450AJ', 'Artic. boom', '227 kg platform', '2023 / ~3 yr', 'Category gap'],
+            ['Genie GS-4047', 'Scissor lift', '350 kg platform', '2022 / ~4 yr', 'Category gap'],
+            ['Bobcat E50z', 'Mini excavator', '4,819 kg operating', '2021 / ~5 yr', 'Category gap'],
+          ].map(([record, category, rating, age, result]) => <span className={result === 'Closest match' ? styles.inventoryMatch : ''} key={record}>
+            <b>{record}</b><span>{category}</span><span>{rating}</span><span>{age}</span><em>{result}</em>
+          </span>)}
+          <i className={styles.inventoryScan} />
+        </div>
       </div>
-      <span className={styles.queryProgress}><i />Comparing supported product records</span>
-      <span className={styles.inventoryNote}>Availability is not assumed · confirm connected status</span>
+      <div className={styles.filterFunnel} aria-label="Example inventory filtering progress">
+        <span><small>Fleet</small><b>7</b></span><i>→</i>
+        <span><small>Forklifts</small><b>3</b></span><i>→</i>
+        <span><small>Electric</small><b>2</b></span><i>→</i>
+        <span><small>Review</small><b>1</b></span>
+      </div>
+      <span className={styles.queryProgress}><i />Comparing manufacturer-rated specifications</span>
+      <span className={styles.inventoryNote}>*Example fleet year/age · confirm asset, mast, load centre and availability</span>
     </div>}
     {step === 3 && <div className={styles.recommendScene}>
-      <span className={styles.selectionAgent}><img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" /><span><strong>Emma</strong><small>AI Sales Agent</small></span></span>
-      <div className={styles.answerBubble}>Option A is the closest supported match to review for the stated capacity, lift and power requirements</div>
-      <div className={styles.matchReasons}><span><i />Capacity meets</span><span><i />Lift height meets</span><span><i />Electric power</span></div>
-      <div className={styles.openChecks}><small>Open checks</small><span>Aisle + load geometry</span><span>Connected availability</span></div>
-      <div className={styles.reviewBoundary}><GraphicIcon kind="review" /><span><strong>Sales review</strong><small>Confirm availability, site suitability and commercial terms</small></span></div>
+      <div className={styles.recommendPhone}>
+        <span className={styles.selectionAgent}><img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" /><span><strong>Emma</strong><small>AI Sales Agent</small></span></span>
+        <div className={styles.recommendBuyerMessage}>Show me the best options for a 5 t electric forklift.</div>
+        <div className={styles.answerBubble}>I found one close catalogue match for review. Toyota 8FBMT50 is rated at 4,990 kg; mast, load centre and site suitability still need confirmation.</div>
+        <div className={styles.recommendTable}>
+          <div className={styles.recommendTableTitle}><span>Closest catalogue options</span><small>3 records reviewed</small></div>
+          <div className={styles.recommendTableHead}><span>Model</span><span>Rating</span><span>Power</span><span>Review</span></div>
+          {[
+            ['Toyota 8FBMT50', '4,990 kg', 'Electric', 'Closest rating'],
+            ['Hyster J3.5XN', '3,500 kg', 'Electric', 'Capacity gap'],
+            ['Linde H50D', '5,000 kg', 'Diesel', 'Power mismatch'],
+          ].map(([model, rating, power, review], index) => <div className={`${styles.recommendTableRow} ${index === 0 ? styles.recommendTableMatch : ''}`} key={model}>
+            <strong>{model}</strong><span>{rating}</span><span>{power}</span><em>{review}</em>
+          </div>)}
+        </div>
+        <div className={styles.reviewBoundary}><GraphicIcon kind="review" /><span><strong>Sales review</strong><small>Confirm availability, site suitability and commercial terms</small></span></div>
+      </div>
     </div>}
   </div>;
 }
 
 export function AgentGraphic() {
-  return <div className={`${styles.productScene} ${styles.agentScene}`} role="img" aria-label="Illustration of Emma using connected Webstore catalogue information to identify that no listed electric forklift is confirmed for a buyer's five-tonne requirement and prepare the enquiry for team review">
-    <div className={styles.agentPanel}>
-      <div className={styles.agentHeader}>
-        <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" />
-        <span><strong>Emma</strong><small>AI Sales Agent</small></span>
-        <i aria-hidden="true" />
-      </div>
-      <div className={styles.agentConversation}>
-        <span className={styles.agentBuyerMessage}>We need a 5 t electric forklift.</span>
-        <span className={styles.agentReply}>What lift height, aisle width and hire period do you need?</span>
-        <span className={styles.agentBuyerMessage}>6 m lift · 3.4 m aisle · 12-week hire</span>
-        <span className={styles.agentInventoryCheck}><span><small>Webstore catalogue checked</small><strong>No confirmed 5 t match</strong></span><b>2 models reviewed</b></span>
-        <span className={`${styles.agentReply} ${styles.agentAnswer}`}>Your listed electric forklifts do not meet the 5 t requirement. I’ll prepare this enquiry for your team to confirm a suitable model and availability.</span>
-      </div>
-      <div className={styles.enquirySummary}>
-        <GraphicIcon kind="review" />
-        <span><small>Requirement profile</small><strong>5 t electric · 6 m lift · 3.4 m aisle · 12-week hire</strong></span>
-        <b>Ready for review</b>
+  return <div className={`${styles.productScene} ${styles.agentScene}`} role="img" aria-label="Upper portion of a phone conversation showing Emma using connected Webstore catalogue information to identify that no listed electric forklift is confirmed for a buyer's five-tonne requirement and prepare the enquiry for team review">
+    <div className={styles.agentPhoneCrop}>
+      <div className={styles.agentPanel}>
+        <div className={styles.agentHeader}>
+          <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" />
+          <span><strong>Emma</strong><small>AI Sales Agent</small></span>
+          <i aria-hidden="true" />
+        </div>
+        <div className={styles.agentConversation}>
+          <span className={styles.agentBuyerMessage}>We need a 5 t electric forklift.</span>
+          <span className={styles.agentReply}>What lift height, aisle width and hire period do you need?</span>
+          <span className={styles.agentBuyerMessage}>6 m lift · 3.4 m aisle · 12-week hire</span>
+          <span className={styles.agentInventoryCheck}><span><small>Webstore catalogue checked</small><strong>No confirmed 5 t match</strong></span><b>2 models reviewed</b></span>
+          <span className={`${styles.agentReply} ${styles.agentAnswer}`}>Your listed electric forklifts do not meet the 5 t requirement. I’ll prepare this enquiry for your team to confirm a suitable model and availability.</span>
+        </div>
+        <div className={styles.enquirySummary}>
+          <GraphicIcon kind="review" />
+          <span><small>Requirement profile</small><strong>5 t electric · 6 m lift · 3.4 m aisle · 12-week hire</strong></span>
+          <b>Ready for review</b>
+        </div>
       </div>
     </div>
   </div>;
@@ -156,7 +265,7 @@ export function WebstoreGraphic() {
   return <div className={`${styles.productScene} ${styles.storeScene}`} role="img" aria-label="Illustrative branded industrial storefront with tools, parts, equipment and a dedicated product URL">
     <div className={styles.storeWindow}>
       <div className={styles.storeBar}><span className={styles.windowDots} aria-hidden="true"><i /><i /><i /></span><span>Your industrial store</span></div>
-      <div className={styles.storeProducts}>{catalogueImages.map(([src, label]) => <div key={src}><img src={src} alt="" loading="lazy" width="120" height="96" /><span>{label}</span></div>)}</div>
+      <div className={styles.storeProducts}>{catalogueImages.map(([src, label]) => <div key={src}><span className={styles.storeProductMedia}><img src={src} alt="" loading="lazy" width="120" height="96" /></span><span>{label}</span></div>)}</div>
       <div className={styles.productUrl}><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="m9 15 6-6M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m0 12a4 4 0 0 0 6 0l5-5a4 4 0 0 0-6-6l-1 1" /></svg><span>/products/your-product</span></div>
     </div>
   </div>;
