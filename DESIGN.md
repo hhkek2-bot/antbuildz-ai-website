@@ -17,7 +17,7 @@ The memorable signature is the connection between real industrial products and v
 5. **Human handover is visible.** AI supports industrial selling; it does not pretend to replace commercial or technical judgement.
 6. **Specific beats generic.** If a hero or section could be relabelled for an unrelated software company, make it more industrial and product-specific.
 
-Browser tabs use the approved red-and-white Antbuildz “a” mark. Do not reuse the transferred Lovable favicon or a product-demo icon as the site favicon.
+Browser tabs use the compact `ai` mark extracted from the existing rendered Antbuildz.AI wordmark: the original first stylised red `a` glyph and the existing final yellow `i` from its `.ai` suffix, on the dark Antbuildz surface. These letterforms must not be typed, traced, recoloured or redrawn. Do not reuse the former single-letter mark, transferred Lovable favicon or a product-demo icon as the site favicon.
 
 ## Canonical foundations
 
@@ -68,6 +68,7 @@ The `--type-*` tokens in `app/globals.css` support source-owned additions. New h
 - Standard content frame: maximum 1320px with approximately 5% side padding.
 - Base spacing rhythm: multiples of 4px.
 - Major public marketing sections use 96px vertical padding at 1180px and above, 80px from 768–1179px, and 64px at 767px and below.
+- Conventional public-page H1s use the same measured gap below the shared header: 96px at 1180px and above, 80px from 768–1179px, and 64px at 767px and below. Home, product-demo heroes, the operational AI Agent Console and the Book a Demo authentication layout retain their approved component-owned header relationships.
 - Dense support bands may use 64px desktop and 48px mobile.
 - Sections own their spacing through padding; do not create double gaps with adjacent section margins.
 - Heroes, footers, operational Console screens, embedded demonstrations and deliberate scroll-led narratives are component-owned exceptions.
@@ -129,7 +130,8 @@ The homepage hero uses the approved static mountain-logistics photograph at
 replace it with a video or a scroll-controlled media reveal. The Agent
 conversation is part of the initial hero composition and must be visible when
 the page first loads; page scrolling must not control its appearance. Preserve
-the high-left title and description with one concentrated Agent conversation
+the high-left title and description, aligned to the public-header wordmark rail,
+with one concentrated Agent conversation
 anchored at the lower right. The four supporting depth conversations stay
 hidden in this composition. Keep the foreground conversation inside the shared
 header rail, with its outer right edge aligned to the Book a Demo utility edge
@@ -143,9 +145,11 @@ The Public Footer is scoped to Antbuildz AI. Its company description is “We ar
 
 The homepage Who We Serve section uses a photographic horizontal carousel with all eight audience destinations. Desktop presents one dominant full-colour card and approximately half of the next card as a continuation cue; non-active imagery is brighter and strongly desaturated until its card becomes active. Mobile keeps one touch-readable 84vw card with a partial next-card cue. Cards remain full native links with labelled previous/next controls, keyboard focus activation, scroll snapping and reduced-motion support.
 
-The Data protection & trust panel appears once on the homepage immediately before the homepage FAQ. Do not repeat it on the eight Who We Serve pages; those routes move directly from their AI Agent control section to their audience-specific FAQ. Preserve the panel's privacy-policy destination, three assurance principles and restrained blue trust surface.
+The Data protection & control panel appears once on the homepage immediately before the homepage FAQ. Do not repeat it on the eight Who We Serve pages; those routes move directly from their AI Agent control section to their audience-specific FAQ. Keep the panel text-only: no leading icon, principle icons or privacy-policy action. Preserve its three assurance principles and restrained blue trust surface.
 
 The desktop Public Header uses a three-zone alignment: Antbuildz.AI wordmark on the left, primary product navigation centred to the viewport, and utility controls on the right. Translation is not a header control; the right side retains Sign in and Book a Demo. Because the complete primary navigation is visible at 981px and wider, the hamburger is hidden there and reserved for the transferred shell's compact/mobile state at 980px and below. This public-header rule does not remove operational sidebar or menu controls from the signed-in AI Agent Console.
+
+The AI Sales Agent and canonical AI Webstore Suite hero frames use the same outer rail as the Public Header: a centred 1280px frame on wide desktop, 24px side insets on compact desktop and 12px side insets on mobile. On the split Sales Agent hero, the title begins at the wordmark edge and the phone ends at the utility edge. On the centred Webstore hero, the H1 frame spans both header edges. Preserve these outer anchors when changing hero copy or graphics.
 
 At the top of public marketing routes, the fixed Public Header is transparent and the route's own hero surface continues behind it unless the route has an approved component-owned header relationship. Preserve each overlaid hero's original content position with a header-height spacer rather than copying a page-specific colour into the navigation. AI Sales Agent follows this shared transparent-top relationship. After the visitor scrolls 24px on overlaid routes, restore the shared canvas-and-white blurred header surface for legibility. Home and the canonical AI Webstore Suite retain their established dark-image overlay contrast; the signed-in AI Agent Console remains outside this public treatment. Header dropdown panels retain a lightly translucent canvas-glass surface with enough blur and contrast to remain legible at every scroll position.
 
@@ -234,6 +238,7 @@ Review at a minimum around 1440px, 1024px and 390px wide.
 
 - Every public route needs a unique title, description, canonical URL, descriptive H1 and useful internal links.
 - Use `https://antbuildz.ai` for canonical, Open Graph, sitemap, robots and structured-data URLs.
+- Use the branded 1200 × 630 JPEG at `/images/antbuildz-ai-social-share.jpg` as the default large social preview. Keep its absolute HTTPS URL, dimensions, MIME type and useful alternative text in Open Graph and Twitter metadata; audience-specific pages may retain a more relevant approved image.
 - Visible headings should naturally explain the product and audience.
 - Structured data must match visible, truthful content.
 

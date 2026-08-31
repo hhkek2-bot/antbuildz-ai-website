@@ -74,19 +74,52 @@ test('homepage metadata stays canonical, truthful, idempotent and route-scoped',
   assert.match(page, /rel="preload" as="image" href="\/marketplace\/how-it-works\/assets\/hero-option-2-mountain-logistics.png" fetchPriority="high"/);
 });
 
-test('shared metadata uses the approved Antbuildz browser-tab mark', async () => {
+test('shared metadata uses the exact extracted Antbuildz wordmark glyphs', async () => {
   const layout = await readFile(new URL('../app/layout.tsx', import.meta.url), 'utf8');
-  assert.match(layout, /icons:\s*\{\s*icon: \[\{ url: '\/develop-admin-assets\/logo-a\.png', type: 'image\/png' \}\],\s*shortcut: '\/develop-admin-assets\/logo-a\.png'/);
-  assert.doesNotMatch(layout, /favicon\.ico|lovable/i);
+  assert.match(layout, /\{ url: '\/favicon\.ico\?v=2', type: 'image\/x-icon', sizes: 'any' \}/);
+  assert.match(layout, /\{ url: '\/images\/antbuildz-ai-favicon-extracted\.png\?v=2', type: 'image\/png', sizes: '512x512' \}/);
+  assert.match(layout, /shortcut: '\/favicon\.ico\?v=2'/);
+  const favicon = await readFile(new URL('../public/images/antbuildz-ai-favicon-extracted.png', import.meta.url));
+  assert.equal(favicon.subarray(1, 4).toString('ascii'), 'PNG');
+  assert.equal(favicon.readUInt32BE(16), 512);
+  assert.equal(favicon.readUInt32BE(20), 512);
+  const chromeFavicon = await readFile(new URL('../public/favicon.ico', import.meta.url));
+  assert.deepEqual(Array.from(chromeFavicon.subarray(0, 4)), [0, 0, 1, 0]);
+  assert.equal(chromeFavicon.readUInt16LE(4), 7, 'Chrome fallback contains seven exact resized icon variants');
+  assert.doesNotMatch(layout, /antbuildz-ai-favicon\.svg/, 'the temporary redrawn mark is no longer referenced');
+  assert.doesNotMatch(layout, /lovable/i);
   await access(new URL('../public/develop-admin-assets/logo-a.png', import.meta.url));
+});
+
+test('social sharing uses one lightweight 1200 by 630 branded preview image', async () => {
+  const social = await readFile(new URL('../lib/social-share.ts', import.meta.url), 'utf8');
+  const layout = await readFile(new URL('../app/layout.tsx', import.meta.url), 'utf8');
+  const page = await readFile(new URL('../app/page.tsx', import.meta.url), 'utf8');
+  const routes = await readFile(new URL('../app/[slug]/page.tsx', import.meta.url), 'utf8');
+  const help = await readFile(new URL('../app/help/[slug]/page.tsx', import.meta.url), 'utf8');
+  const image = await readFile(new URL('../public/images/antbuildz-ai-social-share.jpg', import.meta.url));
+
+  assert.match(social, /https:\/\/antbuildz\.ai\/images\/antbuildz-ai-social-share\.jpg/);
+  assert.match(social, /width: 1200/);
+  assert.match(social, /height: 630/);
+  assert.match(social, /type: 'image\/jpeg'/);
+  assert.equal(image[0], 0xff);
+  assert.equal(image[1], 0xd8);
+  assert.ok(image.byteLength < 1_000_000, 'social preview should stay quick for crawler downloads');
+  for (const source of [layout, page, routes, help]) {
+    assert.match(source, /SOCIAL_SHARE_IMAGE/);
+  }
+  assert.match(routes, /card: 'summary_large_image'/);
+  assert.match(help, /card: 'summary_large_image'/);
 });
 
 test('homepage mobile refinements preserve typography and keep the hero title concise', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
-  assert.match(source, /AI Sales Agent for industrial businesses/);
+  assert.match(source, /Industrial AI Sales Agent for product-led B2B/);
   assert.match(source, /querySelector\('\.antbuildz-ai-home-intro'\)\?\.remove\(\)/);
-  assert.match(source, /textContent !== 'We Make Industrial Possible'/, 'unchanged titles must not continually trigger the root observer');
+  assert.match(source, /textContent !== HOME_HERO_TITLE_PRIMARY/, 'unchanged titles must not continually trigger the root observer');
+  assert.match(source, /querySelector\('\.antbuildz-ai-home-description'\)\?\.remove\(\)/, 'the visible homepage description must be removed');
   assert.match(source, /headObserver.disconnect\(\)/);
   assert.match(source, /titleLines\[0\]\.after\(document\.createTextNode\(' '\)\)/);
   assert.match(css, /@media \(max-width: 1179px\) \{\s*\.antbuildz-ai-home \.abz-public-footer a \{[^}]*min-height: 44px/s);
@@ -100,6 +133,58 @@ test('all requested routes are included in the static route catalogue', async ()
   for (const route of requestedRoutes) {
     assert.match(source, new RegExp(`['\"]${route}['\"]`), `missing route: ${route}`);
   }
+});
+
+test('all Who We Serve process descriptions stay concise and update idempotently', async () => {
+  const source = await readFile(new URL('../lib/who-we-serve-process-copy.ts', import.meta.url), 'utf8');
+  const code = ts.transpileModule(source, {
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
+  }).outputText;
+  const exports = {};
+  runInNewContext(code, { exports });
+
+  const whoWeServePaths = requestedRoutes.slice(10).map(route => `/${route}`);
+  assert.deepEqual(Object.keys(exports.WHO_WE_SERVE_PROCESS_COPY).sort(), whoWeServePaths.sort());
+  for (const [path, descriptions] of Object.entries(exports.WHO_WE_SERVE_PROCESS_COPY)) {
+    assert.equal(descriptions.length, 4, `${path} retains exactly four process descriptions`);
+    descriptions.forEach((description, index) => {
+      assert.ok(description.length <= 125, `${path} step ${index + 1} is concise enough for the shared four-line desktop measure`);
+      assert.ok(description.length >= 80, `${path} step ${index + 1} retains useful industrial context`);
+      assert.doesNotMatch(description, /guaranteed|always accurate|live availability/i);
+    });
+  }
+
+  let writes = 0;
+  const paragraphs = Array.from({ length: 4 }, () => {
+    let value = 'Long transferred description';
+    return {
+      get textContent() { return value; },
+      set textContent(next) { value = next; writes++; },
+    };
+  });
+  const cards = paragraphs.map(paragraph => ({
+    querySelector(selector) {
+      assert.equal(selector, ':scope > p');
+      return paragraph;
+    },
+  }));
+  const root = {
+    querySelectorAll(selector) {
+      assert.equal(selector, '.si-sierra-vignette');
+      return cards;
+    },
+  };
+  exports.applyWhoWeServeProcessCopy(root, '/parts-aftermarket');
+  assert.deepEqual(paragraphs.map(paragraph => paragraph.textContent), [...exports.WHO_WE_SERVE_PROCESS_COPY['/parts-aftermarket']]);
+  assert.equal(writes, 4);
+  exports.applyWhoWeServeProcessCopy(root, '/parts-aftermarket');
+  assert.equal(writes, 4, 'the root observer does not rewrite unchanged copy');
+  exports.applyWhoWeServeProcessCopy(root, '/pricing');
+  assert.equal(writes, 4, 'non-industry routes remain untouched');
+
+  const appSource = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
+  assert.match(appSource, /import \{ applyWhoWeServeProcessCopy \} from '\.\.\/lib\/who-we-serve-process-copy'/);
+  assert.match(appSource, /applyWhoWeServeProcessCopy\(root, window\.location\.pathname\)/);
 });
 
 test('AI-only FAQ page is clearly identified', async () => {
@@ -176,17 +261,17 @@ test('Sales Agent wording updates preserve rich heading spans, icons and text-no
   const heading = copyElement('Into ', gradient, icon);
   const originalChildren = [...heading.childNodes];
   const originalGradientText = gradient.childNodes[0];
-  setSalesAgentText(heading, ['', 'Built for Industrial Business.']);
+  setSalesAgentText(heading, ['', 'Built for Industrial Sales.']);
   assert.deepEqual(heading.childNodes, originalChildren);
   assert.equal(gradient.childNodes[0], originalGradientText);
-  assert.equal(gradient.textContent, 'Built for Industrial Business.');
+  assert.equal(gradient.textContent, 'Built for Industrial Sales.');
   assert.equal(heading.childNodes[0].textContent, '');
   assert.equal(icon.textContent, 'icon title');
   Object.defineProperty(originalGradientText, 'textContent', {
-    get: () => 'Built for Industrial Business.',
+    get: () => 'Built for Industrial Sales.',
     set: () => assert.fail('an unchanged node should not be written again'),
   });
-  setSalesAgentText(heading, ['', 'Built for Industrial Business.']);
+  setSalesAgentText(heading, ['', 'Built for Industrial Sales.']);
 });
 
 test('Sales Agent copy covers animated clones and all Console states without changing other routes or CTA destinations', async () => {
@@ -222,19 +307,21 @@ test('Sales Agent copy covers animated clones and all Console states without cha
   const closing = target('.ws-cta-title', copyElement('Build'), copyElement(' Your AI Sales Agent'));
   const demo = target('.ws-cta-btn-outline', 'Get Demo');
   demo.attributes.href = '/contact';
-  const statCells = SALES_AGENT_COPY.nextSteps.map(() => {
-    const prefix = copyElement('<'); const suffix = copyElement('%'); const value = copyElement('65'); const label = copyElement('Old claim');
-    return { prefix, suffix, value, label,
-      querySelectorAll: () => [prefix, suffix],
-      querySelector: selector => selector === '.aisl-stat-label' ? label : value };
-  });
-  targets.set('.aisl-stat-cell', statCells);
+  const heroPrimary = target('.bright-hero-actions-block .bright-btn-primary', 'Original primary');
+  const heroSecondary = target('.bright-hero-actions-block .bright-btn-secondary', 'Original secondary');
+  heroPrimary.attributes.href = '/pricing';
+  heroSecondary.attributes.href = '/book-a-demo';
+  const removedNextStepSection = target('.aisl-section');
   const metrics = copyElement();
   const queried = [];
   const page = {
     ...copyElement(),
     querySelectorAll(selector) { queried.push(selector); return targets.get(selector) ?? []; },
-    querySelector: () => metrics,
+    querySelector(selector) {
+      queried.push(selector);
+      if (selector === '.aisl-section') return removedNextStepSection;
+      return metrics;
+    },
   };
   // The transferred header precedes the page and shares .bright-landing.
   // Selecting that class directly previously made every update a silent no-op.
@@ -251,22 +338,23 @@ test('Sales Agent copy covers animated clones and all Console states without cha
   assert.equal(page.getAttribute('data-antbuildz-sales-agent'), 'true');
   assert.equal(heroFirst.textContent, 'The AI Sales Agent');
   assert.equal(heroMiddle.textContent, '');
-  assert.equal(heroLast.textContent, 'Built for Industrial Business');
-  assert.equal(heading.textContent, 'AI Agent Features');
+  assert.equal(heroLast.textContent, 'Built for Industrial Sales');
+  assert.equal(SALES_AGENT_COPY.hero, 'Turn product questions into qualified sales and rental enquiries. Antbuildz AI uses your catalogue, specifications and business knowledge to understand buyer needs, recommend suitable products and prepare the details your team needs to quote.');
+  assert.equal(heroPrimary.textContent, 'Build Your AI Sales Agent ');
+  assert.equal(heroSecondary.textContent, 'Book a Demo');
+  assert.equal(heroPrimary.attributes.href, '/pricing');
+  assert.equal(heroSecondary.attributes.href, '/book-a-demo');
+  assert.equal(heading.textContent, 'Built Around');
   assert.equal(closing.textContent, 'Build Your AI Sales Agent');
-  assert.equal(metrics.getAttribute('data-antbuildz-capabilities'), 'true');
-  assert.equal(metrics.getAttribute('aria-label'), 'AI Sales Agent capabilities');
-  assert.match(featureIntro.textContent, /Available features and connections depend on your plan\./);
+  assert.equal(removedNextStepSection.hidden, true);
+  assert.equal(removedNextStepSection.getAttribute('aria-hidden'), 'true');
+  assert.equal(removedNextStepSection.getAttribute('data-antbuildz-sales-agent-removed'), 'true');
+  assert.equal(featureIntro.textContent, 'Give your Agent the knowledge, controls and connections to recommend products, qualify enquiries and support buyers in multiple languages.');
   for (const [visual, title, description] of SALES_AGENT_COPY.features) {
     for (const card of featureCards.get(visual)) {
       assert.equal(card.title.textContent, title);
       assert.equal(card.description.textContent, description);
     }
-  }
-  for (const [i, cell] of statCells.entries()) {
-    assert.equal(cell.value.textContent, SALES_AGENT_COPY.nextSteps[i][0]);
-    assert.equal(cell.label.textContent, SALES_AGENT_COPY.nextSteps[i][1]);
-    assert.equal(cell.prefix.textContent + cell.suffix.textContent, '');
   }
   assert.equal(demo.textContent, 'Book a Demo');
   assert.equal(demo.attributes.href, '/contact');
@@ -280,24 +368,43 @@ test('Sales Agent copy covers animated clones and all Console states without cha
     assert.equal(demo.attributes.href, '/contact', 'wording changes preserve the existing action');
   }
   assert.equal(unchangedFAQ.textContent, 'Existing FAQ questionExisting FAQ answer');
-  assert.ok(queried.every(selector => !/faq|header a|footer/.test(selector)));
+  assert.ok(queried.every(selector => !/header a|footer/.test(selector)));
+  assert.ok(queried.filter(selector => /faq/.test(selector)).every(
+    selector => selector === '.bright-faq-accordion > .bright-container',
+  ), 'only the FAQ section-introduction container may be queried for its eyebrow');
 });
 
-test('Sales Agent capability word sizing uses the responsive heading token only inside the corrected summary', async () => {
+test('Sales Agent added eyebrows retain the approved product styling', async () => {
   const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
-  const rule = css.match(/#root\.antbuildz-public-typography \.aisl-metrics\[data-antbuildz-capabilities\] \.aisl-stat-value\s*\{([^}]+)\}/);
-  assert.ok(rule, 'scope the word-size correction to the Sales Agent capability summary');
-  assert.equal(rule[1].trim(), 'font-size: var(--type-section-heading) !important;');
+  assert.doesNotMatch(css, /\.aisl-metrics\[data-antbuildz-capabilities\]/);
+  assert.match(css, /\[data-antbuildz-sales-agent\] \.si-header > \.antbuildz-si-eyebrow \{[^}]*color: var\(--red, #e3180a\);[^}]*letter-spacing: \.24em;/);
+  assert.match(css, /\[data-antbuildz-sales-agent\] \.antbuildz-sales-agent-eyebrow \{[^}]*color: var\(--red, #e3180a\);[^}]*font-size: 12\.16px;[^}]*letter-spacing: \.24em;/);
+  assert.match(css, /\.bento-section-header > \.antbuildz-sales-agent-eyebrow,[\s\S]*?\.bright-faq-accordion > \.bright-container > \.antbuildz-sales-agent-eyebrow \{\s*text-align: center;/);
 });
 
 test('Sales Agent retains the phone track while inheriting reference description typography', async () => {
   const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
   const hero = css.match(/#root \[data-antbuildz-sales-agent\] \.bright-hero-split\s*\{([^}]+)\}/);
   assert.match(hero[1], /grid-template-columns: minmax\(0, 1fr\) 380px/);
-  assert.match(hero[1], /max-width: 1320px/);
+  assert.match(hero[1], /width: calc\(100% - 48px\)/);
+  assert.match(hero[1], /max-width: 1280px/);
+  assert.match(hero[1], /margin-inline: auto/);
+  assert.match(css, /\[data-antbuildz-sales-agent\] \.bright-hero > \.antbuildz-public-hero-spacer\s*\{\s*display: none;/);
   assert.match(css, /\[data-antbuildz-sales-agent\] \.bright-hero-title-line \{ white-space: normal; \}/);
   assert.match(css, /--type-lead: clamp\(1rem, 1\.35vw, 1\.18rem\)/);
   assert.doesNotMatch(css, /#root\.antbuildz-public-typography \[data-antbuildz-sales-agent\]/, 'reference component styles own the description sizes');
+});
+
+test('product hero frames follow the shared header rail', async () => {
+  const [styles, webstoreStyles] = await Promise.all([
+    readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
+    readFile(new URL('../app/webstore-2-ai-webstore-preview/webstore-concept.module.css', import.meta.url), 'utf8'),
+  ]);
+
+  assert.match(styles, /@media \(max-width: 767px\)[\s\S]*?\[data-antbuildz-sales-agent\] \.bright-hero-split\s*\{\s*width: calc\(100% - 24px\);/);
+  assert.match(webstoreStyles, /\.ws2-hero-shell\)[^{]*\{[\s\S]*?max-width: 1280px;/);
+  assert.match(webstoreStyles, /\.ws2-hero-title\)[^{]*\{[^}]*max-width: 1280px;/);
+  assert.match(webstoreStyles, /@media \(max-width: 767px\)[\s\S]*?\.webstore2-page > section:first-of-type\)[^{]*\{\s*padding-inline: 12px;/);
 });
 
 test('Sales Agent Console title preserves room for the gradient line descenders', async () => {
@@ -309,17 +416,105 @@ test('Sales Agent Console title preserves room for the gradient line descenders'
 
 test('Sales Agent copy retains the approved plan qualification and avoids the superseded claims', async () => {
   const { SALES_AGENT_COPY: copy } = await loadSalesAgentCopy();
+  const source = await readFile(new URL('../lib/ai-sales-agent-copy.ts', import.meta.url), 'utf8');
   assert.equal(copy.capabilities.length, 6);
   assert.equal(copy.features.length, 8);
   assert.equal(copy.channels.length, 6);
   assert.equal(copy.consoleTabs.length, 6);
   assert.equal(copy.problems.length, 6);
   assert.equal(copy.closingLabels.length, 6);
+  assert.equal(
+    copy.problemsIntro,
+    'Buyers need timely answers about product fit, specifications, pricing and availability. Slow replies, scattered information and missed requirements cause valuable enquiries to lose momentum.',
+  );
+  assert.deepEqual(Array.from(copy.problems, entry => Array.from(entry)), [
+    ['a1', 'Slow First Response', 'Buyers expect quick answers, but your team cannot always respond immediately.'],
+    ['a2', 'Unanswered Product Questions', 'Visitors may leave when they cannot confirm specifications, suitability or sales and rental terms.'],
+    ['b', 'Enquiries Across Channels', 'Questions arrive through websites, messages, calls, campaigns and referrals, making them difficult to track.'],
+    ['d', 'Scattered Product Knowledge', 'Specifications, pricing and policies are spread across files, systems and people, making consistent answers harder.'],
+    ['c1', 'Incomplete Buyer Requirements', 'Product, quantity, location and timing can be missed, leaving too little information to recommend or quote.'],
+    ['c2', 'Follow-Up Without Context', 'Without the buyer’s requirements and conversation history, your team has to ask the same questions again.'],
+  ]);
+  assert.deepEqual(Array.from(copy.capabilitiesIntro), [
+    'Your AI Sales Agent clarifies buyer needs, recommends the closest supported products and turns product conversations into qualified sales or rental enquiries.',
+    '',
+  ]);
+  assert.deepEqual(Array.from(copy.capabilities, entry => Array.from(entry)), [
+    ['knowledge', 'Industrial Product Knowledge', 'Answer buyer questions using approved specifications, applications, rental terms and sales information.'],
+    ['training', 'Your Business Knowledge', 'Answer using your catalogues, manuals, pricing guidance, policies and company information.'],
+    ['matching', 'Product Recommendations', 'Systematically compare confirmed buyer requirements with approved product data to recommend the closest supported options.'],
+    ['signals', 'Buyer Intent Signals', 'Recognise urgency, budget, application and sales or rental intent as the conversation develops.'],
+    ['security', 'Knowledge & Response Control', 'Define which knowledge the Agent uses and how it handles pricing, recommendations and questions requiring human review.'],
+    ['workflow', 'Qualified Sales Enquiry', 'Bring together confirmed requirements, recommended products and buyer intent as a qualified sales or rental enquiry.'],
+  ]);
+  assert.deepEqual(Array.from(copy.capabilityEyebrows, entry => Array.from(entry)), [
+    ['knowledge', 'Grounded'],
+    ['training', 'Connected'],
+    ['matching', 'Reasoning'],
+    ['signals', 'Insightful'],
+    ['security', 'Controlled'],
+    ['workflow', 'Qualified'],
+  ]);
+  assert.deepEqual(Array.from(copy.recommendationLabels), ['Closest match', 'Strong alternative', 'Alternative']);
+  assert.deepEqual(Array.from(copy.intentLabels), ['Requirements shared', 'Timeline confirmed', 'Budget discussed']);
   assert.deepEqual(Array.from(copy.controlLabels), ['Business Knowledge', 'Agent Instructions', 'Response Rules']);
-  assert.deepEqual(Array.from(copy.quotationLabels), ['Requirements Captured', 'Products Shortlisted', 'Quote Requested', 'Ready for Review']);
-  assert.match(copy.connection, /^Start with the AI Sales Agent\. Add the AI Webstore Suite/);
-  assert.match(copy.connection, /depend on your plan and setup/);
-  assert.match(copy.channels[2][1], /^Share your agent link through messaging channels/);
+  assert.deepEqual(Array.from(copy.quotationLabels), ['Requirements Confirmed', 'Products Recommended', 'Buyer Intent Captured', 'Qualified Enquiry']);
+  assert.deepEqual(Array.from(copy.consoleIntro), [
+    'Configure a dedicated AI Sales Agent with your product data, business knowledge and sales instructions. Control how it answers questions, recommends products and handles enquiries.',
+    '',
+  ]);
+  assert.match(source, /set\('\.bento-title-line:first-child', 'More Than Answers'\)/);
+  assert.match(source, /antbuildz-capabilities-gradient/);
+  assert.match(source, /setSalesAgentText\(highlight, 'Moves Enquiries Forward'\)/);
+  assert.match(source, /\.bv-train-pill', 'Grounded'/);
+  assert.match(source, /\.bv-best', '✓ Closest match'/);
+  assert.match(source, /\.bv-intent-label', 'High intent'/);
+  assert.match(source, /\.bv-intent-score', ''/);
+  assert.match(source, /setSalesAgentText\(eyebrow, 'AI AGENT FEATURES'\)/);
+  assert.match(source, /set\('\.si-headline-line:first-child', \['Built Around', '', ''\]\)/);
+  assert.match(source, /setSalesAgentText\(highlight, 'The Way You Sell'\)/);
+  assert.match(source, /set\('\.af-section-eyebrow', 'AI AGENT CONSOLE'\)/);
+  assert.match(source, /set\('\.af-section-title-line:first-child', 'Build an Agent'\)/);
+  assert.match(source, /leadingText\.textContent = 'That '/);
+  assert.match(source, /setSalesAgentText\(highlight, 'Knows Your Business'\)/);
+  assert.equal(
+    copy.connection,
+    'Connect your Agent to Antbuildz Webstore inventory, Google Sheets, Excel or supported third-party systems. Recommend products using current stock and rental availability.',
+  );
+  assert.match(source, /set\('\.flexible-ai-platform__eyebrow', 'CONNECTED INVENTORY DATA'\)/);
+  assert.match(source, /leadingText\.textContent = 'Every Recommendation'/);
+  assert.match(source, /supportingText\.textContent = 'Backed by '/);
+  assert.match(source, /setSalesAgentText\(highlight, 'Current Inventory'\)/);
+  assert.equal((source.match(/\beyebrow\('/g) || []).length, 5);
+  for (const label of [
+    'INDUSTRIAL AI SALES AGENT',
+    'AI SALES AGENT CAPABILITIES',
+    'ENQUIRY CHALLENGES',
+    'ONE AI SALES AGENT',
+    'AI SALES AGENT FAQS',
+  ]) assert.ok(source.includes(`'${label}'`));
+  assert.match(source, /nextStepSection\.hidden = true/);
+  assert.doesNotMatch(source, /Help Your Team|Take the Next Step|QUALIFIED ENQUIRIES/);
+  assert.equal(
+    copy.channelsIntro,
+    'Connect your website, webstore, ads, emails, social posts and QR codes to the same AI Sales Agent. Buyers can ask questions immediately—without calling, completing a form or waiting for a reply.',
+  );
+  assert.deepEqual(Array.from(copy.channels, entry => Array.from(entry)), [
+    ['Website & Webstore', 'Embed your Agent as live chat so buyers can ask product questions, clarify requirements and receive recommendations.'],
+    ['Campaigns & QR Codes', 'Let buyers move directly from advertisements, social posts, brochures or QR codes into a product conversation.'],
+    ['Messaging Channels', 'Share your Agent link through messaging channels so buyers can start a conversation immediately.'],
+    ['Email & Sales Outreach', 'Add your Agent link to campaigns, proposals and email signatures.'],
+    ['International Enquiries', 'Support multilingual product conversations and capture requirements from buyers in other markets.'],
+    ['Shared Business Knowledge', 'Use one approved knowledge base to keep product information and business guidance consistent across every touchpoint.'],
+  ]);
+  assert.match(source, /set\('\.dt-title', \['Turn Every Marketing Touchpoint', 'Into a Conversation'\]\)/);
+  assert.match(source, /antbuildz-touchpoint-title-break/);
+  assert.match(source, /set\('\.dt-subtitle', ''\)/);
+  assert.match(source, /set\('\.dt-chat-name', 'AI Sales Agent'\)/);
+  assert.match(source, /set\('\.dt-chat-status', 'Online'\)/);
+  assert.match(source, /Hi—what product or equipment are you looking for\?/);
+  assert.match(source, /I need a 3-ton forklift for indoor use\./);
+  assert.match(source, /I found several electric options that may fit\. What lifting height and rental period do you need\?/);
   assert.doesNotMatch(JSON.stringify(copy), /AES-256|SOC 2|Invoice generated|Reservation ✓|3×|<10s|50%|65%/);
 });
 
@@ -720,8 +915,10 @@ test('demo navigation follows the request page without hijacking alternate click
 
 test('homepage uses the approved Antbuildz AI industrial hero', async () => {
   const source = await readFile(new URL('../app/site.tsx', import.meta.url), 'utf8');
-  assert.match(source, /We Make Industrial Possible/);
-  assert.match(source, /With Antbuildz AI\./);
+  assert.match(source, /Make Industrial Buying Better/);
+  assert.match(source, /With Antbuildz AI/);
+  assert.match(source, /Industrial AI Sales Agent for product-led B2B/);
+  assert.doesNotMatch(source, /className="hero-lead">Antbuildz AI is the Industrial AI Sales Agent/);
   assert.match(source, /\/images\/industrial-ai\.png/);
 });
 
@@ -734,7 +931,8 @@ test('homepage uses the approved static mountain-logistics hero with an immediat
   assert.match(source, /hero-option-2-mountain-logistics\.png/);
   assert.match(source, /Heavy-haul truck transporting an excavator along a mountain road above an industrial valley at blue hour/);
   assert.match(source, /heroImage\.fetchPriority = 'high'/);
-  assert.match(source, /Turn complex product knowledge into useful buyer conversations with an AI Sales Agent/);
+  assert.match(source, /Industrial AI Sales Agent for product-led B2B/);
+  assert.match(source, /querySelector\('\.antbuildz-ai-home-description'\)\?\.remove\(\)/);
   assert.doesNotMatch(source, /home-hero-industrial-story\.mp4/);
   assert.doesNotMatch(source, /function setupHomeHeroVideo/);
   assert.match(source, /prefers-reduced-motion: reduce/);
@@ -742,9 +940,11 @@ test('homepage uses the approved static mountain-logistics hero with an immediat
   assert.match(styles, /filter: saturate\(\.88\) contrast\(1\.06\) brightness\(\.82\)/);
   assert.match(styles, /\.antbuildz-ai-home \.ai-marketplace-hero-overlay \{[\s\S]*?linear-gradient\(180deg, rgb\(4 16 34 \/ \.5\)/);
   assert.match(styles, /top: clamp\(132px, 19svh, 184px\)/);
-  assert.match(styles, /left: max\(5%, calc\(\(100% - 1320px\) \/ 2\)\)/);
+  assert.match(styles, /left: max\(24px, calc\(\(100% - 1280px\) \/ 2\)\)/);
+  assert.match(styles, /@media \(max-width: 767px\)[\s\S]*?\.antbuildz-ai-home \.ai-marketplace-hero-copy \{[\s\S]*?left: 12px !important;[\s\S]*?width: calc\(100% - 24px\) !important;/);
   assert.match(styles, /right: max\(24px, calc\(\(100% - 1280px\) \/ 2\)\)/);
-  assert.match(styles, /bottom: clamp\(28px, 5\.5svh, 54px\)/);
+  assert.match(styles, /bottom: clamp\(56px, 7svh, 78px\)/);
+  assert.match(styles, /\.antbuildz-home-hero-conversation \{\s*right: 16px;\s*bottom: 32px/);
   assert.match(styles, /opacity: var\(--antbuildz-home-chat-opacity, 1\)/);
   assert.doesNotMatch(styles, /\.antbuildz-ai-home \.antbuildz-home-hero-video/);
   await access(new URL('../public/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png', import.meta.url));
@@ -1123,6 +1323,21 @@ test('Who We Serve audience introductions align with the shared section frame', 
   );
 });
 
+test('Who We Serve inventory heading uses the surrounding heading colour', async () => {
+  const [source, styles] = await Promise.all([
+    readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
+  ]);
+  assert.match(
+    source,
+    /classList\.toggle\('antbuildz-who-we-serve-page', WHO_WE_SERVE_PATHS\.has\(window\.location\.pathname\)\)/,
+  );
+  assert.match(
+    styles,
+    /#root\.antbuildz-original-root\.antbuildz-who-we-serve-page[\s\S]*?#flexible-ai-platform-heading[\s\S]*?\.mkt-gradient-text\s*\{[\s\S]*?background: none !important;[\s\S]*?-webkit-text-fill-color: currentColor !important;/,
+  );
+});
+
 test('public typography is removed for Console and marks long-form articles without changing their content', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const parsed = ts.createSourceFile('original-antbuildz-app.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
@@ -1153,7 +1368,7 @@ test('transferred public shell is corrected for the Antbuildz AI brand', async (
     readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
   ]);
-  assert.match(source, /We Make Industrial Possible/);
+  assert.match(source, /Make Industrial Buying Better/);
   assert.match(source, /With Antbuildz AI/);
   assert.match(source, /antbuildz-ai-wordmark/);
   assert.match(source, /brandImage\.src = '\/images\/antbuildz-wordmark\.png'/);
@@ -1198,7 +1413,7 @@ test('homepage inventory Agent card leads with product knowledge and the Emma ta
   assert.match(source, /correctHomeInventoryAgentCard\(root, isHomepage\)/);
   assert.match(styles, /#root\.antbuildz-ai-home #meet-aria\.antbuildz-inventory-agent-card/);
   assert.match(styles, /#root\.antbuildz-ai-home #meet-aria\.antbuildz-inventory-agent-card \.aria-sales-agent-cta__panel \{\s*max-width: 1320px;/);
-  assert.match(styles, /#root\.antbuildz-ai-home #meet-aria\.antbuildz-inventory-agent-card h2 \{[\s\S]*?font-size: var\(--type-section-heading\) !important;[\s\S]*?font-weight: var\(--type-heading-weight\) !important;[\s\S]*?line-height: var\(--type-heading-line\) !important;/);
+  assert.match(styles, /#root\.antbuildz-ai-home #meet-aria\.antbuildz-inventory-agent-card h2 \{[\s\S]*?font-size: var\(--antbuildz-trial-section-title-size\) !important;[\s\S]*?font-weight: var\(--antbuildz-trial-section-title-weight\) !important;[\s\S]*?line-height: var\(--antbuildz-trial-section-title-line\) !important;/);
   assert.match(styles, /#root\.antbuildz-ai-home #meet-aria\.antbuildz-inventory-agent-card \.aria-sales-agent-cta__description \{[\s\S]*?font-size: clamp\(15px, 1\.05vw, 16px\) !important;[\s\S]*?line-height: 1\.55 !important;/);
   assert.doesNotMatch(styles, /@media \(max-width: 760px\) \{[\s\S]*?#root\.antbuildz-ai-home #meet-aria\.antbuildz-inventory-agent-card h2 \{\s*font-size: 24px !important;/);
   await access(new URL('../public/images/emma-inventory-tablet-v1.png', import.meta.url));
@@ -1367,6 +1582,68 @@ test('AI Sales Agent links open the canonical page before the copied router hand
   assert.match(source, /document\.removeEventListener\('keydown', navigateSalesAgentFromLink, true\)/);
 });
 
+test('AI Webstore Suite links open the selected canonical page on the first click', async () => {
+  const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
+  const parsed = ts.createSourceFile('navigation.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  assert.deepEqual(parsed.parseDiagnostics, []);
+  const handler = parsed.statements.find((statement) => ts.isFunctionDeclaration(statement)
+    && statement.name?.text === 'navigateWebstoreFromLink');
+  const code = ts.transpileModule(handler.getText(parsed), {
+    compilerOptions: { target: ts.ScriptTarget.ES2022 },
+  }).outputText;
+  let destination;
+  class FakeElement {
+    closest(selector) { assert.equal(selector, '#root a[href]'); return this.link; }
+  }
+  const context = {
+    Element: FakeElement, URL,
+    window: { location: { href: 'http://localhost:8081/', origin: 'http://localhost:8081',
+      assign: (href) => { destination = href; } } },
+  };
+  runInNewContext(`${code}\nthis.click = navigateWebstoreFromLink;`, context);
+  const makeEvent = (href, overrides = {}, linkOverrides = {}) => {
+    const target = new FakeElement();
+    target.link = { href, target: '', hasAttribute: () => false, ...linkOverrides };
+    return { button: 0, target, defaultPrevented: false,
+      preventDefault() { this.defaultPrevented = true; }, stopImmediatePropagation() { this.stopped = true; },
+      ...overrides };
+  };
+  for (const href of ['/ai-webstore-suite', '/webstore', '/webstore-2']) {
+    const event = makeEvent(href);
+    context.click(event);
+    assert.equal(destination, 'http://localhost:8081/ai-webstore-suite');
+    assert.equal(event.defaultPrevented, true);
+    assert.equal(event.stopped, true);
+  }
+  context.click(makeEvent('/webstore?source=header#workflow'));
+  assert.equal(destination, 'http://localhost:8081/ai-webstore-suite?source=header#workflow');
+  destination = undefined;
+  const keyboardEvent = makeEvent('/ai-webstore-suite', { key: 'Enter', button: undefined });
+  context.click(keyboardEvent);
+  assert.equal(destination, 'http://localhost:8081/ai-webstore-suite');
+  assert.equal(keyboardEvent.defaultPrevented, true);
+  assert.equal(keyboardEvent.stopped, true);
+  for (const event of [
+    makeEvent('/ai-webstore-suite', { key: ' ', button: undefined }),
+    makeEvent('/ai-webstore-suite', { key: 'Enter', repeat: true, button: undefined }),
+    makeEvent('/ai-webstore-suite', { key: 'Enter', ctrlKey: true, button: undefined }),
+    makeEvent('/ai-webstore-suite', { ctrlKey: true }), makeEvent('/ai-webstore-suite', { metaKey: true }),
+    makeEvent('/ai-webstore-suite', { shiftKey: true }), makeEvent('/ai-webstore-suite', { altKey: true }),
+    makeEvent('/ai-webstore-suite', { button: 1 }), makeEvent('/ai-webstore-suite', { defaultPrevented: true }),
+    makeEvent('/ai-webstore-suite', {}, { target: '_blank' }), makeEvent('/ai-webstore-suite', {}, { hasAttribute: () => true }),
+    makeEvent('/pricing'), makeEvent('/resources'), makeEvent('http://localhost:8080/ai-webstore-suite'),
+    makeEvent('https://example.com/ai-webstore-suite'), makeEvent('/ai-webstore-suite', { target: null }),
+  ]) {
+    destination = undefined;
+    context.click(event);
+    assert.equal(destination, undefined);
+  }
+  assert.match(source, /document\.addEventListener\('click', navigateWebstoreFromLink, true\)/);
+  assert.match(source, /document\.removeEventListener\('click', navigateWebstoreFromLink, true\)/);
+  assert.match(source, /document\.addEventListener\('keydown', navigateWebstoreFromLink, true\)/);
+  assert.match(source, /document\.removeEventListener\('keydown', navigateWebstoreFromLink, true\)/);
+});
+
 test('public hamburger has six flat native links and retains the account shell', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const parsed = ts.createSourceFile('drawer.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
@@ -1525,6 +1802,7 @@ test('pricing preserves the transferred cards while consolidating Agent plans', 
   }
   assert.match(source, /ANNUAL_PRICING_DISCOUNT = 0\.2/);
   assert.match(source, /formatUsdAmount/);
+  assert.match(source, /function roundAnnualUsdAmount\(amount: number\) \{\s*return Math\.ceil\(amount\);\s*\}/);
   assert.match(source, /billed annually · Save 20%/);
   assert.match(source, /pricingBillingBindings/);
   assert.match(source, /Included in this plan/);
@@ -1560,6 +1838,11 @@ test('pricing cards use a wider standard-plan row and responsive Custom panel', 
   assert.match(layout, /@media \(max-width: 767px\)/);
   assert.match(layout, /grid-template-columns: minmax\(0, 1fr\)/);
   assert.match(layout, /\.pricing-feature-row \{\s*margin: 0/);
+  assert.match(layout, /\.pricing-target \{\s*min-height: 56px/);
+  assert.match(layout, /\.pricing-price-row \{\s*min-height: 52px;\s*margin-top: 12px/);
+  assert.match(layout, /grid-template-rows: repeat\(3, minmax\(28px, auto\)\)/);
+  assert.match(layout, /min-height: 132px/);
+  assert.match(layout, /\.pricing-features \{\s*gap: 8px;\s*margin-block: 10px 0/);
   assert.match(layout, /min-height: 54px/);
 });
 
@@ -1593,8 +1876,8 @@ test('approved pricing content parses and has the exact prices, packs and usage 
   assert.deepEqual(plans.map((plan) => plan.usage), ['50 AI conversations', '150 AI conversations', '300 AI conversations', 'Custom']);
   assert.deepEqual(plans.map((plan) => plan.features.length), [8, 10, 8, 7]);
   assert.equal(data.ANNUAL_PRICING_DISCOUNT, 0.2);
-  assert.deepEqual(plans.slice(0, 3).map((plan) => (plan.monthlyUsd * 0.8).toFixed(2)), ['39.20', '159.20', '319.20']);
-  assert.deepEqual(plans.slice(0, 3).map((plan) => (plan.monthlyUsd * 12 * 0.8).toFixed(2)), ['470.40', '1910.40', '3830.40']);
+  assert.deepEqual(plans.slice(0, 3).map((plan) => Math.ceil(plan.monthlyUsd * 0.8)), [40, 160, 320]);
+  assert.deepEqual(plans.slice(0, 3).map((plan) => Math.ceil(plan.monthlyUsd * 12 * 0.8)), [471, 1911, 3831]);
   assert.deepEqual(data.PURCHASED_CREDIT_PACKS, [
     { conversations: 25, usd: 22 }, { conversations: 50, usd: 42 },
     { conversations: 100, usd: 79 }, { conversations: 500, usd: 349 },
@@ -1694,6 +1977,12 @@ test('public marketing heroes extend behind the header with approved route excep
   assert.match(styles, /\.antbuildz-public-header\.is-public-hero-overlay\.is-scrolled \.bright-nav \{[^}]*backdrop-filter: blur\(18px\) saturate\(1\.5\) !important;/);
   assert.match(styles, /\.antbuildz-public-header\.is-public-hero-overlay \{[^}]*position: fixed !important;[^}]*width: 100%;[^}]*background: transparent !important;/);
   assert.match(styles, /\.antbuildz-public-hero-spacer \{[^}]*height: var\(--public-header-height, 81px\)/);
+  assert.match(styles, /--public-hero-title-gap: 96px/);
+  assert.match(styles, /@media \(max-width: 1179px\) \{\s*:root \{ --public-hero-title-gap: 80px; \}/);
+  assert.match(styles, /@media \(max-width: 767px\) \{\s*:root \{ --public-hero-title-gap: 64px; \}/);
+  assert.match(styles, /\.antbuildz-ai-pricing \.pricing-container,[\s\S]*?\.bright-resource-hero,[\s\S]*?\.legal-policies-home__hero,[\s\S]*?\.si-hero--detail \{\s*padding-top: var\(--public-hero-title-gap\)/);
+  assert.match(styles, /\.help-centre-hero \{\s*padding-top: calc\(var\(--public-hero-title-gap\) - 24px\)/);
+  assert.match(styles, /\.about-hero \{\s*padding-top: calc\(var\(--public-hero-title-gap\) - 18px\)/);
 });
 
 test('public hamburger is reserved for compact and mobile navigation', async () => {
@@ -2115,6 +2404,8 @@ test('homepage education has the approved concise flow, eight destinations and f
   const faq = renderToStaticMarkup(react.createElement(exports.HomeEducationFaq));
   const html = body + trust + faq;
   assert.equal(exports.HOME_INDUSTRIES.length, 8);
+  assert.match(body, /<p class="eyebrow">Who we serve<\/p><h2 id="home-industries-heading">Built for Complex Industrial Sales<\/h2>/);
+  assert.doesNotMatch(body, /Built around the way industrial businesses sell/);
   assert.match(body, /aria-label="Who We Serve carousel controls"/);
   assert.match(body, /aria-label="Show previous industries"/);
   assert.match(body, /aria-label="Show next industries"/);
@@ -2125,9 +2416,17 @@ test('homepage education has the approved concise flow, eight destinations and f
   }
   assert.equal(exports.HOME_QUESTIONS.length, 5);
   assert.match(trust, /<section[^>]*aria-labelledby="home-data-trust-heading"/);
-  assert.match(trust, /We care about your business data/);
-  assert.match(trust, /href="\/legal\/privacy"/);
-  assert.match(trust, /aria-label="Data protection and trust principles"/);
+  assert.match(trust, /Data protection &amp; control/);
+  assert.match(trust, /Control What Your Agent Knows and Uses/);
+  assert.match(trust, /Antbuildz AI uses the product data, company knowledge and business information your team approves/);
+  assert.match(trust, /Protected Business Information/);
+  assert.match(trust, /Your approved product and business information remains protected/);
+  assert.match(trust, /Authorised Access/);
+  assert.match(trust, /Only authorised users can manage the Agent’s knowledge and settings/);
+  assert.match(trust, /Human Oversight/);
+  assert.match(trust, /Define what the Agent can handle and when your team should take over/);
+  assert.doesNotMatch(trust, /href="\/legal\/privacy"|Read our privacy policy|<svg/);
+  assert.match(trust, /aria-label="Data protection and control principles"/);
   assert.equal((trust.match(/<li>/g) || []).length, 3);
   const typographyRoles = await readFile(new URL('../lib/public-marketing-typography.ts', import.meta.url), 'utf8');
   assert.match(typographyRoles, /'#home-data-trust-heading'/);
@@ -2144,31 +2443,45 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.equal(exports.HOME_SELECTION_STEPS.length, 4);
   assert.equal((body.match(/<div class="stageVisual">/g) || []).length, 4);
   assert.equal((body.match(/<article class="stageCopy">/g) || []).length, 4);
-  assert.match(body, /From your inventory to <span class="selectionEmphasis">recommendation<\/span>/);
-  assert.match(body, /<ol class="stages" aria-label="Ingest, Reason, Retrieve, Recommend: from inventory to recommendation">/);
+  assert.match(body, /<h2 id="home-selection-approach"><span>From Data<\/span><span>To Recommendation<\/span><\/h2>/);
+  assert.match(body, /The Agent structures approved product data, clarifies buyer needs, identifies the closest supported match and turns interest into a qualified enquiry/);
+  assert.match(body, /<ol class="stages" aria-label="Ingest, Reason, Retrieve, Recommend: from data to recommendation">/);
   assert.doesNotMatch(body, /From your catalogue to|a suitable shortlist/);
   assert.equal((body.match(/class="selectionOverview"/g) || []).length, 4);
-  assert.match(body, /Structure product knowledge/);
-  assert.match(body, /Clarify the buyer’s needs/);
-  assert.match(body, /Find supported options/);
-  assert.match(body, /Explain the recommendation/);
-  assert.match(body, /Approved knowledge/);
-  assert.match(body, /Known/);
-  assert.match(body, /Still needed/);
-  assert.match(body, /Closest supported option/);
-  assert.match(body, /Team confirms suitability, availability and terms/);
-  assert.doesNotMatch(body, /AR20JE-2|reach coordinates|Reasoning \+ decision layer|7 mixed equipment records|Toyota 8FBMT50|recommendPhone/);
+  assert.match(body, /Structure product data/);
+  assert.match(body, /Clarify buyer needs/);
+  assert.match(body, /Identify closest match/);
+  assert.match(body, /Capture buyer intent/);
+  assert.match(body, /Turn approved catalogues, specifications and diagrams into structured data the Agent can use/);
+  assert.match(body, /Identify confirmed requirements, missing details and the next question to ask before matching/);
+  assert.match(body, /Systematically compare confirmed requirements with approved catalogue and connected inventory data/);
+  assert.match(body, /capture the buyer’s interest as a qualified enquiry for your team/);
+  assert.match(body, /Approved catalogue/);
+  assert.match(body, /What platform height do you need\?/);
+  assert.match(body, /Telescopic or articulating\?/);
+  assert.match(body, /94% · highest score selected/);
+  assert.match(body, /Your team should confirm the 230 kg platform load, availability and hire terms before quotation/);
+  assert.doesNotMatch(body, /reach coordinates|Reasoning \+ decision layer|7 mixed equipment records|recommendPhone/);
   const educationCss = await readFile(new URL('../app/home-education.module.css', import.meta.url), 'utf8');
   assert.doesNotMatch(educationCss, /\.stages::before/, 'the alternating layout does not restore the previous timeline rule');
-  assert.match(educationCss, /\.stages li:nth-child\(2\) \{ --stage-color: var\(--blue\); \}/);
+  assert.match(educationCss, /\.stages \{ --reason-stage: #0f8f87;/);
+  assert.match(educationCss, /\.stages li:nth-child\(2\) \{ --stage-color: var\(--reason-stage\); \}/);
   assert.match(educationCss, /\.stages li:nth-child\(4\) \{ --stage-color: var\(--red\); \}/);
   assert.match(educationCss, /\.stages \{[^}]*max-width: 1120px;[^}]*gap: 84px;[^}]*margin: 72px auto 0/);
   assert.match(educationCss, /\.approach \.intro \{[^}]*max-width: 1120px;[^}]*margin-inline: auto;[^}]*text-align: center/,
     'the locked process layout retains the centred section introduction');
+  assert.match(educationCss, /\.approach \.intro h2 > span \{ display: block; \}/,
+    'the process heading keeps the requested two-line structure');
+  assert.doesNotMatch(educationCss, /\.selectionEmphasis|background-clip: text/,
+    'the process heading no longer uses a gradient treatment');
   assert.match(educationCss, /\.stages li \{[^}]*display: grid;[^}]*grid-template-columns: minmax\(0, 1\.25fr\) minmax\(0, 1fr\);[^}]*gap: 72px/);
   assert.match(educationCss, /\.stages li:nth-child\(even\) \.stageVisual \{ grid-column: 2; grid-row: 1; \}/);
   assert.match(educationCss, /\.stages li:nth-child\(even\) \.stageCopy \{ grid-column: 1; grid-row: 1; \}/);
   assert.match(educationCss, /\.stageVisual \{[^}]*height: 410px;[^}]*border-radius: 24px;[^}]*box-shadow: none/);
+  assert.match(educationCss, /\.stageVisual \{[^}]*border: 0;[^}]*background: linear-gradient\(180deg,[^}]*var\(--stage-color\) 26%, var\(--canvas\)[^}]*transparent 100%/,
+    'the four process graphics use borderless stage-colour washes that fade away toward the bottom');
+  assert.doesNotMatch(educationCss, /\.stageVisual \{[^}]*border: 1px solid/,
+    'the outer process graphic panels do not retain an outline');
   assert.match(educationCss, /\.stages h3 \{[^}]*font-size: clamp\(30px, 3vw, 42px\)/, 'step titles retain the established alternating-layout hierarchy');
   assert.match(educationCss, /@media \(max-width: 1100px\)[\s\S]*?\.stageVisual \{ height: 360px; \}/, 'compact desktop retains large process graphics');
   assert.match(educationCss, /@media \(max-width: 767px\)[\s\S]*?\.stages li \.stageVisual, \.stages li:nth-child\(even\) \.stageVisual \{ grid-column: 1; grid-row: 2; \}/,
@@ -2177,7 +2490,7 @@ test('homepage education has the approved concise flow, eight destinations and f
   for (const path of requestedRoutes.slice(10)) assert.ok(body.includes(`href="/${path}"`), path);
   for (const path of ['ai-sales-agent', 'ai-webstore-suite']) assert.ok(body.includes(`href="/${path}"`));
   assert.doesNotMatch(body, /href="\/ai-agent-console"/, 'the removed Console note must not leave a hidden destination');
-  assert.ok(faq.includes('href="/book-a-demo"'));
+  assert.doesNotMatch(faq, /href="\/book-a-demo"|Book a Demo/, 'the homepage FAQ no longer renders a demo action');
   assert.equal((body.match(/<h2\b/g) || []).length, 4);
   const gapHtml = renderToStaticMarkup(react.createElement(gap.HomeEnquiryGap));
   const marketHtml = renderToStaticMarkup(react.createElement(market.HomeMarketShift));
@@ -2197,10 +2510,15 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.doesNotMatch(body, /home-market-shift|AI Is Changing|Industrial Enquiries Start Online/, 'the removed Market Shift section must not render on the homepage');
   assert.equal(foundations.AGENT_FOUNDATIONS.length, 4);
   assert.equal((foundationsHtml.match(/<article\b/g) || []).length, 4);
-  for (const title of ['Company Brand', 'Product Catalogue', 'Technical Specifications', 'SOPs and Process Knowledge']) assert.ok(foundationsHtml.includes(title));
-  for (const supersededTitle of ['Your company brand', 'Your product catalogue', 'Your technical specifications', 'Your SOPs and process knowledge']) assert.ok(!foundationsHtml.includes(supersededTitle));
-  assert.match(foundationsHtml, /supported plans/);
-  assert.match(foundationsHtml, /approved qualification steps, escalation rules and handover procedures/);
+  assert.match(foundationsHtml, /Built around your business/);
+  assert.match(foundationsHtml, /Your AI Sales Agent <span>Configured Around Your Business<\/span>/);
+  assert.match(foundationsHtml, /Bring your brand, product data, business knowledge and approved processes into every buyer conversation/);
+  for (const title of ['Brand and sales voice', 'Products and connected inventory', 'Technical and business knowledge', 'Business knowledge and SOPs']) assert.ok(foundationsHtml.includes(title));
+  for (const supersededTitle of ['Company Brand', 'Product Catalogue', 'Technical Specifications', 'SOPs and Process Knowledge']) assert.ok(!foundationsHtml.includes(`>${supersededTitle}<`));
+  assert.match(foundationsHtml, /Keep every conversation aligned with your company voice, business guidance and approved sales approach/);
+  assert.match(foundationsHtml, /Connect Antbuildz Webstore, your inventory system or supported third-party sources/);
+  assert.match(foundationsHtml, /Ask for missing requirements before suggesting a fit/);
+  assert.match(foundationsHtml, /approved qualification steps, business rules, escalation paths and handover procedures—including when human approval is required/);
   assert.match(foundationsHtml, /Following your SOP/);
   assert.match(foundationsHtml, /hand over for team approval/);
   assert.doesNotMatch(foundationsHtml, /Suitable recommendations|Option to review|Based on supplied data/);
@@ -2208,6 +2526,13 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.doesNotMatch(foundationsHtml, /guaranteed|100%|real-time|trained on|<button\b|<input\b|<form\b/i);
   assert.match(foundationsHtml, /src="\/images\/emma-sales-agent.jpg"/);
   const foundationsCss = await readFile(new URL('../app/home-agent-foundations.module.css', import.meta.url), 'utf8');
+  assert.match(foundationsHtml, /<div class="introFrame"><div class="intro">/, 'the second-section introduction owns a separate header-aligned rail');
+  assert.match(foundationsCss, /\.introFrame \{ width: min\(1280px, calc\(100% - 48px\)\); margin-inline: auto; \}/,
+    'the second-section introduction follows the shared wide and compact header rail');
+  assert.match(foundationsCss, /@media \(max-width: 767px\)[\s\S]*?\.introFrame \{ width: calc\(100% - 24px\); \}/,
+    'the second-section introduction follows the 12px mobile wordmark rail');
+  assert.match(foundationsCss, /\.intro \{ max-width: 1120px;/, 'the second-section introduction has room for the supplied copy');
+  assert.match(foundationsCss, /\.intro > p:last-child \{ max-width: none;/, 'the second-section description uses the full introduction width');
   assert.doesNotMatch(foundationsCss, /\.inventory\s*\{[^}]*transform:\s*scale\(\.8\)/, 'the product-catalogue card retains its full grid size');
   assert.match(foundationsCss, /grid-column: span 2/);
   assert.match(foundationsCss, /max-width: 767px/);
@@ -2250,13 +2575,13 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.doesNotMatch(faq, /ai-faq-copy|ai-faq-pill|ai-faq-item|ai-faq-layout/);
   assert.match(educationCss, /\.faq :global\(\.si-sierra-faq-list\)/, 'homepage FAQ styling must not depend on visiting an industry route first');
   assert.match(educationCss, /prefers-reduced-motion: reduce/);
-  assert.ok(faq.indexOf('href="/book-a-demo"') > faq.lastIndexOf('</details>'), 'the preserved demo action follows the full-width FAQ list');
+  assert.doesNotMatch(educationCss, /\.faqActions|\.faq \.demo/, 'removed FAQ action styles do not leave dead CSS');
   for (const [question, answer] of exports.HOME_QUESTIONS) {
     assert.ok(faq.includes(question));
     assert.ok(faq.includes(answer));
   }
   assert.doesNotMatch(html, /<h1\b|<iframe\b|<form\b|<video\b|aria-sales-agent-cta|ai-marketplace-hero|guaranteed/i);
-  assert.doesNotMatch(html, /Marketplace|confidence/i, 'the existing educational copy keeps its original Antbuildz AI scope');
+  assert.doesNotMatch(html, /Marketplace/i, 'the educational copy keeps its Antbuildz AI scope');
   assert.equal((body.match(/<img\b/g) || []).length, 18, 'all reused local product, Emma and industry images remain present');
   for (const src of [...body.matchAll(/<img[^>]+src="([^"]+)"/g)].map(match => match[1])) {
     assert.ok(src.startsWith('/images/verified-equipment/') || src.startsWith('/images/solution-') || src === '/images/emma-sales-agent.jpg');
@@ -2272,56 +2597,89 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(body, /confirm a suitable model and availability/);
   assert.match(body, /Ready for review/);
   assert.doesNotMatch(body, /Illustrative storefront/);
-  assert.match(body, /A searchable product library for buyers and your Agent<\/h3>/);
-  assert.match(body, /Structured specifications and supported inventory help your Agent answer product questions and recommend suitable options with clearer context\./);
-  assert.match(body, /Inventory freshness and visibility depend on your data, plan, connections and indexing\./);
+  assert.match(body, /Strengthen product recommendations<\/h3>/);
+  assert.match(body, /Give your AI Sales Agent structured product pages, approved specifications and connected inventory data for more precise, better-supported product matching\./);
+  assert.match(body, /Your team confirms technical suitability, availability and commercial terms before quotation\./);
   assert.doesNotMatch(graphicsSource, /setInterval|setTimeout|requestAnimationFrame|@remotion|<button\b|<a\b/, 'illustrations are static and do not impersonate controls');
-  assert.match(body, /Start with approved product knowledge\. The Agent clarifies the buyer’s needs, finds relevant options and explains what your team should review\./);
+  assert.match(body, /The Agent structures approved product data, clarifies buyer needs, identifies the closest supported match and turns interest into a qualified enquiry\./);
   assert.doesNotMatch(body, /The Agent structures that information/);
   assert.doesNotMatch(body, /Similarity-only retrieval/);
   assert.doesNotMatch(body, /Illustrative selection example|Generic options; outcomes depend|The shortlist and enquiry details support your sales team/);
   assert.deepEqual(Array.from(exports.HOME_SELECTION_STEPS, ([title]) => title), ['Ingest', 'Reason', 'Retrieve', 'Recommend']);
-  assert.match(body, /aria-label="Ingest, Reason, Retrieve, Recommend: from inventory to recommendation"/);
+  assert.match(body, /aria-label="Ingest, Reason, Retrieve, Recommend: from data to recommendation"/);
   for (const [title, label, description] of exports.HOME_SELECTION_STEPS) {
     assert.ok(body.includes(`>${title}</span>`));
     assert.ok(body.includes(`<h3>${label}</h3>`));
     assert.ok(body.includes(description));
-    assert.ok(description.split(/\s+/).length <= 16, 'each step stays concise');
+    assert.ok(description.split(/\s+/).length <= 22, 'each step stays concise');
   }
-  assert.match(body, /Turn approved catalogues, specification tables and diagrams into structured product knowledge/);
-  assert.match(body, /Identify known requirements, missing constraints and the right next action before matching/);
-  assert.match(body, /Search approved catalogue and supported inventory records for relevant options/);
-  assert.match(body, /Explain the strongest option and flag suitability, availability and commercial checks for review/);
-  assert.match(body, /Product catalogue/);
-  assert.match(body, /Specifications · diagrams · rules/);
-  assert.match(body, /Technical fields/);
-  assert.match(body, /Availability rules/);
-  assert.match(body, /5 t electric forklift/);
-  assert.match(body, /Rated load · power/);
-  assert.match(body, /Lift · aisle · load/);
+  assert.match(body, /Turn approved catalogues, specifications and diagrams into structured data the Agent can use/);
+  assert.match(body, /Identify confirmed requirements, missing details and the next question to ask before matching/);
+  assert.match(body, /Systematically compare confirmed requirements with approved catalogue and connected inventory data to identify the closest supported match/);
+  assert.match(body, /Recommend the closest supported product, explain why it matches and capture the buyer’s interest as a qualified enquiry for your team/);
+  assert.match(body, /Teupen LEO 23GT/);
+  assert.match(body, /Technical specification &amp; working envelope/);
+  assert.match(body, /Working height/);
+  assert.match(body, /Horizontal outreach/);
+  assert.match(body, /Minimum width/);
+  assert.match(body, /AI-readable Markdown/);
+  assert.match(body, /teupen-leo-23gt\.md/);
+  assert.match(body, /<em>#<\/em> Teupen LEO 23GT/);
+  assert.match(body, /<em>##<\/em> Measurements/);
+  assert.match(body, /\| Working height \| 23\.00 m \|/);
+  assert.match(body, /\| Outreach \| 11\.20 m \|/);
+  assert.match(body, /\| Min\. width \| 0\.98 m \|/);
+  assert.match(body, /Ready for Agent retrieval/);
+  assert.doesNotMatch(body, /Ready for approved use|Product details<\/b><i>Mapped|Technical fields<\/b><i>Mapped/);
+  assert.match(body, /“I need a boom lift\.”/);
+  assert.match(body, /Required height is not yet known/);
+  assert.match(body, /Boom type depends on the task/);
   assert.match(body, /Clarify before matching/);
-  assert.match(body, /Approved catalogue \+ supported inventory/);
-  assert.match(body, /Relevant category/);
-  assert.match(body, /Closest supported option/);
-  assert.match(body, /Ready to compare/);
-  assert.match(body, /Outside the need/);
-  assert.match(body, /Which option best fits\?/);
-  assert.match(body, /Explained against the buyer’s stated requirements/);
-  assert.match(body, /Team confirms suitability, availability and terms/);
+  assert.match(body, /No product recommended yet/);
+  assert.doesNotMatch(body, /5 t electric forklift for warehouse use|Rated load · power|Lift · aisle · load|Ask for site constraints/);
+  assert.match(body, /Scanning approved listings/);
+  assert.match(body, /Articulating boom · required height confirmed/);
+  assert.match(body, /Boom type/);
+  assert.match(body, /Platform height/);
+  assert.match(body, /Approved records/);
+  for (const listing of ['Toyota 8FBMT50', 'JCB 540-180', 'Genie GS-4047', 'JLG E450AJ', 'LGMG AR20JE-2']) assert.match(body, new RegExp(listing.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  assert.match(body, />Confidence</);
+  for (const score of ['8', '14', '21', '78', '94']) assert.match(body, new RegExp(`aria-label="${score}% confidence">${score}%`));
+  assert.match(body, /class="overviewOptionActive"><b>LGMG AR20JE-2<\/b><small>Articulating boom<\/small><i aria-label="94% confidence">94%<\/i>/);
+  assert.match(body, /Highest confidence/);
+  assert.match(body, /94% · highest score selected/);
+  assert.doesNotMatch(body, /Category gap|Height review|Closest record|Closest supported record · ready to explain/);
+  assert.match(body, /Which lift suits indoor ceiling maintenance\?/);
+  assert.match(body, /closest supported option is a compact electric scissor lift/);
+  assert.match(body, /Recommendation explained/);
+  assert.match(body, /Working height · electric · access/);
+  assert.match(body, /Your team should confirm the 230 kg platform load, availability and hire terms before quotation/);
+  assert.match(body, /Suitability · availability · commercial terms/);
+  assert.match(body, /Prepared/);
   assert.doesNotMatch(body, /intent_extraction|technical_query_deepening|function_router|general_classifier|TOTAL_TOKENS|COST_USD|openai\/|google\/|chain-of-thought/i);
-  assert.doesNotMatch(body, /AR20JE-2|Toyota 8FBMT50|Hyster J3\.5XN|Linde H50D|JCB 540-180|JLG E450AJ|Genie GS-4047|Bobcat E50z|recommendPhone/);
+  assert.doesNotMatch(body, /Hyster J3\.5XN|Linde H50D|Bobcat E50z|recommendPhone/);
   const graphicsCss = await readFile(new URL('../app/home-graphics.module.css', import.meta.url), 'utf8');
   assert.match(graphicsCss, /\.selectionOverview \{[^}]*height: 100%;[^}]*place-items: center/);
-  assert.match(graphicsCss, /\.overviewFlow \{[^}]*grid-template-columns: minmax\(0, 1fr\) 42px minmax\(0, 1fr\)/);
+  assert.match(graphicsCss, /\.overviewReasonQuestions b \{[^}]*font-family: var\(--font-heading\);[^}]*font-size: clamp\(9px, \.94vw, 12\.5px\)/);
+  assert.match(graphicsCss, /\.overviewFlow \{[^}]*grid-template-columns: minmax\(0, \.9fr\) 42px minmax\(0, 1\.1fr\)/);
+  assert.match(graphicsCss, /\.overviewMarkdown code \{[^}]*font-family: ui-monospace/);
+  assert.match(graphicsCss, /\.overviewIngestArrow > small \{[^}]*text-transform: uppercase/);
   assert.match(graphicsCss, /\.overviewStack \{[^}]*display: grid;[^}]*gap: clamp\(9px, 1\.2vw, 14px\)/);
   assert.match(graphicsCss, /\.overviewOptions \.overviewOptionActive \{[^}]*background: color-mix/);
-  assert.match(graphicsCss, /\.overviewAgent img \{[^}]*border-radius: 50%/);
+  assert.match(graphicsCss, /\.overviewOptions i \{[^}]*font-variant-numeric: tabular-nums;[^}]*font-weight: 750/);
+  assert.match(graphicsCss, /\.overviewOptions > span:nth-of-type\(5\) \{ --scan-delay: 2\.48s; \}/);
+  assert.match(graphicsCss, /@keyframes overviewListingScan/);
+  assert.match(graphicsCss, /@keyframes overviewListingScanClosest/);
+  assert.match(body, /class="agentPanel overviewPhone"/);
+  assert.match(graphicsCss, /\.overviewPhoneCrop \{[^}]*overflow: hidden;[^}]*mask-image: linear-gradient/);
+  assert.match(graphicsCss, /\.overviewPhone \{[^}]*width: min\(72%, 340px\);[^}]*height: 470px;[^}]*border-radius: 34px/);
   assert.match(graphicsCss, /@keyframes overviewTransfer/);
-  assert.match(graphicsCss, /prefers-reduced-motion: reduce[\s\S]*?\.overviewArrow i \{ animation: none; \}/);
+  assert.match(graphicsCss, /prefers-reduced-motion: reduce[\s\S]*?\.overviewArrow i, \.overviewOptions > span \{ animation: none; \}/);
   assert.match(body, /branded industrial storefront/);
-  assert.match(body, /dedicated page for each product/);
-  assert.match(body, /support SEO and GEO discovery/);
-  assert.match(body, /Start with the AI Sales Agent/);
+  assert.match(body, /AI Sales Agent \+ Antbuildz Webstore/);
+  assert.match(body, /Accuracy Matters/);
+  assert.match(body, /In Industrial Sales/);
+  assert.match(body, /Industrial products are high-value, technically complex and often application-specific—so recommendation accuracy matters/);
   const productSection = body.split('aria-labelledby="home-product-relationship"')[1].split('</section>')[0];
   assert.match(productSection, /class="intro productIntro"/);
   assert.match(educationCss, /\.productIntro \{ max-width: none; \}/);
@@ -2332,7 +2690,7 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(productSection, /<article class="webstoreProduct">/);
   assert.doesNotMatch(productSection, /Manage your agent’s knowledge, instructions and conversations through|AI Agent Console/);
   assert.ok(productSection.indexOf('agentProduct') < productSection.indexOf('webstoreProduct'));
-  assert.ok(productSection.indexOf('Start with the AI Sales Agent') < productSection.indexOf('class="products"'), 'the relationship description belongs directly below its title');
+  assert.ok(productSection.indexOf('Industrial products are high-value') < productSection.indexOf('class="products"'), 'the relationship description belongs directly below its title');
   const productCards = [...productSection.matchAll(/<article\b[^>]*>([\s\S]*?)<\/article>/g)];
   assert.equal(productCards.length, 2);
   for (const [index, path] of ['ai-sales-agent', 'ai-webstore-suite'].entries()) {
@@ -2340,16 +2698,22 @@ test('homepage education has the approved concise flow, eight destinations and f
     assert.ok(productCards[index][1].includes(`href="/${path}"`));
   }
   const productDescriptions = productCards.map(([, card]) => card.match(/<h3>[^<]+<\/h3><p>([^<]+)<\/p>/)?.[1] ?? '');
-  assert.deepEqual(productDescriptions.map(copy => copy.trim().split(/\s+/).length), [30, 30], 'the Agent and Webstore descriptions retain a balanced 30-word rhythm');
-  assert.match(productSection, /Optional addition/);
+  assert.deepEqual(productDescriptions, [
+    'Clarify complex requirements, answer product questions and capture buyer intent before your sales team steps in.',
+    'Give your AI Sales Agent structured product pages, approved specifications and connected inventory data for more precise, better-supported product matching.',
+  ]);
+  assert.ok(productDescriptions.every(copy => copy.trim().split(/\s+/).length <= 20), 'both product descriptions stay concise');
+  assert.match(productSection, /The core/);
+  assert.match(productSection, /Available as an add-on/);
   assert.match(productSection, /href="\/ai-sales-agent" aria-label="Explore AI Sales Agent"><svg/);
-  assert.match(productSection, /href="\/ai-webstore-suite" aria-label="Explore AI Webstore Suite"><svg/);
+  assert.match(productSection, /href="\/ai-webstore-suite" aria-label="Explore Antbuildz Webstore"><svg/);
   assert.doesNotMatch(productSection, />AI (?:Sales Agent|Webstore Suite) <svg/,
     'the card destinations use icon-only controls rather than repeated visible labels');
   assert.doesNotMatch(productSection, />Explore AI (?:Sales Agent|Webstore Suite)/);
-  assert.match(productSection, /checks approved product information and supported inventory/);
-  assert.match(productSection, /Structured specifications and supported inventory help your Agent/);
-  assert.match(productSection, /Inventory freshness and visibility depend on your data, plan, connections and indexing/);
+  assert.match(productSection, /Understand and qualify buyers/);
+  assert.match(productSection, /Strengthen product recommendations/);
+  assert.match(productSection, /compare buyer requirements against approved specifications and inventory data/);
+  assert.match(productSection, /Your team confirms technical suitability, availability and commercial terms before quotation/);
   assert.doesNotMatch(productSection, /guaranteed|100%|real-time|always accurate/i);
   assert.match(educationCss, /grid-template-columns: minmax\(0, 1\.2fr\) clamp\(76px, 7vw, 104px\) minmax\(0, 1fr\)/);
   assert.match(educationCss, /\.products article \{[^}]*border: 0/);
@@ -2397,7 +2761,8 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.match(educationCss, /\.industryCard\[data-active='true'\] img \{ filter: none/);
   assert.match(source, /data-active=/, 'industry cards expose the active visual state');
   assert.match(source, /onFocus=/, 'keyboard focus promotes an industry card into the active position');
-  assert.match(educationCss, /\.trustPanel \{[^}]*grid-template-columns: auto minmax\(0, 1fr\);[^}]*border-radius: 28px/);
+  assert.match(educationCss, /\.trustPanel \{[^}]*grid-template-columns: minmax\(0, 1fr\);[^}]*border-radius: 28px/);
+  assert.doesNotMatch(educationCss, /\.trustMark|\.trustReview|\.trustAssurances svg/);
   assert.match(educationCss, /@media \(max-width: 767px\)[\s\S]*\.trustPanel \{[^}]*grid-template-columns: 1fr/);
   assert.doesNotMatch(body, /Illustrative records|Illustrative answer/);
   // The original brief's copy budget excludes later explicitly requested section transfers; the upper allowance also includes the expanded, fact-checked UI labels and three-option recommendation table inside the four process illustrations.

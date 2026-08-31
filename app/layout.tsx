@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
+import { SOCIAL_SHARE_IMAGE, SOCIAL_SHARE_IMAGE_PATH } from '@/lib/social-share';
 import './globals.css';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -29,8 +30,11 @@ export const metadata: Metadata = {
   creator: 'Antbuildz',
   publisher: 'Antbuildz',
   icons: {
-    icon: [{ url: '/develop-admin-assets/logo-a.png', type: 'image/png' }],
-    shortcut: '/develop-admin-assets/logo-a.png',
+    icon: [
+      { url: '/favicon.ico?v=2', type: 'image/x-icon', sizes: 'any' },
+      { url: '/images/antbuildz-ai-favicon-extracted.png?v=2', type: 'image/png', sizes: '512x512' },
+    ],
+    shortcut: '/favicon.ico?v=2',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
   openGraph: {
@@ -40,13 +44,13 @@ export const metadata: Metadata = {
     siteName: 'Antbuildz AI',
     locale: 'en_SG',
     type: 'website',
-    images: [{ url: '/images/industrial-ai.png', width: 1792, height: 1024, alt: 'Antbuildz industrial AI ecosystem' }],
+    images: [SOCIAL_SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Antbuildz AI | Industrial AI Sales Ecosystem',
     description: 'Industrial AI Sales Agent, AI Webstore Suite and AI Agent Console.',
-    images: ['/images/industrial-ai.png'],
+    images: [SOCIAL_SHARE_IMAGE_PATH],
   },
 };
 

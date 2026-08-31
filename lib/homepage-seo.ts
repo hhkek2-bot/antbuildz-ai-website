@@ -1,9 +1,9 @@
 /** Homepage metadata shared by the server and the transferred app's head adapter. */
 export const HOMEPAGE_SEO = {
   title: 'Industrial AI Sales Agent for B2B | Antbuildz AI',
-  description: 'Turn industrial product questions into informed enquiries with an AI Sales Agent grounded in your approved catalogue, specifications and business guidance.',
+  description: 'Antbuildz AI is the Industrial AI Sales Agent that helps buyers understand complex products, find suitable options and submit qualified enquiries—using approved product and inventory data, with a clear handover to your team.',
   url: 'https://antbuildz.ai',
-  image: 'https://antbuildz.ai/images/industrial-ai.png',
+  image: 'https://antbuildz.ai/images/antbuildz-ai-social-share.jpg',
 } as const;
 
 export const HOMEPAGE_WEBPAGE = {

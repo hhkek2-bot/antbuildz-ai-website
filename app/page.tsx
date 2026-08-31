@@ -2,6 +2,7 @@ import { OriginalAntbuildzApp } from './original-antbuildz-app';
 import { HomeEducation } from './home-education';
 import type { Metadata } from 'next';
 import { HOMEPAGE_SEO } from '../lib/homepage-seo';
+import { SOCIAL_SHARE_IMAGE } from '../lib/social-share';
 
 export const metadata: Metadata = {
   title: { absolute: HOMEPAGE_SEO.title },
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: HOMEPAGE_SEO.title, description: HOMEPAGE_SEO.description,
     url: HOMEPAGE_SEO.url, siteName: 'Antbuildz AI', type: 'website', locale: 'en_SG',
-    images: [{ url: HOMEPAGE_SEO.image, width: 1792, height: 1024, alt: 'Antbuildz industrial AI ecosystem' }],
+    images: [SOCIAL_SHARE_IMAGE],
   },
   twitter: { card: 'summary_large_image', title: HOMEPAGE_SEO.title, description: HOMEPAGE_SEO.description, images: [HOMEPAGE_SEO.image] },
 };

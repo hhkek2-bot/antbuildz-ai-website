@@ -40,34 +40,20 @@ function ProductConnector() {
   );
 }
 
-function ShieldIcon() {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8.2-7 10-4.2-1.8-7-5.4-7-10V6l7-3Z" /><path d="m9.5 12 1.7 1.7 3.6-4" /></svg>;
-}
-
-function DataIcon() {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="7" ry="3" /><path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" /></svg>;
-}
-
-function TeamIcon() {
-  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" /><circle cx="9.5" cy="7" r="4" /><path d="M17 11a4 4 0 0 1 4 4v2M16 3.3a4 4 0 0 1 0 7.4" /></svg>;
-}
-
 export function HomeTrustPanel() {
   return (
     <section className={styles.trust} aria-labelledby="home-data-trust-heading">
       <div className={styles.trustFrame}>
         <div className={styles.trustPanel}>
-          <div className={styles.trustMark} aria-hidden="true"><ShieldIcon /></div>
           <div className={styles.trustCopy}>
-            <span className={styles.trustEyebrow}>Data protection &amp; trust</span>
-            <h2 id="home-data-trust-heading">We care about your business data</h2>
-            <p>Antbuildz AI is designed to protect the company knowledge, customer conversations and operational information you use with your Agent. Access remains limited to authorised users, while your team controls the approved knowledge and important business decisions.</p>
-            <a className={styles.trustReview} href="/legal/privacy">Read our privacy policy</a>
+            <span className={styles.trustEyebrow}>Data protection &amp; control</span>
+            <h2 id="home-data-trust-heading">Control What Your Agent Knows and Uses</h2>
+            <p>Antbuildz AI uses the product data, company knowledge and business information your team approves. You control what the Agent can access, how it responds and when an enquiry should be handed to your team.</p>
           </div>
-          <ul className={styles.trustAssurances} aria-label="Data protection and trust principles">
-            <li><ShieldIcon /><div><strong>Protected business data</strong><span>Your company knowledge, operational information and customer conversations are treated as protected business information.</span></div></li>
-            <li><DataIcon /><div><strong>Authorised access</strong><span>Company knowledge and console access remain limited to authorised users.</span></div></li>
-            <li><TeamIcon /><div><strong>Your team stays in control</strong><span>Your team manages what knowledge the Agent uses and retains oversight of important decisions.</span></div></li>
+          <ul className={styles.trustAssurances} aria-label="Data protection and control principles">
+            <li><strong>Protected Business Information</strong><span>Your approved product and business information remains protected.</span></li>
+            <li><strong>Authorised Access</strong><span>Only authorised users can manage the Agent’s knowledge and settings.</span></li>
+            <li><strong>Human Oversight</strong><span>Define what the Agent can handle and when your team should take over.</span></li>
           </ul>
         </div>
       </div>
@@ -76,10 +62,10 @@ export function HomeTrustPanel() {
 }
 
 export const HOME_SELECTION_STEPS = [
-  ['Ingest', 'Structure product knowledge', 'Turn approved catalogues, specification tables and diagrams into structured product knowledge.'],
-  ['Reason', 'Clarify the buyer’s needs', 'Identify known requirements, missing constraints and the right next action before matching.'],
-  ['Retrieve', 'Find supported options', 'Search approved catalogue and supported inventory records for relevant options.'],
-  ['Recommend', 'Explain the recommendation', 'Explain the strongest option and flag suitability, availability and commercial checks for review.'],
+  ['Ingest', 'Structure product data', 'Turn approved catalogues, specifications and diagrams into structured data the Agent can use.'],
+  ['Reason', 'Clarify buyer needs', 'Identify confirmed requirements, missing details and the next question to ask before matching.'],
+  ['Retrieve', 'Identify closest match', 'Systematically compare confirmed requirements with approved catalogue and connected inventory data to identify the closest supported match.'],
+  ['Recommend', 'Capture buyer intent', 'Recommend the closest supported product, explain why it matches and capture the buyer’s interest as a qualified enquiry for your team.'],
 ] as const;
 
 export function HomeEducationBody() {
@@ -149,13 +135,13 @@ export function HomeEducationBody() {
         <div className={styles.frame}>
           <div className={styles.intro}>
             <p className={styles.eyebrow}>The Antbuildz approach</p>
-            <h2 id="home-selection-approach">From your inventory to <span className={styles.selectionEmphasis}>recommendation</span></h2>
-            <p>Start with approved product knowledge. The Agent clarifies the buyer’s needs, finds relevant options and explains what your team should review.</p>
+            <h2 id="home-selection-approach"><span>From Data</span><span>To Recommendation</span></h2>
+            <p>The Agent structures approved product data, clarifies buyer needs, identifies the closest supported match and turns interest into a qualified enquiry.</p>
           </div>
           {/* Layout lock: preserve the four large alternating graphic-and-copy
               rows. Future refinements belong inside SelectionOverviewGraphic
               only unless the user explicitly asks to unlock this layout. */}
-          <ol className={styles.stages} aria-label="Ingest, Reason, Retrieve, Recommend: from inventory to recommendation">
+          <ol className={styles.stages} aria-label="Ingest, Reason, Retrieve, Recommend: from data to recommendation">
             {HOME_SELECTION_STEPS.map(([title, label, description], index) => (
               <li key={title}>
                 <div className={styles.stageVisual}>
@@ -175,27 +161,28 @@ export function HomeEducationBody() {
       <section className={styles.section} aria-labelledby="home-product-relationship">
         <div className={styles.frame}>
           <div className={`${styles.intro} ${styles.productIntro}`}>
-            <p className={styles.eyebrow}>One connected workflow</p>
-            <h2 id="home-product-relationship" className={styles.productHeading}><span>Your AI Sales Agent</span>{' '}<span>Plus a connected Webstore</span></h2>
-            <p className={styles.connection}>Start with the AI Sales Agent. Add AI Webstore Suite when you need a browsable catalogue, supported inventory context and dedicated product pages that can support SEO and GEO discovery. Inventory freshness and visibility depend on your data, plan, connections and indexing.</p>
+            <p className={styles.eyebrow}>AI Sales Agent + Antbuildz Webstore</p>
+            <h2 id="home-product-relationship" className={styles.productHeading}><span>Accuracy Matters</span>{' '}<span>In Industrial Sales</span></h2>
+            <p className={styles.connection}>Industrial products are high-value, technically complex and often application-specific—so recommendation accuracy matters. Connect Antbuildz Webstore so your AI Sales Agent can compare buyer requirements against approved specifications and inventory data, recommend the closest supported match and prepare it for team confirmation.</p>
           </div>
           <div className={styles.products}>
             <article className={styles.agentProduct}>
               <AgentGraphic />
-              <div className={styles.productIdentity}><p className={styles.productLabel}>AI Sales Agent</p><span className={styles.productBadge}>Start here</span></div>
-              <h3>Turn buyer questions into informed enquiries</h3>
-              <p>Give buyers clearer answers and suitable recommendations. Your Agent clarifies requirements, checks approved product information and supported inventory, then prepares the details your team needs to confirm suitability and availability.</p>
+              <div className={styles.productIdentity}><p className={styles.productLabel}>AI Sales Agent</p><span className={styles.productBadge}>The core</span></div>
+              <h3>Understand and qualify buyers</h3>
+              <p>Clarify complex requirements, answer product questions and capture buyer intent before your sales team steps in.</p>
               <a className={styles.textLink} href="/ai-sales-agent" aria-label="Explore AI Sales Agent"><Arrow /></a>
             </article>
             <ProductConnector />
             <article className={styles.webstoreProduct}>
               <WebstoreGraphic />
-              <div className={styles.productIdentity}><p className={styles.productLabel}>AI Webstore Suite</p><span className={styles.productBadge}>Optional addition</span></div>
-              <h3>A searchable product library for buyers and your Agent</h3>
-              <p>Give buyers a browsable catalogue with a dedicated page for each product. Structured specifications and supported inventory help your Agent answer product questions and recommend suitable options with clearer context.</p>
-              <a className={styles.textLink} href="/ai-webstore-suite" aria-label="Explore AI Webstore Suite"><Arrow /></a>
+              <div className={styles.productIdentity}><p className={styles.productLabel}>Antbuildz Webstore</p><span className={styles.productBadge}>Available as an add-on</span></div>
+              <h3>Strengthen product recommendations</h3>
+              <p>Give your AI Sales Agent structured product pages, approved specifications and connected inventory data for more precise, better-supported product matching.</p>
+              <a className={styles.textLink} href="/ai-webstore-suite" aria-label="Explore Antbuildz Webstore"><Arrow /></a>
             </article>
           </div>
+          <p className={styles.productSupport}>Your team confirms technical suitability, availability and commercial terms before quotation.</p>
         </div>
       </section>
 
@@ -204,7 +191,7 @@ export function HomeEducationBody() {
           <div className={styles.industryHeader}>
             <div>
               <p className={styles.eyebrow}>Who we serve</p>
-              <h2 id="home-industries-heading">Built around the way industrial businesses sell</h2>
+              <h2 id="home-industries-heading">Built for Complex Industrial Sales</h2>
             </div>
           </div>
         </div>
@@ -268,9 +255,6 @@ export function HomeEducationFaq() {
                 <div className="si-sierra-faq-answer"><p>{answer}</p></div>
               </details>
             ))}
-          </div>
-          <div className={styles.faqActions}>
-            <a className={`mkt-btn mkt-btn-primary ${styles.demo}`} href="/book-a-demo">Book a Demo <Arrow /></a>
           </div>
         </div>
       </section>

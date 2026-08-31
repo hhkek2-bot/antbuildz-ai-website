@@ -5,10 +5,10 @@ import { GraphicIcon } from './home-graphics';
 import styles from './home-agent-foundations.module.css';
 
 export const AGENT_FOUNDATIONS = [
-  { id: 'brand', title: 'Company Brand', description: 'Reflect your company’s voice and sales approach, using the business guidance and enquiry process you approve.' },
-  { id: 'inventory', title: 'Product Catalogue', description: 'Give the Agent approved product details and, on supported plans, connected inventory context to identify relevant options for each enquiry.' },
-  { id: 'specifications', title: 'Technical Specifications', description: 'Ground product answers in approved specifications, manuals and application details. Clarify missing information before suggesting a fit.' },
-  { id: 'processes', title: 'SOPs and Process Knowledge', description: 'Give the Agent your approved qualification steps, escalation rules and handover procedures. It can follow what to ask, when to pause and what needs human sign-off.' },
+  { id: 'brand', title: 'Brand and sales voice', description: 'Keep every conversation aligned with your company voice, business guidance and approved sales approach.' },
+  { id: 'inventory', title: 'Products and connected inventory', description: 'Connect Antbuildz Webstore, your inventory system or supported third-party sources so the Agent can use approved product and availability information.' },
+  { id: 'specifications', title: 'Technical and business knowledge', description: 'Ground answers in approved specifications, manuals, policies and application guidance. Ask for missing requirements before suggesting a fit.' },
+  { id: 'processes', title: 'Business knowledge and SOPs', description: 'Follow your approved qualification steps, business rules, escalation paths and handover procedures—including when human approval is required.' },
 ] as const;
 
 const inventory = [
@@ -86,12 +86,14 @@ const scenes = [BrandScene, InventoryScene, SpecificationsScene, ProcessScene];
 
 export function HomeAgentFoundations() {
   return <section className={styles.section} aria-labelledby="home-agent-foundations">
-    <div className={styles.frame}>
+    <div className={styles.introFrame}>
       <div className={styles.intro}>
         <p className={styles.eyebrow}>Built around your business</p>
-        <h2 id="home-agent-foundations">Your AI Sales Agent <span>Your business at its core</span></h2>
-        <p>Bring your brand, product knowledge and approved processes into every enquiry, so buyers receive clear guidance while your team keeps control.</p>
+        <h2 id="home-agent-foundations">Your AI Sales Agent <span>Configured Around Your Business</span></h2>
+        <p>Bring your brand, product data, business knowledge and approved processes into every buyer conversation. Connect Antbuildz Webstore, your inventory or supported third-party systems, while your team controls what the Agent uses and when it hands over.</p>
       </div>
+    </div>
+    <div className={styles.frame}>
       <div className={styles.grid}>
         {AGENT_FOUNDATIONS.map(({ id, title, description }, index) => {
           const Scene = scenes[index];

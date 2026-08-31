@@ -2,22 +2,32 @@
 // /ai-sales-agent; the transferred layout, demonstrations and FAQs stay owned
 // by their existing components. Stable visual selectors cover animated clones.
 export const SALES_AGENT_COPY = {
-  hero: 'Use your catalogue, specifications and business knowledge to answer buyer questions, recommend suitable products and qualify sales and rental enquiries. Give your team the details needed for a quotation.',
+  hero: 'Turn product questions into qualified sales and rental enquiries. Antbuildz AI uses your catalogue, specifications and business knowledge to understand buyer needs, recommend suitable products and prepare the details your team needs to quote.',
   capabilitiesIntro: [
-    'Help buyers explore suitable products, explain their requirements and request a quotation. ',
-    'Your AI Sales Agent gathers the information your team needs to take the enquiry forward.',
+    'Your AI Sales Agent clarifies buyer needs, recommends the closest supported products and turns product conversations into qualified sales or rental enquiries.',
+    '',
   ],
   capabilities: [
-    ['knowledge', 'Industrial Product Knowledge', 'Answer questions using your product specifications, applications, rental terms and sales information.'],
-    ['training', 'Your Business Knowledge', 'Equip your agent with catalogues, manuals, pricing guides, policies and company information.'],
-    ['matching', 'Product Recommendations', 'Suggest suitable options based on the buyer’s application, specifications and rental or purchase requirements.'],
-    ['signals', 'Buyer Signals', 'Identify urgency, budget and buying interest to help your team prioritise enquiries.'],
-    ['security', 'Knowledge and Response Control', 'Choose the information your agent uses and set instructions for questions that need your team’s attention.'],
-    ['workflow', 'Quotation Handover', 'Collect product choices, quantities, location and timing for your team to review and quote.'],
+    ['knowledge', 'Industrial Product Knowledge', 'Answer buyer questions using approved specifications, applications, rental terms and sales information.'],
+    ['training', 'Your Business Knowledge', 'Answer using your catalogues, manuals, pricing guidance, policies and company information.'],
+    ['matching', 'Product Recommendations', 'Systematically compare confirmed buyer requirements with approved product data to recommend the closest supported options.'],
+    ['signals', 'Buyer Intent Signals', 'Recognise urgency, budget, application and sales or rental intent as the conversation develops.'],
+    ['security', 'Knowledge & Response Control', 'Define which knowledge the Agent uses and how it handles pricing, recommendations and questions requiring human review.'],
+    ['workflow', 'Qualified Sales Enquiry', 'Bring together confirmed requirements, recommended products and buyer intent as a qualified sales or rental enquiry.'],
   ],
+  capabilityEyebrows: [
+    ['knowledge', 'Grounded'],
+    ['training', 'Connected'],
+    ['matching', 'Reasoning'],
+    ['signals', 'Insightful'],
+    ['security', 'Controlled'],
+    ['workflow', 'Qualified'],
+  ],
+  recommendationLabels: ['Closest match', 'Strong alternative', 'Alternative'],
+  intentLabels: ['Requirements shared', 'Timeline confirmed', 'Budget discussed'],
   controlLabels: ['Business Knowledge', 'Agent Instructions', 'Response Rules'],
-  quotationLabels: ['Requirements Captured', 'Products Shortlisted', 'Quote Requested', 'Ready for Review'],
-  featuresIntro: 'Equip your AI Sales Agent with product knowledge, lead capture, buyer analysis and multilingual support. Set how it recommends products, qualifies sales and rental enquiries, and prepares the details your team needs for follow-up. Available features and connections depend on your plan.',
+  quotationLabels: ['Requirements Confirmed', 'Products Recommended', 'Buyer Intent Captured', 'Qualified Enquiry'],
+  featuresIntro: 'Give your Agent the knowledge, controls and connections to recommend products, qualify enquiries and support buyers in multiple languages.',
   features: [
     ['knowledge', 'Knowledge Base', 'Add catalogues, manuals, FAQs, pricing guidance and business policies to support product conversations.'],
     ['lead', 'Lead Capture', 'Collect contact details, product interest, quantity, location and timing for follow-up.'],
@@ -28,18 +38,18 @@ export const SALES_AGENT_COPY = {
     ['languages', 'Multilingual Support', 'Support product questions and buyer enquiries in multiple languages.'],
     ['quotation', 'Quotation Intent Capture', 'Recognise quotation requests and gather the details your team needs to respond.'],
   ],
-  problemsIntro: 'Industrial buyers need answers about specifications, suitability, pricing and rental terms. Delayed replies, scattered information and missing requirements make enquiries harder to follow up.',
+  problemsIntro: 'Buyers need timely answers about product fit, specifications, pricing and availability. Slow replies, scattered information and missed requirements cause valuable enquiries to lose momentum.',
   problems: [
-    ['a1', 'Slow First Replies', 'Buyers need answers about products and availability, but your team cannot always reply straight away.'],
-    ['a2', 'Visitors Leave With Questions', 'Visitors may leave when they cannot find answers about specifications, suitability or rental terms.'],
-    ['b', 'Enquiries Across Too Many Channels', 'Questions arrive through websites, messages, calls and referrals, making conversations harder to track and follow up.'],
-    ['d', 'Scattered Product Knowledge', 'Specifications, pricing and rental terms sit across files, people and systems, making consistent answers harder to find.'],
-    ['c1', 'Missing Buyer Requirements', 'Product choices, quantity, location and timing can be missed, leaving your team without the details needed to quote.'],
-    ['c2', 'Follow-Up Without Context', 'Your team has to repeat questions when buyer requirements and earlier conversations are not available.'],
+    ['a1', 'Slow First Response', 'Buyers expect quick answers, but your team cannot always respond immediately.'],
+    ['a2', 'Unanswered Product Questions', 'Visitors may leave when they cannot confirm specifications, suitability or sales and rental terms.'],
+    ['b', 'Enquiries Across Channels', 'Questions arrive through websites, messages, calls, campaigns and referrals, making them difficult to track.'],
+    ['d', 'Scattered Product Knowledge', 'Specifications, pricing and policies are spread across files, systems and people, making consistent answers harder.'],
+    ['c1', 'Incomplete Buyer Requirements', 'Product, quantity, location and timing can be missed, leaving too little information to recommend or quote.'],
+    ['c2', 'Follow-Up Without Context', 'Without the buyer’s requirements and conversation history, your team has to ask the same questions again.'],
   ],
   consoleIntro: [
-    'Control the knowledge and instructions your AI Sales Agent uses. ',
-    'Review conversations, buyer details and enquiry signals so your team knows where to follow up.',
+    'Configure a dedicated AI Sales Agent with your product data, business knowledge and sales instructions. Control how it answers questions, recommends products and handles enquiries.',
+    '',
   ],
   consoleTabs: [
     ['Define Your Agent’s Role', 'Set your agent’s role, tone and response boundaries.'],
@@ -49,22 +59,15 @@ export const SALES_AGENT_COPY = {
     ['Review Buyer Details', 'Review contact details and product requirements for follow-up.'],
     ['Understand Quotation Interest', 'Review urgency, budget and quotation interest to prioritise enquiries.'],
   ],
-  connection: 'Start with the AI Sales Agent. Add the AI Webstore Suite to connect conversations with product listings, inventory and sales or rental workflows. Available connections and workflows depend on your plan and setup.',
-  channelsIntro: 'Give buyers a way to ask product questions wherever they discover your business. Use your website and shared agent link to turn interest into enquiries your team can follow up.',
+  connection: 'Connect your Agent to Antbuildz Webstore inventory, Google Sheets, Excel or supported third-party systems. Recommend products using current stock and rental availability.',
+  channelsIntro: 'Connect your website, webstore, ads, emails, social posts and QR codes to the same AI Sales Agent. Buyers can ask questions immediately—without calling, completing a form or waiting for a reply.',
   channels: [
-    ['Website & Webstore', 'Let visitors ask questions, explain their requirements and explore suitable products.'],
-    ['Campaigns & QR Codes', 'Connect advertisements, social posts, brochures and QR codes to your agent.'],
-    ['Business Messaging', 'Share your agent link through messaging channels so buyers can start a product conversation.'],
-    ['Email & Sales Outreach', 'Include your agent link in campaigns, proposals and email signatures.'],
-    ['Overseas Enquiries', 'Support multilingual conversations and collect requirements from buyers in other markets.'],
-    ['Shared Product Knowledge', 'Make your catalogues, specifications and business guidance available through one agent.'],
-  ],
-  nextStepIntro: 'Bring product questions, buyer requirements and quotation interest together so your team can continue with useful context.',
-  nextSteps: [
-    ['Answer', 'Respond to product questions'],
-    ['Qualify', 'Capture buyer requirements'],
-    ['Match', 'Recommend suitable options'],
-    ['Prepare', 'Gather quotation details'],
+    ['Website & Webstore', 'Embed your Agent as live chat so buyers can ask product questions, clarify requirements and receive recommendations.'],
+    ['Campaigns & QR Codes', 'Let buyers move directly from advertisements, social posts, brochures or QR codes into a product conversation.'],
+    ['Messaging Channels', 'Share your Agent link through messaging channels so buyers can start a conversation immediately.'],
+    ['Email & Sales Outreach', 'Add your Agent link to campaigns, proposals and email signatures.'],
+    ['International Enquiries', 'Support multilingual product conversations and capture requirements from buyers in other markets.'],
+    ['Shared Business Knowledge', 'Use one approved knowledge base to keep product information and business guidance consistent across every touchpoint.'],
   ],
   closingLabels: [
     ['Product Recommendations', 'Help buyers find suitable options'],
@@ -118,26 +121,94 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
       });
     });
   };
+  const eyebrow = (containerSelector: string, headingSelector: string, label: string) => {
+    page.querySelectorAll<HTMLElement>(containerSelector).forEach(container => {
+      const heading = container.querySelector(headingSelector);
+      if (!heading || !container.ownerDocument) return;
+      let element = container.querySelector<HTMLElement>(':scope > .antbuildz-sales-agent-eyebrow');
+      if (!element) {
+        element = container.ownerDocument.createElement('span');
+        element.className = 'antbuildz-sales-agent-eyebrow';
+        element.append(container.ownerDocument.createTextNode(''));
+        container.insertBefore(element, heading);
+      }
+      setSalesAgentText(element, label);
+    });
+  };
 
   set('.bright-hero h1 .bright-hero-title-line:nth-child(1)', 'The AI Sales Agent');
   set('.bright-hero h1 .bright-hero-title-line:nth-child(2)', '');
-  set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Built for Industrial Business']);
+  set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Built for Industrial Sales']);
   set('.bright-subtitle', SALES_AGENT_COPY.hero);
-  action('.bright-hero-actions-block .bright-btn-primary', 'Build Your AI Agent ');
+  action('.bright-hero-actions-block .bright-btn-primary', 'Build Your AI Sales Agent ');
   action('.bright-hero-actions-block .bright-btn-secondary', 'Book a Demo');
+  eyebrow('.bright-hero-text-block', 'h1', 'INDUSTRIAL AI SALES AGENT');
+  eyebrow('.bento-section-header', 'h2', 'AI SALES AGENT CAPABILITIES');
+  eyebrow('.pain-bento-header', 'h2', 'ENQUIRY CHALLENGES');
+  eyebrow('.dt-header', 'h2', 'ONE AI SALES AGENT');
+  eyebrow('.bright-faq-accordion > .bright-container', 'h2', 'AI SALES AGENT FAQS');
 
   SALES_AGENT_COPY.capabilitiesIntro.forEach((text, i) => set(`.bento-desc-line:nth-child(${i + 1})`, text));
+  set('.bento-title-line:first-child', 'More Than Answers');
+  const capabilityTitleLine = page.querySelector<HTMLElement>('.bento-title-line:last-child');
+  if (capabilityTitleLine?.classList && capabilityTitleLine.ownerDocument) {
+    capabilityTitleLine.classList.remove('bright-hero-gradient-text');
+    let highlight = capabilityTitleLine.querySelector<HTMLElement>(':scope > .antbuildz-capabilities-gradient');
+    if (!highlight) {
+      const leadingText = Array.from(capabilityTitleLine.childNodes).find(node => node.nodeType === 3)
+        ?? capabilityTitleLine.ownerDocument.createTextNode('');
+      if (!leadingText.parentNode) capabilityTitleLine.prepend(leadingText);
+      leadingText.textContent = 'It ';
+      highlight = capabilityTitleLine.ownerDocument.createElement('span');
+      highlight.className = 'bright-hero-gradient-text antbuildz-capabilities-gradient';
+      highlight.append(capabilityTitleLine.ownerDocument.createTextNode(''));
+      capabilityTitleLine.append(highlight);
+    }
+    setSalesAgentText(highlight, 'Moves Enquiries Forward');
+  }
   SALES_AGENT_COPY.capabilities.forEach(([visual, title, description]) => {
     set(`.bento-card[data-visual="${visual}"] .bento-body h3`, title);
     set(`.bento-card[data-visual="${visual}"] .bento-body p`, description);
   });
-  set('.bento-card[data-visual="security"] .bento-eyebrow', 'Controlled');
-  set('.bento-card[data-visual="workflow"] .bento-eyebrow', 'Prepared');
+  SALES_AGENT_COPY.capabilityEyebrows.forEach(([visual, eyebrow]) => {
+    set(`.bento-card[data-visual="${visual}"] .bento-eyebrow`, eyebrow);
+  });
+  set('.bento-card[data-visual="training"] .bv-train-pill', 'Grounded');
+  SALES_AGENT_COPY.recommendationLabels.forEach((label, i) => set(`.bv-rank-${i + 1} .bv-rank-pct`, label));
+  set('.bento-card[data-visual="matching"] .bv-best', '✓ Closest match');
+  SALES_AGENT_COPY.intentLabels.forEach((label, i) => set(`.bv-sig-${i + 1}`, label));
+  set('.bento-card[data-visual="signals"] .bv-intent-label', 'High intent');
+  set('.bento-card[data-visual="signals"] .bv-intent-score', '');
   SALES_AGENT_COPY.controlLabels.forEach((label, i) => set(`.bv-sec-${i + 1}`, label));
   SALES_AGENT_COPY.quotationLabels.forEach((label, i) => set(`.bv-task-${i + 1} > span:last-child`, label));
 
-  set('.si-headline-line:first-child', ['AI Agent ', 'Features', '']);
-  set('.si-headline-line:last-child', 'Built for Industrial Sales');
+  const featuresHeader = page.querySelector<HTMLElement>('.si-header');
+  if (featuresHeader?.ownerDocument) {
+    let eyebrow = featuresHeader.querySelector<HTMLElement>(':scope > .antbuildz-si-eyebrow');
+    if (!eyebrow) {
+      eyebrow = featuresHeader.ownerDocument.createElement('span');
+      eyebrow.className = 'antbuildz-si-eyebrow';
+      eyebrow.append(featuresHeader.ownerDocument.createTextNode(''));
+      featuresHeader.insertBefore(eyebrow, featuresHeader.querySelector('.si-headline'));
+    }
+    setSalesAgentText(eyebrow, 'AI AGENT FEATURES');
+  }
+  set('.si-headline-line:first-child', ['Built Around', '', '']);
+  const featureTitleLine = page.querySelector<HTMLElement>('.si-headline-line:last-child');
+  if (featureTitleLine?.ownerDocument) {
+    let highlight = featureTitleLine.querySelector<HTMLElement>(':scope > .antbuildz-features-gradient');
+    if (!highlight) {
+      const existingText = Array.from(featureTitleLine.childNodes).find(node => node.nodeType === 3)
+        ?? featureTitleLine.ownerDocument.createTextNode('');
+      if (!existingText.parentNode) featureTitleLine.prepend(existingText);
+      existingText.textContent = '';
+      highlight = featureTitleLine.ownerDocument.createElement('span');
+      highlight.className = 'si-gradient-keyword antbuildz-features-gradient';
+      highlight.append(featureTitleLine.ownerDocument.createTextNode(''));
+      featureTitleLine.append(highlight);
+    }
+    setSalesAgentText(highlight, 'The Way You Sell');
+  }
   set('.si-sub', SALES_AGENT_COPY.featuresIntro);
   SALES_AGENT_COPY.features.forEach(([visual, title, description]) => {
     page.querySelectorAll(`.si-visual-${visual}`).forEach(illustration => {
@@ -155,9 +226,26 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
   });
   set('.pv-drop', 'Questions unanswered');
 
-  set('.af-section-eyebrow', 'AI Agent Console');
-  set('.af-section-title-line:first-child', 'Manage Your Agent ');
-  set('.af-section-title-line:last-child', 'Manage Your Enquiries');
+  set('.af-section-eyebrow', 'AI AGENT CONSOLE');
+  set('.af-section-title-line:first-child', 'Build an Agent');
+  const consoleTitleLine = page.querySelector<HTMLElement>('.af-section-title-line:last-child');
+  if (consoleTitleLine?.classList && consoleTitleLine.ownerDocument) {
+    consoleTitleLine.classList.remove('af-title-gradient');
+    let leadingText = Array.from(consoleTitleLine.childNodes).find(node => node.nodeType === 3);
+    if (!leadingText) {
+      leadingText = consoleTitleLine.ownerDocument.createTextNode('');
+      consoleTitleLine.prepend(leadingText);
+    }
+    leadingText.textContent = 'That ';
+    let highlight = consoleTitleLine.querySelector<HTMLElement>(':scope > .antbuildz-console-gradient');
+    if (!highlight) {
+      highlight = consoleTitleLine.ownerDocument.createElement('span');
+      highlight.className = 'af-title-gradient antbuildz-console-gradient';
+      highlight.append(consoleTitleLine.ownerDocument.createTextNode(''));
+      consoleTitleLine.append(highlight);
+    }
+    setSalesAgentText(highlight, 'Knows Your Business');
+  }
   SALES_AGENT_COPY.consoleIntro.forEach((text, i) => set(`.af-section-desc-line:nth-child(${i + 1})`, text));
   const activeTab = Array.from(page.querySelectorAll('.af-pill')).findIndex(tab => tab.getAttribute('aria-selected') === 'true');
   const tabCopy = SALES_AGENT_COPY.consoleTabs[activeTab];
@@ -166,12 +254,50 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     set('.af-headline p', tabCopy[1]);
   }
 
-  set('.flexible-ai-platform__eyebrow', 'Connected Catalogue and Inventory');
-  set('#flexible-ai-platform-heading', ['Extend Your Agent Into a ', 'Complete Sales System']);
+  set('.flexible-ai-platform__eyebrow', 'CONNECTED INVENTORY DATA');
+  const inventoryHeading = page.querySelector<HTMLElement>('#flexible-ai-platform-heading');
+  if (inventoryHeading?.ownerDocument) {
+    let highlight = inventoryHeading.querySelector<HTMLElement>(':scope > .mkt-gradient-text');
+    if (!highlight) {
+      highlight = inventoryHeading.ownerDocument.createElement('span');
+      highlight.className = 'mkt-gradient-text';
+      highlight.append(inventoryHeading.ownerDocument.createTextNode(''));
+      inventoryHeading.append(highlight);
+    }
+    let leadingText = Array.from(inventoryHeading.childNodes).find(node => node.nodeType === 3);
+    if (!leadingText) {
+      leadingText = inventoryHeading.ownerDocument.createTextNode('');
+      inventoryHeading.prepend(leadingText);
+    }
+    leadingText.textContent = 'Every Recommendation';
+    let lineBreak = inventoryHeading.querySelector<HTMLElement>(':scope > .antbuildz-inventory-title-break');
+    if (!lineBreak) {
+      lineBreak = inventoryHeading.ownerDocument.createElement('br');
+      lineBreak.className = 'antbuildz-inventory-title-break';
+      inventoryHeading.insertBefore(lineBreak, highlight);
+    }
+    const lineBreakIndex = Array.from(inventoryHeading.childNodes).indexOf(lineBreak);
+    let supportingText = Array.from(inventoryHeading.childNodes).find((node, index) => node.nodeType === 3 && index > lineBreakIndex);
+    if (!supportingText) {
+      supportingText = inventoryHeading.ownerDocument.createTextNode('');
+      inventoryHeading.insertBefore(supportingText, highlight);
+    }
+    supportingText.textContent = 'Backed by ';
+    setSalesAgentText(highlight, 'Current Inventory');
+  }
   set('.flexible-ai-platform__heading > p', SALES_AGENT_COPY.connection);
 
-  set('.dt-title', ['One ', 'AI Sales Agent']);
-  set('.dt-subtitle', 'More Ways to Start a Conversation.');
+  set('.dt-title', ['Turn Every Marketing Touchpoint', 'Into a Conversation']);
+  const touchpointHeading = page.querySelector<HTMLElement>('.dt-title');
+  if (touchpointHeading?.ownerDocument) {
+    const highlight = touchpointHeading.querySelector<HTMLElement>(':scope > .dt-title-gradient');
+    if (highlight && !touchpointHeading.querySelector(':scope > .antbuildz-touchpoint-title-break')) {
+      const lineBreak = touchpointHeading.ownerDocument.createElement('br');
+      lineBreak.className = 'antbuildz-touchpoint-title-break';
+      touchpointHeading.insertBefore(lineBreak, highlight);
+    }
+  }
+  set('.dt-subtitle', '');
   set('.dt-desc', SALES_AGENT_COPY.channelsIntro);
   page.querySelectorAll('.dt-card').forEach((card, i) => {
     const copy = SALES_AGENT_COPY.channels[i];
@@ -179,19 +305,18 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     setSalesAgentText(card.querySelector('.dt-card-title'), copy[0]);
     setSalesAgentText(card.querySelector('.dt-card-desc'), copy[1]);
   });
+  set('.dt-chat-name', 'AI Sales Agent');
+  set('.dt-chat-status', 'Online');
+  set('.dt-chat-widget-body .dt-bubble:nth-child(1)', 'Hi—what product or equipment are you looking for?');
+  set('.dt-chat-widget-body .dt-bubble:nth-child(2)', 'I need a 3-ton forklift for indoor use.');
+  set('.dt-chat-widget-body .dt-bubble:nth-child(3)', 'I found several electric options that may fit. What lifting height and rental period do you need?');
 
-  set('.aisl-intro h2', ['Help Your Team ', 'Take the Next Step']);
-  set('.aisl-intro-copy', SALES_AGENT_COPY.nextStepIntro);
-  const capabilities = page.querySelector('.aisl-metrics');
-  capabilities?.setAttribute('aria-label', 'AI Sales Agent capabilities');
-  capabilities?.setAttribute('data-antbuildz-capabilities', 'true');
-  page.querySelectorAll('.aisl-stat-cell').forEach((cell, i) => {
-    const copy = SALES_AGENT_COPY.nextSteps[i];
-    if (!copy) return;
-    cell.querySelectorAll('.aisl-stat-prefix, .aisl-stat-suffix').forEach(suffix => setSalesAgentText(suffix, ''));
-    setSalesAgentText(cell.querySelector('.aisl-stat-value > span:not([class])'), copy[0]);
-    setSalesAgentText(cell.querySelector('.aisl-stat-label'), copy[1]);
-  });
+  const nextStepSection = page.querySelector<HTMLElement>('.aisl-section');
+  if (nextStepSection) {
+    nextStepSection.hidden = true;
+    nextStepSection.setAttribute('aria-hidden', 'true');
+    nextStepSection.setAttribute('data-antbuildz-sales-agent-removed', 'true');
+  }
 
   set('.ws-cta-title', ['Build', ' Your AI Sales Agent']);
   action('.ws-cta-btn-primary', 'Build Your AI Agent ');

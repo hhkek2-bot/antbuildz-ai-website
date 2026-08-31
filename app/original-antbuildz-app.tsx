@@ -9,6 +9,7 @@ import { HOMEPAGE_SEO, syncHomepageMetadata } from '../lib/homepage-seo';
 import { applyPublicMarketingSectionSystem } from '../lib/public-marketing-sections';
 import { applyPublicMarketingTypographyTrial } from '../lib/public-marketing-typography';
 import { removeHeadingFullStops } from '../lib/title-punctuation';
+import { applyWhoWeServeProcessCopy } from '../lib/who-we-serve-process-copy';
 
 const ORIGINAL_STYLESHEET_ID = 'antbuildz-original-styles';
 const ORIGINAL_SCRIPT_ID = 'antbuildz-original-app';
@@ -997,6 +998,25 @@ function navigateSalesAgentFromLink(event: MouseEvent | KeyboardEvent) {
   window.location.assign(destination.href);
 }
 
+function navigateWebstoreFromLink(event: MouseEvent | KeyboardEvent) {
+  if (event.defaultPrevented || event.metaKey || event.ctrlKey
+    || event.shiftKey || event.altKey || !(event.target instanceof Element)) return;
+  if ('key' in event ? event.key !== 'Enter' || event.repeat : event.button !== 0) return;
+  const link = event.target.closest<HTMLAnchorElement>('#root a[href]');
+  if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
+  const destination = new URL(link.href, window.location.href);
+  if (destination.origin !== window.location.origin
+    || !['/ai-webstore-suite', '/webstore', '/webstore-2'].includes(destination.pathname)) return;
+
+  // The copied router still renders its superseded mint Webstore page on the
+  // first client-side click. Enter the canonical product document directly so
+  // the selected AI Webstore Suite experience appears without a refresh.
+  destination.pathname = '/ai-webstore-suite';
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  window.location.assign(destination.href);
+}
+
 function navigateDemoFromLink(event: MouseEvent | KeyboardEvent) {
   if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
     || !(event.target instanceof Element)) return;
@@ -1670,6 +1690,10 @@ function setupHomeHeroConversationRuntime(
   };
 }
 
+const HOME_HERO_EYEBROW = 'Industrial AI Sales Agent for product-led B2B';
+const HOME_HERO_TITLE_PRIMARY = 'Make Industrial Buying Better';
+const HOME_HERO_TITLE_BRAND = 'With Antbuildz AI';
+
 function correctHomepage(root: HTMLElement) {
   const isHomepage = window.location.pathname === '/';
   root.classList.toggle('antbuildz-ai-home', isHomepage);
@@ -1686,24 +1710,21 @@ function correctHomepage(root: HTMLElement) {
 
   const heroCopy = root.querySelector<HTMLElement>('.ai-marketplace-hero-copy');
   const titleLines = heroCopy?.querySelectorAll<HTMLElement>('h1 .ai-hero-line');
-  if (titleLines?.[0] && titleLines[0].textContent !== 'We Make Industrial Possible') titleLines[0].textContent = 'We Make Industrial Possible';
-  if (titleLines?.[1] && titleLines[1].textContent !== 'With Antbuildz AI') titleLines[1].textContent = 'With Antbuildz AI';
+  if (titleLines?.[0] && titleLines[0].textContent !== HOME_HERO_TITLE_PRIMARY) titleLines[0].textContent = HOME_HERO_TITLE_PRIMARY;
+  if (titleLines?.[1] && titleLines[1].textContent !== HOME_HERO_TITLE_BRAND) titleLines[1].textContent = HOME_HERO_TITLE_BRAND;
   if (titleLines?.[0] && titleLines[1] && titleLines[1].previousSibling === titleLines[0]) {
     titleLines[0].after(document.createTextNode(' '));
   }
 
-  if (heroCopy && !heroCopy.querySelector('.antbuildz-ai-home-eyebrow')) {
+  let eyebrow = heroCopy?.querySelector<HTMLElement>('.antbuildz-ai-home-eyebrow');
+  if (heroCopy && !eyebrow) {
     const eyebrow = document.createElement('p');
     eyebrow.className = 'antbuildz-ai-home-eyebrow';
-    eyebrow.textContent = 'AI Sales Agent for industrial businesses';
     heroCopy.prepend(eyebrow);
   }
-  if (heroCopy && !heroCopy.querySelector('.antbuildz-ai-home-description')) {
-    const description = document.createElement('p');
-    description.className = 'antbuildz-ai-home-description';
-    description.textContent = 'Turn complex product knowledge into useful buyer conversations with an AI Sales Agent, AI Webstore Suite and one operational Console—built for industrial rental and sales.';
-    heroCopy.appendChild(description);
-  }
+  eyebrow = heroCopy?.querySelector<HTMLElement>('.antbuildz-ai-home-eyebrow');
+  if (eyebrow && eyebrow.textContent !== HOME_HERO_EYEBROW) eyebrow.textContent = HOME_HERO_EYEBROW;
+  heroCopy?.querySelector('.antbuildz-ai-home-description')?.remove();
   heroCopy?.querySelector('.antbuildz-ai-home-intro')?.remove();
 
   const hero = root.querySelector<HTMLElement>('.ai-marketplace-hero');
@@ -1788,6 +1809,10 @@ function formatUsdAmount(amount: number) {
     minimumFractionDigits: hasCents ? 2 : 0,
     maximumFractionDigits: 2,
   }).format(amount);
+}
+
+function roundAnnualUsdAmount(amount: number) {
+  return Math.ceil(amount);
 }
 
 function setPricingDetail(details: HTMLElement, key: string, label: string, value: string) {
@@ -2007,7 +2032,7 @@ function correctPricing(root: HTMLElement) {
     if (plan.monthlyUsd) {
       annualNote.classList.remove('is-placeholder');
       const monthlyEquivalent = billingCycle === 'annual'
-        ? plan.monthlyUsd * (1 - ANNUAL_PRICING_DISCOUNT)
+        ? roundAnnualUsdAmount(plan.monthlyUsd * (1 - ANNUAL_PRICING_DISCOUNT))
         : plan.monthlyUsd;
       setPricingText(price, `$${formatUsdAmount(monthlyEquivalent)}`);
       if (period) {
@@ -2017,7 +2042,9 @@ function correctPricing(root: HTMLElement) {
       if (annualNote) {
         annualNote.hidden = billingCycle !== 'annual';
         if (billingCycle === 'annual') {
-          const annualTotal = plan.monthlyUsd * 12 * (1 - ANNUAL_PRICING_DISCOUNT);
+          const annualTotal = roundAnnualUsdAmount(
+            plan.monthlyUsd * 12 * (1 - ANNUAL_PRICING_DISCOUNT),
+          );
           setPricingText(
             annualNote,
             `$${formatUsdAmount(annualTotal)} billed annually · Save 20%`,
@@ -2091,6 +2118,10 @@ function correctPublicTypography(root: HTMLElement) {
   root.querySelector('article h1')?.closest('article')?.classList.add('antbuildz-article-typography');
 }
 
+function markWhoWeServePage(root: HTMLElement) {
+  root.classList.toggle('antbuildz-who-we-serve-page', WHO_WE_SERVE_PATHS.has(window.location.pathname));
+}
+
 function correctIndustryTrustPlacement(root: HTMLElement) {
   const isWhoWeServePage = WHO_WE_SERVE_PATHS.has(window.location.pathname);
   root.querySelectorAll<HTMLElement>('.si-sierra-stage--trust').forEach((section) => {
@@ -2133,8 +2164,10 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   syncAgreementMetadata(document, window.location.pathname);
   scopeAiHelpExperience(root, window.location.pathname);
   standardiseAgentPortraits(root);
+  markWhoWeServePage(root);
   correctIndustryTrustPlacement(root);
   removeWhoWeServeBreadcrumb(root);
+  applyWhoWeServeProcessCopy(root, window.location.pathname);
   correctPublicTypography(root);
   applyPublicMarketingTypographyTrial(root, window.location.pathname);
   applyPublicMarketingSectionSystem(root, window.location.pathname);
@@ -2158,6 +2191,8 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     document.addEventListener('click', navigateHomeFromLink, true);
     document.addEventListener('click', navigateSalesAgentFromLink, true);
     document.addEventListener('keydown', navigateSalesAgentFromLink, true);
+    document.addEventListener('click', navigateWebstoreFromLink, true);
+    document.addEventListener('keydown', navigateWebstoreFromLink, true);
     document.addEventListener('click', navigateDemoFromLink, true);
     document.addEventListener('keydown', navigateDemoFromLink, true);
     window.addEventListener('popstate', navigateHomeFromHistory);
@@ -2212,6 +2247,8 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
       document.removeEventListener('click', navigateHomeFromLink, true);
       document.removeEventListener('click', navigateSalesAgentFromLink, true);
       document.removeEventListener('keydown', navigateSalesAgentFromLink, true);
+      document.removeEventListener('click', navigateWebstoreFromLink, true);
+      document.removeEventListener('keydown', navigateWebstoreFromLink, true);
       document.removeEventListener('click', navigateDemoFromLink, true);
       document.removeEventListener('keydown', navigateDemoFromLink, true);
       window.removeEventListener('popstate', navigateHomeFromHistory);

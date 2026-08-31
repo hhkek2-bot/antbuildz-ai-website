@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { allStaticSlugs, getSolution } from '@/lib/site-content';
+import { SOCIAL_SHARE_IMAGE } from '@/lib/social-share';
 import { OriginalAntbuildzApp } from '../original-antbuildz-app';
 import { WebstoreConceptPage } from '../webstore-2-ai-webstore-preview/webstore-concept';
 
@@ -29,13 +30,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     : (pageTitles[slug] ?? ['Antbuildz AI', 'Industrial AI sales ecosystem.']);
   const images = solution
     ? [{ url: solution.image, alt: `${solution.navLabel} industrial operations` }]
-    : undefined;
+    : [SOCIAL_SHARE_IMAGE];
   return {
     title,
     description,
     alternates: { canonical: `/${slug}` },
-    openGraph: { title, description, url: `/${slug}`, ...(images ? { images } : {}) },
-    twitter: { title, description, ...(images ? { images } : {}) },
+    openGraph: { title, description, url: `/${slug}`, images },
+    twitter: { card: 'summary_large_image', title, description, images },
   };
 }
 

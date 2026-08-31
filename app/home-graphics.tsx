@@ -51,71 +51,78 @@ export function CatalogueGraphic() {
 export function SelectionOverviewGraphic({ step }: { step: number }) {
   return <div className={styles.selectionOverview} aria-hidden="true">
     {step === 0 && <div className={`${styles.overviewFlow} ${styles.overviewIngest}`}>
-      <div className={`${styles.overviewCard} ${styles.overviewSource}`}>
-        <span className={styles.overviewLabel}>Approved knowledge</span>
-        <strong>Product catalogue</strong>
-        <small>Specifications · diagrams · rules</small>
-        <div className={styles.overviewDocumentRows}>
-          <span><b>Category</b><small>Electric forklift</small></span>
-          <span><b>Rated load</b><small>Approved field</small></span>
-          <span><b>Power</b><small>Approved field</small></span>
+      <div className={`${styles.overviewCard} ${styles.overviewPdfCard}`}>
+        <div className={styles.overviewFileHeader}><span className={styles.overviewPdfBadge}>PDF</span><small>Approved catalogue</small></div>
+        <strong>Teupen LEO 23GT</strong>
+        <small>Technical specification &amp; working envelope</small>
+        <div className={styles.overviewPdfPreview}>
+          <span><b>Working height</b><small>23.00 m</small></span>
+          <span><b>Horizontal outreach</b><small>11.20 m</small></span>
+          <span><b>Minimum width</b><small>0.98 m</small></span>
         </div>
       </div>
-      <span className={styles.overviewArrow}><i /></span>
-      <div className={`${styles.overviewCard} ${styles.overviewRecord}`}>
-        <span className={styles.overviewLabel}>Structured data</span>
-        <strong>Product record</strong>
-        <div className={styles.overviewList}>
-          <span><b>Product details</b><i>Mapped</i></span>
-          <span><b>Technical fields</b><i>Mapped</i></span>
-          <span><b>Availability rules</b><i>Mapped</i></span>
+      <span className={`${styles.overviewArrow} ${styles.overviewIngestArrow}`}><small>Ingest</small><i /></span>
+      <div className={`${styles.overviewCard} ${styles.overviewMarkdownCard}`}>
+        <div className={styles.overviewFileHeader}><span className={styles.overviewMarkdownBadge}>MD</span><small>AI-readable Markdown</small></div>
+        <strong>teupen-leo-23gt.md</strong>
+        <div className={styles.overviewMarkdown}>
+          <code><span><em>#</em> Teupen LEO 23GT</span><span><em>**</em>Type:<em>**</em> Technical spec</span><span><em>##</em> Measurements</span><span>| Working height | 23.00 m |</span><span>| Outreach | 11.20 m |</span><span>| Min. width | 0.98 m |</span></code>
         </div>
-        <small className={styles.overviewStatus}>Ready for approved use</small>
+        <small className={styles.overviewStatus}>Ready for Agent retrieval</small>
       </div>
     </div>}
 
     {step === 1 && <div className={`${styles.overviewStack} ${styles.overviewReason}`}>
       <div className={styles.overviewQuestion}>
-        <span className={styles.overviewLabel}>Buyer need</span>
-        <strong>5 t electric forklift for warehouse use</strong>
+        <span className={styles.overviewLabel}>Buyer says</span>
+        <strong>“I need a boom lift.”</strong>
       </div>
-      <div className={styles.overviewSplit}>
-        <span><small>Known</small><b>Rated load · power</b><i>2 requirements captured</i></span>
-        <span><small>Still needed</small><b>Lift · aisle · load</b><i>3 constraints to clarify</i></span>
+      <div className={`${styles.overviewSplit} ${styles.overviewReasonQuestions}`}>
+        <span><small>Emma asks first</small><b>What platform height do you need?</b><i>Required height is not yet known</i></span>
+        <span><small>Emma also clarifies</small><b>Telescopic or articulating?</b><i>Boom type depends on the task</i></span>
       </div>
       <div className={styles.overviewOutcome}>
         <span><small>Next action</small><strong>Clarify before matching</strong></span>
-        <b>Ask for site constraints</b>
+        <b>No product recommended yet</b>
       </div>
     </div>}
 
     {step === 2 && <div className={`${styles.overviewStack} ${styles.overviewRetrieve}`}>
       <div className={styles.overviewSearch}>
-        <span><span className={styles.overviewLabel}>Search</span><strong>Approved catalogue + supported inventory</strong></span>
-        <small>Approved sources only</small>
+        <span><span className={styles.overviewLabel}>Scanning approved listings</span><strong>Articulating boom · required height confirmed</strong></span>
+        <small>5 records</small>
       </div>
-      <div className={styles.overviewFilters}><span>Category</span><span>Power</span><span>Rated load</span></div>
+      <div className={styles.overviewFilters}><span>Boom type</span><span>Platform height</span><span>Approved records</span></div>
       <div className={styles.overviewOptions}>
-        <span><b>Electric forklift</b><small>Relevant category</small><i>Included</i></span>
-        <span className={styles.overviewOptionActive}><b>Closest supported option</b><small>Ready to compare</small><i>Review</i></span>
-        <span><b>Other equipment</b><small>Outside the need</small><i>Excluded</i></span>
+        <div className={styles.overviewOptionsHead}><span>Listing</span><span>Equipment</span><span>Confidence</span></div>
+        <span><b>Toyota 8FBMT50</b><small>Electric forklift</small><i aria-label="8% confidence">8%</i></span>
+        <span><b>JCB 540-180</b><small>Telehandler</small><i aria-label="14% confidence">14%</i></span>
+        <span><b>Genie GS-4047</b><small>Scissor lift</small><i aria-label="21% confidence">21%</i></span>
+        <span><b>JLG E450AJ</b><small>Articulating boom</small><i aria-label="78% confidence">78%</i></span>
+        <span className={styles.overviewOptionActive}><b>LGMG AR20JE-2</b><small>Articulating boom</small><i aria-label="94% confidence">94%</i></span>
       </div>
+      <div className={styles.overviewRetrieveResult}><span><small>Highest confidence</small><strong>LGMG AR20JE-2</strong></span><b>94% · highest score selected</b></div>
     </div>}
 
-    {step === 3 && <div className={`${styles.overviewStack} ${styles.overviewRecommend}`}>
-      <div className={styles.overviewAgent}>
-        <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="32" height="32" />
-        <span><strong>Emma</strong><small>AI Sales Agent</small></span>
-        <i>For team review</i>
+    {step === 3 && <div className={styles.overviewPhoneCrop}>
+      <div className={`${styles.agentPanel} ${styles.overviewPhone}`}>
+        <div className={styles.agentHeader}>
+          <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" />
+          <span><strong>Emma</strong><small>AI Sales Agent</small></span>
+          <i aria-hidden="true" />
+        </div>
+        <div className={styles.agentConversation}>
+          <span className={styles.agentBuyerMessage}>Which lift suits indoor ceiling maintenance?</span>
+          <span className={styles.agentReply}>For 10 m working height and 900 mm access, the closest supported option is a compact electric scissor lift.</span>
+          <span className={styles.agentInventoryCheck}><span><small>Recommendation explained</small><strong>Working height · electric · access</strong></span><b>3 checks shown</b></span>
+          <span className={`${styles.agentReply} ${styles.agentAnswer}`}>Your team should confirm the 230 kg platform load, availability and hire terms before quotation.</span>
+        </div>
+        <div className={styles.enquirySummary}>
+          <GraphicIcon kind="review" />
+          <span><small>Team review</small><strong>Suitability · availability · commercial terms</strong></span>
+          <b>Prepared</b>
+        </div>
       </div>
-      <div className={styles.overviewBuyer}>Which option best fits?</div>
-      <div className={styles.overviewAnswer}>
-        <span className={styles.overviewLabel}>Recommendation</span>
-        <strong>Closest supported option</strong>
-        <small>Explained against the buyer’s stated requirements</small>
-        <div className={styles.overviewRecommendationFacts}><span>Rated load</span><span>Power</span><span>Application</span></div>
-      </div>
-      <div className={styles.overviewReview}><span>Sales review</span><strong>Team confirms suitability, availability and terms</strong></div>
     </div>}
   </div>;
 }

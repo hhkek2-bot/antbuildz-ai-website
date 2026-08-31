@@ -448,11 +448,11 @@
     align-items: center;
     gap: 6px;
     height: 100%;
-    max-width: 1180px;
+    max-width: 1280px;
     text-align: center;
   }
   .conceptPage :global(.webstore2-page .ws2-hero-shell > .mkt-section-eyebrow) { flex-shrink: 0; margin: 0; text-align: center; }
-  .conceptPage:global(#root) :global(.webstore2-page > section:first-of-type .ws2-hero-shell .ws2-hero-title) { flex-shrink: 0; margin: 0; width: 100%; max-width: 1180px; text-align: center; }
+  .conceptPage:global(#root) :global(.webstore2-page > section:first-of-type .ws2-hero-shell .ws2-hero-title) { flex-shrink: 0; margin: 0; width: 100%; max-width: 1280px; text-align: center; }
   .conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-desc) { flex-shrink: 0; margin: 0; width: 100%; text-align: center; }
   .conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-desc .mkt-desc-line) { display: inline; white-space: normal; }
   .conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-cta-wrap) { flex-shrink: 0; align-items: center; margin: 4px 0 0; }
@@ -479,6 +479,12 @@
   .storyFooter p { font-size: 12px; line-height: 1.5; }
   .playback { margin: 0; }
 
+}
+
+@media (max-width: 767px) {
+  .conceptPage :global(.webstore2-page > section:first-of-type) {
+    padding-inline: 12px;
+  }
 }
 
 @media (max-width: 979px) {

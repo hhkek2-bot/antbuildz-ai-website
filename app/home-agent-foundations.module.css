@@ -1,10 +1,11 @@
 .section { padding: 104px 0; background: #fff; color: var(--body); font: var(--type-body-weight) var(--type-body)/var(--type-body-line) var(--font-body); }
 .frame { width: 90%; max-width: 1320px; margin-inline: auto; }
-.intro { max-width: 940px; margin-bottom: 48px; }
+.introFrame { width: min(1280px, calc(100% - 48px)); margin-inline: auto; }
+.intro { max-width: 1120px; margin-bottom: 48px; }
 .eyebrow { margin: 0 0 20px; color: var(--red); font: 800 var(--type-label)/1 var(--font-heading); letter-spacing: .24em; text-transform: uppercase; }
 .intro h2 { margin: 0; color: var(--ink); font: var(--type-heading-weight) var(--type-section-heading)/var(--type-heading-line) var(--font-heading); letter-spacing: var(--type-heading-tracking); }
 .intro h2 span { display: block; text-wrap: balance; color: var(--ink); }
-.intro > p:last-child { max-width: 760px; margin: 24px 0 0; font-size: var(--type-lead); line-height: 1.62; }
+.intro > p:last-child { max-width: none; margin: 24px 0 0; font-size: var(--type-lead); line-height: 1.62; }
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(160deg, white 24%, color-mix(in srgb, var(--red) 5%, white)); }
 .brand, .processes { grid-column: span 2; }
@@ -67,6 +68,7 @@
 .reviewNote { display: flex; gap: 8px; align-items: flex-start; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--body); font-size: 11px; }
 @media (min-width: 980px) {
   .frame { width: 76.5%; zoom: .85; }
+  .intro { zoom: .85; }
 }
 @media (max-width: 979px) {
   .section { padding-block: 80px; }
@@ -89,6 +91,7 @@
 }
 @media (max-width: 767px) {
   .section { padding-block: 64px; }
+  .introFrame { width: calc(100% - 24px); }
   .intro { margin-bottom: 32px; }
   .intro h2 { text-wrap: balance; }
   .grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
