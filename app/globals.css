@@ -1704,8 +1704,14 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
     line-height: 1.6;
   }
   #root [data-antbuildz-sales-agent] .ws-cta-actions {
-    align-items: stretch;
+    align-items: center;
     margin-top: 24px;
+  }
+
+  #root [data-antbuildz-sales-agent] .bright-hero-actions-block .bright-btn,
+  #root [data-antbuildz-sales-agent] .ws-cta-actions :is(.ws-cta-btn-primary, .ws-cta-btn-outline) {
+    width: 300px !important;
+    max-width: 100%;
   }
 
   #root [data-antbuildz-sales-agent] .bright-hero.antbuildz-public-hero-surface {
@@ -1743,6 +1749,32 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
     order: 3 !important;
     flex: 0 0 auto;
     margin: 14px auto 84px !important;
+  }
+
+  /* Keep the Sales Agent's interface illustrations proportional to a phone
+     viewport. Capability cards use a compact landscape proof area, while the
+     dense Agent configuration demo becomes one contained preview instead of
+     expanding through several mobile screens. */
+  #root [data-antbuildz-sales-agent] :is(.si-card-sm, .si-card-md, .si-card-lg) {
+    aspect-ratio: auto;
+  }
+
+  #root [data-antbuildz-sales-agent] .si-card-visual {
+    height: clamp(210px, 62vw, 236px);
+    min-height: clamp(210px, 62vw, 236px);
+    flex: 0 0 clamp(210px, 62vw, 236px);
+  }
+
+  #root.antbuildz-original-root .af-panel-visual {
+    height: clamp(500px, 142vw, 580px);
+    min-height: clamp(500px, 142vw, 580px);
+    max-height: 580px;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  #root.antbuildz-original-root .af-panel-visual::after {
+    height: 112px;
   }
   #root.antbuildz-public-typography {
     --type-hero-heading: clamp(2rem, 9vw, 2.75rem);

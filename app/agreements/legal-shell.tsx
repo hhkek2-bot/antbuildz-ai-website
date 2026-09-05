@@ -65,7 +65,6 @@ function LegalHeader() {
               <a href="/ai-agent-console">AI Agent Console</a>
               <a href="/pricing">Pricing</a>
               <a href="/ai-roles">All AI Roles</a>
-              {agentRoleLinks.map(([label, href]) => <a className={styles.mobileRoleLink} key={href} href={href}>{label}</a>)}
               <a href="/resources">Resources</a>
               <a href="/about">About Us</a>
             </nav>

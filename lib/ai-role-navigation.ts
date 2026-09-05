@@ -17,12 +17,11 @@ export function syncAiRoleNavigation(root: HTMLElement, roles: readonly { label:
     if (drawer.querySelector('[data-ai-mobile-roles]')) return;
     const group = document.createElement('div');
     group.dataset.aiMobileRoles = 'true';
-    [{ label: 'All AI Roles', href: '/ai-roles' }, ...roles].forEach(({ label, href }, index) => {
-      const link = document.createElement('a');
-      link.href = href; link.textContent = label;
-      link.className = `antbuildz-menu-link${index ? ' antbuildz-menu-role-link' : ''}`;
-      group.appendChild(link);
-    });
+    const link = document.createElement('a');
+    link.href = '/ai-roles';
+    link.textContent = 'All AI Roles';
+    link.className = 'antbuildz-menu-link';
+    group.appendChild(link);
     drawer.querySelector('a[href="/pricing"]')?.insertAdjacentElement('afterend', group);
   });
   root.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => {

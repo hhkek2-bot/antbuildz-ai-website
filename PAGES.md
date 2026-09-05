@@ -2,6 +2,37 @@
 
 This register preserves route intent and design status between sessions. Read it before page work and update it when a route, primary CTA, source relationship or QA status materially changes.
 
+## 2026-09-05 — Mobile graphics and calls to action
+
+### Follow-up — Single mobile AI Roles link
+
+The public mobile navigation now shows one `All AI Roles` master link to
+`/ai-roles`. The five individual role links are removed from both the copied
+public drawer and the source-owned legal-page drawer. The desktop AI Roles
+dropdown and the dedicated role pages remain available. Browser inspection at
+390px covered AI Sales Agent and Agreements; both drawers show the same short
+link list with zero horizontal overflow.
+
+Audit and system-mode correction for public mobile graphics, with particular
+attention to AI Sales Agent. At 767px and below, the eight Sales Intelligence
+card illustrations now use compact 210–236px proof areas instead of tall
+near-square panels. The shared Agent configuration demonstration is contained
+in a 500–580px preview with a lower fade, rather than expanding through more
+than 2,000px of a phone page. This shared correction also covers AI Webstore
+Suite.
+
+AI Sales Agent hero and closing actions now follow the public mobile standard:
+300px maximum width, 54px height and centred alignment. Inner containers can
+reduce the width on smaller screens without causing overflow. Desktop graphic
+dimensions and action layouts remain unchanged because the corrections are
+scoped to the mobile breakpoint.
+
+Browser QA covered AI Sales Agent at 360px, 390px and 1440px; AI Webstore Suite
+at 390px and 1440px; AI Agent Console at 390px; the home page at 360px and
+390px; and a representative AI role page at 360px. Every checked route retained
+zero horizontal overflow. Rendered mobile evidence and measurement reports are
+stored in `artifacts/mobile-qa-20260905/`. Local-only; nothing deployed.
+
 ## 2026-09-04 — AI Roles overview and five role pages
 
 ### Follow-up — Industry-matched section descriptions
