@@ -2,17 +2,20 @@
  * Keep model, image and source together. See PRODUCT-SOURCES.md for the audit.
  */
 export const PRODUCT_FACTS_CHECKED_ON = '2026-08-28';
-// Commercial modes illustrate the workflow, not a supplier's stock or rates.
-// Replace quote placeholders only with approved seller pricing.
-const RENTAL_PRICING = [
-  { label: 'Rental / day', value: 'Get Quote' },
-  { label: 'Rental / month', value: 'Get Quote' },
-  { label: 'Sale price', value: '—' },
+export const PRODUCT_PRICING_CHECKED_ON = '2026-08-31';
+// Prices are current public references, not live inventory or a quotation.
+// The rental example uses a comparable 1.6-ton reach truck because no public
+// rate was available for the pictured ETV 216i. See PRODUCT-SOURCES.md.
+const REACH_TRUCK_RENTAL_PRICING = [
+  { label: 'Daily', value: 'SGD 350' },
+  { label: 'Weekly', value: 'SGD 350' },
+  { label: 'Monthly', value: 'SGD 750' },
 ] as const;
-const SALES_PRICING = [
-  { label: 'Rental / day', value: '—' },
-  { label: 'Rental / month', value: '—' },
-  { label: 'Sale price', value: 'Get Quote' },
+const BOSCH_SALE_PRICING = [
+  { label: 'Sale price', value: 'SGD 210.00' },
+] as const;
+const NSK_SALE_PRICING = [
+  { label: 'Sale price', value: 'SGD 7.99' },
 ] as const;
 export const DEMO_PRODUCTS = [
   {
@@ -20,7 +23,9 @@ export const DEMO_PRODUCTS = [
     brand: 'Jungheinrich', model: 'ETV 216i', category: 'Material handling',
     slug: 'jungheinrich-etv-216i', keyDetail: '1,600 kg load', specification: '10.7 m max. lift',
     application: 'Warehouse stacking', power: 'Electric', summary: 'Reach truck · 1,600 kg',
-    listingType: 'rental', pricing: RENTAL_PRICING,
+    listingType: 'rental', pricingContext: 'Example 1.6 t · excl. tax', pricing: REACH_TRUCK_RENTAL_PRICING,
+    pricingSource: 'https://antbuildz.com/equipments/material_handling',
+    pricingSourceTitle: 'Antbuildz 1.6-ton Hyster R1.6 reach-truck rental listing',
     specs: [{ label: 'Rated load', value: '1,600 kg' }, { label: 'Power', value: 'Electric' }, { label: 'Max. lift', value: '10.7 m' }],
     image: '/images/verified-equipment/jungheinrich-etv-216i.webp',
     imageAlt: 'Jungheinrich ETV 216i electric reach truck — manufacturer image',
@@ -33,7 +38,9 @@ export const DEMO_PRODUCTS = [
     brand: 'Bosch', model: 'GBH 2-26 DRE', category: 'Power tools',
     slug: 'bosch-gbh-2-26-dre', keyDetail: '2.7 J impact', specification: 'SDS plus',
     application: 'Drilling & chiselling', power: '800 W', summary: 'Rotary hammer · 800 W',
-    listingType: 'rental', pricing: RENTAL_PRICING,
+    listingType: 'sale', pricingContext: 'GST included', pricing: BOSCH_SALE_PRICING,
+    pricingSource: 'https://veshop.com.sg/shop-now/tools-machines/596-bosch-professional-rotary-hammer-with-sds-plus',
+    pricingSourceTitle: 'Vertex Enterprise Bosch GBH 2-26 DRE sale listing',
     specs: [{ label: 'Input power', value: '800 W' }, { label: 'Impact', value: '2.7 J' }, { label: 'Tool holder', value: 'SDS plus' }],
     image: '/images/verified-equipment/bosch-gbh-2-26-dre.png',
     imageAlt: 'Bosch GBH 2-26 DRE rotary hammer with side handle — manufacturer image',
@@ -46,7 +53,9 @@ export const DEMO_PRODUCTS = [
     brand: 'NSK', model: '6205', category: 'Parts & components',
     slug: 'nsk-6205', keyDetail: '25 mm bore', specification: '52 × 15 mm OD/W',
     application: 'Rotating assemblies', power: 'Not powered', summary: 'Ball bearing · 25 mm bore',
-    listingType: 'sale', pricing: SALES_PRICING,
+    listingType: 'sale', pricingContext: 'Per unit · excl. GST', pricing: NSK_SALE_PRICING,
+    pricingSource: 'https://sg.rs-online.com/web/p/ball-bearings/0643713',
+    pricingSourceTitle: 'RS Singapore NSK 6205 sale listing',
     specs: [{ label: 'Bore', value: '25 mm' }, { label: 'Outside Ø', value: '52 mm' }, { label: 'Width', value: '15 mm' }],
     image: '/images/verified-equipment/nsk-6205-catalogue.jpg',
     imageAlt: 'NSK open deep groove ball bearing — manufacturer cutaway illustration on the 6205 catalogue page',
@@ -74,10 +83,10 @@ export const INVENTORY_PRODUCTS = [
 ] as const;
 
 export const CHAT_TURNS = [
-  { question: 'Can I rent the rotary hammer for a week?',
-    reply: 'What dates and delivery location do you need? I’ll include them in your rental enquiry.' },
-  { question: 'I also need 20 NSK 6205 bearings.',
-    reply: 'I’ll note 20 units. Please confirm the bearing variant and delivery location for your sales quote.' },
+  { question: 'It needs to handle 1,500 kg, lift to 8 m and work in a 3 m aisle for two weeks.',
+    reply: 'The ETV 216i may suit, subject to mast configuration and availability. Where and when should it be delivered?' },
+  { question: 'Deliver it to Jurong in two weeks. I also need one rotary hammer and 20 bearings.',
+    reply: 'Noted. I’ll prepare an enquiry for a two-week reach-truck rental, one rotary hammer and 20 bearings. Our team will confirm the bearing variant, availability, delivery and pricing.' },
 ] as const;
 
 /** Model is supplied; category-specific specifications share seven review columns. */
@@ -103,18 +112,24 @@ export const STORY_STAGES = [
 // Give the moving cards time to land, then respond promptly. Longer holds are
 // reserved for reading completed replies, rather than waiting for a response.
 const CHAT_TIMING = {
-  handoff: 1600,
-  rentalQuestion: 2400,
-  rentalTyping: 2650,
-  rentalReply: 3350,
-  salesQuestion: 6350,
-  salesTyping: 6600,
-  salesReply: 7300,
-  end: 10800,
+  handoff: 1400,
+  initialBuyerTyping: 2100,
+  initialQuestion: 2550,
+  initialAgentTyping: 2800,
+  initialReply: 3450,
+  rentalBuyerTyping: 4700,
+  rentalQuestion: 5150,
+  rentalAgentTyping: 5400,
+  rentalReply: 6050,
+  salesBuyerTyping: 7450,
+  salesQuestion: 7900,
+  salesAgentTyping: 8150,
+  salesReply: 8800,
+  end: 11000,
 } as const;
 
 export const STORY_DURATION = STORY_STAGES[2].start + CHAT_TIMING.end;
-export const CHAT_LOOP_START = STORY_STAGES[2].start + CHAT_TIMING.rentalQuestion;
+export const CHAT_LOOP_START = STORY_STAGES[2].start + CHAT_TIMING.initialBuyerTyping;
 
 /** Once cards arrive, keep chatting. Only Replay restarts the full workflow. */
 export function advanceStoryTime(elapsed: number, delta: number) {
@@ -133,12 +148,26 @@ export function getStoryFrame(elapsed: number, reducedMotion = false) {
   const enrichedFields = time < 4600 ? 0 : Math.min(INVENTORY_FIELDS.length, Math.floor((time - 4600) / 350));
   const chatTime = time - STORY_STAGES[2].start;
   const chatBeat = stage !== 2 ? 'idle' : chatTime < CHAT_TIMING.handoff ? 'sync'
-    : chatTime < CHAT_TIMING.rentalQuestion ? 'recommendations'
-      : chatTime < CHAT_TIMING.rentalTyping ? 'rental-question' : chatTime < CHAT_TIMING.rentalReply ? 'rental-typing'
-        : chatTime < CHAT_TIMING.salesQuestion ? 'rental-reply' : chatTime < CHAT_TIMING.salesTyping ? 'sales-question'
-          : chatTime < CHAT_TIMING.salesReply ? 'sales-typing' : 'sales-reply';
+    : chatTime < CHAT_TIMING.initialBuyerTyping ? 'recommendations'
+      : chatTime < CHAT_TIMING.initialQuestion ? 'initial-buyer-typing'
+        : chatTime < CHAT_TIMING.initialAgentTyping ? 'initial-question'
+          : chatTime < CHAT_TIMING.initialReply ? 'initial-agent-typing'
+            : chatTime < CHAT_TIMING.rentalBuyerTyping ? 'initial-reply'
+              : chatTime < CHAT_TIMING.rentalQuestion ? 'rental-buyer-typing'
+                : chatTime < CHAT_TIMING.rentalAgentTyping ? 'rental-question'
+                  : chatTime < CHAT_TIMING.rentalReply ? 'rental-agent-typing'
+                    : chatTime < CHAT_TIMING.salesBuyerTyping ? 'rental-reply'
+                      : chatTime < CHAT_TIMING.salesQuestion ? 'sales-buyer-typing'
+                        : chatTime < CHAT_TIMING.salesAgentTyping ? 'sales-question'
+                          : chatTime < CHAT_TIMING.salesReply ? 'sales-agent-typing' : 'sales-reply';
   const chatTurn = stage !== 2 || chatTime < CHAT_TIMING.rentalQuestion ? -1 : chatTime < CHAT_TIMING.salesQuestion ? 0 : 1;
-  const chatScroll = chatTurn === -1 ? 0 : chatTurn === 0 ? 190 : 360;
+  // Keep the newest exchange in the lower reading area of the tall phone.
+  // The previous 360–600px jumps pushed completed messages against the top
+  // edge and left an implausibly empty lower half.
+  const chatScroll = ['idle', 'sync', 'recommendations', 'initial-buyer-typing', 'initial-question', 'initial-agent-typing', 'initial-reply'].includes(chatBeat) ? 0
+    : chatBeat === 'rental-agent-typing' ? 96 : chatBeat === 'rental-reply' ? 120
+      : chatBeat === 'sales-buyer-typing' ? 140 : chatBeat === 'sales-question' ? 160
+        : chatBeat === 'sales-agent-typing' ? 184 : chatBeat === 'sales-reply' ? 224 : 80;
   return { stage, phase, time, enrichedFields, chatBeat, chatTurn, chatScroll };
 }
 

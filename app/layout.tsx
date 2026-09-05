@@ -23,7 +23,6 @@ export const metadata: Metadata = {
   },
   description: 'AI Sales Agent, AI Webstore Suite and AI Agent Console for industrial products, equipment rental, parts and technical B2B sales.',
   keywords: ['Industrial AI Sales Agent', 'AI Webstore Suite', 'equipment rental AI', 'industrial product sales'],
-  alternates: { canonical: '/' },
   applicationName: 'Antbuildz AI',
   category: 'Industrial AI software',
   authors: [{ name: 'Antbuildz', url: 'https://antbuildz.ai' }],
@@ -31,10 +30,10 @@ export const metadata: Metadata = {
   publisher: 'Antbuildz',
   icons: {
     icon: [
-      { url: '/favicon.ico?v=2', type: 'image/x-icon', sizes: 'any' },
-      { url: '/images/antbuildz-ai-favicon-extracted.png?v=2', type: 'image/png', sizes: '512x512' },
+      { url: '/favicon.ico?v=3', type: 'image/x-icon', sizes: 'any' },
+      { url: '/images/antbuildz-ai-favicon-transparent.png?v=3', type: 'image/png', sizes: '512x512' },
     ],
-    shortcut: '/favicon.ico?v=2',
+    shortcut: '/favicon.ico?v=3',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
   openGraph: {

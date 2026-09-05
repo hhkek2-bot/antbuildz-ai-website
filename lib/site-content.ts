@@ -130,7 +130,6 @@ export const agentFaqs = [
 export const resourceCards = [
   { title: 'Understand AI Agents', text: 'A practical introduction to industrial AI Agents, buyer conversations and qualification workflows.', image: '/resources/understand-ai-agents.jpg', tag: 'Foundations', href: '/ai-sales-agent' },
   { title: 'AI Sales Agent + Webstore', text: 'See how structured product pages and conversation-led discovery work together.', image: '/resources/ai-agent-webstore.jpg', tag: 'Product guide', href: '/ai-webstore-suite' },
-  { title: 'AI Agent Roles', text: 'Explore focused AI roles for sales, product knowledge, customer service, technical support and after-sales workflows.', image: '/resources/ai-agent-roles.jpg', tag: 'Role library', href: '/ai-agent-roles' },
   { title: 'The Antbuildz Difference', text: 'Why industrial product context matters more than generic document search.', image: '/resources/antbuildz-difference.jpg', tag: 'Point of view', href: '/about' },
   { title: 'Get Your Business Ready', text: 'Prepare catalogues, policies, product data and sales rules for a reliable Agent.', image: '/resources/getting-ready.jpg', tag: 'Checklist', href: '/resources#readiness' },
   { title: 'Run Your AI Agent Console', text: 'Manage knowledge, instructions, testing and conversations in one operational workspace.', image: '/resources/ai-console.jpg', tag: 'Operations', href: '/ai-agent-console' },

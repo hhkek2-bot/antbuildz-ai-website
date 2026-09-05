@@ -137,31 +137,39 @@ function ProductPage({ product, index }: { product: Product; index: number }) {
       <div className={styles.productPicture}><ProductImage product={product} /></div>
       <div className={styles.productContent}>
         <div className={styles.productTitle}><strong>{product.brand} {product.model}</strong><span>{product.name}</span></div>
-        <div className={styles.productLocation}>{product.listingType === 'rental' ? 'For rental' : 'For sale'}<span>·</span>Price on enquiry</div>
+        <div className={styles.productLocation}><span>{product.listingType === 'rental' ? 'For rental' : 'For sale'}</span><i aria-hidden="true" /><span>{product.pricingContext}</span></div>
         <div className={styles.pricingGrid} data-pricing-grid>{product.pricing.map(price => <span key={price.label}>{price.label}<b>{price.value}</b></span>)}</div>
       </div>
     </div>
-    <div className={styles.recommendationProduct}><ProductImage product={product} /><div><strong>{product.brand} {product.model}</strong><small>{product.summary}</small><span className={styles.productLink}>{product.listingType === 'rental' ? 'Rental' : 'Sales'} · Get Quote <span>↗</span></span></div></div>
+    <div className={styles.recommendationProduct}><ProductImage product={product} /><div><strong>{product.brand} {product.model}</strong><small>{product.summary}</small><span className={styles.productLink}>{product.listingType === 'rental' ? `Rental · ${product.pricing[0].value}/day` : `Sale · ${product.pricing[0].value}`} <span>↗</span></span></div></div>
   </div>;
 }
 
 function Conversation({ frame }: { frame: ReturnType<typeof getStoryFrame> }) {
+  const initialQuestionVisible = !['idle', 'sync', 'recommendations', 'initial-buyer-typing'].includes(frame.chatBeat);
+  const initialReplyVisible = !['idle', 'sync', 'recommendations', 'initial-buyer-typing', 'initial-question', 'initial-agent-typing'].includes(frame.chatBeat);
   return <>
-    <div className={styles.syncSummary}><span className={styles.syncPill}><Tick /> Catalogue connected</span><strong>From your store<br />to the conversation.</strong><p>Emma shares your product cards, then helps buyers explain what they need.</p><div><span><Tick /> The same products and photos</span><span><Tick /> Rental dates and purchase quantities</span><span><Tick /> Details for your team to quote</span></div><span className={styles.syncArrow}>⟶</span></div>
+    <div className={styles.syncSummary}><strong>From your store<br />to the conversation.</strong><p>Emma shares your product cards, then helps buyers explain what they need.</p><div><span><Tick /> The same products and photos</span><span><Tick /> Rental dates and purchase quantities</span><span><Tick /> Details for your team to quote</span></div><span className={styles.syncArrow}>⟶</span></div>
     <div className={styles.conversation} data-phone-frame>
       <div className={styles.phoneStatus}><span>9:41</span><svg viewBox="0 0 48 14" fill="currentColor"><path d="M1 10h3v3H1zm5-3h3v6H6zm5-3h3v9h-3zm5-3h3v12h-3z" /><rect x="27" y="3" width="17" height="9" rx="2" fill="none" stroke="currentColor" /><rect x="29" y="5" width="12" height="5" rx="1" /><path d="M46 6h1v3h-1z" /></svg></div>
       <div className={styles.chatHeader}><span className={styles.chatBack}>‹</span><EmmaAvatar className={styles.agentAvatar} /><div><strong>Emma</strong><span className={styles.connected}><i /> Your Webstore · AI Sales Agent</span></div><span className={styles.chatMore}>···</span></div>
       <div className={styles.chatBody}><div className={styles.chatTranscript}>
         <span className={styles.chatDate}>Today</span>
-        <div className={styles.buyerMessage}>I need rental equipment and parts to buy.</div>
-        <div className={styles.chatReply}><div className={styles.agentMessage}><span className={styles.agentByline}><EmmaAvatar className={styles.replyAvatar} size={16} decorative /> Emma</span><span>Here are two rental listings and a part to buy. What do you need for the job?</span></div></div>
-        <div className={styles.chatFollowups}>{CHAT_TURNS.map((turn, index) => <div className={styles.chatTurn} data-chat-turn={index} data-visible={frame.chatTurn >= index} data-replied={frame.chatTurn > index || (frame.chatTurn === index && frame.chatBeat.endsWith('-reply'))} data-typing={frame.chatTurn === index && frame.chatBeat.endsWith('-typing')} key={turn.question}>
+        <div className={styles.buyerTyping} data-visible={frame.chatBeat === 'initial-buyer-typing'} aria-hidden="true"><i /><i /><i /><span>Buyer is typing</span></div>
+        <div className={styles.buyerMessage} data-visible={initialQuestionVisible}>Can you help me confirm whether this reach truck fits my warehouse?</div>
+        <div className={styles.chatReply} data-typing={frame.chatBeat === 'initial-agent-typing'}><div className={styles.agentMessage} data-visible={initialReplyVisible}><span className={styles.agentByline}><EmmaAvatar className={styles.replyAvatar} size={16} decorative /> Emma</span><span>Yes. What load, lift height, aisle width and hire period do you need?</span></div><div className={styles.chatTyping}><i /><i /><i /><span>Emma is typing</span></div></div>
+        <div className={styles.chatFollowups}>{CHAT_TURNS.map((turn, index) => {
+          const turnName = index === 0 ? 'rental' : 'sales';
+          const buyerTyping = frame.chatBeat === `${turnName}-buyer-typing`;
+          const questionVisible = frame.chatTurn >= index;
+          return <div className={styles.chatTurn} data-chat-turn={index} data-visible={questionVisible || buyerTyping} data-question-visible={questionVisible} data-buyer-typing={buyerTyping} data-replied={frame.chatTurn > index || (frame.chatTurn === index && frame.chatBeat.endsWith('-reply'))} data-agent-typing={frame.chatTurn === index && frame.chatBeat === `${turnName}-agent-typing`} key={turn.question}>
+          <div className={styles.followupBuyerTyping} aria-hidden="true"><i /><i /><i /><span>Buyer is typing</span></div>
           <div className={styles.followupBuyer}>{turn.question}</div>
           <div className={styles.followupResponse}>
             <div className={styles.followupReply}><span className={styles.agentByline}><EmmaAvatar className={styles.replyAvatar} size={16} decorative /> Emma</span><span>{turn.reply}</span></div>
             <div className={styles.chatTyping}><i /><i /><i /><span>Emma is typing</span></div>
           </div>
-        </div>)}</div>
+        </div>})}</div>
       </div></div>
       <div className={styles.chatInput}><span>What would you like to know?</span><span>↑</span></div>
     </div>
@@ -181,8 +189,8 @@ export function ListingStory() {
   useEffect(() => {
     const viewport = canvasViewportRef.current;
     if (!viewport) return;
-    // Only the illustrative scene scales. Tabs, captions and playback controls
-    // keep their normal readable size; mobile uses its existing stacked scene.
+    // Only the illustrative scene scales. The stage tabs keep their normal
+    // readable size; mobile uses its existing stacked scene.
     const fit = () => {
       if (window.innerWidth < 980) return;
       const scale = Math.min(1, viewport.clientWidth / 1120, viewport.clientHeight / 660);
@@ -227,7 +235,9 @@ export function ListingStory() {
     let previous = performance.now();
     let rendered = getStoryFrame(elapsedRef.current);
     const tick = (now: number) => {
-      elapsedRef.current = advanceStoryTime(elapsedRef.current, Math.min(now - previous, 100));
+      // Absorb brief dropped frames instead of making the conversation appear
+      // to pause, while still preventing a large jump after a long stall.
+      elapsedRef.current = advanceStoryTime(elapsedRef.current, Math.min(now - previous, 250));
       previous = now;
       const next = getStoryFrame(elapsedRef.current);
       if (rendered.phase !== next.phase || rendered.enrichedFields !== next.enrichedFields || rendered.chatBeat !== next.chatBeat) {
@@ -245,37 +255,20 @@ export function ListingStory() {
     setFrame(getStoryFrame(elapsedRef.current));
     setPaused(stage !== 2 || reducedMotion);
   };
-  const replay = () => {
-    elapsedRef.current = 0;
-    setFrame(getStoryFrame(0));
-    setPaused(reducedMotion);
-  };
-
   return <div className={styles.story} ref={storyRef} style={{ '--chat-scroll': `${frame.chatScroll}px` } as CSSProperties} data-stage={frame.stage} data-phase={frame.phase} data-chat-beat={frame.chatBeat} data-chat-loop={frame.stage === 2} data-enriched-fields={frame.enrichedFields} data-visible={visible} data-paused={paused || reducedMotion || !visible || !pageVisible} data-reduced-motion={reducedMotion}>
     <div className={styles.glassFrame}>
     <div className={styles.stageNav} role="group" aria-label="Explore the AI listing workflow">{STORY_STAGES.map((stage, index) => <button key={stage.label} onClick={() => showStage(index)} aria-pressed={frame.stage === index} aria-controls="webstore-listing-story"><span className={styles.stageNumber}>{String(index + 1).padStart(2, '0')}</span><span><strong>{stage.label}</strong><small>{stage.detail}</small></span><span className={styles.stageArrow}>↗</span></button>)}</div>
     <div className={styles.canvasViewport} ref={canvasViewportRef}>
     <div id="webstore-listing-story" className={styles.canvas} aria-hidden="true">
-      <div className={styles.sceneLabel}><span>{frame.stage === 0 ? 'FROM MODEL TO LISTING' : frame.stage === 1 ? 'BUILT FOR DISCOVERY' : 'FROM BROWSING TO ENQUIRY'}</span><span>{frame.stage === 0 ? 'Add the model. AI fills in the details.' : frame.stage === 1 ? 'Every product. Its own page and URL.' : 'Turn product questions into useful recommendations.'}</span></div>
+      {frame.stage < 2 && <div className={styles.sceneLabel}><span>{frame.stage === 0 ? 'FROM MODEL TO LISTING' : 'BUILT FOR DISCOVERY'}</span><span>{frame.stage === 0 ? 'Add the model. AI fills in the details.' : 'Every product. Its own page and URL.'}</span></div>}
       <EquipmentSource /><Inventory frame={frame} /><PhotoUpload /><WebstoreFrame />
       <DiscoveryHint />
       <Conversation frame={frame} />
       {DEMO_PRODUCTS.map((product, index) => <ProductPage product={product} index={index} key={product.id} />)}
     </div>
     </div>
-    <div className={styles.storyFooter}>
-      <p>{STORY_STAGES[frame.stage].caption}</p>
-      <div className={styles.playback}>
-        {!reducedMotion && <button type="button" onClick={() => setPaused(!paused)} aria-label={paused ? 'Play animation' : 'Pause animation'} title={paused ? 'Play animation' : 'Pause animation'}>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">{paused ? <path d="m8 5 11 7-11 7Z" fill="currentColor" stroke="none" /> : <path d="M8 5v14M16 5v14" />}</svg>
-        </button>}
-        <button type="button" onClick={replay} aria-label="Replay animation" title="Replay animation">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 10a8 8 0 1 1 1.6 7M4 4v6h6" /></svg>
-        </button>
-      </div>
     </div>
-    </div>
-    <p className={styles.srOnly}>This demo starts with five real product models across material handling, power tools and replacement parts. AI fills seven columns, giving you 35 details to review. Three featured products then appear in the demonstration Webstore: two rental listings and one sales listing. A discovery hint connects each product’s identity and structured details with its own page and unique URL, supporting search engine optimisation (SEO) and generative engine optimisation (GEO). This illustrates a foundation for discovery, not guaranteed indexing, rankings or AI citations. Each card has daily rental, monthly rental and sale price columns. Get Quote is a placeholder, not an approved rate; a dash means the field does not apply to that demo listing. Commercial modes do not represent supplier stock or availability. The same cards move into Emma’s recommendations, followed by an illustrative conversation about rental dates, purchase quantities and delivery. The bearing image is a manufacturer cutaway illustration. Product selection and specifications require confirmation for the intended application and configuration. Upload, AI enrichment, search, publishing and chat are illustrated, not connected to live services.</p>
+    <p className={styles.srOnly}>This demo starts with five real product models across material handling, power tools and replacement parts. AI fills seven columns, giving you 35 details to review. Three featured products then appear in the demonstration Webstore: one rental listing and two sales listings. A discovery hint connects each product’s identity and structured details with its own page and unique URL, supporting search engine optimisation (SEO) and generative engine optimisation (GEO). This illustrates a foundation for discovery, not guaranteed indexing, rankings or AI citations. The reach-truck card shows example daily, weekly and monthly rates from a comparable 1.6-ton market listing. The Bosch rotary hammer and NSK bearing cards each show one exact-model public sale price. The prices were checked on 31 August 2026 and do not represent live stock, availability or a quotation. Ratings and verified badges are not shown. The same cards move into Emma’s recommendations, followed by an illustrative conversation about rental requirements, purchase quantities and delivery. The bearing image is a manufacturer cutaway illustration. Product selection and specifications require confirmation for the intended application and configuration. Upload, AI enrichment, search, publishing and chat are illustrated, not connected to live services.</p>
   </div>;
 }
 

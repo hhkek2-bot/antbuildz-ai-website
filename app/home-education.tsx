@@ -182,7 +182,6 @@ export function HomeEducationBody() {
               <a className={styles.textLink} href="/ai-webstore-suite" aria-label="Explore Antbuildz Webstore"><Arrow /></a>
             </article>
           </div>
-          <p className={styles.productSupport}>Your team confirms technical suitability, availability and commercial terms before quotation.</p>
         </div>
       </section>
 

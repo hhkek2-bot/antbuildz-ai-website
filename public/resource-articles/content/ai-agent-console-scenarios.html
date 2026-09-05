@@ -1,0 +1,34 @@
+<h4>What Scenarios does</h4>
+<p>Scenarios are structured workflows that guide how the AI Agent should handle different types of customer conversations. Instead of letting every conversation happen randomly, scenarios help the AI follow a clear path.</p>
+<p>For an AI webstore or equipment business, scenarios are useful for rental enquiries, quotation requests, product recommendations, spare parts questions, service support, warranty questions, delivery questions, and complaints.</p>
+<h4>Who should use this feature</h4>
+<p>Use Scenarios if you are an admin, sales manager, rental manager, support lead, operations lead, or anyone responsible for how customer enquiries should be handled.</p>
+<h4>When to use it</h4>
+<p>Use Scenarios when the AI needs to follow a specific process. You should create or improve scenarios when Conversations show that the AI is missing key questions, collecting weak lead details, or handing over too early or too late.</p>
+<h4>Before you start</h4>
+<p>Choose one workflow to build first. Do not try to build every scenario at once. Good first scenarios include:</p>
+<ul><li>rental enquiry</li><li>quote request</li><li>product recommendation</li><li>spare parts enquiry</li><li>service support request</li><li>after-hours enquiry</li><li>complaint or urgent issue handover</li></ul>
+<p>For each scenario, prepare:</p>
+<ul><li>customer intent</li><li>required questions</li><li>optional questions</li><li>information source the AI should use</li><li>when to create a lead</li><li>when to hand over to a human</li><li>final message or next step</li></ul>
+<h4>Step-by-step guide</h4>
+<ol><li>Open <strong>Scenarios</strong> from the console menu.</li><li>Choose an existing scenario to edit or create a new one.</li><li>Name the scenario clearly. Example: "Forklift Rental Enquiry" or "Spare Parts Request".</li><li>Define when the scenario should start. Example: when a customer asks about renting equipment, requesting a quote, or checking service support.</li><li>Add the questions the AI should ask. Keep them practical and not too long.</li><li>Mark the information that is required before handover.</li><li>Add rules for what the AI should do next. Example: create lead, ask for contact details, recommend product category, or hand over to sales.</li><li>Add escalation rules for sensitive or complex cases.</li><li>Save the scenario.</li><li>Test it in <strong>Playground</strong> using realistic customer messages.</li><li>Review real results in <strong>Conversations</strong> and improve the scenario when needed.</li></ol>
+<h3>Example scenario: rental enquiry</h3>
+<p><strong>Trigger:</strong> Customer asks to rent equipment.</p>
+<p><strong>AI should ask:</strong></p>
+<ul><li>What equipment do you need?</li><li>Where is the job site?</li><li>When do you need it?</li><li>How long is the rental period?</li><li>What capacity, height, power, or size do you need?</li><li>Do you need delivery?</li><li>What is your name, company, phone number, and email?</li></ul>
+<p><strong>Human handover:</strong> Required when the customer asks for final price, final stock availability, urgent delivery, unusual technical use, or special discount.</p>
+<h4>What good looks like</h4>
+<p>A good scenario makes the conversation feel organised without making the customer feel like they are filling a long form. Good signs include:</p>
+<ul><li>the AI recognises the customer's intent</li><li>the AI asks only useful questions</li><li>the AI does not repeat questions unnecessarily</li><li>required details are collected before handover</li><li>the lead or handover summary is easy for your team to act on</li><li>the AI escalates complex or sensitive cases properly</li></ul>
+<h4>Common problems and what to check</h4>
+<p><strong>The AI asks too many questions at once.</strong> Break the flow into smaller steps. Ask the most important questions first.</p>
+<p><strong>The AI misses important details.</strong> Add those details as required questions in the scenario.</p>
+<p><strong>The AI starts the wrong scenario.</strong> Make the scenario trigger clearer.</p>
+<p><strong>The AI does not create a lead.</strong> Check the lead creation rule and required contact fields.</p>
+<p><strong>The AI handles complex requests by itself.</strong> Add stronger escalation rules.</p>
+<h4>Best practices</h4>
+<p>Start with your highest-value enquiry type. For many equipment businesses, this is rental enquiry or quotation request. Keep scenario names simple. Test with real customer language, including short and messy messages. Review scenarios monthly based on real Conversations.</p>
+<h4>Done checklist</h4>
+<ul><li>At least one high-value scenario is created.</li><li>Required questions are clear.</li><li>Lead capture rules are defined.</li><li>Handover rules are defined.</li><li>The scenario has been tested in Playground.</li><li>Real conversations are reviewed for improvement.</li></ul>
+<h4>Next recommended guide</h4>
+<p>Continue with <strong>Integrations</strong> so customers can reach the AI Agent through your webstore, website, WhatsApp, or other connected channels.</p>

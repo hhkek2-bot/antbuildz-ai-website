@@ -33,6 +33,9 @@
   --type-heading-tracking: -.04em;
   --section-space-major: 96px;
   --section-space-compact: 64px;
+  --public-frame-max: 1250px;
+  --public-frame-width: min(var(--public-frame-max), 90vw);
+  --public-frame-gutter: max(5vw, calc((100vw - var(--public-frame-max)) / 2));
   --public-hero-title-gap: 96px;
   --menu-surface: color-mix(in srgb, var(--canvas) 98%, transparent);
   --menu-border: var(--line);
@@ -53,13 +56,322 @@
   --menu-dialog-layer: 300;
 }
 
+/* Resource positioning: the Agent is the core product and Webstore is its optional product-data layer. */
+#root .antbuildz-resource-model {
+  color: var(--ink);
+}
+
+#root .antbuildz-resource-model--index {
+  background: var(--clean);
+  padding: 48px 0;
+}
+
+#root .antbuildz-resource-model__inner {
+  width: min(1250px, 90vw);
+  margin: 0 auto;
+  padding: 28px 32px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: linear-gradient(115deg, color-mix(in srgb, var(--yellow) 12%, var(--clean)), color-mix(in srgb, var(--purple) 6%, var(--clean)) 55%, var(--clean) 100%);
+  box-shadow: 0 18px 50px rgb(15 23 42 / 7%);
+}
+
+#root .antbuildz-resource-model--article {
+  margin: 0 0 32px;
+}
+
+#root .antbuildz-resource-model--article .antbuildz-resource-model__inner {
+  width: 100%;
+  padding: 22px 24px;
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+#root .antbuildz-resource-model__eyebrow {
+  margin: 0 0 10px;
+  color: var(--red);
+  font: 800 12px/1.2 var(--font-heading);
+  letter-spacing: .16em;
+}
+
+#root .antbuildz-resource-model h2 {
+  margin: 0;
+  color: var(--ink);
+  font: 800 clamp(24px, 2.4vw, 34px)/1.15 var(--font-heading);
+  letter-spacing: -.03em;
+}
+
+#root .antbuildz-resource-model__description {
+  max-width: 980px;
+  margin: 14px 0 0;
+  color: var(--body);
+  font: 400 16px/1.7 var(--font-body);
+}
+
+#root .antbuildz-resource-blog-content {
+  color: var(--body);
+  font: 400 17px/1.78 var(--font-body);
+}
+
+#root .antbuildz-resource-blog-content > p {
+  margin: 0 0 22px;
+}
+
+#root .antbuildz-resource-blog-content > h2,
+#root .antbuildz-resource-blog-content > h3,
+#root .antbuildz-resource-blog-content > h4 {
+  color: var(--ink);
+  font-family: var(--font-heading);
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+#root .antbuildz-resource-blog-content > h2 {
+  margin: 52px 0 18px;
+  font-size: clamp(27px, 2.6vw, 36px);
+  line-height: 1.2;
+}
+
+#root .antbuildz-resource-blog-content > h3 {
+  margin: 42px 0 16px;
+  font-size: clamp(23px, 2vw, 29px);
+  line-height: 1.25;
+}
+
+#root .antbuildz-resource-blog-content > h4 {
+  margin: 32px 0 12px;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+#root .antbuildz-resource-blog-content > ul,
+#root .antbuildz-resource-blog-content > ol {
+  margin: 0 0 26px;
+  padding-left: 1.45em;
+}
+
+#root .antbuildz-resource-blog-content > ul li,
+#root .antbuildz-resource-blog-content > ol li {
+  margin: 8px 0;
+  padding-left: 5px;
+}
+
+#root .antbuildz-resource-blog-content > blockquote {
+  margin: 24px 0;
+  padding: 18px 22px;
+  border-left: 4px solid var(--yellow);
+  border-radius: 0 14px 14px 0;
+  background: color-mix(in srgb, var(--yellow) 8%, var(--clean));
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#root .antbuildz-resource-blog-content > figure.table {
+  max-width: 100%;
+  margin: 28px 0 34px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+#root .antbuildz-resource-blog-content table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  background: var(--clean);
+}
+
+#root .antbuildz-resource-blog-content th,
+#root .antbuildz-resource-blog-content td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+#root .antbuildz-resource-blog-content th {
+  color: var(--ink);
+  font-weight: 750;
+}
+
+#root .antbuildz-resource-blog-content .antbuildz-resource-answer {
+  margin: 0 0 34px;
+  padding: 20px 22px;
+  border-left: 4px solid var(--red);
+  border-radius: 0 14px 14px 0;
+  background: color-mix(in srgb, var(--red) 5%, var(--clean));
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+@media (max-width: 767px) {
+  #root .antbuildz-resource-model--index {
+    padding: 32px 0;
+  }
+
+  #root .antbuildz-resource-model__inner,
+  #root .antbuildz-resource-model--article .antbuildz-resource-model__inner {
+    padding: 22px 20px;
+    border-radius: 20px;
+  }
+
+  #root .antbuildz-resource-model h2 {
+    font-size: 25px;
+  }
+
+  #root .antbuildz-resource-model__description {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  #root .antbuildz-resource-blog-content {
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  #root .antbuildz-resource-blog-content > h2 {
+    margin-top: 42px;
+    font-size: 27px;
+  }
+
+  #root .antbuildz-resource-blog-content > h3 {
+    margin-top: 34px;
+    font-size: 23px;
+  }
+
+  #root .antbuildz-resource-blog-content > h4 {
+    margin-top: 28px;
+    font-size: 19px;
+  }
+
+  #root .antbuildz-resource-blog-content .antbuildz-resource-answer {
+    padding: 17px 18px;
+    font-size: 16px;
+  }
+}
+
 * { box-sizing: border-box; }
+
+/* Destination-owned public CTA system. The source DOM comes from several
+   transferred components; these attributes make one action look and read the
+   same on Home, AI Sales Agent and AI Webstore Suite at every breakpoint. */
+#root a[data-antbuildz-cta="true"] {
+  display: inline-flex !important;
+  width: auto;
+  min-width: 0 !important;
+  height: 54px !important;
+  min-height: 54px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 0 28px !important;
+  border: 1px solid transparent !important;
+  border-radius: 999px !important;
+  color: var(--ink) !important;
+  font-family: var(--font-heading) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  transition: transform .2s ease, border-color .2s ease, background-color .2s ease, box-shadow .2s ease !important;
+}
+
+#root a[data-antbuildz-cta="true"] > svg {
+  display: none !important;
+}
+
+#root a[data-antbuildz-cta-variant="primary"] {
+  border-color: var(--yellow) !important;
+  background: var(--yellow) !important;
+  box-shadow: 0 18px 32px -22px rgb(15 23 42 / 42%) !important;
+}
+
+#root a[data-antbuildz-cta-variant="secondary"] {
+  border-color: rgb(15 23 42 / 28%) !important;
+  background: var(--clean) !important;
+}
+
+#root a[data-antbuildz-cta-variant="primary"]:hover {
+  border-color: var(--yellow-hover) !important;
+  background: var(--yellow-hover) !important;
+  transform: translateY(-2px);
+}
+
+/* The header demo action is a compact utility, not a full content CTA. Keep
+   its touch target while using a quieter yellow so it does not dominate the
+   page title or the centred navigation. */
+#root a.antbuildz-header-demo[data-antbuildz-cta="true"] {
+  height: 44px !important;
+  min-height: 44px !important;
+  padding-inline: 18px !important;
+  border-color: color-mix(in srgb, var(--yellow) 58%, var(--clean)) !important;
+  background: color-mix(in srgb, var(--yellow) 34%, var(--clean)) !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+}
+
+#root a.antbuildz-header-demo[data-antbuildz-cta="true"]:hover {
+  border-color: color-mix(in srgb, var(--yellow) 72%, var(--clean)) !important;
+  background: color-mix(in srgb, var(--yellow) 50%, var(--clean)) !important;
+}
+
+#root a[data-antbuildz-cta-variant="secondary"]:hover {
+  border-color: rgb(15 23 42 / 52%) !important;
+  background: var(--canvas) !important;
+  transform: translateY(-2px);
+}
+
+#root a[data-antbuildz-cta="true"]:focus-visible {
+  outline: 2px solid var(--blue) !important;
+  outline-offset: 4px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root a[data-antbuildz-cta="true"] { transition: none !important; }
+  #root a[data-antbuildz-cta="true"]:hover { transform: none; }
+}
+
+@media (max-width: 767px) {
+  #root a[data-antbuildz-cta="true"]:not(.antbuildz-header-demo) {
+    width: 300px !important;
+    max-width: 100% !important;
+  }
+
+  #root a.antbuildz-header-demo[data-antbuildz-cta="true"] {
+    height: 44px !important;
+    min-height: 44px !important;
+    padding-inline: 18px !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 359px) {
+  #root a.antbuildz-header-demo[data-antbuildz-cta="true"] {
+    height: 44px !important;
+    min-height: 44px !important;
+    padding-inline: 14px !important;
+    font-size: 13px !important;
+  }
+}
 
 /* Agreement master page only. The linked legal documents retain their
    original content; reduce duplicate directory furniture and nested boxes. */
 #root .antbuildz-agreement-hub [hidden] { display: none !important; }
 #root .antbuildz-ai-help-directory [hidden],
 #root .antbuildz-ai-help-centre [hidden] { display: none !important; }
+#root .antbuildz-ai-help-centre .help-centre-tab {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0 !important;
+}
+#root .antbuildz-ai-help-centre :is(.help-centre-tab__icon, .help-centre-tab__indicator) {
+  display: none !important;
+}
 #root .about-final-section .about-final-action[hidden] { display: none !important; }
 #root .antbuildz-ai-help-directory .help-directory__cards {
   grid-template-columns: minmax(0, 760px);
@@ -254,16 +566,67 @@ button, summary { font: inherit; }
 }
 
 .antbuildz-ai-pricing .pricing-controls-row {
-  margin: -10px auto 34px;
+  /* Keep billing choice on the same centred rail as the hero and plan grid.
+     The copied container has 24px inner gutters, so 1152px is its widest
+     usable content width without letting a child overflow to one side. */
+  width: min(100%, 1152px);
+  margin: -10px auto 34px 0;
 }
 
 .antbuildz-ai-pricing .pricing-controls-row .pricing-currency-select-wrap {
   display: none !important;
 }
 
+.antbuildz-ai-pricing .pricing-billing-toggle {
+  border-color: color-mix(in srgb, var(--blue) 18%, var(--line));
+  background: var(--canvas);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 76%);
+}
+
+.antbuildz-ai-pricing .pricing-billing-btn {
+  color: var(--muted);
+  box-shadow: none;
+}
+
+.antbuildz-ai-pricing .pricing-billing-btn.is-active {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--blue) 76%, var(--ink));
+  color: var(--clean);
+  box-shadow: 0 8px 18px -12px color-mix(in srgb, var(--blue) 56%, var(--ink));
+}
+
+.antbuildz-ai-pricing .pricing-billing-btn:not(.is-active):hover {
+  background: var(--clean);
+  color: var(--ink);
+}
+
+.antbuildz-ai-pricing .pricing-billing-save,
+.antbuildz-ai-pricing .pricing-billing-btn:not(.is-active) .pricing-billing-save {
+  padding: 0 0 0 8px;
+  border-left: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  color: color-mix(in srgb, var(--blue) 68%, var(--body));
+  font-size: .7rem;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.antbuildz-ai-pricing .pricing-billing-btn.is-active .pricing-billing-save {
+  background: transparent;
+  color: rgb(255 255 255 / 78%);
+}
+
 .antbuildz-ai-pricing .pricing-billing-btn:focus-visible {
   outline: 3px solid rgb(59 130 246 / 45%);
   outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .antbuildz-ai-pricing .pricing-billing-btn {
+    transition: none;
+  }
 }
 
 .antbuildz-ai-pricing .pricing-annual-note {
@@ -285,8 +648,13 @@ button, summary { font: inherit; }
 /* Roomier subscription comparison: three standard plans, then a full-width
    Custom panel. The remaining pricing sections retain their existing frame. */
 .antbuildz-ai-pricing .pricing-section:has(.pricing-card[data-antbuildz-plan]) {
-  width: min(1320px, 90vw);
-  margin-inline: calc((100% - min(1320px, 90vw)) / 2);
+  /* Preserve the wider public plan rail, but centre it independently of the
+     narrower transferred container so the outer page gutters stay equal. */
+  width: var(--public-frame-width);
+  max-width: none;
+  margin-right: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
   padding-bottom: 0;
   margin-bottom: 64px;
 }
@@ -312,6 +680,26 @@ button, summary { font: inherit; }
   min-width: 0;
   padding: 24px;
   border-radius: 24px;
+}
+
+/* Square-inspired card introduction: one strong plan title and one concise
+   suitability statement, with the existing Antbuildz badge beside the title. */
+.antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-plan-name {
+  font-size: 1.5rem;
+  font-weight: 750;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+}
+
+.antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .pricing-plan-name {
+  padding-right: 120px;
+}
+
+.antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .antbuildz-pricing-badge {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  margin: 0;
 }
 
 /* Quiet, consistent emphasis for the three standard plans. Keep the Custom
@@ -367,14 +755,93 @@ button, summary { font: inherit; }
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-target {
-  min-height: 56px;
+  display: grid;
+  min-height: 92px;
+  align-content: start;
+  gap: 8px;
   font-size: .875rem;
   line-height: 1.5;
   color: var(--body);
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .pricing-target {
-  text-wrap: balance;
+  min-height: 92px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-subtitle {
+  color: var(--ink);
+  font-family: var(--font-heading);
+  font-size: .9375rem;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-description,
+.antbuildz-ai-pricing .antbuildz-pricing-best-for {
+  display: block;
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-best-for {
+  width: 100%;
+  max-width: none;
+  color: var(--muted);
+  font-size: .9375rem;
+  line-height: 1.55;
+  text-wrap: wrap;
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-best-for strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.antbuildz-ai-pricing #compare-features-webstore[hidden] {
+  display: none !important;
+}
+
+.antbuildz-ai-pricing #compare-features-ai-agent[data-antbuildz-unified-comparison="true"] {
+  margin-top: 0;
+}
+
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table {
+  min-width: 700px;
+  table-layout: fixed;
+}
+
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table .pricing-compare-th-feature,
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table .pricing-compare-td-feature {
+  width: 46%;
+  padding-inline: 24px;
+  text-align: left;
+}
+
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table .pricing-compare-th-plan,
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table .pricing-compare-td-value {
+  width: 18%;
+  text-align: center;
+}
+
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table .pricing-compare-td-feature {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table :is(th, td):nth-child(3) {
+  background: color-mix(in srgb, var(--blue) 3%, var(--clean));
+}
+
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table :is(th, td):nth-child(4) {
+  background: color-mix(in srgb, var(--yellow) 5%, var(--clean));
+}
+
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table .pricing-compare-row.is-tier-start > * {
+  border-top: 2px solid var(--line);
+}
+
+.antbuildz-ai-pricing .antbuildz-plan-comparison-table .pricing-compare-row:hover > * {
+  background: var(--soft);
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-price-row {
@@ -394,21 +861,122 @@ button, summary { font: inherit; }
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .antbuildz-pricing-details {
-  grid-template-rows: repeat(3, minmax(28px, auto));
-  min-height: 132px;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 140px;
   margin-top: 6px;
   padding-block: 12px;
-  gap: 6px;
+  gap: 0;
 }
 
-.antbuildz-ai-pricing .antbuildz-pricing-details > div {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+.antbuildz-ai-pricing .antbuildz-pricing-details > .antbuildz-pricing-details-heading {
+  display: block;
+  padding-bottom: 9px;
+  color: var(--ink);
+  font-size: .9375rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-details > [data-antbuildz-pricing-detail] {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
   gap: 12px;
+  min-width: 0;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
 }
 
 .antbuildz-ai-pricing .antbuildz-pricing-details :is(span, strong) {
-  font-size: .75rem;
+  font-size: .875rem;
   line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-details strong {
+  text-align: right;
+}
+
+.antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .antbuildz-pricing-details strong {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta {
+  position: relative;
+  overflow: hidden;
+  padding: 52px 40px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--yellow) 13%, transparent), transparent 34%),
+    radial-gradient(circle at 88% 82%, color-mix(in srgb, var(--blue) 9%, transparent), transparent 36%),
+    linear-gradient(135deg, var(--clean), var(--soft));
+  color: var(--ink);
+  box-shadow: 0 24px 60px -46px rgb(15 23 42 / 38%);
+}
+
+#root.antbuildz-original-root.antbuildz-ai-pricing .pricing-section:has(.pricing-bottom-cta) {
+  margin-bottom: 0;
+  padding-bottom: 0 !important;
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--violet), var(--blue), var(--yellow));
+  content: '';
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta h2 {
+  color: var(--ink);
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta p {
+  color: var(--body);
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta-actions {
+  gap: 12px;
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta :is(.pricing-cta-white, .pricing-cta-outline-white) {
+  min-height: 54px;
+  padding-inline: 28px;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta .pricing-cta-white {
+  border: 1px solid var(--yellow);
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta .pricing-cta-white:hover {
+  border-color: var(--yellow-hover);
+  background: var(--yellow-hover);
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta .pricing-cta-outline-white {
+  border: 1px solid var(--line);
+  background: var(--clean);
+  color: var(--ink);
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta .pricing-cta-outline-white:hover {
+  border-color: color-mix(in srgb, var(--ink) 28%, var(--line));
+  background: var(--canvas);
+}
+
+.antbuildz-ai-pricing .pricing-bottom-cta :is(.pricing-cta-white, .pricing-cta-outline-white):focus-visible {
+  outline: 3px solid rgb(59 130 246 / 45%);
+  outline-offset: 3px;
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-cta {
@@ -416,64 +984,123 @@ button, summary { font: inherit; }
   border-radius: 999px;
 }
 
+.antbuildz-ai-pricing .antbuildz-pricing-trial-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: .75rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.antbuildz-legal-acknowledgement {
+  margin: 16px 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--body);
+}
+.antbuildz-legal-acknowledgement a { text-decoration: underline; text-underline-offset: 3px; }
+.antbuildz-checkout-preview-notice {
+  max-width: 960px;
+  margin: 24px auto 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--soft);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-feature-group-label {
   min-height: 20px;
-  font-size: .8125rem;
+  font-size: .9375rem;
+  font-weight: 750;
   line-height: 1.5;
 }
 
+/* Keep the price and allowance rails aligned as the approved Best-for copy
+   changes line count; mobile remains content-driven below 768px. */
+@media (min-width: 768px) and (max-width: 899px) {
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .pricing-target,
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] .pricing-target { min-height: 108px; }
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .antbuildz-pricing-details { min-height: 140px; }
+}
+
+@media (min-width: 900px) and (max-width: 1099px) {
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .pricing-target { min-height: 92px; }
+}
+
+@media (min-width: 1100px) and (max-width: 1239px) {
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .pricing-target { min-height: 108px; }
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .antbuildz-pricing-details { min-height: 140px; }
+}
+
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-features {
-  gap: 8px;
+  gap: 10px;
   margin-block: 10px 0;
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-feature-row {
   margin: 0;
-  font-size: .875rem;
-  line-height: 1.5;
-  gap: 8px;
+  font-size: 1rem;
+  line-height: 1.45;
+  gap: 10px;
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-divider {
   margin-block: 12px 10px;
 }
 
-@media (min-width: 1100px) {
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] {
-    grid-column: 1 / -1;
+.antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"].antbuildz-pricing-custom-compact {
+  grid-column: 1 / -1;
+  background: var(--clean);
+}
+
+.antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"].antbuildz-pricing-custom-compact::before {
+  display: none;
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-custom-label {
+  color: var(--muted);
+  font-size: .75rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-custom-copy {
+  margin: 0;
+  color: var(--body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"].antbuildz-pricing-custom-compact {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    column-gap: 40px;
-    row-gap: 12px;
+    grid-template-columns: minmax(260px, .75fr) minmax(0, 1.55fr);
+    grid-template-rows: auto auto auto;
+    column-gap: 56px;
+    row-gap: 8px;
+    align-items: start;
+    padding: 36px 40px;
   }
 
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > :is(.antbuildz-pricing-badge, .pricing-divider, .antbuildz-pricing-annual-note) {
-    display: none;
+  .antbuildz-ai-pricing .antbuildz-pricing-custom-label { grid-area: 1 / 1; }
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-plan-name { grid-area: 2 / 1; }
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-cta {
+    grid-area: 3 / 1;
+    width: fit-content;
+    min-width: 168px;
+    margin-top: 12px;
+    padding-inline: 26px;
   }
-
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-plan-name { grid-area: 1 / 1; }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-target { grid-area: 2 / 1; min-height: 0; }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-price-row { grid-area: 3 / 1; min-height: 0; margin-top: 8px; }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-cta { grid-area: 4 / 1; margin-top: 8px; }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-feature-group-label { grid-area: 1 / 2; align-self: center; margin: 0; }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-features {
-    grid-area: 2 / 2 / 4 / 3;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-content: start;
-    gap: 12px 24px;
-    margin: 0;
+  .antbuildz-ai-pricing .antbuildz-pricing-custom-copy {
+    grid-area: 1 / 2 / 4 / 3;
+    align-self: center;
   }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .antbuildz-pricing-details {
-    grid-area: 4 / 2;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto;
-    min-height: 0;
-    margin: 0;
-    padding-block: 12px 0;
-  }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] .antbuildz-pricing-details > div { grid-template-columns: 1fr; gap: 4px; }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] .antbuildz-pricing-details strong { text-align: left; }
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
@@ -484,11 +1111,28 @@ button, summary { font: inherit; }
   .antbuildz-ai-pricing .pricing-section:has(.pricing-card[data-antbuildz-plan]) {
     width: 100%;
     margin-inline: 0;
+    transform: none;
   }
   .antbuildz-ai-pricing .pricing-grid-4:has([data-antbuildz-plan]) { grid-template-columns: minmax(0, 1fr); }
   .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] { padding: 24px 20px; }
-  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-target,
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"].antbuildz-pricing-custom-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] > .pricing-cta {
+    width: 100%;
+    margin-top: 4px;
+  }
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .pricing-target,
+  .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"] .pricing-target,
   .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .antbuildz-pricing-details { min-height: 0; }
+  .antbuildz-ai-pricing .pricing-bottom-cta { padding: 40px 20px; }
+  .antbuildz-ai-pricing .pricing-bottom-cta-actions { align-items: center; flex-direction: column; }
+  .antbuildz-ai-pricing .pricing-bottom-cta :is(.pricing-cta-white, .pricing-cta-outline-white) {
+    width: 300px;
+    max-width: 100%;
+  }
 }
 
 /* Antbuildz.AI compatibility layer
@@ -657,6 +1301,77 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 #root [data-antbuildz-sales-agent] .bright-hero-text-block { min-width: 0; }
 #root [data-antbuildz-sales-agent] .bright-hero-title-line { white-space: normal; }
 
+/* Replace the transferred neon four-corner theme with five restrained,
+   single-accent interface themes. The source compatibility layer advances
+   this data attribute every two seconds and leaves slate fixed when the user
+   prefers reduced motion. */
+#root [data-antbuildz-sales-agent]
+  .bright-chat-theme-demo[data-antbuildz-hero-theme] {
+  --lc-foreground: var(--ink) !important;
+  --lc-muted-foreground: var(--muted) !important;
+  --lc-font-sans: var(--font-body) !important;
+  --lc-font-display: var(--font-heading) !important;
+  --lc-radius: 16px !important;
+  --lc-page-bg-size: 100% 100% !important;
+  --lc-shadow-bubble: 0 6px 18px rgb(15 23 42 / 8%) !important;
+  --lc-shadow-glow: 0 24px 54px -30px color-mix(in srgb, var(--lc-primary) 36%, transparent) !important;
+}
+
+#root [data-antbuildz-sales-agent]
+  .bright-chat-theme-demo[data-antbuildz-hero-theme="slate"] {
+  --lc-background: var(--clean) !important;
+  --lc-page-bg-image: linear-gradient(180deg, var(--clean), var(--canvas)) !important;
+  --lc-surface: rgb(255 255 255 / 92%) !important;
+  --lc-surface-elevated: var(--clean) !important;
+  --lc-border: rgb(15 23 42 / 14%) !important;
+  --lc-primary: var(--ink) !important;
+  --lc-primary-foreground: var(--clean) !important;
+}
+
+#root [data-antbuildz-sales-agent]
+  .bright-chat-theme-demo[data-antbuildz-hero-theme="violet"] {
+  --lc-background: var(--canvas) !important;
+  --lc-page-bg-image: radial-gradient(circle at 92% 10%, rgb(124 58 237 / 12%), transparent 48%), linear-gradient(180deg, var(--clean), var(--canvas)) !important;
+  --lc-surface: color-mix(in srgb, var(--clean) 94%, var(--purple)) !important;
+  --lc-surface-elevated: color-mix(in srgb, var(--clean) 97%, var(--purple)) !important;
+  --lc-border: color-mix(in srgb, var(--purple) 24%, transparent) !important;
+  --lc-primary: var(--purple) !important;
+  --lc-primary-foreground: var(--clean) !important;
+}
+
+#root [data-antbuildz-sales-agent]
+  .bright-chat-theme-demo[data-antbuildz-hero-theme="blue"] {
+  --lc-background: color-mix(in srgb, var(--clean) 94%, var(--blue)) !important;
+  --lc-page-bg-image: radial-gradient(circle at 92% 10%, rgb(59 130 246 / 12%), transparent 48%), linear-gradient(180deg, var(--clean), var(--canvas)) !important;
+  --lc-surface: color-mix(in srgb, var(--clean) 94%, var(--blue)) !important;
+  --lc-surface-elevated: color-mix(in srgb, var(--clean) 97%, var(--blue)) !important;
+  --lc-border: color-mix(in srgb, var(--blue) 26%, transparent) !important;
+  --lc-primary: color-mix(in srgb, var(--blue) 72%, var(--ink)) !important;
+  --lc-primary-foreground: var(--clean) !important;
+}
+
+#root [data-antbuildz-sales-agent]
+  .bright-chat-theme-demo[data-antbuildz-hero-theme="gold"] {
+  --lc-background: color-mix(in srgb, var(--clean) 90%, var(--yellow)) !important;
+  --lc-page-bg-image: radial-gradient(circle at 92% 10%, rgb(255 197 1 / 16%), transparent 48%), linear-gradient(180deg, var(--clean), var(--canvas)) !important;
+  --lc-surface: color-mix(in srgb, var(--clean) 92%, var(--yellow)) !important;
+  --lc-surface-elevated: color-mix(in srgb, var(--clean) 96%, var(--yellow)) !important;
+  --lc-border: color-mix(in srgb, var(--yellow) 36%, var(--ink)) !important;
+  --lc-primary: var(--yellow) !important;
+  --lc-primary-foreground: var(--ink) !important;
+}
+
+#root [data-antbuildz-sales-agent]
+  .bright-chat-theme-demo[data-antbuildz-hero-theme="red"] {
+  --lc-background: color-mix(in srgb, var(--clean) 96%, var(--red)) !important;
+  --lc-page-bg-image: radial-gradient(circle at 92% 10%, rgb(227 24 10 / 10%), transparent 48%), linear-gradient(180deg, var(--clean), var(--canvas)) !important;
+  --lc-surface: color-mix(in srgb, var(--clean) 96%, var(--red)) !important;
+  --lc-surface-elevated: color-mix(in srgb, var(--clean) 98%, var(--red)) !important;
+  --lc-border: color-mix(in srgb, var(--red) 22%, transparent) !important;
+  --lc-primary: var(--red) !important;
+  --lc-primary-foreground: var(--clean) !important;
+}
+
 /* Fill the six missing Sales Agent section-introduction roles with the same
    restrained brand eyebrow used by the existing Features and Console areas. */
 #root [data-antbuildz-sales-agent] .antbuildz-sales-agent-eyebrow {
@@ -700,10 +1415,202 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   padding-bottom: .12em;
 }
 
+/* Match the Console introduction to the established Sales Agent section
+   rhythm. The transferred stylesheet gives both blocks zero margin, which
+   leaves the supporting copy touching the title's line box. */
+#root [data-antbuildz-sales-agent] .af-section-header h2 + p {
+  margin-top: 18px;
+}
+
+/* The touchpoint introduction carries one deliberately complete sentence.
+   Let it use the section's wider text frame so desktop keeps the supplied
+   copy to two balanced lines instead of inheriting the global 800px cap. */
+#root.antbuildz-original-root.antbuildz-typography-trial
+  [data-antbuildz-sales-agent]
+  .dt-header
+  .dt-desc {
+  width: min(100%, 1000px);
+  max-width: 1000px !important;
+}
+
+/* Anchor every touchpoint card to the same top rail. The transferred cards
+   vertically centre their contents, which offsets icons whenever descriptions
+   wrap to different line counts. Keep the copy compact and easy to scan. */
+#root [data-antbuildz-sales-agent] .dt-card-content {
+  justify-content: flex-start;
+}
+
+#root [data-antbuildz-sales-agent] .dt-card-desc {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Close the Sales Agent page with the same clean, continuous proof strip as
+   the Webstore. The original 12 brand marks remain the source items; a hidden
+   duplicate set creates a seamless visual loop. */
+#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] {
+  --sales-logo-gap: 24px;
+  --sales-logo-gap-half: 12px;
+  overflow: hidden;
+  padding-block: 64px;
+  border-color: transparent;
+  background: var(--clean);
+}
+
+#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] > .bright-container {
+  width: 100%;
+  max-width: none;
+  overflow: hidden;
+  padding-inline: 0;
+}
+
+#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] .bright-logo-grid-static {
+  display: flex;
+  width: max-content;
+  max-width: none;
+  flex-wrap: nowrap;
+  gap: var(--sales-logo-gap);
+  margin: 0;
+  animation: antbuildz-sales-logo-marquee 36s linear infinite;
+  will-change: transform;
+}
+
+#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] .bright-logo-grid-item {
+  width: 140px;
+  min-width: 140px;
+  height: 56px;
+  flex: 0 0 140px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--clean);
+  box-shadow: 0 10px 24px -22px rgb(15 23 42 / 30%);
+}
+
+#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"]:hover .bright-logo-grid-static {
+  animation-play-state: paused;
+}
+
+@keyframes antbuildz-sales-logo-marquee {
+  to { transform: translateX(calc(-50% - var(--sales-logo-gap-half))); }
+}
+
+/* Present the final Sales Agent action as one contained industrial story:
+   product evidence first, then a focused decision panel. This replaces the
+   transferred animated grid and scattered floating-card treatment. */
+#root [data-antbuildz-sales-agent] .ws-cta-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(380px, .85fr);
+  gap: 0;
+  isolation: isolate;
+  padding-block: var(--section-space-major) !important;
+  padding-inline: var(--public-frame-gutter) !important;
+  background: var(--clean);
+}
+
+#root [data-antbuildz-sales-agent] .ws-cta-grid,
+#root [data-antbuildz-sales-agent] .ws-cta-fade,
+#root [data-antbuildz-sales-agent] .ws-cta-float {
+  display: none !important;
+}
+
+#root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-media {
+  position: relative;
+  z-index: 0;
+  width: calc(100% + clamp(110px, 10vw, 160px));
+  min-width: 0;
+  min-height: 430px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-right: 0;
+  border-radius: 24px 0 0 24px;
+  background: var(--soft);
+  box-shadow: 0 24px 60px -42px rgb(15 23 42 / 38%);
+}
+
+#root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-media::after {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: 1;
+  width: 46%;
+  background: linear-gradient(90deg, transparent 0%, rgb(241 239 248 / 48%) 44%, var(--soft) 100%);
+  content: '';
+  pointer-events: none;
+}
+
+#root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#root [data-antbuildz-sales-agent] .ws-cta-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: none;
+  margin: 0;
+  padding: 56px;
+  border: 1px solid var(--line);
+  border-left: 0;
+  border-radius: 0 24px 24px 0;
+  background: linear-gradient(90deg, rgb(241 239 248 / 0%) 0%, var(--soft) 18%, var(--soft) 100%);
+  text-align: left;
+}
+
+#root [data-antbuildz-sales-agent] .ws-cta-title {
+  max-width: 10ch;
+  font-size: clamp(34px, 3.2vw, 48px);
+  line-height: 1.08;
+  text-align: left;
+}
+
+#root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-copy {
+  max-width: 38ch;
+  margin: 20px 0 0;
+  color: var(--body);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+#root [data-antbuildz-sales-agent] .ws-cta-actions {
+  justify-content: flex-start;
+  margin-top: 28px;
+}
+
+#root [data-antbuildz-sales-agent] .ws-cta-btn-outline {
+  border-color: rgb(15 23 42 / 28%);
+  background: var(--clean);
+}
+
+#root [data-antbuildz-sales-agent] .ws-cta-section :is(a, button):focus-visible {
+  outline: var(--menu-focus);
+  outline-offset: 4px;
+}
+
+@media (min-width: 1180px) {
+  #root [data-antbuildz-sales-agent] .ws-cta-section {
+    grid-template-columns: minmax(0, .85fr) minmax(620px, 1.15fr);
+  }
+  #root [data-antbuildz-sales-agent] .ws-cta-inner {
+    padding: 48px;
+  }
+  #root.antbuildz-original-root.antbuildz-typography-trial [data-antbuildz-sales-agent] .ws-cta-title[data-antbuildz-type-role="section-title"] {
+    max-width: none;
+    font-size: clamp(38px, 3vw, 46px) !important;
+    white-space: nowrap !important;
+  }
+}
+
 @media (min-width: 981px) {
   #root [data-antbuildz-sales-agent] .bright-hero-split {
-    width: calc(100% - 48px);
-    max-width: 1280px;
+    width: var(--public-frame-width);
+    max-width: var(--public-frame-max);
     margin-inline: auto;
     padding-inline: 0;
     grid-template-columns: minmax(0, 1fr) 380px;
@@ -717,14 +1624,39 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 }
 
 @media (max-width: 980px) {
+  #root [data-antbuildz-sales-agent] .ws-cta-section {
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: 80px !important;
+  }
+  #root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-media {
+    width: 100%;
+    min-height: 400px;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+    border-radius: 24px 24px 0 0;
+  }
+  #root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-media::after {
+    inset: auto 0 0;
+    width: auto;
+    height: 38%;
+    background: linear-gradient(180deg, transparent 0%, rgb(241 239 248 / 52%) 48%, var(--soft) 100%);
+  }
+  #root [data-antbuildz-sales-agent] .ws-cta-inner {
+    padding: 48px;
+    border-top: 0;
+    border-left: 1px solid var(--line);
+    border-radius: 0 0 24px 24px;
+    background: var(--soft);
+  }
+  #root [data-antbuildz-sales-agent] .ws-cta-title { max-width: 14ch; }
   #root [data-antbuildz-sales-agent] .bright-hero.antbuildz-public-hero-surface {
     padding-top: calc(var(--public-header-height, 81px) + 56px);
   }
   #root [data-antbuildz-sales-agent] .bright-hero-split {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 48px);
-    max-width: 1280px;
+    width: var(--public-frame-width);
+    max-width: var(--public-frame-max);
     margin-inline: auto;
     padding-inline: 0;
   }
@@ -742,11 +1674,75 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 @media (max-width: 767px) {
   :root { --public-hero-title-gap: 64px; }
 
+  #root [data-antbuildz-sales-agent] .ws-cta-section {
+    padding-block: 64px !important;
+  }
+  #root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] {
+    --sales-logo-gap: 16px;
+    --sales-logo-gap-half: 8px;
+    padding-block: 48px;
+  }
+  #root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] .bright-logo-grid-item {
+    width: 124px;
+    min-width: 124px;
+    flex-basis: 124px;
+  }
+  #root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-media {
+    min-height: 240px;
+    border-radius: 22px 22px 0 0;
+  }
+  #root [data-antbuildz-sales-agent] .ws-cta-inner {
+    padding: 32px 24px;
+    border-radius: 0 0 22px 22px;
+  }
+  #root [data-antbuildz-sales-agent] .ws-cta-title {
+    max-width: 12ch;
+    font-size: 34px;
+  }
+  #root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-copy {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  #root [data-antbuildz-sales-agent] .ws-cta-actions {
+    align-items: stretch;
+    margin-top: 24px;
+  }
+
   #root [data-antbuildz-sales-agent] .bright-hero.antbuildz-public-hero-surface {
-    padding-top: calc(var(--public-header-height, 75px) + 48px);
+    box-sizing: border-box;
+    height: 100svh;
+    min-height: 0;
+    padding-top: calc(var(--public-header-height, 75px) + 24px);
+    overflow: clip;
   }
   #root [data-antbuildz-sales-agent] .bright-hero-split {
-    width: calc(100% - 24px);
+    width: var(--public-frame-width);
+    height: calc(100svh - var(--public-header-height, 75px) - 24px);
+    flex: 0 0 auto;
+    min-height: 0;
+  }
+  #root [data-antbuildz-sales-agent] .bright-hero-text-block { flex: 0 0 auto; }
+  #root [data-antbuildz-sales-agent] .bright-hero-mockup-right {
+    order: 2 !important;
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+    margin-top: 14px !important;
+    padding-bottom: 0 !important;
+    overflow: hidden;
+  }
+  #root [data-antbuildz-sales-agent] .bright-hero-mockup-right .bright-glass-ambient {
+    display: none;
+  }
+  #root [data-antbuildz-sales-agent] .bright-hero-mockup-right .bright-chat-mockup {
+    height: 100% !important;
+    max-height: none;
+    border-radius: 28px 28px 0 0;
+  }
+  #root [data-antbuildz-sales-agent] .bright-hero-actions-block {
+    order: 3 !important;
+    flex: 0 0 auto;
+    margin: 14px auto 84px !important;
   }
   #root.antbuildz-public-typography {
     --type-hero-heading: clamp(2rem, 9vw, 2.75rem);
@@ -761,9 +1757,48 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
     --antbuildz-trial-major-intro-size: 16px;
   }
 
+  /* Mobile hero and section descriptions use the full available text row.
+     Keep component copy, interface demonstrations, FAQs and controls outside
+     this semantic introduction role so their authored alignment is preserved. */
+  #root.antbuildz-original-root.antbuildz-typography-trial
+    [data-antbuildz-type-role="major-intro"] {
+    width: 100% !important;
+    max-width: none !important;
+    text-align: justify !important;
+    text-align-last: left;
+    text-justify: inter-word;
+  }
+
   #root.antbuildz-original-root.antbuildz-section-system {
     --section-space-major: 64px;
     --section-space-compact: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] .bright-logo-grid-static {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  #root [data-antbuildz-sales-agent] .bright-hero.antbuildz-public-hero-surface {
+    padding-top: calc(var(--public-header-height, 75px) + 12px);
+  }
+  #root [data-antbuildz-sales-agent] .bright-hero-split {
+    height: calc(100svh - var(--public-header-height, 75px) - 12px);
+  }
+  #root [data-antbuildz-sales-agent] .bright-hero h1 {
+    margin-bottom: 14px !important;
+    font-size: 34px !important;
+    line-height: 1.02 !important;
+  }
+  #root [data-antbuildz-sales-agent] .bright-hero-text-block .bright-subtitle {
+    margin-bottom: 12px !important;
+    font-size: 15px !important;
+    line-height: 1.45 !important;
   }
 }
 
@@ -815,7 +1850,88 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   letter-spacing: inherit;
 }
 
+/* Shared public route transition. The copied application owns when the
+   Suspense fallback appears; this source-owned layer supplies the Antbuildz
+   identity without implying that a public page is loading a Workspace. */
+#root.antbuildz-original-root .antbuildz-route-loader {
+  position: fixed;
+  z-index: 2147483000;
+  inset: 0;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 46%, color-mix(in srgb, var(--yellow) 9%, transparent), transparent 32%),
+    var(--canvas);
+}
+
+#root.antbuildz-original-root .antbuildz-route-loader__visual {
+  display: grid;
+  place-items: center;
+  width: min(72vw, 320px);
+}
+
+#root.antbuildz-original-root .antbuildz-route-loader__stage {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+#root.antbuildz-original-root .antbuildz-route-loader__wordmark {
+  font-size: clamp(32px, 8.5vw, 42px) !important;
+}
+
+#root.antbuildz-original-root .antbuildz-route-loader__wordmark.is-base {
+  opacity: .14;
+  filter: grayscale(1);
+}
+
+#root.antbuildz-original-root .antbuildz-route-loader__progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  overflow: hidden;
+  animation: antbuildz-route-logo-reveal 1.8s cubic-bezier(.65, 0, .35, 1) infinite;
+  will-change: width;
+}
+
+#root.antbuildz-original-root .antbuildz-route-loader__progress .antbuildz-route-loader__wordmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+}
+
+#root.antbuildz-original-root .antbuildz-route-loader__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes antbuildz-route-logo-reveal {
+  0% { width: 0; opacity: .72; }
+  72%, 92% { width: 100%; opacity: 1; }
+  100% { width: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root.antbuildz-original-root .antbuildz-route-loader__progress {
+    width: 100%;
+    animation: none;
+  }
+}
+
 .antbuildz-industries-menu,
+.antbuildz-products-menu,
+.antbuildz-roles-menu,
 .antbuildz-resources-menu {
   position: relative;
   align-self: center;
@@ -824,7 +1940,7 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 
 .antbuildz-public-header {
   --header-nav-font-size: 14px;
-  --header-nav-font-weight: 750;
+  --header-nav-font-weight: 600;
   --header-nav-line-height: 1.65;
 }
 
@@ -896,11 +2012,12 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  min-height: 54px;
-  padding: 0 20px;
-  border: 1px solid transparent;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid color-mix(in srgb, var(--yellow) 58%, var(--clean));
   border-radius: 999px;
-  background: var(--yellow);
+  background: color-mix(in srgb, var(--yellow) 34%, var(--clean));
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 14px;
@@ -910,7 +2027,10 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   white-space: nowrap;
 }
 
-.antbuildz-public-header .antbuildz-header-demo:hover { background: var(--yellow-hover); }
+.antbuildz-public-header .antbuildz-header-demo:hover {
+  border-color: color-mix(in srgb, var(--yellow) 72%, var(--clean));
+  background: color-mix(in srgb, var(--yellow) 50%, var(--clean));
+}
 .antbuildz-public-header .antbuildz-header-demo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
 /* The full public navigation is already visible on desktop, so the drawer
@@ -922,44 +2042,377 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 }
 
 @media (min-width: 981px) and (max-width: 1399px) {
-  #root.antbuildz-original-root .bright-nav { padding-inline: 24px; gap: 12px; }
+  #root.antbuildz-original-root .bright-nav { padding-inline: var(--public-frame-gutter); gap: 12px; }
   #root.antbuildz-original-root .antbuildz-public-header .bright-nav-product-links { position: static; margin-inline: 0; }
   #root.antbuildz-original-root .bright-nav-utilities { gap: 4px; }
   #root.antbuildz-original-root .antbuildz-header-demo { padding-inline: 14px; font-size: 13px; }
 }
 
 @media (max-width: 767px) {
-  #root.antbuildz-original-root .bright-nav { padding-inline: 12px; gap: 8px; }
+  #root.antbuildz-original-root .bright-nav { padding-inline: var(--public-frame-gutter); gap: 8px; }
   #root.antbuildz-original-root .bright-nav-utilities { gap: 4px; }
   #root.antbuildz-original-root .antbuildz-ai-wordmark { font-size: 20px; }
   #root.antbuildz-original-root .antbuildz-header-demo { padding-inline: 12px; font-size: 13px; }
   #root.antbuildz-original-root .antbuildz-menu-trigger { width: 44px; height: 44px; flex-basis: 44px; }
 }
 
+@media (min-width: 768px) and (max-width: 980px) {
+  #root.antbuildz-original-root .antbuildz-public-header .bright-nav {
+    padding-inline: var(--public-frame-gutter);
+  }
+}
+
+/* Normalise the transferred 1280px marketing wrappers without changing
+   narrower reading columns or the internal sizing of product demos. */
+#root.antbuildz-original-root .antbuildz-ai-home section > .max-w-7xl,
+#root.antbuildz-original-root .webstore2-page section > .max-w-7xl {
+  width: var(--public-frame-width) !important;
+  max-width: var(--public-frame-max) !important;
+}
+
+/* The transferred industry/Sales wrappers include 24px internal padding.
+   Size their outer box so the visible content lands on the same public rail. */
+@media (min-width: 768px) {
+  #root.antbuildz-original-root [data-antbuildz-sales-agent] .si-container {
+    width: min(calc(var(--public-frame-max) + 48px), calc(90vw + 48px));
+    max-width: none;
+  }
+
+  #root.antbuildz-original-root:is(.antbuildz-ai-home, .antbuildz-who-we-serve-page) .si-container {
+    width: var(--public-frame-width);
+    max-width: var(--public-frame-max);
+  }
+}
+
 @media (max-width: 360px) {
   #root.antbuildz-original-root .antbuildz-ai-wordmark { font-size: 18px; }
 }
 
-/* Keep the existing request form in the public typography and colour system. */
-#root.antbuildz-original-root .marketing-auth--book-demo { background: var(--canvas); color: var(--body); }
-#root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__ambient { display: none; }
-#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story h1 {
-  color: var(--ink);
+/* Keep demo and account-entry forms in one lean, accessible design system.
+   The transferred bundle retains the form logic; these source-owned rules
+   remove decorative labels and standardise hierarchy, fields and actions. */
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) {
+  background: var(--canvas);
+  color: var(--body);
+  font-family: var(--font-body);
 }
-#root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__intro h2 {
-  color: var(--ink);
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__ambient,
+#root.antbuildz-original-root :is(
+  .marketing-auth__eyebrow,
+  .book-demo-story__eyebrow,
+  .book-demo-card__eyebrow
+) {
+  display: none !important;
 }
-#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-card { border-radius: 24px; }
-#root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__primary-button {
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__card {
+  width: min(100%, 480px);
+  border-color: var(--line);
+  border-radius: 24px;
+  background: var(--clean);
+  box-shadow: 0 24px 60px -42px rgb(15 23 42 / 38%);
+  padding: clamp(30px, 4vw, 40px);
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__intro {
+  margin: 0 auto 28px;
+  text-align: center;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__logo {
+  display: none !important;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__intro :is(h1, h2) {
+  max-width: none;
+  color: var(--ink);
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3vw, 34px) !important;
+  font-weight: 800;
+  line-height: 1.12 !important;
+  letter-spacing: -.035em;
+  text-align: center;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__intro > p:last-child {
+  color: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__field-label-row label {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) :is(input:not([type="checkbox"]), .marketing-auth__select-trigger) {
+  min-height: 54px;
+  border-color: rgb(15 23 42 / 18%);
+  border-radius: 14px;
+  background: var(--clean);
+  color: var(--ink);
+  font-size: 15px;
+  box-shadow: none;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__primary-button {
   min-height: 54px;
   border-radius: 999px;
   background: var(--yellow);
+  background-image: none;
   color: var(--ink);
   box-shadow: none;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  transform: none;
 }
-#root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__primary-button:hover { background: var(--yellow-hover); }
-#root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__preview-note { color: var(--body); }
-#root.antbuildz-original-root .marketing-auth--book-demo :is(a, input, button):focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__primary-button:hover {
+  background: var(--yellow-hover);
+  background-image: none;
+  box-shadow: none;
+  transform: none;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) .marketing-auth__social-button {
+  min-height: 52px;
+  border-color: rgb(15 23 42 / 18%);
+  background: var(--clean);
+  box-shadow: none;
+  font-size: 14px;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) :is(.marketing-auth__switch-copy, .marketing-auth__preview-note) {
+  color: var(--body);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo {
+  padding: clamp(40px, 5vw, 64px) 24px;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(400px, .86fr);
+  gap: clamp(40px, 5vw, 72px);
+  width: var(--public-frame-width);
+  max-width: var(--public-frame-max);
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__logo {
+  margin-bottom: 32px;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__logo img {
+  width: clamp(140px, 11vw, 168px);
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story h1 {
+  max-width: 12ch;
+  color: var(--ink);
+  font-size: clamp(40px, 4vw, 56px) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.04em !important;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__lead {
+  margin-top: 20px;
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: left !important;
+  text-align-last: auto !important;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__benefits {
+  gap: 14px;
+  margin-top: 28px;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__benefits li {
+  color: var(--body);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__fit {
+  margin-top: 30px;
+  padding-top: 18px;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .book-demo-card {
+  max-width: 500px;
+  border-color: var(--line);
+  border-radius: 24px;
+  background: var(--clean);
+  box-shadow: 0 24px 60px -42px rgb(15 23 42 / 38%);
+  padding: clamp(32px, 4vw, 44px);
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__intro {
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__intro h2 {
+  color: var(--ink);
+  font-size: clamp(28px, 2.6vw, 34px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.035em;
+}
+
+#root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__preview-note {
+  max-width: 46ch;
+  margin-top: 14px;
+  text-align: center;
+}
+
+#root.antbuildz-original-root :is(
+  .marketing-auth--book-demo,
+  .marketing-auth--sign-in,
+  .marketing-auth--sign-up,
+  .marketing-auth--forgot-password,
+  .marketing-auth--reset-password
+) :is(a, input, button, .marketing-auth__select-trigger):focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}
+
+@media (max-width: 960px) {
+  #root.antbuildz-original-root .marketing-auth--book-demo {
+    padding: 36px 24px 48px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .book-demo-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 640px) {
+  #root.antbuildz-original-root :is(
+    .marketing-auth--sign-in,
+    .marketing-auth--sign-up,
+    .marketing-auth--forgot-password,
+    .marketing-auth--reset-password
+  ) {
+    padding: 24px 16px 32px;
+  }
+  #root.antbuildz-original-root :is(
+    .marketing-auth--sign-in,
+    .marketing-auth--sign-up,
+    .marketing-auth--forgot-password,
+    .marketing-auth--reset-password
+  ) .marketing-auth__card {
+    border-radius: 22px;
+    padding: 28px 22px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo {
+    padding: 24px 16px 32px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__logo {
+    margin-bottom: 24px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__logo img {
+    width: 140px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story h1 {
+    font-size: 36px !important;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__lead {
+    margin-top: 16px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__benefits {
+    margin-top: 24px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .book-demo-story__fit {
+    margin-top: 26px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .book-demo-card {
+    border-radius: 22px;
+    padding: 28px 22px;
+  }
+  #root.antbuildz-original-root .marketing-auth--book-demo .marketing-auth__intro h2 {
+    font-size: 28px !important;
+  }
+}
 
 #root.antbuildz-original-root .antbuildz-public-header :is(
   .bright-nav-product-link,
@@ -1008,6 +2461,10 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 }
 
 .antbuildz-public-header .bright-nav-product-link[aria-current]::before,
+.antbuildz-products-menu:has(a[aria-current]) > .antbuildz-industries-menu__trigger::before,
+.antbuildz-products-menu[open] > .antbuildz-industries-menu__trigger::before,
+.antbuildz-roles-menu:has(a[aria-current]) > .antbuildz-industries-menu__trigger::before,
+.antbuildz-roles-menu[open] > .antbuildz-industries-menu__trigger::before,
 .antbuildz-industries-menu:has(a[aria-current]) > .antbuildz-industries-menu__trigger::before,
 .antbuildz-public-header .bright-nav-product-link[aria-current][hidden] + .antbuildz-resources-menu > .antbuildz-industries-menu__trigger::before,
 .antbuildz-industries-menu[open] > .antbuildz-industries-menu__trigger::before,
@@ -1055,6 +2512,23 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   border-radius: var(--menu-item-radius);
 }
 
+/* AI Roles is a commercial hub, separate from the educational Resources library. */
+#root .bright-resource-collection[hidden],
+#root .bright-resource-topic-list > button[hidden],
+#root .next-step-panel--resources[hidden],
+#root footer nav[aria-label="AI Agent Roles"] > ul[hidden] { display: none !important; }
+.antbuildz-simple-menu-links .antbuildz-menu-role-link { padding-left: 28px; font-size: 15px; }
+@media (min-width: 980px) {
+  #root.antbuildz-original-root .bright-nav-product-links { gap: clamp(4px, .6vw, 10px); }
+  #root.antbuildz-original-root .bright-nav-product-links > a,
+  #root.antbuildz-original-root .antbuildz-industries-menu__trigger { padding-inline: 7px; font-size: 14px; white-space: nowrap; }
+}
+@media (min-width: 980px) and (max-width: 1179px) {
+  #root.antbuildz-original-root .bright-nav-product-links { gap: 2px; }
+  #root.antbuildz-original-root .bright-nav-product-links > a,
+  #root.antbuildz-original-root .antbuildz-industries-menu__trigger { padding-inline: 5px; font-size: 13px; }
+}
+
 @media (max-width: 767px) {
   .bright-resource-topic-list button[aria-controls="antbuildz-resource-role-links"] {
     grid-template-columns: 32px minmax(0, 1fr) auto 12px;
@@ -1093,12 +2567,12 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   }
 }
 
-/* Align the wide desktop header controls with the same 1280px content frame
-   used by homepage section two. The header surface still spans the
-   viewport, and the primary navigation remains centred to the viewport. */
+/* Match the public Antbuildz rail: 5vw gutters until the centred 1250px
+   maximum is reached. The header surface still spans the viewport, and the
+   primary navigation remains centred to the viewport. */
 @media (min-width: 1400px) {
   #root.antbuildz-original-root .antbuildz-public-header .bright-nav {
-    padding-inline: max(5%, calc((100% - 1280px) / 2));
+    padding-inline: var(--public-frame-gutter);
   }
 }
 
@@ -1174,7 +2648,7 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   padding: 28px;
   border: 1px solid var(--menu-border);
   border-radius: var(--menu-radius);
-  background: color-mix(in srgb, var(--canvas) 90%, transparent);
+  background: color-mix(in srgb, var(--canvas) 96%, transparent);
   -webkit-backdrop-filter: blur(18px) saturate(1.08);
   backdrop-filter: blur(18px) saturate(1.08);
   box-shadow: var(--menu-shadow);
@@ -1529,8 +3003,63 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   display: none !important;
 }
 
+/* Keep the persistent Agent entry point clear of phone and tablet cards and actions. */
+@media (max-width: 980px) {
+  #root .live-chat-launcher {
+    right: 16px !important;
+    left: auto !important;
+    width: 56px !important;
+    height: 56px !important;
+    transform: none !important;
+  }
+
+  #root .live-chat-launcher-shell.live-chat-launcher-dynamic-island {
+    width: 56px !important;
+    min-width: 56px !important;
+    height: 56px !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    padding: 8px !important;
+  }
+
+  #root .live-chat-launcher-copy,
+  #root .live-chat-launcher-end {
+    display: none !important;
+  }
+}
+
 .abz-public-footer__grid {
-  grid-template-columns: minmax(240px, 1.35fr) repeat(4, minmax(120px, .9fr)) !important;
+  grid-template-columns: minmax(220px, 1.3fr) repeat(4, minmax(105px, .82fr)) !important;
+}
+
+#root .abz-public-footer .antbuildz-footer-email {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 0 18px;
+  border: 1px solid rgb(15 23 42 / 24%);
+  border-radius: 999px;
+  background: var(--clean);
+  color: var(--ink);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+#root .abz-public-footer .antbuildz-footer-email:hover {
+  border-color: var(--yellow);
+  background: var(--yellow);
+  transform: translateY(-1px);
+}
+
+#root .abz-public-footer .antbuildz-footer-email:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
 }
 
 .antbuildz-footer-language {
@@ -1597,7 +3126,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 .antbuildz-ai-home .ai-marketplace-hero-copy {
   z-index: 5;
   top: clamp(132px, 19svh, 184px) !important;
-  left: max(24px, calc((100% - 1280px) / 2)) !important;
+  left: var(--public-frame-gutter) !important;
   width: min(680px, 53vw) !important;
   padding: 0 !important;
   transform: none !important;
@@ -1669,8 +3198,8 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-surface-padding: 12px 14px;
   position: absolute;
   z-index: 5;
-  /* Match the right edge of the shared 1280px header rail (Book a Demo). */
-  right: max(24px, calc((100% - 1280px) / 2));
+  /* Match the right edge of the shared public header rail (Book a Demo). */
+  right: var(--public-frame-gutter);
   bottom: clamp(56px, 7svh, 78px);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1683,6 +3212,24 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   transition: opacity .16s linear;
   /* Promoting opacity here would isolate the bubbles from the hero backdrop. */
   will-change: transform;
+}
+
+@media (min-width: 1180px) {
+  /* Bring the primary exchange alongside the headline on wide screens while
+     keeping it clear of the copy and slightly inside the shared page rail. */
+  .antbuildz-ai-home .antbuildz-home-hero-conversation.is-centre {
+    top: clamp(300px, 35svh, 380px);
+    right: calc(var(--public-frame-gutter) + clamp(24px, 2.5vw, 40px));
+    bottom: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1179px) {
+  .antbuildz-ai-home .antbuildz-home-hero-conversation.is-centre {
+    top: clamp(350px, 40svh, 400px);
+    right: calc(var(--public-frame-gutter) + clamp(12px, 2vw, 20px));
+    bottom: auto;
+  }
 }
 
 .antbuildz-home-hero-conversation.is-left {
@@ -2140,7 +3687,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
 .antbuildz-home-industry-chapter {
   display: block;
-  width: min(1320px, 90%);
+  width: var(--public-frame-width);
   margin-inline: auto;
   overflow: hidden;
   padding: 0;
@@ -2557,8 +4104,8 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
   .antbuildz-ai-home .ai-marketplace-hero-copy {
     top: 116px !important;
-    left: 12px !important;
-    width: calc(100% - 24px) !important;
+    left: var(--public-frame-gutter) !important;
+    width: var(--public-frame-width) !important;
     padding: 0 !important;
     text-align: left !important;
   }
@@ -2584,9 +4131,14 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   }
 
   .antbuildz-home-hero-conversation {
-    right: 16px;
+    right: var(--public-frame-gutter);
     bottom: 32px;
-    width: calc(100% - 32px);
+    width: var(--public-frame-width);
+  }
+
+  .antbuildz-ai-home .antbuildz-home-hero-conversation.is-centre {
+    top: clamp(312px, 38svh, 328px);
+    bottom: auto;
   }
 
   .antbuildz-home-hero-conversation.is-left {
@@ -2656,7 +4208,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   .bright-hero-mockup-wrap { order: 3 !important; }
 }
 
-.container { width: min(1320px, 90%); max-width: 100%; margin-inline: auto; }
+.container { width: var(--public-frame-width); max-width: 100%; margin-inline: auto; }
 .container > *, main, main > *, section, article, aside { min-width: 0; }
 .narrow { max-width: 900px; }
 .site-header { position: sticky; z-index: 50; top: 0; height: 76px; border-bottom: 1px solid var(--line); background: rgb(248 247 255 / 90%); backdrop-filter: blur(18px); }
@@ -3066,7 +4618,7 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   :root { --type-section-heading: clamp(2rem, 9vw, 2.75rem); }
 
   .site-header { height: 64px; }
-  .container { width: min(calc(100% - 36px), 1320px); }
+  .container { width: var(--public-frame-width); }
   .header-inner { gap: 10px; }
   .brand { font-size: 18px; }
   .brand-mark { width: 32px; height: 32px; border-radius: 9px; font-size: 17px; }
@@ -3147,7 +4699,7 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
 }
 
 @media (max-width: 430px) {
-  .container { width: min(calc(100% - 32px), 1320px); }
+  .container { width: var(--public-frame-width); }
   .hero-glow { left: 12%; width: 76vw; height: 76vw; }
   .home-hero, .product-hero { padding: 64px 0 62px; }
   .hero-copy h1, .center-hero h1, .solution-hero h1, .home-hero .hero-copy h1, .product-hero .hero-copy h1 {
@@ -3590,7 +5142,7 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
 
 /* Homepage inventory-aware Agent CTA variant with Emma reviewing a tablet. */
 #root.antbuildz-ai-home #meet-aria.antbuildz-inventory-agent-card .aria-sales-agent-cta__panel {
-  max-width: 1320px;
+  max-width: var(--public-frame-max);
   border-color: rgba(255, 197, 1, .34);
   background: #fffaf1;
   box-shadow: 0 30px 64px -46px rgba(15, 23, 42, .52);
@@ -3642,4 +5194,13 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   letter-spacing: .24em;
   text-align: center;
   text-transform: uppercase;
+}
+
+/* Approved Sales Agent narrative sections use the clean white surface. */
+#root [data-antbuildz-sales-agent] .bright-features.bento-section,
+#root.antbuildz-original-root [data-antbuildz-sales-agent] .pain-bento-section,
+#root.antbuildz-original-root [data-antbuildz-sales-agent] .flexible-ai-platform,
+#root.antbuildz-original-root [data-antbuildz-sales-agent] .dt-section-embedded {
+  background: var(--clean) !important;
+  border-top: 0;
 }

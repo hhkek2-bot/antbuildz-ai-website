@@ -14,6 +14,7 @@ export function removeHeadingFullStops(root: ParentNode, pathname: string) {
   if (!TITLE_PUNCTUATION_ROUTES.has(pathname)) return;
 
   root.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
+    if (heading.closest('[data-antbuildz-preserve-heading-punctuation="true"]')) return;
     const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
     let textNode = walker.nextNode();
 

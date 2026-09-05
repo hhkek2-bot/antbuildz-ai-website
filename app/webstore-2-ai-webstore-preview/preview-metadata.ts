@@ -1,9 +1,9 @@
 export const AI_WEBSTORE_PAGE = {
   path: '/ai-webstore-suite',
-  title: 'AI Webstore Suite',
+  title: 'AI Webstore Suite for Industrial Products',
   description: 'Extend your AI Sales Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.',
   url: 'https://antbuildz.ai/ai-webstore-suite',
-  image: 'https://antbuildz.ai/images/antbuildz-ai-social-share.jpg',
+  image: 'https://antbuildz.ai/images/antbuildz-ai-social-share-v2.jpg',
 } as const;
 
 /** Keep the copied app's head updates aligned with the canonical product page. */

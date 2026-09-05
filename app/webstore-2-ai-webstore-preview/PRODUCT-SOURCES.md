@@ -43,21 +43,25 @@ The hero uses `webstore-dusty-ochre-yard.jpg`, the user-selected **Dusty Ochre Y
 
 - The miniature store has no separate branding/search header row, ratings, verified badges, unverified location, card URL strip or visible source footer.
 - Product facts and links remain documented here after the user removed the visible source/date note.
-- Supporting preview widgets now use tools, bearings and maintenance enquiries rather than repeated boom-lift and excavator examples. No new commercial price, availability, delivery or compatibility promise is introduced.
+- Supporting preview widgets now use tools, bearings and maintenance enquiries rather than repeated boom-lift and excavator examples. The price references documented below do not add an availability, delivery or compatibility promise.
 - Real catalogue facts do not mean this demonstration performs live enrichment, publishes a store or connects to inventory. The accessible summary states that boundary.
 - Original public-route copy, shared images and transferred production bundles are not edited.
 
-## Pricing and continuing conversation — 28 August 2026
+## Pricing and continuing conversation — 31 August 2026
 
-Five real models populate the aligned inventory; three are selected as featured Webstore cards. The reach truck and rotary hammer illustrate rental listings; the bearing illustrates a sales listing. These are editorial examples, not verified supplier offers, rental availability or current stock.
+Five real models populate the aligned inventory; three are selected as featured Webstore cards. The reach truck illustrates a rental listing; the rotary hammer and bearing illustrate sales listings. Ratings and verified badges are deliberately absent.
 
-All cards use the same three pricing columns: **Rental / day**, **Rental / month**, **Sale price**. Applicable cells say **Get Quote**; a dash means that commercial mode is not offered by that *demonstration listing*. No numeric price, discount, minimum order or delivery charge has been invented. Replace placeholders only with approved seller rates. Manufacturer specifications remain in the inventory/data and chat summary; they no longer occupy the pricing footer.
+Prices were checked on **31 August 2026** and are public reference prices rather than a live feed, quotation, stock or availability claim:
 
-The same three card elements move from the store into the phone. After arrival, Emma’s illustrative dialogue continues with a weekly rental enquiry, dates/location questions, a request for 20 bearings, and confirmation of bearing variant and delivery location. Quantities and dates are fictional buyer requirements, not price or availability claims. The chat continues within this scene until paused; Replay returns to the full import-to-chat workflow. Reduced motion presents stable recommendations.
+- **Reach-truck rental:** Daily **SGD 350**, weekly **SGD 350** and monthly **SGD 750**, based on the [Antbuildz 2021 Hyster R1.6 1.6-ton reach-truck listing](https://antbuildz.com/equipments/material_handling). The card labels this an example 1.6-ton market rate because the listing is comparable to, but not the same model as, the pictured Jungheinrich ETV 216i. The source lists tax-exclusive rental pricing and separate delivery charges; neither is represented as included.
+- **Bosch GBH 2-26 DRE sale:** **SGD 210.00**, GST included, from the exact-model [Vertex Enterprise listing](https://veshop.com.sg/shop-now/tools-machines/596-bosch-professional-rotary-hammer-with-sds-plus).
+- **NSK 6205 sale:** **SGD 7.99** per unit excluding GST, marked indicative by the exact-model [RS Singapore listing](https://sg.rs-online.com/web/p/ball-bearings/0643713).
+
+The same three card elements move from the store into the phone. After arrival, Emma’s illustrative dialogue continues with a rotary-hammer purchase enquiry, a request for 20 bearings, and confirmation of quantities, variants and delivery location. These buyer requirements do not assert stock or availability. The chat continues within this scene until paused; Replay returns to the full import-to-chat workflow. Reduced motion presents stable recommendations.
 
 ## Company storefront banner — 28 August 2026
 
-The miniature store now introduces an industrial sales and rental company instead of giving browsing guidance. The separate “Your Company” placeholder branding/search row was subsequently removed at the user’s request; the illustrative company banner starts at the top of the store preview. The banner reads “Equipment. Tools. Parts & supplies.” with construction, manufacturing and maintenance as illustrative sectors. No operating history, service area, authorised-dealer status, business relationship or performance claim is implied. Both the duplicate Explore products banner action and the separate header Get Quote action are removed. Pricing cells retain Get Quote. The main page hero, catalogue facts, pricing and chat cadence are unchanged.
+The miniature store now introduces an industrial sales and rental company instead of giving browsing guidance. The separate “Your Company” placeholder branding/search row was subsequently removed at the user’s request; the illustrative company banner starts at the top of the store preview. The banner reads “Equipment. Tools. Parts & supplies.” with construction, manufacturing and maintenance as illustrative sectors. No operating history, service area, authorised-dealer status, business relationship or performance claim is implied. Both the duplicate Explore products banner action and the separate header Get Quote action are removed. The card pricing was later replaced by the sourced rental and sales references documented above. The main page hero and catalogue facts are unchanged.
 
 
 ## Search and AI discovery hint — 28 August 2026

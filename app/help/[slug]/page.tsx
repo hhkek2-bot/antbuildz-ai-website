@@ -1,6 +1,6 @@
 import { OriginalAntbuildzApp } from '../../original-antbuildz-app';
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { AI_HELP_SEO } from '../../../lib/ai-help-scope';
 import { SOCIAL_SHARE_IMAGE } from '../../../lib/social-share';
 
@@ -19,7 +19,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function HelpPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (slug === 'marketplace') {
-    redirect('https://antbuildz.com/help/marketplace');
+    permanentRedirect('https://antbuildz.com/help/marketplace');
   }
-  return <OriginalAntbuildzApp />;
+  if (slug !== 'ai') notFound();
+
+  const routeSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://antbuildz.ai/help/ai#webpage',
+    name: AI_HELP_SEO.title,
+    description: AI_HELP_SEO.description,
+    url: 'https://antbuildz.ai/help/ai',
+    inLanguage: 'en-SG',
+    isPartOf: { '@id': 'https://antbuildz.ai/#website' },
+  };
+
+  return (
+    <>
+      <script
+        id="route-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(routeSchema).replace(/</g, '\\u003c') }}
+      />
+      <OriginalAntbuildzApp />
+    </>
+  );
 }

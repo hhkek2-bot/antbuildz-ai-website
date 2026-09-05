@@ -2,7 +2,7 @@
 // /ai-sales-agent; the transferred layout, demonstrations and FAQs stay owned
 // by their existing components. Stable visual selectors cover animated clones.
 export const SALES_AGENT_COPY = {
-  hero: 'Turn product questions into qualified sales and rental enquiries. Antbuildz AI uses your catalogue, specifications and business knowledge to understand buyer needs, recommend suitable products and prepare the details your team needs to quote.',
+  hero: 'Turn product questions into qualified sales or rental enquiries with suitable product matches and quote-ready details.',
   capabilitiesIntro: [
     'Your AI Sales Agent clarifies buyer needs, recommends the closest supported products and turns product conversations into qualified sales or rental enquiries.',
     '',
@@ -107,12 +107,16 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
   page.setAttribute('data-antbuildz-sales-agent', 'true');
   const set = (selector: string, value: string | readonly string[]) =>
     page.querySelectorAll(selector).forEach(element => setSalesAgentText(element, value));
-  const action = (selector: string, label: string) => {
+  const action = (selector: string, label: string, href?: string) => {
     page.querySelectorAll(selector).forEach(link => {
       // Renaming Get Demo must not cause the shared label-based normaliser
       // to change this wording-only request's existing CTA destination.
       const attributes = ['href', 'target', 'rel'];
       if (!actionDestinations.has(link)) actionDestinations.set(link, attributes.map(name => link.getAttribute(name)));
+      if (href) {
+        const destinations = actionDestinations.get(link);
+        if (destinations) destinations[0] = href;
+      }
       setSalesAgentText(link, label);
       actionDestinations.get(link)?.forEach((value, index) => {
         if (link.getAttribute(attributes[index]) === value) return;
@@ -140,8 +144,8 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
   set('.bright-hero h1 .bright-hero-title-line:nth-child(2)', '');
   set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Built for Industrial Sales']);
   set('.bright-subtitle', SALES_AGENT_COPY.hero);
-  action('.bright-hero-actions-block .bright-btn-primary', 'Build Your AI Sales Agent ');
-  action('.bright-hero-actions-block .bright-btn-secondary', 'Book a Demo');
+  action('.bright-hero-actions-block .bright-btn-primary', 'Book a Demo', '/book-a-demo');
+  action('.bright-hero-actions-block .bright-btn-secondary', 'View Pricing', '/pricing');
   eyebrow('.bright-hero-text-block', 'h1', 'INDUSTRIAL AI SALES AGENT');
   eyebrow('.bento-section-header', 'h2', 'AI SALES AGENT CAPABILITIES');
   eyebrow('.pain-bento-header', 'h2', 'ENQUIRY CHALLENGES');
@@ -319,8 +323,66 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
   }
 
   set('.ws-cta-title', ['Build', ' Your AI Sales Agent']);
-  action('.ws-cta-btn-primary', 'Build Your AI Agent ');
-  action('.ws-cta-btn-outline', 'Book a Demo');
+  action('.ws-cta-btn-primary', 'Book a Demo', '/book-a-demo');
+  action('.ws-cta-btn-outline', 'View Pricing', '/pricing');
+  const closingCta = page.querySelector<HTMLElement>('.ws-cta-section');
+  if (closingCta?.classList?.contains('ws-cta-section') && closingCta.ownerDocument) {
+    const ctaInner = closingCta.querySelector<HTMLElement>(':scope > .ws-cta-inner');
+    if (ctaInner) {
+      let media = closingCta.querySelector<HTMLElement>(':scope > .antbuildz-sales-agent-cta-media');
+      if (!media) {
+        media = closingCta.ownerDocument.createElement('figure');
+        media.className = 'antbuildz-sales-agent-cta-media';
+
+        const image = closingCta.ownerDocument.createElement('img');
+        image.src = '/images/emma-industrial-sales-consultation-v2.jpg';
+        image.alt = 'Industrial sales specialist using product inventory on a tablet to guide a buyer';
+        image.width = 1672;
+        image.height = 941;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+
+        media.append(image);
+        closingCta.insertBefore(media, ctaInner);
+      }
+
+      let supportingCopy = ctaInner.querySelector<HTMLElement>(':scope > .antbuildz-sales-agent-cta-copy');
+      if (!supportingCopy) {
+        supportingCopy = closingCta.ownerDocument.createElement('p');
+        supportingCopy.className = 'antbuildz-sales-agent-cta-copy';
+        supportingCopy.append(closingCta.ownerDocument.createTextNode(''));
+        ctaInner.querySelector('.ws-cta-title')?.insertAdjacentElement('afterend', supportingCopy);
+      }
+      setSalesAgentText(
+        supportingCopy,
+        'Configure your Agent around your products, qualification process and handover rules.',
+      );
+    }
+  }
+
+  // Move the existing equipment-brand proof to the page close and present it
+  // as the same continuous logo marquee used by the Webstore. Duplicate items
+  // are decorative only and make the motion loop seamless.
+  const logoStrip = page.querySelector<HTMLElement>('.bright-logo-strip');
+  if (
+    logoStrip?.classList?.contains('bright-logo-strip')
+    && closingCta?.classList?.contains('ws-cta-section')
+    && logoStrip.parentElement === closingCta.parentElement
+  ) {
+    logoStrip.setAttribute('data-antbuildz-logo-strip', 'true');
+    const logoGrid = logoStrip.querySelector<HTMLElement>('.bright-logo-grid-static');
+    if (logoGrid && !logoGrid.querySelector('[data-antbuildz-logo-duplicate="true"]')) {
+      Array.from(logoGrid.children).forEach(item => {
+        const duplicate = item.cloneNode(true) as HTMLElement;
+        duplicate.setAttribute('data-antbuildz-logo-duplicate', 'true');
+        duplicate.setAttribute('aria-hidden', 'true');
+        logoGrid.append(duplicate);
+      });
+    }
+    if (closingCta.nextElementSibling !== logoStrip) {
+      closingCta.insertAdjacentElement('afterend', logoStrip);
+    }
+  }
   page.querySelectorAll('.ws-cta-float').forEach((card, i) => {
     const copy = SALES_AGENT_COPY.closingLabels[i];
     if (!copy) return;

@@ -1,7 +1,7 @@
 import { OriginalAntbuildzApp } from './original-antbuildz-app';
 import { HomeEducation } from './home-education';
 import type { Metadata } from 'next';
-import { HOMEPAGE_SEO } from '../lib/homepage-seo';
+import { HOMEPAGE_SEO, HOMEPAGE_WEBPAGE } from '../lib/homepage-seo';
 import { SOCIAL_SHARE_IMAGE } from '../lib/social-share';
 
 export const metadata: Metadata = {
@@ -17,5 +17,16 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <><link rel="preload" as="image" href="/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png" fetchPriority="high" /><OriginalAntbuildzApp /><HomeEducation /></>;
+  return (
+    <>
+      <link rel="preload" as="image" href="/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png" fetchPriority="high" />
+      <script
+        id="route-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(HOMEPAGE_WEBPAGE).replace(/</g, '\\u003c') }}
+      />
+      <OriginalAntbuildzApp />
+      <HomeEducation />
+    </>
+  );
 }

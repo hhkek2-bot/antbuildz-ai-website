@@ -45,6 +45,8 @@ export function simplifyAgreementHub(root: HTMLElement) {
     '.legal-policies-home__collection-number',
     '.legal-policies-home__card-eyebrow',
     '.legal-policies-home__collection-link',
+    '.legal-policies-home__status-note',
+    '.legal-policies-home__legal-note',
     '.legal-policies-home__agreement-group-heading p',
     '.legal-policies-home__agreement-group-heading--market > a',
     '[aria-labelledby="legal-collection-general"] .legal-policies-home__agreement-group-heading',
@@ -63,8 +65,6 @@ export function simplifyAgreementHub(root: HTMLElement) {
   setText('#legal-collection-ai-products', 'AI product policies');
   setText('[aria-labelledby="legal-collection-general"] .legal-policies-home__collection-header > div > p:last-child', 'Privacy and data handling for Antbuildz AI services.');
   setText('[aria-labelledby="legal-collection-ai-products"] .legal-policies-home__collection-header > div > p:last-child', 'Policies for the AI Webstore Suite and related Antbuildz AI services.');
-  setText('.legal-policies-home__status-note p', 'A separate Antbuildz AI platform terms document is not currently available.');
-  setText('.legal-policies-home__legal-note', 'A separate AI Sales Agent agreement is not currently available.');
   hub.querySelectorAll('.legal-policies-home__topic-list button').forEach((button, index) => {
     const label = button.querySelector('span');
     const text = ['Privacy & data', 'AI product policies'][index];

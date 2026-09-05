@@ -14,11 +14,134 @@
 /* Beat the later-loaded copied stylesheet, without changing the public route. */
 .conceptPage :global(.webstore2-page .ws2-hero-shell > .ws2-hero-title),
 .conceptPage :global(.webstore2-page .ws2-hero-shell > .mkt-section-eyebrow) { color: white !important; -webkit-text-fill-color: white; text-shadow: 0 2px 20px rgb(15 23 42 / 28%); }
-.conceptPage :global(.webstore2-page .ws2-hero-title .mkt-gradient-text) { color: #ffe2a2; background-image: linear-gradient(105deg, #e4d4ff, #d2e6ff 55%, #ffe2a2); background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; }
+.conceptPage :global(.webstore2-page .ws2-hero-title .mkt-gradient-text) { color: white; background: none; -webkit-text-fill-color: white; text-shadow: inherit; }
+.conceptPage:global(#root) :global(.webstore2-page > section:first-of-type .ws2-hero-shell .ws2-hero-title) { font-size: clamp(34px, 4vw, 56px) !important; line-height: 1.04 !important; }
 .conceptPage :global(.webstore2-page .ws2-hero-desc) { color: rgb(255 255 255 / 94%) !important; }
+/* Keep every Webstore section title in one solid typographic treatment. This
+   removes only text highlights; gradients inside interface graphics remain. */
+.conceptPage :global(.webstore2-page :is(h2, h3) .mkt-gradient-text),
+.conceptPage :global(.webstore2-page :is(h2, h3) .af-title-gradient),
+.conceptPage :global(.webstore2-page :is(h2, h3) [class*="bg-[linear-gradient"]),
+.conceptPage :global(.webstore2-page :is(h2, h3)[style*="background: linear-gradient"]) {
+  color: inherit !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+/* Follow the six journey accents in perceptual order so the central process
+   line agrees with the cards instead of skipping from blue straight to green. */
+.conceptPage :global(.webstore2-page .ws2-how-section [data-antbuildz-journey-spine="true"]) {
+  background-image: linear-gradient(
+    to bottom,
+    hsl(var(--accent-purple) / .5) 0%,
+    hsl(var(--accent-blue) / .5) 20%,
+    hsl(var(--accent-green) / .5) 40%,
+    hsl(var(--accent-yellow) / .5) 60%,
+    hsl(var(--accent-orange) / .5) 80%,
+    hsl(var(--accent-red) / .5) 100%
+  ) !important;
+}
+/* Preserve the six Webstore benefit graphics while giving each card a quiet,
+   accent-specific surface that fades back to the clean page at the bottom. */
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card) {
+  --benefit-accent: hsl(var(--accent-blue));
+  --benefit-accent-alt: hsl(var(--accent-purple));
+  isolation: isolate;
+  border: 0 !important;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--benefit-accent) 10%, var(--clean)) 0%,
+    color-mix(in srgb, var(--benefit-accent-alt) 5%, var(--clean)) 46%,
+    var(--clean) 100%
+  ) !important;
+  box-shadow: 0 22px 48px -40px color-mix(in srgb, var(--benefit-accent) 32%, transparent);
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card:nth-child(2)) {
+  --benefit-accent: hsl(var(--accent-green));
+  --benefit-accent-alt: hsl(var(--accent-blue));
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card:nth-child(3)) {
+  --benefit-accent: hsl(var(--accent-purple));
+  --benefit-accent-alt: hsl(var(--accent-red));
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card:nth-child(4)) {
+  --benefit-accent: hsl(var(--accent-orange));
+  --benefit-accent-alt: hsl(var(--accent-yellow));
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card:nth-child(5)) {
+  --benefit-accent: hsl(var(--accent-red));
+  --benefit-accent-alt: hsl(var(--accent-purple));
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card:nth-child(6)) {
+  --benefit-accent: hsl(var(--accent-yellow));
+  --benefit-accent-alt: hsl(var(--accent-orange));
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card::after) {
+  content: none;
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:nth-child(2)) {
+  background: none !important;
+  opacity: 0 !important;
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:last-child > div:first-child > div:first-child) {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--benefit-accent) 18%, white),
+    color-mix(in srgb, var(--benefit-accent-alt) 12%, white)
+  ) !important;
+  border-color: color-mix(in srgb, var(--benefit-accent) 30%, white) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 78%), 0 12px 28px -22px var(--benefit-accent);
+}
+.conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:last-child > div:nth-child(2)) {
+  filter: saturate(1.08) contrast(1.01);
+}
+/* The logo marquee is supporting proof, not a separate narrative section.
+   Keep its movement and logo tiles while blending its shell into white. */
+.conceptPage :global(.webstore2-page section[data-antbuildz-logo-strip="true"]) {
+  background: var(--clean) !important;
+  border-color: transparent !important;
+}
+@media (min-width: 768px) {
+  .conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-benefits-desc) {
+    width: min(100%, 1000px);
+    max-width: 1000px !important;
+  }
+
+  /* The transferred bento cards reserve 578px even though their copy and
+     interface graphics need much less room. Reduce the full composition by
+     almost exactly 20% while retaining readable graphics and equal rows. */
+  .conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card) {
+    height: 462px !important;
+  }
+
+  .conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:last-child) {
+    padding: 24px !important;
+  }
+
+  .conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:last-child > div:nth-child(2)) {
+    height: 172px !important;
+    margin-block: 12px !important;
+  }
+
+  .conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:last-child > div:nth-child(2) > *) {
+    zoom: .94;
+  }
+
+  .conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:last-child > div:last-child) {
+    height: 152px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:last-child) {
+    padding: 22px !important;
+  }
+
+  .conceptPage :global(.webstore2-page .ws2-benefits-section .ws2-bento-card > div:last-child > div:nth-child(2)) {
+    margin-block: 14px !important;
+  }
+}
 /* Remove only the preview hero link; other Sales Agent links remain available. */
 .conceptPage :global(.webstore2-page .ws2-hero-secondary-link) { display: none !important; }
-
 /* Keep the multilingual globe composition, but move the section off the heavy
    operational surface and onto the site's softer public-marketing palette. */
 .conceptPage:global(#root.antbuildz-original-root.antbuildz-section-system) :global(.ws2-global-agent-section[data-antbuildz-section-surface="dark"]) {
@@ -48,7 +171,7 @@
 .conceptPage:has(.story[data-visible="true"]) :global(.live-chat-launcher) { visibility: hidden; pointer-events: none; }
 .canvasViewport { min-width: 0; }
 .mount { order: 6; width: 100%; margin: 28px auto 0; }
-.story { --story-surface: #fff; --story-violet: color-mix(in srgb, var(--purple) 7%, white); --story-blue: color-mix(in srgb, var(--blue) 8%, white); --glass-edge: rgb(255 255 255 / 72%); --glass-surface: linear-gradient(135deg, rgb(255 255 255 / 96%), rgb(255 255 255 / 90%) 55%, rgb(248 247 255 / 94%)); --frame-ink: var(--ink); --frame-body: var(--body); --frame-wash: rgb(255 255 255 / 40%); --frame-footer: rgb(255 255 255 / 72%); --frame-number: var(--soft); container-type: inline-size; max-width: 1248px; margin: auto; text-align: left; color: var(--ink); font: 400 14px/1.5 var(--font-body); }
+.story { --story-surface: #fff; --story-violet: color-mix(in srgb, var(--purple) 12%, white); --story-blue: color-mix(in srgb, var(--blue) 14%, white); --glass-edge: rgb(255 255 255 / 72%); --glass-surface: linear-gradient(135deg, rgb(255 255 255 / 96%), rgb(255 255 255 / 90%) 55%, rgb(248 247 255 / 94%)); --frame-ink: var(--ink); --frame-body: var(--body); --frame-wash: rgb(255 255 255 / 40%); --frame-footer: rgb(255 255 255 / 72%); --frame-number: var(--soft); container-type: inline-size; max-width: 1248px; margin: auto; text-align: left; color: var(--ink); font: 400 14px/1.5 var(--font-body); }
 /* One static blur layer, not a filter on every moving product card. */
 .glassFrame { overflow: hidden; border: 1px solid var(--glass-edge); border-radius: 28px; background: rgb(248 247 255 / 94%); box-shadow: inset 0 1px 0 rgb(255 255 255 / 48%), 0 20px 60px -28px rgb(15 23 42 / 45%); }
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -65,6 +188,16 @@
 .stageNav strong { font-size: 14px; font-weight: 600; }
 .stageNav small { font-size: 11px; color: inherit; margin-top: 2px; }
 .stageArrow { margin-left: auto; color: inherit; font-size: 18px; }
+.canvasViewport {
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--purple) 22%, transparent), transparent 34%),
+    radial-gradient(circle at 82% 12%, color-mix(in srgb, var(--blue) 20%, transparent), transparent 36%),
+    radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--yellow) 18%, transparent), transparent 34%),
+    radial-gradient(circle at 24% 76%, color-mix(in srgb, var(--red) 9%, transparent), transparent 30%),
+    linear-gradient(180deg, rgb(255 255 255 / 20%), rgb(248 247 255 / 8%));
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, rgb(0 0 0 / 96%) 68%, rgb(0 0 0 / 76%) 80%, rgb(0 0 0 / 34%) 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 58%, rgb(0 0 0 / 96%) 68%, rgb(0 0 0 / 76%) 80%, rgb(0 0 0 / 34%) 92%, transparent 100%);
+}
 .canvas { --store-top: 48px; --catalogue-top: 220px; --store-sidebar-width: clamp(144px, 15cqw, 184px); --store-preview-left: calc(4cqw + var(--store-sidebar-width) + 25px); --store-preview-width: calc(92cqw - var(--store-sidebar-width) - 38px); --listing-width: min(calc((var(--store-preview-width) - 64px) / 3), 208px); --listing-height: calc(var(--listing-width) + 144px); --listing-gap: 16px; --phone-width: 300px; --phone-height: 548px; --phone-left: calc(72cqw - var(--phone-width) / 2); --phone-top: 68px; --recommendation-top: 236px; --recommendation-height: 68px; --recommendation-gap: 8px; height: 660px; container-type: inline-size; position: relative; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse at 8% 0%, rgb(255 255 255 / 8%), transparent 58%); }
 .sceneLabel { position: absolute; top: 16px; left: 28px; right: 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--frame-body); font-size: 12px; }
 .sceneLabel span:first-child { font-size: 10px; font-weight: 600; letter-spacing: .1em; }
@@ -194,12 +327,16 @@
 .productTitle strong, .productTitle > span { display: block; font-weight: 500; }
 .productTitle strong { color: var(--ink); font-weight: 600; min-height: 2.8em; }
 .productTitle > span { min-height: 2.8em; }
-.productLocation { display: flex; align-items: center; gap: 4px; margin: 3px 0 5px; font-size: 9px; color: var(--muted); }
-.productLocation > span { font-size: 12px; line-height: 1; }
+.productLocation { display: flex; align-items: center; gap: 5px; margin: 3px 0 5px; font-size: 8px; line-height: 1.35; color: var(--muted); white-space: nowrap; }
+.productLocation > span:first-child { color: var(--body); font-weight: 600; }
+.productLocation i { flex: 0 0 3px; width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
 .pricingGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: auto; border: 1px solid var(--line); border-radius: 5px; }
 .pricingGrid > span { display: block; min-width: 0; padding: 5px 4px; color: var(--body); font-size: 8px; line-height: 1.35; white-space: nowrap; }
 .pricingGrid > span + span { border-left: 1px solid var(--line); }
 .pricingGrid b { display: block; color: var(--ink); font-size: 9px; font-weight: 600; margin-top: 2px; white-space: nowrap; }
+.productPage[data-listing-type="sale"] .pricingGrid { grid-template-columns: 1fr; border: 0; background: color-mix(in srgb, var(--red) 4%, white); }
+.productPage[data-listing-type="sale"] .pricingGrid > span { padding: 7px 8px; }
+.productPage[data-listing-type="sale"] .pricingGrid b { color: var(--red); font-size: 15px; line-height: 1.2; letter-spacing: -.02em; }
 .pageReady { position: absolute; left: 50%; bottom: 12px; width: max-content; max-width: 92%; transform: translateX(-50%); display: flex; align-items: center; gap: 20px; padding: 8px 20px; border: 1px solid var(--glass-edge); border-radius: 16px; background: var(--glass-surface); color: var(--body); opacity: 0; transition: opacity .5s; }
 .discoveryStep { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .discoveryIcon { display: grid; place-items: center; flex: 0 0 28px; width: 28px; height: 28px; color: var(--purple); background: var(--story-violet); border-radius: 8px; }
@@ -210,9 +347,8 @@
 [data-phase="pages"] .productPage { opacity: 1; transform: translateY(0) scale(1); }
 [data-phase="pages"] .pageReady { opacity: 1; }
 [data-phase="photos"] .productPage { opacity: .1; transform: translateY(15px) scale(.86); }
-.syncSummary { position: absolute; left: 8%; top: 200px; width: 34%; opacity: 0; transform: translateX(-16px); transition: opacity .6s, transform .6s; }
-.syncPill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); padding: 6px 10px; background: white; border-radius: 99px; font-size: 11px; color: var(--body); }
-.syncSummary > strong { color: var(--frame-ink); display: block; margin: 20px 0 12px; font-family: var(--font-heading); font-size: 30px; letter-spacing: -.035em; line-height: 1.22; font-weight: 700; }
+.syncSummary { position: absolute; left: 8%; top: 0; bottom: 0; display: flex; width: 34%; flex-direction: column; justify-content: center; opacity: 0; transform: translateX(-16px); transition: opacity .6s, transform .6s; }
+.syncSummary > strong { color: var(--frame-ink); display: block; margin: 0 0 12px; font-family: var(--font-heading); font-size: 30px; letter-spacing: -.035em; line-height: 1.22; font-weight: 700; }
 .syncSummary p { color: var(--frame-body); font-size: 15px; max-width: 300px; }
 .syncSummary > div { display: grid; gap: 10px; margin-top: 24px; }
 .syncSummary > div > span { display: flex; align-items: center; gap: 8px; color: var(--frame-body); font-size: 13px; }
@@ -239,14 +375,22 @@
   -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 24%), #000 22px, #000 calc(100% - 28px), rgb(0 0 0 / 24%));
   mask-image: linear-gradient(to bottom, rgb(0 0 0 / 24%), #000 22px, #000 calc(100% - 28px), rgb(0 0 0 / 24%));
 }
-.chatTranscript { position: relative; transform: translateY(calc(-1 * var(--chat-scroll, 0px))); transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+.chatTranscript { position: relative; transform: translate3d(0, calc(-1 * (var(--chat-scroll, 0px) + var(--chat-viewport-compensation, 0px))), 0); transition: transform .72s cubic-bezier(.22,1,.36,1); will-change: transform; }
 .chatFollowups { position: absolute; top: calc(var(--recommendation-top) - 88px + 3 * var(--recommendation-height) + 2 * var(--recommendation-gap) + 18px); left: 0; right: 0; }
 .chatTurn { min-height: 170px; opacity: 0; transition: opacity .4s; }
 .chatTurn[data-visible="true"] { opacity: 1; }
-.followupBuyer { padding: 7px 9px; margin-left: auto; max-width: 90%; border-radius: 14px 14px 4px 14px; background: var(--soft); font-size: 12px; line-height: 1.5; }
+.buyerTyping { position: absolute; top: 28px; right: 0; }
+.buyerTyping, .followupBuyerTyping { display: none; width: max-content; max-width: 90%; align-items: center; gap: 4px; margin-left: auto; padding: 8px 10px; border-radius: 14px 14px 4px 14px; background: var(--soft); color: var(--muted); font-size: 10px; line-height: 1; }
+.buyerTyping[data-visible="true"], .chatTurn[data-buyer-typing="true"] .followupBuyerTyping { display: flex; }
+.buyerTyping i, .followupBuyerTyping i { width: 4px; height: 4px; border-radius: 50%; background: var(--blue); animation: breathe 1s ease-in-out infinite alternate; }
+.buyerTyping i:nth-child(2), .followupBuyerTyping i:nth-child(2) { animation-delay: .18s; }
+.buyerTyping i:nth-child(3), .followupBuyerTyping i:nth-child(3) { animation-delay: .36s; }
+.buyerTyping span, .followupBuyerTyping span { margin-left: 4px; }
+.followupBuyer { display: none; padding: 7px 9px; margin-left: auto; max-width: 90%; border-radius: 14px 14px 4px 14px; background: var(--soft); font-size: 12px; line-height: 1.5; }
+.chatTurn[data-question-visible="true"] .followupBuyer { display: block; }
 .followupResponse { position: relative; margin-top: 12px; }
 .followupReply { font-size: 12px; line-height: 1.5; color: var(--body); opacity: 0; transition: opacity .4s; }
-.chatTurn[data-replied="true"] .followupReply, .chatTurn[data-typing="true"] .chatTyping { opacity: 1; }
+.chatTurn[data-replied="true"] .followupReply, .chatTurn[data-agent-typing="true"] .chatTyping, .chatReply[data-typing="true"] .chatTyping { opacity: 1; }
 .chatDate { display: block; margin-bottom: 8px; text-align: center; font-size: 9px; color: var(--muted); line-height: 12px; }
 .buyerMessage { max-width: 90%; padding: 7px 9px; margin-left: auto; background: var(--soft); border-radius: 14px 14px 4px 14px; font-size: 12px; line-height: 1.5; opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s; }
 .chatReply { position: relative; margin-top: 10px; }
@@ -257,8 +401,25 @@
 .chatInput { position: absolute; left: 12px; right: 12px; bottom: 14px; height: 34px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 1px solid var(--line); border-radius: 99px; padding: 5px 6px 5px 12px; color: var(--muted); font-size: 10px; background: white; }
 .chatInput > span:last-child { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--yellow); color: var(--ink); font-size: 15px; }
 [data-stage="2"] .conversation, [data-stage="2"] .syncSummary { opacity: 1; transform: none; }
-[data-stage="2"] .productPage { --card-top: calc(var(--recommendation-top) + var(--item) * (var(--recommendation-height) + var(--recommendation-gap)) - var(--chat-scroll, 0px)); opacity: 1; top: calc(var(--phone-top) + var(--card-top)); left: calc(var(--phone-left) + 12px); width: calc(var(--phone-width) - 24px); height: var(--recommendation-height); border-radius: 10px; transform: none; transition-delay: calc(var(--item) * .12s); }
-[data-stage="2"] .buyerMessage, [data-stage="2"] .agentMessage { opacity: 1; transform: none; }
+/* Let the final workflow beat read as the main product moment: the larger
+   phone deliberately continues below the scene and dissolves into the glass
+   surface, while its shared variables keep the moving product cards aligned. */
+[data-stage="2"] .canvas {
+  --phone-width: min(420px, 94cqw);
+  --phone-height: 800px;
+  --phone-top: 28px;
+  --recommendation-height: 76px;
+  --recommendation-gap: 10px;
+}
+@media (min-width: 768px) {
+  [data-stage="2"] .canvas { --phone-left: calc(69cqw - var(--phone-width) / 2); }
+  .story[data-chat-beat="sales-buyer-typing"] .canvas { --chat-viewport-compensation: 100px; }
+  .story[data-chat-beat="sales-question"] .canvas { --chat-viewport-compensation: 130px; }
+  .story[data-chat-beat="sales-agent-typing"] .canvas { --chat-viewport-compensation: 155px; }
+  .story[data-chat-beat="sales-reply"] .canvas { --chat-viewport-compensation: 180px; }
+}
+[data-stage="2"] .productPage { --card-top: calc(var(--recommendation-top) + var(--item) * (var(--recommendation-height) + var(--recommendation-gap)) - var(--chat-scroll, 0px) - var(--chat-viewport-compensation, 0px)); opacity: 1; top: calc(var(--phone-top) + var(--card-top)); left: calc(var(--phone-left) + 12px); width: calc(var(--phone-width) - 24px); height: var(--recommendation-height); border-radius: 10px; transform: none; transition-delay: calc(var(--item) * .12s); }
+.buyerMessage[data-visible="true"], .agentMessage[data-visible="true"] { opacity: 1; transform: none; }
 /* Cards remain the same DOM nodes throughout the handoff. Once in chat,
    crop only the portions scrolled behind the phone header/composer. */
 [data-stage="2"]:not([data-chat-beat="sync"]) .productPage { clip-path: inset(max(0px, calc(76px - var(--card-top))) 0 max(0px, calc(var(--card-top) + var(--recommendation-height) - (var(--phone-height) - 62px))) 0); transition-delay: 0s; }
@@ -270,13 +431,6 @@
 .recommendationProduct strong { display: block; font-size: 11px; font-weight: 600; line-height: 1.3; letter-spacing: -.015em; }
 .recommendationProduct small { font-size: 9px; color: var(--muted); margin-top: 3px; }
 .productLink { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; color: var(--purple); font-size: 10px; font-weight: 600; }
-.storyFooter { display: grid; grid-template-columns: 88px minmax(0, 1fr) 88px; align-items: center; gap: 12px; min-height: 68px; border-top: 1px solid var(--glass-edge); background: var(--frame-footer); padding: 12px 24px; }
-.storyFooter p { grid-column: 2; grid-row: 1; justify-self: center; max-width: 820px; margin: 0; font-size: 13px; line-height: 1.6; text-align: center; text-wrap: balance; color: var(--frame-body); }
-.playback { grid-column: 3; grid-row: 1; display: flex; justify-content: flex-end; gap: 0; }
-.playback button { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 10px; background: transparent; color: var(--frame-body); cursor: pointer; transition: background .2s, color .2s; }
-.playback button:hover { background: rgb(255 255 255 / 65%); color: var(--ink); }
-.playback button:active { background: var(--soft); }
-.playback svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .story button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 .srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 [data-paused="true"] *, [data-paused="true"] *::before, [data-paused="true"] *::after { animation-play-state: paused !important; }
@@ -400,10 +554,13 @@
   .productTitle { grid-column: 2; grid-row: 1; padding: 7px 8px 0; font-size: 11px; line-height: 1.35; }
   .productTitle strong, .productTitle > span { min-height: 0; }
   .productLocation { position: absolute; left: 92px; top: 66px; margin: 0; font-size: 8px; }
-  .productLocation > span { font-size: 10px; }
+  .productLocation { gap: 4px; }
+  .productLocation i { flex-basis: 2px; width: 2px; height: 2px; }
   .pricingGrid { grid-column: 1 / -1; grid-row: 2; align-self: stretch; margin: 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; }
   .pricingGrid > span { padding: 3px 8px; font-size: 8px; }
   .pricingGrid b { font-size: 9px; margin-top: 0; }
+  .productPage[data-listing-type="sale"] .pricingGrid > span { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 5px 8px; }
+  .productPage[data-listing-type="sale"] .pricingGrid b { font-size: 13px; }
   .pageReady { width: 92%; gap: 6px; justify-content: space-between; padding: 8px; border-radius: 12px; }
   .discoveryStep { flex: 1; flex-direction: column; gap: 4px; text-align: center; }
   .discoveryIcon { display: none; }
@@ -411,9 +568,7 @@
   .discoveryStep strong { min-height: 2.6em; font-size: 10px; line-height: 1.3; }
   .discoveryStep small { min-height: 2.6em; font-size: 8px; line-height: 1.3; }
   .discoveryArrow { font-size: 12px; }
-  .syncSummary { left: 5%; top: calc(var(--phone-top) - 38px); width: 90%; text-align: center; }
-  .syncPill { font-size: 10px; padding: 5px 8px; }
-  .syncSummary > strong, .syncSummary > p, .syncSummary > div, .syncArrow { display: none; }
+  .syncSummary { display: none; }
   /* Keep the detailed scene as a legible illustration instead of letting its
      mobile stack turn the hero into a two-screen-tall browser. Each stage has
      its own scale so inventory, storefront and phone remain recognisable. */
@@ -423,23 +578,43 @@
   [data-stage="1"] .canvas { width: 161.2903%; }
   [data-stage="2"] .canvasViewport { --mobile-scene-scale: .8; height: 554px; }
   [data-stage="2"] .canvas { width: 125%; }
-  .storyFooter { grid-template-columns: minmax(0, 1fr) auto; padding: 8px 12px; min-height: 72px; gap: 8px; border-radius: 0 0 24px 24px; }
-  .storyFooter p { grid-column: 1; grid-row: 1; justify-self: center; font-size: 11px; line-height: 1.45; }
-  .playback { grid-column: 2; grid-row: 1; justify-content: flex-end; }
-  .playback button { width: 44px; height: 44px; }
+  /* The deliberately oversized phone continues below the visible hero frame.
+     Compensate only as later messages arrive so the newest exchange remains
+     readable before it dissolves into the lower fade. */
+  .story[data-chat-beat="rental-buyer-typing"] .canvas,
+  .story[data-chat-beat="rental-question"] .canvas { --chat-viewport-compensation: 72px; }
+  .story[data-chat-beat="rental-agent-typing"] .canvas { --chat-viewport-compensation: 96px; }
+  .story[data-chat-beat="rental-reply"] .canvas { --chat-viewport-compensation: 132px; }
+  .story[data-chat-beat="sales-buyer-typing"] .canvas { --chat-viewport-compensation: 230px; }
+  .story[data-chat-beat="sales-question"] .canvas { --chat-viewport-compensation: 270px; }
+  .story[data-chat-beat="sales-agent-typing"] .canvas { --chat-viewport-compensation: 305px; }
+  .story[data-chat-beat="sales-reply"] .canvas { --chat-viewport-compensation: 340px; }
 }
 @keyframes listingDropMobile { 0% { opacity: 1; transform: none; } 65% { opacity: .85; } 100% { opacity: 0; transform: translate(calc(var(--item) * -100% - var(--item) * 4px), calc(190px + var(--item) * 108px)) rotate(2deg) scale(.9); } }
 @keyframes dragMobile { 0% { opacity: 1; transform: none; } 70% { opacity: 1; } 100% { opacity: 0; transform: translate(10px, 160px); } }
 @media (prefers-reduced-motion: reduce) { .story *, .story *::before, .story *::after { animation: none !important; transition: none !important; } }
 
-/* Preserve the centred, vertical hero while fitting ordinary laptop viewports.
-   Only the illustration scales; controls remain usable at their native size. */
+/* The shared header already provides Book a Demo and Pricing remains in the
+   primary navigation. Remove the duplicate hero action row on this route. */
+.conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-cta-wrap) {
+  display: none !important;
+}
+
+/* Keep the complete desktop hero inside the first laptop viewport. The
+   storyboard starts at roughly 80% of its authored size and can shrink further
+   on short laptop screens so the next section begins exactly below the fold. */
 @media (min-width: 980px) {
   .conceptPage :global(.webstore2-page > section:first-of-type) {
-    /* Extend the photograph under the fixed header without moving the content. */
-    height: calc(100svh - 81px + var(--preview-header-height, 0px));
-    min-height: calc(600px + var(--preview-header-height, 0px));
-    padding: calc(80px + var(--preview-header-height, 0px)) 24px 12px;
+    /* Extend the photograph under the fixed header, then align the H1 with the
+       shared 96px/80px public-page title gap. The 18px adjustment accounts for
+       the eyebrow and the hero shell's 6px gap above the H1. */
+    height: 100svh;
+    min-height: 0;
+    padding:
+      calc(var(--preview-header-height, 0px) + var(--public-hero-title-gap, 96px) - 18px)
+      var(--public-frame-gutter, 5vw)
+      clamp(16px, 3svh, 28px);
+    overflow: hidden;
     box-sizing: border-box;
   }
   .conceptPage :global(.webstore2-page .ws2-hero-shell) {
@@ -448,24 +623,38 @@
     align-items: center;
     gap: 6px;
     height: 100%;
-    max-width: 1280px;
+    min-height: 0;
+    max-width: var(--public-frame-max, 1250px);
     text-align: center;
   }
   .conceptPage :global(.webstore2-page .ws2-hero-shell > .mkt-section-eyebrow) { flex-shrink: 0; margin: 0; text-align: center; }
-  .conceptPage:global(#root) :global(.webstore2-page > section:first-of-type .ws2-hero-shell .ws2-hero-title) { flex-shrink: 0; margin: 0; width: 100%; max-width: 1280px; text-align: center; }
+  .conceptPage:global(#root) :global(.webstore2-page > section:first-of-type .ws2-hero-shell .ws2-hero-title) { flex-shrink: 0; margin: 0; width: 100%; max-width: var(--public-frame-max, 1250px); text-align: center; }
   .conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-desc) { flex-shrink: 0; margin: 0; width: 100%; text-align: center; }
   .conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-desc .mkt-desc-line) { display: inline; white-space: normal; }
-  .conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-cta-wrap) { flex-shrink: 0; align-items: center; margin: 4px 0 0; }
-  .conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-actions) { gap: 8px; flex-wrap: wrap; justify-content: center; }
-  .conceptPage :global(.webstore2-page .ws2-hero-shell .ws2-hero-actions > a) { padding-inline: 20px; min-height: 54px; }
-  .mount { flex: 1; width: min(90%, clamp(576px, 99svh, 990px)); min-height: 0; min-width: 0; margin: 34px auto 0; }
-  /* The 34px mount margin replaces the removed link row and its gap, keeping
-     the approved frame dimensions and CTA spacing unchanged.
-     Restore the original Webstore's 80px top spacing. The mount loses 68px
-     compared with its previous 12px inset; compensate before applying .9 × .9
-     so the browser is 10% smaller than its last approved size, in both axes.
-     Cap the height only on short windows; controls keep their native size. */
-  .story { position: relative; display: flex; flex-direction: column; height: min(100%, calc((100% + 68px) * .81)); min-height: 0; }
+  .mount {
+    display: flex;
+    flex: 1 1 0;
+    justify-content: center;
+    width: min(80%, 998px);
+    min-height: 0;
+    min-width: 0;
+    margin: clamp(14px, 2.2svh, 24px) auto 0;
+  }
+  .story {
+    position: relative;
+    display: flex;
+    width: auto;
+    max-width: 100%;
+    height: min(100%, 608px);
+    aspect-ratio: 1248 / 760;
+    flex: none;
+    flex-direction: column;
+    min-height: 0;
+    /* On tall desktop screens the max-height frame otherwise centres inside
+       the remaining hero space and leaves too much air below the description.
+       Bias it upward progressively, while keeping short laptops unchanged. */
+    transform: translateY(clamp(-34px, calc((100svh - 960px) * -.18), 0px));
+  }
   .glassFrame { flex: 1; display: flex; flex-direction: column; min-height: 0; }
   .stageNav { flex-shrink: 0; gap: 4px; padding: 4px; }
   .stageNav button { min-height: 44px; padding: 6px 8px; gap: 8px; }
@@ -473,17 +662,13 @@
   .stageNav small { font-size: 10px; }
   .stageNumber { width: 26px; height: 26px; flex-basis: 26px; font-size: 10px; }
   .stageArrow { font-size: 14px; }
-  .canvasViewport { position: relative; flex: 1; min-height: 0; overflow: hidden; background: radial-gradient(ellipse at 8% 0%, rgb(255 255 255 / 8%), transparent 58%); }
+  .canvasViewport { position: relative; flex: 1; min-height: 0; overflow: hidden; }
   .canvas { position: absolute; left: 50%; top: 50%; width: 1120px; height: 660px; transform: translate(-50%, -50%) scale(var(--scene-scale, .6)); transform-origin: center; background: transparent; }
-  .storyFooter { flex-shrink: 0; gap: 10px; min-height: 52px; padding: 4px 12px; }
-  .storyFooter p { font-size: 12px; line-height: 1.5; }
-  .playback { margin: 0; }
-
 }
 
 @media (max-width: 767px) {
   .conceptPage :global(.webstore2-page > section:first-of-type) {
-    padding-inline: 12px;
+    padding-inline: var(--public-frame-gutter, 5vw);
   }
 }
 
@@ -491,7 +676,169 @@
   .conceptPage :global(.webstore2-page > section:first-of-type) { padding-top: calc(48px + var(--preview-header-height, 0px)); padding-bottom: 48px; }
 }
 
+@media (max-width: 767px) {
+  /* Keep the complete mobile hero inside the small viewport. The storyboard
+     owns the remaining space after the heading and recomposes its canvas
+     inside that frame instead of making the page taller than the phone. */
+  .conceptPage :global(.webstore2-page > section:first-of-type) {
+    --mobile-hero-bottom-gap: 24px;
+    box-sizing: border-box;
+    height: 100svh;
+    min-height: 0;
+    padding-bottom: var(--mobile-hero-bottom-gap);
+    overflow: hidden;
+  }
+  .conceptPage :global(.webstore2-page .ws2-hero-shell) {
+    display: flex;
+    height: calc(100svh - 48px - var(--preview-header-height, 0px) - var(--mobile-hero-bottom-gap));
+    min-height: 0;
+    flex-direction: column;
+  }
+  .conceptPage :global(.webstore2-page .ws2-hero-shell > .mkt-section-eyebrow),
+  .conceptPage :global(.webstore2-page .ws2-hero-shell > .ws2-hero-title),
+  .conceptPage :global(.webstore2-page .ws2-hero-shell > .ws2-hero-desc) {
+    flex-shrink: 0;
+  }
+  .mount {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .story,
+  .glassFrame {
+    display: flex;
+    height: 100%;
+    min-height: 0;
+    flex-direction: column;
+  }
+  .stageNav { flex-shrink: 0; }
+  .canvasViewport,
+  [data-stage="1"] .canvasViewport,
+  [data-stage="2"] .canvasViewport {
+    height: auto !important;
+    min-height: 0;
+    flex: 1 1 0;
+  }
+}
+
+/* Closing Webstore CTA: reuse the homepage's contained photographic card
+   language while keeping this route's catalogue-specific action and imagery. */
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid)) {
+  box-sizing: border-box;
+  width: min(var(--public-frame-max, 1250px), 90vw);
+  min-height: 430px;
+  margin: 96px auto;
+  padding: clamp(36px, 5vw, 62px) !important;
+  overflow: hidden;
+  border: 1px solid rgba(255, 197, 1, .34);
+  border-radius: 24px;
+  background-color: #fffaf1 !important;
+  background-image:
+    linear-gradient(90deg, rgba(255, 250, 241, .99) 0%, rgba(255, 250, 241, .97) 42%, rgba(255, 250, 241, .74) 58%, rgba(255, 250, 241, .08) 79%),
+    url('/images/emma-webstore-catalogue-scan-v1.jpg') !important;
+  background-position: center, center;
+  background-size: cover, cover;
+  background-repeat: no-repeat;
+  box-shadow: 0 30px 64px -46px rgba(15, 23, 42, .52);
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) > :not(.max-w-6xl)) {
+  display: none !important;
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) > .max-w-6xl) {
+  width: min(100%, 620px);
+  max-width: 620px;
+  margin: 0 !important;
+  text-align: left;
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) h2) {
+  max-width: 20ch;
+  margin: 0;
+  color: var(--ink, #0f172a) !important;
+  background: none !important;
+  font-size: clamp(34px, 3.2vw, 46px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.045em !important;
+  text-align: left;
+  -webkit-text-fill-color: currentColor !important;
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) h2 .mkt-section-title-line) {
+  text-align: left !important;
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .mkt-section-desc) {
+  max-width: 54ch !important;
+  margin: 18px 0 0 !important;
+  color: var(--body, #475569) !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  text-align: left;
+  text-wrap: pretty;
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .max-w-6xl > div) {
+  align-items: flex-start !important;
+  margin-top: 28px !important;
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .ws2-hero-actions) {
+  justify-content: flex-start !important;
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .ws2-hero-cta-button) {
+  min-height: 54px;
+  border-radius: 999px;
+}
+.conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .max-w-6xl > div > a) {
+  justify-content: flex-start !important;
+  margin-top: 20px !important;
+  padding-inline: 0 !important;
+}
+
+@media (max-width: 1179px) {
+  .conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid)) {
+    margin-block: 80px;
+  }
+}
+
+@media (max-width: 767px) {
+  .conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid)) {
+    min-height: 0;
+    margin-block: 64px;
+    padding-inline: 24px !important;
+    border-radius: 22px;
+    background-image:
+      linear-gradient(180deg, rgba(255, 250, 241, 0) 0%, rgba(255, 250, 241, .12) 30%, rgba(255, 250, 241, .92) 47%, #fffaf1 58%),
+      url('/images/emma-webstore-catalogue-scan-v1.jpg') !important;
+    background-position: center, 69% top;
+    background-size: 100% 100%, auto 300px;
+  }
+  .conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) > .max-w-6xl) {
+    width: 100%;
+    max-width: none;
+    margin-top: 190px !important;
+  }
+  .conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) h2) {
+    max-width: 18ch;
+    font-size: clamp(30px, 9vw, 38px) !important;
+  }
+  .conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .mkt-section-desc) {
+    max-width: none !important;
+    font-size: 15px !important;
+  }
+  .conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .ws2-hero-actions) {
+    display: grid !important;
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+  .conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .ws2-hero-cta-button) {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  .conceptPage :global(.webstore2-page section:has(> .ws2-final-cta-grid) .max-w-6xl > div > a) {
+    align-self: center;
+    justify-content: center !important;
+    text-align: center;
+  }
+}
+
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   .glassFrame { background: var(--canvas); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .story { --glass-surface: white; --glass-edge: var(--line); --frame-ink: var(--ink); --frame-body: var(--body); --frame-footer: white; --frame-number: var(--soft); }
+  .canvasViewport { background: var(--canvas); -webkit-mask-image: none; mask-image: none; }
 }

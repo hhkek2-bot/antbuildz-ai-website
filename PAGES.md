@@ -2,6 +2,414 @@
 
 This register preserves route intent and design status between sessions. Read it before page work and update it when a route, primary CTA, source relationship or QA status materially changes.
 
+## 2026-09-04 — AI Roles overview and five role pages
+
+### Follow-up — Industry-matched section descriptions
+
+The centred descriptions below AI role section headings now use `#66758B`,
+matching the computed description colour on the Who We Serve industry pages.
+This shared rule covers the AI Roles overview and all five role pages. Hero
+banner descriptions remain white directly over their photographs.
+
+### Follow-up — White hero descriptions without containers
+
+Fidelity correction across the AI Roles overview and all five role pages. The
+temporary translucent description box is removed, and hero descriptions return
+to white text directly over the photograph. A restrained dark text shadow keeps
+the copy readable without adding a visible container.
+Browser-inspected across the overview and all five role pages at 1440px and
+390px. The white text, transparent background and zero padding render
+consistently, and every checked route retains zero horizontal overflow.
+Typography, wording, title colour and image treatment remain unchanged.
+
+### Follow-up — Inventory-led product recommendations
+
+Copy refinement across the five AI role pages removes `qualified handover` and
+other sales-style handover language. Sales Specialist and Product Specialist
+now lead with matching buyer requirements to suitable products using approved
+catalogue knowledge and connected inventory data. Inventory wording remains
+conditional because current stock and rental availability depend on the
+customer's configured data connection. Customer Support, Technical Support and
+After-Sales Service use plain team follow-up wording only where a person must
+confirm an exception, safety issue, price, delivery, warranty or compatibility.
+Browser QA across all five role pages at 1440px and 390px confirms complete
+hero copy, two-line desktop descriptions, two-line titles and no horizontal
+overflow. Scoped ESLint and diff whitespace checks pass.
+
+### Follow-up — Conversation-led AI role photography
+
+System-mode image update across the overview and five role pages. Following
+review, the final set deliberately mixes three conversation-led heroes with
+three role-specific industrial heroes. The overview, Sales Specialist and
+Customer Support retain the new online-enquiry scenes. Product Specialist,
+Technical Support and After-Sales Service use the preserved product,
+documentation, parts and service photographs because those actions clarify the
+roles. The mix presents Antbuildz as an AI Agent platform while retaining
+credible industrial context and Asian representation.
+
+Six versioned `*-conversations-v2.png` assets remain stored in
+`public/images/ai-roles/`; three are selected in the final page mapping and all
+previous images remain preserved. The shared old-film grain, soft-focus
+treatment and lower canvas fade remain in place.
+Exact prompts are recorded in
+`artifacts/ai-role-images-20260905/conversation-workspace-prompts.md`.
+
+### Follow-up — Incoming conversations and shareable AI Terminal
+
+Copy refinement follows the user's current product clarification: the Agent
+handles incoming conversations, and the dedicated AI Terminal is a shareable
+conversation page anyone with the link can use. The overview and five role
+pages now explain website, advertising and campaign entry points in their
+When and How sections, with role-specific examples. Customer Support no longer
+promotes connected order actions. Preparation copy keeps quotations, order
+changes, approvals and service arrangements with the business team. The
+overview's contextual product link now opens AI Sales Agent; hero CTAs remain
+unchanged. Overview hero copy and metadata reflect the same positioning.
+
+QA: targeted ESLint and diff whitespace checks passed. All six routes rendered
+at 1440px and 390px without horizontal overflow; overview and Sales Specialist
+section screenshots were visually inspected in `artifacts/role-banner-qa/`.
+
+### Follow-up — Complete two-line desktop hero copy
+
+System-mode refinement: all five detail banners keep `AI Agent for` on the
+first title line and the complete role name on the second. The shared copy
+container now spans the image's inner width; descriptions use a balanced
+96ch maximum measure without line clamping, clipping or ellipses. All original
+wording remains visible. Browser measurements confirm two title and description
+lines for all five roles at 1024px, 1440px and 1920px. At narrow tablet and phone
+widths descriptions wrap naturally to preserve readable text and complete copy;
+titles remain two lines. Checked all five at 390px with no horizontal overflow,
+and inspected representative desktop/mobile screenshots in
+`artifacts/role-banner-qa/`. Existing colours and hero actions are preserved.
+
+### Follow-up — Readable resource URLs
+
+The 44 formerly run-together Resource article paths now use concise, lowercase,
+hyphen-separated canonical URLs, such as
+`/resources/what-is-an-ai-sales-agent`. Each former address permanently
+redirects directly to its matching canonical page, while the sitemap and
+copied-app navigation point to the new URL. This preserves existing links and
+avoids redirect chains.
+
+### Follow-up — Balanced role-card grids
+
+System-mode layout update for the shared role cards. The `Explore the other
+roles` section now uses a balanced 2 × 2 grid on every role-detail page,
+instead of a three-card row followed by one orphaned card. The five-role
+overview uses one row at wide desktop, two complete pairs and a full-width final
+card at compact desktop, and a single column on mobile.
+
+The card content, destinations, numbering, focus states and responsive touch
+targets are unchanged. Shared rendering covers the overview and all five detail
+pages.
+
+### Follow-up — Hero CTA simplification for AI role pages
+
+The hero image overlay on the AI Roles overview and detail pages now uses one
+`Learn More` action instead of the previous two-button set. This call-to-action
+links directly to `/ai-sales-agent` on the overview and all five detail pages,
+following the latest user correction. Final section CTAs remain unchanged.
+
+### Follow-up — Inclusive hero photography and lower image fade
+
+System-mode visual update for the role-detail hero treatment. Sales and Product
+Guidance already include Asian industrial professionals; Technical Support and
+After-Sales Service now use role-specific workshop photography with Asian
+technicians. The original image files remain preserved and the new versioned
+assets are `technical-support-asian-v2.jpg` and
+`after-sales-service-asian-v2.jpg` in `public/images/ai-roles/`.
+
+Every role hero now uses the same lower canvas fade, so its photography recedes
+into the page from below while the role actions remain legible. Desktop and
+mobile visual checks cover the new Technical Support and After-Sales Service
+scenes. Local-only; nothing deployed.
+
+### Follow-up — Standard role titles and What / When / How flow
+
+System-mode update across the AI Roles overview and all five detail pages.
+Detail-page H1s and metadata now use the consistent `AI Agent for [role]`
+format: Sales, Product Guidance, Customer Support, Technical Support and
+After-Sales Service. Navigation, role-card and breadcrumb labels retain their
+established human-readable role names.
+
+The overview now helps visitors understand what one Agent can do, when to
+deploy it across their customer channels and how to configure it. Every detail
+page follows the same `What` (capabilities), `When` (role-specific deployment
+uses) and `How` (knowledge, rules, testing, publishing and review) order,
+before its preparation checklist. Existing role photos, actions, navigation,
+footer, canonical routes and human handover boundaries remain in place.
+
+Desktop inspection covered the Technical Support detail page and overview;
+mobile verification at 390px confirms the Technical Support title and full
+section order with zero horizontal overflow. The role-copy regression suite,
+targeted ESLint and diff checks pass. Local-only; nothing deployed.
+
+### Follow-up — Simplified public header
+
+Following the header crowding audit, desktop navigation now reads Products,
+AI Roles, Industries, Resources, Pricing. Products contains AI Sales Agent,
+AI Webstore Suite and AI Agent Console with descriptive links. Existing
+Industries, Resources and AI Roles panels retain their grouped design; the new
+Products panel reuses it. Sign in and Book a Demo remain separate utilities.
+Mobile direct links and all footer destinations are preserved.
+
+System mode implementation is shared by the copied public runtime and source
+role/legal pages. Original router-owned product links stay mounted but hidden;
+DOM ordering is idempotent and matches keyboard ordering. Products and AI Roles
+show selected-route and open-menu indicators. No configuration, pricing, route
+or page-content changes.
+
+Browser checks: 1440px and 1024px public headers, 390px source mobile header and
+menu; Products panel in both source and copied shells; all three product links,
+selected-route markers, Enter/Escape, focus return and exclusive menu opening.
+Resources styling preserved. All 106 tests, targeted ESLint, production build
+and diff checks pass. Local-only, no deployment.
+
+### Follow-up — Industrial role photography
+
+Reviewed all five role photographs. Replaced four consumer-retail scenes with
+generated industrial editorial images: pallet-stacker sales, industrial valve
+selection, a tool distributor's trade counter, and hydraulic-cylinder/seal
+inspection in an equipment service workshop. Retained the relevant Technical
+Support pump photograph and the overview's industrial showroom photograph.
+
+Built-in image generation and design-fidelity review were used. Four new
+`*-industrial.jpg` assets are stored in `public/images/ai-roles/`, with matching
+descriptive alt text in `lib/ai-role-images.ts`. Original assets are preserved.
+Exact prompts: `artifacts/ai-role-images-20260904/industrial-prompts.md`.
+No conversation overlays, layout, background, copy or CTA changes.
+
+All four new heroes visually checked at 1440px and 390px, plus Product
+Specialist at 1024px. All 105 tests pass, including referenced asset existence
+and industrial-image descriptions. Local-only; no deployment.
+
+### Follow-up — Deployment-first role copy
+
+The user prioritised explaining how businesses deploy each role. Hero copy now
+introduces setup and placement. The existing four-step section is first after
+the photograph and explains adding knowledge, setting rules, Playground tests,
+and publishing/reviewing. Each detail has its own source examples, test cases,
+handover boundaries and website/link placements. Knowledge checklists are now
+labelled “What to prepare for this role”. The overview explains embedding,
+shareable links and plan/setup-dependent catalogue connections.
+
+Copywriting and copy-editing guided the practical customer actions. Fidelity
+mode preserves white surfaces, photographs, typography, layout components,
+shared navigation/footer and primary CTA destinations. No actual Agent was
+deployed and no automatic external integration or launch-time promise added.
+Copy rationale and alternatives: `artifacts/ai-roles-deployment-copy-20260904.md`.
+
+Verified all six rendered mobile routes have one H1 and no horizontal overflow.
+Visual checks: overview at 1440px, After-Sales at 2016px and 390px, Technical
+Support at 1024px. The new workflow Console link opens `/ai-agent-console`.
+All 105 tests, targeted ESLint, production build and diff checks pass.
+
+### Follow-up — White page backgrounds
+
+Applied the existing clean white surface to the shared page, every narrative
+section and the closing CTA panel across the overview and five role pages.
+Removed the CTA panel's decorative gradient. Photos, photo overlays, buttons,
+shared header/footer, content and spacing are unchanged. This is scoped to AI
+Roles, not a global design-system change.
+
+Desktop overview (1440px), mobile detail (390px) and tablet detail (1024px)
+visually checked; white section backgrounds confirmed with no horizontal
+overflow. All 105 tests and diff checks pass. Local-only; nothing deployed.
+
+### Follow-up — Global-English SEO and focused role copy
+
+Used seo-audit and copywriting, with a copy-editing pass and design-fidelity
+checks. The six pages now have clear AI-focused titles, unique descriptions,
+descriptive H1s with explicit word separation, specific role introductions and
+five distinct workflows. Contextual links include AI Agent setup FAQs. Route
+WebPage schema matches the descriptive metadata and identifies English content.
+The existing photos, navigation, footer, CTA destinations, CSS and section
+structure are unchanged; no conversation overlay was restored.
+
+Global scope currently means English content without artificial country pages
+or unsupported translated alternates. No hreflang, locale routes, pricing,
+ratings, offers, configuration or production deployment were added. The footer
+language preference is not treated as a separate crawlable translation.
+
+Verified all six local routes return 200 with server-rendered H1s, correct
+canonical URLs and index/follow; all eight aliases redirect directly with 308;
+an unknown role returns 404. Robots and the XML sitemap are consistent. Rendered
+JSON-LD checked in the browser. Visual QA: all six pages at 1440px and 390px,
+plus 1024px workflow checks; no overflow. The setup FAQ link was exercised.
+All 105 tests, targeted ESLint, production build and diff checks pass.
+
+Audit, exact revised copy, alternatives, keyword hypotheses, source links and
+post-launch priorities: `artifacts/ai-roles-seo-20260904.md`. Live indexing,
+Search Console query data, backlinks and production Core Web Vitals have not
+been verified; this is not a ranking guarantee.
+
+### Follow-up — Five distinct photos, no conversation overlays
+
+The latest imagery request supersedes the photo-and-conversation treatment
+described below. All five detail pages now use distinct generated editorial
+photographs: furniture sales, appliance guidance, a customer service counter,
+industrial pump inspection and coffee-machine after-sales service. Assets are
+local JPEGs in `public/images/ai-roles/`; prompts and provenance are recorded in
+`artifacts/ai-role-images-20260904/prompts.md`.
+
+Removed the complete conversation overlay, avatar, example badge and supporting
+conversation caption from the shared hero. The overview retains its showroom
+photo without the overlay. Existing headings, CTA destinations, content sections,
+navigation dropdowns and footer are unchanged. Desktop crops prioritise faces;
+mobile retains visible products and stacked 54px actions.
+
+Visual checks covered all five photos at 1440px and 390px, plus a 1024px tablet
+check. No horizontal overflow or remaining hero chat elements. All 103 tests,
+targeted ESLint and production build pass. Local-only; nothing deployed.
+
+### Follow-up — Who We Serve design fidelity
+
+Overview photo update: `/ai-roles` now uses the existing product-showroom
+photograph (`solution-dealers.jpg`) instead of the Emma consultation portrait.
+The five detail-page photos, conversation overlay, layout and actions remain
+unchanged. Desktop (1440px) and mobile (390px) image loading/crop checks passed
+with no overflow; all 103 tests pass.
+
+The overview and five role pages now follow the Who We Serve editorial
+composition: centred two-line headings, the reference heading scale and
+96/80/64px rhythm, a wide rounded photograph with a right-aligned conversation,
+and open, divider-led feature and audience sections. The existing approved Emma
+consultation photograph is reused; each detail retains its own four-message
+example, capabilities, knowledge sources and business contexts. The overview
+uses Sales Specialist as its representative example. Examples are static,
+labelled as examples, and do not imply a live chat.
+
+The four-step workflow, knowledge section and closing CTA retain existing
+destinations and commercial boundaries. Mobile reflows the complete chat and
+actions without clipping; no fixed-height crop hides the messages. Existing
+header dropdowns, footer, route metadata, pricing and legal content are unchanged.
+
+Browser inspection covered the overview and representative detail layouts at
+1440px, 1024px and 390px. All five details were checked at desktop and mobile
+widths for one H1 and zero horizontal overflow. Role-card navigation and the
+Build Your AI Agent action were exercised. 103 tests, targeted ESLint,
+production build and diff checks pass. Local-only; nothing deployed.
+
+Fidelity correction: source-rendered AI Roles and legal pages now mount the
+same Industries and Resources dropdown factories used by the main site,
+replacing the separate small Industries menu and plain Resources link.
+AI Roles uses the same introduction, grouped labelled links, descriptions,
+canvas glass, spacing and menu interactions. No page body or footer changed.
+Desktop comparison confirms identical Resources panel metrics: 1120px width,
+88px top, 28px padding, 24px corners and Inter 14px/600 link titles.
+Browser checks at 1440px, 1024px and 390px verified menu switching, Escape,
+role navigation, 44px mobile targets and zero horizontal overflow.
+
+Design mode with the Who We Serve editorial hero, shared typography, public
+content rail, pill actions and main-site footer. `/ai-roles` introduces one
+AI Agent performing multiple jobs, not five products or subscriptions. Five
+source-rendered pages share one template and distinct capabilities, illustrative
+conversations, data sources and suitable business examples:
+
+- `/ai-roles/sales-specialist`
+- `/ai-roles/product-specialist`
+- `/ai-roles/customer-support`
+- `/ai-roles/technical-support`
+- `/ai-roles/after-sales-service`
+
+Primary action: `Build Your AI Agent` → existing `/signup`; secondary action:
+`Book a Demo`. No new signup, billing or integration behaviour is implied.
+Consumer-product and industrial examples coexist; safety-critical, warranty
+and commercial decisions retain human review.
+
+`AI Roles` is a primary desktop disclosure with the overview and five roles.
+Both mobile navigation implementations expose every role. The footer on
+marketing, legal and role pages uses the same ordered names and destinations.
+Resources retains only its educational collections; the old role collection is
+hidden without removing React-owned files/nodes. AI Roles remains available
+through its dedicated page and the global AI Roles navigation.
+The Resources-only closing conversion panel is also hidden, so the library
+ends with its educational content and shared footer.
+All five old role articles and three legacy role aliases permanently redirect
+directly to the new destinations. The old Resources hash enters the new hub.
+Metadata, canonical URLs, breadcrumbs, sitemap and llms.txt reflect the new
+structure. Unknown role slugs return 404.
+
+Browser QA covers all six pages at 1440×900 and 390×844, plus compact layout
+and navigation checks at 1024×768. Checked layouts have no horizontal overflow;
+desktop/mobile role navigation, Escape/focus return, footer links and the
+signup entry action work. The eight legacy URLs return 308 redirects; all six
+new pages return 200 and one H1. 101 regression tests, targeted ESLint and the
+production build pass. Local-only implementation; nothing deployed.
+
+## 2026-09-04 — Dedicated AI legal framework
+
+### Follow-up — Lean legal document directory
+
+Design-mode update for `/agreements`. The hub now has a concise legal-document
+introduction followed by one balanced four-document directory: a two-by-two
+grid on desktop and compact screens, and a single-column list on mobile. Each
+document has a short functional label, its full title, a plain-language summary
+and a descriptive destination link. A single support contact sits below the
+directory.
+
+Terms of Service, Privacy Policy, Data Processing Addendum and Acceptable Use
+Policy keep their existing routes and wording. The shared header, footer,
+metadata and legal article templates are unchanged. Desktop review at 1440px,
+compact review at 1024px and mobile review at 390px found no horizontal
+overflow; all four document destinations remain present. The regression suite
+and production build pass. Local-only; nothing deployed.
+
+### Follow-up — Terms & Policy footer entry
+
+The Company-column directory link is now `Terms & Policy` on both transferred
+marketing pages and source-rendered legal pages. It opens `/agreements` through
+a document navigation, bypassing the transferred SPA's outdated directory.
+The destination lists Terms of Service, Privacy Policy, Data Processing
+Addendum and Acceptable Use Policy. The redundant bottom-footer legal stripe is
+removed, leaving this single clear route to the directory. No document wording
+changes.
+Desktop and mobile clicks from the marketing/legal footers open the correct
+four-document directory, with no horizontal overflow. All 99 tests and
+targeted ESLint pass.
+
+### Follow-up — Plain DPA article and main-site footer fidelity
+
+Fidelity-mode correction: all three DPA schedules now use the same plain
+article sections as the body, without card borders, surfaces or inset padding.
+The legal wording, section IDs and contents navigation are unchanged.
+
+The hub and all four documents now render the main public footer's structure,
+wordmark, four link columns, social icons, copyright, language preference
+control and compact legal links. The former legal-only footer styles are
+removed. `app/public-footer.css` preserves the transferred footer's source
+rules and breakpoints; the production bundle remains untouched. The native
+language dialog shares the main selector's preference key/event, supports
+Escape and focus return, and does not mislabel English legal text as translated.
+
+Browser comparisons at 1440×900, 1024×768 and 390×844 confirm matching footer
+content, column/link geometry and main-area heights, with no horizontal
+overflow. All four footer document links were exercised on mobile. The hub
+and four documents return 200 with one H1 and the same footer; all three
+schedules retain plain article styling. 99 regression tests, targeted ESLint
+and the production build pass.
+
+Audit-to-System update following the approved legal brief. Existing Terms,
+Privacy and DPA routes are amended in place; `/agreements/acceptable-use` is
+new. The four documents use Antbuildz Pte. Ltd., UEN 202007699D and
+help@antbuildz.ai. Cookies are integrated into Privacy, with permanent redirects
+from former cookie routes. The footer uses four compact inline legal links,
+not a new column. Signup and the subscription prototype display linked
+acknowledgements; the prototype is explicitly identified as non-live checkout.
+
+The new brief supersedes earlier six-month credit-expiry copy: purchased credits
+now have no expiry in public pricing and legal wording. No real ledger,
+payment authorisation, trial conversion, acceptance-record system or production
+data-access controls were implemented or represented as verified.
+
+98 regression tests, targeted ESLint and the production build pass. HTTP checks
+confirm the hub/four documents and twelve local redirects. Browser review at
+1440×900, 1024×768 and 390×844 found no overflow in checked layouts; signup
+acknowledgement, legal navigation and compact mobile footer were reviewed.
+See `LEGAL-IMPLEMENTATION-REVIEW.md` for the nineteen-point verification matrix,
+changed files, sources, unresolved launch gates and required legal review.
+
 ## Status language
 
 - **Reference matched** — transferred from an approved 8080 reference and previously compared.
@@ -14,16 +422,741 @@ This register preserves route intent and design status between sessions. Read it
 | Route | Primary visitor job | Preferred primary CTA | Design source | Current status |
 | --- | --- | --- | --- | --- |
 | `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero uses the approved static mountain-logistics photograph. The Agent conversations are visible on the first frame and no longer depend on page scrolling. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
-| `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Book a Demo | Selected Webstore listing workflow formerly reviewed at `/webstore-2-ai-webstore-preview` | Canonical product page now uses the approved dusty-ochre listing workflow, mixed-category catalogue enrichment, product-page handoff and Emma recommendation experience. Canonical metadata is indexable at `https://antbuildz.ai/ai-webstore-suite`; the former preview URL redirects here. Desktop, compact and mobile QA pass with one H1 and no horizontal overflow |
-| `/ai-sales-agent` | Understand standalone AI-guided qualification and handover | Build Your AI Agent | `/aiagent` on 8080 | Separate shared-header band and original 96px hero inset restored from the reference relationship; current copy, navigation, phone graphic and hero composition remain unchanged. Responsive QA details are recorded below |
+| `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Book a Demo | Selected Webstore listing workflow formerly reviewed at `/webstore-2-ai-webstore-preview` | Canonical product page uses the approved dusty-ochre listing workflow, mixed-category catalogue enrichment, product-page handoff and Emma recommendation experience. At 767px and below, the complete hero ends exactly at the phone viewport boundary throughout all three animated stages. The final conversation stage now uses a larger, deliberately cropped phone with a lower fade on mobile and desktop. Canonical metadata remains indexable at `https://antbuildz.ai/ai-webstore-suite`; the former preview URL redirects here |
+| `/ai-sales-agent` | Understand standalone AI-guided qualification and handover | Book a Demo | `/aiagent` on 8080 | Desktop retains the reference split composition. Its repeated actions now use the shared destination-owned CTA contract: Book a Demo is primary and View Pricing is secondary. At 767px and below, the hero fits exactly one small viewport, places the animated phone before both actions and keeps the persistent Agent launcher clear of the secondary action. Responsive QA details are recorded below |
 | `/ai-agent-console` | Understand how teams control knowledge, instructions and conversations | Book a Demo | `/app` on 8080 | Reference matched; operational typography unchanged against baseline |
-| `/pricing` | Compare approved product plans and choose a next step | Build Your AI Agent, Book a Demo or Contact Sales | Transferred content; Gorgias-inspired wider plan layout | Three standard cards with shorter, balanced descriptions and shared price/allowance/CTA baselines; checked at 1440px, 1100px, 1024px and 390px. Ivory/gold hover, Custom panel and commercial terms retained; legacy entitlement decisions pending below |
+| `/pricing` | Compare approved product plans and choose a next step | Start 14-Day Free Trial or Talk to Sales | Transferred content; Gorgias-inspired wider plan layout | Standard plans present one cumulative Agent → Sales → Rental+ path, with one side-by-side comparison table. Current approved prices, allowances, billing mechanics, Custom panel and commercial terms are recorded below |
 | `/resources` | Discover practical industrial AI education | Explore a Guide | `/resources` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA; grouped header dropdown, all topic destinations and mobile access verified |
-| `/resources/ai-agent-roles` | Understand specialist AI roles and their boundaries | Build Your AI Agent | Resources role library | Review required: direct route renders Article not found; the Resources role collection and existing individual guides remain available |
+| `/ai-roles` | Choose a role for your AI Agent | Build Your AI Agent | Source-owned Who We Serve-style overview | Overview plus five detail pages; canonical replacement for the former Resources role collection. Desktop/mobile navigation and redirects verified |
 | `/help/ai` | Resolve Antbuildz AI product and setup questions | Browse AI FAQs | Transferred AI Help Centre | AI-only FAQ library; Marketplace-specific questions are excluded. `/help` and `/faqs` redirect here; Marketplace help routes leave this website for antbuildz.com |
 | `/about` | Understand the industrial history and reason Antbuildz AI exists | Book a Demo | `/about` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA |
-| `/book-a-demo` | Share contact details, then choose a demo time | Continue to Calendly | Existing transferred demo-request form | Header-to-form navigation, validation and Calendly handoff verified at 1440px. 8081 restarted with permission; final responsive QA blocked by Browser Use URL policy. No separate lead storage or booking confirmation implemented |
-| `/agreements` | Find Antbuildz AI privacy and product policies | View Terms | Existing transferred agreement directory | AI-only presentation: privacy/data and AI product policies remain; Marketplace policy categories and notes are hidden without detaching source documents |
+| `/book-a-demo` | Share contact details, then choose a demo time | Continue to Calendly | Existing transferred demo-request form | Uses the lean shared account-entry form system with decorative eyebrows removed and consistent field, label and action typography. Responsive QA is recorded below. No separate lead storage or booking confirmation implemented |
+| `/agreements` | Find the terms and privacy documents governing Antbuildz AI | View Terms | Project-original Antbuildz AI legal suite | Source-rendered AI-only hub linking Terms of Service, Privacy Policy, Data Processing Addendum and Acceptable Use Policy. Cookies are incorporated into Privacy and the old Cookie URL redirects there. Antbuildz Pte. Ltd., UEN 202007699D; contact help@antbuildz.ai. Operational/legal launch checks remain open in LEGAL-IMPLEMENTATION-REVIEW.md |
+
+## 2026-09-03 — Webstore hero follows the established title gap
+
+Audit-to-Fidelity spacing correction for the `/ai-webstore-suite` hero. At
+1440px wide, its H1 previously began about 41px below the 76px fixed header,
+while Pricing, Resources and About consistently use a 96px gap. The desktop
+Webstore H1 now derives the same 96px wide-screen and 80px compact-desktop gap
+from `--public-hero-title-gap`; the eyebrow remains immediately above it. The
+existing one-viewport hero redistributes the remaining height to its storyboard
+rather than extending the page. Mobile retains its already comfortable
+component-owned spacing.
+
+Rendered QA at 1440×900, 1024×768 and 390×844 confirms respective desktop H1
+gaps of about 96px and 80px, the unchanged mobile gap, a complete one-viewport
+hero and zero horizontal overflow. The listing and conversation storyboard
+states remain visible. All 96 regression tests, targeted ESLint, the production
+build and `git diff --check` pass.
+
+## 2026-09-05 — AI Roles overview uses a grainy film image
+
+Design-mode image update scoped to the `/ai-roles` overview hero. Replaced the
+reused Dealers & Distributors showroom photograph with a new generated 35mm
+documentary-style industrial scene: two Asian industrial specialists reviewing
+product information on a tablet among pumps and parts. Visible fine grain,
+muted colour, soft halation and candid available light distinguish AI Roles
+from the polished Who We Serve photography. The five role-detail photographs,
+hero layout, copy, actions and Who We Serve assets are unchanged.
+
+The versioned PNG is
+`public/images/ai-roles/ai-roles-overview-film-v1.png`; the exact prompt is in
+`artifacts/ai-roles-film-hero-20260905/prompt.md`. Browser checks at 1280×720
+and 390×844 confirm the new asset loads, the white overlay copy remains
+readable, the mobile crop retains the people and tablet, and there is no
+horizontal overflow.
+
+## 2026-09-05 — Pricing plans share the title centreline
+
+Fidelity-mode layout correction scoped to `/pricing`. The original wider
+three-plan rail is preserved but now centres independently of the narrower
+transferred container. Its outer left and right gutters are equal and its
+centreline matches the hero title and Monthly/Annual control. Rendered checks
+at 3600px and 1440px confirm equal desktop gutters; 390px retains equal 16px
+gutters, one-column stacking and zero horizontal overflow. Annual switching
+continues to display `US$39`, `US$119` and `US$239`. Pricing, copy, card
+content, CTA destinations and other routes are unchanged.
+
+## 2026-09-04 — Pricing trial actions
+
+Design-mode CTA refinement using the existing pill buttons and featured Sales
+treatment. Agent, Sales and Rental+ now say `Start 14-Day Free Trial`, with
+`Credit card required` beneath each action and linked accessible descriptions.
+Custom remains `Talk to Sales`. Standard-plan actions open the existing `/signup`
+page with the selected plan and `trial=14-day` in the URL. This is a marketing
+entry-point change only: signup consumption of these parameters, credit-card
+collection and trial billing enforcement are not implemented by this change.
+
+Rendered checks at 1440×900, 1024×768 and 390×844 confirm readable labels,
+54px actions, aligned notes and no horizontal overflow. All three trial links
+were exercised and reached signup with the correct plan. Prices, allowances,
+features, legal documents and backend billing are unchanged.
+
+### Follow-up: hero graphic sits closer to its description
+
+The `/ai-webstore-suite` storyboard now moves progressively closer to the hero
+description on taller desktop screens, where its 608px maximum height formerly
+left an oversized centred gap. The adjustment reaches 34px on the tallest
+checked viewport, keeps the graphic at its authored size and leaves short
+laptops, compact desktop and mobile unchanged.
+
+Rendered QA at 2560×1148, 1920×1080, 1440×900, 1024×768 and 390×844 confirms
+description-to-graphic gaps of approximately 72px, 50px, 26px, 23px and 18px,
+respectively. The approved H1/header spacing, one-viewport hero boundary and
+zero horizontal overflow remain intact, and all three storyboard tabs still
+activate normally. All 96 regression tests, targeted ESLint, the production
+build and `git diff --check` pass.
+
+### Follow-up: final-stage summary uses one centred copy group
+
+The final `/ai-webstore-suite` conversation stage no longer shows the
+`Catalogue connected` eyebrow. Its headline, supporting sentence, three proof
+points and directional arrow now form one vertically centred group beside the
+phone. The compact mobile composition continues to prioritise the phone and
+hides this supplementary desktop copy.
+
+Rendered QA at 2560×1148, 1440×900 and 390×844 confirms exact vertical
+centering at both desktop sizes, no remaining eyebrow text, the unchanged
+one-viewport mobile frame and zero horizontal overflow. All 97 regression
+tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: resources use long-form blog articles — 2026-09-05
+
+The short repeated training-template body has been replaced across all 44
+resource articles with locally stored long-form editorial content derived from
+the corresponding Antbuildz marketplace resources. Explanatory articles now
+use connected paragraphs, descriptive subheadings, examples, comparisons and
+FAQs. Dense fragment lists are converted into prose and ordinary educational
+articles keep no more than two useful lists; procedural AI Agent Console guides
+retain step and feature lists where scanning is clearer.
+
+The generated library contains about 92,700 words. Each article opens with a
+concise direct answer for search and answer engines, while Article structured
+data now includes the full article body, word count, topic section, keywords and
+explicit AI Sales Agent/Webstore entities. Unsupported performance statistics
+were removed. Agent-first corrections are applied in both visible and
+machine-readable content: the AI Sales Agent remains the core product, Webstore
+is an optional product and inventory layer, and Marketplace is an optional
+discovery channel.
+
+Browser QA on the representative Webstore-support article confirmed 2,800+
+words, 26 explanatory headings, zero bullet lists, the readable canonical URL,
+no stale product-positioning phrases, no persistent route loader and zero
+horizontal overflow at desktop and 390×844. All 110 regression tests, targeted
+ESLint, Python compilation, the production build and `git diff --check` pass.
+
+### Follow-up: footer opens the AI FAQ library directly
+
+The shared footer's `AI Help Centre` and `AI FAQs` links now bypass the
+transferred React Router's obsolete `/help` directory state and perform a clean
+navigation to `/help/ai`. Visitors land immediately on the final FAQ library,
+where the AI Sales Agent and AI Webstore Suite tabs are available. The former
+`/help` and `/faqs` URLs continue to redirect to the same canonical library.
+Live footer navigation from `/pricing` reached `/help/ai` without rendering the
+directory card. Both product tabs remain operable. Rendered QA at 1280×720 and
+390×844 confirms one H1, two tabs and zero horizontal overflow. All 96
+regression tests, targeted ESLint, the production build and `git diff --check`
+pass.
+
+## 2026-09-02 — Complete Antbuildz AI legal suite
+
+Design-mode legal-document implementation for Antbuildz.ai. `/agreements` is now
+a source-rendered, AI-only legal hub containing exactly four core documents:
+Terms of Service, Privacy Policy, Data Processing Addendum and Cookie Policy.
+The documents are available at `/agreements/terms`, `/agreements/privacy`,
+`/agreements/dpa` and `/agreements/cookies`; the former `/legal/*` paths
+permanently redirect to their canonical counterparts.
+
+The suite consistently identifies Antbuildz Pte. Ltd., Singapore, as the service
+provider and keeps the Antbuildz.ai B2B SaaS service legally separate from the
+antbuildz.com Marketplace. The signup acceptance links now lead to the canonical
+Terms and Privacy documents, while the shared Company footer column links once
+to the `/agreements` master page. Legal pages use one H1, unique metadata and canonical URLs,
+a narrow reading column, a sticky desktop contents list and a native collapsible
+mobile contents list.
+
+Rendered QA at 1440×900 and 390×844 confirms readable hierarchy, working mobile
+navigation, correct desktop/mobile contents behaviour and zero horizontal
+overflow. HTTP checks confirm five canonical 200 responses, unknown-document
+404 handling and four permanent legacy redirects. All 96 regression tests,
+targeted ESLint, the production build and `git diff --check` pass. Publication
+still requires founder confirmation of company registration/contact details,
+the appointed DPO contact, commercial terms, subprocessor and international
+transfer information, actual cookie/provider inventory, model-training policy,
+and supportable security and retention statements, followed by Singapore legal
+counsel review.
+
+### Follow-up: legal access stays in the Company footer column
+
+The separately added Legal footer column is removed from every public page.
+`AI Agreements & Policies` remains the single Company-column link and opens the
+`/agreements` master page, where the four individual documents are listed. The
+source-rendered legal pages now mirror the shared top-level header order and the
+same five footer categories: brand, AI Products, Who We Serve, AI Agent Roles
+and Company. Individual document links are not repeated in the footer.
+
+Rendered QA at 1440×900 and 390×844 confirms zero separate Legal columns,
+exactly one `/agreements` link under Company, matching top-level header order
+and footer categories, functioning Industries and mobile menus, the corrected
+`antbuildz.ai` wordmark and no horizontal overflow. All 96 regression tests,
+targeted ESLint, the production build and `git diff --check` pass.
+
+Fidelity follow-up restores the legal footer's link density to the earlier
+shared footer rhythm. Desktop link rows are 32px apart rather than 41px, while
+mobile retains 44px touch targets. Rendered checks at 1280×720 and 390×844
+confirm the tighter hierarchy and zero horizontal overflow.
+
+The shared and source-rendered legal footers no longer display the `Sales
+enquiries` label or `help@antbuildz.ai` address. Purposeful email actions in
+the product and Pricing conversion sections remain unchanged.
+
+System-mode logo correction aligns the source-rendered agreement header and
+footer wordmarks with the shared public-header geometry. The legal shell had
+aligned its separately rendered yellow `.ai` suffix to the text baseline, which
+placed it visibly lower than the cropped Antbuildz mark. Both parts now share a
+fixed-height, vertically centred, non-wrapping wordmark; the suffix cannot shrink
+away from the brand. The responsive wordmark scale now also matches the public
+header at desktop, tablet, mobile and narrow-mobile widths.
+
+Rendered checks on `/agreements/dpa` at 1280×720, 1024×768 and 390×844 confirm
+aligned header and footer suffixes and zero horizontal overflow. All 97
+regression tests, targeted ESLint, the production build and `git diff --check`
+pass.
+
+## 2026-09-02 — Pricing comparison uses one title
+
+### Follow-up: approved plan content and allowances updated
+
+Fidelity-mode content update scoped to `/pricing`; the existing card structure,
+layout, typography, colours, spacing, responsive behaviour, navigation and
+footer are unchanged. Agent remains `US$49/month` with 50 AI conversations;
+Sales is now `US$149/month` with 75 AI conversations and 100 active Sales
+listings; Rental+ is now `US$299/month` with 100 AI conversations and one
+combined allowance of 300 active Sales + Rental listings. The unchanged annual
+selector derives `US$39`, `US$119` and `US$239` monthly equivalents from its
+existing 20% saving rule.
+
+The cards now use the supplied product names, descriptions, feature wording and
+actions: `Start with AI`, `Build My AI Sales Store`,
+`Build My Rental & Sales Store` and `Talk to Sales`. `Free Custom Domain Setup`
+is used consistently without implying that Antbuildz pays the customer's domain
+registration fee. Agent includes AI Product Recommendations but makes no claim
+about Webstore URLs or inventory. The comparison and allowance FAQ use the same
+approved terminology and limits. This supplied specification restores the
+product-name line on Agent, Sales and Rental+, superseding the earlier request
+below that removed those three subtitles.
+
+Rendered QA at 1280×720 and 390×844 confirms all supplied product names,
+monthly prices, allowances, actions and complete feature lists are visible with
+zero horizontal overflow. The Annual state displays `US$39`, `US$119` and
+`US$239` per month with exact annual totals of `US$468`, `US$1,428` and
+`US$2,868`, then returns cleanly to Monthly. All 96 regression tests pass.
+
+Fidelity follow-up aligns the comparison rails within each pricing-card row
+without changing any approved pricing content or card styling. Product copy,
+prices, allowances, action buttons and feature introductions now begin on the
+same horizontal rails at 1440×900, 1100×800, 1024×768 and 768×1024. The
+single-column 390×844 layout remains content-driven, without artificial blank
+space or horizontal overflow. Monthly and Annual states use the same alignment.
+
+Copy-only follow-up replaces the three standard-plan `Best for` statements with
+the approved team-focused wording: enquiry answering, product recommendations
+and customer support for Agent; product discovery, enquiries and sales for
+Sales; and sales, rental, availability and bookings for Rental+. Prices,
+allowances, product names, actions, features and plan structure are unchanged.
+Rendered checks at 1440×900, 1024×768 and 390×844 confirm the revised copy,
+aligned desktop and tablet comparison rails, content-driven mobile cards and
+zero horizontal overflow.
+
+Fidelity follow-up removes the repeated summary paragraph below each plan CTA,
+including Custom. The included-feature heading and list now follow the action
+directly. `Best for` remains the single plan summary above the price; all
+product names, prices, allowances, actions and feature content are unchanged.
+Rendered checks at 1440×900, 1024×768 and 390×844 confirm zero summary nodes,
+an aligned 23px CTA-to-feature-label gap and no horizontal overflow. All 96
+regression tests, targeted ESLint, the production build and `git diff --check`
+pass.
+
+Copy-audit follow-up tightens every plan's included-feature list and mirrors the
+same terminology in the comparison table. Agent now opens with `Includes:` and
+uses shorter labels such as `Agent Instructions` and `Website Embed`. Sales
+removes duplicated search-readiness wording, adds the confirmed `Multilingual
+Webstore` capability and replaces internal terms such as product ingestion with
+plain-language `Catalogue Import`. Rental+ and Custom retain all capabilities
+with shorter booking, inventory, integration and deployment labels. Prices,
+allowances, feature counts and cumulative plan inheritance are unchanged.
+
+Rendered checks at 1440×900, 1024×768 and 390×844 confirm every card retains its
+8, 12, 11 or 8 visible features, all feature labels remain on one line at
+tablet and mobile widths, and the page has no horizontal overflow.
+
+Pricing-card allowances use compact values because their column labels already
+provide the context. Agent, Sales and Rental+ now show `50 / month`,
+`75 / month` and `100 / month` under `Included AI conversations`; listing
+values are `—`, `100 (Sales)` and `300 (Sales + Rental)`. Custom allowances and
+the fuller explanatory usage wording elsewhere on the page remain unchanged.
+Rendered checks at 1440×900, 1024×768 and 390×844 confirm aligned allowance and
+action rails, readable values and zero horizontal overflow.
+
+Fidelity follow-up changes the standard-plan allowance strip from two side-by-
+side columns to a vertical `Plan allowances` list inspired by the referenced
+Square pricing treatment. `Included AI conversations` and `Listings` now occupy
+separate ruled rows with their values aligned on the right. The approved values,
+regular weight, card order and pricing remain unchanged.
+
+Rendered checks at 1280×720, 1024×768 and 390×844 confirm two readable ruled
+rows per standard plan, aligned desktop actions, an unclipped Rental+ value and
+zero horizontal overflow. All 97 regression tests, targeted ESLint, the
+production build and `git diff --check` pass.
+
+The three standard plans give their allowance values a clearer hierarchy at
+16px, up from the 12px label scale. The values now use regular 400 weight so
+conversation and listing allowances do not receive unnecessary bold emphasis.
+Labels and the descriptive Custom allowances retain their existing size.
+Rendered checks at 1440×900, 1024×768 and 390×844 confirm aligned rails,
+natural Rental+ wrapping and zero horizontal overflow.
+
+Fidelity-mode follow-up adapts the top of each standard plan card from Square's
+pricing hierarchy: a stronger plan title shares the first row with its badge,
+followed by one concise `Best for` statement and a quiet divider before the
+price. The repeated `AI Sales Agent`, `AI Sales Webstore` and `AI Rental & Sales
+Suite` subtitle lines are removed because the suitability copy already explains
+each plan. Antbuildz colours, card surfaces, prices, allowances, actions and
+comparison content remain unchanged. Rendered checks at 1440×900, 1024×768 and
+390×844 confirm zero standard-plan subtitle nodes, aligned desktop and tablet
+rails, clear mobile wrapping and zero horizontal overflow.
+
+Design and copy-editing follow-up makes each standard card a concise plan
+summary instead of a second comparison table. Agent, Sales and Rental+ now show
+five decision-making capabilities each at a larger 16px scale, with their
+group labels raised to 15px. The full 30-row Agent–Sales–Rental+ feature
+comparison remains unchanged below for detailed evaluation. Custom retains all
+eight capabilities because it is not represented in that comparison.
+Rendered QA at 1440×900, 1024×768 and 390×844 confirms 5/5/5/8 visible
+features, equal standard-card heights on wide desktop, readable wrapping and
+zero horizontal overflow. All 96 regression tests, targeted ESLint, the
+production build and `git diff --check` pass.
+
+The repeated custom-enterprise contact strip between the Pricing FAQ and final
+CTA is removed. Higher-volume and tailored requirements remain covered by the
+dedicated Custom plan and its `Talk to Sales` action, so the page no longer
+presents the same enterprise route twice.
+Rendered QA at 1280×720 and 390×844 confirms the FAQ now leads directly into
+the closing CTA, with no enterprise-strip node and no horizontal overflow. All
+96 regression tests, targeted ESLint, the production build and
+`git diff --check` pass.
+
+The four generic assurance boxes beneath the closing Pricing CTA are removed.
+The page now transitions directly from the `Book a Demo` and `Email Sales`
+conversion card to the shared footer, while the CTA content and footer remain
+unchanged. Rendered checks at 1280×720 and 390×844 confirm zero assurance
+boxes, no horizontal overflow and one intentional CTA-to-footer gap: 96px on
+desktop and 72px on mobile.
+
+The smallest Buyer Enquiry Credit pack now establishes the non-PAYG entry rate
+at `$0.99` per credit: 25 credits cost `$24.75`. The larger 50-, 100- and
+500-credit packs retain their existing approved totals and volume discounts.
+This remains pricing-page presentation only; no payment or metering backend is
+implemented by the website.
+
+Rendered desktop and 390×844 mobile checks confirm the `$24.75 · $0.99/credit`
+row, no PAYG wording and no table or page overflow. All 96 regression tests,
+targeted ESLint, the production build and `git diff --check` pass.
+
+The purchased-credit validity period is now six months from purchase, replacing
+the former 12-month period in both the add-on card and its related FAQ guidance.
+Rollover remains available only until each credit's six-month expiry, and use
+still requires an active Antbuildz subscription. Credit quantities, prices and
+consumption order are unchanged.
+
+The add-on is now consistently named `AI Conversation Credits`, matching the
+usage unit shown in the plan cards. Copy explains that credits may be purchased
+manually or replenished through Auto Top-Up. The table displays the approved
+unit rates as whole cents—`99¢`, `84¢`, `79¢` and `70¢` per credit—so it uses no
+decimal places while preserving the underlying rates and pack data. The FAQ and
+usage-order guidance use the same terminology.
+
+Rendered QA at 1440×900 and 390×844 confirms the table remains contained, the
+credit card stacks cleanly on mobile and the expanded Auto Top-Up FAQ states the
+six-month validity without legacy credit terminology. All 97 regression tests,
+targeted ESLint, the production build and `git diff --check` pass.
+
+Copy and pricing-display follow-up reframes the add-on as `AI Conversation
+Credit Top-Ups` and makes the bulk purchase model explicit. The table now uses
+`Credit pack` and `Bulk top-up price` columns and displays only the approved pack
+totals: `US$24.75`, `US$42`, `US$79` and `US$349`. Per-credit prices are no
+longer shown. The supporting copy and related FAQ state that credits are sold in
+packs rather than individually and that the same packs can be added through
+Auto Top-Up. Credit quantities, total prices, validity and usage order are
+unchanged.
+
+Rendered QA at 1280×720, 1024×768 and 390×844 confirms readable pack totals,
+an unclipped table, clean mobile stacking and zero horizontal overflow. The
+expanded Auto Top-Up FAQ repeats the bulk-pack rule. All 97 regression tests,
+targeted ESLint, the production build and `git diff --check` pass.
+
+The latest whole-dollar pricing follow-up supersedes the former `$0.99` entry
+rate for the smallest credit pack. The 25-credit pack is now `US$25`, so all
+bulk top-up totals display without decimal places. The approved `US$42`,
+`US$79` and `US$349` totals remain unchanged; the sequence is not artificially
+repriced to force every pack to end in nine. The smallest pack is therefore
+exactly `$1` per credit while the larger packs retain their volume discounts.
+Rendered QA at 1280×720 and 390×844 confirms all four totals use whole dollars,
+the table remains contained and the page has no horizontal overflow. All 97
+regression tests, targeted ESLint, the production build and `git diff --check`
+pass. Repository-wide lint still reports pre-existing errors in generated
+`public/assets` bundles; the edited source and test files lint cleanly.
+
+The pricing usage note is tightened without changing its commercial meaning:
+`One AI conversation covers one buyer enquiry with up to five message
+exchanges. Test prompts and unrelated interactions do not count. Monthly
+allowances reset and never roll over—even on annual plans.` This replaces the
+longer duplicated test-prompt and allowance-cycle wording in both the visible
+pricing note and the relevant FAQ answer.
+Rendered QA at 1280×720 and 390×844 confirms the note remains within its
+content rail, uses two desktop lines and produces no horizontal overflow. All
+97 regression tests, targeted ESLint, the production build and
+`git diff --check` pass.
+
+Market-language and copy-density follow-up removes `bulk` from the AI credit
+card. Following the concise patterns used by OpenAI, Lovable and Descript, the
+card is now titled `AI Conversation Credits`, introduces the option as `Add
+credits when you need more conversations`, and says only `Choose a credit pack
+or use Auto Top-Up. Credits are valid for 6 months.` The table headings are
+reduced to `Credit pack` and `Price`. The fuller FAQ uses `fixed packs` and
+retains the enquiry definition, rollover, expiry and active-subscription rules.
+Rendered QA at 1280×720, 1024×768 and 390×844 confirms the shorter copy, table
+and card remain contained with no horizontal overflow. All 97 regression tests,
+targeted ESLint, the production build and `git diff --check` pass.
+
+The Custom plan is reduced from a second feature-comparison card to one compact
+enterprise row inspired by the referenced Square pattern. It now asks `Need
+More Than a Standard Plan?`, keeps one `Talk to Sales` action and explains that
+the custom route is for higher conversation or listing volumes, specialised
+deployments, multiple Webstores, or ERP, CRM and other third-party connections.
+The duplicate price label, allowance strip and eight-item checklist are removed;
+the detailed standard-plan comparison remains unchanged.
+Rendered checks at 1280×720 and 390×844 confirm the compact two-column desktop
+row, natural mobile stack, readable copy and zero horizontal overflow. All 97
+regression tests and targeted ESLint pass.
+
+The Agent, Sales and Rental+ cards no longer repeat their product-stack subtitle
+directly beneath the plan name. Each card now moves straight into a shorter,
+more specific `Best for` statement: existing-channel enquiries for Agent,
+online catalogue and sales-enquiry workflows for Sales, and rates, availability
+and booking workflows alongside sales for Rental+. The detailed plan
+descriptions remain beside their feature lists.
+
+QA rendered `/pricing` at 1280×720, 1024×768 and 390×844. The three standard
+plans expose no subtitle node, keep their price rows aligned on the shared
+64px positioning rail, retain their detailed feature introductions and produce
+no horizontal overflow. Monthly and Annual states remain functional. The full
+96-test content suite, targeted ESLint, production build and diff check pass.
+
+Fidelity-mode hierarchy correction for the comparison section on `/pricing`.
+The large `Compare Features Side by Side` heading is the section's only title;
+the repeated smaller `Agent, Sales and Rental+` title is removed. One supporting
+sentence now explains the cumulative Agent, Sales and Rental+ plan relationship
+before the unchanged comparison table.
+
+Rendered QA at 1440×900 and 390×844 confirms the single title, zero repeated
+small-title matches and no horizontal overflow. All 96 regression tests,
+targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-02 — Webstore journey colours follow one continuous sequence
+
+Fidelity-mode colour correction for “From Product Discovery to Enquiry” on
+`/ai-webstore-suite`. The former step order—purple, blue, orange, yellow, green,
+red—created abrupt hue jumps, while the desktop spine omitted three of those
+colours. The complete journey now progresses purple → blue → green → yellow →
+orange → red. Step numbers, interface examples, actor labels, progress bars and
+the desktop spine all use the same order. Content, layout, animation, card
+structure and mobile stacking remain unchanged.
+
+Rendered QA at 1440×900 and 390×844 confirms all six step accents, a matching
+six-stop desktop gradient, the intentionally hidden mobile spine and zero
+horizontal overflow. All 95 regression tests, targeted ESLint, the production
+build and `git diff --check` pass.
+
+## 2026-09-02 — Webstore benefit cards use borderless fading colour surfaces
+
+Fidelity-mode finish refinement for the six cards beneath “Make Every Product
+Discoverable and Sales-Ready” on `/ai-webstore-suite`. The background grid and
+coloured top hairline are removed, and the card border is eliminated. Each card
+retains its existing blue, green, purple, orange, red or yellow identity through
+a very light two-accent surface that fades to the clean white base at the bottom
+of the frame. Card content, illustrations, order, dimensions, typography and
+responsive grid remain unchanged.
+
+Rendered QA at 1440×900, 768×1024 and 390×844 confirms six distinct card
+backgrounds, zero card borders, no grid layer and zero horizontal overflow. All
+95 regression tests, the production build and `git diff --check` pass.
+
+## 2026-09-02 — Global-reach section no longer repeats page actions
+
+Fidelity-mode cleanup scoped to the multilingual globe section on
+`/ai-sales-agent`. The duplicated `Book a Demo` and `View Pricing` buttons are
+removed from both desktop and mobile render paths. The section heading,
+description, globe, language chips, motion, responsive layout and actions
+elsewhere on the page remain unchanged. This supersedes the global-reach action
+placement described in the CTA-order note below.
+
+Rendered QA at 1440×900 and 390×844 confirms zero links or buttons inside the
+section, a loaded globe, readable copy and zero horizontal overflow. All 95
+regression tests, targeted ESLint, the production build and `git diff --check`
+pass.
+
+## 2026-09-02 — Webstore buyer conversation keeps a continuous cadence
+
+Design-mode motion refinement scoped to stage 03, `Guide buyers in chat`, in
+the `/ai-webstore-suite` hero. The existing recommendations, buyer questions,
+Emma replies, product details, copy and layout remain unchanged. The three
+conversation exchanges now use shorter buyer and Agent typing beats, followed
+by 1.25–1.4-second reading holds instead of the former 2.1–3.4-second visible
+stalls. Brief dropped frames can be absorbed without making the conversation
+clock appear to stop, and the transcript uses a faster composited easing when
+bringing the latest exchange into view. The reduced-motion path remains a
+stable recommendation state.
+
+A live desktop trace at 1440×900 reached every expected state in order with no
+pause flag. Rendered QA at 1024×768 and 390×844 confirms the final reply remains
+visible, the hero stays exactly one viewport tall and both layouts retain zero
+horizontal overflow. All 95 regression tests, targeted ESLint, the production
+build and `git diff --check` pass.
+
+## 2026-09-02 — Demo precedes pricing in shared CTA groups
+
+System-mode CTA-order refinement across the public marketing pages. Whenever
+`Book a Demo` and `View Pricing` appear in the same action group, the primary
+yellow demo action now appears first in DOM and visual reading order, followed
+by the outlined pricing action. The change covers the AI Sales Agent hero,
+closing action, global-reach section and transferred Webstore action groups on
+desktop and stacked mobile layouts. Labels, destinations, button dimensions,
+other CTA combinations, page copy and section layouts remain unchanged.
+
+Rendered QA at 1440×900 and 390×844 covers the Sales Agent hero and the
+Webstore closing action. Both routes retain 54px controls, the mobile Webstore
+pair remains 300px wide, and all checked views have zero horizontal overflow.
+Live clicks from the Sales Agent hero reached `/book-a-demo` and `/pricing`.
+All 95 regression tests, targeted ESLint, the production build and
+`git diff --check` pass.
+
+## 2026-09-01 — Sales Agent brand strip closes the page
+
+Fidelity-mode relocation on `/ai-sales-agent`. The existing 12 approved equipment-brand marks move from directly beneath the hero to the final position after the closing CTA and immediately before the shared footer. The presentation now follows the AI Webstore Suite treatment: a compact continuous row on the clean white surface, restrained outlined logo tiles and no heading or visible section dividers. The original brand marks are unchanged; an `aria-hidden` duplicate set creates the seamless loop, while reduced-motion users receive a static row. Browser inspection at the available 1280×720 viewport confirms the CTA → logo strip → footer order and clean visual transition. All 95 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-01 — Sales Agent globe uses a lighter blue ocean
+
+Fidelity-mode colour refinement scoped to the globe in the `/ai-sales-agent` global-reach section. The existing globe artwork, green land, route lines, market points, language chips, orbit, layout and motion remain unchanged. Only the near-black navy ocean stops are raised to softer mid/deep blues, and the globe's drop shadow is reduced slightly so the illustration feels lighter against the soft violet section without losing spherical depth. The updated 480×480 SVG was rendered directly at 600×600 for visual inspection; its authored geometry and responsive dimensions are unchanged. All 95 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-01 — Webstore logo strip blends into the clean footer transition
+
+Fidelity-mode cleanup scoped to the logo marquee beneath the final AI Webstore Suite CTA. The inherited `Trusted Partners` label is removed, while all 28 moving logo placeholders and the marquee behaviour remain intact. The strip now uses the clean white surface with transparent top and bottom dividers so it blends into the surrounding page instead of appearing as a separate grey band. Browser inspection at the available 1280×720 viewport confirms a hidden label, white surface, transparent dividers, all 28 tiles, unchanged 186px strip height and zero horizontal overflow.
+
+## 2026-09-01 — Pricing uses Purchased Credits instead of PAYG
+
+The pricing cards now keep only the two plan-specific capacity details visitors need to compare: included AI conversations and listings. The repeated `Extra conversations` row and all Pay-As-You-Go wording are removed because the Purchased Credits section immediately below already provides the approved route for additional conversation capacity. The usage FAQ now points customers to Purchased Credits after their monthly allowance, and the two remaining plan details use a shorter two-column layout.
+
+Plan prices, monthly usage allowances, listing limits, annual discount, Purchased Credit pack prices and the Additional AI Agent option are unchanged. Browser QA at 1440×900, 1024×900 and 390×844 confirms two details per plan, no redundant wording and zero horizontal overflow; the Annual selector still updates the three standard prices while every Purchased Credit pack remains unchanged. All 93 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: usage is expressed as AI Enquiry Sessions — 2026-09-01
+
+Customer-facing pricing now uses `AI Enquiry Session` instead of `conversation` as the measurable usage unit. One session is defined as one relevant buyer enquiry with up to five message exchanges; unrelated or irrelevant interactions do not count. Plan allowances, the usage note, Purchased Credit table and related FAQs use the same terminology. One Purchased Credit adds one AI Enquiry Session. The quantities and prices are unchanged. Rendered QA at 1440×900, 1024×900 and 390×844 confirms the longer labels wrap without clipping and retain zero horizontal overflow.
+
+### Follow-up: listing values avoid the repeated label — 2026-09-01
+
+The pricing-card detail label remains `Listings`; the Sales and Rental+ values are shortened to `100 active Sales` and `500 combined Sales + Rental` so the word `listings` is not repeated inside the same field. Numeric limits, plan structure, comparison content and pricing remain unchanged. Browser QA at 1440×900, 1024×900 and 390×844 confirms the values remain aligned and unclipped with zero field or page-level horizontal overflow.
+
+### Follow-up: listing values are numbers only — 2026-09-01
+
+The Sales and Rental+ `Listings` values are further simplified to `100` and `500` for faster plan scanning. Their feature introductions now explain that Sales includes up to 100 active sales listings and Rental+ includes up to 500 active sales and rental listings. This supersedes the longer values recorded above without changing either approved limit, plan capability or price.
+
+Browser QA at 1440×900, 1024×900 and 390×844 confirms the numeric values scan cleanly, both explanations remain contained above their feature lists and every pricing card retains zero horizontal overflow.
+
+### Follow-up: add-on capacity uses a buyer-outcome name — 2026-09-01
+
+The former `Purchased Credits` presentation is renamed `Buyer Enquiry Credits`, replacing the abstract `AI Enquiry Sessions` wording inside the add-on card. The supporting copy now leads with handling more product, sales and rental enquiries, while each credit remains transparently defined as one relevant buyer enquiry with up to five message exchanges. Pack quantities, prices, 12-month validity, rollover, consumption order and active-subscription requirement remain unchanged.
+
+Browser QA at 1440×900, 1024×900 and 390×844 confirms the outcome-led title, supporting copy and all four credit rows remain readable, contained and free of horizontal overflow.
+
+### Follow-up: comparison introduction consolidated — 2026-09-01
+
+The pricing comparison now has one introduction instead of repeating the plan names above the table. The eyebrow is `Plan Comparison`, the single heading is `Compare Agent, Sales and Rental+`, and one sentence explains the cumulative relationship: every plan includes the AI Sales Agent, Sales adds a Sales Store and Rental+ adds rental capabilities. The duplicate inner title and paragraph are removed, while the table region remains labelled by the visible heading.
+
+Desktop browser inspection confirms the heading, description and table form one compact reading sequence with no page overflow. The in-app browser's temporary mobile viewport override did not take effect during this pass, so mobile containment is covered by the unchanged responsive table shell and regression checks rather than a new rendered mobile capture.
+
+### Follow-up: annual prices use exact 9-ending monthly equivalents — 2026-09-01
+
+Annual billing now displays `$39`, `$159` and `$319` per month for Agent, Sales and Rental+, with exact annual charges of `$468`, `$1,908` and `$3,828`. Each annual total is calculated directly from the monthly equivalent shown on the card, removing the former mismatch between rounded monthly displays and annual charges. The standard monthly prices remain `$49`, `$199` and `$399`; the annual selector continues to communicate a 20% saving.
+
+Desktop browser QA exercised both billing states: Annual displays the three approved 9-ending equivalents and matching annual totals, while Monthly restores the original prices. Both states retain zero horizontal overflow. The in-app browser's temporary mobile viewport override remains unavailable; the unchanged responsive card structure and shorter price strings are covered by the pricing regression suite rather than a new mobile capture.
+
+## 2026-09-01 — Public page loading uses the Antbuildz.AI wordmark
+
+System-mode transition refinement across the transferred public application. The copied generic spinner and visible `Loading workspace…` message are replaced at source level with the established Antbuildz.AI wordmark progressively revealing from left to right on the canvas surface. The fallback retains a polite `Loading Antbuildz AI` assistive status, while `prefers-reduced-motion` presents the complete static logo. Route timing, lazy loading, destinations and operational Console behaviour remain unchanged.
+
+The actual transition component was rendered at 1440×900 and 390×844: it fills the viewport, keeps the complete mark centred and legible, exposes two aligned wordmark layers, runs the 1.8-second reveal and has zero horizontal overflow. Normal Pricing and About loads were rechecked after removing the temporary local preview hook; both render one H1 with no loader residue or workspace wording. All 93 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-01 — Public header navigation uses a lighter weight
+
+System-mode typography refinement for the shared public header. AI Sales Agent, AI Webstore Suite, Pricing, Industries, Resources and Sign in now use Inter 600 instead of 750, reducing the visual heaviness while retaining the established 14px desktop / 13px compact sizing, 1.65 line-height, alignment, yellow selected underline and destinations. The Book a Demo action, dropdown content, mobile drawer, language selector and operational AI Agent Console are unchanged.
+
+Browser QA on the dark AI Webstore Suite hero at 1440×900, the light Pricing header and open Industries menu at 1024×768, and the mobile Webstore header and drawer at 390×844 confirms the intended 600 desktop weight, the drawer's existing 500 weight and zero horizontal overflow. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-01 — Demo and account-entry pages use one lean form system
+
+System-mode refinement across `/book-a-demo`, `/signup`, `/sign-in`, `/forgot-password` and `/reset-password`. Decorative eyebrow labels, atmospheric background blobs and duplicate in-card logos are removed, while useful field labels, progress information, industrial benefits and every form control remain. Account-page introductions now use one centred 28–34px heading scale; field labels use 13px, field content uses 15px, supporting copy uses 13–15px and all primary actions retain a 54px touch target with a 16px/700 label. Cards use the shared clean surface, restrained line, 22–24px radius and a quieter shadow. Book a Demo keeps its explanatory story left aligned and adopts the same field and action language inside its form.
+
+The registration, sign-in and password routes remain non-indexable account utilities. No form logic, validation, Calendly handoff, destination, data handling, route, configuration or service behaviour changed. Browser QA at 390×844, 768×1024 and 1440×900 covers Book a Demo and the account-entry system; every measured page has zero horizontal overflow, hidden decorative eyebrows, aligned controls and a 54px primary action. All 91 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-01 — Webstore discovery cards reduced in height
+
+Fidelity-mode density refinement for the six cards beneath “Make Every Product Discoverable and Sales-Ready.” At 768px and above, the equal card frame is reduced from 578px to 462px—almost exactly 20%—by tightening internal padding, the interface-graphic area and the reserved copy area. Mobile retains content-driven card heights with smaller padding and graphic margins so its labels remain readable. The title, descriptions, graphics, card order, responsive grid and interactions are unchanged. Browser QA at 1440×900, 768×1024 and 390×844 confirms contained graphics and copy, equal desktop/tablet rows and zero horizontal overflow. All 91 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: hero-style line and colour finish — 2026-09-01
+
+The same six cards retain their approved layout, content, dimensions and interface illustrations. Their finish now borrows the hero storyboard's visual language through a restrained two-colour hairline, softly tinted grid lines, clearer colour saturation and two-tone glass icon tiles. Each card keeps its original blue, green, purple, orange, red or yellow identity, with a neighbouring brand accent adding depth rather than introducing a new graphic style.
+
+## 2026-09-01 — Webstore closing CTA uses a photographic catalogue action
+
+Design-mode refinement scoped to the final “Give Your AI Sales Agent a Connected Catalogue” section on `/ai-webstore-suite`. The former full-width grid and six floating labels are replaced visually by the homepage CTA's contained warm photographic-card language. A newly generated Emma scene shows her scanning a labelled industrial component bin in an organised parts warehouse, making the physical-inventory-to-catalogue connection specific and distinct from the homepage tablet action. A soft warm gradient blends the photograph into the left-aligned copy surface without a hard split.
+
+The existing Book a Demo, View Pricing and Explore AI Sales Agent destinations and standardised treatments remain intact. Desktop and tablet use the photograph as a right-side action scene; mobile crops it above the copy, stacks the two main actions and preserves the lighter Agent link. Browser QA at 1440×900, 768×1024 and 390×844 confirms the intended fade, readable type, 54px actions and zero horizontal overflow. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: closing message and text alignment refined — 2026-09-01
+
+The photographic closing card now asks “Want to See How the AI Webstore Suite Works?” and invites visitors to book a demo to understand how their catalogue, inventory and AI Sales Agent work together. The inherited centred alignment on the heading's internal line spans is removed so every title line shares the description's left edge. The existing Book a Demo, View Pricing and Explore AI Sales Agent actions and destinations remain unchanged.
+
+### Follow-up: duplicate journey actions removed — 2026-09-01
+
+The transferred `See it in action` and `Talk to sales` action row is removed from the end of the six-step “From Product Discovery to Enquiry” section. Its title, introduction, six journey steps, graphics and surrounding section order remain unchanged. The actions remain available elsewhere through the page's canonical CTA system. Browser QA at 1440×900 and 390×844 confirms the section closes naturally after `Submit Enquiry`, with zero rendered duplicate buttons and no horizontal overflow. All 91 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-01 — Pricing billing toggle follows the title centre
+
+Fidelity-mode alignment correction for the monthly/annual billing selector on `/pricing`. The selector now centres on the pricing hero title's 1152px inner rail instead of the wider standard-plan grid, correcting a 49px rightward offset on wide desktop. The existing billing controls, wording, annual discount, prices, cards and interaction remain unchanged. Browser measurements at 1440×900, 1024×900, 768×1024, 390×844 and 320×740 confirm a 0px title-to-toggle centre offset and no horizontal overflow; the Annual state remains interactive. All 91 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: billing selector uses a blue selected state — 2026-09-01
+
+System-mode colour refinement informed by current Carbon and Atlassian guidance for selected controls: a state colour and shape provide the selection signal, while focus remains separately visible. The former black selected segment is replaced with a deeper Antbuildz blue mixed from the existing blue and ink tokens, with white text and a restrained shadow. `Save 20%` is no longer a yellow mini-button; it is plain supporting text separated by a fine rule inside the Annual segment. Yellow remains reserved for primary commercial actions and the Sales plan's established `Most Popular` tag. Monthly and Annual states were rendered at 1440×900, with the default composition also inspected at 390×844; the billing interaction and approved prices remain unchanged.
+
+## 2026-09-01 — Core-page CTAs standardised by destination
+
+System-mode CTA update across Home, AI Sales Agent and AI Webstore Suite. Repeated actions now derive their wording and visual priority from one source-level destination contract: `/book-a-demo` is always `Book a Demo` in the yellow primary pill; `/pricing` is always `View Pricing` in the clean outlined pill; product buttons use `Explore AI Sales Agent` or `Explore AI Webstore Suite` in the same outlined treatment. The former Sales Agent variants (`Build Your AI Sales Agent`, `Build Your Agent`, and `Build Your AI Agent`) all led to Pricing and are therefore consolidated to `View Pricing`. The closing Sales Agent `/contact` demo action and Webstore `/trial` demo action now point to the canonical `/book-a-demo` route. Webstore text CTAs retain their lighter link treatment but now use the same `Explore AI Sales Agent` wording.
+
+Every mapped desktop button now measures 54px high with the same 999px radius, 16px/700 label, padding, colour, border and icon-free treatment. At 767px and below, content CTAs share a 300px width while the header action remains content-sized; the 320px header uses the documented compact-label exception so its wordmark, demo action and menu trigger remain visible. Rendered QA at 1440px, 1024px, 390px and 320px covers the three routes, button destinations, styling fingerprints and horizontal containment. Live clicks from the Sales Agent hero reached `/pricing` and `/book-a-demo`. All 88 regression tests, targeted ESLint, the production build and `git diff --check` pass. The Webstore hero's previously removed duplicate actions remain removed.
+
+## 2026-09-01 — Mobile header demo action uses a quieter scale
+
+System-mode refinement of the shared `Book a Demo` header action across Home, AI Sales Agent and AI Webstore Suite. The normal mobile control is reduced from 54px to 48px high, from a 16px to 15px label and from 28px to 24px horizontal padding. This keeps the established yellow primary treatment and canonical destination while reducing its visual weight beside the 44px menu trigger. At 359px and below, the existing compact exception now explicitly uses a 44px height, 13px label and 18px horizontal padding.
+
+Browser-measured on all three routes at 602×1061, 390×844, 320×740, 1024×900 and 1440×900. The three mobile headers resolve to identical dimensions, retain zero horizontal overflow, keep the wordmark, action and menu contained, and preserve the desktop 54px/16px button. The drawer opens normally and the resized action still reaches `/book-a-demo`. All 88 regression tests, targeted ESLint, the production build and `git diff --check` pass. No content CTA, wording, destination, hero, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Obsolete copied routes retired
+
+System-mode route cleanup following a live indexing audit. The internal previews `/aiagent-homepage-preview`, `/antbuildz-main-clone`, `/main-dashboard-navigation-preview`, `/aiagent-sales-agent-preview` and `/chat-theme-studio`, together with the unused copied routes `/product`, `/use-cases`, `/integrations`, `/security` and `/insurance`, now use the genuine site-wide 404 response instead of rendering indexable transferred pages. `/marketplace` permanently redirects to `https://antbuildz.com`, while `/blogs` permanently redirects to the canonical `/resources` library.
+
+The underlying copied source and assets remain intact; only public route exposure changed. These routes were already absent from the canonical sitemap. Account, authentication, operational Console, demonstration-product and approved compatibility routes remain unchanged. Local HTTP checks confirm ten 404 responses, the two intended permanent redirects, retained 200 responses for canonical pages and no retired sitemap entries. The useful `noindex` 404 page passed rendered checks at 1440 × 900 and 390 × 844 with no overflow and 54px mobile actions. All 82 tests, targeted ESLint, diff validation and the production build pass. Deployment remains a separate authorised step.
+
+## 2026-08-31 — Homepage conversation aligned nearer the hero title
+
+Fidelity-mode position refinement only. On wide and compact desktop layouts, the primary Agent conversation now sits higher and slightly further inside the right rail so it reads alongside the hero title instead of at the bottom of the image. The industrial photograph, headline, conversation dimensions, copy, animation timing, speaker alignment and mobile bottom anchor remain unchanged.
+
+Rendered checks at 1440 × 900, 1024 × 900 and 390 × 844 confirm a clear title-to-conversation relationship, no overlap and no horizontal overflow. Mobile retains its existing 32px bottom anchor and full-width readable composition.
+
+## 2026-08-31 — Mobile homepage conversation gap reduced
+
+Fidelity-mode spacing refinement scoped only to the primary homepage conversation at 640px and below. Replaced its lower-screen anchor with a responsive top position so the first animated exchange follows the headline more closely, while retaining a safe minimum gap on narrow phones. This supersedes the previous 32px mobile bottom anchor; the headline, conversation content, timing, glass treatment, industrial photograph, hero height and desktop/compact anchors are unchanged.
+
+Browser-measured at 390 × 844 and 320 × 740: the title-to-conversation gap is now approximately 57px and 32px respectively, reduced from 227px at the supplied 390px mobile view. The later multi-message conversation state remains contained in its transcript. Visual checks at 1440 × 900 and 1024 × 900 confirm their existing compositions are unchanged; all four viewports retain zero horizontal overflow. Targeted ESLint, all 85 regression tests, the production build and `git diff --check` pass.
+
+## 2026-08-31 — Mobile public descriptions use justified full rows
+
+System-mode typography update across all 17 public marketing routes. At 767px and below, every visible hero or section description carrying the shared `major-intro` role now fills its component content row, uses justified inter-word alignment and keeps its final line left-aligned. The semantic scope includes Home, product, Pricing, Resources, AI Help, About, demo, agreements and all eight Who We Serve routes.
+
+Card copy, FAQ answers, pricing data, buttons, labels, embedded interface demonstrations and the operational AI Agent Console retain their authored alignment. The supplied AI Sales Agent view was inspected at 602 × 1061 and 390 × 844; AI Webstore Suite, Resources and Rental & Leasing were also visually sampled at 390 × 844. A route-wide mobile check found no unhandled visible major descriptions and zero horizontal overflow on every public route. Checks at 768 × 900 and 1440 × 900 confirm the existing non-mobile alignment returns at the breakpoint. Targeted ESLint, all 85 regression tests, the production build and `git diff --check` pass.
+
+## 2026-08-31 — AI Sales Agent mobile hero fits one screen
+
+Fidelity-mode mobile composition update scoped to `/ai-sales-agent` at 767px and below. The hero now uses exactly `100svh`, so its lower boundary is visible at the bottom of the phone screen without scrolling. The existing animated phone follows the title and description, while the unchanged `Build Your AI Sales Agent` and `Book a Demo` actions follow the animation. The phone's inherited 60px trailing pad and decorative ambient overflow are removed only in this compact layout.
+
+The action group retains the established 54px touch targets and reserves enough space for the persistent Agent launcher, preventing it from covering `Book a Demo`. Narrow-phone typography is compacted only at 360px and below so the animation remains visible. Browser measurements at 320 × 740, 390 × 844 and 602 × 1061 confirm that the hero and following section meet exactly at the viewport edge, the animation precedes the actions and horizontal overflow remains zero. The 768px and desktop compositions remain outside this mobile override.
+
+## 2026-08-31 — AI Webstore Suite mobile hero fits one screen
+
+Fidelity-mode mobile sizing correction scoped to `/ai-webstore-suite` at 767px and below. The dusty-ochre hero now uses exactly `100svh`; its heading and description retain their current content, while the existing three-stage Webstore storyboard flexes into the remaining space. The stage navigation, animated canvas, explanatory footer and native 44px playback controls remain inside the banner instead of extending beyond the phone viewport.
+
+Browser measurements at 320 × 740, 390 × 844 and the supplied 602 × 1061 viewport confirm that the hero ends exactly at the viewport boundary with zero horizontal overflow. At 602 × 1061, all three manually selected workflow stages keep the same 1061px hero boundary and retain visible footer controls. The 768px compact and 1440px desktop compositions remain outside this mobile rule and retain their authored, content-driven storyboard height.
+
+### Follow-up: mobile storyboard clears the hero boundary — 2026-09-01
+
+Fidelity-mode spacing correction scoped to `/ai-webstore-suite` at 767px and below. Reserved a 24px footer gap beneath the complete Webstore storyboard so its rounded control footer no longer touches the bottom edge of the dusty-ochre hero. The storyboard continues to flex within the remaining height; the hero itself remains exactly `100svh`, keeping the following Product Discovery section below the first phone viewport.
+
+Browser-measured at 602×1061, 390×844 and 320×740. All three manually selected workflow stages retain the full 24px internal gap, visible playback controls and zero horizontal overflow. The 1440×900 desktop composition remains outside the mobile rule and preserves its authored 1248×760 storyboard.
+
+### Follow-up: conversation phone enlarged with a soft crop — 2026-09-01
+
+Fidelity-mode visual refinement scoped to the third `Guide buyers in chat` stage. The Emma conversation phone is enlarged from a small inset to the dominant workflow graphic, while the same stage variables continue to position all three moving product cards inside the frame. Its lower portion now extends beyond the visible animation canvas and fades gradually into the storyboard surface instead of ending at a hard horizontal cut.
+
+Rendered checks at 1440×900, 602×1061 and 390×844 confirm the larger phone, readable conversation state, intentional lower fade, contained stage footer and zero horizontal overflow. The 390×844 composition keeps the entire dusty-ochre hero within one phone viewport and retains the 24px gap below the storyboard. The listing-enrichment and Webstore stages, animation copy, timing, buttons and destinations are unchanged.
+
+### Follow-up: hero storyboard colour and fade refined — 2026-09-01
+
+Fidelity-mode visual refinement scoped to the AI Webstore Suite hero animation. All three workflow stages now sit over restrained violet, blue, gold and red light fields drawn from the approved Antbuildz palette. The visual begins a broad lower dissolve after the primary content area so the graphic fades gradually into the glass footer rather than ending on a hard edge. Increased-contrast and reduced-transparency preferences retain a solid canvas without the decorative fade.
+
+Rendered checks at 1440×900 and 390×844 cover the enlarged conversation stage and the catalogue workflow. Both retain the gradual fade, readable content, the existing one-screen mobile boundary and zero horizontal overflow. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: hero animation footer removed — 2026-09-01
+
+Fidelity-mode cleanup scoped to the AI Webstore Suite hero storyboard. Removed the full lower strip beneath the animated graphic, including each stage's explanatory sentence and the pause/replay controls. The three selectable workflow tabs, automatic animation, colourful visual treatment and gradual lower fade remain; the released space is returned to the illustration on desktop and mobile.
+
+Rendered checks at 1440×900 and 390×844 confirm the footer and controls are absent, all three stage tabs remain available, the mobile hero still ends at exactly one viewport and horizontal overflow remains zero. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: conversation remains anchored in the phone — 2026-09-01
+
+Fidelity-mode motion correction scoped to the third AI Webstore Suite hero stage. Replaced the excessive 360–600px transcript jumps with smaller 80–224px staged offsets. Questions and replies still move upward as the conversation grows, but the newest completed exchange remains in the phone's lower reading area instead of being pushed to the top and leaving an empty lower half.
+
+Rendered the completed second reply at 1440×900 and 390×844. The final exchange remains grouped above the composer with a natural 103–129px gap, the faded phone crop remains intact and horizontal overflow is zero. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: product handoff becomes a simulated live chat — 2026-09-01
+
+Fidelity-mode interaction refinement scoped to the third AI Webstore Suite hero stage. After the three product cards synchronise into the phone, the chat now proceeds through a buyer typing indicator, buyer message, Emma typing indicator and Emma reply for the initial enquiry and both qualification follow-ups. Messages no longer appear before their turn. The same technical, rental, quantity, delivery and handover meaning is retained in shorter wording so complete sentences remain readable inside the cropped phone.
+
+Rendered at 1440×900, 768×1024 and 390×844. The initial typing state appears above the recommendations, each sent message is followed by Emma's typing state, and the completed rental and sales exchanges remain fully readable. Responsive scroll compensation keeps the latest exchange above the intentional lower fade without changing the desktop/tablet composition or leaving an empty phone. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: desktop hero fits the first laptop viewport — 2026-09-01
+
+Fidelity-mode sizing refinement scoped to the AI Webstore Suite hero at 980px and above. The complete dusty-ochre banner now ends at exactly `100svh`, so the next section begins below the first laptop view without requiring a scroll to find the hero boundary. The storyboard starts at approximately 80% of its former authored desktop size and scales down further only when a short laptop viewport needs the extra clearance.
+
+The three stage tabs, animation content, conversation sequence, lower fade, title and description remain unchanged. Mobile retains its separately approved one-screen composition.
+
+Browser QA at 1440×900, 1280×720, 1024×768 and 390×844 confirms an exact viewport-height hero boundary, one H1 and zero horizontal overflow. The three desktop workflow stages remain selectable and contained; the compact desktop storyboard is approximately 24% smaller than the former authored frame, while the short 720px laptop view scales further to preserve the first-view boundary. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: Webstore title highlights removed — 2026-09-01
+
+Fidelity-mode colour correction scoped to `/ai-webstore-suite`. All visible section-title and animated feature-card title gradients now resolve to their surrounding solid heading colour, including `Recommendations`, `Discoverable and Sales-Ready` and the other lower-page highlighted phrases. Gradient accents inside interface graphics, labels and controls remain unchanged.
+
+Browser-inspected at 1440×900 and 390×844. No visible H2 or H3 retains a text-gradient background, the responsive heading wraps remain readable and both checked viewports retain zero horizontal overflow. Wording, typography, spacing, cards, animation behaviour, CTA styling and other routes are unchanged.
+
+## 2026-08-31 — Project-wide technical SEO audit and remediation
+
+Completed a full source, local HTTP and rendered-browser audit of public routes, metadata, crawl controls, redirects, structured data and internal links. The canonical sitemap now contains 67 unique indexable URLs: the homepage, canonical product/support/company and Who We Serve pages, plus all 49 resource articles. Sitemap modification dates are stable and truthful; redirect aliases, fragments, previews and operational pages are excluded.
+
+Every resource article now emits its approved title, description, self-canonical, Open Graph/Twitter metadata and Article/Breadcrumb JSON-LD in the initial HTML. Public pages emit route-specific WebPage/Breadcrumb data, the homepage emits its WebPage data before hydration, unknown public URLs return a true 404 with `noindex`, and known operational/conversion routes remain functional with `noindex`. Internal legacy aliases and duplicate solution paths use permanent redirects. The transferred app's post-hydration metadata is guarded so it cannot replace the correct Antbuildz.AI canonical, social URL or route schema with localhost or the retired `antbuildzai.com` domain.
+
+Verification passes: 82 content/regression tests, targeted ESLint, production build, a 67-URL canonical crawl and rendered Chrome checks for Home, Webstore, Resources, a resource article, Who We Serve and AI Help. The canonical crawl found no failed URLs, missing titles/descriptions/canonicals, duplicate titles/descriptions or invalid route JSON-LD after the one duplicate title found during QA was corrected. Rendered pages retain one H1, valid JSON-LD and image alt attributes in the representative browser sample. Demonstration product links and the account workspace now resolve on explicit `noindex` routes; the legacy Marketplace How It Works link leaves this AI website via a permanent redirect.
+
+Open launch work remains: the transferred marketing app still supplies most visible headings and links only after JavaScript hydration, so server-rendering the visible page content is the highest remaining technical SEO improvement. The homepage hero image and several transferred assets also remain large enough to threaten production Core Web Vitals. The approved `next.config.ts` host-normalisation and baseline security headers are implemented and production-tested locally; deployment is still required before live `http://antbuildz.ai` and `https://www.antbuildz.ai` behaviour changes. No deployment, Search Console account, external service or paid integration was changed in this audit.
+
+## 2026-08-31 — Social sharing uses one clean industrial story
+
+Design-mode social-preview update for WhatsApp, Facebook, LinkedIn and other Open Graph consumers. Replaced the crowded default artwork with a cache-busting 1200 × 630 JPEG inspired by the restraint of Sierra's public share card: one full-bleed mountain-logistics photograph, the short two-part statement `Make industrial buying better. Built with Antbuildz AI.`, and one transparent Antbuildz.AI wordmark at the lower left.
+
+The new artwork removes the former white logo plate, eyebrow, paragraph, URL strip and repeated branding. All default Open Graph and Twitter references use the new absolute `/images/antbuildz-ai-social-share-v2.jpg` URL so platforms do not keep serving the previously cached artwork. The homepage social description is now one concise sentence covering complex industrial products, suitable options, qualified sales or rental enquiries, and approved product and inventory data; visible page copy remains unchanged.
+
+## 2026-08-31 — Browser-tab `ai` mark uses a transparent canvas
+
+Fidelity-mode favicon correction preserving the exact previously approved red `a` and yellow `i` glyphs while removing only their dark rounded-square backing. Browser metadata now references the transparent 512 × 512 PNG and a regenerated seven-size transparent ICO fallback with a `v=3` cache key. Header/footer wordmarks, social-share artwork and the glyph shapes/colours remain unchanged.
 
 ## Reference typography restored — 2026-08-28
 
@@ -198,6 +1331,18 @@ Historical placement: the latest removal above moves Market Shift to section two
 - **Visual QA pending:** Browser Use URL policy blocked access to the stale `ERR_CONNECTION_REFUSED` browser error page, although HTTP checks show the local server running. Asked the user to manually reopen `/agreements`. No accepted screenshots or rendered desktop/tablet/mobile checks were possible in this pass; do not treat the page as visually approved until that review is completed.
 
 ## Local design previews
+
+### Webstore catalogue pricing cards — 2026-08-31
+
+- **Fidelity mode:** Reworked the three featured cards around the supplied rental and sale references. Jungheinrich ETV 216i remains the sole rental example with separate daily, weekly and monthly cells; Bosch GBH 2-26 DRE and NSK 6205 are sale listings with one prominent sale-price row each. Ratings and verified badges remain absent.
+- The rental figures are visibly qualified as an example 1.6-ton, tax-exclusive rate because the public source is a comparable Hyster R1.6 rather than the pictured model. Exact-model Singapore listings provide the Bosch and NSK figures. Source URLs, tax context and the 31 August 2026 check date are recorded in `app/webstore-2-ai-webstore-preview/PRODUCT-SOURCES.md`; the animation does not claim live stock, availability or a quotation.
+- Updated the follow-on Emma dialogue and recommendation summaries so the rotary hammer is treated as a purchase rather than a rental. Desktop 1440×1000, compact 1024×900 and mobile 390×844 browser checks pass with no card or page horizontal overflow; all three cards remain inside the Webstore frame after responsive transitions settle. Targeted ESLint, all 85 regression tests and the production build pass.
+
+### Webstore FAQ and closing CTA order — 2026-08-31
+
+- **Fidelity mode:** Moved the existing “Give Your AI Sales Agent a Connected Catalogue” section intact from immediately before to immediately after the AI Webstore Suite FAQ. It remains the final conversion section before Trusted Partners and the footer; its content, buttons, destinations and responsive design are unchanged.
+- The source-level correction uses the existing closing-CTA grid and native FAQ details section, and only moves the CTA when their order is stale. Opening and closing a FAQ does not duplicate or displace it.
+- Browser QA at 1440×1000, 1024×900 and 390×844 passes with FAQ → CTA → Trusted Partners order and no page or CTA horizontal overflow. The FAQ interaction was verified at desktop and mobile widths; targeted ESLint, all 85 regression tests and the production build pass.
 
 | Route | Purpose | Primary CTA | Status |
 | --- | --- | --- | --- |
@@ -1135,6 +2280,12 @@ Fidelity-mode spacing correction scoped to the `Built around your business` home
 
 At 1440×1000 the description now measures 952px and renders in exactly two lines instead of three. At 1024px and 390px it continues to wrap naturally for readability. Browser inspection reports no text clipping or horizontal overflow at any checked viewport; the four-card layout and all other section styling remain unchanged.
 
+## 2026-08-31 — Business-configuration graphic contained on ultrawide screens
+
+Fidelity-mode containment correction scoped to the homepage's four-card `Built around your business` graphic. Its existing 85% desktop scale and normal desktop/tablet proportions remain unchanged, but the previously uncapped percentage frame now stops at the rendered 1250px content rail instead of continuing to grow beyond the section introduction on ultrawide displays.
+
+Browser-measured at 4904px, 2452px, 1440px, 1024px and 390px widths. At both ultrawide widths the graphic and introduction share the same left and right edges; all four scenes remain inside their cards at every checked width and the document has zero horizontal overflow. All 82 content tests, targeted ESLint, `git diff --check` and the production build pass. No copy, card order, illustration content, interaction, shared design token, configuration, service restart, reference-project or deployment change was made.
+
 ## 2026-08-31 — Antbuildz approach copy follows data-to-enquiry flow
 
 Fidelity-mode copy update scoped to the locked four-row homepage process section. The eyebrow remains `The Antbuildz approach`; the headline now reads `From Data to a Recommendation`; and the introduction summarises the path from approved product data through clarification and closest-match identification to a qualified enquiry.
@@ -1150,6 +2301,12 @@ Fidelity-mode copy update scoped to the homepage's existing connected Agent-and-
 The primary card now presents `AI Sales Agent — The core` with the role `Understand and qualify buyers`. The secondary card presents `Antbuildz Webstore — Available as an add-on` with the role `Strengthen product recommendations`. A closing line makes human confirmation explicit: the team confirms technical suitability, availability and commercial terms before quotation. The existing Agent-first card proportions, connector, graphics, destination links and responsive stacking remain unchanged.
 
 Browser-inspected at 1440×1000, 1024×900 and 390×844. All supplied wording renders without text clipping, the Webstore description wraps naturally at each width, the supporting line remains readable and all three viewports retain zero horizontal overflow. No route, CTA destination, pricing, graphic, configuration, service restart, reference-project or deployment change was made.
+
+### Follow-up: supporting sentence removed — 2026-09-01
+
+Fidelity-mode removal scoped to the connected AI Sales Agent and Webstore section on the homepage. Removed the sentence `Your team confirms technical suitability, availability and commercial terms before quotation.` beneath the two product cards, together with its now-unused top-margin style. The cards, descriptions, graphics, connector, links and normal section padding remain unchanged.
+
+Browser-inspected at 1440×900 and 390×844. The sentence is absent from rendered text and the DOM, the next Who We Serve section follows with the normal responsive section spacing, and both viewports retain zero horizontal overflow.
 
 ## 2026-08-31 — Who We Serve heading focuses on complex industrial sales
 
@@ -1264,3 +2421,275 @@ Browser-inspected at 1440×1000, 1024×900 and 390×844. All six tabs remain int
 Fidelity-mode removal scoped only to the `Help Your Team Take the Next Step` section on `/ai-sales-agent`. The complete section—its `QUALIFIED ENQUIRIES` eyebrow, introduction and Answer / Qualify / Match / Prepare summary—is hidden at the route correction hook and excluded from accessibility navigation without deleting React-owned transferred markup. The preceding touchpoint section now flows directly into the existing FAQ.
 
 Browser-inspected at 1440×1000, 1024×900 and 390×844. The removed section has zero rendered height at every checked size, the touchpoint-to-FAQ transition has no added layout gap and all three viewports retain zero horizontal overflow. All 74 content tests, targeted ESLint, the production build and `git diff --check` pass. No other section, copy, illustration, interaction, CTA, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Homepage section titles share the hero rail
+
+Fidelity-mode alignment correction scoped to the source-owned homepage education sections. Their shared outer frame now follows the same responsive rail as the Public Header wordmark and homepage hero title: a centred 1280px frame on wide desktop, 24px side insets on compact desktop and 12px side insets on mobile. This aligns the left edges of `Accuracy Matters In Industrial Sales` and `Built for Complex Industrial Sales` with the hero title while keeping the centred process introduction, section copy, cards, carousel, spacing and responsive behaviour unchanged.
+
+Browser-measured at 1440×1000, 1024×900 and 390×844. The wordmark, hero H1 and both corrected section headings now share exact left positions of 80px, 24px and 12px respectively; every checked viewport retains zero horizontal overflow. All 75 content tests, targeted ESLint, the production build and `git diff --check` pass. No copy, image, CTA, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Console introduction uses standard title spacing
+
+Fidelity-mode spacing correction scoped only to the `AI AGENT CONSOLE` introduction on `/ai-sales-agent`. Added the established 18px title-to-description gap used by neighbouring Sales Agent sections while retaining the Console heading's descender clearance, supplied copy, centred alignment, demonstration, animation and responsive composition.
+
+Browser-measured at 1440×1000, 1024×900 and 390×844. The title-to-description gap computes to exactly 18px at every size, the copy remains unclipped and every checked viewport retains zero horizontal overflow. All 75 content tests, targeted ESLint, the production build and `git diff --check` pass. No wording, graphic, animation, CTA, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Touchpoint introduction uses two desktop lines
+
+Fidelity-mode width correction scoped only to the `Turn Every Marketing Touchpoint Into a Conversation` description on `/ai-sales-agent`. Increased its centred desktop text frame from the shared 800px cap to 1000px so the approved sentence forms two balanced lines, while preserving its wording, typography, heading, cards, interactions and natural mobile wrapping.
+
+Browser-measured at 1440×1000, 1024×900 and 390×844. The description renders in exactly two lines at both desktop sizes, remains naturally readable on mobile and every checked viewport retains zero horizontal overflow. All 76 content tests, targeted ESLint, the production build and `git diff --check` pass. No wording, card, graphic, animation, CTA, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore hero restores its storyboard proportions
+
+Fidelity-mode hero correction scoped to `/ai-webstore-suite`. Restored the animated listing storyboard to its authored 1248 × 760 desktop proportion instead of compressing it into the previous shallow viewport-fitted frame. Reduced the route's H1 maximum from 64px to 56px with a 34px mobile floor, and removed only the duplicate hero CTA row; the shared-header `Book a Demo` action remains available.
+
+Browser-inspected at 1440×1000, 1024×900 and 390×844. The storyboard measures 1248×760px on wide desktop and 976×594px at compact desktop; all three Enrich, Webstore and Agent stages retain the same stable frame. The mobile-specific 366×735px composition remains intact, the hero CTA row has zero rendered size, the page retains one H1 and every checked viewport has zero horizontal overflow. All 77 content tests, targeted ESLint, the production build and `git diff --check` pass. No hero wording, storyboard content, animation timing, header CTA, lower-page CTA, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore hero leads with inventory-backed recommendations
+
+Fidelity-mode copy update scoped to the hero on `/ai-webstore-suite`. The eyebrow remains `AI WEBSTORE SUITE`; the two-line headline now reads `Better Recommendations` / `Start With Your Inventory`; and the description explains that structured product and inventory data gives the Agent more accurate recommendations. The complete headline uses one white treatment, with no highlighted or gradient phrase.
+
+The latest approved hero specification explicitly retains `Book a Demo` and `View Pricing`, so the existing two-button row is visible again with its original labels and destinations. The industrial background, reduced 56px title maximum, interactive three-stage workflow, animation timing and restored storyboard dimensions remain unchanged.
+
+Browser-inspected at 1440×1000, 1024×900 and 390×844. The headline keeps its intended two-line structure at every size; both CTA buttons remain visible and touch-friendly; the storyboard continues to measure 1248×760px, 976×594px and 366×735px respectively; the page retains one H1 and every checked viewport has zero horizontal overflow. All 77 content tests, targeted ESLint, the production build and `git diff --check` pass. No other section, navigation item, workflow content, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore discovery gap focuses on product identity
+
+Fidelity-mode copy update scoped only to the second section on `/ai-webstore-suite`. Its eyebrow now reads `THE PRODUCT DISCOVERY GAP`; the heading reads `Every Product Needs a Discoverable Identity`, retaining the section's existing emphasis treatment on `Discoverable Identity`; and the description explains how structured product pages help search engines and AI platforms understand, surface and connect products with relevant buyers.
+
+The existing six-card progression retains its Product Pages, SEO & AI Search, Product Data, Buyer Action, Manual Sales and Buyer Speed labels. Card titles and descriptions now cover weak product identity, hidden specifications, fragmented product information, missing enquiry paths, sales-dependent discovery and a slow path to enquiry using the exact supplied wording.
+
+Browser-inspected at 1440×1000, 1024×900 and 390×844. The established three-column desktop grid and one-column mobile stack remain unchanged; every card remains unclipped, the page retains one H1 and all checked viewports have zero horizontal overflow. All 77 content tests, targeted ESLint, the production build and `git diff --check` pass. No illustration, animation, layout, spacing, colour, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore Market Shift reflects AI-era buyer expectations
+
+Fidelity-mode copy update scoped only to the existing four-card Market Shift section on `/ai-webstore-suite`. Its eyebrow now reads `THE AI-ERA BUYER`; the unhighlighted headline reads `AI Has Changed What Buyers Expect`; and the description states that modern buyers expect searchable products, instant answers and AI-assisted comparison.
+
+The existing numbered cards and their original graphics remain paired in place while the titles now read `Research Starts Online`, `Fast Answers Expected`, `Buyers Compare Independently` and `AI Shapes Shortlists`. Each title contains exactly three words. The supplied card descriptions contain 9, 9, 11 and 9 words respectively, keeping every one below the requested 12-word maximum.
+
+Browser-inspected at 1440×1000, 1024×900 and 390×844. The established four-column desktop composition and one-column mobile stack remain unchanged; the former heading-highlight span contains no visible text; all cards remain unclipped; the page retains one H1 and all checked viewports have zero horizontal overflow. All 77 content tests, targeted ESLint, the production build and `git diff --check` pass. No numbering, graphic, animation, colour, typography, spacing, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore and Agent turn discovery into recommendations
+
+Fidelity-mode copy update scoped only to the existing connected Agent section on `/ai-webstore-suite`. Its eyebrow now reads `WEBSTORE + AI SALES AGENT`; the headline reads `Turn Discovery Into Recommendations`, retaining the section's established gradient treatment only on `Recommendations`; and the description explains how structured product data supports suitable recommendations and buyer-intent capture.
+
+The existing sales-cycle graphic, three stage controls, `See How the AI Sales Agent Works` link, layout, spacing, typography and animation remain unchanged. Browser-inspected at 1440×1000, 1024×900 and 390×844. The supplied copy remains unclipped in the desktop two-column and mobile stacked compositions; the page retains one H1 and all checked viewports have zero horizontal overflow. All 77 content tests, targeted ESLint, the production build and `git diff --check` pass. No other section, graphic, interaction, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore benefits connect discovery to enquiry
+
+Fidelity-mode copy update scoped only to the existing six-card benefits section on `/ai-webstore-suite`. Its eyebrow now reads `DISCOVERY TO ENQUIRY`; the headline reads `Make Every Product Discoverable and Sales-Ready`, retaining the established gradient treatment on `Discoverable and Sales-Ready`; and the description explains that structured product pages help buyers discover, compare and enquire.
+
+The six existing cards retain their graphics, numbering, colours, layout, spacing and animation while their copy now covers greater product visibility, higher enquiry conversion, wider multilingual reach, more accurate recommendations, less manual work and lasting organic presence. The description receives a section-scoped 1000px desktop frame and renders in one line at both checked desktop sizes, remaining within the requested two-line maximum without truncation. Browser-inspected at 1440×1000, 1024×900 and 390×844. All six card titles and descriptions remain inside their cards, the mobile stack remains 342px wide, the page retains one H1 and every checked viewport has zero horizontal overflow. All 78 content tests, targeted ESLint, the production build and `git diff --check` pass. No other section, graphic, interaction, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Redundant Webstore inventory section removed
+
+Fidelity-mode removal scoped only to the `An AI Sales Agent that knows your inventory` section on `/ai-webstore-suite`. The complete shared inventory block—its eyebrow, heading, description and animated connection graphic—is hidden from rendering and accessibility navigation without deleting the transferred source component.
+
+The preceding `Make Every Product Discoverable and Sales-Ready` benefits section now flows directly into `From Search to Sales-Ready Enquiry`. Browser-inspected at 1440×1000, 1024×900 and 390×844. The removed section has zero rendered height and no client rectangles at every checked size; the remaining transition keeps only its normal adjacent-section rhythm, the page retains one H1 and every checked viewport has zero horizontal overflow. All 78 content tests, targeted ESLint, the production build and `git diff --check` pass. No other section, copy, graphic, interaction, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore workflow follows discovery through enquiry
+
+Fidelity-mode copy update scoped only to the existing six-step `HOW IT WORKS` section on `/ai-webstore-suite`. Its headline now reads `From Product Discovery to Enquiry`, retaining the established emphasis treatment on `Enquiry`, and its introduction explains how structured product data supports discovery, comparison, recommendations and enquiries.
+
+The original alternating timeline, numbered markers, animated illustrations, colours, spacing and CTA row remain unchanged. Its six steps now progress through Discover Products, Ask Questions, Understand Needs, Match Products, Recommend Products and Submit Enquiry, with the supplied Webstore, AI Sales Agent and Sales Team ownership labels retained on their appropriate stages. Browser-inspected at 1440×1000, 1024×900 and 390×844. All six cards and ownership chips remain unclipped, the page retains one H1 and every checked viewport has zero horizontal overflow. All 78 content tests, targeted ESLint, the production build and `git diff --check` pass. No other section, graphic, interaction, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore features use one clear description
+
+Fidelity-mode copy update scoped only to the existing `AI WEBSTORE SUITE FEATURES` section on `/ai-webstore-suite`. The section now uses the approved `What the Webstore Includes` headline, concise introduction and six supplied feature titles and descriptions. Each feature's former secondary mini-title is hidden from rendering and accessibility navigation, leaving one main title and one description per card. The supplied plan-and-setup availability note is shown beneath the existing feature sequence.
+
+The original six-card order, numbering, SVG source paths, graphic pairings, dimensions, cropping, colours, typography, animation wrappers, desktop alternating composition and mobile stack remain unchanged. Browser-inspected at 1440×1000, 1024×900 and 390×844. All copy blocks remain unclipped, removed mini-titles occupy zero space, every checked viewport retains zero horizontal overflow and the page retains one H1. All 78 content tests, targeted ESLint, the production build and `git diff --check` pass. No other section, graphic, asset, interaction, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Public page rails follow Antbuildz.com
+
+System-mode alignment update across the public Antbuildz AI site. The live Antbuildz.com header and content edges establish a centred 1250px maximum rail with 5vw side gutters below that maximum. The shared Public Header, homepage hero and source-owned sections, AI Sales Agent hero, canonical AI Webstore Suite hero and outer sections, pricing cards, Who We Serve pages and source-owned public containers now use that same `min(1250px, 90vw)` contract.
+
+Narrow reading columns, internal card padding, dropdown panels, product demonstration dimensions and the operational AI Agent Console remain component-owned. At the local 1280px rendered viewport, the wordmark, Book a Demo utility, homepage H1, Sales Agent hero, Webstore hero, pricing frame and Who We Serve hero now share exact 64px outer anchors with no horizontal overflow. The responsive CSS contract keeps 5vw gutters at tablet and mobile sizes. All 79 content tests, targeted ESLint, the production build and `git diff --check` pass. No copy, graphic, animation, CTA destination, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore comparison distinguishes the Agent from the connected Suite
+
+Fidelity-mode copy update scoped only to the existing comparison section on `/ai-webstore-suite`. The section now uses the supplied `SEE THE DIFFERENCE` eyebrow, `Start With the Agent. Expand With the Webstore.` headline, supporting description and closing note. The first product column is `AI Sales Agent`; the second is `+ AI Webstore Suite`, making the additive product relationship explicit without a secondary label.
+
+The existing desktop grid and mobile comparison-card component now carry the same eight supplied rows: Best For, Knowledge Source, Buyer Experience, Product Recommendations, Online Discovery, Marketplace Exposure, Sales Workflows and Long-Term Value. One existing row shell is cloned to accommodate the additional supplied row, preserving its inherited classes, spacing and responsive treatment. The existing Webstore emphasis stays paired with the `+ AI Webstore Suite` column after repeated copy passes and remounts.
+
+Browser-inspected at the available 1280×720 desktop viewport. The complete table and closing note remain aligned and unclipped with zero horizontal page overflow. The hidden responsive DOM was also checked: all eight mobile cards use the same row order and place `AI Sales Agent` before `+ AI Webstore Suite`; no responsive CSS was changed. All 79 content tests, targeted ESLint, the production build and `git diff --check` pass. No graphic, animation, colour, typography, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Sales Agent hero description uses two desktop lines
+
+Fidelity-mode copy refinement scoped only to the `/ai-sales-agent` hero description. The shorter sentence retains the core path from product questions to qualified sales or rental enquiries, suitable product matches and quote-ready details, while removing the longer supporting explanation.
+
+Browser-measured at 1440×1000, 1024×900 and 390×844. The description renders in exactly two lines at both desktop sizes and wraps naturally to three lines on mobile, with no horizontal overflow. The hero heading, CTAs, image, conversation, typography and layout remain unchanged.
+
+## 2026-08-31 — Sales Agent hero cycles through five restrained themes
+
+Fidelity-mode animation refinement scoped to the `/ai-sales-agent` hero conversation. Removed the transferred neon four-corner rainbow treatment and replaced it with five light, single-accent themes drawn from the approved Antbuildz palette: slate, violet, blue, gold and brand red. The themes advance every two seconds with the existing smooth colour transition; users who prefer reduced motion receive a stable slate treatment.
+
+Browser-exercised through the complete theme sequence at 1440×1000 and inspected at 1024×900 and 390×844. Each transition after the initial partial interval occurred at approximately two seconds, product cards and conversation text remained readable in every treatment, reduced-motion mode stayed fixed on slate and all three viewports retained zero horizontal overflow. All 83 content tests, targeted ESLint, the production build and `git diff --check` pass. No conversation copy, product card, CTA, layout, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Sales Agent touchpoint cards align to one content rail
+
+Fidelity-mode refinement scoped to the six interactive touchpoint cards on `/ai-sales-agent`. Every card now anchors its icon, title and description to the same top position instead of vertically centring shorter copy, so the icon rows remain aligned across each two-card pair. Card descriptions use a more compact 14px size with a readable 1.55 line-height.
+
+The existing grid, titles, descriptions, icon artwork and colours, selected state, preview illustration and interaction remain unchanged. Browser-inspected at 1440×1000, 1024×900 and 390×844: every icon uses the same 21px card-top offset at all three sizes, all descriptions resolve to the intended 14px scale, the active-card preview still updates and every viewport retains zero horizontal overflow. All 84 content tests, targeted ESLint, the production build and `git diff --check` pass. No copy, illustration, animation, CTA, navigation, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Sales Agent closes with a contained industrial CTA
+
+Design-mode redesign scoped to the final CTA on `/ai-sales-agent`. The former full-width animated grid and six scattered capability cards are replaced by one contained editorial composition inspired by the supplied reference: the established tablet-and-inventory photograph leads on the left, while the action panel sits on the right. Reversing the reference's image position and adding a compact `Catalogue → Qualification → Handover` cue gives the section its own industrial-sales presentation.
+
+The headline remains `Build Your AI Sales Agent`; the existing `Build Your AI Agent` and `Book a Demo` actions keep their original destinations. The new supporting sentence is limited to the approved product, qualification and handover workflow. Desktop uses the shared 1250px public rail; compact and mobile layouts stack the image above the action panel with touch-friendly buttons.
+
+Browser-inspected at 1440×1000, 1024×900 and 390×844. The image loads at its full 1672×941 source size with useful alternative text, the inserted media remains idempotently singular, both actions retain 56px touch height, native destinations and a visible 2px focus outline, and every viewport retains one H1 with zero horizontal overflow. All 85 content tests, targeted ESLint, the production build and `git diff --check` pass. No header, FAQ, footer, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-08-31 — Webstore hero actions removed
+
+Fidelity-mode removal scoped only to the two-button action row in the `/ai-webstore-suite` hero. `Book a Demo` and `View Pricing` no longer render beneath the hero description. The shared-header `Book a Demo` utility and `Pricing` navigation item remain available, while the hero heading, description, background and interactive Webstore storyboard retain their existing composition.
+
+Browser-inspected at 1440×1000, 1024×900 and 390×844. The removed action wrapper has zero width, height and visible links at every size; the storyboard closes the former gap naturally, each viewport retains one H1 with zero horizontal overflow, and desktop keeps both shared-header destinations visible. All 85 content tests, targeted ESLint, the production build and `git diff --check` pass. No header, storyboard content, animation, lower-page CTA, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-09-01 — Sales Agent closing CTA uses an active consultation photograph and continuous fade
+
+Design-mode refinement scoped to the final CTA on `/ai-sales-agent`. Replaced the passive tablet-review photograph with a purpose-built industrial consultation scene: the sales specialist now points to a product option while guiding a buyer in a parts warehouse. The new 1672×941 JPEG retains the established warm industrial photography and restrained red clothing accent, includes useful alternative text and is compressed to approximately 320 KB.
+
+The former straight image-to-copy boundary is replaced by one continuous pale-soft surface. Desktop and compact layouts extend the photograph beneath the action panel and fade it horizontally into the shared background; mobile stacks the same composition and fades vertically into the copy. The workflow caption moves into the lower faded area on mobile so it does not cover the specialist's face. The headline, description, CTA wording and destinations remain unchanged.
+
+Browser-inspected at 1440×900, 1024×900 and 390×844. The subject, buyer and tablet remain readable, both fade directions resolve without a hard seam, the final JPEG loads at its authored dimensions and every checked viewport retains zero horizontal overflow. All 88 content tests, targeted ESLint, the production build and `git diff --check` pass. No header, FAQ, footer, route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-09-01 — Webstore conversation qualifies one realistic mixed-product enquiry
+
+Fidelity-mode copy refinement scoped to the animated phone conversation in the `/ai-webstore-suite` hero. The buyer now asks for a warehouse reach truck, a rotary hammer and 6205 bearings. Emma distinguishes one rental option from two sale products, qualifies the truck's load capacity, lift height, aisle width and hire period, then records the Jurong delivery request and purchase quantities before handing configuration, availability, delivery and final pricing to the sales team.
+
+All dialogue now uses complete, natural sentences and keeps commercial boundaries explicit: the illustrated truck may suit the requirements subject to mast configuration and availability, while the sales team retains final confirmation. Product-card wording also uses the grammatically correct singular `Sale` label. The animation's staged scroll positions were adjusted so the longer qualification and handover replies remain inside the phone at each beat.
+
+Browser-inspected at 1440×900, 1024×900 and 390×844. The rental and final sales replies remain visible inside the phone, the mobile page retains zero horizontal overflow and no other section changes. All 88 content tests, targeted ESLint and the production build pass. No route, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-09-01 — Final phone and tablet graphic audit
+
+Audit mode covered the 18 core public route types at 390×844 and 768×1024: Home, AI Webstore Suite, AI Sales Agent, AI Agent Console, Pricing, Resources, AI FAQs, About, Book a Demo, Agreements and all eight Who We Serve pages. The graphic-heavy Home, Agent, Webstore, Pricing, Rental and Console layouts also received representative 1024×900 checks. Every route retained one H1 and zero document-level horizontal overflow; no visible graphic failed after lazy-loaded media was brought into view. The Webstore audit exercised its full 23,279px mobile page and loaded all 35 images. Intentional carousel continuation and the collapsed Console sidebar remain the only off-canvas media.
+
+The persistent AI Agent launcher was the only shared obstruction found. Its transferred 252–304px label covered mobile and tablet card content, so it now compacts below the established 980px navigation breakpoint to a 56px circular Emma control anchored 16px from the right edge. The accessible `Open AI Agent` name remains intact, the control opens the existing full-screen mobile Agent panel, and the labelled 252px launcher returns at 1024px and above. Browser rechecks at 390×844, 768×1024 and 1024×900 confirmed the breakpoint, touch target and zero overflow.
+
+All 89 content tests, targeted ESLint, the production build and `git diff --check` pass. No route, copy, product graphic, pricing data, configuration, service restart, reference-project or deployment change was made.
+
+## 2026-09-01 — Header demo action is smaller and lighter
+
+Fidelity-mode refinement of the shared Public Header `Book a Demo` action. The header utility now uses a consistent 44px height, 14px label and 18px horizontal padding on desktop and standard mobile widths, instead of inheriting the 54px content-CTA scale or the former 48px mobile exception. Its fill is a pale mix of the approved Antbuildz yellow and clean surface, with a slightly stronger yellow hover state and unchanged dark text, focus outline, wording and `/book-a-demo` destination.
+
+At 359px and below, the action retains the accessible 44px touch height while using a 13px label and 14px horizontal padding so the wordmark, action and menu trigger remain contained. Content CTAs keep their existing 54px primary treatment.
+
+Browser-inspected on Home at 1440×900, 1024×900, 390×844 and 320×740, plus both product pages at 390×844. The action measures 44px at every checked size, retains its canonical destination, remains clear on dark image surfaces and introduces no horizontal overflow. The 320px header retains 8px between the wordmark and action and 4px before the menu trigger. All 89 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-01 — Sales Agent closing CTA uses one uninterrupted action panel
+
+Fidelity-mode refinement scoped to the final CTA on `/ai-sales-agent`. The floating `Approved Product Knowledge` caption has been removed from the photograph so the consultation scene remains uncluttered. At wide desktop sizes, the action panel begins further left and has a wider text rail, allowing `Build Your AI Sales Agent` to remain on one line inside the card.
+
+The established horizontal image fade, supporting description, `View Pricing` and `Book a Demo` actions and their destinations remain unchanged. Tablet and mobile retain the existing stacked composition and natural heading wrapping.
+
+Browser-inspected at 1440×900, 1180×900 and 390×844. The heading remains one line at both desktop widths, the smallest wide-desktop frame has no text overflow, the mobile image and copy remain correctly stacked and all checked viewports retain zero horizontal overflow. All 90 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-01 — Direct email enquiry path across public pages
+
+System-mode contact-path addition across the public site. `Book a Demo` remains the primary conversion action, while the closing AI Sales Agent and AI Webstore Suite action panels now provide a restrained direct-email alternative. The shared footer displays the verified `help@antbuildz.ai` address on every public page, so buyers who are not ready to schedule can still contact the team directly.
+
+The email action uses a prefilled `Antbuildz AI sales enquiry` subject, a 44px accessible link target and a tertiary underlined treatment rather than a competing third pill button. No new inbox, form, external service, header control, route, configuration or deployment was introduced.
+
+Browser-inspected at 390×844 on both product pages and on Home, Pricing, Resources and About. Each route renders one footer email, each product closing panel renders one direct-email alternative, and every checked page retains zero horizontal overflow. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass. The full-repository lint command remains unsuitable because it scans the transferred minified bundles under `public/`, which contain unrelated pre-existing generated-code violations.
+
+### Follow-up: direct email uses a recognisable contact pattern — 2026-09-02
+
+System-mode refinement of the shared direct-email alternative on the AI Sales Agent and AI Webstore Suite closing panels. The awkward `Prefer email?` prompt and underlined text are replaced by one compact contact link containing a decorative envelope icon, the clear `Email Us` label and the visible verified `help@antbuildz.ai` address. The whole component is interactive, retains the prefilled enquiry subject, a 52px target and a visible keyboard focus state, while its pale surface remains subordinate to `Book a Demo` and `View Pricing`.
+
+The pattern follows accessibility guidance to use descriptive link text, keep a supporting icon decorative when adjacent text already supplies its meaning, and expose the actual email address as an alternative contact channel. Browser inspection on AI Webstore Suite at 1440×900, 1024×768 and 390×844, plus AI Sales Agent at 1440×900, confirms one correctly labelled email link per closing panel, a 52px target, the canonical prefilled destination and zero horizontal overflow. All 95 regression tests, targeted ESLint, the production build and `git diff --check` pass. No inbox, commercial wording, route, integration, configuration or deployment was changed.
+
+## 2026-09-01 — Pricing plans follow one cumulative product path
+
+Copy-only pricing refinement scoped to `/pricing`. The three standard plans are now named `Agent`, `Sales` and `Rental+`, with subtitles that state the included product clearly. Card descriptions, best-fit guidance, features and actions now explain a cumulative upgrade path: Sales contains Agent plus a Sales Store, while Rental+ contains Sales plus rental inventory, rates, availability and booking workflows. Existing monthly and annual prices, AI-conversation allowances, listing allowances, billing behaviour, purchased credits, the Custom option and the pricing hero title and description are unchanged.
+
+The former split comparison is consolidated into one continuous 21-row table with `Feature`, `Agent`, `Sales` and `Rental+` columns. Checkmarks and dashes make the package inheritance visible without introducing new claims. Desktop browser QA at 1440×900 confirms all standard-card copy is visible, the comparison has one visible table with the expected 21 rows and the document has no horizontal overflow. The Annual selector still displays the approved annual totals and savings before returning cleanly to Monthly. Mobile/tablet card and table containment remain covered by the existing responsive rules and updated regression assertions. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: pricing cards and comparison made easier to scan — 2026-09-01
+
+Each standard-plan card now uses one concise outcome-led description. Detailed product knowledge, Sales Store and rental capabilities remain in the existing feature lists, best-fit guidance, FAQs and comparison instead of being repeated in the opening paragraph. The shorter content rail reduces the aligned positioning area from 218px to 150px without changing pricing, allowances, billing or actions.
+
+The comparison retains one table and the same 21 rows. Feature names now form a left-aligned reading rail, Sales and Rental+ receive restrained blue and yellow column tints, and subtle rules mark where Sales Store and rental capabilities begin. The treatment follows the existing clean surface, semantic colour tokens and responsive scroll container. Browser inspection at 1280×720 confirms aligned 150px card-copy rails, unclipped wording, left-aligned 24px feature cells, visible tier separators and zero page overflow. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: package descriptions moved to the feature area — 2026-09-01
+
+The upper positioning area of every pricing card now contains only the product subtitle and `Best for` guidance. Each concise package description appears after the price, allowance details and action, immediately before its included-feature heading and feature list. This keeps plan suitability prominent at the top while placing capability explanation beside the detailed inclusions. The aligned standard-plan top rail is reduced to 92px; pricing, allowances, actions and feature wording remain unchanged. Browser inspection at 1280×720 confirms the requested order on Agent, Sales, Rental+ and Custom, no clipped positioning text and zero horizontal overflow. All 92 regression tests, targeted ESLint, the production build and `git diff --check` pass.
+
+### Follow-up: Best-for guidance uses the full card rail — 2026-09-01
+
+Fidelity-mode correction scoped to the pricing cards. Removed balanced wrapping from the `Best for` guidance and explicitly kept its text rail at the full available card width, so the wording now continues towards the right edge before wrapping naturally. Plan copy, card heights, prices, allowances, actions and comparison content remain unchanged. Browser inspection at 1280px confirms full-width wrapping on Agent, Sales, Rental+ and Custom with no page overflow.
+
+### Follow-up: plan allowances use one horizontal strip — 2026-09-01
+
+Fidelity-mode pricing-card refinement. The three details below each price—Included AI conversations, Listings and Extra conversations—now share one equal three-column row, with each label stacked above its value and subtle separators between columns. The strip keeps natural word wrapping at narrow widths and does not change any approved price, allowance, listing limit or commercial wording. Browser inspection at 1280px confirms aligned columns across Agent, Sales, Rental+ and Custom with zero horizontal overflow.
+
+### Follow-up: pricing closes with a light conversion card — 2026-09-01
+
+Design-mode refinement scoped to the final Pricing CTA. The former black panel is replaced by a clean-to-soft Antbuildz surface with a restrained violet–blue–yellow top accent, subtle border and soft depth. Its primary action now uses the canonical yellow `Book a Demo` treatment and `/book-a-demo` destination; the secondary clean outline is `Email Sales` and opens the existing sales-enquiry address. Agent retains `Start Here`, Sales retains the yellow `Most Popular` tag and Rental+ retains `Best Value`. Browser inspection at 1280px confirms the light panel, 54px pill actions, all three visible plan tags and zero horizontal overflow; the demo action was exercised successfully.
+## 2026-09-03 — Pricing feature inclusions reflect the approved package contents
+
+Copy-only pricing update scoped to the included-feature lists on `/pricing`.
+Agent now lists its dedicated AI terminal, website chat embed, knowledge,
+recommendation, lead monitoring, multilingual, setup and spreadsheet features.
+Sales and Rental+ use the approved concise Webstore, listing, domain, search,
+translation, product-link and inventory wording; Rental+ also includes its
+rental booking system. Both upgrade cards now use `Everything in Agent, plus:`
+as supplied. Prices, allowances, actions, Custom, usage notes and the detailed
+feature-comparison table are unchanged.
+
+Rendered QA at 2048×1152, 1024×768 and 390×844 confirms all 8/7/8 supplied
+features render, the standard cards remain aligned at tablet width, the mobile
+cards stack without clipped copy, and every checked viewport has zero
+horizontal overflow. All 97 regression tests, targeted ESLint, the production
+build and `git diff --check` pass.
+
+### Sales Agent capabilities — white surface
+
+The AI Sales Agent capabilities section (`.bright-features.bento-section`)
+uses the clean white token, as requested. Scoped source CSS preserves the
+existing cards, copy and spacing. Browser checks at 1440px and 390px confirmed
+`rgb(255, 255, 255)`; screenshots inspected at both widths.
+
+The Sales Agent Enquiry Challenges section (`.pain-bento-section`) also uses
+solid clean white, replacing its gradient. Verified white with no background
+image at 1440px and 390px and visually inspected both layouts.
+
+Connected Inventory Data (`.flexible-ai-platform`) and Marketing Touchpoints
+(`.dt-section-embedded`) on AI Sales Agent also use solid clean white, per the
+user request. Both section gradients are removed via scoped source CSS.
+Verified computed white surfaces without background images and inspected
+both sections at 1440px and 390px; illustrations and content are preserved.
+
+### Shared footer contact action — 2026-09-05
+
+The direct `Email Sales` contact card has been removed from the final AI Sales
+Agent and AI Webstore Suite CTA panels. The shared footer now presents one
+compact `Email Us` button beneath the Antbuildz AI brand statement. It opens a
+prefilled `help@antbuildz.ai` enquiry email and preserves the existing primary
+CTA hierarchy in the product closing sections.
+
+Desktop and mobile browser checks confirm one footer action, no remaining CTA
+email cards and no horizontal overflow on both product pages.
+
+## 2026-09-05 — Resources follow the Agent-first product model
+
+Audit-to-design update scoped to `/resources` and its educational articles. The
+library now presents the AI Sales Agent as the core product for buyer
+conversations, qualification, recommendations and handover. Antbuildz Webstore
+is explained as an optional supporting system that adds structured product
+pages, specifications and inventory context; its dedicated product URLs also
+support SEO and AI search discovery.
+
+The resource hero, product-model explainer, Webstore collection, selected
+article titles and descriptions, conflicting article passages, related-reading
+labels and closing actions now use that hierarchy. Search metadata and
+`llms.txt` use the same positioning. Readable canonical article URLs are bridged
+to the transferred resource content during startup, then restored after the
+article renders without leaving the route transition layer visible. Visible
+resource collections are numbered 01–05.
+
+Browser-inspected at 2560px and 390×844 on the library and a representative
+Webstore-support article. Canonical direct loading, rewritten copy, responsive
+containment and zero horizontal overflow were verified. All 109 regression
+tests, targeted ESLint, the production build and `git diff --check` pass.

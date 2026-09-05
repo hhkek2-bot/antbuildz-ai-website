@@ -1,15 +1,22 @@
 'use client';
 
 import { useEffect } from 'react';
-import { scopeAiHelpExperience, syncAiHelpMetadata } from '../lib/ai-help-scope';
+import { scopeAiHelpExperience } from '../lib/ai-help-scope';
 import { simplifyAgreementHub, syncAgreementMetadata } from '../lib/agreement-hub';
 import { EMMA_PORTRAIT_ALT, EMMA_PORTRAIT_SRC, standardiseAgentPortraits } from '../lib/agent-identity';
 import { correctSalesAgentCopy } from '../lib/ai-sales-agent-copy';
 import { HOMEPAGE_SEO, syncHomepageMetadata } from '../lib/homepage-seo';
+import { syncDefaultSocialShareImage } from '../lib/social-share';
 import { applyPublicMarketingSectionSystem } from '../lib/public-marketing-sections';
 import { applyPublicMarketingTypographyTrial } from '../lib/public-marketing-typography';
+import { applyPublicCtaSystem } from '../lib/public-cta-system';
 import { removeHeadingFullStops } from '../lib/title-punctuation';
+import { addLegalAcknowledgement, syncLegalNavigation } from '../lib/legal-navigation';
 import { applyWhoWeServeProcessCopy } from '../lib/who-we-serve-process-copy';
+import { AI_ROLES, AI_ROLE_LINKS, AI_ROLE_REDIRECTS } from '../lib/ai-roles';
+import { syncAiRoleNavigation } from '../lib/ai-role-navigation';
+import { getTransferredResourcePath, syncResourceNavigation } from '../lib/resource-navigation';
+import { correctResourceCopy, RESOURCE_LIBRARY_SEO } from '../lib/resource-copy';
 
 const ORIGINAL_STYLESHEET_ID = 'antbuildz-original-styles';
 const ORIGINAL_SCRIPT_ID = 'antbuildz-original-app';
@@ -21,6 +28,44 @@ const ROUTE_ALIASES: Record<string, string> = {
   '/app': '/ai-agent-console',
   '/develop-admin': '/ai-agent-console',
 };
+
+const SALES_AGENT_HERO_THEMES = ['slate', 'violet', 'blue', 'gold', 'red'] as const;
+const SALES_AGENT_HERO_THEME_INTERVAL_MS = 2_000;
+let salesAgentHeroThemeTimer = 0;
+let salesAgentHeroThemeElement: HTMLElement | null = null;
+
+function resetSalesAgentHeroThemes() {
+  if (salesAgentHeroThemeTimer) window.clearInterval(salesAgentHeroThemeTimer);
+  if (salesAgentHeroThemeElement) delete salesAgentHeroThemeElement.dataset.antbuildzHeroTheme;
+  salesAgentHeroThemeTimer = 0;
+  salesAgentHeroThemeElement = null;
+}
+
+function syncSalesAgentHeroThemes(root: HTMLElement, pathname: string) {
+  const chat = pathname === '/ai-sales-agent'
+    ? root.querySelector<HTMLElement>('[data-antbuildz-sales-agent] .bright-chat-theme-demo')
+    : null;
+  if (!chat) {
+    resetSalesAgentHeroThemes();
+    return;
+  }
+  if (chat === salesAgentHeroThemeElement) return;
+
+  resetSalesAgentHeroThemes();
+  salesAgentHeroThemeElement = chat;
+  let themeIndex = 0;
+  chat.dataset.antbuildzHeroTheme = SALES_AGENT_HERO_THEMES[themeIndex];
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  salesAgentHeroThemeTimer = window.setInterval(() => {
+    if (!chat.isConnected || window.location.pathname !== '/ai-sales-agent') {
+      resetSalesAgentHeroThemes();
+      return;
+    }
+    themeIndex = (themeIndex + 1) % SALES_AGENT_HERO_THEMES.length;
+    chat.dataset.antbuildzHeroTheme = SALES_AGENT_HERO_THEMES[themeIndex];
+  }, SALES_AGENT_HERO_THEME_INTERVAL_MS);
+}
 
 const WHO_WE_SERVE_PATHS = new Set([
   '/rental-businesses',
@@ -35,15 +80,15 @@ const WHO_WE_SERVE_PATHS = new Set([
 
 const PAGE_TITLES: Record<string, string> = {
   '/': HOMEPAGE_SEO.title,
-  '/ai-webstore-suite': 'AI Webstore Suite | Antbuildz AI',
-  '/ai-sales-agent': 'Industrial AI Sales Agent | Antbuildz AI',
-  '/ai-agent-console': 'AI Agent Console | Antbuildz AI',
-  '/pricing': 'Pricing | Antbuildz AI',
-  '/resources': 'Industrial AI Resources | Antbuildz AI',
+  '/ai-webstore-suite': 'AI Webstore Suite for Industrial Products | Antbuildz AI',
+  '/ai-sales-agent': 'AI Sales Agent for Industrial Enquiries | Antbuildz AI',
+  '/ai-agent-console': 'AI Agent Console for Industrial Sales Teams | Antbuildz AI',
+  '/pricing': 'Antbuildz AI Pricing | Antbuildz AI',
+  '/resources': `${RESOURCE_LIBRARY_SEO.title} | Antbuildz AI`,
   '/faqs': 'AI FAQs | Antbuildz AI',
   '/help/ai': 'AI Help Centre | Antbuildz AI',
-  '/about': 'About Antbuildz AI | Antbuildz AI',
-  '/book-a-demo': 'Book a Demo | Antbuildz AI',
+  '/about': 'About Antbuildz Industrial AI | Antbuildz AI',
+  '/book-a-demo': 'Book an Industrial AI Demo | Antbuildz AI',
   '/agreements': 'Antbuildz AI Agreements & Policies | Antbuildz AI',
 };
 
@@ -101,25 +146,48 @@ function correctDemoRequest(root: HTMLElement) {
   }, true);
 }
 
-const RESOURCE_ROLE_LINKS = [
-  { label: 'Sales Specialist', href: '/resources/ai-sales-agent-for-industrial-businesses' },
-  { label: 'Customer Service', href: '/resources/ai-customer-service-agent-for-industrial-businesses' },
-  { label: 'Technical Support', href: '/resources/ai-technical-support-agent-for-industrial-businesses' },
-  { label: 'Product Specialist', href: '/resources/ai-product-specialist-for-industrial-businesses' },
-  { label: 'After-Sales Support', href: '/resources/ai-after-sales-agent-for-industrial-businesses' },
-] as const;
+function correctLegalAcceptance(root: HTMLElement) {
+  if (window.location.pathname === '/subscribe') {
+    const main = root.querySelector<HTMLElement>('main');
+    if (main) {
+      addLegalAcknowledgement(main, true);
+      if (!main.querySelector('.antbuildz-checkout-preview-notice')) {
+        const notice = document.createElement('aside');
+        notice.className = 'antbuildz-checkout-preview-notice';
+        notice.textContent = 'Subscription preview only. This prototype uses test details and does not collect payment or activate a paid subscription. The live offer is a 14-day free trial with a credit card required. Live checkout must confirm the selected plan, price, renewal terms and payment authorisation before activation. Do not enter real card details here.';
+        main.prepend(notice);
+      }
+      for (const button of main.querySelectorAll('button')) {
+        if (button.textContent?.trim() === 'Start Free Trial') setPricingText(button, 'Preview setup');
+      }
+    }
+  }
+  const signUp = root.querySelector<HTMLElement>('.marketing-auth--sign-up');
+  if (!signUp) return;
+  addLegalAcknowledgement(signUp);
+  const terms = signUp.querySelector<HTMLAnchorElement>('a[href="/legal/terms"], a[href="/agreements/terms"]');
+  const privacy = signUp.querySelector<HTMLAnchorElement>('a[href="/legal/privacy"], a[href="/agreements/privacy"]');
+  if (terms) {
+    terms.href = '/agreements/terms';
+    setPricingText(terms, 'Terms of Service');
+  }
+  if (privacy) {
+    privacy.href = '/agreements/privacy';
+    setPricingText(privacy, 'Privacy Policy');
+  }
+}
 
 const RESOURCE_TOPICS = [
   { label: 'AI Agent Roles', id: 'ai-agent-roles', description: 'Explore specialist roles across the customer journey.' },
   { label: 'Understand Antbuildz AI Agent', id: 'understand-ai-agent', description: 'Learn the essentials of industrial AI sales.' },
-  { label: 'Antbuildz AI Agent + Webstore', id: 'ai-agent-webstore', description: 'See how your Agent and product catalogue work together.' },
+  { label: 'Antbuildz AI Agent + Webstore', displayLabel: 'How Webstore Supports the AI Agent', id: 'ai-agent-webstore', description: 'See how structured product pages and inventory context support your Agent.' },
   { label: 'Why Antbuildz AI Agent Is Different', id: 'why-antbuildz-ai', description: 'Explore the approach to industrial buying workflows.' },
   { label: 'Getting Ready for Antbuildz AI Agent', id: 'getting-ready', description: 'Prepare your product information and business knowledge.' },
   { label: 'AI Console Features — Your Command Centre', id: 'ai-console-features', description: 'Get to know the tools for managing your Agent.' },
 ] as const;
 
 const RESOURCE_MENU_GROUPS = [
-  { label: 'Explore AI', topics: [RESOURCE_TOPICS[0], RESOURCE_TOPICS[1]] },
+  { label: 'Explore AI', topics: [RESOURCE_TOPICS[1]] },
   { label: 'Choose your approach', topics: [RESOURCE_TOPICS[2], RESOURCE_TOPICS[3]] },
   { label: 'Get started', topics: [RESOURCE_TOPICS[4], RESOURCE_TOPICS[5]] },
 ] as const;
@@ -169,7 +237,6 @@ function correctPublicDrawer() {
 }
 
 function createHeaderMenuIntro(
-  eyebrow: string,
   title: string,
   description: string,
   action?: { label: string; href: string },
@@ -178,13 +245,11 @@ function createHeaderMenuIntro(
   intro.className = 'antbuildz-industries-menu__intro';
   const copy = document.createElement('div');
   copy.className = 'antbuildz-industries-menu__intro-copy';
-  const kicker = document.createElement('span');
-  kicker.textContent = eyebrow;
   const heading = document.createElement('strong');
   heading.textContent = title;
   const text = document.createElement('p');
   text.textContent = description;
-  copy.append(kicker, heading, text);
+  copy.append(heading, text);
   const link = action ? document.createElement('a') : null;
   if (link && action) {
     link.className = 'antbuildz-industries-menu__overview-action';
@@ -223,7 +288,7 @@ function bindResourceNavigation(link: HTMLAnchorElement) {
     event.stopImmediatePropagation();
     // The copied shell starts a route loader for these links. A full navigation
     // resets that loader, the mobile drawer and any previous collection filter.
-    if (window.location.pathname === '/resources') {
+    if (window.location.pathname === '/resources' && link.pathname === '/resources') {
       window.location.hash = link.hash;
       window.location.reload();
     } else window.location.assign(link.href);
@@ -248,7 +313,7 @@ function correctResourcesMenu(root: HTMLElement) {
     panel.className = 'antbuildz-industries-menu__panel antbuildz-resources-menu__panel';
     panel.setAttribute('aria-label', 'Resources');
     const { intro, link: overview } = createHeaderMenuIntro(
-      'RESOURCES', 'Practical guides for industrial AI',
+      'Practical guides for industrial AI',
       'Understand your Agent, explore the platform and prepare your team.',
       { label: 'All resources', href: '/resources' },
     );
@@ -269,7 +334,7 @@ function correctResourcesMenu(root: HTMLElement) {
       groupLinks.className = 'antbuildz-industries-menu__group-links';
       topicGroup.topics.forEach((topic) => {
         const link = createIndustryLink(
-          { ...topic, href: `/resources#${topic.id}` },
+          { ...topic, label: topic.displayLabel ?? topic.label, href: `/resources#${topic.id}` },
           'antbuildz-industries-menu__link antbuildz-resources-menu__link', true,
         );
         bindResourceNavigation(link);
@@ -305,7 +370,10 @@ function correctResourcesMenu(root: HTMLElement) {
   }
   if (root.dataset.antbuildzResourceTopic === topic.id) return;
   const button = Array.from(root.querySelectorAll<HTMLButtonElement>('.bright-resource-topic-list button'))
-    .find((item) => item.querySelector('span:nth-child(2)')?.textContent?.trim() === topic.label);
+    .find((item) => {
+      const label = item.querySelector('span:nth-child(2)')?.textContent?.trim();
+      return label === topic.label || label === topic.displayLabel;
+    });
   if (button) {
     root.dataset.antbuildzResourceTopic = topic.id;
     button.click();
@@ -315,118 +383,108 @@ function correctResourcesMenu(root: HTMLElement) {
 function dismissHeaderDropdowns(event: Event) {
   const target = event.target;
   if (!(target instanceof Node)) return;
-  document.querySelectorAll<HTMLDetailsElement>('.antbuildz-industries-menu[open], .antbuildz-resources-menu[open]')
+  document.querySelectorAll<HTMLDetailsElement>('.antbuildz-industries-menu[open], .antbuildz-resources-menu[open], .antbuildz-roles-menu[open], .antbuildz-products-menu[open]')
     .forEach((menu) => { if (!menu.contains(target)) menu.open = false; });
 }
 
 type AgentPricingPlan = {
   name: string;
   badge: string | null;
-  target: string;
-  description: string;
+  subtitle: string | null;
+  bestFor: string;
   monthlyUsd: number | null;
   usage: string;
   listings: string;
-  extraConversations: string;
   featureLabel: string;
   cta: string;
+  trialPlan?: 'agent' | 'sales' | 'rental-plus';
   emailSubject: string;
   features: readonly string[];
+  customSummary?: string;
 };
 
 const AGENT_PRICING_PLANS: readonly AgentPricingPlan[] = [
   {
-    name: 'Launch',
-    badge: 'Start Here',
-    target: 'AI Sales Agent',
-    description: 'Answer enquiries using your approved product and business knowledge.',
+    name: 'Agent',
+    badge: null,
+    subtitle: null,
+    bestFor: 'Teams that want AI to answer enquiries, recommend products and support customers.',
     monthlyUsd: 49,
-    usage: '50 AI conversations',
+    usage: '50 / month',
     listings: '—',
-    extraConversations: '$0.99 each, if PAYG enabled',
-    featureLabel: 'Included in this plan',
-    cta: 'Build Your AI Agent',
-    emailSubject: 'Antbuildz AI Launch plan enquiry',
+    featureLabel: 'Includes:',
+    cta: 'Start 14-Day Free Trial',
+    trialPlan: 'agent',
+    emailSubject: 'Antbuildz AI Agent plan enquiry',
     features: [
-      '1 AI Sales Agent',
+      'Dedicated AI Terminal',
+      'Website Chat Embed',
       'Knowledge Base',
-      'AI Product Recommendations',
-      'Agent Setup & Instructions',
-      'Lead Capture',
-      'Conversation Monitoring',
-      'Website Embedding',
-      'Multilingual Conversations',
+      'Product Recommendations',
+      'Lead Capture & Monitoring',
+      'Multilingual AI',
+      'Agent Setup & Rules',
+      'Google Sheets + Excel',
     ],
   },
   {
-    name: 'Growth',
+    name: 'Sales',
     badge: 'Most Popular',
-    target: 'AI Sales Webstore',
-    description: 'Turn your catalogue into an online sales channel with built-in AI.',
-    monthlyUsd: 199,
-    usage: '150 AI conversations',
-    listings: '100 active Sales listings',
-    extraConversations: '$0.99 each, if PAYG enabled',
-    featureLabel: 'Everything in Launch, plus:',
-    cta: 'Book a Demo',
-    emailSubject: 'Antbuildz AI Growth plan demo',
+    subtitle: null,
+    bestFor: 'Teams that want an AI-powered store for product discovery, enquiries and sales.',
+    monthlyUsd: 149,
+    usage: '75 / month',
+    listings: '100 (Sales)',
+    featureLabel: 'Everything in Agent, plus:',
+    cta: 'Start 14-Day Free Trial',
+    trialPlan: 'sales',
+    emailSubject: 'Antbuildz AI Sales plan enquiry',
     features: [
-      'Complete Sales Webstore',
-      'Store Builder',
-      'Custom Domain',
-      'Dedicated Product URLs',
-      'AI Recommendations with Direct Product Links',
-      'SEO & AI Search-Ready Product Pages',
-      'Sales Inventory Management',
-      'Inventory Sync',
-      'Sales Product Ingestion',
-      'Lead Intelligence',
+      'Sales Webstore',
+      '100 Sales Listings',
+      'Store Builder + Custom Domain',
+      'SEO + AI Search Pages',
+      'Multilingual Store',
+      'AI Product Links',
+      'Inventory Management + Sync',
     ],
   },
   {
-    name: 'Enterprise',
+    name: 'Rental+',
     badge: 'Best Value',
-    target: 'AI Rental & Sales Suite',
-    description: 'Manage sales, rentals and inventory in one AI-powered platform.',
-    monthlyUsd: 399,
-    usage: '300 AI conversations',
-    listings: '500 combined Sales + Rental listings',
-    extraConversations: '$0.99 each, if PAYG enabled',
-    featureLabel: 'Everything in Growth, plus:',
-    cta: 'Book a Demo',
-    emailSubject: 'Antbuildz AI Enterprise plan demo',
+    subtitle: null,
+    bestFor: 'Teams that need sales, rental, availability and bookings in one AI-powered store.',
+    monthlyUsd: 299,
+    usage: '100 / month',
+    listings: '300 (Sales + Rental)',
+    featureLabel: 'Everything in Agent, plus:',
+    cta: 'Start 14-Day Free Trial',
+    trialPlan: 'rental-plus',
+    emailSubject: 'Antbuildz AI Rental+ plan enquiry',
     features: [
-      'Complete Sales + Rental Webstore',
+      'Sales + Rental Webstore',
+      '300 Sales + Rental Listings',
+      'Store Builder + Custom Domain',
+      'SEO + AI Search Pages',
+      'Multilingual Store',
+      'AI Product Links',
+      'Sales + Rental Inventory',
       'Rental Booking System',
-      'Rental Availability & Pricing',
-      'Sales + Rental Inventory Management',
-      'Advanced Inventory Sync',
-      'Third-Party Inventory Sync',
-      'Rental Product Ingestion',
-      'Advanced Workflow Automation',
     ],
   },
   {
     name: 'Custom',
     badge: null,
-    target: 'Built Around Your Operation',
-    description: 'For businesses that need capabilities beyond the standard plans.',
+    subtitle: null,
+    bestFor: 'Businesses whose requirements go beyond the standard plans.',
     monthlyUsd: null,
-    usage: 'Custom',
-    listings: 'Higher capacity',
-    extraConversations: 'Contracted',
-    featureLabel: 'Everything in Enterprise, plus:',
-    cta: 'Contact Sales',
+    usage: '',
+    listings: '',
+    featureLabel: '',
+    cta: 'Talk to Sales',
     emailSubject: 'Custom Antbuildz AI plan enquiry',
-    features: [
-      'Higher AI conversation volume',
-      'Higher listing capacity',
-      'Custom inventory integrations',
-      'ERP / CRM / API connections',
-      'Custom workflows',
-      'Multiple brands, markets or Webstores',
-      'Tailored onboarding and support',
-    ],
+    features: [],
+    customSummary: 'For higher conversation or listing volumes, specialised deployments, multiple Webstores, or ERP, CRM and third-party integrations, ask us about a custom plan.',
   },
 ] as const;
 
@@ -436,41 +494,41 @@ const ANNUAL_PRICING_DISCOUNT = 0.2;
 
 // Approved pricing-page copy only. This does not implement metering or payments.
 const PURCHASED_CREDIT_PACKS = [
-  { conversations: 25, usd: 22 },
-  { conversations: 50, usd: 42 },
-  { conversations: 100, usd: 79 },
-  { conversations: 500, usd: 349 },
+  { sessions: 25, usd: 25 },
+  { sessions: 50, usd: 42 },
+  { sessions: 100, usd: 79 },
+  { sessions: 500, usd: 349 },
 ] as const;
 
 const PRICING_USAGE_COPY = {
-  monthly: 'Monthly Conversations reset each monthly allowance cycle and do not roll over, including on an annual subscription.',
-  purchased: 'Purchased Credits are one-time purchases through supported payment methods, valid for 12 months from purchase, and roll over until expiry.',
-  order: 'Usage order: Monthly Conversations first, then Purchased Credits (earliest expiry first), then Pay-As-You-Go if enabled.',
-  payg: 'Pay-As-You-Go costs $0.99 per additional AI conversation and requires an automatic payment method or approved billing setup. Invoice or bank-transfer customers do not automatically receive postpaid usage; customers without Pay-As-You-Go can buy prepaid Purchased Credits.',
-  cancellation: 'Purchased credits remain valid until their original expiry date but require an active Antbuildz subscription to be used.',
-  principle: 'Plan upgrades unlock more business capability. Conversation credits increase usage without forcing a plan upgrade.',
+  session: 'One AI conversation covers one buyer enquiry with up to five message exchanges. Test prompts and unrelated interactions do not count.',
+  monthly: 'Monthly allowances reset and never roll over—even on annual plans.',
+  purchased: 'Purchased AI Conversation Credits do not expire. Choose a credit pack or expressly enable Auto Top-Up. The default threshold is five total available conversations: monthly remaining plus purchased credits. Enabled Auto Top-Up purchases your selected pack using your authorised payment method whenever that threshold is reached, and may repeat as usage continues. Change or disable it in your account, or contact help@antbuildz.ai.',
+  order: 'Usage order: included monthly AI conversations first, then purchased AI Conversation Credits.',
+  cancellation: 'Purchased AI Conversation Credits do not expire, but using them requires access to the applicable Services. They have no cash value and are generally non-refundable, except for verified billing errors or where required by law.',
+  principle: 'Plan upgrades unlock more business capability. AI Conversation Credits add enquiry capacity without forcing a plan upgrade.',
 } as const;
 
 const PRICING_FAQS = [
   {
     question: 'What does the AI Sales Agent do?',
-    answer: 'It answers customer enquiries using your approved knowledge, recommends suitable products and captures leads. Launch includes AI Product Recommendations without a Webstore; dedicated product URLs and direct product links are included from Growth.',
+    answer: 'It answers customer enquiries using your approved product and business knowledge, recommends suitable products and captures leads. Agent works with your existing sales channels; Sales and Rental+ add Webstore capabilities around the same AI Sales Agent.',
   },
   {
     question: 'Can I train the AI with my catalogue?',
-    answer: 'Yes. Use your product catalogue, manuals, FAQs and business knowledge to guide the AI Sales Agent. Launch includes Knowledge Base and Agent Setup & Instructions. Growth adds Sales Product Ingestion; Enterprise adds Rental Product Ingestion.',
+    answer: 'Yes. Use your product catalogue, manuals, FAQs and business knowledge to guide the AI Sales Agent. Sales adds an AI Sales Webstore with catalogue and inventory management; Rental+ adds rental inventory, pricing, availability and booking workflows.',
   },
   {
-    question: 'What happens if I exceed my Monthly Conversations?',
-    answer: `Launch includes 50, Growth 150 and Enterprise 300 AI conversations per month. ${PRICING_USAGE_COPY.monthly} ${PRICING_USAGE_COPY.order} ${PRICING_USAGE_COPY.payg}`,
+    question: 'What happens if I use all my included AI conversations?',
+    answer: `Agent includes 50, Sales 75 and Rental+ 100 AI conversations per month. ${PRICING_USAGE_COPY.session} ${PRICING_USAGE_COPY.monthly} You can purchase AI Conversation Credits or enable Auto Top-Up when you need more capacity. ${PRICING_USAGE_COPY.order}`,
   },
   {
-    question: 'How long do Purchased Credits last, and what if I cancel?',
-    answer: `${PRICING_USAGE_COPY.purchased} They are used only after Monthly Conversations are exhausted; the earliest-expiring credits are used first. ${PRICING_USAGE_COPY.cancellation}`,
+    question: 'How do AI Conversation Credits and Auto Top-Up work?',
+    answer: `${PRICING_USAGE_COPY.purchased} They are used only after your included monthly AI conversations are exhausted; the earliest-expiring credits are used first. ${PRICING_USAGE_COPY.cancellation}`,
   },
   {
     question: 'Which plan is right for my business?',
-    answer: `Launch: Start with AI, including Multilingual Conversations. Growth: Build your AI Sales Webstore. Enterprise: Run Sales, Rental and Inventory. Custom: Extend beyond standard plans. ${PRICING_USAGE_COPY.principle}`,
+    answer: `Agent adds the AI Sales Agent to your existing channels. Sales includes Agent plus an AI Sales Webstore. Rental+ includes Sales plus rental and booking capabilities. Custom extends beyond the standard plans. ${PRICING_USAGE_COPY.principle}`,
   },
   // Preserve the existing additional-agent price and entitlement until approved.
   {
@@ -479,34 +537,43 @@ const PRICING_FAQS = [
   },
 ] as const;
 
-type PricingComparisonCopy = { label?: string; values?: readonly string[] };
-
-// Only approved mappings are changed. Unspecified legacy entitlements (storage,
-// alerts, AI learning, Sheets sync, etc.) stay in place for commercial review.
-const AGENT_COMPARISON_COPY: Record<string, PricingComparisonCopy> = {
-  Conversations: { label: 'Monthly Conversations', values: ['50', '150', '300', 'Custom'] },
-  'Structured Knowledge': { label: 'Knowledge Base' },
-  'AI Instructions Control': { label: 'Agent Setup & Instructions' },
-  'Conversation Tracking': { label: 'Conversation Monitoring' },
-  'Lead Intelligence': { values: ['No', 'Yes', 'Yes', 'Yes'] },
-  'Data Sync': { label: 'Inventory Sync', values: ['No', 'Yes', 'Advanced', 'Custom integrations'] },
-  'Workflow Automation': { values: ['No', 'No', 'Advanced', 'Custom workflows'] },
+type PricingComparisonRow = {
+  feature: string;
+  included: readonly [boolean, boolean, boolean];
 };
 
-const WEBSTORE_COMPARISON_COPY: Record<string, PricingComparisonCopy> = {
-  Conversations: { label: 'Monthly Conversations', values: ['150', '300', 'Custom'] },
-  'Total Listings': { label: 'Active Listings', values: ['100 Sales', '500 Sales + Rental', 'Higher capacity'] },
-  'Custom Webstore (URL)': { label: 'Custom Domain' },
-  'SEO & GEO Optimized': { label: 'SEO & AI Search-Ready Product Pages' },
-  'Dedicated Product Pages': { label: 'Dedicated Product URLs' },
-  'Multi-Language Support': { label: 'Multilingual Conversations' },
-  'Inventory Management': { values: ['Sales', 'Sales + Rental', 'Sales + Rental'] },
-  'Rental Booking System': { values: ['No', 'Yes', 'Yes'] },
-  'Real-Time Inventory Sync': { label: 'Inventory Sync', values: ['Yes', 'Advanced', 'Custom integrations'] },
-  'Workflow Automation': { values: ['No', 'Advanced', 'Custom workflows'] },
-  'AI Instructions Control': { label: 'Agent Setup & Instructions' },
-  'Conversation Tracking': { label: 'Conversation Monitoring' },
-};
+const PRICING_COMPARISON_ROWS: readonly PricingComparisonRow[] = [
+  { feature: 'AI Sales Agent', included: [true, true, true] },
+  { feature: 'Knowledge Base', included: [true, true, true] },
+  { feature: 'Product Recommendations', included: [true, true, true] },
+  { feature: 'Agent Instructions', included: [true, true, true] },
+  { feature: 'Lead Capture', included: [true, true, true] },
+  { feature: 'Conversation Monitoring', included: [true, true, true] },
+  { feature: 'Website Embed', included: [true, true, true] },
+  { feature: 'Multilingual AI Conversations', included: [true, true, true] },
+  { feature: 'Sales Webstore', included: [false, true, true] },
+  { feature: 'Store Builder', included: [false, true, true] },
+  { feature: 'Sales Listings', included: [false, true, true] },
+  { feature: 'Free Custom Domain Setup', included: [false, true, true] },
+  { feature: 'Dedicated Product Pages', included: [false, true, true] },
+  { feature: 'Google & AI Search-Ready', included: [false, true, true] },
+  { feature: 'Multilingual Webstore', included: [false, true, true] },
+  { feature: 'Direct Product Links', included: [false, true, true] },
+  { feature: 'Sales Inventory', included: [false, true, true] },
+  { feature: 'Inventory Sync', included: [false, true, true] },
+  { feature: 'Catalogue Import', included: [false, true, true] },
+  { feature: 'Lead Intelligence', included: [false, true, true] },
+  { feature: 'Sales + Rental Webstore', included: [false, false, true] },
+  { feature: 'Sales + Rental Listings', included: [false, false, true] },
+  { feature: 'Rental Bookings', included: [false, false, true] },
+  { feature: 'Availability & Pricing', included: [false, false, true] },
+  { feature: 'Sales + Rental Inventory', included: [false, false, true] },
+  { feature: 'Multiple Rental Units', included: [false, false, true] },
+  { feature: 'Advanced Inventory Sync', included: [false, false, true] },
+  { feature: 'Third-Party Sync', included: [false, false, true] },
+  { feature: 'Rental Catalogue Import', included: [false, false, true] },
+  { feature: 'Workflow Automation', included: [false, false, true] },
+] as const;
 
 type IndustryLink = {
   label: string;
@@ -825,7 +892,7 @@ function createDesktopIndustriesMenu() {
   panel.setAttribute('aria-label', 'Industries');
 
   const { intro } = createHeaderMenuIntro(
-    'WHO WE SERVE', 'Industrial AI by business model',
+    'Industrial AI by business model',
     'Practical AI sales workflows for products, rental, parts and technical supply.',
   );
 
@@ -874,7 +941,7 @@ function correctIndustriesMenu(root: HTMLElement) {
   if (desktopLinks) {
     const industriesMenu = desktopLinks.querySelector('.antbuildz-industries-menu')
       ?? createDesktopIndustriesMenu();
-    const pricingLink = Array.from(desktopLinks.children).find(
+    const pricingLink = desktopLinks.querySelector('.antbuildz-roles-menu') ?? Array.from(desktopLinks.children).find(
       (child) => child.textContent?.trim() === 'Pricing',
     );
     // Keep visual order and keyboard order aligned, including after remounts.
@@ -906,6 +973,123 @@ function correctHeaderLayout(root: HTMLElement) {
 
 }
 
+function correctAiRolesMenu(root: HTMLElement) {
+  const desktop = root.querySelector<HTMLElement>('.bright-nav-product-links');
+  if (!desktop || desktop.querySelector('.antbuildz-roles-menu')) return;
+  const menu = document.createElement('details');
+  menu.className = 'antbuildz-roles-menu';
+  const trigger = document.createElement('summary');
+  trigger.className = 'antbuildz-industries-menu__trigger';
+  trigger.textContent = 'AI Roles';
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.setAttribute('aria-controls', 'antbuildz-roles-dropdown');
+  const panel = document.createElement('nav');
+  panel.id = 'antbuildz-roles-dropdown';
+  panel.className = 'antbuildz-industries-menu__panel';
+  panel.setAttribute('aria-label', 'AI Roles');
+  const { intro } = createHeaderMenuIntro('One AI Agent. Multiple roles.',
+    'Built for businesses with products to sell, explain and support.', { label: 'All AI Roles', href: '/ai-roles' });
+  const links = document.createElement('div');
+  links.className = 'antbuildz-industries-menu__links antbuildz-resources-menu__links';
+  const roleColumns = [
+    AI_ROLES.slice(0, 2),
+    AI_ROLES.slice(2, 4),
+    AI_ROLES.slice(4),
+  ];
+  roleColumns.forEach((roles) => {
+    const group = document.createElement('div');
+    group.className = 'antbuildz-industries-menu__group antbuildz-roles-menu__column';
+    const groupLinks = document.createElement('div');
+    groupLinks.className = 'antbuildz-industries-menu__group-links';
+    roles.forEach(role => groupLinks.appendChild(createIndustryLink(
+      { label: role.name, href: `/ai-roles/${role.slug}`, description: role.summary },
+      'antbuildz-industries-menu__link', true,
+    )));
+    group.appendChild(groupLinks);
+    links.appendChild(group);
+  });
+  panel.append(intro, links);
+  menu.append(trigger, panel);
+  bindHeaderDropdown(menu, trigger);
+  const pricing = Array.from(desktop.children).find(child => child.textContent?.trim() === 'Pricing');
+  if (pricing) pricing.insertAdjacentElement('afterend', menu);
+  else desktop.appendChild(menu);
+}
+
+/** Group product destinations without removing the copied router's owned links. */
+function correctProductsMenu(root: HTMLElement) {
+  const desktop = root.querySelector<HTMLElement>('.bright-nav-product-links');
+  if (!desktop) return;
+  let menu = desktop.querySelector<HTMLDetailsElement>('.antbuildz-products-menu');
+  if (!menu) {
+    menu = document.createElement('details');
+    menu.className = 'antbuildz-products-menu';
+    const trigger = document.createElement('summary');
+    trigger.className = 'antbuildz-industries-menu__trigger';
+    trigger.textContent = 'Products';
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.setAttribute('aria-controls', 'antbuildz-products-dropdown');
+    const panel = document.createElement('nav');
+    panel.id = 'antbuildz-products-dropdown';
+    panel.className = 'antbuildz-industries-menu__panel';
+    panel.setAttribute('aria-label', 'Products');
+    const { intro } = createHeaderMenuIntro('Your Agent, Webstore and Console',
+      'Answer product questions, connect your catalogue and manage your AI in one platform.');
+    const links = document.createElement('div');
+    links.className = 'antbuildz-industries-menu__links antbuildz-resources-menu__links';
+    const products = [
+      { group: 'Engage customers', label: 'AI Sales Agent', href: '/ai-sales-agent', description: 'Deploy a 24/7 AI Agent to answer enquiries across your online channels and supported languages.' },
+      { group: 'Guide product discovery', label: 'AI Webstore Suite', href: '/ai-webstore-suite', description: 'Connect your sales and rental catalogue and inventory for more accurate product recommendations.' },
+      { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Train and deploy an on-brand AI Agent with your company knowledge, inventory and selected role.' },
+    ];
+    products.forEach((product, index) => {
+      const group = document.createElement('section');
+      group.className = 'antbuildz-industries-menu__group';
+      const title = document.createElement('p');
+      title.id = `antbuildz-product-group-${index + 1}`;
+      title.textContent = product.group;
+      group.setAttribute('aria-labelledby', title.id);
+      const groupLinks = document.createElement('div');
+      groupLinks.className = 'antbuildz-industries-menu__group-links';
+      const link = createIndustryLink(product, 'antbuildz-industries-menu__link', true);
+      bindHeaderNavigation(link);
+      groupLinks.appendChild(link);
+      group.append(title, groupLinks);
+      links.appendChild(group);
+    });
+    panel.append(intro, links);
+    menu.append(trigger, panel);
+    bindHeaderDropdown(menu, trigger);
+    desktop.prepend(menu);
+  }
+  Array.from(desktop.children).forEach(child => {
+    if (child instanceof HTMLAnchorElement && ['/ai-sales-agent', '/ai-webstore-suite', '/ai-agent-console'].includes(child.getAttribute('href') ?? '')) child.hidden = true;
+  });
+  menu.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => {
+    if (link.pathname === window.location.pathname) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+  // Keep visual and keyboard order identical. Move only when needed so the
+  // transferred shell's mutation observer settles after the first correction.
+  const ordered = [menu, desktop.querySelector('.antbuildz-roles-menu'), desktop.querySelector('.antbuildz-industries-menu'), desktop.querySelector('.antbuildz-resources-menu'), Array.from(desktop.children).find(child => child instanceof HTMLAnchorElement && child.getAttribute('href') === '/pricing')];
+  let previous: Element | undefined;
+  ordered.forEach(item => {
+    if (!item) return;
+    if (!previous) { if (desktop.firstElementChild !== item) desktop.prepend(item); }
+    else if (previous.nextElementSibling !== item) previous.insertAdjacentElement('afterend', item);
+    previous = item;
+  });
+}
+
+/** Use the same menu markup, content and behaviour on source-rendered public pages. */
+export function syncPublicHeaderDropdowns(header: HTMLElement) {
+  correctIndustriesMenu(header);
+  correctAiRolesMenu(header);
+  correctResourcesMenu(header);
+  correctProductsMenu(header);
+  header.querySelectorAll<HTMLElement>('[data-menu-fallback]').forEach(link => { link.hidden = true; });
+}
+
 function createWordmark() {
   const wordmark = document.createElement('span');
   wordmark.className = 'antbuildz-ai-wordmark';
@@ -928,6 +1112,43 @@ function createWordmark() {
   wordmark.appendChild(brand);
   wordmark.appendChild(ai);
   return wordmark;
+}
+
+function correctRouteLoader(root: HTMLElement) {
+  root.querySelectorAll<HTMLElement>('[role="status"][aria-live="polite"]').forEach((loader) => {
+    const isTransferredLoader = loader.textContent?.trim() === 'Loading workspace…';
+    const isAntbuildzLoader = loader.dataset.antbuildzRouteLoader === 'true';
+    if (!isTransferredLoader && !isAntbuildzLoader) return;
+    if (isAntbuildzLoader && loader.querySelector('.antbuildz-route-loader__stage')) return;
+
+    loader.dataset.antbuildzRouteLoader = 'true';
+    loader.className = 'antbuildz-route-loader';
+    loader.setAttribute('aria-label', 'Loading Antbuildz AI');
+
+    const visual = document.createElement('div');
+    visual.className = 'antbuildz-route-loader__visual';
+    visual.setAttribute('aria-hidden', 'true');
+
+    const stage = document.createElement('div');
+    stage.className = 'antbuildz-route-loader__stage';
+
+    const baseWordmark = createWordmark();
+    baseWordmark.classList.add('antbuildz-route-loader__wordmark', 'is-base');
+
+    const progress = document.createElement('div');
+    progress.className = 'antbuildz-route-loader__progress';
+    const progressWordmark = createWordmark();
+    progressWordmark.classList.add('antbuildz-route-loader__wordmark', 'is-progress');
+    progress.appendChild(progressWordmark);
+
+    stage.append(baseWordmark, progress);
+    visual.appendChild(stage);
+
+    const status = document.createElement('span');
+    status.className = 'antbuildz-route-loader__status';
+    status.textContent = 'Loading Antbuildz AI';
+    loader.replaceChildren(visual, status);
+  });
 }
 
 function correctWordmarks(root: HTMLElement) {
@@ -1053,7 +1274,7 @@ function correctLinks(root: HTMLElement) {
       if (link.getAttribute('href') === window.location.pathname) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     }
-    if (link.closest('.bright-nav-product-links')
+    if (link.parentElement?.matches('.bright-nav-product-links')
       && (label === 'Backend Admin' || label === 'AI Agent Console' || label === 'Resources')) {
       if (label !== 'Resources') link.textContent = 'Resources';
       link.setAttribute('href', '/resources');
@@ -1084,57 +1305,52 @@ function correctLinks(root: HTMLElement) {
 
 function correctResourceRoles(root: HTMLElement) {
   if (window.location.pathname !== '/resources') return;
+  if (window.location.hash === '#ai-agent-roles') {
+    window.location.replace('/ai-roles');
+    return;
+  }
+  root.querySelectorAll<HTMLElement>('.next-step-panel--resources').forEach((panel) => {
+    panel.hidden = true;
+    panel.inert = true;
+    panel.setAttribute('aria-hidden', 'true');
+  });
   const topics = root.querySelector<HTMLElement>('.bright-resource-topic-list');
   const trigger = Array.from(topics?.querySelectorAll<HTMLButtonElement>('button') ?? []).find(
     (button) => button.querySelector('span:nth-child(2)')?.textContent?.trim() === 'AI Agent Roles',
   );
-  if (!topics || !trigger) return;
+  if (!topics) return;
 
-  let panel = topics.querySelector<HTMLElement>('#antbuildz-resource-role-links');
-  if (!panel) {
-    panel = document.createElement('nav');
-    panel.id = 'antbuildz-resource-role-links';
-    panel.className = 'antbuildz-resource-role-links';
-    panel.setAttribute('aria-label', 'AI Agent role guides');
-    panel.hidden = trigger.getAttribute('aria-expanded') !== 'true';
-    RESOURCE_ROLE_LINKS.forEach((role) => {
-      const link = document.createElement('a');
-      link.href = role.href;
-      link.textContent = role.label;
-      panel!.appendChild(link);
-    });
-    trigger.insertAdjacentElement('afterend', panel);
-  }
-
-  trigger.setAttribute('aria-controls', panel.id);
-  if (trigger.dataset.antbuildzRoleDisclosure === 'true') return;
-  trigger.dataset.antbuildzRoleDisclosure = 'true';
-  trigger.setAttribute('aria-expanded', String(!panel.hidden));
-
-  const setExpanded = (expanded: boolean) => {
-    trigger.setAttribute('aria-expanded', String(expanded));
-    const currentPanel = topics.querySelector<HTMLElement>('#antbuildz-resource-role-links');
-    if (currentPanel) currentPanel.hidden = !expanded;
-  };
-  // Preserve the existing category filter; the disclosure adds direct links.
-  trigger.addEventListener('click', () => {
-    setExpanded(trigger.getAttribute('aria-expanded') !== 'true');
+  // Keep React-owned nodes mounted but remove the role collection from this
+  // educational library. AI Roles has its own dedicated page and navigation.
+  if (trigger && !trigger.hidden) trigger.hidden = true;
+  root.querySelectorAll<HTMLElement>('.bright-resource-collection').forEach(collection => {
+    if (collection.querySelector('h3')?.textContent?.trim() === 'AI Agent Roles' && !collection.hidden) collection.hidden = true;
   });
-  trigger.addEventListener('keydown', (event) => {
-    if (event.key !== 'Enter' && event.key !== ' ') return;
+  const total = topics.querySelector('button strong');
+  if (total?.textContent === '49') total.textContent = '44';
+}
+
+function bindFooterAiHelpNavigation(footer: HTMLElement) {
+  if (footer.dataset.antbuildzAiHelpNavigation === 'true') return;
+  footer.dataset.antbuildzAiHelpNavigation = 'true';
+  footer.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented
+      || event.button !== 0
+      || event.metaKey
+      || event.ctrlKey
+      || event.shiftKey
+      || event.altKey
+      || !(event.target instanceof Element)
+    ) return;
+    const link = event.target.closest<HTMLAnchorElement>('a[href="/help/ai"]');
+    if (!link || !footer.contains(link)) return;
     event.preventDefault();
-    if (!event.repeat) trigger.click();
-  });
-  topics.addEventListener('click', (event) => {
-    const button = (event.target as Element).closest('button');
-    if (button && button !== trigger) setExpanded(false);
-  });
-  topics.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape' || trigger.getAttribute('aria-expanded') !== 'true') return;
-    event.preventDefault();
-    setExpanded(false);
-    trigger.focus();
-  });
+    event.stopImmediatePropagation();
+    // The transferred footer still carries its former React Router destination.
+    // Use a full navigation so both AI FAQ tabs render immediately.
+    window.location.assign(new URL('/help/ai', window.location.origin).href);
+  }, true);
 }
 
 function correctFooter(root: HTMLElement) {
@@ -1142,6 +1358,7 @@ function correctFooter(root: HTMLElement) {
   if (!footer) return;
 
   footer.setAttribute('aria-label', 'Antbuildz AI footer');
+  bindFooterAiHelpNavigation(footer);
   footer.querySelector<HTMLElement>('nav[aria-label="Marketplace"]')?.setAttribute('hidden', '');
 
   const languageUtilities = root.querySelector<HTMLElement>('.antbuildz-header-utilities');
@@ -1160,6 +1377,17 @@ function correctFooter(root: HTMLElement) {
 
   const brandCopy = footer.querySelector<HTMLElement>('.abz-public-footer__brand p');
   setPricingText(brandCopy, 'We are Building the Intelligence Layer for Industrial Businesses.');
+
+  const footerBrand = footer.querySelector<HTMLElement>('.abz-public-footer__brand');
+  if (footerBrand && !footerBrand.querySelector('[data-antbuildz-footer-email="true"]')) {
+    const emailAction = footer.ownerDocument.createElement('a');
+    emailAction.className = 'antbuildz-footer-email';
+    emailAction.dataset.antbuildzFooterEmail = 'true';
+    emailAction.href = 'mailto:help@antbuildz.ai?subject=Antbuildz%20AI%20enquiry';
+    emailAction.setAttribute('aria-label', 'Email Antbuildz AI');
+    emailAction.textContent = 'Email Us';
+    footerBrand.appendChild(emailAction);
+  }
 
   const companyResources = footer.querySelector<HTMLAnchorElement>(
     'nav[aria-label="Company"] a[href="/blogs"], nav[aria-label="Company"] a[href="/resources"]',
@@ -1182,7 +1410,7 @@ function correctFooter(root: HTMLElement) {
     'nav[aria-label="Company"] a[href="/agreements"]',
   );
   if (companyPolicies) {
-    setPricingText(companyPolicies, 'AI Agreements & Policies');
+    setPricingText(companyPolicies, 'Terms & Policy');
     companyPolicies.setAttribute('href', '/agreements');
   }
 
@@ -1204,6 +1432,7 @@ function correctFooter(root: HTMLElement) {
     marketplaceItem.appendChild(marketplaceLink);
     companyList.appendChild(marketplaceItem);
   }
+
 }
 
 const ABOUT_AI_DESTINATION = 'https://antbuildz.ai';
@@ -1811,8 +2040,10 @@ function formatUsdAmount(amount: number) {
   }).format(amount);
 }
 
-function roundAnnualUsdAmount(amount: number) {
-  return Math.ceil(amount);
+function getAnnualMonthlyUsd(monthlyUsd: number) {
+  // Keep the familiar 9-ending presentation while ensuring that the annual
+  // total is exactly twelve times the displayed monthly equivalent.
+  return Math.floor(monthlyUsd * (1 - ANNUAL_PRICING_DISCOUNT));
 }
 
 function setPricingDetail(details: HTMLElement, key: string, label: string, value: string) {
@@ -1827,34 +2058,116 @@ function setPricingDetail(details: HTMLElement, key: string, label: string, valu
   setPricingText(row.querySelector('strong'), value);
 }
 
+function simplifyCustomPricingCard(card: HTMLElement, summary: string) {
+  card.classList.add('antbuildz-pricing-custom-compact');
+
+  const planName = card.querySelector<HTMLElement>('.pricing-plan-name');
+  setPricingText(planName, 'Need More Than a Standard Plan?');
+
+  let label = card.querySelector<HTMLElement>('.antbuildz-pricing-custom-label');
+  if (!label) {
+    label = card.ownerDocument.createElement('div');
+    label.className = 'antbuildz-pricing-custom-label';
+    planName?.insertAdjacentElement('beforebegin', label);
+  }
+  setPricingText(label, 'Custom');
+
+  let copy = card.querySelector<HTMLElement>('.antbuildz-pricing-custom-copy');
+  if (!copy) {
+    copy = card.ownerDocument.createElement('p');
+    copy.className = 'antbuildz-pricing-custom-copy';
+    card.querySelector('.pricing-cta')?.insertAdjacentElement('beforebegin', copy);
+  }
+  setPricingText(copy, summary);
+
+  card.querySelectorAll(
+    '.antbuildz-pricing-badge, .pricing-target, .pricing-price-row, .antbuildz-pricing-annual-note, .antbuildz-pricing-details, .pricing-feature-group-label, .pricing-features, .pricing-divider',
+  ).forEach((element) => element.remove());
+}
+
 function correctPricingComparison(
   block: HTMLElement | null,
-  plans: readonly AgentPricingPlan[],
-  copy: Record<string, PricingComparisonCopy>,
+  legacyBlock: HTMLElement | null,
 ) {
   if (!block) return;
-  block.querySelectorAll('.pricing-compare-plan-chip').forEach((chip, index) => {
-    if (plans[index]) setPricingText(chip, plans[index].name);
+  if (legacyBlock) {
+    legacyBlock.hidden = true;
+    legacyBlock.setAttribute('aria-hidden', 'true');
+    legacyBlock.setAttribute('inert', '');
+  }
+  if (block.dataset.antbuildzUnifiedComparison === 'true') return;
+
+  const ownerDocument = block.ownerDocument;
+  const card = ownerDocument.createElement('div');
+  card.className = 'pricing-compare-card';
+
+  const scroll = ownerDocument.createElement('div');
+  scroll.className = 'pricing-compare-scroll';
+  scroll.setAttribute('role', 'region');
+  scroll.setAttribute('aria-labelledby', 'antbuildz-plan-comparison-title');
+  scroll.setAttribute('tabindex', '0');
+
+  const table = ownerDocument.createElement('table');
+  table.className = 'pricing-compare-table pricing-compare-table-4plans antbuildz-plan-comparison-table';
+
+  const head = ownerDocument.createElement('thead');
+  const headRow = ownerDocument.createElement('tr');
+  ['Feature', 'Agent', 'Sales', 'Rental+'].forEach((label, index) => {
+    const heading = ownerDocument.createElement('th');
+    heading.className = index === 0 ? 'pricing-compare-th-feature' : 'pricing-compare-th-plan';
+    heading.setAttribute('scope', 'col');
+    if (index === 0) {
+      heading.textContent = label;
+    } else {
+      const chip = ownerDocument.createElement('span');
+      chip.className = 'pricing-compare-plan-chip';
+      chip.textContent = label;
+      heading.appendChild(chip);
+    }
+    headRow.appendChild(heading);
   });
-  block.querySelectorAll<HTMLElement>('.pricing-compare-row').forEach((row) => {
-    const label = row.querySelector('.pricing-compare-td-feature');
-    const originalLabel = row.dataset.antbuildzOriginalFeature ?? label?.textContent?.trim();
-    if (!originalLabel) return;
-    row.dataset.antbuildzOriginalFeature = originalLabel;
-    const update = copy[originalLabel];
-    if (!update) return;
-    if (update.label) setPricingText(label, update.label);
-    row.querySelectorAll('.pricing-compare-td-value').forEach((cell, index) => {
-      const value = update.values?.[index];
-      if (value === undefined) return;
-      setPricingText(cell, value);
-      cell.classList.toggle('is-yes', value === 'Yes');
-      cell.classList.toggle('is-no', value === 'No');
+  head.appendChild(headRow);
+
+  const body = ownerDocument.createElement('tbody');
+  PRICING_COMPARISON_ROWS.forEach(({ feature, included }, rowIndex) => {
+    const row = ownerDocument.createElement('tr');
+    row.className = 'pricing-compare-row';
+    if (rowIndex === 8 || rowIndex === 20) row.classList.add('is-tier-start');
+
+    const label = ownerDocument.createElement('th');
+    label.className = 'pricing-compare-td-feature';
+    label.setAttribute('scope', 'row');
+    label.textContent = feature;
+    row.appendChild(label);
+
+    included.forEach((isIncluded) => {
+      const cell = ownerDocument.createElement('td');
+      cell.className = `pricing-compare-td-value ${isIncluded ? 'is-yes' : 'is-no'}`;
+      cell.textContent = isIncluded ? '✓' : '—';
+      cell.setAttribute('aria-label', isIncluded ? 'Included' : 'Not included');
+      row.appendChild(cell);
     });
+    body.appendChild(row);
   });
+
+  table.appendChild(head);
+  table.appendChild(body);
+  scroll.appendChild(table);
+  card.appendChild(scroll);
+  block.replaceChildren(card);
+  block.dataset.antbuildzUnifiedComparison = 'true';
 }
 
 function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLElement) {
+  // The closing CTA already completes the pricing journey. Remove the copied
+  // assurance strip beneath it so the page can transition directly to the
+  // shared footer without repeating four generic feature claims.
+  root.querySelector('.pricing-trust-grid')?.remove();
+
+  // Custom requirements are already handled by the dedicated Custom plan.
+  // Remove the repeated enterprise contact strip between the FAQ and CTA.
+  root.querySelector('.pricing-enterprise-note')?.remove();
+
   const heroTitle = root.querySelector<HTMLElement>('.pricing-hero h1');
   if (heroTitle && heroTitle.dataset.antbuildzPricingTitle !== 'channels') {
     heroTitle.dataset.antbuildzPricingTitle = 'channels';
@@ -1884,37 +2197,50 @@ function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLEleme
   }
   setPricingText(
     agentSection.querySelector('.pricing-conversation-note p'),
-    `A conversation means one meaningful live AI-agent session; Playground is for test prompts inside the AI console. ${PRICING_USAGE_COPY.monthly} Plan, Purchased Credit and Pay-As-You-Go prices are in USD; the existing Additional AI Agent price is shown separately in SGD.`,
+    `${PRICING_USAGE_COPY.session} ${PRICING_USAGE_COPY.monthly} Plan and AI Conversation Credit prices are in USD; the existing Additional AI Agent price is shown separately in SGD.`,
   );
 
   const packCard = root.querySelector('.pricing-topup-table')?.closest('.pricing-addon-card');
   if (packCard) {
-    setPricingText(packCard.querySelector('h3'), 'Purchased Credits');
+    setPricingText(packCard.querySelector('h3'), 'AI Conversation Credits');
     const descriptions = packCard.querySelectorAll('.pricing-addon-desc');
-    setPricingText(descriptions[0], PRICING_USAGE_COPY.purchased);
-    setPricingText(descriptions[1], 'Buy more upfront and save on each conversation.');
+    setPricingText(descriptions[0], 'Add credits when you need more conversations.');
+    setPricingText(descriptions[1], 'Choose a credit pack or use Auto Top-Up. Purchased credits do not expire.');
+    const headings = packCard.querySelectorAll('thead th');
+    setPricingText(headings[0], 'Credit pack');
+    setPricingText(headings[1], 'Price');
     packCard.querySelectorAll('tbody tr').forEach((row, index) => {
       const pack = PURCHASED_CREDIT_PACKS[index];
       if (!pack) return;
       const cells = row.querySelectorAll('td');
-      setPricingText(cells[0], `${pack.conversations} conversations`);
-      setPricingText(cells[1], `$${pack.usd} · $${(pack.usd / pack.conversations).toFixed(2)}/conversation`);
+      setPricingText(cells[0], `${pack.sessions} credits`);
+      setPricingText(cells[1], `US$${formatUsdAmount(pack.usd)}`);
     });
   }
 
-  correctPricingComparison(
-    root.querySelector('#compare-features-ai-agent'), AGENT_PRICING_PLANS, AGENT_COMPARISON_COPY,
-  );
-  correctPricingComparison(
-    root.querySelector('#compare-features-webstore'), AGENT_PRICING_PLANS.slice(1), WEBSTORE_COMPARISON_COPY,
-  );
+  const comparisonHeader = root.querySelector<HTMLElement>('#compare-features > .pricing-section-header');
+  const comparisonLabel = comparisonHeader?.querySelector<HTMLElement>('.pricing-section-label');
+  const comparisonTitle = comparisonHeader?.querySelector<HTMLElement>('h2');
+  setPricingText(comparisonLabel, 'Plan Comparison');
+  if (comparisonTitle && comparisonTitle.dataset.antbuildzConsolidated !== 'true') {
+    const highlightedWord = document.createElement('span');
+    highlightedWord.className = 'pricing-gradient-text';
+    highlightedWord.textContent = 'Features';
+    comparisonTitle.replaceChildren(
+      document.createTextNode('Compare '),
+      highlightedWord,
+      document.createTextNode(' Side by Side'),
+    );
+    comparisonTitle.id = 'antbuildz-plan-comparison-title';
+    comparisonTitle.dataset.antbuildzConsolidated = 'true';
+  }
   setPricingText(
-    root.querySelector('#compare-features-ai-agent .pricing-compare-subtitle'),
-    'Launch, Growth, Enterprise and Custom: compare AI capabilities across the four subscription plans.',
+    comparisonHeader?.querySelector('p'),
+    'One AI Sales Agent across every plan; Sales adds an AI Sales Webstore, while Rental+ adds rental, booking and combined inventory capabilities.',
   );
-  setPricingText(
-    root.querySelector('#compare-features-webstore .pricing-compare-subtitle'),
-    'Growth includes the Sales Webstore. Enterprise adds Rental. Custom extends beyond the standard plans.',
+  correctPricingComparison(
+    root.querySelector('#compare-features-ai-agent'),
+    root.querySelector('#compare-features-webstore'),
   );
 
   root.querySelectorAll('.pricing-faq-item').forEach((item, index) => {
@@ -1925,15 +2251,27 @@ function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLEleme
     setPricingText(item.querySelector('.pricing-faq-answer p'), faq.answer);
   });
 
-  // Avoid the copied footer CTA's obsolete Starter checkout price. Reuse the
-  // enquiry-only behaviour of the four corrected subscription cards.
-  const bottomCta = root.querySelector<HTMLButtonElement>('.pricing-bottom-cta .pricing-cta-white');
-  if (bottomCta && !pricingCtaBindings.has(bottomCta)) {
-    pricingCtaBindings.add(bottomCta);
-    bottomCta.addEventListener('click', (event) => {
+  // Replace the copied checkout actions with the approved public conversion
+  // paths while keeping the transferred CTA structure and native buttons.
+  const bottomDemoCta = root.querySelector<HTMLButtonElement>('.pricing-bottom-cta .pricing-cta-white');
+  setPricingText(bottomDemoCta, 'Book a Demo');
+  if (bottomDemoCta && !pricingCtaBindings.has(bottomDemoCta)) {
+    pricingCtaBindings.add(bottomDemoCta);
+    bottomDemoCta.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
-      window.location.href = `mailto:hello@antbuildz.com?subject=${encodeURIComponent('Antbuildz AI plan enquiry')}`;
+      window.location.assign(new URL(DEMO_REQUEST_PATH, window.location.origin).href);
+    });
+  }
+
+  const bottomEmailCta = root.querySelector<HTMLButtonElement>('.pricing-bottom-cta .pricing-cta-outline-white');
+  setPricingText(bottomEmailCta, 'Email Sales');
+  if (bottomEmailCta && !pricingCtaBindings.has(bottomEmailCta)) {
+    pricingCtaBindings.add(bottomEmailCta);
+    bottomEmailCta.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      window.location.href = `mailto:help@antbuildz.ai?subject=${encodeURIComponent('Antbuildz AI plan enquiry')}`;
     });
   }
 }
@@ -2000,8 +2338,8 @@ function correctPricing(root: HTMLElement) {
     const card = cards[index];
     if (!card) return;
 
-    card.dataset.antbuildzPlan = plan.name.toLowerCase();
-    card.classList.toggle('pricing-card-featured', plan.badge === 'Most Popular');
+    card.dataset.antbuildzPlan = plan.name === 'Rental+' ? 'rental-plus' : plan.name.toLowerCase();
+    card.classList.toggle('pricing-card-featured', plan.name === 'Sales');
 
     let badge = card.querySelector<HTMLElement>('.antbuildz-pricing-badge');
     if (!badge) {
@@ -2010,13 +2348,34 @@ function correctPricing(root: HTMLElement) {
       card.insertAdjacentElement('afterbegin', badge);
     }
     badge.classList.toggle('is-empty', !plan.badge);
-    badge.classList.toggle('is-popular', plan.badge === 'Most Popular');
+    badge.classList.toggle('is-popular', plan.name === 'Sales');
     setPricingText(badge, plan.badge ?? 'Plan badge');
     badge.setAttribute('aria-hidden', plan.badge ? 'false' : 'true');
 
     setPricingText(card.querySelector('.pricing-plan-name'), plan.name);
-    // Use the existing text slot without adding a new card element.
-    setPricingText(card.querySelector('.pricing-target'), `${plan.target}. ${plan.description}`);
+    const positioning = card.querySelector<HTMLElement>('.pricing-target');
+    const positioningSignature = `${plan.subtitle}|${plan.bestFor}|no-feature-intro`;
+    if (positioning && positioning.dataset.antbuildzPricingPositioning !== positioningSignature) {
+      const bestFor = positioning.ownerDocument.createElement('span');
+      bestFor.className = 'antbuildz-pricing-best-for';
+      const bestForLabel = positioning.ownerDocument.createElement('strong');
+      bestForLabel.textContent = 'Best for:';
+      bestFor.append(bestForLabel, positioning.ownerDocument.createTextNode(` ${plan.bestFor}`));
+
+      if (plan.subtitle) {
+        const subtitle = positioning.ownerDocument.createElement('span');
+        subtitle.className = 'antbuildz-pricing-subtitle';
+        subtitle.textContent = plan.subtitle;
+        positioning.replaceChildren(subtitle, bestFor);
+      } else {
+        positioning.replaceChildren(bestFor);
+      }
+      positioning.dataset.antbuildzPricingPositioning = positioningSignature;
+      positioning.setAttribute(
+        'aria-label',
+        `${plan.subtitle ? `${plan.subtitle}. ` : ''}Best for: ${plan.bestFor}`,
+      );
+    }
 
     const price = card.querySelector<HTMLElement>('.pricing-price');
     const period = card.querySelector<HTMLElement>('.pricing-price-period');
@@ -2032,9 +2391,9 @@ function correctPricing(root: HTMLElement) {
     if (plan.monthlyUsd) {
       annualNote.classList.remove('is-placeholder');
       const monthlyEquivalent = billingCycle === 'annual'
-        ? roundAnnualUsdAmount(plan.monthlyUsd * (1 - ANNUAL_PRICING_DISCOUNT))
+        ? getAnnualMonthlyUsd(plan.monthlyUsd)
         : plan.monthlyUsd;
-      setPricingText(price, `$${formatUsdAmount(monthlyEquivalent)}`);
+      setPricingText(price, `US$${formatUsdAmount(monthlyEquivalent)}`);
       if (period) {
         period.hidden = false;
         setPricingText(period, '/mo');
@@ -2042,12 +2401,10 @@ function correctPricing(root: HTMLElement) {
       if (annualNote) {
         annualNote.hidden = billingCycle !== 'annual';
         if (billingCycle === 'annual') {
-          const annualTotal = roundAnnualUsdAmount(
-            plan.monthlyUsd * 12 * (1 - ANNUAL_PRICING_DISCOUNT),
-          );
+          const annualTotal = monthlyEquivalent * 12;
           setPricingText(
             annualNote,
-            `$${formatUsdAmount(annualTotal)} billed annually · Save 20%`,
+            `US$${formatUsdAmount(annualTotal)} billed annually · Save 20%`,
           );
         }
       }
@@ -2062,7 +2419,9 @@ function correctPricing(root: HTMLElement) {
     const button = card.querySelector<HTMLButtonElement>('.pricing-cta');
     if (button) {
       setPricingText(button, plan.cta);
+      button.setAttribute('aria-label', plan.trialPlan ? `${plan.cta} — ${plan.name} plan` : plan.cta);
       button.classList.toggle('pricing-cta-featured', plan.badge === 'Most Popular');
+      button.dataset.antbuildzTrialPlan = plan.trialPlan ?? '';
       button.dataset.antbuildzEmailSubject = plan.emailSubject;
       button.dataset.antbuildzDemo = String(plan.cta === 'Book a Demo');
       if (!pricingCtaBindings.has(button)) {
@@ -2070,14 +2429,37 @@ function correctPricing(root: HTMLElement) {
         button.addEventListener('click', (event) => {
           event.preventDefault();
           event.stopImmediatePropagation();
+          const trialPlan = button.dataset.antbuildzTrialPlan;
+          if (trialPlan) {
+            const destination = new URL('/signup', window.location.origin);
+            destination.searchParams.set('plan', trialPlan);
+            destination.searchParams.set('trial', '14-day');
+            window.location.assign(destination.href);
+            return;
+          }
           if (button.dataset.antbuildzDemo === 'true') {
             window.location.assign(new URL(DEMO_REQUEST_PATH, window.location.origin).href);
             return;
           }
           const subject = button.dataset.antbuildzEmailSubject ?? 'Antbuildz AI pricing enquiry';
-          window.location.href = `mailto:hello@antbuildz.com?subject=${encodeURIComponent(subject)}`;
+          window.location.href = `mailto:help@antbuildz.ai?subject=${encodeURIComponent(subject)}`;
         });
       }
+    }
+
+    let trialNote = card.querySelector<HTMLElement>('.antbuildz-pricing-trial-note');
+    if (plan.trialPlan && button) {
+      if (!trialNote) {
+        trialNote = document.createElement('p');
+        trialNote.className = 'antbuildz-pricing-trial-note';
+        button.insertAdjacentElement('afterend', trialNote);
+      }
+      trialNote.id = `pricing-trial-note-${plan.trialPlan}`;
+      button.setAttribute('aria-describedby', trialNote.id);
+      setPricingText(trialNote, 'Credit card required');
+    } else {
+      trialNote?.remove();
+      button?.removeAttribute('aria-describedby');
     }
 
     let details = card.querySelector<HTMLElement>('.antbuildz-pricing-details');
@@ -2086,11 +2468,20 @@ function correctPricing(root: HTMLElement) {
       details.className = 'antbuildz-pricing-details';
       button?.insertAdjacentElement('beforebegin', details);
     }
-    setPricingDetail(details, 'usage', 'Monthly Conversations', plan.usage);
+    let detailsHeading = details.querySelector<HTMLElement>('.antbuildz-pricing-details-heading');
+    if (!detailsHeading) {
+      detailsHeading = document.createElement('div');
+      detailsHeading.className = 'antbuildz-pricing-details-heading';
+      details.prepend(detailsHeading);
+    }
+    setPricingText(detailsHeading, 'Plan allowances');
+    setPricingDetail(details, 'usage', 'Included AI conversations', plan.usage);
     setPricingDetail(details, 'listings', 'Listings', plan.listings);
-    setPricingDetail(details, 'overage', 'Extra conversations', plan.extraConversations);
+    details.querySelector('[data-antbuildz-pricing-detail="overage"]')?.remove();
 
-    setPricingText(card.querySelector('.pricing-feature-group-label'), plan.featureLabel);
+    const featureLabel = card.querySelector<HTMLElement>('.pricing-feature-group-label');
+    card.querySelector('.antbuildz-pricing-feature-intro')?.remove();
+    setPricingText(featureLabel, plan.featureLabel);
 
     const featureRows = Array.from(card.querySelectorAll<HTMLElement>('.pricing-feature-row'));
     // Repeat the existing row pattern for the full approved feature list.
@@ -2106,6 +2497,8 @@ function correctPricing(root: HTMLElement) {
       row.hidden = !feature;
       if (feature) setPricingText(row.lastElementChild, feature);
     });
+
+    if (plan.customSummary) simplifyCustomPricingCard(card, plan.customSummary);
   });
   correctPricingSupportingCopy(root, agentSection);
 }
@@ -2146,20 +2539,30 @@ function removeWhoWeServeBreadcrumb(root: HTMLElement) {
 }
 
 function applyAntbuildzAiCorrections(root: HTMLElement) {
+  correctRouteLoader(root);
   correctWordmarks(root);
   correctLinks(root);
   correctIndustriesMenu(root);
   correctHeaderLayout(root);
+  correctAiRolesMenu(root);
   correctPublicHeroHeader(root);
   correctResourceRoles(root);
+  correctResourceCopy(root, window.location.pathname);
   correctResourcesMenu(root);
+  correctProductsMenu(root);
   correctPublicDrawer();
   correctFooter(root);
   correctAboutEcosystem(root);
+  syncAiRoleNavigation(root, AI_ROLE_LINKS, AI_ROLE_REDIRECTS);
+  syncResourceNavigation(root);
   correctHomepage(root);
   correctPricing(root);
   correctDemoRequest(root);
+  correctLegalAcceptance(root);
   correctSalesAgentCopy(root, window.location.pathname);
+  applyPublicCtaSystem(root, window.location.pathname);
+  syncLegalNavigation(root);
+  syncSalesAgentHeroThemes(root, window.location.pathname);
   simplifyAgreementHub(root);
   syncAgreementMetadata(document, window.location.pathname);
   scopeAiHelpExperience(root, window.location.pathname);
@@ -2176,6 +2579,7 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   const pageTitle = PAGE_TITLES[window.location.pathname];
   if (pageTitle) document.title = pageTitle;
   syncHomepageMetadata(document, window.location.pathname);
+  syncDefaultSocialShareImage(document);
 }
 
 /**
@@ -2188,6 +2592,65 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     const root = document.getElementById('root');
     if (!root) return;
 
+    // The copied SPA updates the document head after hydration. Preserve the
+    // authoritative metadata rendered by the Next route so canonicals never
+    // fall back to localhost or the retired antbuildzai.com domain.
+    const protectedPathname = window.location.pathname;
+    const transferredResourcePath = getTransferredResourcePath(protectedPathname);
+    const nativeReplaceState = window.history.replaceState.bind(window.history);
+    const protectedTitle = document.title;
+    const protectedCanonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href ?? '';
+    const protectedRouteSchema = document.getElementById('route-jsonld')?.textContent ?? '';
+    const protectedMeta = new Map<string, string>();
+    const metadataSelectors = [
+      'meta[name="description"]',
+      'meta[name="robots"]',
+      'meta[name="googlebot"]',
+      'meta[property="og:title"]',
+      'meta[property="og:description"]',
+      'meta[property="og:url"]',
+      'meta[property="og:type"]',
+      'meta[property="og:site_name"]',
+      'meta[property="og:locale"]',
+      'meta[property="og:image"]',
+      'meta[property="og:image:alt"]',
+      'meta[property="og:image:width"]',
+      'meta[property="og:image:height"]',
+      'meta[name="twitter:card"]',
+      'meta[name="twitter:title"]',
+      'meta[name="twitter:description"]',
+      'meta[name="twitter:image"]',
+      'meta[name="twitter:image:alt"]',
+    ];
+    for (const selector of metadataSelectors) {
+      const value = document.querySelector<HTMLMetaElement>(selector)?.content;
+      if (value) protectedMeta.set(selector, value);
+    }
+    const restoreServerMetadata = () => {
+      if (window.location.pathname !== protectedPathname) return;
+      if (protectedTitle && document.title !== protectedTitle) document.title = protectedTitle;
+      if (protectedCanonical) {
+        document.querySelectorAll<HTMLLinkElement>('link[rel="canonical"]').forEach((link) => {
+          if (link.href !== protectedCanonical) link.href = protectedCanonical;
+        });
+      }
+      for (const [selector, value] of protectedMeta) {
+        document.querySelectorAll<HTMLMetaElement>(selector).forEach((meta) => {
+          if (meta.content !== value) meta.content = value;
+        });
+      }
+      if (protectedRouteSchema) {
+        let script = document.getElementById('route-jsonld');
+        if (!script) {
+          script = document.createElement('script');
+          script.id = 'route-jsonld';
+          script.setAttribute('type', 'application/ld+json');
+          document.head.appendChild(script);
+        }
+        if (script.textContent !== protectedRouteSchema) script.textContent = protectedRouteSchema;
+      }
+    };
+
     document.addEventListener('click', navigateHomeFromLink, true);
     document.addEventListener('click', navigateSalesAgentFromLink, true);
     document.addEventListener('keydown', navigateSalesAgentFromLink, true);
@@ -2198,12 +2661,27 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     window.addEventListener('popstate', navigateHomeFromHistory);
 
     let correctionFrame = 0;
+    let resourceRestoreFrame = 0;
     const scheduleCorrections = () => {
       if (correctionFrame) return;
       correctionFrame = window.requestAnimationFrame(() => {
         correctionFrame = 0;
         applyAntbuildzAiCorrections(root);
+        restoreServerMetadata();
       });
+    };
+    const restoreTransferredResourcePath = (attempt = 0) => {
+      if (!transferredResourcePath || window.location.pathname !== transferredResourcePath) {
+        scheduleCorrections();
+        return;
+      }
+      const articleHasRendered = Boolean(root.querySelector('article h1'));
+      if (!articleHasRendered && attempt < 120) {
+        resourceRestoreFrame = window.requestAnimationFrame(() => restoreTransferredResourcePath(attempt + 1));
+        return;
+      }
+      nativeReplaceState(window.history.state, '', `${protectedPathname}${window.location.search}${window.location.hash}`);
+      scheduleCorrections();
     };
 
     if (!document.getElementById(ORIGINAL_STYLESHEET_ID)) {
@@ -2215,20 +2693,29 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     }
 
     if (!document.getElementById(ORIGINAL_SCRIPT_ID)) {
+      if (transferredResourcePath) {
+        nativeReplaceState(window.history.state, '', `${transferredResourcePath}${window.location.search}${window.location.hash}`);
+      }
       const script = document.createElement('script');
       script.id = ORIGINAL_SCRIPT_ID;
       script.type = 'module';
       script.src = '/assets/index-i9-KQg8N.js';
-      script.addEventListener('load', scheduleCorrections);
+      script.addEventListener('load', () => {
+        restoreTransferredResourcePath();
+      });
       document.body.appendChild(script);
     }
 
-    const observer = new MutationObserver(scheduleCorrections);
+    const observer = new MutationObserver(() => {
+      // Correct the copied Suspense fallback in the same microtask that adds
+      // it, so the workspace wording cannot flash for a painted frame.
+      correctRouteLoader(root);
+      scheduleCorrections();
+    });
     observer.observe(root, { childList: true, subtree: true, characterData: true });
     const headObserver = new MutationObserver(() => {
-      syncHomepageMetadata(document, window.location.pathname);
-      syncAiHelpMetadata(document, window.location.pathname);
-      syncAgreementMetadata(document, window.location.pathname);
+      restoreServerMetadata();
+      syncDefaultSocialShareImage(document);
     });
     headObserver.observe(document.head, { childList: true, subtree: true, characterData: true, attributes: true });
     document.addEventListener('click', scheduleCorrections);
@@ -2241,6 +2728,7 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     return () => {
       resetHomeHeroRuntime();
       resetPublicHeroHeader();
+      resetSalesAgentHeroThemes();
       observer.disconnect();
       headObserver.disconnect();
       document.removeEventListener('click', scheduleCorrections);
@@ -2257,6 +2745,7 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
       window.removeEventListener('popstate', scheduleCorrections);
       window.removeEventListener('hashchange', scheduleCorrections);
       if (correctionFrame) window.cancelAnimationFrame(correctionFrame);
+      if (resourceRestoreFrame) window.cancelAnimationFrame(resourceRestoreFrame);
     };
   }, []);
 

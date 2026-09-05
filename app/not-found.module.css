@@ -1,0 +1,125 @@
+.page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(32px, 6vw, 80px) var(--public-frame-gutter, 5vw);
+  color: var(--heading-ink, #0f172a);
+  background:
+    radial-gradient(circle at 82% 18%, rgb(124 58 237 / 8%), transparent 34%),
+    radial-gradient(circle at 14% 84%, rgb(255 197 1 / 12%), transparent 30%),
+    var(--canvas, #f8f7ff);
+}
+
+.panel {
+  width: min(720px, 100%);
+  padding: clamp(40px, 6vw, 72px);
+  text-align: center;
+  background: var(--clean-surface, #fff);
+  border: 1px solid rgb(15 23 42 / 8%);
+  border-radius: 28px;
+  box-shadow: 0 28px 80px rgb(15 23 42 / 10%);
+}
+
+.eyebrow {
+  margin: 0 0 20px;
+  color: var(--brand-accent, #e3180a);
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.panel h1 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", Inter, sans-serif;
+  font-size: clamp(36px, 5.2vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.045em;
+}
+
+.description {
+  max-width: 570px;
+  margin: 24px auto 0;
+  color: var(--body, #475569);
+  font-family: Inter, sans-serif;
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.65;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.actions a {
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-family: "Plus Jakarta Sans", Inter, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.actions a:hover {
+  transform: translateY(-2px);
+}
+
+.actions a:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 3px;
+}
+
+.primary {
+  color: #0f172a;
+  background: var(--primary-action, #ffc501);
+}
+
+.primary:hover {
+  background: var(--primary-hover, #f5b70a);
+}
+
+.secondary {
+  color: #0f172a;
+  background: #fff;
+  border: 1px solid rgb(15 23 42 / 16%);
+}
+
+.secondary:hover {
+  border-color: rgb(15 23 42 / 30%);
+}
+
+@media (max-width: 560px) {
+  .panel {
+    padding: 40px 24px;
+    border-radius: 24px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions a {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .actions a {
+    transition: none;
+  }
+
+  .actions a:hover {
+    transform: none;
+  }
+}
