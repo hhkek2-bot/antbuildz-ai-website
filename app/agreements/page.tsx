@@ -1,3 +1,4 @@
+import { SOCIAL_SHARE_IMAGE } from '@/lib/social-share';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { LegalShell } from './legal-shell';
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   title: 'Antbuildz AI Agreements & Policies',
   description: 'Legal terms and privacy information governing Antbuildz AI services.',
   alternates: { canonical: '/agreements' },
+  twitter: { card: 'summary_large_image', title: 'Antbuildz AI Agreements & Policies', description: 'Legal terms and privacy information governing Antbuildz AI services.', images: [SOCIAL_SHARE_IMAGE] },
   openGraph: {
+      images: [SOCIAL_SHARE_IMAGE],
     title: 'Antbuildz AI Agreements & Policies',
     description: 'Legal terms and privacy information governing Antbuildz AI services.',
     url: '/agreements', siteName: 'Antbuildz AI', type: 'website', locale: 'en_SG',

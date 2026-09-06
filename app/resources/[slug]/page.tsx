@@ -3,7 +3,6 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import { getResourceRedirect, getResourceSeo, resourceSeoEntries } from '@/lib/resource-seo';
 import { SOCIAL_SHARE_IMAGE } from '@/lib/social-share';
 import { AI_ROLE_REDIRECTS } from '@/lib/ai-roles';
-import { getResourceBlogSchema } from '@/lib/resource-blog-schema';
 import { OriginalAntbuildzApp } from '../../original-antbuildz-app';
 
 const siteUrl = 'https://antbuildz.ai';
@@ -67,35 +66,34 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
 
   const url = `${siteUrl}/resources/${article.slug}`;
   const image = article.image ? new URL(article.image, siteUrl).toString() : SOCIAL_SHARE_IMAGE.url;
-  const blogSchema = getResourceBlogSchema(article.slug);
   const discussesWebstore = /webstore|product page|inventory/i.test(`${article.title} ${article.description}`);
   const articleSection = article.slug.startsWith('ai-agent-console-')
     ? 'AI Agent Console guides'
     : discussesWebstore
-      ? 'How Webstore supports the AI Sales Agent'
-      : 'Industrial AI Sales Agent guides';
+      ? 'How Webstore supports the AI Agent'
+      : 'AI Agent guides for complex products';
   const articleSchema = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'Article',
         '@id': `${url}#article`,
-        headline: article.title.replace(/\s+\|\s+.*$/, ''),
+        headline: article.title.replace(/\s+\|\s+Antbuildz AI$/, ''),
         name: article.title,
         description: article.description,
         url,
         mainEntityOfPage: { '@id': url },
         inLanguage: 'en-SG',
         image,
-        ...(blogSchema ? { articleBody: blogSchema.articleBody, wordCount: blogSchema.wordCount } : {}),
         articleSection,
         keywords: [
-          'industrial AI Sales Agent',
+          'AI Agent for complex products',
+          'industrial AI',
           'B2B sales enquiries',
           'approved business knowledge',
-          ...(discussesWebstore ? ['AI Webstore', 'structured product data', 'inventory context'] : []),
+          ...(discussesWebstore ? ['AI Webstore Suite', 'structured product data', 'inventory context'] : []),
         ],
-        about: { '@type': 'SoftwareApplication', name: 'Antbuildz AI Sales Agent', applicationCategory: 'BusinessApplication' },
+        about: { '@type': 'SoftwareApplication', '@id': `${siteUrl}/#software`, name: 'Antbuildz AI Agent', applicationCategory: 'BusinessApplication' },
         ...(discussesWebstore ? { mentions: { '@type': 'SoftwareApplication', name: 'Antbuildz AI Webstore Suite', applicationCategory: 'BusinessApplication' } } : {}),
         ...(article.datePublished ? { datePublished: article.datePublished } : {}),
         ...(article.dateModified ? { dateModified: article.dateModified } : {}),
@@ -109,7 +107,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
           { '@type': 'ListItem', position: 2, name: 'Resources', item: `${siteUrl}/resources` },
-          { '@type': 'ListItem', position: 3, name: article.title.replace(/\s+\|\s+.*$/, ''), item: url },
+          { '@type': 'ListItem', position: 3, name: article.title.replace(/\s+\|\s+Antbuildz AI$/, ''), item: url },
         ],
       },
     ],

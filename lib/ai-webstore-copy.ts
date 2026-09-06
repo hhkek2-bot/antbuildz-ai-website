@@ -3,6 +3,7 @@ import { setSalesAgentText as setText } from './ai-sales-agent-copy';
 
 // Select only the canonical Webstore route. Exact text replacements preserve the
 // transferred React nodes, layouts, animations, FAQ behaviour and link targets.
+export const WEBSTORE_TITLE = 'AI Webstore Suite for Complex Products';
 export const WEBSTORE_DESCRIPTION = "Extend your AI Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.";
 
 // The transferred hero has one non-wrapping desktop description slot. Keep the

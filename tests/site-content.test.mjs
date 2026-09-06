@@ -666,24 +666,11 @@ test('Sales Agent retains the phone track while inheriting reference description
   assert.doesNotMatch(css, /#root\.antbuildz-public-typography \[data-antbuildz-sales-agent\]/, 'reference component styles own the description sizes');
 });
 
-test('Sales Agent mobile hero fits one viewport and places the phone before its actions', async () => {
+test('AI Agent mobile hero gives the conversation room below its actions', async () => {
   const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
-  assert.match(
-    css,
-    /#root \[data-antbuildz-sales-agent\] \.bright-hero\.antbuildz-public-hero-surface \{[^}]*height: 100svh;[^}]*overflow: clip;/,
-  );
-  assert.match(
-    css,
-    /#root \[data-antbuildz-sales-agent\] \.bright-hero-split \{[^}]*height: calc\(100svh - var\(--public-header-height, 75px\) - 24px\);/,
-  );
-  assert.match(
-    css,
-    /#root \[data-antbuildz-sales-agent\] \.bright-hero-mockup-right \{[^}]*order: 2 !important;[^}]*padding-bottom: 0 !important;/,
-  );
-  assert.match(
-    css,
-    /#root \[data-antbuildz-sales-agent\] \.bright-hero-actions-block \{[^}]*order: 3 !important;[^}]*margin: 14px auto 84px !important;/,
-  );
+  assert.match(css, /#root \[data-antbuildz-sales-agent\] \.bright-hero\.antbuildz-public-hero-surface \{[^}]*height: auto;[^}]*overflow: clip;/);
+  assert.match(css, /#root \[data-antbuildz-sales-agent\] \.bright-hero-mockup-right \{[^}]*order: 3 !important;[^}]*min-height: 400px;/);
+  assert.match(css, /#root \[data-antbuildz-sales-agent\] \.bright-hero-actions-block \{[^}]*order: 2 !important;/);
 });
 
 test('Sales Agent hero cycles through five restrained themes every two seconds', async () => {
@@ -3238,8 +3225,8 @@ test('resource articles use local long-form blog content with answer-engine stru
   assert.match(copy, /antbuildz-resource-answer/);
   assert.match(copy, /articleBody\.innerHTML = html/);
   assert.match(route, /articleSection/);
-  assert.match(route, /articleBody: blogSchema\.articleBody/);
-  assert.match(route, /wordCount: blogSchema\.wordCount/);
+  assert.doesNotMatch(route, /articleBody: blogSchema\.articleBody/, 'do not expose a stale duplicate of the corrected visible article');
+  assert.doesNotMatch(route, /wordCount: blogSchema\.wordCount/);
   assert.match(route, /keywords:/);
   assert.match(route, /about: \{ '@type': 'SoftwareApplication'/);
 });
@@ -3321,7 +3308,11 @@ async function loadListingModule(file) {
   const compiled = ts.transpileModule(source, {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
   }).outputText;
-  const sandbox = { exports: {} };
+  const webstoreCopy = await loadWebstoreCopy();
+  const sandbox = { exports: {}, require(id) {
+    assert.equal(id, '../../lib/ai-webstore-copy');
+    return webstoreCopy;
+  } };
   runInNewContext(compiled, sandbox);
   return sandbox.exports;
 }
@@ -3593,6 +3584,9 @@ test('Webstore preview presents the global Sales Agent section on a restrained l
 
 test('canonical Webstore page corrects inherited metadata idempotently', async () => {
   const { AI_WEBSTORE_PAGE, syncWebstoreMetadata } = await loadListingModule('preview-metadata');
+  const canonicalRoute = await readFile(new URL('../app/[slug]/page.tsx', import.meta.url), 'utf8');
+  assert.match(canonicalRoute, /'ai-webstore-suite': \[WEBSTORE_TITLE, WEBSTORE_DESCRIPTION\]/);
+  assert.equal(AI_WEBSTORE_PAGE.title, (await loadWebstoreCopy()).WEBSTORE_TITLE);
   let writes = 0;
   const node = attributes => ({
     attributes: { ...attributes },
@@ -4214,4 +4208,26 @@ test('resource FAQs retain their 229 questions and current product naming', asyn
   assert.equal(questions, 229);
   const handover = await readFile(new URL('when-ai-agents-should-hand-over-to-humans.html', folder), 'utf8');
   assert.match(handover, /when the customer requests a person/);
+});
+
+test('resource metadata shares current headings and article links avoid unpublished source files', async () => {
+  const options = { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } };
+  const copy = {};
+  runInNewContext(ts.transpileModule(await readFile(new URL('../lib/resource-copy.ts', import.meta.url), 'utf8'), options).outputText, { exports: copy });
+  const seo = {};
+  runInNewContext(ts.transpileModule(await readFile(new URL('../lib/resource-seo.ts', import.meta.url), 'utf8'), options).outputText, { exports: seo, require: () => copy });
+  const articleDirectory = new URL('../public/resource-articles/content/', import.meta.url);
+  const files = (await readdir(articleDirectory)).filter(name => name.endsWith('.html'));
+  const titles = new Set();
+  for (const file of files) {
+    const slug = file.replace(/\.html$/, '');
+    const entry = seo.getResourceSeo(slug);
+    assert.ok(entry, `${slug} has canonical metadata`);
+    assert.equal(entry.title, `${copy.RESOURCE_POSITIONING_OVERRIDES[slug].title} | Antbuildz AI`);
+    assert.ok(!titles.has(entry.title), `${slug} has a unique title`);
+    titles.add(entry.title);
+    assert.doesNotMatch(`${entry.title} ${entry.description}`, /\bAI Console\b|AI Agent Resources/);
+    const html = await readFile(new URL(file, articleDirectory), 'utf8');
+    assert.doesNotMatch(html, /href=["']\/content\/[^"']+\.md/, `${slug} links to published pages`);
+  }
 });

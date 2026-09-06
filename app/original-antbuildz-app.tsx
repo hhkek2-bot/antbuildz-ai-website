@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { WEBSTORE_TITLE } from '../lib/ai-webstore-copy';
 import { scopeAiHelpExperience } from '../lib/ai-help-scope';
 import { simplifyAgreementHub, syncAgreementMetadata } from '../lib/agreement-hub';
 import { EMMA_PORTRAIT_ALT, EMMA_PORTRAIT_SRC, standardiseAgentPortraits } from '../lib/agent-identity';
@@ -81,15 +82,15 @@ const WHO_WE_SERVE_PATHS = new Set([
 
 const PAGE_TITLES: Record<string, string> = {
   '/': HOMEPAGE_SEO.title,
-  '/ai-webstore-suite': 'AI Webstore Suite for Industrial Products | Antbuildz AI',
+  '/ai-webstore-suite': `${WEBSTORE_TITLE} | Antbuildz AI`,
   '/ai-sales-agent': 'AI Agent for Complex Product Businesses | Antbuildz AI',
-  '/ai-agent-console': 'AI Agent Console for Industrial Sales Teams | Antbuildz AI',
+  '/ai-agent-console': 'AI Agent Console | Knowledge, Workflows & Conversations | Antbuildz AI',
   '/pricing': 'Antbuildz AI Pricing | Antbuildz AI',
   '/resources': `${RESOURCE_LIBRARY_SEO.title} | Antbuildz AI`,
   '/faqs': 'AI FAQs | Antbuildz AI',
   '/help/ai': 'AI Help Centre | Antbuildz AI',
-  '/about': 'About Antbuildz Industrial AI | Antbuildz AI',
-  '/book-a-demo': 'Book an Industrial AI Demo | Antbuildz AI',
+  '/about': 'About Antbuildz AI | Antbuildz AI',
+  '/book-a-demo': 'Book an Antbuildz AI Agent Demo | Antbuildz AI',
   '/agreements': 'Antbuildz AI Agreements & Policies | Antbuildz AI',
 };
 
@@ -2664,9 +2665,15 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
       if (window.location.pathname !== protectedPathname) return;
       if (protectedTitle && document.title !== protectedTitle) document.title = protectedTitle;
       if (protectedCanonical) {
-        document.querySelectorAll<HTMLLinkElement>('link[rel="canonical"]').forEach((link) => {
-          if (link.href !== protectedCanonical) link.href = protectedCanonical;
-        });
+        const links = Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel="canonical"]'));
+        const canonical = links[0] ?? document.createElement('link');
+        if (!links.length) {
+          canonical.rel = 'canonical';
+          document.head.appendChild(canonical);
+        }
+        if (canonical.href !== protectedCanonical) canonical.href = protectedCanonical;
+        // The transferred app may add its own identical canonical after hydration.
+        for (const duplicate of links.slice(1)) duplicate.remove();
       }
       for (const [selector, value] of protectedMeta) {
         document.querySelectorAll<HTMLMetaElement>(selector).forEach((meta) => {

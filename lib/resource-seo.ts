@@ -122,8 +122,9 @@ export const resourceSeoEntries: ResourceSeoEntry[] = resourceSeoEntriesSource.m
     ...entry,
     slug,
     ...override,
+    description: (override?.description ?? entry.description).replace(/\b(?:Antbuildz )?AI Console\b/g, 'AI Agent Console').replace(/\bAI Webstore(?! Suite)\b/g, 'AI Webstore Suite'),
     title: override?.title ? `${override.title} | Antbuildz AI` : entry.title,
-    dateModified: override ? '2026-09-05' : entry.dateModified,
+    dateModified: override ? '2026-09-06' : entry.dateModified,
   };
 });
 

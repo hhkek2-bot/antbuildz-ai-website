@@ -75,7 +75,7 @@ const structuredData = {
     {
       '@type': 'SoftwareApplication',
       '@id': 'https://antbuildz.ai/#software',
-      name: 'Antbuildz AI',
+      name: 'Antbuildz AI Agent',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       url: 'https://antbuildz.ai/ai-sales-agent',

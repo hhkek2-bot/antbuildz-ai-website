@@ -15,7 +15,7 @@ Canonical website: https://antbuildz.ai
 ## Learning and support
 
 - [Resources](https://antbuildz.ai/resources): Practical AI Agent guides covering buyer conversations, approved knowledge, inventory connections, Webstore support, readiness and Console operations.
-- [AI Agent Roles](https://antbuildz.ai/ai-roles): Industrial AI agent roles for sales, product recommendations, customer support, technical support and after-sales service. These are practical jobs for one grounded AI Agent, not separate subscriptions.
+- [AI Agent Roles](https://antbuildz.ai/ai-roles): AI Agent roles for complex product sales, product guidance, customer service, technical support and after-sales support. These are practical jobs for one grounded AI Agent, not separate subscriptions.
 - [Sales Specialist — AI Sales Agent for Complex Product Sales](https://antbuildz.ai/ai-roles/sales-specialist): The sales role of the AI Agent, with particular strength in industrial and equipment sales. It is an AI Sales Agent that answers product enquiries, guides product selection, captures buyer requirements and prepares qualified handovers for a sales team.
 - [AI Agent for Product Guidance](https://antbuildz.ai/ai-roles/product-specialist): An AI product recommendation agent that helps buyers compare approved specifications, dimensions and product fit, while leaving uncertain compatibility checks with the team.
 - [Customer Service](https://antbuildz.ai/ai-roles/customer-support): An AI customer support agent for delivery, returns and product enquiries using approved FAQs and policies, with handover for exceptions.
@@ -24,7 +24,7 @@ Canonical website: https://antbuildz.ai
 - [Antbuildz AI Help Centre](https://antbuildz.ai/help/ai): AI-only product, knowledge, Webstore and onboarding answers.
 - [About Antbuildz](https://antbuildz.ai/about): Company history, principles and industrial AI direction.
 - [Antbuildz AI Agreements & Policies](https://antbuildz.ai/agreements): Legal terms and privacy information governing Antbuildz AI services.
-- [Antbuildz AI Terms of Service](https://antbuildz.ai/agreements/terms): B2B terms for the AI Sales Agent, AI Webstore Suite and related Antbuildz AI services.
+- [Antbuildz AI Terms of Service](https://antbuildz.ai/agreements/terms): B2B terms for the AI Agent, AI Webstore Suite and related Antbuildz AI services.
 - [Antbuildz AI Privacy Policy](https://antbuildz.ai/agreements/privacy): How Antbuildz Pte. Ltd. handles personal data for Antbuildz.ai.
 - [Antbuildz AI Data Processing Addendum](https://antbuildz.ai/agreements/dpa): Customer and Antbuildz data-processing responsibilities.
 - [Antbuildz AI Acceptable Use Policy](https://antbuildz.ai/agreements/acceptable-use): Responsible platform use and safety-critical industrial boundaries. Cookie and analytics information is included in the Privacy Policy.

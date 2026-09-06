@@ -1,3 +1,4 @@
+import { SOCIAL_SHARE_IMAGE } from '@/lib/social-share';
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { LegalDocumentView } from '../legal-document-view';
@@ -19,10 +20,11 @@ export async function generateMetadata({ params }: { params: Promise<{ document:
     description: document.description,
     alternates: { canonical },
     openGraph: {
+      images: [SOCIAL_SHARE_IMAGE],
       title: document.title, description: document.description, url: canonical,
       siteName: 'Antbuildz AI', type: 'article', locale: 'en_SG',
     },
-    twitter: { card: 'summary_large_image', title: document.title, description: document.description },
+    twitter: { images: [SOCIAL_SHARE_IMAGE], card: 'summary_large_image', title: document.title, description: document.description },
   };
 }
 

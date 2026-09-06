@@ -4,8 +4,8 @@ export type ResourcePositioningCopy = {
 };
 
 export const RESOURCE_LIBRARY_SEO = {
-  title: "AI Agent Guides for Industrial B2B",
-  description: "Learn how industrial AI Agents qualify enquiries, use approved product knowledge, connect to inventory, and work with an AI Webstore for search and product discovery.",
+  title: "AI Agent Guides for Complex Product Businesses",
+  description: "Explore AI Agent guides for product knowledge, sales, rental and support. Includes industrial B2B workflows, AI Webstore Suite and AI Agent Console.",
 } as const;
 
 export const RESOURCE_POSITIONING_OVERRIDES: Record<string, ResourcePositioningCopy> = {
@@ -55,6 +55,51 @@ export const RESOURCE_POSITIONING_OVERRIDES: Record<string, ResourcePositioningC
     description: "Improve AI Agent accuracy with approved knowledge, structured product data, optional inventory connections, business rules, testing and conversation review.",
   },
 };
+
+// Canonical article headings also drive metadata, breadcrumbs and linked cards.
+const RESOURCE_RELEASE_TITLES: Record<string, string> = {
+  "what-is-an-ai-sales-agent": "What Is an AI Sales Agent for Complex Products?",
+  "ai-agents-vs-chatbots-for-industrial-b2b": "AI Agents vs Chatbots for Industrial B2B",
+  "ai-agent-benefits-for-industrial-b2b": "7 AI Agent Benefits for Industrial B2B",
+  "enquiries-an-ai-agent-can-handle": "Which Enquiries Can an AI Agent Handle?",
+  "what-an-ai-agent-can-and-cannot-do": "What an AI Agent Can and Cannot Do",
+  "why-ai-sales-agents-need-business-knowledge": "Why AI Sales Agents Need Business Knowledge",
+  "ai-agent-as-first-digital-sales-touchpoint": "AI Agent as Your First Digital Sales Touchpoint",
+  "ai-agent-industrial-enquiry-workflows": "AI Agent Workflows for Industrial Enquiries",
+  "ai-agent-vs-generic-ai-agents": "Antbuildz AI Agent vs Generic AI Agents",
+  "ai-agent-vs-chatgpt": "AI Agent vs ChatGPT for Product Enquiries",
+  "why-industry-specific-ai-agents-matter": "Why Industry-Specific AI Agents Matter",
+  "how-ai-agents-learn-from-business-knowledge": "How AI Agents Use Your Business Knowledge",
+  "how-ai-agents-improve-over-time": "How AI Agents Improve Through Team Review",
+  "how-to-test-ai-agent-responses": "How to Test and Improve AI Agent Responses",
+  "when-ai-agents-should-hand-over-to-humans": "When AI Agents Should Hand Over to Humans",
+  "how-to-improve-ai-agent-accuracy": "How to Improve AI Agent Accuracy",
+  "why-faqs-agreements-and-policies-matter-for-ai-agents": "FAQs, Agreements and Policies for AI Agents",
+  "company-information-to-prepare-for-ai-agents": "Company Information to Prepare for Your AI Agent",
+  "why-product-data-quality-matters-for-ai-agents": "Why Product Data Quality Matters for AI Agents",
+  "ai-agent-pre-launch-checklist": "AI Agent Pre-Launch Checklist",
+  "how-antbuildz-connects-webstore-and-ai-agent": "How Antbuildz Connects AI Agent and Webstore",
+  "why-ai-agents-work-with-an-integrated-webstore": "How AI Webstore Suite Supports Recommendations",
+  "ai-webstore-vs-company-website": "AI Webstore Suite vs a Company Website",
+  "ai-agent-console-settings-and-help": "Settings & Help: AI Agent Console",
+  "ai-agent-console-knowledge-base": "Knowledge Base: AI Agent Console",
+  "ai-agent-console-overview-dashboard": "Overview Dashboard: AI Agent Console",
+  "ai-agent-console-conversations": "Conversations: AI Agent Console",
+  "ai-agent-console-playground": "Playground: AI Agent Console",
+  "ai-agent-console-agent-setup": "Agent Setup: AI Agent Console",
+  "ai-agent-console-inventory-management": "Inventory Management: AI Agent Console",
+  "ai-agent-console-deals": "Deals: AI Agent Console",
+  "ai-agent-console-leads": "Leads: AI Agent Console",
+  "ai-agent-console-integrations": "Integrations: AI Agent Console",
+  "ai-agent-console-scenarios": "Scenarios: AI Agent Console",
+  "ai-agent-console-user-activities": "User Activities: AI Agent Console",
+  "ai-agent-console-invoices": "Invoices: AI Agent Console",
+  "ai-agent-console-payment-methods": "Payment Methods: AI Agent Console",
+  "ai-agent-console-billing": "Billing: AI Agent Console"
+};
+for (const [slug, title] of Object.entries(RESOURCE_RELEASE_TITLES)) {
+  RESOURCE_POSITIONING_OVERRIDES[slug] = { ...RESOURCE_POSITIONING_OVERRIDES[slug], title };
+}
 
 const PRODUCT_MODEL_COPY = 'The AI Agent uses product knowledge, inventory and workflows to guide customer conversations. Sales Specialist, Product Specialist, Customer Service, Technical Support and After-Sales Support are its roles. Sales and Rental+ are subscription capabilities. AI Webstore Suite adds the connected product, inventory and store layer, with dedicated product URLs for search discovery.';
 
@@ -264,6 +309,14 @@ function correctResourceArticle(root: HTMLElement, pathname: string) {
 }
 
 export function correctResourceCopy(root: HTMLElement, pathname: string) {
+  if (pathname === '/resources' || pathname.startsWith('/resources/')) {
+    root.querySelectorAll<HTMLElement>('h2, h3, h4, p, nav, span, button, a').forEach(element => {
+      if (element.children.length) return;
+      const original = element.textContent ?? '';
+      const updated = original.replace(/\b(?:Antbuildz )?AI Console\b/g, 'AI Agent Console');
+      if (updated !== original) setText(element, updated);
+    });
+  }
   if (pathname === '/resources') correctResourceIndex(root);
   else if (pathname.startsWith('/resources/')) correctResourceArticle(root, pathname);
 }

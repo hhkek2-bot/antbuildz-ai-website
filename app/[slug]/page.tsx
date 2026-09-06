@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { allStaticSlugs, getSolution } from '@/lib/site-content';
 import { SOCIAL_SHARE_IMAGE } from '@/lib/social-share';
-import { WEBSTORE_DESCRIPTION } from '@/lib/ai-webstore-copy';
+import { WEBSTORE_DESCRIPTION, WEBSTORE_TITLE } from '@/lib/ai-webstore-copy';
 import { OriginalAntbuildzApp } from '../original-antbuildz-app';
 import { AiSalesAgentPage } from '../ai-sales-agent-global-reach';
 import { WebstoreConceptPage } from '../webstore-2-ai-webstore-preview/webstore-concept';
@@ -10,15 +10,15 @@ import { LEGAL_ALIASES } from '@/lib/legal-navigation';
 import { RESOURCE_LIBRARY_SEO } from '@/lib/resource-copy';
 
 const pageTitles: Record<string, [string, string]> = {
-  'ai-webstore-suite': ['AI Webstore Suite for Industrial Products', WEBSTORE_DESCRIPTION],
+  'ai-webstore-suite': [WEBSTORE_TITLE, WEBSTORE_DESCRIPTION],
   'ai-sales-agent': ['AI Agent for Complex Product Businesses', 'Antbuildz AI Agent uses product knowledge, inventory and workflows to guide sales, rental and support. Built from industrial equipment and B2B expertise.'],
-  'ai-agent-console': ['AI Agent Console for Industrial Sales Teams', 'Manage approved knowledge, Agent instructions, conversations, workflows, testing and performance for your industrial AI sales operation.'],
+  'ai-agent-console': ['AI Agent Console | Knowledge, Workflows & Conversations', 'Manage AI Agent knowledge, instructions, workflows and conversations across sales, rental and support. Review responses and control human handover.'],
   pricing: ['Antbuildz AI Pricing', 'Compare Antbuildz AI Agent plans: Agent, Sales and Rental+. Review AI Webstore Suite capabilities, included features and setup options.'],
-  'book-a-demo': ['Book an Industrial AI Demo', 'Share your contact details and schedule an Antbuildz AI demo focused on your industrial products, sales workflows and buyer enquiries.'],
+  'book-a-demo': ['Book an Antbuildz AI Agent Demo', 'Book an Antbuildz AI Agent demo for your complex products, sales, rental or support workflows. Explore approved knowledge, recommendations and human handover.'],
   resources: [RESOURCE_LIBRARY_SEO.title, RESOURCE_LIBRARY_SEO.description],
   'ai-agent-roles': ['AI Agent Roles', 'Specialised AI roles for sales, product, service, technical support and after-sales workflows.'],
   faqs: ['AI FAQs', 'Answers about the Antbuildz AI Agent, AI Webstore Suite and AI Agent Console.'],
-  about: ['About Antbuildz Industrial AI', 'Learn how Antbuildz applies industrial rental, product and sales experience to practical AI tools for complex B2B buyer journeys.'],
+  about: ['About Antbuildz AI', 'Learn how Antbuildz brings industrial equipment, rental and B2B experience to AI Agents for complex product businesses.'],
   agreements: ['Antbuildz AI Agreements & Policies', 'Find the published privacy, data-handling and product policy documents that apply to Antbuildz AI services and customers.'],
 };
 

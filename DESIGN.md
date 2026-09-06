@@ -350,3 +350,11 @@ The logo and description span the full width above those groups. Links wrap
 naturally; colours, typography, destinations and bottom-bar controls are retained.
 Below 360px, use one column for readable labels. Wider desktop retains the existing
 multi-column footer.
+
+## 2026-09-06 — Core Agent mobile conversation
+
+The core Agent hero below 768px grows with its copy instead of compressing all
+content into one viewport. Keep actions before the conversation preview, with a
+400–460px preview height and complete rounded frame. Recommendation labels wrap
+within their own column and capability cards grow with their content. The desktop
+hero composition and shared section rhythm remain unchanged.

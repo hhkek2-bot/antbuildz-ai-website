@@ -2915,3 +2915,57 @@ source page and the copied core Agent page were inspected at 390px with no
 horizontal overflow. No footer links, typography or colours changed.
 Additional QA at 320×740 confirms the one-column fallback; at 1440×900 the
 existing desktop grid is preserved. Production build and whitespace checks pass.
+
+## 2026-09-06 — Mobile AI Agent hero and release SEO consistency
+
+Audit-to-system release refinement. The mobile AI Agent hero now grows with its
+content instead of forcing the complete copy, actions and conversation into one
+viewport. The action group appears before a contained 400–460px conversation
+preview, while affected capability illustrations use content-led heights and
+compact matching columns. Desktop behaviour remains unchanged.
+
+Public metadata now uses consistent names for AI Webstore Suite, AI Agent
+Console, About, Book a Demo and Resources. Resource article headings, visible
+titles, breadcrumbs and structured data share the same source; stale duplicated
+article bodies were removed from schema, legal pages include the shared social
+image and transferred routes retain one canonical link after hydration. One
+unpublished source-file link was replaced with its public resource URL.
+
+Validation: all 114 automated tests pass, targeted lint reports no errors, the
+production build and whitespace checks pass, and the release audit covers 73
+public routes, 49 internal destinations/social images and 61 legacy redirects
+without failures. A fresh visual browser pass could not be repeated at release
+time because the Mac was locked; the mobile CSS, responsive bounds and regression
+tests were reviewed directly before deployment.
+
+## 2026-09-06 — Mobile and release SEO audit
+
+Audit/fidelity repairs preserve the canonical route catalogue, including the
+explicitly retained `/ai-sales-agent` core product URL. The core Agent mobile
+hero now uses its content height, actions followed by a 400–460px conversation
+preview, and responsive recommendation labels. Desktop composition is retained.
+
+Refined main-page and resource titles for complex product positioning, with
+industrial specialisation retained. Article headings, linked cards, metadata
+and schema share the corrected titles. Removed the obsolete articleBody snapshot
+from Article schema; it duplicated earlier FAQ wording and claims. Legal pages
+now include social images. Resource navigation uses AI Agent Console, the root
+software schema names Antbuildz AI Agent, and llms.txt follows the same hierarchy.
+Fixed one article link to an unpublished Markdown file. Removed duplicate
+hydrated canonical tags. Webstore metadata now shares its title/description
+with the server route, preventing competing head observers from freezing the page.
+
+Verification: 73 sitemap URLs return 200 with unique titles/descriptions,
+canonical antbuildz.ai URLs and social metadata; 49 discovered local link/image
+destinations return 200; 61 legacy redirects pass. Sample account/admin routes
+are noindex; an unknown path returns 404/noindex. All 114 tests, targeted lint,
+production build and whitespace checks pass. Browser inspection covers Agent
+at 320px, 390px, 768px and 1440px, plus mobile Home, Webstore, industry overview,
+sales role, rental industry, Console and article templates. Rendered metadata
+checks also cover Pricing, Help and role overview. This is template-based visual
+QA, not a screenshot of every article or a real-device laboratory test.
+
+Remaining publication check: the previously flagged S$49/month additional-Agent
+FAQ versus USD plan pricing still requires the approved commercial source. No
+price was guessed. Search Console indexing/backlink authority has not been
+verified. No deployment, service restart or configuration change was performed.
