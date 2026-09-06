@@ -11,7 +11,7 @@ import { PublicFooterLanguage } from '../public-footer-language';
 import '../public-footer.css';
 
 const productLinks = [
-  ['AI Sales Agent', '/ai-sales-agent'],
+  ['AI Agent', '/ai-sales-agent'],
   ['AI Webstore Suite', '/ai-webstore-suite'],
   ['Pricing', '/pricing'],
 ] as const;
@@ -51,7 +51,7 @@ function LegalHeader() {
         <nav className={`${styles.desktopNav} bright-nav-product-links`} aria-label="Primary navigation">
           {productLinks.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
           <a href="/ai-roles" data-menu-fallback>AI Roles</a>
-          <a href="/rental-businesses" data-menu-fallback>Industries</a>
+          <a href="/who-we-serve" data-menu-fallback>Industries</a>
           <a href="/resources" aria-label="Resources">Resources</a>
         </nav>
         <div className={styles.headerUtilities}>
@@ -60,11 +60,11 @@ function LegalHeader() {
           <details className={styles.mobileMenu}>
             <summary aria-label="Open navigation"><span /><span /><span /></summary>
             <nav aria-label="Mobile navigation">
-              <a href="/ai-sales-agent">AI Sales Agent</a>
+              <a href="/ai-sales-agent">AI Agent</a>
               <a href="/ai-webstore-suite">AI Webstore Suite</a>
-              <a href="/ai-agent-console">AI Agent Console</a>
               <a href="/pricing">Pricing</a>
-              <a href="/ai-roles">All AI Roles</a>
+              <a href="/who-we-serve">Industries</a>
+              <a href="/ai-roles">AI Roles</a>
               <a href="/resources">Resources</a>
               <a href="/about">About Us</a>
             </nav>
@@ -78,7 +78,7 @@ function LegalHeader() {
 function LegalFooter() {
   const columns = [
     ['AI Products', [
-      ['AI Sales Agent', '/ai-sales-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
+      ['AI Agent', '/ai-sales-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
       ['AI FAQs', '/help/ai'], ['Pricing', '/pricing'], ['Book a Demo', '/book-a-demo'],
     ]],
     ['Who We Serve', industryLinks],
@@ -101,7 +101,7 @@ function LegalFooter() {
                 </span><span className="antbuildz-ai-wordmark__ai">.ai</span>
               </span>
             </a>
-            <p>We are Building the Intelligence Layer for Industrial Businesses.</p>
+            <p>Product Intelligence for Complex Product Businesses.</p>
           </div>
           {columns.map(([label, links]) => <nav className={`abz-public-footer__link-column${label === 'Who We Serve' ? ' abz-public-footer__link-column--who-we-serve' : ''}`} aria-label={label} key={label}>
             <h2>{label}</h2><ul>{links.map(([text, href]) => <li key={href}><a href={href}>{text}</a></li>)}</ul>

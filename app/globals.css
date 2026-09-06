@@ -2580,7 +2580,7 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
     margin-left: auto;
   }
 
-  #root.antbuildz-original-root .bright-nav-product-links {
+  #root.antbuildz-original-root .bright-nav > .bright-nav-product-links {
     position: absolute;
     z-index: 1;
     top: 0;
@@ -3973,7 +3973,9 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
 @media (max-width: 1020px) {
   .abz-public-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-  .abz-public-footer__brand { grid-column: 1 / -1; }
+  .abz-public-footer__brand { grid-column: 1 / -1 !important; }
+  .abz-public-footer__link-column { min-width: 0; }
+  .abz-public-footer .abz-public-footer__link-column a { white-space: normal; overflow-wrap: anywhere; }
 
   .antbuildz-home-industry-chapter__inner {
     grid-template-columns: minmax(0, .94fr) minmax(390px, 1.06fr);
@@ -4047,8 +4049,8 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 }
 
 @media (max-width: 640px) {
-  .abz-public-footer__grid { grid-template-columns: 1fr !important; }
-  .abz-public-footer__brand { grid-column: auto; }
+  .abz-public-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 32px 20px; }
+  .abz-public-footer__brand { grid-column: 1 / -1 !important; }
 
   .antbuildz-industries-mobile__links { grid-template-columns: 1fr !important; }
 
@@ -4169,7 +4171,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   }
 
   .antbuildz-ai-home .antbuildz-home-hero-conversation.is-centre {
-    top: clamp(312px, 38svh, 328px);
+    top: max(clamp(312px, 38svh, 328px), var(--antbuildz-home-chat-top, 0px));
     bottom: auto;
   }
 
@@ -5235,4 +5237,9 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
 #root.antbuildz-original-root [data-antbuildz-sales-agent] .dt-section-embedded {
   background: var(--clean) !important;
   border-top: 0;
+}
+
+/* Very narrow screens retain readable footer labels and touch targets. */
+@media (max-width: 359px) {
+  .abz-public-footer__grid { grid-template-columns: 1fr !important; }
 }

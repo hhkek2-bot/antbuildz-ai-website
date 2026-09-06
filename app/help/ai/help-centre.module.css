@@ -1,0 +1,10 @@
+/* Preserve the existing Help Centre accordion appearance with source-owned answers. */
+.row { border-bottom: 1px solid var(--help-line); }
+.row h4 { margin: 0; }
+.trigger { display: flex; width: 100%; align-items: center; justify-content: space-between; text-align: left; border: 0; background: transparent; cursor: pointer; }
+.trigger svg { transition: transform .2s; }
+.trigger:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+.row [hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .trigger svg { transition: none; } }
+
+.searchTitle { overflow-wrap: anywhere; }

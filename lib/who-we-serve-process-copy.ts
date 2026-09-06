@@ -49,9 +49,28 @@ const WHO_WE_SERVE_PROCESS_COPY: Record<string, readonly [string, string, string
   ],
 };
 
+const PRODUCT_RANGE_INTRO: Record<string, { hero: string; context: string }> = {
+  '/manufacturers-brands': {
+    hero: 'Guide technical product questions across machinery, instruments and electronics. Your AI Sales Agent uses approved data to compare models and prepare enquiries for sales or engineering.',
+    context: 'Manufacturers of equipment, precision instruments and electronic products share a need: helping customers choose from complex ranges. The Sales Specialist role of Antbuildz AI Agent uses approved catalogues, datasheets and configuration rules to guide those conversations.',
+  },
+  '/dealers-distributors': {
+    hero: 'Guide buyers across equipment, instruments, electronics and component ranges. Your AI Sales Agent compares approved product options and routes enquiries to the right sales team.',
+    context: 'From equipment dealers to electronics and instrument distributors, multi-brand catalogues bring detailed product questions. The Sales Specialist role of Antbuildz AI Agent helps compare approved options and route enquiries by brand, category, branch or territory.',
+  },
+};
+
 export function applyWhoWeServeProcessCopy(root: HTMLElement, pathname: string) {
   const copy = WHO_WE_SERVE_PROCESS_COPY[pathname];
   if (!copy) return;
+
+  const introduction = PRODUCT_RANGE_INTRO[pathname];
+  if (introduction) {
+    const hero = root.querySelector<HTMLElement>('.si-hero-copy');
+    const context = root.querySelector<HTMLElement>('.si-sierra-context-grid .si-sierra-copy p');
+    if (hero && hero.textContent !== introduction.hero) hero.textContent = introduction.hero;
+    if (context && context.textContent !== introduction.context) context.textContent = introduction.context;
+  }
 
   root.querySelectorAll<HTMLElement>('.si-sierra-vignette').forEach((card, index) => {
     const paragraph = card.querySelector<HTMLElement>(':scope > p');

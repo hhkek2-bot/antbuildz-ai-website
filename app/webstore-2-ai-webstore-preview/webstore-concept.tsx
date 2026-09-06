@@ -152,7 +152,7 @@ function Conversation({ frame }: { frame: ReturnType<typeof getStoryFrame> }) {
     <div className={styles.syncSummary}><strong>From your store<br />to the conversation.</strong><p>Emma shares your product cards, then helps buyers explain what they need.</p><div><span><Tick /> The same products and photos</span><span><Tick /> Rental dates and purchase quantities</span><span><Tick /> Details for your team to quote</span></div><span className={styles.syncArrow}>⟶</span></div>
     <div className={styles.conversation} data-phone-frame>
       <div className={styles.phoneStatus}><span>9:41</span><svg viewBox="0 0 48 14" fill="currentColor"><path d="M1 10h3v3H1zm5-3h3v6H6zm5-3h3v9h-3zm5-3h3v12h-3z" /><rect x="27" y="3" width="17" height="9" rx="2" fill="none" stroke="currentColor" /><rect x="29" y="5" width="12" height="5" rx="1" /><path d="M46 6h1v3h-1z" /></svg></div>
-      <div className={styles.chatHeader}><span className={styles.chatBack}>‹</span><EmmaAvatar className={styles.agentAvatar} /><div><strong>Emma</strong><span className={styles.connected}><i /> Your Webstore · AI Sales Agent</span></div><span className={styles.chatMore}>···</span></div>
+      <div className={styles.chatHeader}><span className={styles.chatBack}>‹</span><EmmaAvatar className={styles.agentAvatar} /><div><strong>Emma</strong><span className={styles.connected}><i /> Your Webstore · AI Agent</span></div><span className={styles.chatMore}>···</span></div>
       <div className={styles.chatBody}><div className={styles.chatTranscript}>
         <span className={styles.chatDate}>Today</span>
         <div className={styles.buyerTyping} data-visible={frame.chatBeat === 'initial-buyer-typing'} aria-hidden="true"><i /><i /><i /><span>Buyer is typing</span></div>

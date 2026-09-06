@@ -26,9 +26,9 @@ export const solutions: Solution[] = [
     slug: 'manufacturers-brands',
     navLabel: 'Manufacturers & OEMs',
     accent: 'Manufacturers and OEMs',
-    summary: 'Answer technical product questions from approved data, compare suitable models and route application-ready enquiries to sales or engineering.',
+    summary: 'Guide machinery, instrument and electronics enquiries with approved product data. Compare models and prepare questions for sales or engineering review.',
     image: '/images/solution-manufacturers.jpg',
-    audiences: ['Equipment and machinery manufacturers', 'Technical product brands', 'OEM application teams'],
+    audiences: ['Equipment and machinery manufacturers', 'Instrument and electronics brands', 'OEM application teams'],
     workflow: ['Define the application', 'Compare approved options', 'Route the qualified enquiry'],
     outcome: 'Turn repeat technical questions into application-ready opportunities for the right market team.',
     example: 'Need a stainless pump for 42 m³/h at 18 m head, process water at 45°C, 400 V / 50 Hz.',
@@ -37,9 +37,9 @@ export const solutions: Solution[] = [
     slug: 'dealers-distributors',
     navLabel: 'Dealers & Distributors',
     accent: 'Equipment Dealers and Distributors',
-    summary: 'Guide buyers across approved multi-brand ranges, explain relevant model differences and route qualified opportunities to the right branch.',
+    summary: 'Guide buyers across equipment, instruments, electronics and components. Compare approved multi-brand options and route enquiries to the right sales team.',
     image: '/images/solution-dealers.jpg',
-    audiences: ['Multi-brand equipment dealers', 'Technical product distributors', 'Regional sales teams'],
+    audiences: ['Multi-brand equipment dealers', 'Electronics and instrument distributors', 'Regional sales teams'],
     workflow: ['Define the buyer requirement', 'Compare approved models', 'Route the qualified enquiry'],
     outcome: 'Turn a large multi-brand catalogue into one guided sales conversation.',
     example: 'Need a battery boom lift with 20 m working height and 10 m outreach for outdoor up-and-over access.',
@@ -117,14 +117,14 @@ export const productRoutes = [
 export const allStaticSlugs = [...productRoutes, ...solutions.map((item) => item.slug)];
 
 export const agentFaqs = [
-  ['What does the Antbuildz AI Sales Agent do?', 'It answers product questions, qualifies requirements, recommends suitable options from approved information, captures buyer intent and prepares quotation-ready handovers.'],
+  ['What does the Antbuildz AI Agent do?', 'Antbuildz AI Agent uses approved knowledge to support product guidance, sales, rental and customer support. Sales Specialist is its AI Sales Agent role; other roles handle product, service, technical and after-sales conversations.'],
   ['Can it learn from our product catalogue?', 'Yes. Add approved catalogues, manuals, FAQs, pricing guidance, policies and sales rules to the knowledge base. Your team controls what the Agent may use and share.'],
-  ['Is this a generic chatbot?', 'No. Antbuildz AI is designed for industrial product, equipment rental and technical sales workflows where specifications, compatibility, availability and commercial context matter.'],
+  ['Is this a generic chatbot?', 'No. Antbuildz AI is designed for complex product businesses, specialising in industrial equipment, rental and technical B2B workflows where specifications, compatibility, availability and commercial context matter.'],
   ['Can it handle rental and sales enquiries?', 'Yes. It can qualify hire dates, site conditions and delivery needs for rental, or capture specifications, quantities, budgets and timelines for sales.'],
   ['Does it support multiple languages?', 'Yes. The Agent can support multilingual buyer conversations when configured with suitable knowledge and language coverage.'],
   ['How does it know when to involve our team?', 'You configure handover rules, commercial boundaries and escalation points in the AI Agent Console. Qualified or sensitive enquiries can be routed to the right person.'],
-  ['Can we review what the Agent says?', 'Yes. The Console gives your team conversation review, knowledge controls, instructions, testing and performance signals so you can improve responses over time.'],
-  ['What is the difference between AI Webstore Suite and AI Sales Agent?', 'AI Webstore Suite combines a purpose-built Webstore with the AI Sales Agent. The AI Sales Agent can also support customer conversations without a new Webstore.'],
+  ['Can we review what the Agent says?', 'Yes. AI Agent Console gives your team conversation review, knowledge controls, instructions, testing and performance signals so you can improve responses over time.'],
+  ['What is the difference between AI Webstore Suite and AI Agent?', 'AI Agent handles customer conversations. AI Webstore Suite adds the connected product, inventory and store layer through Sales or Rental+ capabilities. The Agent plan works with your existing customer channels.'],
 ] as const;
 
 export const resourceCards = [

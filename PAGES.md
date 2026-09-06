@@ -452,9 +452,10 @@ changed files, sources, unresolved launch gates and required legal review.
 
 | Route | Primary visitor job | Preferred primary CTA | Design source | Current status |
 | --- | --- | --- | --- | --- |
-| `/` | Understand industrial product selection and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero uses the approved static mountain-logistics photograph. The Agent conversations are visible on the first frame and no longer depend on page scrolling. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
+| `/` | Understand AI guidance for complex products, led by industrial expertise, and explore the Agent or Webstore | Book a Demo | Protected industrial hero and Emma component, with source-owned educational body | Hero uses the approved static mountain-logistics photograph. The Agent conversations are visible on the first frame and no longer depend on page scrolling. Initial HTML still lacks visible content/links; server-rendering migration and production performance/indexing checks remain open. Details and evidence below |
 | `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Book a Demo | Selected Webstore listing workflow formerly reviewed at `/webstore-2-ai-webstore-preview` | Canonical product page uses the approved dusty-ochre listing workflow, mixed-category catalogue enrichment, product-page handoff and Emma recommendation experience. At 767px and below, the complete hero ends exactly at the phone viewport boundary throughout all three animated stages. The final conversation stage now uses a larger, deliberately cropped phone with a lower fade on mobile and desktop. Canonical metadata remains indexable at `https://antbuildz.ai/ai-webstore-suite`; the former preview URL redirects here |
-| `/ai-sales-agent` | Understand standalone AI-guided qualification and handover | Book a Demo | `/aiagent` on 8080 | Desktop retains the reference split composition. Its repeated actions now use the shared destination-owned CTA contract: Book a Demo is primary and View Pricing is secondary. At 767px and below, the hero fits exactly one small viewport, places the animated phone before both actions and keeps the persistent Agent launcher clear of the secondary action. Responsive QA details are recorded below |
+| `/who-we-serve` | Find the right industry application for a complex product business | Find Your Business → Book a Demo | Shared source-rendered public shell and AI Roles editorial hero | Eight existing industry destinations, dedicated instruments/electronics/technical-consumer examples, business-fit guidance and closing CTA. Desktop and mobile QA recorded below |
+| `/ai-sales-agent` | Understand the core AI Agent for complex product knowledge, recommendations, sales, rental, support and human handover | Book a Demo | `/aiagent` on 8080 | URL retained by explicit user decision on 2026-09-06. Desktop retains the reference split composition. Its repeated actions use the shared destination-owned CTA contract: Book a Demo is primary and View Pricing is secondary. At 767px and below, the hero fits exactly one small viewport, places the animated phone before both actions and keeps the persistent Agent launcher clear of the secondary action. Responsive QA details are recorded below |
 | `/ai-agent-console` | Understand how teams control knowledge, instructions and conversations | Book a Demo | `/app` on 8080 | Reference matched; operational typography unchanged against baseline |
 | `/pricing` | Compare approved product plans and choose a next step | Start 14-Day Free Trial or Talk to Sales | Transferred content; Gorgias-inspired wider plan layout | Standard plans present one cumulative Agent → Sales → Rental+ path, with one side-by-side comparison table. Current approved prices, allowances, billing mechanics, Custom panel and commercial terms are recorded below |
 | `/resources` | Discover practical industrial AI education | Explore a Guide | `/resources` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA; grouped header dropdown, all topic destinations and mobile access verified |
@@ -2724,3 +2725,193 @@ Browser-inspected at 2560px and 390×844 on the library and a representative
 Webstore-support article. Canonical direct loading, rewritten copy, responsive
 containment and zero horizontal overflow were verified. All 109 regression
 tests, targeted ESLint, the production build and `git diff --check` pass.
+
+## 2026-09-06 — Homepage complex-product positioning
+
+Fidelity-mode copy refinement following the supplied final tightening brief.
+Home now leads with “AI Agent for Complex Product Businesses” and “Built from
+industrial expertise”. Existing body copy explains product knowledge, inventory,
+sales, rental, technical questions and after-sales support. Industrial equipment
+and rental remain the visual and commercial specialisation; the final FAQ
+introduces electronic components and technical consumer products such as 3D
+printers after industrial and B2B examples.
+
+The existing Webstore card describes catalogue structure and product discovery;
+the existing FAQ explains that Rental+ includes sales and rental. The current
+homepage has no Sales/Rental+ plan cards or hero description, so those messages
+use existing text areas. Four foundation cards, four recommendation stages, two
+product cards, eight industry destinations, five FAQs, section order, imagery,
+animations, styles and CTA structure are retained. The shorter hero eyebrow
+keeps the title clear of the fixed conversation at 320px without CSS changes.
+
+Homepage title, description, Open Graph/Twitter text, WebPage schema, shared
+company/software schema descriptions and the llms.txt positioning summary align
+with the approved broader category. The footer wording change is homepage-only;
+other routes retain their existing copy. Canonical URLs and route catalogue are
+unchanged. No configuration, reference-project or deployment changes were made.
+
+Rendered checks at 1440×900, 1024×900, 390×844 and 320×740 confirm readable copy
+and zero horizontal overflow. Desktop and mobile content, expanded mobile FAQs,
+and rendered metadata/schema were inspected; the narrowest hero retains a gap
+above the conversation. Existing JavaScript-rendered main content remains an
+open SEO limitation; this copy-only change does not complete a rendering migration.
+
+Validation: all 110 existing regression tests, targeted ESLint, the production
+build and git diff whitespace checks pass.
+
+## 2026-09-06 — AI Agent product hierarchy and SEO refinement
+
+Fidelity-mode wording refinement: Antbuildz AI → AI Agent → Agent Roles →
+Sales/Rental capabilities. The core page now leads with “AI Agent for Complex
+Product Businesses”; Sales Specialist leads with “AI Sales Agent for Complex
+Product Sales”. Customer Service and After-Sales Support use the approved role
+names. AI Webstore Suite is the connected product, inventory and store layer.
+Industrial equipment, B2B sales and rental remain the strongest specialisation,
+with technical consumer products included in the broader market definition.
+
+Homepage, core product, roles, Webstore, pricing, resources, shared navigation
+and footer labels now follow that hierarchy. Relevant titles, descriptions,
+Open Graph metadata, structured data, breadcrumbs, internal anchor labels and
+llms.txt are aligned. Homepage and core product titles remain distinct.
+
+The user explicitly chose to preserve /ai-sales-agent. Public search did not
+establish its traffic, backlink or indexed authority; no inference of zero SEO
+equity was made. Canonicals retain existing URLs. There is no route migration,
+redirect or sitemap change. No UI, CSS, section layout, card count, navigation
+structure, imagery, configuration or reference-project changes were made.
+
+Desktop and mobile browser checks covered the core product, Sales Specialist,
+Webstore, resources and shared labels; mobile checks also covered home, pricing,
+Customer Service and After-Sales Support. Revised headings fit, checked routes
+have no horizontal overflow, expanded core FAQs show the hierarchy and plans,
+and a supporting resource article retains its canonical URL and updated copy.
+
+Validation: all 110 regression tests, targeted ESLint, production build and
+git diff whitespace checks pass. Local-only; nothing deployed. The previously
+recorded JavaScript-rendering SEO limitation remains outside this copy scope.
+
+### Follow-up — Distinct homepage and product hero titles
+
+The homepage now reads “Complex Products / Clear Answers with AI”, retaining
+“Built from industrial expertise” above it. The AI Agent product page keeps
+“AI Agent for Complex Product Businesses”. This separates the homepage benefit
+from the product category. The existing two heading spans, emphasis, imagery,
+conversation, layout and unique SEO metadata are unchanged. Browser checks at
+1440×900, 1024×900 and 390×844 confirm readable wrapping with no overlap or
+horizontal overflow. The existing 110 regression tests pass. Local-only.
+
+### Follow-up — Approved homepage hero wording
+
+Home uses the exact requested eyebrow “AI Agent for Sales & Rental Businesses”,
+H1 “Built for Complex Product Conversations”, and description “Understands
+specifications, inventory, availability and customer needs across sales, rental
+and support.” The user explicitly approved restoring the description paragraph
+with its existing styles, then approved the minimum mobile spacing adjustment
+after browser inspection revealed overlap with the fixed conversation.
+
+The mobile conversation now clears the measured copy bottom by 24px while
+preserving its previous minimum top position. Copy resizing recalculates this
+clearance; desktop positioning, animation timing, buttons, typography and other
+page content remain unchanged. No metadata or URLs changed. Browser checks at
+1440×900, 1024×900, 390×844 and 320×740 confirm readable copy and no overlap.
+All 110 existing regression tests and targeted ESLint pass. Local-only.
+
+### Follow-up — Remove Console from hamburger navigation
+
+Removed AI Agent Console from the copied public drawer and the shared
+source-page mobile menu. Other menu links, desktop navigation, Console route,
+styles and behaviour are unchanged. Mobile browser verification confirms the
+remaining drawer links. All 110 regression tests pass. Local-only.
+
+## 2026-09-06 — Who We Serve overview
+
+Design-mode addition at /who-we-serve, following the existing public design
+system and AI Roles editorial hero. Reuses the source-rendered header/footer,
+photography, section typography, buttons, surfaces and responsive spacing.
+The page leads with “Built Around Your Product Business”, then presents eight
+industry image cards and concrete applications for instruments/test equipment,
+electronics/components and technical consumer products including 3D printers.
+The business-fit section explains product complexity, requirements, approved
+knowledge and team confirmation; Book a Demo closes the page.
+
+The hamburger menus include Who We Serve and still omit AI Agent Console.
+The desktop Industries dropdown adds View All Industries and broader intro
+copy. Native navigation connects the copied public pages to the new source
+route. No existing industry URL changes. Manufacturer and distributor hero
+and introduction paragraphs now include instruments and electronics; their
+industrial examples, layouts and component counts are retained. Matching
+metadata descriptions and audience data were refined.
+
+Unique metadata, Open Graph/Twitter text, canonical URL, visible breadcrumb,
+CollectionPage/BreadcrumbList schema, sitemap entry and llms.txt link added.
+Robots already allows this public route and references the correct sitemap, so
+no robots change was needed. The new overview renders its full content on the
+server; existing industry pages retain their prior client rendering.
+
+Browser QA covers 1440×900, 1024×900, 390×844 and 320×740: readable hero,
+industry cards, technical examples and closing actions; no horizontal overflow.
+Verified hero directory jump, desktop and mobile overview navigation across
+both public shells, and refined manufacturer/distributor paragraphs. Server
+checks confirmed one H1, canonical/social metadata, schema, sitemap, all eight
+industry destinations and local images. All 110 regression tests, targeted
+ESLint, production build and git diff whitespace checks pass. No configuration
+changes, service restarts, reference-project edits or deployment.
+
+## 2026-09-06 — FAQ positioning audit and ownership
+
+Audit mode followed by source-level wording updates with the existing public
+FAQ designs retained. See `FAQS.md` for scope, editable sources and maintenance.
+Reviewed the 96 distinct AI Help questions, five homepage FAQs, eight core Agent
+FAQs, six Webstore FAQs, six Pricing FAQs, 77 industry FAQ placements and 229
+questions across 29 resource articles. Also reviewed the shared article fallback
+and retained source FAQ templates; marketplace and merchant-specific FAQs remain
+outside Antbuildz AI product copy.
+
+Updated core Agent/role/plan hierarchy, AI Agent Console naming, optional Webstore
+use, support handover and broader complex product examples. Industrial/equipment
+examples remain prominent. FAQ-only learning claims now describe team review and
+approved knowledge updates rather than automatic learning or guaranteed results.
+
+`/help/ai` now has an explicit source route using the existing Help Centre styles
+and public shell. Its 96 editable entries drive both tabs, cross-tab search and
+FAQPage schema from one source. Marketplace-only hidden entries are excluded from
+schema as well as visible content. Canonical reference links were checked: all
+18 distinct Help destinations returned 200. `/ai-sales-agent` and all other
+public URLs are retained; no sitemap or redirect changes were needed.
+
+The inherited S$49/month additional-Agent FAQ needs approved currency/price
+confirmation alongside the USD plan display. The audit preserves the amount.
+No commercial entitlements or prices were inferred. Non-FAQ article text was
+not included in the wording changes.
+
+Validation: 113 automated tests and production build pass. Targeted ESLint on
+all FAQ source changes passes. The repository-wide lint command also scans the
+copied production/marketplace bundles and reports existing generated-code errors;
+it is not a clean project-wide lint baseline. Browser checks cover Help search,
+empty/default states, both tabs, keyboard arrow selection, expanded answers,
+canonical schema and desktop/mobile wrapping, plus representative product,
+Pricing, industry and article FAQs. No deployment, service restart, configuration
+change or reference-project edit.
+
+Help Centre viewports checked: 1280×720, 1024×900, 390×844 and 320×740;
+product FAQ desktop checks used 1440×1000. The narrow-screen search heading now
+wraps unusually long query tokens within its existing frame instead of clipping.
+
+## 2026-09-06 — Hamburger master links
+
+Fidelity update: both public hamburger menus now show Pricing → Industries →
+AI Roles. Industries links to the master `/who-we-serve` overview; AI Roles links
+to `/ai-roles` and replaces the previous All AI Roles label. Existing menu styling
+and desktop navigation are retained. Browser verification at 390×844 covered
+both source and transferred menus and the Industries destination. All 113 tests
+pass; targeted lint and whitespace checks pass.
+
+## 2026-09-06 — Two-column compact footer
+
+Applied the approved two-column link layout to the shared public footer through
+source CSS. Brand content spans both columns. Below 360px the links stack for
+readability; wider desktop retains its existing layout. Both the Who We Serve
+source page and the copied core Agent page were inspected at 390px with no
+horizontal overflow. No footer links, typography or colours changed.
+Additional QA at 320×740 confirms the one-column fallback; at 1440×900 the
+existing desktop grid is preserved. Production build and whitespace checks pass.

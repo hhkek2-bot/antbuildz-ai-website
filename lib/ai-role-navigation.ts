@@ -1,4 +1,4 @@
-/** Bridges source-owned role routes and links still owned by the copied router. */
+/** Bridges source-owned role and industry-overview routes with the copied router. */
 export function syncAiRoleNavigation(root: HTMLElement, roles: readonly { label: string; href: string }[], redirects: Record<string, string>) {
   const footer = root.querySelector('footer nav[aria-label="AI Agent Roles"]');
   if (footer && !footer.querySelector('[data-ai-role-list]')) {
@@ -19,16 +19,16 @@ export function syncAiRoleNavigation(root: HTMLElement, roles: readonly { label:
     group.dataset.aiMobileRoles = 'true';
     const link = document.createElement('a');
     link.href = '/ai-roles';
-    link.textContent = 'All AI Roles';
+    link.textContent = 'AI Roles';
     link.className = 'antbuildz-menu-link';
     group.appendChild(link);
-    drawer.querySelector('a[href="/pricing"]')?.insertAdjacentElement('afterend', group);
+    drawer.querySelector('a[href="/who-we-serve"]')?.insertAdjacentElement('afterend', group);
   });
   root.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => {
     const destination = redirects[link.getAttribute('href') ?? ''];
     if (destination) link.setAttribute('href', destination);
     if (link.getAttribute('href') === '/resources#ai-agent-roles') link.setAttribute('href', '/ai-roles');
-    if (!link.pathname.startsWith('/ai-roles') || link.origin !== window.location.origin
+    if ((!link.pathname.startsWith('/ai-roles') && link.pathname !== '/who-we-serve') || link.origin !== window.location.origin
       || link.dataset.aiRoleNavigation === 'true') return;
     link.dataset.aiRoleNavigation = 'true';
     link.addEventListener('click', event => {

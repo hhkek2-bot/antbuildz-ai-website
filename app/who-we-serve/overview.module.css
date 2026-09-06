@@ -1,0 +1,44 @@
+.page .canvas { background: var(--canvas, #F8F7FF); }
+.page .soft { background: var(--soft); }
+.page [id] { scroll-margin-top: 140px; }
+.breadcrumb { display: flex; align-items: center; gap: 12px; font-size: 14px; text-align: left; color: var(--muted); }
+.breadcrumb a { color: var(--body); }
+.page .heroStage { margin-top: 24px; }
+.page .heroCopy { gap: 18px; }
+.page .heroEyebrow { font: 700 12px/1.4 var(--font-heading); letter-spacing: .18em; text-transform: uppercase; }
+.industryGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.industryCard { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--clean); color: var(--body); box-shadow: 0 12px 32px -28px rgb(15 23 42 / .3); }
+.industryCard:hover { border-color: var(--muted); }
+.cardPhoto { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.cardPhoto img { object-fit: cover; }
+.cardCopy { position: relative; display: flex; flex-direction: column; flex: 1; gap: 14px; padding: 24px; }
+.number { color: var(--muted); font: 600 13px/1.4 var(--font-body); }
+.page .cardCopy p { font-size: 15px; line-height: 1.6; }
+.page .cardCopy .examples { margin-top: auto; color: var(--muted); font-size: 12px; padding-top: 6px; }
+.cardLink { color: var(--ink); font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+.technicalGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.technicalItem { padding: 0 32px; border-left: 1px solid var(--line); display: flex; flex-direction: column; align-items: flex-start; }
+.technicalItem:first-child { padding-left: 0; border: 0; }
+.technicalItem:last-child { padding-right: 0; }
+.page .technicalExamples { font-size: 14px; color: var(--muted); margin-top: 12px; min-height: 3.3em; }
+.technicalItem blockquote { margin: 24px 0; padding: 18px 0 18px 20px; border-left: 3px solid var(--yellow); font: 700 20px/1.4 var(--font-heading); color: var(--ink); }
+.technicalItem > a { margin-top: auto; padding-top: 24px; }
+.page .note { font-size: 14px; color: var(--muted); margin-top: 48px; max-width: 90ch; }
+.page .fitLead { margin-top: 24px; }
+.fitList { list-style: none; padding: 0; margin: 0; }
+.fitList li { display: grid; grid-template-columns: 28px 1fr; gap: 20px; padding: 24px 0; border-top: 1px solid var(--line); }
+.fitList li:first-child { padding-top: 0; border: 0; }
+.fitList p { margin-top: 8px; }
+@media (max-width: 1179px) {
+  .industryGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .technicalItem { padding-inline: 22px; }
+}
+@media (max-width: 767px) {
+  .industryGrid, .technicalGrid { grid-template-columns: 1fr; }
+  .page .heroStage { min-height: 500px; }
+  .page .heroCopy h1 span { white-space: normal; }
+  .technicalItem, .technicalItem:first-child, .technicalItem:last-child { padding: 32px 0; border: 0; border-top: 1px solid var(--line); }
+  .technicalItem:first-child { padding-top: 0; border: 0; }
+  .technicalItem > a { margin-top: 0; }
+  .page .note { margin-top: 24px; }
+}

@@ -1,26 +1,26 @@
 # Antbuildz AI
 
-> Antbuildz AI helps industrial rental, equipment, parts, manufacturing and technical product businesses turn approved product knowledge into useful buyer conversations and qualified sales handovers.
+> Antbuildz AI provides an AI Agent for complex product businesses, specialising in industrial equipment, rental and technical B2B products. It uses approved product knowledge, specifications, inventory and business rules to support sales, rental, product guidance and customer support. The same approach can support other complex products, including technical consumer products.
 
 Canonical website: https://antbuildz.ai
 
 ## Product model
 
-- [AI Sales Agent](https://antbuildz.ai/ai-sales-agent): The core Antbuildz AI product. It qualifies industrial requirements, recommends supported options from approved knowledge, captures buyer intent and prepares human handovers.
-- [AI Webstore Suite](https://antbuildz.ai/ai-webstore-suite): An optional supporting system for the AI Sales Agent. It adds structured product pages, dedicated product URLs and connected inventory context for more accurate recommendations, SEO and AI search discovery.
+- [AI Agent](https://antbuildz.ai/ai-sales-agent): The core Antbuildz product for complex product businesses. It connects product knowledge, inventory and workflows to recommendations, sales, rental, customer service, technical support and human handover. The existing URL is retained.
+- [AI Webstore Suite](https://antbuildz.ai/ai-webstore-suite): The optional product, inventory and store layer connected to the AI Agent. It adds structured product pages, dedicated product URLs and connected inventory context for more accurate recommendations, SEO and AI search discovery.
 - [AI Agent Console](https://antbuildz.ai/ai-agent-console): Manages knowledge, instructions, testing, conversations, workflows and performance.
-- [Pricing](https://antbuildz.ai/pricing): Current Antbuildz AI Sales Agent plans, Webstore options and included features.
+- [Pricing](https://antbuildz.ai/pricing): Agent, Sales and Rental+ subscription plans and capabilities. Sales adds the sales Webstore; Rental+ includes sales and rental capabilities.
 - [Book a Demo](https://antbuildz.ai/book-a-demo): Share your name and work email, then choose and confirm a demo time in Calendly.
 
 ## Learning and support
 
-- [Resources](https://antbuildz.ai/resources): Practical AI Sales Agent guides covering buyer conversations, approved knowledge, inventory connections, Webstore support, readiness and Console operations.
+- [Resources](https://antbuildz.ai/resources): Practical AI Agent guides covering buyer conversations, approved knowledge, inventory connections, Webstore support, readiness and Console operations.
 - [AI Agent Roles](https://antbuildz.ai/ai-roles): Industrial AI agent roles for sales, product recommendations, customer support, technical support and after-sales service. These are practical jobs for one grounded AI Agent, not separate subscriptions.
-- [AI Agent for Sales](https://antbuildz.ai/ai-roles/sales-specialist): An industrial AI sales agent that answers product enquiries, guides product selection, captures buyer requirements and prepares qualified handovers for a sales team.
+- [Sales Specialist — AI Sales Agent for Complex Product Sales](https://antbuildz.ai/ai-roles/sales-specialist): The sales role of the AI Agent, with particular strength in industrial and equipment sales. It is an AI Sales Agent that answers product enquiries, guides product selection, captures buyer requirements and prepares qualified handovers for a sales team.
 - [AI Agent for Product Guidance](https://antbuildz.ai/ai-roles/product-specialist): An AI product recommendation agent that helps buyers compare approved specifications, dimensions and product fit, while leaving uncertain compatibility checks with the team.
-- [AI Agent for Customer Support](https://antbuildz.ai/ai-roles/customer-support): An AI customer support agent for delivery, returns and product enquiries using approved FAQs and policies, with handover for exceptions.
+- [Customer Service](https://antbuildz.ai/ai-roles/customer-support): An AI customer support agent for delivery, returns and product enquiries using approved FAQs and policies, with handover for exceptions.
 - [AI Agent for Technical Support](https://antbuildz.ai/ai-roles/technical-support): An AI technical support agent for equipment and industrial products that retrieves approved manuals, explains documented specifications and prepares specialist escalation.
-- [AI Agent for After-Sales Service](https://antbuildz.ai/ai-roles/after-sales-service): An AI after-sales service agent for warranty, maintenance, repair and spare-parts enquiries, with service-team confirmation for coverage and compatibility.
+- [After-Sales Support](https://antbuildz.ai/ai-roles/after-sales-service): An AI after-sales service agent for warranty, maintenance, repair and spare-parts enquiries, with service-team confirmation for coverage and compatibility.
 - [Antbuildz AI Help Centre](https://antbuildz.ai/help/ai): AI-only product, knowledge, Webstore and onboarding answers.
 - [About Antbuildz](https://antbuildz.ai/about): Company history, principles and industrial AI direction.
 - [Antbuildz AI Agreements & Policies](https://antbuildz.ai/agreements): Legal terms and privacy information governing Antbuildz AI services.
@@ -31,6 +31,7 @@ Canonical website: https://antbuildz.ai
 
 ## Industries served
 
+- [Who We Serve](https://antbuildz.ai/who-we-serve): Overview of complex product businesses, from industrial equipment and rental to instruments, electronics, components and technical consumer products such as 3D printers. Explore the eight industry pages and example applications; suitability depends on approved product knowledge and configured data connections.
 - [Rental and leasing](https://antbuildz.ai/rental-businesses)
 - [Manufacturers and OEMs](https://antbuildz.ai/manufacturers-brands)
 - [Dealers and distributors](https://antbuildz.ai/dealers-distributors)

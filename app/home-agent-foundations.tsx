@@ -5,10 +5,10 @@ import { GraphicIcon } from './home-graphics';
 import styles from './home-agent-foundations.module.css';
 
 export const AGENT_FOUNDATIONS = [
-  { id: 'brand', title: 'Brand and sales voice', description: 'Keep every conversation aligned with your company voice, business guidance and approved sales approach.' },
-  { id: 'inventory', title: 'Products and connected inventory', description: 'Connect Antbuildz Webstore, your inventory system or supported third-party sources so the Agent can use approved product and availability information.' },
-  { id: 'specifications', title: 'Technical and business knowledge', description: 'Ground answers in approved specifications, manuals, policies and application guidance. Ask for missing requirements before suggesting a fit.' },
-  { id: 'processes', title: 'Business knowledge and SOPs', description: 'Follow your approved qualification steps, business rules, escalation paths and handover procedures—including when human approval is required.' },
+  { id: 'brand', title: 'Your brand and voice', description: 'Keep sales, rental and support conversations aligned with your company voice and approved guidance.' },
+  { id: 'inventory', title: 'Products and connected inventory', description: 'Connect AI Webstore Suite, your inventory or supported sources so the Agent can use approved product and availability data.' },
+  { id: 'specifications', title: 'Product and technical knowledge', description: 'Ground answers in approved specifications, manuals, policies and application guidance. Ask for missing requirements before suggesting a fit.' },
+  { id: 'processes', title: 'Sales, rental and support workflows', description: 'Follow approved sales and rental rules, qualification steps and support procedures, with clear handover when your team needs to step in.' },
 ] as const;
 
 const inventory = [
@@ -29,7 +29,7 @@ function BrandScene() {
       <span className={styles.guidanceNote}><GraphicIcon kind="review" />Your sales approach</span>
     </div>
     <div className={styles.chatPanel}>
-      <div className={styles.panelHeader}><EmmaAvatar size={32} decorative /><span><strong>Emma</strong><small>Your AI Sales Agent</small></span></div>
+      <div className={styles.panelHeader}><EmmaAvatar size={32} decorative /><span><strong>Emma</strong><small>Your AI Agent</small></span></div>
       <div className={styles.chatMessages}>
         <span className={styles.buyerMessage}>Can you help me choose?</span>
         <span className={styles.agentMessage}>Tell me what you need the equipment to do.</span>
@@ -89,8 +89,8 @@ export function HomeAgentFoundations() {
     <div className={styles.introFrame}>
       <div className={styles.intro}>
         <p className={styles.eyebrow}>Built around your business</p>
-        <h2 id="home-agent-foundations">Your AI Sales Agent <span>Configured Around Your Business</span></h2>
-        <p>Bring your brand, product data, business knowledge and approved processes into every buyer conversation. Connect Antbuildz Webstore, your inventory or supported third-party systems, while your team controls what the Agent uses and when it hands over.</p>
+        <h2 id="home-agent-foundations">One AI Agent. <span>Built Around Your Products.</span></h2>
+        <p>Antbuildz AI uses your products, inventory, company knowledge and workflows to understand customer requirements and guide each conversation. From sales and rental to product recommendations, technical questions and after-sales support, your team controls its knowledge and handover rules.</p>
       </div>
     </div>
     <div className={styles.frame}>

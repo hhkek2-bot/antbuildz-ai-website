@@ -11,13 +11,13 @@ import { RESOURCE_LIBRARY_SEO } from '@/lib/resource-copy';
 
 const pageTitles: Record<string, [string, string]> = {
   'ai-webstore-suite': ['AI Webstore Suite for Industrial Products', WEBSTORE_DESCRIPTION],
-  'ai-sales-agent': ['AI Sales Agent for Industrial Enquiries', 'Qualify complex industrial sales and rental enquiries, recommend suitable options from approved knowledge, and prepare useful handovers for your team.'],
+  'ai-sales-agent': ['AI Agent for Complex Product Businesses', 'Antbuildz AI Agent uses product knowledge, inventory and workflows to guide sales, rental and support. Built from industrial equipment and B2B expertise.'],
   'ai-agent-console': ['AI Agent Console for Industrial Sales Teams', 'Manage approved knowledge, Agent instructions, conversations, workflows, testing and performance for your industrial AI sales operation.'],
-  pricing: ['Antbuildz AI Pricing', 'Compare the published Antbuildz AI Sales Agent and AI Webstore Suite plans, included features and available setup paths.'],
+  pricing: ['Antbuildz AI Pricing', 'Compare Antbuildz AI Agent plans: Agent, Sales and Rental+. Review AI Webstore Suite capabilities, included features and setup options.'],
   'book-a-demo': ['Book an Industrial AI Demo', 'Share your contact details and schedule an Antbuildz AI demo focused on your industrial products, sales workflows and buyer enquiries.'],
   resources: [RESOURCE_LIBRARY_SEO.title, RESOURCE_LIBRARY_SEO.description],
   'ai-agent-roles': ['AI Agent Roles', 'Specialised AI roles for sales, product, service, technical support and after-sales workflows.'],
-  faqs: ['AI FAQs', 'Answers about the Antbuildz AI Sales Agent, AI Webstore Suite and AI Agent Console.'],
+  faqs: ['AI FAQs', 'Answers about the Antbuildz AI Agent, AI Webstore Suite and AI Agent Console.'],
   about: ['About Antbuildz Industrial AI', 'Learn how Antbuildz applies industrial rental, product and sales experience to practical AI tools for complex B2B buyer journeys.'],
   agreements: ['Antbuildz AI Agreements & Policies', 'Find the published privacy, data-handling and product policy documents that apply to Antbuildz AI services and customers.'],
 };

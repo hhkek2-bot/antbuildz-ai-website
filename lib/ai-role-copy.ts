@@ -15,7 +15,7 @@ export type AiRoleCopy = {
 
 export const AI_ROLES_OVERVIEW_COPY = {
   title: 'AI Agent Roles for Sales & Product Support',
-  seoTitle: 'Industrial AI Agents for Sales & Support',
+  seoTitle: 'AI Agent Roles for Complex Product Businesses',
   metaDescription: 'AI agents for inbound sales and support conversations. Share your dedicated AI Terminal through websites, ads and campaigns to help customers find answers.',
   headline: ['AI Agent Roles', 'for customer conversations'] as const,
   intro: 'Turn website visits and ad clicks into helpful conversations. Share your dedicated AI Terminal so anyone can ask your Agent about products, sales or support.',
@@ -23,15 +23,15 @@ export const AI_ROLES_OVERVIEW_COPY = {
 
 export const AI_ROLE_COPY: Record<string, AiRoleCopy> = {
   'sales-specialist': {
-    title: 'AI Agent for Sales Specialist',
-    seoTitle: 'AI Sales Agent for Product Enquiries',
-    metaDescription: 'AI sales agent for industrial product businesses. Match buyer needs with suitable products using approved catalogue knowledge and connected inventory data.',
-    headline: ['AI Agent for', 'Sales Specialist'],
-    intro: 'Deploy an AI sales agent that uses approved catalogue knowledge and connected inventory data to recommend suitable products for each buyer’s requirements.',
-    capabilityHeading: 'What an AI Agent for Sales Specialist can do',
+    title: 'AI Sales Agent for Complex Product Sales',
+    seoTitle: 'AI Sales Agent for Complex Product Sales',
+    metaDescription: 'AI Sales Agent for complex product sales. Match industrial, equipment and technical buyer needs with approved catalogue knowledge and connected inventory.',
+    headline: ['AI Sales Agent for', 'Complex Product Sales'],
+    intro: 'Sales Specialist is the sales role of your Antbuildz AI Agent. Use approved product knowledge and connected inventory to guide complex product sales.',
+    capabilityHeading: 'What your AI Sales Agent can do',
     description: 'Your AI sales agent helps manufacturers, distributors and industrial suppliers handle inbound product enquiries. It asks about the application, quantity, location and timing, then recommends suitable catalogue items. When inventory is connected, it can prioritise products using current stock or rental availability. Your team confirms price and delivery.',
     useCaseIntro: 'Deploy this role when website visitors or people responding to ads want to discuss a product. Link your ads and campaigns to your dedicated AI Terminal so interested buyers can ask questions and explain what they need.',
-    deploymentHeading: 'How to deploy an AI Agent for Sales Specialist',
+    deploymentHeading: 'How to deploy the Sales Specialist role',
     deploymentIntro: 'Configure your sales conversations in AI Agent Console, then share your AI Terminal with incoming prospects.',
     workflow: [
       ['Add your knowledge', 'Add your catalogue, inventory data, sales FAQs and quotation requirements. Start with the product range you want the Agent to cover.'],
@@ -59,15 +59,15 @@ export const AI_ROLE_COPY: Record<string, AiRoleCopy> = {
     ],
   },
   'customer-support': {
-    title: 'AI Agent for Customer Support',
-    seoTitle: 'AI Customer Support Agent for Product Teams',
+    title: 'AI Agent for Customer Service',
+    seoTitle: 'AI Customer Service Agent for Product Teams',
     metaDescription: 'AI customer support agent for product businesses. Answer delivery, returns and product enquiries from approved FAQs and policies, then hand exceptions to your team.',
-    headline: ['AI Agent for', 'Customer Support'],
+    headline: ['AI Agent for', 'Customer Service'],
     intro: 'Use an AI customer support agent to answer delivery, returns and product enquiries from approved FAQs and policies, then send exceptions to your team with the relevant details.',
-    capabilityHeading: 'What an AI Agent for Customer Support can do',
+    capabilityHeading: 'What an AI Agent for Customer Service can do',
     description: 'Your AI customer support agent answers recurring questions from your FAQs, policies and product information. Help shoppers and business buyers understand the next step without inventing an order update, refund approval or policy exception.',
     useCaseIntro: 'Deploy this role when visitors have questions about delivery, returns or your products. Share your AI Terminal on your website and in customer messages so people can start a support conversation directly.',
-    deploymentHeading: 'How to deploy an AI Agent for Customer Support',
+    deploymentHeading: 'How to deploy an AI Agent for Customer Service',
     deploymentIntro: 'Configure your FAQs and support instructions in AI Agent Console, then share your AI Terminal with customers who need answers.',
     workflow: [
       ['Add your knowledge', 'Add your support FAQs, delivery information and returns policies. Include the contact details and next steps customers should receive.'],
@@ -95,15 +95,15 @@ export const AI_ROLE_COPY: Record<string, AiRoleCopy> = {
     ],
   },
   'after-sales-service': {
-    title: 'AI Agent for After-Sales Service',
-    seoTitle: 'AI After-Sales Service Agent',
+    title: 'AI Agent for After-Sales Support',
+    seoTitle: 'AI After-Sales Support Agent',
     metaDescription: 'AI after-sales service agent for product businesses. Guide warranty, maintenance, repair and spare-parts enquiries, then prepare complete service requests for your team.',
-    headline: ['AI Agent for', 'After-Sales Service'],
+    headline: ['AI Agent for', 'After-Sales Support'],
     intro: 'Use an AI after-sales service agent to guide warranty, maintenance, repair and spare-parts enquiries before your service team confirms next steps.',
-    capabilityHeading: 'What an AI Agent for After-Sales Service can do',
+    capabilityHeading: 'What an AI Agent for After-Sales Support can do',
     description: 'Your AI after-sales service agent supports post-purchase warranty, maintenance, repair and spare-parts enquiries. It collects product and purchase details so your team can confirm coverage, compatibility and the appropriate service.',
     useCaseIntro: 'Deploy this role when customers ask about care, warranty or spare parts after a purchase. Link service pages, follow-up emails and maintenance campaigns to your AI Terminal for a direct conversation about what they need.',
-    deploymentHeading: 'How to deploy an AI Agent for After-Sales Service',
+    deploymentHeading: 'How to deploy an AI Agent for After-Sales Support',
     deploymentIntro: 'Add your after-sales knowledge in AI Agent Console, then share your AI Terminal as a place to ask post-purchase questions.',
     workflow: [
       ['Add your knowledge', 'Add warranty terms, care guides, parts catalogues and your service request process for the products you support.'],

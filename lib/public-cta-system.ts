@@ -11,7 +11,7 @@ export const PUBLIC_CTA_PAGES = new Set([
 export const PUBLIC_CTA_DESTINATIONS = {
   '/book-a-demo': { label: 'Book a Demo', variant: 'primary' },
   '/pricing': { label: 'View Pricing', variant: 'secondary' },
-  '/ai-sales-agent': { label: 'Explore AI Sales Agent', variant: 'secondary' },
+  '/ai-sales-agent': { label: 'Explore AI Agent', variant: 'secondary' },
   '/ai-webstore-suite': { label: 'Explore AI Webstore Suite', variant: 'secondary' },
 } as const;
 

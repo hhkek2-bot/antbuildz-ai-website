@@ -3,13 +3,13 @@ import { setSalesAgentText as setText } from './ai-sales-agent-copy';
 
 // Select only the canonical Webstore route. Exact text replacements preserve the
 // transferred React nodes, layouts, animations, FAQ behaviour and link targets.
-export const WEBSTORE_DESCRIPTION = 'Extend your AI Sales Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.';
+export const WEBSTORE_DESCRIPTION = "Extend your AI Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.";
 
 // The transferred hero has one non-wrapping desktop description slot. Keep the
 // opening concise; the sections below explain recommendations and discovery.
 export const WEBSTORE_HERO = 'Give your Agent structured product and inventory data for more accurate recommendations.';
 
-export const WEBSTORE_INVENTORY = 'Connect your AI Sales Agent to the AI Webstore Suite catalogue and supported inventory sources. Use product specifications and recorded availability to narrow suitable options. Inventory connections and update frequency depend on your plan and setup.';
+export const WEBSTORE_INVENTORY = "Connect your AI Agent to the AI Webstore Suite catalogue and supported inventory sources. Use product specifications and recorded availability to narrow suitable options. Inventory connections and update frequency depend on your plan and setup.";
 
 export const WEBSTORE_MARKET_SHIFT = {
   eyebrow: 'THE AI-ERA BUYER',
@@ -24,7 +24,7 @@ export const WEBSTORE_MARKET_SHIFT = {
 } as const;
 
 export const WEBSTORE_CONNECTED_AGENT = {
-  eyebrow: 'WEBSTORE + AI SALES AGENT',
+  eyebrow: "WEBSTORE + AI AGENT",
   headline: ['Turn Discovery Into ', 'Recommendations'],
   description: 'Connect structured product data to recommend suitable options and capture buyer intent.',
 } as const;
@@ -49,10 +49,10 @@ export const WEBSTORE_HOW_IT_WORKS = {
   description: 'Structured product data helps buyers discover, compare, receive recommendations and enquire.',
   steps: [
     ['Discover Products', ['Webstore'], 'Buyers find your product pages through search, AI or shared links.'],
-    ['Ask Questions', ['AI Sales Agent'], 'Buyers ask questions about products, applications and requirements.'],
-    ['Understand Needs', ['AI Sales Agent'], 'The Agent identifies specifications, quantity, budget, location and timing.'],
-    ['Match Products', ['AI Sales Agent'], 'The Agent compares buyer needs with specifications and available inventory.'],
-    ['Recommend Products', ['AI Sales Agent', 'Webstore'], 'The Agent recommends products and shares Webstore pages for review.'],
+    ['Ask Questions', ["AI Agent"], 'Buyers ask questions about products, applications and requirements.'],
+    ['Understand Needs', ["AI Agent"], 'The Agent identifies specifications, quantity, budget, location and timing.'],
+    ['Match Products', ["AI Agent"], 'The Agent compares buyer needs with specifications and available inventory.'],
+    ['Recommend Products', ["AI Agent", 'Webstore'], 'The Agent recommends products and shares Webstore pages for review.'],
     ['Submit Enquiry', ['Webstore', 'Sales Team'], 'Buyers submit product choices and requirements for your sales team.'],
   ],
 } as const;
@@ -89,8 +89,8 @@ export const WEBSTORE_FEATURES = {
 export const WEBSTORE_COMPARISON = {
   eyebrow: 'SEE THE DIFFERENCE',
   headline: ['Start With the Agent. ', 'Expand With the Webstore.'],
-  description: 'Use the AI Sales Agent with your existing business knowledge. Connect the Webstore for structured product pages, inventory context and sales workflows.',
-  columns: ['AI Sales Agent', '+ AI Webstore Suite'],
+  description: "Use the AI Agent with your existing business knowledge. Connect the Webstore for structured product pages, inventory context and sales workflows.",
+  columns: ["AI Agent", '+ AI Webstore Suite'],
   rows: [
     ['Best For', 'Product guidance, recommendations and enquiry capture.', 'Adds product browsing, inventory context and structured sales workflows.'],
     ['Knowledge Source', 'Approved catalogues, PDFs, FAQs, websites and business documents.', 'Adds structured listings, specifications, pricing and supported inventory data.'],
@@ -106,18 +106,18 @@ export const WEBSTORE_COMPARISON = {
 
 export const WEBSTORE_CLOSING_CTA = {
   headline: ['Want to See How the', ' ', 'AI Webstore Suite Works?'],
-  description: 'Book a demo to see how your catalogue, inventory and AI Sales Agent work together to help buyers discover products and prepare clearer enquiries.',
+  description: "Book a demo to see how your catalogue, inventory and AI Agent work together to help buyers discover products and prepare clearer enquiries.",
 } as const;
 
 export const WEBSTORE_FAQS = [
   ['The Antbuildz AI Webstore Suite is an AI Webstore for industrial products. It combines a structured product library, branded Webstore, sales, rental and enquiry workflows, quotation tools, analytics, multilingual capabilities, and a built-in AI Sales Agent. It supports businesses selling machinery, equipment, tools, components, spare parts, hardware, materials, and supplies.',
-    'The AI Webstore Suite is an optional extension to your AI Sales Agent. It adds a browsable catalogue, structured listings and dedicated product pages for industrial products. Supported inventory, sales and rental workflows depend on your plan and setup.'],
+    "AI Webstore Suite is the connected product, inventory and store layer for your AI Agent. It adds a browsable catalogue and dedicated pages for complex products, including equipment, instruments, electronics and parts. Sales and rental capabilities depend on your plan and setup."],
   ['The AI Webstore Suite combines a structured product library, branded Webstore, rental and sales workflows, quotation tools, analytics, and the built-in AI Sales Agent. The Antbuildz AI Sales Agent is for companies that already have a website or digital catalogue and want to add AI-guided product engagement without launching a new Webstore.',
-    'The AI Sales Agent answers questions, recommends products and qualifies enquiries using your approved knowledge. The AI Webstore Suite adds structured listings, product pages and supported inventory context. You can use the agent without a webstore or choose a combined plan from the beginning.'],
+    "The AI Agent answers questions, recommends products and qualifies enquiries using your approved knowledge. The AI Webstore Suite adds structured listings, product pages and supported inventory context. You can use the agent without a webstore or choose a combined plan from the beginning."],
   ['Yes. The AI Sales Agent is included in the AI Webstore Suite. It uses approved product information to answer enquiries, recommend suitable options, and capture buyer requirements before quotation or human sales handover.',
-    'Yes. The AI Sales Agent is included in the AI Webstore Suite. It answers product questions, recommends suitable options and captures requirements for quotation review or sales handover. You can also use the AI Sales Agent without launching a webstore.'],
+    "Yes. The Sales and Rental+ plans combine the AI Agent with AI Webstore Suite capabilities. The Agent uses approved knowledge to guide product questions, recommendations and enquiries. You can also start with the Agent plan without launching a Webstore."],
   ['The Suite includes a Webstore Builder, Product Catalogue and Inventory Management, sales, rental and enquiry workflows, quotation tools, buyer analytics, multilingual content, and a built-in AI Sales Agent.',
-    'Available capabilities include the Webstore Builder, product catalogue, inventory management, enquiry tools, buyer analytics and multilingual content. Growth adds the Sales Webstore; Enterprise adds Rental capabilities. Features, integrations and workflows depend on your plan and setup.'],
+    'Available capabilities include the Webstore Builder, product catalogue, inventory management, enquiry tools, buyer analytics and multilingual content. Sales adds sales Webstore capabilities; Rental+ includes sales plus rental capabilities. Features, integrations and workflows depend on your plan and setup.'],
   ['Yes — Antbuildz Webstore is available globally with AI-powered translation supporting 21 languages, enabling businesses to reach both local and international customers.',
     'Please confirm availability for your market and the supported languages during your demo. Product-page translation and multilingual agent conversations are separate capabilities; the options available depend on your plan and setup.'],
 ] as const;
@@ -143,7 +143,7 @@ export const WEBSTORE_REPLACEMENTS = [
   ['Deploy the AI Sales Agent with a complete AI Webstore, unique product pages and built-in inventory management—or add the standalone Agent to your existing website.', WEBSTORE_HERO],
   // Retain the existing link, its two text nodes and arrow icon.
   ['Prefer a lighter way to start?', 'Explore the '],
-  ['Quickly deploy the AI Sales Agent.', 'AI Sales Agent'],
+  ['Quickly deploy the AI Sales Agent.', "AI Agent"],
   ['The Gap', 'THE PRODUCT DISCOVERY GAP'],
   ['Why Industrial Product Enquiries', 'Every Product Needs a'],
   ['Get Lost', 'Discoverable Identity'],
@@ -173,8 +173,8 @@ export const WEBSTORE_REPLACEMENTS = [
   ['Buyers want to explore catalogues, compare options, review specifications, and understand product suitability before speaking with sales.', WEBSTORE_MARKET_SHIFT.cards[2][1]],
   ['AI Shapes Supplier Shortlists', WEBSTORE_MARKET_SHIFT.cards[3][0]],
   ['Buyers use AI-assisted research to compare product fit, pricing clarity, supplier credibility, and decision readiness before deciding who to contact.', WEBSTORE_MARKET_SHIFT.cards[3][1]],
-  ['Built-In AI Sales Agent', 'Connected AI Sales Agent'],
-  ['Your built-in AI Sales Agent understands your product and business information, guides buyers to suitable options, and captures quote-ready requirements.', 'Your AI Sales Agent uses connected product and business information to answer questions, recommend suitable options and capture quotation requirements.'],
+  ['Built-In AI Sales Agent', "Connected AI Agent"],
+  ['Your built-in AI Sales Agent understands your product and business information, guides buyers to suitable options, and captures quote-ready requirements.', "Your AI Agent uses connected product and business information to answer questions, recommend suitable options and capture quotation requirements."],
   ['Industrial Product SEO & AI Discovery', WEBSTORE_BENEFITS.cards[0][0]],
   ['Turn product pages into structured, searchable content that search engines and AI tools can understand, cite, and recommend.', WEBSTORE_BENEFITS.cards[0][1]],
   ['Enquiry & Quotation Conversion', WEBSTORE_BENEFITS.cards[1][0]],
@@ -200,33 +200,33 @@ export const WEBSTORE_REPLACEMENTS = [
   ['ERP & Inventory Systems', 'Supported inventory'],
   ['API integration', 'Connection by setup'],
   ['The buyer submits selected products, quantities, location, timeline, delivery details, budget, contact details, and purchase or rental intent for sales follow-up.', 'The buyer submits product choices, quantities, timing, delivery needs and contact details for your sales team to review and quote.'],
-  ['Manage your product library, sales, rental and enquiry journeys, quotations, analytics, and multilingual content in one connected platform.', 'Manage your catalogue, inventory and enquiry workflows, connected to your AI Sales Agent.'],
+  ['Manage your product library, sales, rental and enquiry journeys, quotations, analytics, and multilingual content in one connected platform.', "Manage your catalogue, inventory and enquiry workflows, connected to your AI Agent."],
   ['Give buyers a structured Webstore experience through the AI Webstore Suite while your built-in AI Sales Agent guides product discovery and enquiry capture.', 'Support product guidance and quotation handover. Features, rental workflows and integrations depend on your plan.'],
   ['Customize your branding, banners, product categories, and content to create a professional buying experience for your market.', 'Customise your branding, banners, product categories and content for your customers.'],
   ['Organize products, specifications, categories, pricing, availability, images, and documents so every listing is easy for buyers, search engines, and AI to understand.', 'Organise specifications, categories, pricing, recorded availability, images and documents into clear product listings.'],
   ['Capture complete requirements without delay.', 'Capture the details needed for follow-up.'],
   ['Present product pages and buyer conversations in multiple languages to support local and international markets.', 'Present product pages in supported languages. Translation options depend on your plan and setup.'],
-  ['Your AI Sales Agent works across time zones, channels, and languages. It captures and qualifies enquiries 24/7, so your team can focus on higher-value closing.', 'Your AI Sales Agent can capture and qualify enquiries beyond office hours, with or without a webstore. Supported channels and languages depend on your setup.'],
+  ['Your AI Sales Agent works across time zones, channels, and languages. It captures and qualifies enquiries 24/7, so your team can focus on higher-value closing.', "Your AI Agent can capture and qualify enquiries beyond office hours, with or without a webstore. Supported channels and languages depend on your setup."],
   ['Deploy your AI Sales Agent everywhere.', 'Connect conversations across supported channels.'],
   ['Capture and route qualified enquiries.', 'Capture requirements for sales follow-up.'],
   ['The future of every website and online store is interactive. Let visitors ask questions, discover the right products, and turn every visit into a qualified enquiry — 24/7.', 'Let visitors ask questions, explore suitable products and share the requirements your sales team needs.'],
-  ['Share your AI Agent link through WhatsApp, Facebook Messenger, WeChat, Telegram, or broadcast messages to guide customers into structured product and sales conversations.', 'Share your AI Sales Agent link in messaging channels to start product conversations. Sharing a link does not require a native messaging integration.'],
+  ['Share your AI Agent link through WhatsApp, Facebook Messenger, WeChat, Telegram, or broadcast messages to guide customers into structured product and sales conversations.', "Share your AI Agent link in messaging channels to start product conversations. Sharing a link does not require a native messaging integration."],
   ['Scale across borders with one AI Agent that engages new markets, supports different languages, and responds across time zones.', 'Support enquiries across time zones using the languages available for your agent setup.'],
-  ['Turn product specifications, pricing, availability rules, policies, and sales terms into a searchable brain your team can use across every conversation.', 'Give your AI Sales Agent approved specifications, pricing guidance, availability rules and sales terms to use in buyer conversations.'],
+  ['Turn product specifications, pricing, availability rules, policies, and sales terms into a searchable brain your team can use across every conversation.', "Give your AI Agent approved specifications, pricing guidance, availability rules and sales terms to use in buyer conversations."],
   ['AI Agent Control', 'AI Agent Console'],
   ['Control Center', 'Control Centre'],
   ['Spot high-intent enquiries faster and keep every follow-up moving.', 'Review buyer signals and prepare your team for follow-up.'],
   ['Capture and Profile Every Potential Buyer', 'Capture Buyer Details and Requirements'],
   ['Capture buyer details, company information, product interest, quantity, location, rental duration, budget, urgency, and purchase timeline to help your team understand lead quality.', 'Capture the contact details and requirements buyers share, including product interest, quantity, location, timing and budget, for your team to follow up.'],
-  ['The AI Webstore Suite is the complete platform and our primary product. The Antbuildz AI Sales Agent is a focused alternative for companies that already have a website.', 'Start with the AI Sales Agent for product guidance and enquiry qualification. Connect the AI Webstore Suite when you need structured product listings, dedicated product pages and supported inventory workflows.'],
-  ['Antbuildz AI Webstore Suite', 'AI Sales Agent + AI Webstore Suite'],
-  ['Antbuildz AI Sales Agent', 'AI Sales Agent'],
-  ['The Antbuildz AI Sales Agent adds AI engagement to your existing website.', 'Use the AI Sales Agent with your approved product and business knowledge.'],
+  ['The AI Webstore Suite is the complete platform and our primary product. The Antbuildz AI Sales Agent is a focused alternative for companies that already have a website.', "Start with the AI Agent for product guidance and enquiry qualification. Connect the AI Webstore Suite when you need structured product listings, dedicated product pages and supported inventory workflows."],
+  ['Antbuildz AI Webstore Suite', "AI Agent + AI Webstore Suite"],
+  ['Antbuildz AI Sales Agent', "AI Agent"],
+  ['The Antbuildz AI Sales Agent adds AI engagement to your existing website.', "Use the AI Agent with your approved product and business knowledge."],
   ['The AI Webstore Suite connects your product library, Webstore, workflows, and built-in AI Sales Agent.', 'Connect the AI Webstore Suite for structured listings, product pages and supported workflows.'],
-  ['Traditional websites display information. An AI Webstore helps buyers discover, compare, ask, and enquire through a more interactive buying experience.', 'Combine AI Sales Agent conversations with connected product pages to help buyers explore, compare and share requirements for your team to review.'],
-  ['Build an AI Webstore', 'Give Your AI Sales Agent'],
+  ['Traditional websites display information. An AI Webstore helps buyers discover, compare, ask, and enquire through a more interactive buying experience.', "Combine AI Agent conversations with connected product pages to help buyers explore, compare and share requirements for your team to review."],
+  ['Build an AI Webstore', "Give Your AI Agent"],
   ['Around Your Business', 'a Connected Catalogue'],
-  ['Bring your product catalogue, business knowledge, buyer journeys, quotations, and built-in AI Sales Agent into one connected platform.', 'Connect your product catalogue and buyer journeys to your AI Sales Agent, so customers can explore suitable products and your team receives clearer quotation requirements.'],
+  ['Bring your product catalogue, business knowledge, buyer journeys, quotations, and built-in AI Sales Agent into one connected platform.', "Connect your product catalogue and buyer journeys to your AI Agent, so customers can explore suitable products and your team receives clearer quotation requirements."],
   ['Multilingual Catalog', 'Translated Pages'],
   ['Reach global buyers', 'Support buyer languages'],
   ...WEBSTORE_FAQS,
@@ -242,7 +242,7 @@ export function correctWebstoreCopy(root: HTMLElement, pathname: string) {
   const visit = (node: Node) => {
     if (node.nodeType === 3) {
       const current = node.textContent ?? '';
-      const replacement = replacements.get(current.trim());
+      const replacement = replacements.get(current.trim()) ?? current.trim().replaceAll('AI Sales Agent', 'AI Agent');
       if (replacement !== undefined) {
         const value = current.replace(current.trim(), replacement);
         if (value !== current) node.textContent = value;

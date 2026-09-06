@@ -2,9 +2,9 @@
 export const AI_ROLE_LINKS = [
   { label: 'Sales Specialist', href: '/ai-roles/sales-specialist' },
   { label: 'Product Specialist', href: '/ai-roles/product-specialist' },
-  { label: 'Customer Support', href: '/ai-roles/customer-support' },
+  { label: 'Customer Service', href: '/ai-roles/customer-support' },
   { label: 'Technical Support', href: '/ai-roles/technical-support' },
-  { label: 'After-Sales Service', href: '/ai-roles/after-sales-service' },
+  { label: 'After-Sales Support', href: '/ai-roles/after-sales-service' },
 ] as const;
 
 export const AI_ROLE_REDIRECTS: Record<string, string> = {
@@ -51,7 +51,7 @@ export const AI_ROLES: readonly AiRole[] = [
     },
     sources: ['Product catalogue', 'Product pages', 'Sales FAQs', 'Delivery policies', 'Excel / Google Sheets'],
     businesses: [
-      { name: 'Furniture & consumer brands', example: 'Link product ads to your AI Terminal so interested buyers can discuss options and quote requirements.' },
+      { name: 'Technical & complex consumer products', example: 'Link product ads to your AI Terminal so interested buyers can discuss options and quote requirements.' },
       { name: 'Distributors & manufacturers', example: 'Invite website visitors to discuss quantities, applications and procurement needs with your Agent.' },
       { name: 'Equipment & rental businesses', example: 'Let visitors from equipment campaigns explain the job, rental dates and delivery needs in a conversation.' },
     ],
@@ -87,7 +87,7 @@ export const AI_ROLES: readonly AiRole[] = [
     related: { label: 'AI for manufacturers & OEMs', href: '/manufacturers-brands' },
   },
   {
-    slug: 'customer-support', name: 'Customer Support',
+    slug: 'customer-support', name: 'Customer Service',
     summary: 'Answer everyday customer questions using your business knowledge.',
     description: 'Give customers clear answers from your FAQs, policies and product information, then send exceptions to your team with the relevant details.',
     capabilities: [
@@ -145,7 +145,7 @@ export const AI_ROLES: readonly AiRole[] = [
     related: { label: 'AI for industrial & MRO suppliers', href: '/industrial-mro' },
   },
   {
-    slug: 'after-sales-service', name: 'After-Sales Service',
+    slug: 'after-sales-service', name: 'After-Sales Support',
     summary: 'Support customers with warranty, servicing, maintenance, parts and post-purchase enquiries.',
     description: 'Help customers look after the products they own, find the right service information and give your team a clear post-purchase enquiry.',
     capabilities: [
@@ -167,7 +167,7 @@ export const AI_ROLES: readonly AiRole[] = [
     },
     sources: ['Warranty policies', 'Care & maintenance guides', 'Parts catalogue', 'Product manuals', 'Service procedures'],
     businesses: [
-      { name: 'Appliances & consumer products', example: 'Include your AI Terminal link in follow-up emails for warranty, care and repair questions.' },
+      { name: 'Appliances & technical consumer products', example: 'Include your AI Terminal link in follow-up emails for warranty, care and repair questions.' },
       { name: 'Automotive & aftermarket suppliers', example: 'Link parts campaigns to a conversation that gathers vehicle and part details for your team.' },
       { name: 'Equipment manufacturers', example: 'Invite visitors from service pages to discuss maintenance and spare-parts needs with your Agent.' },
     ],

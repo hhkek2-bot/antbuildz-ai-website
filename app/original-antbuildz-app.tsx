@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { scopeAiHelpExperience } from '../lib/ai-help-scope';
 import { simplifyAgreementHub, syncAgreementMetadata } from '../lib/agreement-hub';
 import { EMMA_PORTRAIT_ALT, EMMA_PORTRAIT_SRC, standardiseAgentPortraits } from '../lib/agent-identity';
-import { correctSalesAgentCopy } from '../lib/ai-sales-agent-copy';
+import { correctSalesAgentCopy, setSalesAgentText } from '../lib/ai-sales-agent-copy';
 import { HOMEPAGE_SEO, syncHomepageMetadata } from '../lib/homepage-seo';
 import { syncDefaultSocialShareImage } from '../lib/social-share';
 import { applyPublicMarketingSectionSystem } from '../lib/public-marketing-sections';
@@ -12,6 +12,7 @@ import { applyPublicMarketingTypographyTrial } from '../lib/public-marketing-typ
 import { applyPublicCtaSystem } from '../lib/public-cta-system';
 import { removeHeadingFullStops } from '../lib/title-punctuation';
 import { addLegalAcknowledgement, syncLegalNavigation } from '../lib/legal-navigation';
+import { correctIndustryFaqs } from '../lib/industry-faq-content';
 import { applyWhoWeServeProcessCopy } from '../lib/who-we-serve-process-copy';
 import { AI_ROLES, AI_ROLE_LINKS, AI_ROLE_REDIRECTS } from '../lib/ai-roles';
 import { syncAiRoleNavigation } from '../lib/ai-role-navigation';
@@ -81,7 +82,7 @@ const WHO_WE_SERVE_PATHS = new Set([
 const PAGE_TITLES: Record<string, string> = {
   '/': HOMEPAGE_SEO.title,
   '/ai-webstore-suite': 'AI Webstore Suite for Industrial Products | Antbuildz AI',
-  '/ai-sales-agent': 'AI Sales Agent for Industrial Enquiries | Antbuildz AI',
+  '/ai-sales-agent': 'AI Agent for Complex Product Businesses | Antbuildz AI',
   '/ai-agent-console': 'AI Agent Console for Industrial Sales Teams | Antbuildz AI',
   '/pricing': 'Antbuildz AI Pricing | Antbuildz AI',
   '/resources': `${RESOURCE_LIBRARY_SEO.title} | Antbuildz AI`,
@@ -193,10 +194,10 @@ const RESOURCE_MENU_GROUPS = [
 ] as const;
 
 const DRAWER_LINKS = [
-  { label: 'AI Sales Agent', href: '/ai-sales-agent' },
+  { label: 'AI Agent', href: '/ai-sales-agent' },
   { label: 'AI Webstore Suite', href: '/ai-webstore-suite' },
-  { label: 'AI Agent Console', href: '/ai-agent-console' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'Industries', href: '/who-we-serve' },
   { label: 'Resources', href: '/resources' },
   { label: 'About Us', href: '/about' },
 ] as const;
@@ -511,12 +512,12 @@ const PRICING_USAGE_COPY = {
 
 const PRICING_FAQS = [
   {
-    question: 'What does the AI Sales Agent do?',
-    answer: 'It answers customer enquiries using your approved product and business knowledge, recommends suitable products and captures leads. Agent works with your existing sales channels; Sales and Rental+ add Webstore capabilities around the same AI Sales Agent.',
+    question: 'What does the AI Agent do?',
+    answer: 'It uses approved product and business knowledge to guide sales, rental, product and support conversations. Sales Specialist is its AI Sales Agent role. Agent works with your existing channels; Sales and Rental+ add AI Webstore Suite capabilities around the same AI Agent.',
   },
   {
     question: 'Can I train the AI with my catalogue?',
-    answer: 'Yes. Use your product catalogue, manuals, FAQs and business knowledge to guide the AI Sales Agent. Sales adds an AI Sales Webstore with catalogue and inventory management; Rental+ adds rental inventory, pricing, availability and booking workflows.',
+    answer: 'Yes. Use your product catalogue, manuals, FAQs and business knowledge to guide the AI Agent. Sales adds AI Webstore Suite sales capabilities with catalogue and inventory management; Rental+ includes sales plus rental inventory, pricing, availability and booking workflows.',
   },
   {
     question: 'What happens if I use all my included AI conversations?',
@@ -524,15 +525,15 @@ const PRICING_FAQS = [
   },
   {
     question: 'How do AI Conversation Credits and Auto Top-Up work?',
-    answer: `${PRICING_USAGE_COPY.purchased} They are used only after your included monthly AI conversations are exhausted; the earliest-expiring credits are used first. ${PRICING_USAGE_COPY.cancellation}`,
+    answer: `${PRICING_USAGE_COPY.purchased} They are used only after your included monthly AI conversations are exhausted. ${PRICING_USAGE_COPY.cancellation}`,
   },
   {
     question: 'Which plan is right for my business?',
-    answer: `Agent adds the AI Sales Agent to your existing channels. Sales includes Agent plus an AI Sales Webstore. Rental+ includes Sales plus rental and booking capabilities. Custom extends beyond the standard plans. ${PRICING_USAGE_COPY.principle}`,
+    answer: `Agent adds the AI Agent to your existing channels. Sales includes Agent plus AI Webstore Suite sales capabilities. Rental+ includes Sales plus rental and booking capabilities. Custom extends beyond the standard plans. ${PRICING_USAGE_COPY.principle}`,
   },
   // Preserve the existing additional-agent price and entitlement until approved.
   {
-    question: 'Can I add more AI agents later?',
+    question: 'Can I add more AI Agents later?',
     answer: 'Yes. Each additional agent costs S$49/month and gets its own knowledge base — useful for different product lines or brands.',
   },
 ] as const;
@@ -543,7 +544,7 @@ type PricingComparisonRow = {
 };
 
 const PRICING_COMPARISON_ROWS: readonly PricingComparisonRow[] = [
-  { feature: 'AI Sales Agent', included: [true, true, true] },
+  { feature: 'AI Agent', included: [true, true, true] },
   { feature: 'Knowledge Base', included: [true, true, true] },
   { feature: 'Product Recommendations', included: [true, true, true] },
   { feature: 'Agent Instructions', included: [true, true, true] },
@@ -892,8 +893,9 @@ function createDesktopIndustriesMenu() {
   panel.setAttribute('aria-label', 'Industries');
 
   const { intro } = createHeaderMenuIntro(
-    'Industrial AI by business model',
-    'Practical AI sales workflows for products, rental, parts and technical supply.',
+    'AI for complex product businesses',
+    'Explore equipment, rental, instruments, electronics and technical supply.',
+    { label: 'View All Industries', href: '/who-we-serve' },
   );
 
   const links = document.createElement('div');
@@ -1038,7 +1040,7 @@ function correctProductsMenu(root: HTMLElement) {
     const links = document.createElement('div');
     links.className = 'antbuildz-industries-menu__links antbuildz-resources-menu__links';
     const products = [
-      { group: 'Engage customers', label: 'AI Sales Agent', href: '/ai-sales-agent', description: 'Deploy a 24/7 AI Agent to answer enquiries across your online channels and supported languages.' },
+      { group: 'Engage customers', label: 'AI Agent', href: '/ai-sales-agent', description: 'Deploy a 24/7 AI Agent to answer enquiries across your online channels and supported languages.' },
       { group: 'Guide product discovery', label: 'AI Webstore Suite', href: '/ai-webstore-suite', description: 'Connect your sales and rental catalogue and inventory for more accurate product recommendations.' },
       { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Train and deploy an on-brand AI Agent with your company knowledge, inventory and selected role.' },
     ];
@@ -1376,7 +1378,7 @@ function correctFooter(root: HTMLElement) {
   }
 
   const brandCopy = footer.querySelector<HTMLElement>('.abz-public-footer__brand p');
-  setPricingText(brandCopy, 'We are Building the Intelligence Layer for Industrial Businesses.');
+  setPricingText(brandCopy, 'Product Intelligence for Complex Product Businesses.');
 
   const footerBrand = footer.querySelector<HTMLElement>('.abz-public-footer__brand');
   if (footerBrand && !footerBrand.querySelector('[data-antbuildz-footer-email="true"]')) {
@@ -1881,6 +1883,12 @@ function setupHomeHeroConversationRuntime(
         ? Math.min(340, Math.max(280, heroBounds.height * .38))
         : Math.min(370, Math.max(300, heroBounds.height * .46));
       hero.style.setProperty('--antbuildz-home-chat-height', `${chatHeight}px`);
+      const copyBounds = hero.querySelector('.ai-marketplace-hero-copy')?.getBoundingClientRect();
+      if (heroBounds.width <= 767 && copyBounds) {
+        hero.style.setProperty('--antbuildz-home-chat-top', `${copyBounds.bottom - heroBounds.top + 24}px`);
+      } else {
+        hero.style.removeProperty('--antbuildz-home-chat-top');
+      }
     }
     const layer = conversation.dataset.layer;
     const layerVisible = layer === 'centre';
@@ -1904,6 +1912,9 @@ function setupHomeHeroConversationRuntime(
   };
 
   window.addEventListener('resize', updateLayout);
+  const copyResizeObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(updateLayout);
+  const heroCopy = hero.querySelector('.ai-marketplace-hero-copy');
+  if (conversation.dataset.layer === 'centre' && heroCopy) copyResizeObserver?.observe(heroCopy);
   transcript?.addEventListener('scroll', updateTranscriptFade, { passive: true });
   reducedMotion.addEventListener('change', handleMotionPreference);
   renderConversation();
@@ -1912,6 +1923,7 @@ function setupHomeHeroConversationRuntime(
   return () => {
     window.clearInterval(advanceConversation);
     window.removeEventListener('resize', updateLayout);
+    copyResizeObserver?.disconnect();
     transcript?.removeEventListener('scroll', updateTranscriptFade);
     reducedMotion.removeEventListener('change', handleMotionPreference);
     if (transcriptFrame) window.cancelAnimationFrame(transcriptFrame);
@@ -1919,9 +1931,10 @@ function setupHomeHeroConversationRuntime(
   };
 }
 
-const HOME_HERO_EYEBROW = 'Industrial AI Sales Agent for product-led B2B';
-const HOME_HERO_TITLE_PRIMARY = 'Make Industrial Buying Better';
-const HOME_HERO_TITLE_BRAND = 'With Antbuildz AI';
+const HOME_HERO_EYEBROW = 'AI Agent for Sales & Rental Businesses';
+const HOME_HERO_TITLE_PRIMARY = 'Built for Complex';
+const HOME_HERO_TITLE_BRAND = 'Product Conversations';
+const HOME_HERO_DESCRIPTION = 'Understands specifications, inventory, availability and customer needs across sales, rental and support.';
 
 function correctHomepage(root: HTMLElement) {
   const isHomepage = window.location.pathname === '/';
@@ -1953,7 +1966,13 @@ function correctHomepage(root: HTMLElement) {
   }
   eyebrow = heroCopy?.querySelector<HTMLElement>('.antbuildz-ai-home-eyebrow');
   if (eyebrow && eyebrow.textContent !== HOME_HERO_EYEBROW) eyebrow.textContent = HOME_HERO_EYEBROW;
-  heroCopy?.querySelector('.antbuildz-ai-home-description')?.remove();
+  let description = heroCopy?.querySelector<HTMLElement>('.antbuildz-ai-home-description');
+  if (heroCopy && !description) {
+    description = document.createElement('p');
+    description.className = 'antbuildz-ai-home-description';
+    heroCopy.querySelector('h1')?.after(description);
+  }
+  if (description && description.textContent !== HOME_HERO_DESCRIPTION) description.textContent = HOME_HERO_DESCRIPTION;
   heroCopy?.querySelector('.antbuildz-ai-home-intro')?.remove();
 
   const hero = root.querySelector<HTMLElement>('.ai-marketplace-hero');
@@ -1995,11 +2014,11 @@ const HOME_AGENT_CARD_INVENTORY = {
   imageAlt: 'Emma checking approved industrial product inventory on a tablet',
   eyebrow: null,
   title: 'An AI Agent That Understands Your Inventory',
-  description: 'With connected inventory data, it understands your industry and guides buyers using current, approved product information.',
-  button: 'Explore AI Sales Agent',
-  buttonAria: 'Explore the Antbuildz AI Sales Agent',
+  description: 'With connected inventory data, it helps customers compare products, check availability and enquire to buy or rent.',
+  button: 'Explore AI Agent',
+  buttonAria: 'Explore the Antbuildz AI Agent',
   buttonHref: '/ai-sales-agent',
-  badge: 'AI Sales Agent',
+  badge: 'AI Agent',
 } as const;
 
 function correctHomeInventoryAgentCard(root: HTMLElement, isHomepage: boolean) {
@@ -2175,7 +2194,7 @@ function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLEleme
       document.createTextNode('Deploy Your '),
       Object.assign(document.createElement('span'), {
         className: 'pricing-gradient-text',
-        textContent: 'AI Sales Agent',
+        textContent: 'AI Agent',
       }),
       document.createElement('br'),
       document.createTextNode('Across Your Customer Channels.'),
@@ -2236,7 +2255,7 @@ function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLEleme
   }
   setPricingText(
     comparisonHeader?.querySelector('p'),
-    'One AI Sales Agent across every plan; Sales adds an AI Sales Webstore, while Rental+ adds rental, booking and combined inventory capabilities.',
+    'One AI Agent across every plan; Sales adds an AI Sales Webstore, while Rental+ adds rental, booking and combined inventory capabilities.',
   );
   correctPricingComparison(
     root.querySelector('#compare-features-ai-agent'),
@@ -2571,10 +2590,25 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   correctIndustryTrustPlacement(root);
   removeWhoWeServeBreadcrumb(root);
   applyWhoWeServeProcessCopy(root, window.location.pathname);
+  correctIndustryFaqs(root, window.location.pathname);
   correctPublicTypography(root);
   applyPublicMarketingTypographyTrial(root, window.location.pathname);
   applyPublicMarketingSectionSystem(root, window.location.pathname);
   removeHeadingFullStops(root, window.location.pathname);
+
+  // Product links keep their established URL and DOM structure. Sales-role
+  // links retain their specific role names and destinations.
+  root.querySelectorAll<HTMLAnchorElement>('a[href="/ai-sales-agent"]').forEach(link => {
+    const labels: Record<string, string> = {
+      'AI Sales Agent': 'AI Agent',
+      'Explore AI Sales Agent': 'Explore AI Agent',
+      'Meet Your AI Sales Agent': 'Meet Your AI Agent',
+    };
+    const label = link.textContent?.trim() ?? '';
+    if (labels[label]) setSalesAgentText(link, labels[label]);
+    const aria = link.getAttribute('aria-label');
+    if (aria?.includes('AI Sales Agent')) link.setAttribute('aria-label', aria.replace('AI Sales Agent', 'AI Agent'));
+  });
 
   const pageTitle = PAGE_TITLES[window.location.pathname];
   if (pageTitle) document.title = pageTitle;

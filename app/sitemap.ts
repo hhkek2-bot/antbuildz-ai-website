@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     { url: `${base}/help/ai`, lastModified: lastVerified },
     { url: `${base}/ai-roles`, lastModified: '2026-09-04' },
+    { url: `${base}/who-we-serve`, lastModified: '2026-09-06' },
     ...AI_ROLE_LINKS.map(({ href }) => ({ url: `${base}${href}`, lastModified: '2026-09-04' })),
     ...legalDocuments.map((document) => ({
       url: `${base}/agreements/${document}`,

@@ -135,7 +135,7 @@ AI Sales Agent and AI Webstore Suite. Reused actions must follow this mapping:
 | --- | --- | --- |
 | `/book-a-demo` | `Book a Demo` | Primary yellow pill |
 | `/pricing` | `View Pricing` | Secondary clean outline pill |
-| `/ai-sales-agent` | `Explore AI Sales Agent` | Secondary clean outline pill when rendered as a button |
+| `/ai-sales-agent` | `Explore AI Agent` | Secondary clean outline pill when rendered as a button |
 | `/ai-webstore-suite` | `Explore AI Webstore Suite` | Secondary clean outline pill when rendered as a button |
 | `mailto:help@antbuildz.ai` | `Email Us` | Tertiary icon-and-text contact link showing the Antbuildz AI help address |
 
@@ -293,7 +293,10 @@ Review at a minimum around 1440px, 1024px and 390px wide.
 ## Copy and naming
 
 - Use British English: `catalogue`, `enquiry` and `personalised`.
-- Approved product names: `AI Webstore Suite`, `AI Sales Agent` and `AI Agent Console`.
+- Approved hierarchy (2026-09-06): Antbuildz AI → AI Agent → Agent Roles → Sales/Rental capabilities. `AI Agent` is the core product for complex product businesses; industrial equipment, technical B2B and rental remain its strongest specialisation. Technical and complex consumer products are a broader application.
+- `AI Sales Agent` describes the sales use case. `Sales Specialist` is the role name; the other roles are `Product Specialist`, `Customer Service`, `Technical Support` and `After-Sales Support`.
+- `Sales` and `Rental+` are subscription plans/capabilities. `AI Webstore Suite` is the connected product, inventory and store layer. `AI Agent Console` manages the Agent.
+- Preserve `/ai-sales-agent` as the core-product URL per the user’s explicit decision. Its H1 is `AI Agent for Complex Product Businesses`; `/ai-roles/sales-specialist` uses `AI Sales Agent for Complex Product Sales`. Do not infer a route migration from the new terminology.
 - Use concrete nouns and active verbs: products, specifications, availability, rental, quotation, enquiry and handover.
 - Prefer `Book a Demo`, `Build Your AI Agent`, `View Pricing` and `Get Quote` over generic actions.
 - Do not invent prices, limits, integrations, security claims, language counts, conversion statistics or performance claims.
@@ -338,3 +341,12 @@ Resources dropdown implementation, not introduce simplified alternatives.
 The AI Roles dropdown follows that same grouped panel and menu type system.
 
 Design work is complete only when the rendered interface has been inspected, changed interactions have been exercised, representative desktop and mobile layouts have been checked, relevant tests have run, and remaining limitations are reported honestly.
+
+## 2026-09-06 — Compact footer columns
+
+The approved shared public footer uses two link-group columns from 360px through
+1020px: AI Products beside Who We Serve, followed by AI Agent Roles beside Company.
+The logo and description span the full width above those groups. Links wrap
+naturally; colours, typography, destinations and bottom-bar controls are retained.
+Below 360px, use one column for readable labels. Wider desktop retains the existing
+multi-column footer.

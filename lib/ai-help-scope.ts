@@ -5,7 +5,7 @@
  */
 export const AI_HELP_SEO = {
   title: 'AI Help Centre | Antbuildz AI',
-  description: 'Find answers about the Antbuildz AI Sales Agent, AI Webstore Suite, AI Agent Console, product knowledge, setup, controls and subscriptions.',
+  description: 'Find answers about the Antbuildz AI Agent, AI Webstore Suite, AI Agent Console, product knowledge, setup, controls and subscriptions.',
   url: 'https://antbuildz.ai/help/ai',
 } as const;
 
@@ -44,7 +44,7 @@ export function scopeAiHelpExperience(root: HTMLElement, pathname: string) {
     setText(directory.querySelector('.help-directory__intro h1'), 'Answers for Antbuildz AI products.');
     setText(
       directory.querySelector('.help-directory__intro > p:last-child'),
-      'Find practical guidance for the AI Sales Agent, AI Webstore Suite, AI Agent Console, product knowledge, setup and plans.',
+      'Find practical guidance for the AI Agent, AI Webstore Suite, AI Agent Console, product knowledge, setup and plans.',
     );
 
     const marketplaceCard = directory.querySelector<HTMLElement>('.help-directory__card[href="/help/marketplace"]');
@@ -59,7 +59,7 @@ export function scopeAiHelpExperience(root: HTMLElement, pathname: string) {
       setText(aiCard.querySelector('h2'), 'Antbuildz AI Help');
       setText(
         aiCard.querySelector('span'),
-        'Answers for AI Sales Agent, AI Webstore Suite, AI Agent Console, approved knowledge, setup and subscriptions.',
+        'Answers for AI Agent, AI Webstore Suite, AI Agent Console, approved knowledge, setup and subscriptions.',
       );
       const action = aiCard.querySelector('strong');
       if (action?.firstChild?.nodeType === Node.TEXT_NODE
@@ -81,7 +81,7 @@ export function scopeAiHelpExperience(root: HTMLElement, pathname: string) {
   setText(helpCentre.querySelector('.help-centre-hero__intro h1'), 'Antbuildz AI Help');
   setText(
     helpCentre.querySelector('.help-centre-hero__intro > p:last-child'),
-    'Clear answers for the AI Sales Agent, AI Webstore Suite and AI Agent Console, including product knowledge, setup, controls and subscriptions.',
+    'Clear answers for the AI Agent, AI Webstore Suite and AI Agent Console, including product knowledge, setup, controls and subscriptions.',
   );
 
   helpCentre.querySelectorAll<HTMLElement>('.help-centre-accordion > .border-b').forEach((row) => {
