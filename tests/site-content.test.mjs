@@ -2583,18 +2583,28 @@ test('Resources dropdown keeps educational collections and moves Roles to the pr
   const code = ts.transpileModule(`${declaration.getText(parsed)}\n${groupsDeclaration.getText(parsed)}\nJSON.stringify({ topics: RESOURCE_TOPICS, groups: RESOURCE_MENU_GROUPS });`, {
     compilerOptions: { target: ts.ScriptTarget.ES2022 },
   }).outputText;
-  const { topics, groups } = JSON.parse(runInNewContext(code));
+  const categories = {};
+  runInNewContext(ts.transpileModule(await readFile(new URL('../lib/resource-tutorial-categories.ts', import.meta.url), 'utf8'), {compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText,{exports:categories});
+  const { topics, groups } = JSON.parse(runInNewContext(code,{...categories}));
   assert.equal(topics.length, 6);
   assert.equal(new Set(topics.map((topic) => topic.id)).size, 6);
   const bundle = await readFile(new URL('../public/assets/index-i9-KQg8N.js', import.meta.url), 'utf8');
   for (const topic of topics) assert.ok(bundle.includes(topic.label));
-  assert.deepEqual(groups.flatMap((group) => group.topics), topics.slice(1));
-  assert.ok(groups.every((group) => group.topics.length >= 1 && group.topics.length <= 2));
+  assert.deepEqual(groups.flatMap(group=>group.topics).filter(topic=>!topic.href).map(topic=>topic.id), topics.slice(1).map(topic=>topic.id));
+  assert.deepEqual(groups.flatMap(group=>group.topics).filter(topic=>topic.href).map(topic=>topic.href), JSON.parse(JSON.stringify(categories.RESOURCE_TUTORIAL_CATEGORIES.map(category=>category.href))));
+  assert.deepEqual(groups.map(group=>group.label), ['Understand the products','Get started','Use & improve']);
+  assert.deepEqual(groups.map(group=>group.topics.length), [3,3,3]);
+  assert.deepEqual(groups.map(group=>group.topics.map(topic=>topic.id)), [
+    ['understand-ai-agent','ai-agent-webstore','why-antbuildz-ai'],
+    ['getting-ready','subscription','agent-setup'],
+    ['products-webstore','ai-console-features','usage-troubleshooting'],
+  ]);
   assert.match(source, /correctResourcesMenu\(root\)/);
   assert.match(source, /correctPublicDrawer\(\)/);
   assert.match(source, /document\.removeEventListener\('pointerdown', dismissHeaderDropdowns\)/);
   assert.match(source, /panel.className = 'antbuildz-industries-menu__panel antbuildz-resources-menu__panel'/);
-  assert.doesNotMatch(styles, /\.antbuildz-resources-menu__panel\s*\{/);
+  assert.doesNotMatch(styles, /\.antbuildz-resources-menu__panel\s*\{/,
+    'Resources inherits the Industries panel geometry instead of a compact variant');
   assert.match(styles, /\.antbuildz-industries-menu__panel \{[\s\S]*?background: color-mix\(in srgb, var\(--canvas\) 96%, transparent\);/,
     'both desktop dropdowns use the quieter, less transparent shared canvas surface');
   assert.match(styles, /\.antbuildz-resources-menu__link\[aria-current\]/);
@@ -3167,7 +3177,7 @@ test('resource articles use readable canonical URLs and direct legacy redirects'
   }).outputText;
   runInNewContext(code, {
     exports,
-    require: path => path.endsWith('resource-copy') ? { RESOURCE_POSITIONING_OVERRIDES: {} } : {},
+    require: path => path.endsWith('resource-copy') ? { RESOURCE_POSITIONING_OVERRIDES: {} } : { customerTutorials: [], tutorialReviewDate: '2026-09-07' },
   });
 
   const redirects = exports.RESOURCE_URL_REDIRECTS;
@@ -3214,6 +3224,8 @@ test('resource articles use local long-form blog content with answer-engine stru
   const files = (await readdir(articleDirectory)).filter((name) => name.endsWith('.html'));
   const agentArticle = await readFile(new URL('what-is-an-ai-sales-agent.html', articleDirectory), 'utf8');
   const webstoreArticle = await readFile(new URL('why-ai-agents-work-with-an-integrated-webstore.html', articleDirectory), 'utf8');
+  const benefitsArticle = await readFile(new URL('ai-agent-benefits-for-industrial-b2b.html', articleDirectory), 'utf8');
+  const improvementArticle = await readFile(new URL('how-ai-agents-improve-over-time.html', articleDirectory), 'utf8');
 
   assert.equal(files.length, 44);
   assert.ok(agentArticle.split(/\s+/).length > 1_500);
@@ -3221,12 +3233,16 @@ test('resource articles use local long-form blog content with answer-engine stru
   assert.ok((webstoreArticle.match(/<h[234]>/g) ?? []).length > 10);
   assert.ok((webstoreArticle.match(/<(?:ul|ol)>/g) ?? []).length <= 2);
   assert.doesNotMatch(agentArticle, /According to Harvard Business Review/);
+  assert.doesNotMatch(`${agentArticle} ${benefitsArticle}`, /up to 80%|100x|380%|35-40%|40-60%|can handle 50/i);
+  assert.doesNotMatch(improvementArticle, /Every enquiry teaches|learns automatically|matches or exceeds a junior/i);
+  assert.match(improvementArticle, /conversations make gaps visible; authorised updates make the Agent better/i);
   assert.match(copy, /RESOURCE_BLOG_CONTENT_PATH/);
   assert.match(copy, /antbuildz-resource-answer/);
   assert.match(copy, /articleBody\.innerHTML = html/);
   assert.match(route, /articleSection/);
-  assert.doesNotMatch(route, /articleBody: blogSchema\.articleBody/, 'do not expose a stale duplicate of the corrected visible article');
-  assert.doesNotMatch(route, /wordCount: blogSchema\.wordCount/);
+  assert.match(route, /getResourceBlogSchema/);
+  assert.match(route, /articleBody: blogContent\.articleBody/);
+  assert.match(route, /wordCount: blogContent\.wordCount/);
   assert.match(route, /keywords:/);
   assert.match(route, /about: \{ '@type': 'SoftwareApplication'/);
 });
@@ -4213,9 +4229,11 @@ test('resource FAQs retain their 229 questions and current product naming', asyn
 test('resource metadata shares current headings and article links avoid unpublished source files', async () => {
   const options = { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } };
   const copy = {};
-  runInNewContext(ts.transpileModule(await readFile(new URL('../lib/resource-copy.ts', import.meta.url), 'utf8'), options).outputText, { exports: copy });
+  runInNewContext(ts.transpileModule(await readFile(new URL('../lib/resource-copy.ts', import.meta.url), 'utf8'), options).outputText, { exports: copy, require:()=>({RESOURCE_TUTORIAL_CATEGORIES:[]}) });
   const seo = {};
-  runInNewContext(ts.transpileModule(await readFile(new URL('../lib/resource-seo.ts', import.meta.url), 'utf8'), options).outputText, { exports: seo, require: () => copy });
+  const tutorials = {};
+  runInNewContext(ts.transpileModule(await readFile(new URL('../lib/customer-tutorials.ts', import.meta.url), 'utf8'), options).outputText, { exports: tutorials });
+  runInNewContext(ts.transpileModule(await readFile(new URL('../lib/resource-seo.ts', import.meta.url), 'utf8'), options).outputText, { exports: seo, require: name => name.endsWith('customer-tutorials') ? tutorials : copy });
   const articleDirectory = new URL('../public/resource-articles/content/', import.meta.url);
   const files = (await readdir(articleDirectory)).filter(name => name.endsWith('.html'));
   const titles = new Set();
@@ -4223,7 +4241,7 @@ test('resource metadata shares current headings and article links avoid unpublis
     const slug = file.replace(/\.html$/, '');
     const entry = seo.getResourceSeo(slug);
     assert.ok(entry, `${slug} has canonical metadata`);
-    assert.equal(entry.title, `${copy.RESOURCE_POSITIONING_OVERRIDES[slug].title} | Antbuildz AI`);
+    assert.equal(entry.title, `${tutorials.getCustomerTutorial(slug)?.title ?? copy.RESOURCE_POSITIONING_OVERRIDES[slug].title} | Antbuildz AI`);
     assert.ok(!titles.has(entry.title), `${slug} has a unique title`);
     titles.add(entry.title);
     assert.doesNotMatch(`${entry.title} ${entry.description}`, /\bAI Console\b|AI Agent Resources/);

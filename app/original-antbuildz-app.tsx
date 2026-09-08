@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { RESOURCE_TUTORIAL_CATEGORIES, RESOURCE_LEARNING_LABELS } from '../lib/resource-tutorial-categories';
 import { WEBSTORE_TITLE } from '../lib/ai-webstore-copy';
 import { scopeAiHelpExperience } from '../lib/ai-help-scope';
 import { simplifyAgreementHub, syncAgreementMetadata } from '../lib/agreement-hub';
@@ -188,10 +189,17 @@ const RESOURCE_TOPICS = [
   { label: 'AI Console Features — Your Command Centre', id: 'ai-console-features', description: 'Get to know the tools for managing your Agent.' },
 ] as const;
 
-const RESOURCE_MENU_GROUPS = [
-  { label: 'Explore AI', topics: [RESOURCE_TOPICS[1]] },
-  { label: 'Choose your approach', topics: [RESOURCE_TOPICS[2], RESOURCE_TOPICS[3]] },
-  { label: 'Get started', topics: [RESOURCE_TOPICS[4], RESOURCE_TOPICS[5]] },
+const RESOURCE_MENU_GROUPS: {label:string;topics: {label:string;displayLabel?:string;id:string;description:string;href?:string}[]}[] = [
+  { label: 'Understand the products', topics: RESOURCE_TOPICS.slice(1,4).map(topic=>({...topic,displayLabel:RESOURCE_LEARNING_LABELS[topic.label]})) },
+  { label: 'Get started', topics: [
+    {...RESOURCE_TOPICS[4],displayLabel:RESOURCE_LEARNING_LABELS[RESOURCE_TOPICS[4].label]},
+    ...RESOURCE_TUTORIAL_CATEGORIES.slice(0,2),
+  ] },
+  { label: 'Use & improve', topics: [
+    RESOURCE_TUTORIAL_CATEGORIES[2],
+    {...RESOURCE_TOPICS[5],displayLabel:RESOURCE_LEARNING_LABELS[RESOURCE_TOPICS[5].label]},
+    RESOURCE_TUTORIAL_CATEGORIES[3],
+  ] },
 ] as const;
 
 const DRAWER_LINKS = [
@@ -315,8 +323,8 @@ function correctResourcesMenu(root: HTMLElement) {
     panel.className = 'antbuildz-industries-menu__panel antbuildz-resources-menu__panel';
     panel.setAttribute('aria-label', 'Resources');
     const { intro, link: overview } = createHeaderMenuIntro(
-      'Practical guides for industrial AI',
-      'Understand your Agent, explore the platform and prepare your team.',
+      'Resources',
+      'Understand the product. Follow the steps.',
       { label: 'All resources', href: '/resources' },
     );
     if (overview) {
@@ -336,7 +344,7 @@ function correctResourcesMenu(root: HTMLElement) {
       groupLinks.className = 'antbuildz-industries-menu__group-links';
       topicGroup.topics.forEach((topic) => {
         const link = createIndustryLink(
-          { ...topic, label: topic.displayLabel ?? topic.label, href: `/resources#${topic.id}` },
+          { ...topic, label: topic.displayLabel ?? topic.label, href: topic.href ?? `/resources#${topic.id}` },
           'antbuildz-industries-menu__link antbuildz-resources-menu__link', true,
         );
         bindResourceNavigation(link);
@@ -374,7 +382,8 @@ function correctResourcesMenu(root: HTMLElement) {
   const button = Array.from(root.querySelectorAll<HTMLButtonElement>('.bright-resource-topic-list button'))
     .find((item) => {
       const label = item.querySelector('span:nth-child(2)')?.textContent?.trim();
-      return label === topic.label || label === topic.displayLabel;
+      const original = item.dataset.originalTopicLabel;
+      return label === topic.label || label === topic.displayLabel || Boolean(original && (original === topic.label || original === topic.displayLabel));
     });
   if (button) {
     root.dataset.antbuildzResourceTopic = topic.id;

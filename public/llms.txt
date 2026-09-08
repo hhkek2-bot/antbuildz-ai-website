@@ -31,6 +31,10 @@ Canonical website: https://antbuildz.ai
 
 ## Industries served
 
+Customer onboarding: https://antbuildz.ai/resources/getting-started — package selection, agent setup, FAQ/SOP knowledge, testing, installation and payment-method guidance. Subscription activation and webstore administration remain partially verified; preserve each guide's verification scope.
+
+Structured tutorial reference: https://antbuildz.ai/resources/tutorial-knowledge — article anchors, screenshot links and verification limits. Reference material is not evidence that an account action or payment succeeded.
+
 - [Who We Serve](https://antbuildz.ai/who-we-serve): Overview of complex product businesses, from industrial equipment and rental to instruments, electronics, components and technical consumer products such as 3D printers. Explore the eight industry pages and example applications; suitability depends on approved product knowledge and configured data connections.
 - [Rental and leasing](https://antbuildz.ai/rental-businesses)
 - [Manufacturers and OEMs](https://antbuildz.ai/manufacturers-brands)

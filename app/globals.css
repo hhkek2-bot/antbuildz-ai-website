@@ -2028,6 +2028,25 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 /* Conventional public heroes share one measured H1-to-header gap. Product
    demonstrations and the homepage keep their component-owned compositions. */
 #root.antbuildz-original-root.antbuildz-ai-pricing .pricing-container,
+.bright-resource-hero-copy [data-customer-tutorial-link] { max-width:100%; justify-content:center; text-align:center; }
+.bright-resource-topic-list .antbuildz-resource-tutorial-topic {
+  display:grid; grid-template-columns:36px minmax(0,1fr) auto;
+  gap:12px; align-items:center; width:100%; min-height:54px;
+  border:1px solid transparent; border-radius:12px; padding:8px 10px;
+  color:var(--ink); font-family:var(--landing-heading-font);
+  font-size:.93rem; font-weight:700; line-height:1.25; text-decoration:none;
+}
+.bright-resource-topic-list .antbuildz-resource-tutorial-topic:hover { background:var(--soft); border-color:var(--menu-border); }
+.bright-resource-topic-list .antbuildz-resource-topic-group {
+  margin:16px 10px 4px; padding-top:12px; border-top:1px solid var(--line);
+  font:600 12px/1.4 var(--font-body); color:var(--muted);
+  letter-spacing:.06em; text-transform:uppercase;
+}
+.bright-resource-topic-list .antbuildz-resource-tutorial-topic:focus-visible { outline:var(--menu-focus); outline-offset:2px; }
+@media(max-width:720px) {
+  .bright-resource-topic-list .antbuildz-resource-tutorial-topic { grid-template-columns:32px minmax(0,1fr) auto; min-height:50px; font-size:.88rem; }
+}
+
 #root.antbuildz-original-root .bright-resource-hero,
 #root.antbuildz-original-root .legal-policies-home__hero,
 #root.antbuildz-original-root .solutions-insurance-page .si-hero--detail {
@@ -2578,7 +2597,7 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   overflow: visible !important;
 }
 
-@media (min-width: 1180px) {
+@media (min-width: 981px) {
   #root.antbuildz-original-root .bright-nav {
     position: relative;
   }
@@ -2587,7 +2606,7 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
     margin-left: auto;
   }
 
-  #root.antbuildz-original-root .bright-nav > .bright-nav-product-links {
+  #root.antbuildz-original-root .antbuildz-public-header .bright-nav .bright-nav-product-links {
     position: absolute;
     z-index: 1;
     top: 0;

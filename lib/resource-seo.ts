@@ -1,4 +1,5 @@
 import { RESOURCE_POSITIONING_OVERRIDES } from './resource-copy';
+import { customerTutorials, tutorialReviewDate } from './customer-tutorials';
 
 export type ResourceSeoEntry = {
   slug: string;
@@ -115,6 +116,24 @@ const resourceSeoEntriesSource: ResourceSeoEntry[] = [
   {"slug":"billingantbuildzaiconsolefeatureguide","title":"Billing — Antbuildz AI Console Feature Guide | Antbuildz AI Agent Resources","description":"Manage your subscription, review billing history, access invoices, and monitor payment information from one place."},
 ];
 
+const RESOURCE_CONTENT_UPDATED_SLUGS = new Set([
+  'what-is-an-ai-sales-agent',
+  'ai-agents-vs-chatbots-for-industrial-b2b',
+  'ai-agent-benefits-for-industrial-b2b',
+  'what-an-ai-agent-can-and-cannot-do',
+  'ai-agent-as-first-digital-sales-touchpoint',
+  'ai-agent-vs-generic-ai-agents',
+  'ai-agent-vs-chatgpt',
+  'how-ai-agents-improve-over-time',
+  'how-ai-webstore-helps-capture-sales-enquiries',
+  'how-ai-webstore-qualifies-marketing-enquiries',
+  'ai-webstore-vs-company-website',
+  'why-a-product-catalogue-is-not-enough',
+  'why-ai-agents-work-with-an-integrated-webstore',
+  'how-antbuildz-connects-webstore-and-ai-agent',
+  'why-industry-specific-ai-agents-matter',
+]);
+
 export const resourceSeoEntries: ResourceSeoEntry[] = resourceSeoEntriesSource.map((entry) => {
   const slug = RESOURCE_URL_REDIRECTS[entry.slug] ?? entry.slug;
   const override = RESOURCE_POSITIONING_OVERRIDES[slug];
@@ -124,10 +143,20 @@ export const resourceSeoEntries: ResourceSeoEntry[] = resourceSeoEntriesSource.m
     ...override,
     description: (override?.description ?? entry.description).replace(/\b(?:Antbuildz )?AI Console\b/g, 'AI Agent Console').replace(/\bAI Webstore(?! Suite)\b/g, 'AI Webstore Suite'),
     title: override?.title ? `${override.title} | Antbuildz AI` : entry.title,
-    dateModified: override ? '2026-09-06' : entry.dateModified,
+    dateModified: RESOURCE_CONTENT_UPDATED_SLUGS.has(slug)
+      ? '2026-09-07'
+      : override
+        ? '2026-09-06'
+        : entry.dateModified,
   };
 });
 
+for (const guide of customerTutorials) {
+  const entry = {slug:guide.slug,title:`${guide.title} | Antbuildz AI`,description:guide.description,dateModified:tutorialReviewDate};
+  const index = resourceSeoEntries.findIndex(item=>item.slug === guide.slug);
+  if (index >= 0) resourceSeoEntries[index] = entry;
+  else resourceSeoEntries.push(entry);
+}
 export const resourceSeoBySlug = new Map(resourceSeoEntries.map((entry) => [entry.slug, entry]));
 
 export function getResourceRedirect(slug: string) {

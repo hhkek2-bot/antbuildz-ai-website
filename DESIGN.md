@@ -102,6 +102,12 @@ The `--type-*` tokens in `app/globals.css` support source-owned additions. New h
 
 ## Shared component contract
 
+The public header alignment is locked by user instruction (7 September 2026).
+Keep the desktop primary menu on the viewport centreline, with the wordmark
+and account actions on their existing outer rails. Keep the header pinned at
+the top while scrolling. Retain the mobile menu below the desktop breakpoint;
+do not shift or redesign this arrangement without an explicit user request.
+
 Legal documents use continuous rich-text article sections, including DPA
 schedules: no decorative schedule cards. The Agreements hub and every legal
 document must match the main site's public footer in content, typography,

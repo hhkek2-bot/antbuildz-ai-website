@@ -27,7 +27,8 @@
 .headerInner {
   display: grid;
   min-height: 76px;
-  grid-template-columns: auto 1fr auto;
+  /* Equal outer tracks lock primary navigation to the viewport centre. */
+  grid-template-columns: minmax(0, 1fr) max-content minmax(0, 1fr);
   align-items: center;
   gap: 28px;
 }
@@ -106,7 +107,7 @@
 .desktopNav > a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 10px; }
 .mobileMenu > nav { max-height: calc(100dvh - 110px); overflow-y: auto; }
 .mobileMenu > nav .mobileRoleLink { padding-left: 24px; font-size: 14px; }
-.headerUtilities { display: flex; align-items: center; gap: 16px; }
+.headerUtilities { display: flex; align-items: center; justify-self: end; gap: 16px; }
 @media (min-width: 980px) and (max-width: 1179px) {
   .headerInner { gap: 16px; }
   .desktopNav { gap: 2px; }

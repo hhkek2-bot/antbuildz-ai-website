@@ -1,6 +1,141 @@
 # Antbuildz.AI Page Register
 
+## Resources dropdown restored to shared design — 8 September 2026
+
+User clarification supersedes the compact two-column experiment. Resources
+inherits the Industries dropdown panel width, padding, glass surface, typography,
+descriptive links and row spacing again. Three balanced groups contain three
+links each: Understand the products; Get started; Use & improve. Only sequence
+and grouping change; all nine destinations and locked header alignment remain.
+Topics and article layouts are unchanged. Compared both dropdowns at 1280px:
+matching 1120px panel width, 28px padding, 24px corners, shared glass surface
+and 112px descriptive-link height. Resources uses three groups for nine links;
+Industries retains four groups for eight links. Checked at 1024px with no
+overflow; Escape closes and returns focus. All 114 regression tests pass.
+
+## Consistent Resources journey — 8 September 2026
+
+Shared learning labels now drive the dropdown, Topics labels and collection
+headings. Learning collections retain the same five-item sequence, and tutorial
+categories retain their shared four-item sequence. Clicking a topic now reveals
+the same short category name instead of a different long heading. Article
+content and locked header geometry are preserved.
+Tutorial breadcrumbs now include Step-by-step guides and the matching category
+link. Menu-to-learning-filter verified at 1280px; tutorial breadcrumb checked
+at 390px with no overflow. All 114 regression tests pass.
+
+## Simplified Resources dropdown — 8 September 2026
+
+Two columns mirror Topics: Learn about AI (five article collections) and
+Step-by-step guides (four tutorial collections). Shorter labels, 44px rows and
+an 800px panel replace the three-column descriptive tiles. All destinations,
+shared menu surface, keyboard behaviour and locked header centreline remain.
+Other dropdowns and page bodies are unchanged. Corrected source-header active
+state to match tutorial anchors, preventing all four categories highlighting.
+Visual QA at 1280px and 1024px, tutorial destination and Escape/focus return
+verified; 114 regression tests pass.
+
+## Onboarding follows Resources blog layout
+
+User requested the existing blog presentation for onboarding destinations.
+Tutorials now use the compact article heading scale, left reading column and
+quiet right contents sidebar; steps and screenshots remain in a continuous
+vertical article. The category hub uses vertical article rows instead of a
+two-column card grid. Text, verification limits, screenshots, URLs, Topics and
+locked header are preserved. Related reading is limited to three same-category
+guides plus the full index link instead of listing every other tutorial.
+Compared with an existing Resources article at 1280px; hub rows and tutorial
+steps/screenshots visually checked at 1280px and 390px. Step anchor works,
+mobile has no horizontal overflow, and 114 site plus two tutorial tests pass.
+
+## Resources product-model block removed
+
+User requested removal of the full “The AI Agent is the core product” block
+from the Resources index. Removed its index insertion; hero, Topics, article
+content and locked header are unchanged. Article-specific product-model content
+is outside this removal and remains intact.
+
+## Approved tutorial wording and icons
+
+Topics now uses “Step-by-step guides” in place of “Set up & manage”. Tutorial
+category labels use sentence case consistently in Topics, header links and the
+hub. Distinct matching red outline icons: user-plus, sliders, storefront, gauge.
+Existing Topics panel, destinations and locked header geometry are retained.
+Verified at desktop 1280px and mobile 390px; all four icons render at 16px,
+mobile has zero horizontal overflow, and 114 regression tests pass.
+
+## Topic label and grouping refinement
+
+Shortened sidebar labels and added two quiet group labels within the same Topics
+panel: Learn about AI; Set up & manage. All articles accurately describes the
+44-article filter; tutorial links retain arrows to distinguish navigation from
+article counts. Original topic labels are retained in data attributes for header
+deep-link matching. No article-body, route, or locked-header design changes.
+Desktop 1280px and mobile 390px visually checked; two group labels remain
+unduplicated after filtering, Console filter works, and mobile has no horizontal
+overflow. All 114 regression tests pass.
+
+## Resources onboarding inside Topics — 7 September 2026
+
+User correction supersedes the separate onboarding category band below. The four
+onboarding categories now sit inside the existing Topics navigation as links to
+their matching tutorial collections. No separate onboarding section on the
+Resources index. Tutorials, educational filters and the locked header remain.
+Verified at 1280px and 390px with no horizontal overflow; existing Console topic
+filter works and the subscription topic opens its matching collection anchor.
+All 114 site tests and two tutorial tests pass.
+
+## Locked public header centreline — 7 September 2026
+
+Fidelity correction requested by the user: source-owned header uses equal outer
+grid tracks so unequal logo/account widths cannot pull navigation off-centre.
+Transferred header centring now covers compact desktop from 981px as well.
+Existing sticky/fixed scroll behaviour and mobile navigation are retained.
+No page content or menu destinations changed. Rendered tutorial header checked
+at 1440px, 1028px and 390px CSS widths: desktop menu centre matches viewport
+centre; scrolled header remains at top 0; no horizontal overflow. Resources
+transferred shell checked at 1280px, centre 640px. Corrected its selector to
+match navigation nested inside the utility wrapper. All 114 regression tests pass.
+
+## Resources alignment and category navigation
+
+QA: desktop 1280px and mobile 390px hero/category rows visually inspected; CTA centres match at desktop and mobile has zero horizontal overflow. Balanced dropdown inspected and Agent Setup category link verified to land on its matching hub section. All 114 regression tests and two tutorial tests pass; production build passes.
+
+Fidelity fix: onboarding CTA was a direct child of the full-width hero; moved into `.bright-resource-hero-copy` to share the title's centred frame. Added a Resources onboarding category block using existing resource rows, leaving educational article bodies and FAQ Help unchanged. Shared category data aligns Resources dropdown, library block and tutorial hub anchors: Sign-up & Subscription; Agent Setup & Knowledge; Products & Webstore; Usage & Troubleshooting. Dropdown remains the existing three-column pattern with three links in each group. The shared header Resources menu updates wherever that header is used; no unrelated page body changes. No new routes or deployment.
+
+## Resources-only text completion pass
+
+Per user instruction, leave unavailable live-screen work pending and supply useful text/steps now. Added `/resources/prepare-company-workspace`, `/resources/prepare-and-check-product-import`, `/resources/prepare-inventory-connection` through the existing tutorial catalogue/template. Expanded subscription continuation and webstore setup/publication checks; unverified UI and actions explicitly labelled text-first drafts. Library now has 14 guides. Existing screenshot assets, page styling, Help and all other public pages unchanged. Canonical metadata, sitemap entries and reference export derive from the same catalogue automatically. No live screen control, new screenshots, account mutations or deployment in this pass. Visual reinspection intentionally not performed because this is a content-only pass without screen control.
+
+## Authoritative correction — Help is FAQ-only; tutorials belong in Resources
+
+User clarification supersedes the Help onboarding follow-up below. Restored Help component, styles and four FAQ edits to their pre-follow-up versions. Help retains FAQ-only search and product tabs. All 11 detailed onboarding/tutorial articles stay under Resources. Preserve the existing UI and educational articles; add practical pages/blocks only as needed. Required tutorial standard: prerequisites, exact actions, relevant real screenshots, expected results, completion checks and troubleshooting sufficient for customer self-onboarding. Checkout, product import and webstore workflow gaps remain unverified, not complete. Six live screenshot crops with numbered overlays are retained in Resources; no screenshot assets or tutorial files deleted.
+
+## Focused Help onboarding follow-up — 7 September 2026
+
+QA: 114 regression tests + two tutorial/search tests pass, targeted lint and build pass. Help/search visually checked at 1280/390px; Quick Start at 1024/390px. Search aliases, new routes, redirects and zero mobile Help horizontal overflow verified. All 44 pre-existing resource HTML files match this turn's starting hashes.
+
+Audit-to-Design pass scoped to onboarding, using the existing Help styles and shared tutorial template. Preserved 96 FAQ questions and all introductory/explanatory Resources files. Added a Help onboarding entry point and tutorial keyword/alias results alongside existing FAQ search. Three P0 tutorial routes added through the existing Resources article catalogue: `/resources/quick-start-ai-agent`, `/resources/understand-usage-and-billing`, `/resources/onboarding-troubleshooting`. Existing tutorial URLs remain canonical; no duplicate Help article bodies or broad route migration. Four sign-up/billing FAQ answers tightened to match verification limits. Marketplace help remains on antbuildz.com. Production billing rule reconciliation and missing live checkout/product/webstore administration remain explicit blockers; no app UI or live account changes. Full audit/outcome: `artifacts/onboarding-help-audit-20260907.md`.
+
+## Customer tutorials — 7 September 2026
+
+QA: build passed; 114 existing tests plus one tutorial integrity test passed; targeted lint passed. Rendered hub/article checked at 1280, 980 and 390px, including Resources navigation, step anchors, FAQ disclosure and screenshot callouts. All eight article routes and screenshot assets return 200. Full repository type-check retains existing copied-app/DOM errors; see `artifacts/customer-tutorial-handoff-20260907.md` for limits and pending inputs.
+
+Design mode after live Console audit. New `/resources/getting-started` hub reuses PublicPageShell, with eight substantial tutorials, unaltered live screenshot assets and deterministic numbered overlays. Primary CTA: start package selection. Existing Agent Setup, Knowledge Base, Playground and Payment Methods article URLs now use native server-rendered tutorials. New routes: `choose-plan-and-sign-up`, `add-faq-knowledge`, `add-sop-and-policy-knowledge`, `webstore-onboarding-checklist` under `/resources/`. Structured export: `/resources/tutorial-knowledge`, noindex, includes source limitations and screenshot URLs. Sitemap and llms references maintained; robots rules already cover resource routes.
+
+Not publication-complete: public subscription checkout is explicitly a simulation; live checkout activation and webstore administration require verified access. Screens inspected read-only; no card submission, source mutation, test conversation or deployment performed. Older Console guides outside these four replaced routes have not been verified against this live release. Do not treat those legacy module guides as proof of current feature availability.
+
 This register preserves route intent and design status between sessions. Read it before page work and update it when a route, primary CTA, source relationship or QA status materially changes.
+
+## 2026-09-07 — Resources positioning and discovery tightening
+
+Audit and copy-only fidelity pass across the 44 canonical Resource articles. Nine articles remain unchanged; 35 receive light changes, of which 20 are terminology, British-English casing or empty-markup corrections only. Fifteen articles receive selective opening, claim, positioning, conclusion or internal-link edits. No article title, canonical URL, visual design, CTA destination or pricing information changes. Total body length changes from 92,789 to 92,375 words (-0.45%); the most edited article retains 85.2% of its previous length.
+
+Removed unsupported statistics, fictional performance examples, absolute chatbot comparisons, automatic self-learning promises and the unsupported “80%” handling claim from the three affected legacy guides. The revised wording positions the AI Agent around inbound complex-product conversations, approved catalogues and technical knowledge, connected inventory context, requirement matching and appropriate human confirmation while retaining industrial search intent. Eight meta descriptions are tightened and 30 contextual internal links are added across 15 articles. Article JSON-LD now includes refreshed `articleBody` and `wordCount` from all 44 local HTML bodies. Only the 15 materially edited articles receive a 2026-09-07 modification date.
+
+Crawl review confirms that `robots.txt` does not block OAI-SearchBot, Googlebot or Bingbot, canonical resource URLs remain in the sitemap and legacy slugs retain permanent redirects. The transferred article template still loads its visible body after client mount, so initial HTML lacks the visible body headings and contextual links as normal markup; server-rendering or prerendering the article shell would materially improve crawlability and is recorded as a separate follow-up rather than expanded into this copy pass. Full audit: `artifacts/resources-positioning-audit-20260907.md`.
+
+Browser QA covered representative articles at 1440×900, 1024×900 and 390×844. Each retained one descriptive H1, readable copy wrapping, valid internal links and zero horizontal overflow. Automated verification passes all 114 tests, targeted linting, production build and diff whitespace checks. Local-only; nothing deployed.
 
 ## 2026-09-05 — Mobile graphics and calls to action
 

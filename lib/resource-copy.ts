@@ -1,3 +1,5 @@
+import { RESOURCE_TUTORIAL_CATEGORIES, RESOURCE_LEARNING_LABELS } from './resource-tutorial-categories';
+
 export type ResourcePositioningCopy = {
   title?: string;
   description?: string;
@@ -9,6 +11,30 @@ export const RESOURCE_LIBRARY_SEO = {
 } as const;
 
 export const RESOURCE_POSITIONING_OVERRIDES: Record<string, ResourcePositioningCopy> = {
+  'what-is-an-ai-sales-agent': {
+    description: "Learn how an AI Sales Agent handles inbound complex-product enquiries using approved catalogues, specifications, inventory context and business rules.",
+  },
+  'ai-agents-vs-chatbots-for-industrial-b2b': {
+    description: "Compare rules-based chatbots with AI Agents that clarify industrial product requirements, use approved knowledge and support multi-step enquiry workflows.",
+  },
+  'ai-agent-benefits-for-industrial-b2b': {
+    description: "Explore seven practical AI Agent benefits for industrial B2B: clearer product guidance, stronger requirement capture and more useful sales handovers.",
+  },
+  'what-an-ai-agent-can-and-cannot-do': {
+    description: "See which complex-product enquiries an AI Agent can support, which data it needs and when technical, pricing or availability decisions require a person.",
+  },
+  'ai-agent-as-first-digital-sales-touchpoint': {
+    description: "Learn how an AI Agent handles the first inbound product conversation, clarifies buyer requirements and prepares a useful industrial sales or rental enquiry.",
+  },
+  'ai-agent-vs-generic-ai-agents': {
+    description: "Compare generic AI with an Antbuildz AI Agent built to reason across approved product knowledge, specifications, inventory context and industrial workflows.",
+  },
+  'ai-agent-vs-chatgpt': {
+    description: "Understand why an LLM alone does not know your actual products, and how an AI Agent uses approved knowledge, inventory context and business workflows.",
+  },
+  'how-ai-agents-improve-over-time': {
+    description: "Learn how an AI Agent improves through conversation review, approved knowledge updates, workflow refinement and realistic product-question testing.",
+  },
   'why-ai-agents-work-with-an-integrated-webstore': {
     title: 'How Antbuildz Webstore Improves AI Agent Recommendations',
     description: "Learn how Antbuildz Webstore supports the AI Agent with structured product pages, approved specifications and inventory context for more accurate recommendations.",
@@ -211,13 +237,74 @@ function correctResourceIndex(root: HTMLElement) {
   const hero = root.querySelector<HTMLElement>('.bright-resource-hero');
   const body = root.querySelector<HTMLElement>('.bright-resource-body');
   if (!hero || !body) return;
+  if (!hero.querySelector('[data-customer-tutorial-link]')) {
+    const link = document.createElement('a');
+    link.href = '/resources/getting-started';
+    link.dataset.customerTutorialLink = 'true';
+    link.textContent = 'New customer? Follow the step-by-step onboarding guides →';
+    link.style.cssText = 'display:inline-flex;align-items:center;min-height:54px;padding:12px 24px;margin-top:24px;border-radius:999px;background:#FFC501;color:#0F172A;font-weight:700;text-decoration:none;line-height:1.5';
+    hero.querySelector('.bright-resource-hero-copy')?.append(link);
+  }
+  const onboardingLink = hero.querySelector('[data-customer-tutorial-link]');
+  const heroCopy = hero.querySelector('.bright-resource-hero-copy');
+  if (onboardingLink && heroCopy && onboardingLink.parentElement !== heroCopy) heroCopy.append(onboardingLink);
+
+  // Onboarding belongs in the existing Topics navigation, not a separate band.
+  const topics = body.querySelector('.bright-resource-topic-list');
+  const topicLabels: Record<string,string> = {
+    'All resources':'All articles',
+    ...RESOURCE_LEARNING_LABELS,
+  };
+  topics?.querySelectorAll<HTMLButtonElement>('button').forEach(button=>{
+    const label = button.querySelector('span:nth-child(2)');
+    const original = label?.textContent?.trim() ?? '';
+    if (topicLabels[original]) {
+      if (!button.dataset.originalTopicLabel) button.dataset.originalTopicLabel = original;
+      setText(label,topicLabels[original]);
+    }
+  });
+  if (topics && !topics.querySelector('[data-resource-tutorial-topic]')) {
+    RESOURCE_TUTORIAL_CATEGORIES.forEach((category)=>{
+      const link = document.createElement('a');
+      link.href = category.href;
+      link.dataset.resourceTutorialTopic = category.id;
+      link.className = 'antbuildz-resource-tutorial-topic';
+      const iconPaths: Record<string,string> = {
+        subscription:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M20 8v6m-3-3h6"/>',
+        'agent-setup':'<path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6m2-6h6m2 8h6"/>',
+        'products-webstore':'<path d="M3 10V6l2-3h14l2 3v4M3 10a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M3 13v8h18v-8M9 21v-7h6v7"/>',
+        'usage-troubleshooting':'<path d="M3 18a10 10 0 1 1 18 0Z M12 13l4-4 M6 12h.01M12 6h.01M18 12h.01"/>',
+      };
+      const icon = document.createElement('span');
+      icon.className = 'bright-resource-topic-icon';
+      icon.setAttribute('aria-hidden','true');
+      icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconPaths[category.id]}</svg>`;
+      link.append(icon);
+      const label = document.createElement('span');
+      label.textContent = category.label;
+      const arrow = document.createElement('span');
+      arrow.textContent = '→';
+      arrow.setAttribute('aria-hidden','true');
+      link.append(label,arrow);
+      topics.append(link);
+    });
+  }
+
+  if (topics && !topics.querySelector('[data-topic-group]')) {
+    const firstArticle = Array.from(topics.querySelectorAll('button')).find(button=>button.dataset.originalTopicLabel === 'Understand Antbuildz AI Agent');
+    const firstTutorial = topics.querySelector('[data-resource-tutorial-topic]');
+    for (const [name,target] of [['Learn about AI',firstArticle],['Step-by-step guides',firstTutorial]] as const) {
+      if (!target) continue;
+      const heading = document.createElement('p');
+      heading.dataset.topicGroup = name;
+      heading.className = 'antbuildz-resource-topic-group';
+      heading.textContent = name;
+      topics.insertBefore(heading,target);
+    }
+  }
 
   setText(hero.querySelector('h1'), "Build an AI Agent for complex products.");
   setText(hero.querySelector('h1 + p'), "Learn how the Antbuildz AI Agent understands enquiries, uses approved business knowledge and, when connected, draws on Webstore product and inventory data for better-supported recommendations.");
-
-  if (!root.querySelector('[data-antbuildz-resource-model="index"]')) {
-    body.insertAdjacentElement('beforebegin', createProductModelSection(document, 'index'));
-  }
 
   root.querySelectorAll<HTMLElement>('.bright-resource-topic-list button span:nth-child(2), .bright-resource-collection h3')
     .forEach((element) => {
@@ -227,6 +314,9 @@ function correctResourceIndex(root: HTMLElement) {
     });
 
   Array.from(root.querySelectorAll<HTMLElement>('.bright-resource-collection:not([hidden])')).forEach((collection, index) => {
+    const heading = collection.querySelector('h3');
+    const label = heading?.textContent?.trim() ?? '';
+    if (RESOURCE_LEARNING_LABELS[label]) setText(heading,RESOURCE_LEARNING_LABELS[label]);
     const number = collection.querySelector<HTMLElement>('.bright-resource-collection-number');
     if (number) setText(number, String(index + 1).padStart(2, '0'));
   });
@@ -236,6 +326,10 @@ function correctResourceIndex(root: HTMLElement) {
 function correctResourceArticle(root: HTMLElement, pathname: string) {
   const article = root.querySelector<HTMLElement>('main article');
   if (!article) return;
+  article.querySelectorAll<HTMLElement>('nav[aria-label="Breadcrumb"] span').forEach(label=>{
+    const text = label.textContent?.trim() ?? '';
+    if (RESOURCE_LEARNING_LABELS[text]) setText(label,RESOURCE_LEARNING_LABELS[text]);
+  });
   const slug = pathname.split('/').filter(Boolean).at(-1) ?? '';
   const copy = RESOURCE_POSITIONING_OVERRIDES[slug];
   const header = article.querySelector<HTMLElement>(':scope > div > header');

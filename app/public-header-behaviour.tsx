@@ -21,7 +21,9 @@ export function PublicHeaderBehaviour() {
     };
     menus.forEach(menu => menu.addEventListener('toggle', sync));
     header.querySelectorAll<HTMLAnchorElement>('a').forEach(link => {
-      if (link.pathname === window.location.pathname) link.setAttribute('aria-current', 'page');
+      const matchingTopic = !link.classList.contains('antbuildz-resources-menu__link') || link.hash === window.location.hash;
+      if (link.pathname === window.location.pathname && matchingTopic) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
     });
     document.addEventListener('pointerdown', closeOutside);
     header.addEventListener('keydown', escape);

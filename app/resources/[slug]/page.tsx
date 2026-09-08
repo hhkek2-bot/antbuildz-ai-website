@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { getResourceRedirect, getResourceSeo, resourceSeoEntries } from '@/lib/resource-seo';
+import { getResourceBlogSchema } from '@/lib/resource-blog-schema';
 import { SOCIAL_SHARE_IMAGE } from '@/lib/social-share';
 import { AI_ROLE_REDIRECTS } from '@/lib/ai-roles';
 import { OriginalAntbuildzApp } from '../../original-antbuildz-app';
+import { getCustomerTutorial } from '@/lib/customer-tutorials';
+import { CustomerTutorialPage } from '../customer-tutorial';
 
 const siteUrl = 'https://antbuildz.ai';
 
@@ -61,11 +64,15 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
   const redirect = getResourceRedirect(slug);
   if (redirect) permanentRedirect(redirect);
 
+  const tutorial = getCustomerTutorial(slug);
+  if (tutorial) return <CustomerTutorialPage guide={tutorial} />;
+
   const article = getResourceSeo(slug);
   if (!article) notFound();
 
   const url = `${siteUrl}/resources/${article.slug}`;
   const image = article.image ? new URL(article.image, siteUrl).toString() : SOCIAL_SHARE_IMAGE.url;
+  const blogContent = getResourceBlogSchema(article.slug);
   const discussesWebstore = /webstore|product page|inventory/i.test(`${article.title} ${article.description}`);
   const articleSection = article.slug.startsWith('ai-agent-console-')
     ? 'AI Agent Console guides'
@@ -97,6 +104,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
         ...(discussesWebstore ? { mentions: { '@type': 'SoftwareApplication', name: 'Antbuildz AI Webstore Suite', applicationCategory: 'BusinessApplication' } } : {}),
         ...(article.datePublished ? { datePublished: article.datePublished } : {}),
         ...(article.dateModified ? { dateModified: article.dateModified } : {}),
+        ...(blogContent ? { articleBody: blogContent.articleBody, wordCount: blogContent.wordCount } : {}),
         author: { '@id': `${siteUrl}/#organization` },
         publisher: { '@id': `${siteUrl}/#organization` },
         isPartOf: { '@id': `${siteUrl}/#website` },

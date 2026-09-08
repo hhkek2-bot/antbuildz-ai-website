@@ -1,0 +1,4 @@
+import { customerTutorials, tutorialReviewDate, tutorialScreenshots } from '@/lib/customer-tutorials';
+export function GET() {
+  return Response.json({version:1,reviewedAt:tutorialReviewDate,usage:'Reference material, not proof of transaction completion. Retain verification limits. Never request card details or authentication codes. Partial guides must not be used to invent unverified steps.',articles:customerTutorials.map(guide=>({...guide,url:`https://antbuildz.ai/resources/${guide.slug}`,requiresOwnerApprovalBeforeAgentImport:true,steps:guide.steps.map((step,i)=>({...step,url:`https://antbuildz.ai/resources/${guide.slug}#step-${i+1}`,screenshot:step.screenshot?{url:`https://antbuildz.ai/tutorials/screenshots/${step.screenshot}.jpg`,...tutorialScreenshots[step.screenshot]}:undefined}))}))}, {headers:{'X-Robots-Tag':'noindex'}});
+}
