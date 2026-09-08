@@ -2700,7 +2700,7 @@ test('pricing presents Agent, Sales and Rental+ as one clear upgrade path', asyn
   assert.match(source, /One business conversation may turn into thousands in revenue\./);
   assert.match(source, /duplicateSectionHeader\.hidden = true/);
   assert.match(source, /duplicateSectionHeader\.setAttribute\('aria-hidden', 'true'\)/);
-  assert.match(source, /Included AI conversations/);
+  assert.match(source, /Conversation credits/);
   assert.match(source, /One AI conversation covers one buyer enquiry with up to five message exchanges/);
   assert.match(source, /Test prompts and unrelated interactions do not count/);
   assert.match(source, /AI Conversation Credits/);
@@ -2750,6 +2750,7 @@ test('pricing presents Agent, Sales and Rental+ as one clear upgrade path', asyn
   assert.match(styles, /\.pricing-currency-select-wrap/);
   assert.match(styles, /\.antbuildz-ai-pricing \.antbuildz-pricing-badge/);
   assert.match(styles, /\.antbuildz-ai-pricing \.antbuildz-pricing-details/);
+  assert.match(styles, /\.pricing-section:has\(\.pricing-addons-grid\) \{[\s\S]*?width: var\(--public-frame-width\);[\s\S]*?margin-left: 50%;[\s\S]*?transform: translateX\(-50%\);/);
   assert.match(styles, /\.antbuildz-ai-pricing \.pricing-bottom-cta \{[\s\S]*?border-radius: 24px;[\s\S]*?linear-gradient\(135deg, var\(--clean\), var\(--soft\)\);[\s\S]*?color: var\(--ink\)/);
   assert.match(styles, /#root\.antbuildz-original-root\.antbuildz-ai-pricing \.pricing-section:has\(\.pricing-bottom-cta\) \{\s*margin-bottom: 0;\s*padding-bottom: 0 !important;/);
   assert.match(styles, /\.pricing-bottom-cta :is\(\.pricing-cta-white, \.pricing-cta-outline-white\) \{[\s\S]*?min-height: 54px;[\s\S]*?border-radius: 999px/);
@@ -2796,7 +2797,9 @@ test('pricing cards use a wider standard-plan row and responsive Custom panel', 
   assert.match(layout, /\.pricing-price-row \{\s*min-height: 52px;\s*margin-top: 12px/);
   assert.match(layout, /\.antbuildz-pricing-details \{\s*grid-template-columns: minmax\(0, 1fr\);\s*min-height: 140px/);
   assert.match(layout, /\.antbuildz-pricing-details-heading \{[\s\S]*?font-size: \.9375rem;[\s\S]*?font-weight: 700/);
+  assert.match(layout, /\.antbuildz-pricing-details-heading \{[\s\S]*?text-align: left/);
   assert.match(layout, /\.antbuildz-pricing-details > \[data-antbuildz-pricing-detail\] \{[\s\S]*?grid-template-columns: minmax\(0, 1fr\) auto;[\s\S]*?border-top: 1px solid var\(--line\)/);
+  assert.match(layout, /\[data-antbuildz-pricing-detail\] > span \{\s*text-align: left;/);
   assert.match(layout, /:not\(\[data-antbuildz-plan="custom"\]\) \.antbuildz-pricing-details strong \{\s*font-size: 1rem;\s*font-weight: 400;/,
     'standard-plan allowance values are larger than their labels without bold emphasis or enlarged Custom text');
   assert.match(layout, /\.pricing-feature-group-label \{[\s\S]*?font-size: \.9375rem;[\s\S]*?font-weight: 750;/,
@@ -2813,7 +2816,7 @@ test('pricing has one compact gap before add-ons and hides only the Agent compar
   const section = styles.match(/\.antbuildz-ai-pricing \.pricing-section:has\(\.pricing-card\[data-antbuildz-plan\]\) \{([^}]+)\}/)[1];
   assert.match(section, /padding-bottom: 0/);
   assert.match(section, /margin-bottom: 64px/);
-  assert.match(styles, /@media \(max-width: 767px\) \{\s*\.antbuildz-ai-pricing \.pricing-section:has\(\.pricing-card\[data-antbuildz-plan\]\) \{\s*margin-bottom: 48px/);
+  assert.match(styles, /@media \(max-width: 767px\) \{[\s\S]*?\.antbuildz-ai-pricing \.pricing-section:has\(\.pricing-card\[data-antbuildz-plan\]\) \{\s*margin-bottom: 48px/);
   assert.match(styles, /\.antbuildz-ai-pricing \.pricing-compare-link-row:has\(> a\[href="#compare-features-ai-agent"\]\) \{\s*display: none/);
   assert.doesNotMatch(styles, /\.antbuildz-ai-pricing #compare-features-ai-agent\s*\{\s*display: none/);
 });

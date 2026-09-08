@@ -2504,7 +2504,7 @@ function correctPricing(root: HTMLElement) {
       details.prepend(detailsHeading);
     }
     setPricingText(detailsHeading, 'Plan allowances');
-    setPricingDetail(details, 'usage', 'Included AI conversations', plan.usage);
+    setPricingDetail(details, 'usage', 'Conversation credits', plan.usage);
     setPricingDetail(details, 'listings', 'Listings', plan.listings);
     details.querySelector('[data-antbuildz-pricing-detail="overage"]')?.remove();
 

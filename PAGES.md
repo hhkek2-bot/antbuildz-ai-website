@@ -1,5 +1,21 @@
 # Antbuildz.AI Page Register
 
+## Pricing add-ons return to the shared content rail — 8 September 2026
+
+The `Usage & Add-ons` heading and its two cards now use the same centred public
+content rail as the standard pricing plans above. This replaces the transferred
+section's near-full-viewport 24px gutter on wide screens. Mobile remains within
+its existing content-driven container. Add-on copy, prices, actions and card
+styling are unchanged.
+
+## Pricing allowance labels clarified — 8 September 2026
+
+The three standard pricing cards now use the shorter `Conversation credits`
+allowance label. `Plan allowances`, `Conversation credits` and `Listings` share
+one explicit left-aligned label rail, while the approved quantities remain
+right-aligned for comparison. Prices, allowance quantities, listing limits,
+billing behaviour and purchased-credit terms are unchanged.
+
 ## Resources dropdown restored to shared design — 8 September 2026
 
 User clarification supersedes the compact two-column experiment. Resources

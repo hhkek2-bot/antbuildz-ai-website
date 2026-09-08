@@ -659,12 +659,31 @@ button, summary { font: inherit; }
   margin-bottom: 64px;
 }
 
+/* Keep Usage & Add-ons on the same left and right rail as the plan cards.
+   The transferred container otherwise lets this section stretch to a 24px
+   viewport gutter, which breaks the pricing-page hierarchy on wide screens. */
+.antbuildz-ai-pricing .pricing-section:has(.pricing-addons-grid) {
+  width: var(--public-frame-width);
+  max-width: none;
+  margin-right: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
 /* Remove this shortcut and its row without unmounting copied React nodes. */
 .antbuildz-ai-pricing .pricing-compare-link-row:has(> a[href="#compare-features-ai-agent"]) {
   display: none;
 }
 
 @media (max-width: 767px) {
+  .antbuildz-ai-pricing .pricing-section:has(.pricing-card[data-antbuildz-plan]),
+  .antbuildz-ai-pricing .pricing-section:has(.pricing-addons-grid) {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    transform: none;
+  }
+
   .antbuildz-ai-pricing .pricing-section:has(.pricing-card[data-antbuildz-plan]) {
     margin-bottom: 48px;
   }
@@ -875,6 +894,7 @@ button, summary { font: inherit; }
   font-size: .9375rem;
   font-weight: 700;
   line-height: 1.4;
+  text-align: left;
 }
 
 .antbuildz-ai-pricing .antbuildz-pricing-details > [data-antbuildz-pricing-detail] {
@@ -894,6 +914,10 @@ button, summary { font: inherit; }
 
 .antbuildz-ai-pricing .antbuildz-pricing-details strong {
   text-align: right;
+}
+
+.antbuildz-ai-pricing .antbuildz-pricing-details > [data-antbuildz-pricing-detail] > span {
+  text-align: left;
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .antbuildz-pricing-details strong {
