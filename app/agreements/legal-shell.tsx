@@ -11,7 +11,7 @@ import { PublicFooterLanguage } from '../public-footer-language';
 import '../public-footer.css';
 
 const productLinks = [
-  ['AI Agent', '/ai-sales-agent'],
+  ['AI Agent', '/ai-agent'],
   ['AI Webstore Suite', '/ai-webstore-suite'],
   ['Pricing', '/pricing'],
 ] as const;
@@ -60,7 +60,7 @@ function LegalHeader() {
           <details className={styles.mobileMenu}>
             <summary aria-label="Open navigation"><span /><span /><span /></summary>
             <nav aria-label="Mobile navigation">
-              <a href="/ai-sales-agent">AI Agent</a>
+              <a href="/ai-agent">AI Agent</a>
               <a href="/ai-webstore-suite">AI Webstore Suite</a>
               <a href="/pricing">Pricing</a>
               <a href="/who-we-serve">Industries</a>
@@ -78,7 +78,7 @@ function LegalHeader() {
 function LegalFooter() {
   const columns = [
     ['AI Products', [
-      ['AI Agent', '/ai-sales-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
+      ['AI Agent', '/ai-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
       ['AI FAQs', '/help/ai'], ['Pricing', '/pricing'], ['Book a Demo', '/book-a-demo'],
     ]],
     ['Who We Serve', industryLinks],

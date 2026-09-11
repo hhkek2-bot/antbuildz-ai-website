@@ -171,7 +171,7 @@ export function HomeEducationBody() {
               <div className={styles.productIdentity}><p className={styles.productLabel}>AI Agent</p><span className={styles.productBadge}>The core product</span></div>
               <h3>Guide product conversations</h3>
               <p>Guide product choices, sales, rental and support using approved knowledge, with a clear handover to your team.</p>
-              <a className={styles.textLink} href="/ai-sales-agent" aria-label="Explore AI Agent"><Arrow /></a>
+              <a className={styles.textLink} href="/ai-agent" aria-label="Explore AI Agent"><Arrow /></a>
             </article>
             <ProductConnector />
             <article className={styles.webstoreProduct}>

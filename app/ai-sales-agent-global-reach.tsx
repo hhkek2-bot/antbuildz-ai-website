@@ -61,7 +61,7 @@ export function AiSalesAgentPage() {
     let container: HTMLDivElement | null = null;
     let frame = 0;
     const attach = () => {
-      if (window.location.pathname !== '/ai-sales-agent' || container?.isConnected) return;
+      if (window.location.pathname !== '/ai-agent' || container?.isConnected) return;
       const faq = root.querySelector<HTMLElement>('[data-antbuildz-sales-agent] .bright-faq-accordion');
       if (!faq) return;
       container = document.createElement('div');

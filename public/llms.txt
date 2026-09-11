@@ -6,7 +6,7 @@ Canonical website: https://antbuildz.ai
 
 ## Product model
 
-- [AI Agent](https://antbuildz.ai/ai-sales-agent): The core Antbuildz product for complex product businesses. It connects product knowledge, inventory and workflows to recommendations, sales, rental, customer service, technical support and human handover. The existing URL is retained.
+- [AI Agent](https://antbuildz.ai/ai-agent): The core Antbuildz product for complex product businesses. It connects product knowledge, inventory and workflows to recommendations, sales, rental, customer service, technical support and human handover.
 - [AI Webstore Suite](https://antbuildz.ai/ai-webstore-suite): The optional product, inventory and store layer connected to the AI Agent. It adds structured product pages, dedicated product URLs and connected inventory context for more accurate recommendations, SEO and AI search discovery.
 - [AI Agent Console](https://antbuildz.ai/ai-agent-console): Manages knowledge, instructions, testing, conversations, workflows and performance.
 - [Pricing](https://antbuildz.ai/pricing): Agent, Sales and Rental+ subscription plans and capabilities. Sales adds the sales Webstore; Rental+ includes sales and rental capabilities.

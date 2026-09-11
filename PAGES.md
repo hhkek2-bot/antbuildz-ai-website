@@ -1,5 +1,56 @@
 # Antbuildz.AI Page Register
 
+## AI Agent canonical URL simplified — 11 September 2026
+
+The core product page now uses `/ai-agent` as its canonical URL, matching the
+public `AI Agent` product name and its sales, rental and support scope. Legacy
+addresses `/ai-sales-agent`, `/aiagent` and `/assistant` permanently redirect
+to the new route. Navigation, calls to action, metadata, structured data,
+sitemap and AI-discovery references follow the new canonical address; article
+URLs specifically about the AI Sales Agent role remain unchanged.
+
+## AI Sales Agent logo strip removed — 11 September 2026
+
+The transferred moving brand-logo strip is removed from the AI Sales Agent
+page. The final `Build Your AI Agent` CTA now hands off directly to the shared
+footer, while the Webstore page's separate logo treatment remains unchanged.
+
+## Pricing FAQ questions and answers align left — 11 September 2026
+
+Every pricing FAQ question and expanded answer now uses an explicit left text
+alignment. Accordion controls, right-side expand icons, content and responsive
+behaviour remain unchanged.
+
+## Plan comparison table returns to the shared content rail — 11 September 2026
+
+The `Compare Features Side by Side` table now follows the same left and right
+container boundaries as the pricing plans and add-on cards. Its existing
+horizontal scrolling behaviour is preserved when the table is wider than a
+mobile viewport.
+
+## Custom pricing panel follows the left-led hierarchy — 11 September 2026
+
+The `Custom` label, `Need More Than a Standard Plan?` title and supporting
+description now align left, matching the reading hierarchy used across the
+standard plans and add-on cards. The responsive two-column layout and action
+placement remain unchanged.
+
+## Floating AI Agent launcher removed site-wide — 11 September 2026
+
+The persistent bottom-right AI Agent launcher is removed across every route.
+Embedded conversation demonstrations and page-owned AI Agent content remain
+available; only the floating global entry point is affected. The launcher is
+removed by the shared compatibility layer, with a global styling safeguard to
+prevent it flashing briefly while a page loads.
+
+## Pricing cards use a left-led reading hierarchy — 11 September 2026
+
+Agent, Sales and Rental+ now left-align their plan names and `Best for`
+descriptions. The AI Conversation Credits and Additional AI Agent cards also
+left-align their titles, descriptions and supporting content, giving every
+pricing card one consistent reading edge. Prices, allowances, add-on values,
+actions, card structure and responsive behaviour are unchanged.
+
 ## Pricing add-ons return to the shared content rail — 8 September 2026
 
 The `Usage & Add-ons` heading and its two cards now use the same centred public

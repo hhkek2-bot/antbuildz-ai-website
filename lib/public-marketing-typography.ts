@@ -3,7 +3,7 @@ const ALIGN_ATTRIBUTE = 'data-antbuildz-type-align';
 
 export const PUBLIC_MARKETING_TYPOGRAPHY_PATHS = new Set([
   '/',
-  '/ai-sales-agent',
+  '/ai-agent',
   '/ai-webstore-suite',
   '/pricing',
   '/resources',

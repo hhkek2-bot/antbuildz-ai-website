@@ -1,6 +1,6 @@
 import { CORE_AGENT_FAQS } from './core-agent-faqs';
 // Approved wording brief, 28 August 2026. This module changes text only on
-// /ai-sales-agent; the transferred layout, demonstrations and FAQs stay owned
+// /ai-agent; the transferred layout, demonstrations and FAQs stay owned
 // by their existing components. Stable visual selectors cover animated clones.
 export const SALES_AGENT_COPY = {
   hero: 'Use approved product knowledge, inventory and workflows to guide complex product questions across sales, rental and support.',
@@ -100,7 +100,7 @@ export function setSalesAgentText(element: Element | null, parts: string | reado
 const actionDestinations = new WeakMap<Element, (string | null)[]>();
 
 export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
-  if (pathname !== '/ai-sales-agent') return;
+  if (pathname !== '/ai-agent') return;
   // The shared header also uses .bright-landing. Anchor to the page's hero
   // so the first class match cannot silently scope all updates to the header.
   const page = root.querySelector('.bright-hero')?.closest<HTMLElement>('.bright-landing');
@@ -372,28 +372,14 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     }
   }
 
-  // Move the existing equipment-brand proof to the page close and present it
-  // as the same continuous logo marquee used by the Webstore. Duplicate items
-  // are decorative only and make the motion loop seamless.
+  // The transferred logo strip repeats proof already provided elsewhere and
+  // interrupts the handoff from the final CTA to the shared footer.
   const logoStrip = page.querySelector<HTMLElement>('.bright-logo-strip');
-  if (
-    logoStrip?.classList?.contains('bright-logo-strip')
-    && closingCta?.classList?.contains('ws-cta-section')
-    && logoStrip.parentElement === closingCta.parentElement
-  ) {
-    logoStrip.setAttribute('data-antbuildz-logo-strip', 'true');
-    const logoGrid = logoStrip.querySelector<HTMLElement>('.bright-logo-grid-static');
-    if (logoGrid && !logoGrid.querySelector('[data-antbuildz-logo-duplicate="true"]')) {
-      Array.from(logoGrid.children).forEach(item => {
-        const duplicate = item.cloneNode(true) as HTMLElement;
-        duplicate.setAttribute('data-antbuildz-logo-duplicate', 'true');
-        duplicate.setAttribute('aria-hidden', 'true');
-        logoGrid.append(duplicate);
-      });
-    }
-    if (closingCta.nextElementSibling !== logoStrip) {
-      closingCta.insertAdjacentElement('afterend', logoStrip);
-    }
+  if (logoStrip?.classList?.contains('bright-logo-strip')) {
+    logoStrip.hidden = true;
+    logoStrip.setAttribute('aria-hidden', 'true');
+    logoStrip.setAttribute('inert', '');
+    logoStrip.setAttribute('data-antbuildz-sales-agent-removed', 'true');
   }
   page.querySelectorAll('.ws-cta-float').forEach((card, i) => {
     const copy = SALES_AGENT_COPY.closingLabels[i];

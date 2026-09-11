@@ -6,7 +6,7 @@ import { runInNewContext } from 'node:vm';
 
 const requestedRoutes = [
   'ai-webstore-suite',
-  'ai-sales-agent',
+  'ai-agent',
   'ai-agent-console',
   'pricing',
   'book-a-demo',
@@ -44,7 +44,9 @@ test('public headers group products and place pricing after discovery links', as
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const parsed = ts.createSourceFile('header.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   const grouping = parsed.statements.find(node => ts.isFunctionDeclaration(node) && node.name?.text === 'correctProductsMenu').getText(parsed);
-  for (const path of ['/ai-sales-agent', '/ai-webstore-suite', '/ai-agent-console']) assert.ok(grouping.includes(`href: '${path}'`));
+  for (const path of ['/ai-agent', '/ai-webstore-suite', '/ai-agent-console']) assert.ok(grouping.includes(`href: '${path}'`));
+  assert.match(grouping, /label: 'AI Agent Console'[\s\S]*?unavailable: true/);
+  assert.match(grouping, /link\.removeAttribute\('href'\)[\s\S]*?aria-disabled[\s\S]*?data-antbuildz-unavailable/);
   assert.match(grouping, /createHeaderMenuIntro/);
   assert.match(grouping, /bindHeaderDropdown\(menu, trigger\)/);
   assert.match(grouping, /child.hidden = true/);
@@ -328,6 +330,13 @@ test('social sharing uses one lightweight 1200 by 630 branded preview image', as
   assert.match(help, /card: 'summary_large_image'/);
 });
 
+test('public pages declare a device-width viewport for responsive layouts', async () => {
+  const layout = await readFile(new URL('../app/layout.tsx', import.meta.url), 'utf8');
+  assert.match(layout, /export const viewport: Viewport/);
+  assert.match(layout, /width: 'device-width'/);
+  assert.match(layout, /initialScale: 1/);
+});
+
 test('homepage mobile refinements preserve typography and keep the hero title concise', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
@@ -595,7 +604,7 @@ test('Sales Agent copy covers animated clones and all Console states while using
   } };
   const unchangedFAQ = copyElement('Existing FAQ question', 'Existing FAQ answer');
   targets.set('#faq-summary', [unchangedFAQ]);
-  correctSalesAgentCopy(root, '/ai-sales-agent');
+  correctSalesAgentCopy(root, '/ai-agent');
   assert.equal(page.getAttribute('data-antbuildz-sales-agent'), 'true');
   assert.equal(heroFirst.textContent, "AI Agent for ");
   assert.equal(heroMiddle.textContent, '');
@@ -610,12 +619,12 @@ test('Sales Agent copy covers animated clones and all Console states while using
   assert.equal(removedNextStepSection.hidden, true);
   assert.equal(removedNextStepSection.getAttribute('aria-hidden'), 'true');
   assert.equal(removedNextStepSection.getAttribute('data-antbuildz-sales-agent-removed'), 'true');
-  assert.equal(logoStrip.getAttribute('data-antbuildz-logo-strip'), 'true');
-  assert.equal(logoStripMoves, 1);
-  assert.equal(closingCtaSection.nextElementSibling, logoStrip);
-  assert.equal(logoGrid.children.length, 24);
-  assert.ok(logoGrid.children.slice(12).every(item => item.getAttribute('aria-hidden') === 'true'));
-  assert.ok(logoGrid.children.slice(12).every(item => item.getAttribute('data-antbuildz-logo-duplicate') === 'true'));
+  assert.equal(logoStrip.hidden, true);
+  assert.equal(logoStrip.getAttribute('aria-hidden'), 'true');
+  assert.equal(logoStrip.getAttribute('inert'), '');
+  assert.equal(logoStrip.getAttribute('data-antbuildz-sales-agent-removed'), 'true');
+  assert.equal(logoStripMoves, 0);
+  assert.equal(logoGrid.children.length, 12);
   assert.equal(featureIntro.textContent, "Give your AI Agent the knowledge, controls and connections to recommend products and support sales, rental and customer conversations.");
   for (const [visual, title, description] of SALES_AGENT_COPY.features) {
     for (const card of featureCards.get(visual)) {
@@ -631,13 +640,13 @@ test('Sales Agent copy covers animated clones and all Console states while using
   for (let active = 0; active < tabs.length; active++) {
     tabs.forEach((tab, i) => tab.setAttribute('aria-selected', String(i === active)));
     closingDemo.attributes.href = '/book-a-demo';
-    correctSalesAgentCopy(root, '/ai-sales-agent');
+    correctSalesAgentCopy(root, '/ai-agent');
     assert.equal(consoleTitle.textContent, SALES_AGENT_COPY.consoleTabs[active][0]);
     assert.equal(consoleCopy.textContent, SALES_AGENT_COPY.consoleTabs[active][1]);
     assert.equal(closingDemo.attributes.href, '/book-a-demo', 'the demo action remains on its canonical destination');
   }
-  assert.equal(logoStripMoves, 1, 'reapplying the correction keeps the logo strip after the closing CTA');
-  assert.equal(logoGrid.children.length, 24, 'reapplying the correction does not duplicate the marquee again');
+  assert.equal(logoStripMoves, 0, 'reapplying the correction keeps the logo strip removed');
+  assert.equal(logoGrid.children.length, 12, 'reapplying the correction does not duplicate logo items');
   assert.equal(unchangedFAQ.textContent, 'Existing FAQ questionExisting FAQ answer');
   assert.ok(queried.every(selector => !/header a|footer/.test(selector)));
   assert.ok(queried.filter(selector => /faq/.test(selector)).every(
@@ -753,19 +762,17 @@ test('Sales Agent closing CTA uses the contained industrial split-card treatment
   assert.match(css, /@media \(max-width: 980px\)[\s\S]*?\[data-antbuildz-sales-agent\] \.ws-cta-section \{\s*grid-template-columns: minmax\(0, 1fr\);/);
 });
 
-test('Sales Agent closes with the Webstore-style logo marquee immediately before the footer', async () => {
+test('Sales Agent removes the transferred logo strip before the shared footer', async () => {
   const [source, css] = await Promise.all([
     readFile(new URL('../lib/ai-sales-agent-copy.ts', import.meta.url), 'utf8'),
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
   ]);
-  assert.match(source, /logoStrip\.setAttribute\('data-antbuildz-logo-strip', 'true'\)/);
-  assert.match(source, /duplicate\.setAttribute\('aria-hidden', 'true'\)/);
-  assert.match(source, /closingCta\.insertAdjacentElement\('afterend', logoStrip\)/,
-    'the existing strip is moved after the final CTA instead of being recreated');
-  assert.match(css, /\.bright-logo-strip\[data-antbuildz-logo-strip="true"\] \{[\s\S]*?padding-block: 64px;[\s\S]*?border-color: transparent;[\s\S]*?background: var\(--clean\);/);
-  assert.match(css, /\.bright-logo-grid-static \{[\s\S]*?flex-wrap: nowrap;[\s\S]*?animation: antbuildz-sales-logo-marquee 36s linear infinite;/);
-  assert.match(css, /\.bright-logo-grid-item \{[\s\S]*?flex: 0 0 140px;[\s\S]*?border: 1px solid var\(--line\);[\s\S]*?border-radius: 12px;/);
-  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.bright-logo-grid-static \{\s*animation: none;/);
+  assert.match(source, /logoStrip\.hidden = true/);
+  assert.match(source, /logoStrip\.setAttribute\('aria-hidden', 'true'\)/);
+  assert.match(source, /logoStrip\.setAttribute\('inert', ''\)/);
+  assert.match(source, /logoStrip\.setAttribute\('data-antbuildz-sales-agent-removed', 'true'\)/);
+  assert.doesNotMatch(source, /closingCta\.insertAdjacentElement\('afterend', logoStrip\)/);
+  assert.match(css, /\[data-antbuildz-sales-agent\] \.bright-logo-strip \{\s*display: none !important;/);
 });
 
 test('Webstore closing CTA uses a catalogue-specific photographic card', async () => {
@@ -1026,7 +1033,7 @@ test('Preview Webstore copy preserves nodes, rich headings, links, comparison co
   const figures = copyElement('3x', '30%', '90%', '3x');
   const icon = { ...copyElement('arrow'), nodeName: 'svg' };
   const link = copyElement(copyElement('Prefer a lighter way to start?'), copyElement('Quickly deploy the AI Sales Agent.'), icon);
-  link.attributes = { href: '/ai-sales-agent', target: '_blank', rel: 'noopener' };
+  link.attributes = { href: '/ai-agent', target: '_blank', rel: 'noopener' };
   const comparison = {
     attributes: {},
     setAttribute(name, value) { this.attributes[name] = value; },
@@ -1070,9 +1077,9 @@ test('Preview Webstore copy preserves nodes, rich headings, links, comparison co
   correctWebstoreCopy(root, '/ai-webstore-suite');
   WEBSTORE_REPLACEMENTS.forEach(([, after], index) => assert.equal(replacementNodes[index].textContent, after));
   assert.equal(heroEyebrow.textContent, 'AI WEBSTORE SUITE');
-  assert.equal(hero.textContent, 'Better RecommendationsStart With Your Inventory');
+  assert.equal(hero.textContent, 'Make Your Products DiscoverablePower Better Recommendations');
   assert.equal(hero.childNodes.at(-1).textContent, '', 'the former gradient span is emptied so no headline words are highlighted');
-  assert.equal(heroDescription.textContent, 'Give your Agent structured product and inventory data for more accurate recommendations.');
+  assert.equal(heroDescription.textContent, 'Turn your catalogue into a structured product library that helps search engines and AI platforms understand your products — while giving your AI Agent accurate product knowledge to recommend the right solution to customers.');
   assert.equal(connectedEyebrow.textContent, WEBSTORE_CONNECTED_AGENT.eyebrow);
   assert.equal(connectedHeading.textContent, WEBSTORE_CONNECTED_AGENT.headline.join(''));
   assert.equal(connectedDescription.textContent, WEBSTORE_CONNECTED_AGENT.description);
@@ -1117,7 +1124,7 @@ test('Preview Webstore copy preserves nodes, rich headings, links, comparison co
   assert.equal(compareSummary.textContent, WEBSTORE_COMPARISON.note);
   assert.equal(comparison.getAttribute('data-antbuildz-preserve-heading-punctuation'), 'true');
   assert.equal(link.textContent, "Explore the AI Agentarrow");
-  assert.deepEqual(link.attributes, { href: '/ai-sales-agent', target: '_blank', rel: 'noopener' });
+  assert.deepEqual(link.attributes, { href: '/ai-agent', target: '_blank', rel: 'noopener' });
   assert.deepEqual(page.childNodes, originalChildren);
   assert.deepEqual(hero.childNodes, originalHeroChildren);
   assert.deepEqual(link.childNodes, originalLinkChildren);
@@ -1168,7 +1175,7 @@ test('Preview Webstore copy preserves nodes, rich headings, links, comparison co
 
 test('Webstore replacements match transferred source and preserve core agent, plan and claim boundaries', async () => {
   const { correctWebstoreCopy, WEBSTORE_REPLACEMENTS, WEBSTORE_COMPARISON, WEBSTORE_FAQS, WEBSTORE_MARKET_SHIFT, WEBSTORE_BENEFITS, WEBSTORE_HOW_IT_WORKS, WEBSTORE_JOURNEY_ACCENTS, WEBSTORE_FEATURES } = await loadWebstoreCopy();
-  for (const path of ['/', '/pricing', '/ai-sales-agent', '/ai-agent-console', '/webstore-2-ai-webstore-preview', '/webstore-2']) {
+  for (const path of ['/', '/pricing', '/ai-agent', '/ai-agent-console', '/webstore-2-ai-webstore-preview', '/webstore-2']) {
     correctWebstoreCopy({ querySelector() { assert.fail('copy must not touch another route'); } }, path);
   }
   const literals = new Set();
@@ -1279,7 +1286,7 @@ test('global reach section is relocated from Webstore to immediately before Sale
   const correction = await readFile(new URL('../lib/ai-webstore-copy.ts', import.meta.url), 'utf8');
   const globe = await readFile(new URL('../public/images/ai-sales-agent-global-globe.svg', import.meta.url), 'utf8');
 
-  assert.match(route, /slug === 'ai-sales-agent'[\s\S]*?<AiSalesAgentPage \/>/);
+  assert.match(route, /slug === 'ai-agent'[\s\S]*?<AiSalesAgentPage \/>/);
   assert.match(component, /MULTIPLE LANGUAGES, CHANNELS &amp; MARKETS/);
   assert.match(component, /One Agent\. Available <span[^>]*>24\/7\.<\/span>/);
   assert.match(component, /Support buyers across your channels, supported languages and markets—even outside office hours\./);
@@ -1311,13 +1318,13 @@ test('principal marketing pages derive CTA labels and treatments from one destin
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
   ]);
 
-  for (const pathname of ['/', '/ai-sales-agent', '/ai-webstore-suite']) {
+  for (const pathname of ['/', '/ai-agent', '/ai-webstore-suite']) {
     assert.ok(system.includes(`'${pathname}'`));
   }
   for (const [destination, label, variant] of [
     ['/book-a-demo', 'Book a Demo', 'primary'],
     ['/pricing', 'View Pricing', 'secondary'],
-    ['/ai-sales-agent', 'Explore AI Agent', 'secondary'],
+    ['/ai-agent', 'Explore AI Agent', 'secondary'],
     ['/ai-webstore-suite', 'Explore AI Webstore Suite', 'secondary'],
   ]) {
     assert.ok(system.includes(`'${destination}': { label: '${label}', variant: '${variant}' }`));
@@ -1422,7 +1429,7 @@ test('shared footer keeps Company navigation focused on Antbuildz AI', async () 
   aiProductOrder.push(webstoreItem, salesAgentItem);
   const aiProducts = {
     querySelector(selector) {
-      if (selector === 'a[href="/ai-sales-agent"]') return { closest: () => salesAgentItem };
+      if (selector === 'a[href="/ai-agent"]') return { closest: () => salesAgentItem };
       if (selector === 'a[href="/ai-webstore-suite"]') return { closest: () => webstoreItem };
       throw new Error(`Unexpected AI Products selector: ${selector}`);
     },
@@ -1764,7 +1771,7 @@ test('homepage uses the approved static mountain-logistics hero with an immediat
   assert.match(source, /Heavy-haul truck transporting an excavator along a mountain road above an industrial valley at blue hour/);
   assert.match(source, /heroImage\.fetchPriority = 'high'/);
   assert.match(source, /AI Agent for Sales & Rental Businesses/);
-  assert.match(source, /Understands specifications, inventory, availability and customer needs across sales, rental and support/);
+  assert.match(source, /Help customers discover the right products, get accurate AI recommendations, and turn buying intent into revenue/);
   assert.doesNotMatch(source, /home-hero-industrial-story\.mp4/);
   assert.doesNotMatch(source, /function setupHomeHeroVideo/);
   assert.match(source, /prefers-reduced-motion: reduce/);
@@ -2075,7 +2082,7 @@ test('the reversible marketing typography trial uses semantic roles and excludes
   ]);
 
   const expectedPaths = [
-    '/', '/ai-sales-agent', '/ai-webstore-suite', '/pricing', '/resources', '/help/ai',
+    '/', '/ai-agent', '/ai-webstore-suite', '/pricing', '/resources', '/help/ai',
     '/about', '/book-a-demo', '/agreements', '/rental-businesses', '/manufacturers-brands',
     '/dealers-distributors', '/industrial-mro', '/hardware-trade-supplies',
     '/building-engineering', '/parts-aftermarket', '/buggies-commercial-vehicles',
@@ -2256,7 +2263,7 @@ test('homepage inventory Agent card leads with product knowledge and the Emma ta
   assert.match(source, /eyebrow: null/);
   assert.match(source, /eyebrow\.hidden = !copy\.eyebrow/);
   assert.match(source, /button: 'Explore AI Agent'/);
-  assert.match(source, /buttonHref: '\/ai-sales-agent'/);
+  assert.match(source, /buttonHref: '\/ai-agent'/);
   assert.match(source, /badge: 'AI Agent'/);
   const inventoryDescription = source.match(/description: 'With connected inventory data, ([^']+)'/)?.[0] ?? '';
   assert.ok(inventoryDescription.replace(/^description: '/, '').replace(/'$/, '').trim().split(/\s+/).length <= 20);
@@ -2389,7 +2396,7 @@ test('public route loading uses the progressive Antbuildz AI wordmark', async ()
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[^]*\.antbuildz-route-loader__progress\s*\{[^}]*width: 100%;[^}]*animation: none;/);
 });
 
-test('AI Sales Agent links open the canonical page before the copied router handles the click', async () => {
+test('AI Agent and legacy links open the canonical page before the copied router handles the click', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const parsed = ts.createSourceFile('navigation.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   assert.deepEqual(parsed.parseDiagnostics, []);
@@ -2415,19 +2422,19 @@ test('AI Sales Agent links open the canonical page before the copied router hand
       preventDefault() { this.defaultPrevented = true; }, stopImmediatePropagation() { this.stopped = true; },
       ...overrides };
   };
-  for (const href of ['/ai-sales-agent', '/aiagent']) {
+  for (const href of ['/ai-agent', '/ai-sales-agent', '/aiagent']) {
     const event = makeEvent(href);
     context.click(event);
-    assert.equal(destination, 'http://localhost:8081/ai-sales-agent');
+    assert.equal(destination, 'http://localhost:8081/ai-agent');
     assert.equal(event.defaultPrevented, true);
     assert.equal(event.stopped, true);
   }
   context.click(makeEvent('/aiagent?source=menu#features'));
-  assert.equal(destination, 'http://localhost:8081/ai-sales-agent?source=menu#features');
+  assert.equal(destination, 'http://localhost:8081/ai-agent?source=menu#features');
   destination = undefined;
-  const keyboardEvent = makeEvent('/ai-sales-agent', { key: 'Enter', button: undefined });
+  const keyboardEvent = makeEvent('/ai-agent', { key: 'Enter', button: undefined });
   context.click(keyboardEvent);
-  assert.equal(destination, 'http://localhost:8081/ai-sales-agent');
+  assert.equal(destination, 'http://localhost:8081/ai-agent');
   assert.equal(keyboardEvent.defaultPrevented, true);
   assert.equal(keyboardEvent.stopped, true);
   for (const event of [
@@ -2553,7 +2560,7 @@ test('public hamburger has six flat native links and retains the account shell',
   assert.ok(originalGroups.every(group => group.attributes.hidden === ''));
   const list = navigation.children[3];
   assert.deepEqual(list.children.map(link => [link.textContent, link.href]), [
-    ["AI Agent", '/ai-sales-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
+    ["AI Agent", '/ai-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
     ['Pricing', '/pricing'],
     ['Industries', '/who-we-serve'],
     ['Resources', '/resources'], ['About Us', '/about'],
@@ -2768,6 +2775,8 @@ test('pricing cards use a wider standard-plan row and responsive Custom panel', 
   assert.match(layout, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(layout, /@media \(min-width: 768px\)/);
   assert.match(layout, /\[data-antbuildz-plan="custom"\][^{]*\{\s*grid-column: 1 \/ -1/);
+  assert.match(layout, /\[data-antbuildz-plan="custom"\]\.antbuildz-pricing-custom-compact \{[\s\S]*?text-align: left;/,
+    'Custom label, title and supporting copy share a left reading edge');
   assert.match(layout, /@media \(min-width: 768px\) and \(max-width: 1099px\)/);
   assert.match(layout, /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(layout, /@media \(max-width: 767px\)/);
@@ -2777,10 +2786,18 @@ test('pricing cards use a wider standard-plan row and responsive Custom panel', 
   assert.match(layout, /:not\(\[data-antbuildz-plan="custom"\]\) \.pricing-target \{\s*min-height: 92px/);
   assert.match(layout, /\.pricing-plan-name \{\s*font-size: 1\.5rem;[\s\S]*?font-weight: 750;/,
     'plan titles use the stronger Square-inspired hierarchy');
+  assert.match(layout, /:not\(\[data-antbuildz-plan="custom"\]\) \{[\s\S]*?text-align: left;/,
+    'standard pricing cards use a left-led reading hierarchy');
+  assert.match(layout, /:not\(\[data-antbuildz-plan="custom"\]\) \.pricing-plan-name \{[\s\S]*?text-align: left;/,
+    'standard plan names align left');
   assert.match(layout, /:not\(\[data-antbuildz-plan="custom"\]\) \.antbuildz-pricing-badge \{[\s\S]*?position: absolute;[\s\S]*?top: 24px;[\s\S]*?right: 24px;/,
     'standard-plan badges sit beside the plan title');
   assert.match(layout, /:not\(\[data-antbuildz-plan="custom"\]\) \.pricing-target \{[\s\S]*?padding-bottom: 20px;[\s\S]*?border-bottom: 1px solid var\(--line\);/,
     'the suitability statement is separated from the price by a quiet rule');
+  assert.match(layout, /:not\(\[data-antbuildz-plan="custom"\]\) \.pricing-target \{[\s\S]*?text-align: left;/,
+    'standard plan descriptions align left');
+  assert.match(layout, /\.pricing-addon-card \{\s*text-align: left;/,
+    'credit and additional-agent cards align their content left');
   assert.match(layout, /\.antbuildz-pricing-best-for \{[\s\S]*?width: 100%;[\s\S]*?max-width: none;[\s\S]*?text-wrap: wrap/);
   assert.doesNotMatch(layout, /\.pricing-card\[data-antbuildz-plan\]:not\(\[data-antbuildz-plan="custom"\]\) \.pricing-target \{\s*text-wrap: balance/);
   assert.doesNotMatch(layout, /\.antbuildz-pricing-feature-intro \{/);
@@ -2794,6 +2811,10 @@ test('pricing cards use a wider standard-plan row and responsive Custom panel', 
     'single-column mobile cards remain content-driven');
   assert.match(layout, /\.pricing-compare-td-feature \{[\s\S]*?text-align: left/);
   assert.match(layout, /\.pricing-compare-row\.is-tier-start > \*/);
+  assert.match(layout, /#compare-features-ai-agent\[data-antbuildz-unified-comparison="true"\] \{\s*width: var\(--public-frame-width\);\s*max-width: 100%;\s*margin-inline: auto;/,
+    'plan comparison table follows the shared pricing content rail');
+  assert.match(layout, /\.pricing-faq-trigger > span:first-child,\s*\.antbuildz-ai-pricing \.pricing-faq-answer p \{\s*text-align: left;/,
+    'pricing FAQ questions and answers align left');
   assert.match(layout, /\.pricing-price-row \{\s*min-height: 52px;\s*margin-top: 12px/);
   assert.match(layout, /\.antbuildz-pricing-details \{\s*grid-template-columns: minmax\(0, 1fr\);\s*min-height: 140px/);
   assert.match(layout, /\.antbuildz-pricing-details-heading \{[\s\S]*?font-size: \.9375rem;[\s\S]*?font-weight: 700/);
@@ -2919,6 +2940,15 @@ test('legacy marketplace admin route redirects to the AI Agent Console', async (
   assert.match(source, /permanentRedirect\(redirectTargets\[slug\]\)/);
 });
 
+test('legacy AI Agent routes redirect directly to the canonical product URL', async () => {
+  const source = await readFile(new URL('../app/[slug]/page.tsx', import.meta.url), 'utf8');
+  assert.match(source, /'ai-sales-agent': '\/ai-agent'/);
+  assert.match(source, /aiagent: '\/ai-agent'/);
+  assert.match(source, /assistant: '\/ai-agent'/);
+  assert.match(source, /'ai-agent': \['AI Agent for Complex Product Businesses'/);
+  assert.doesNotMatch(source, /'ai-agent': '\/ai-sales-agent'/);
+});
+
 test('header Industries menu includes every Who We Serve destination', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const industries = [
@@ -2985,7 +3015,7 @@ test('public marketing heroes extend behind the header with approved route excep
   ]);
   assert.match(source, /function correctPublicHeroHeader\(root: HTMLElement\)/);
   assert.match(source, /const usesExistingOverlay = path === '\/' \|\| path === '\/ai-webstore-suite'/);
-  assert.doesNotMatch(source, /preservesHeaderGap|path === '\/ai-sales-agent'/,
+  assert.doesNotMatch(source, /preservesHeaderGap|path === '\/ai-agent'/,
     'AI Sales Agent follows the shared transparent-top header behaviour');
   assert.match(source, /if \(!header \|\| usesExistingOverlay\)/);
   assert.match(source, /':scope > \.bright-hero, :scope > section\[class~="bg-hero"\]'/);
@@ -3017,19 +3047,22 @@ test('public hamburger is reserved for compact and mobile navigation', async () 
   );
 });
 
-test('mobile Agent launcher remains touch-friendly without covering card content', async () => {
-  const styles = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
+test('floating AI Agent launcher is removed from every transferred route', async () => {
+  const [source, styles] = await Promise.all([
+    readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
+    readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
+  ]);
   assert.match(
-    styles,
-    /@media \(max-width: 980px\)[\s\S]*?#root \.live-chat-launcher \{[^}]*right: 16px !important;[^}]*left: auto !important;[^}]*width: 56px !important;[^}]*height: 56px !important;/,
+    source,
+    /function removeLiveChatLauncher\(root: HTMLElement\) \{[\s\S]*?querySelectorAll<HTMLElement>\('\.live-chat-launcher'\)[\s\S]*?launcher\.remove\(\)/,
+  );
+  assert.match(
+    source,
+    /function applyAntbuildzAiCorrections\(root: HTMLElement\) \{\s*removeLiveChatLauncher\(root\);/,
   );
   assert.match(
     styles,
-    /#root \.live-chat-launcher-shell\.live-chat-launcher-dynamic-island \{[^}]*width: 56px !important;[^}]*min-width: 56px !important;[^}]*height: 56px !important;[^}]*justify-content: center !important;/,
-  );
-  assert.match(
-    styles,
-    /#root \.live-chat-launcher-copy,\s*#root \.live-chat-launcher-end \{\s*display: none !important;/,
+    /#root \.live-chat-launcher \{\s*display: none !important;/,
   );
 });
 
@@ -3799,7 +3832,7 @@ test('homepage education has the approved concise flow, eight destinations and f
     'mobile keeps each explanation before its matching graphic');
   assert.match(educationCss, /@media \(max-width: 767px\)[\s\S]*?\.stageVisual \{ height: 310px; border-radius: 20px; \}/);
   for (const path of requestedRoutes.slice(10)) assert.ok(body.includes(`href="/${path}"`), path);
-  for (const path of ['ai-sales-agent', 'ai-webstore-suite']) assert.ok(body.includes(`href="/${path}"`));
+  for (const path of ['ai-agent', 'ai-webstore-suite']) assert.ok(body.includes(`href="/${path}"`));
   assert.doesNotMatch(body, /href="\/ai-agent-console"/, 'the removed Console note must not leave a hidden destination');
   assert.doesNotMatch(faq, /href="\/book-a-demo"|Book a Demo/, 'the homepage FAQ no longer renders a demo action');
   assert.equal((body.match(/<h2\b/g) || []).length, 4);
@@ -4005,7 +4038,7 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.ok(productSection.indexOf('Built around equipment rental') < productSection.indexOf('class="products"'), 'the relationship description belongs directly below its title');
   const productCards = [...productSection.matchAll(/<article\b[^>]*>([\s\S]*?)<\/article>/g)];
   assert.equal(productCards.length, 2);
-  for (const [index, path] of ['ai-sales-agent', 'ai-webstore-suite'].entries()) {
+  for (const [index, path] of ['ai-agent', 'ai-webstore-suite'].entries()) {
     assert.equal((productCards[index][1].match(/<a\b/g) || []).length, 1, 'each card has one native focusable destination');
     assert.ok(productCards[index][1].includes(`href="/${path}"`));
   }
@@ -4017,7 +4050,7 @@ test('homepage education has the approved concise flow, eight destinations and f
   assert.ok(productDescriptions.every(copy => copy.trim().split(/\s+/).length <= 20), 'both product descriptions stay concise');
   assert.match(productSection, /The core/);
   assert.match(productSection, /Available as an add-on/);
-  assert.match(productSection, /href="\/ai-sales-agent" aria-label="Explore AI Agent"><svg/);
+  assert.match(productSection, /href="\/ai-agent" aria-label="Explore AI Agent"><svg/);
   assert.match(productSection, /href="\/ai-webstore-suite" aria-label="Explore AI Webstore Suite"><svg/);
   assert.doesNotMatch(productSection, />AI (?:Sales Agent|Webstore Suite) <svg/,
     'the card destinations use icon-only controls rather than repeated visible labels');

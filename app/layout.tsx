@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import { SOCIAL_SHARE_IMAGE, SOCIAL_SHARE_IMAGE_PATH } from '@/lib/social-share';
 import './globals.css';
@@ -53,6 +53,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -78,7 +83,7 @@ const structuredData = {
       name: 'Antbuildz AI Agent',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
-      url: 'https://antbuildz.ai/ai-sales-agent',
+      url: 'https://antbuildz.ai/ai-agent',
       description: 'AI Agent for complex products, supporting sales, rental and product guidance with approved knowledge, AI Webstore Suite and AI Agent Console.',
       provider: { '@id': 'https://antbuildz.ai/#organization' },
     },

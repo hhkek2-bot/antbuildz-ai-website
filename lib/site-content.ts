@@ -103,7 +103,7 @@ export const solutions: Solution[] = [
 
 export const productRoutes = [
   'ai-webstore-suite',
-  'ai-sales-agent',
+  'ai-agent',
   'ai-agent-console',
   'pricing',
   'book-a-demo',
@@ -128,7 +128,7 @@ export const agentFaqs = [
 ] as const;
 
 export const resourceCards = [
-  { title: 'Understand AI Agents', text: 'A practical introduction to industrial AI Agents, buyer conversations and qualification workflows.', image: '/resources/understand-ai-agents.jpg', tag: 'Foundations', href: '/ai-sales-agent' },
+  { title: 'Understand AI Agents', text: 'A practical introduction to industrial AI Agents, buyer conversations and qualification workflows.', image: '/resources/understand-ai-agents.jpg', tag: 'Foundations', href: '/ai-agent' },
   { title: 'AI Sales Agent + Webstore', text: 'See how structured product pages and conversation-led discovery work together.', image: '/resources/ai-agent-webstore.jpg', tag: 'Product guide', href: '/ai-webstore-suite' },
   { title: 'The Antbuildz Difference', text: 'Why industrial product context matters more than generic document search.', image: '/resources/antbuildz-difference.jpg', tag: 'Point of view', href: '/about' },
   { title: 'Get Your Business Ready', text: 'Prepare catalogues, policies, product data and sales rules for a reliable Agent.', image: '/resources/getting-ready.jpg', tag: 'Checklist', href: '/resources#readiness' },

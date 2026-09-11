@@ -4,7 +4,7 @@ import { resourceSeoEntries } from '@/lib/resource-seo';
 import { AI_ROLE_LINKS, AI_ROLE_REDIRECTS } from '@/lib/ai-roles';
 
 const lastVerified = '2026-09-02';
-const refinedRoutes = new Set(['ai-sales-agent', 'ai-webstore-suite', 'ai-agent-console', 'book-a-demo', 'resources', 'about', 'agreements']);
+const refinedRoutes = new Set(['ai-agent', 'ai-webstore-suite', 'ai-agent-console', 'book-a-demo', 'resources', 'about', 'agreements']);
 const legalDocuments = ['terms', 'privacy', 'dpa', 'acceptable-use'] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base, lastModified: lastVerified },
     ...canonicalStaticSlugs.map((slug) => ({
       url: `${base}/${slug}`,
-      lastModified: refinedRoutes.has(slug) ? '2026-09-06' : lastVerified,
+      lastModified: slug === 'ai-agent' ? '2026-09-11' : refinedRoutes.has(slug) ? '2026-09-06' : lastVerified,
     })),
     { url: `${base}/help/ai`, lastModified: lastVerified },
     { url: `${base}/resources/getting-started`, lastModified: '2026-09-07' },

@@ -6,9 +6,7 @@ import { setSalesAgentText as setText } from './ai-sales-agent-copy';
 export const WEBSTORE_TITLE = 'AI Webstore Suite for Complex Products';
 export const WEBSTORE_DESCRIPTION = "Extend your AI Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.";
 
-// The transferred hero has one non-wrapping desktop description slot. Keep the
-// opening concise; the sections below explain recommendations and discovery.
-export const WEBSTORE_HERO = 'Give your Agent structured product and inventory data for more accurate recommendations.';
+export const WEBSTORE_HERO = 'Turn your catalogue into a structured product library that helps search engines and AI platforms understand your products — while giving your AI Agent accurate product knowledge to recommend the right solution to customers.';
 
 export const WEBSTORE_INVENTORY = "Connect your AI Agent to the AI Webstore Suite catalogue and supported inventory sources. Use product specifications and recorded availability to narrow suitable options. Inventory connections and update frequency depend on your plan and setup.";
 
@@ -280,7 +278,7 @@ export function correctWebstoreCopy(root: HTMLElement, pathname: string) {
   // Preserve the existing line break and React-owned spans. The former
   // highlighted span stays empty so both headline lines share one treatment.
   setText(page.querySelector('.ws2-hero-shell > .mkt-section-eyebrow'), 'AI WEBSTORE SUITE');
-  setText(page.querySelector('.ws2-hero-title'), ['Better Recommendations', 'Start With Your Inventory', '']);
+  setText(page.querySelector('.ws2-hero-title'), ['Make Your Products Discoverable', 'Power Better Recommendations', '']);
   setText(page.querySelector('.ws2-hero-desc'), WEBSTORE_HERO);
   const connectedAgent = page.querySelector('.ws2-sales-cycle-copy');
   setText(connectedAgent?.querySelector('.mkt-section-eyebrow') ?? null, WEBSTORE_CONNECTED_AGENT.eyebrow);

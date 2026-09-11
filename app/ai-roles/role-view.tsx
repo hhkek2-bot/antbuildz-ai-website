@@ -10,7 +10,7 @@ import styles from './roles.module.css';
 function Actions({ mode = 'standard' }: { mode?: 'standard' | 'hero' }) {
   if (mode === 'hero') {
     return <div className={styles.actions}>
-      <a className={styles.primary} href="/ai-sales-agent">Explore AI Agent</a>
+      <a className={styles.primary} href="/ai-agent">Explore AI Agent</a>
     </div>;
   }
   return <div className={styles.actions}>
@@ -78,7 +78,7 @@ export function RolesOverview() {
       <div className={styles.intro}><p className={styles.eyebrow}>What</p><h2 id="roles-heading">What your AI Agent can do</h2><p>Choose the conversation your visitors need: sales, product guidance or support. These are roles for one configurable Agent, not five separate products or subscriptions. Your Agent answers from your business knowledge, asks useful questions and gathers details for your team.</p></div><RoleCards />
     </div></section>
     <section className={`${styles.section} ${styles.white}`} aria-labelledby="placement-heading"><div className={styles.frame}>
-      <div className={styles.split}><div><p className={styles.eyebrow}>When</p><h2 id="placement-heading">When to deploy your Agent</h2></div><div><p>Use your Agent when people arrive from your website, ads or other online channels with questions. Link a campaign directly to your dedicated AI Terminal so an interested visitor can talk to your Agent, explore products and explain what they need.</p><p>Your AI Terminal is a dedicated, shareable conversation page. Anyone with its link can talk to your Agent. Share it in ads, social posts, emails or website links to give each visitor a direct way to get answers from your business knowledge.</p><a className={styles.textLink} href="/ai-sales-agent">Explore AI Agent</a></div></div>
+      <div className={styles.split}><div><p className={styles.eyebrow}>When</p><h2 id="placement-heading">When to deploy your Agent</h2></div><div><p>Use your Agent when people arrive from your website, ads or other online channels with questions. Link a campaign directly to your dedicated AI Terminal so an interested visitor can talk to your Agent, explore products and explain what they need.</p><p>Your AI Terminal is a dedicated, shareable conversation page. Anyone with its link can talk to your Agent. Share it in ads, social posts, emails or website links to give each visitor a direct way to get answers from your business knowledge.</p><a className={styles.textLink} href="/ai-agent">Explore AI Agent</a></div></div>
     </div></section>
     <Workflow />
     <FinalCta />

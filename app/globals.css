@@ -701,6 +701,10 @@ button, summary { font: inherit; }
   border-radius: 24px;
 }
 
+.antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) {
+  text-align: left;
+}
+
 /* Square-inspired card introduction: one strong plan title and one concise
    suitability statement, with the existing Antbuildz badge beside the title. */
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-plan-name {
@@ -712,6 +716,7 @@ button, summary { font: inherit; }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .pricing-plan-name {
   padding-right: 120px;
+  text-align: left;
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan]:not([data-antbuildz-plan="custom"]) .antbuildz-pricing-badge {
@@ -787,6 +792,12 @@ button, summary { font: inherit; }
   min-height: 92px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+/* Add-on cards follow the same left-led reading hierarchy as the plans. */
+.antbuildz-ai-pricing .pricing-addon-card {
+  text-align: left;
 }
 
 .antbuildz-ai-pricing .antbuildz-pricing-subtitle {
@@ -821,6 +832,9 @@ button, summary { font: inherit; }
 }
 
 .antbuildz-ai-pricing #compare-features-ai-agent[data-antbuildz-unified-comparison="true"] {
+  width: var(--public-frame-width);
+  max-width: 100%;
+  margin-inline: auto;
   margin-top: 0;
 }
 
@@ -861,6 +875,11 @@ button, summary { font: inherit; }
 
 .antbuildz-ai-pricing .antbuildz-plan-comparison-table .pricing-compare-row:hover > * {
   background: var(--soft);
+}
+
+.antbuildz-ai-pricing .pricing-faq-trigger > span:first-child,
+.antbuildz-ai-pricing .pricing-faq-answer p {
+  text-align: left;
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan] .pricing-price-row {
@@ -1079,6 +1098,7 @@ button, summary { font: inherit; }
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"].antbuildz-pricing-custom-compact {
   grid-column: 1 / -1;
   background: var(--clean);
+  text-align: left;
 }
 
 .antbuildz-ai-pricing .pricing-card[data-antbuildz-plan="custom"].antbuildz-pricing-custom-compact::before {
@@ -1469,53 +1489,9 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   line-height: 1.55;
 }
 
-/* Close the Sales Agent page with the same clean, continuous proof strip as
-   the Webstore. The original 12 brand marks remain the source items; a hidden
-   duplicate set creates a seamless visual loop. */
-#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] {
-  --sales-logo-gap: 24px;
-  --sales-logo-gap-half: 12px;
-  overflow: hidden;
-  padding-block: 64px;
-  border-color: transparent;
-  background: var(--clean);
-}
-
-#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] > .bright-container {
-  width: 100%;
-  max-width: none;
-  overflow: hidden;
-  padding-inline: 0;
-}
-
-#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] .bright-logo-grid-static {
-  display: flex;
-  width: max-content;
-  max-width: none;
-  flex-wrap: nowrap;
-  gap: var(--sales-logo-gap);
-  margin: 0;
-  animation: antbuildz-sales-logo-marquee 36s linear infinite;
-  will-change: transform;
-}
-
-#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] .bright-logo-grid-item {
-  width: 140px;
-  min-width: 140px;
-  height: 56px;
-  flex: 0 0 140px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--clean);
-  box-shadow: 0 10px 24px -22px rgb(15 23 42 / 30%);
-}
-
-#root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"]:hover .bright-logo-grid-static {
-  animation-play-state: paused;
-}
-
-@keyframes antbuildz-sales-logo-marquee {
-  to { transform: translateX(calc(-50% - var(--sales-logo-gap-half))); }
+/* Remove the transferred brand-logo strip from the AI Sales Agent journey. */
+#root [data-antbuildz-sales-agent] .bright-logo-strip {
+  display: none !important;
 }
 
 /* Present the final Sales Agent action as one contained industrial story:
@@ -1701,16 +1677,6 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   #root [data-antbuildz-sales-agent] .ws-cta-section {
     padding-block: 64px !important;
   }
-  #root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] {
-    --sales-logo-gap: 16px;
-    --sales-logo-gap-half: 8px;
-    padding-block: 48px;
-  }
-  #root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] .bright-logo-grid-item {
-    width: 124px;
-    min-width: 124px;
-    flex-basis: 124px;
-  }
   #root [data-antbuildz-sales-agent] .antbuildz-sales-agent-cta-media {
     min-height: 240px;
     border-radius: 22px 22px 0 0;
@@ -1835,14 +1801,6 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   #root.antbuildz-original-root.antbuildz-section-system {
     --section-space-major: 64px;
     --section-space-compact: 48px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #root [data-antbuildz-sales-agent] .bright-logo-strip[data-antbuildz-logo-strip="true"] .bright-logo-grid-static {
-    animation: none;
-    transform: none;
-    will-change: auto;
   }
 }
 
@@ -2845,6 +2803,13 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   margin-top: 8px;
 }
 
+/* The Console remains visible in the product map while its demo is private. */
+.antbuildz-industries-menu__link[data-antbuildz-unavailable="true"] {
+  cursor: default;
+  opacity: .56;
+  pointer-events: none;
+}
+
 @media (min-width: 980px) and (max-width: 1179px) {
   .antbuildz-industries-menu__panel { padding: 24px; }
   .antbuildz-industries-menu__links { gap: 12px; }
@@ -3081,33 +3046,8 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   display: none !important;
 }
 
-.antbuildz-ai-home-active .live-chat-launcher {
+#root .live-chat-launcher {
   display: none !important;
-}
-
-/* Keep the persistent Agent entry point clear of phone and tablet cards and actions. */
-@media (max-width: 980px) {
-  #root .live-chat-launcher {
-    right: 16px !important;
-    left: auto !important;
-    width: 56px !important;
-    height: 56px !important;
-    transform: none !important;
-  }
-
-  #root .live-chat-launcher-shell.live-chat-launcher-dynamic-island {
-    width: 56px !important;
-    min-width: 56px !important;
-    height: 56px !important;
-    justify-content: center !important;
-    gap: 0 !important;
-    padding: 8px !important;
-  }
-
-  #root .live-chat-launcher-copy,
-  #root .live-chat-launcher-end {
-    display: none !important;
-  }
 }
 
 .abz-public-footer__grid {

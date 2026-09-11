@@ -1,6 +1,6 @@
 const TITLE_PUNCTUATION_ROUTES = new Set([
   '/',
-  '/ai-sales-agent',
+  '/ai-agent',
   '/ai-webstore-suite',
 ]);
 

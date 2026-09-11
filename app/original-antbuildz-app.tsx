@@ -25,7 +25,8 @@ const ORIGINAL_STYLESHEET_ID = 'antbuildz-original-styles';
 const ORIGINAL_SCRIPT_ID = 'antbuildz-original-app';
 
 const ROUTE_ALIASES: Record<string, string> = {
-  '/aiagent': '/ai-sales-agent',
+  '/ai-sales-agent': '/ai-agent',
+  '/aiagent': '/ai-agent',
   '/webstore': '/ai-webstore-suite',
   '/webstore-2': '/ai-webstore-suite',
   '/app': '/ai-agent-console',
@@ -45,7 +46,7 @@ function resetSalesAgentHeroThemes() {
 }
 
 function syncSalesAgentHeroThemes(root: HTMLElement, pathname: string) {
-  const chat = pathname === '/ai-sales-agent'
+  const chat = pathname === '/ai-agent'
     ? root.querySelector<HTMLElement>('[data-antbuildz-sales-agent] .bright-chat-theme-demo')
     : null;
   if (!chat) {
@@ -61,7 +62,7 @@ function syncSalesAgentHeroThemes(root: HTMLElement, pathname: string) {
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   salesAgentHeroThemeTimer = window.setInterval(() => {
-    if (!chat.isConnected || window.location.pathname !== '/ai-sales-agent') {
+    if (!chat.isConnected || window.location.pathname !== '/ai-agent') {
       resetSalesAgentHeroThemes();
       return;
     }
@@ -84,7 +85,7 @@ const WHO_WE_SERVE_PATHS = new Set([
 const PAGE_TITLES: Record<string, string> = {
   '/': HOMEPAGE_SEO.title,
   '/ai-webstore-suite': `${WEBSTORE_TITLE} | Antbuildz AI`,
-  '/ai-sales-agent': 'AI Agent for Complex Product Businesses | Antbuildz AI',
+  '/ai-agent': 'AI Agent for Complex Product Businesses | Antbuildz AI',
   '/ai-agent-console': 'AI Agent Console | Knowledge, Workflows & Conversations | Antbuildz AI',
   '/pricing': 'Antbuildz AI Pricing | Antbuildz AI',
   '/resources': `${RESOURCE_LIBRARY_SEO.title} | Antbuildz AI`,
@@ -203,7 +204,7 @@ const RESOURCE_MENU_GROUPS: {label:string;topics: {label:string;displayLabel?:st
 ] as const;
 
 const DRAWER_LINKS = [
-  { label: 'AI Agent', href: '/ai-sales-agent' },
+  { label: 'AI Agent', href: '/ai-agent' },
   { label: 'AI Webstore Suite', href: '/ai-webstore-suite' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Industries', href: '/who-we-serve' },
@@ -1050,9 +1051,9 @@ function correctProductsMenu(root: HTMLElement) {
     const links = document.createElement('div');
     links.className = 'antbuildz-industries-menu__links antbuildz-resources-menu__links';
     const products = [
-      { group: 'Engage customers', label: 'AI Agent', href: '/ai-sales-agent', description: 'Deploy a 24/7 AI Agent to answer enquiries across your online channels and supported languages.' },
+      { group: 'Engage customers', label: 'AI Agent', href: '/ai-agent', description: 'Deploy a 24/7 AI Agent to answer enquiries across your online channels and supported languages.' },
       { group: 'Guide product discovery', label: 'AI Webstore Suite', href: '/ai-webstore-suite', description: 'Connect your sales and rental catalogue and inventory for more accurate product recommendations.' },
-      { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Train and deploy an on-brand AI Agent with your company knowledge, inventory and selected role.' },
+      { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Train and deploy an on-brand AI Agent with your company knowledge, inventory and selected role.', unavailable: true },
     ];
     products.forEach((product, index) => {
       const group = document.createElement('section');
@@ -1064,7 +1065,14 @@ function correctProductsMenu(root: HTMLElement) {
       const groupLinks = document.createElement('div');
       groupLinks.className = 'antbuildz-industries-menu__group-links';
       const link = createIndustryLink(product, 'antbuildz-industries-menu__link', true);
-      bindHeaderNavigation(link);
+      if (product.unavailable) {
+        link.removeAttribute('href');
+        link.setAttribute('aria-disabled', 'true');
+        link.setAttribute('data-antbuildz-unavailable', 'true');
+        link.tabIndex = -1;
+      } else {
+        bindHeaderNavigation(link);
+      }
       groupLinks.appendChild(link);
       group.append(title, groupLinks);
       links.appendChild(group);
@@ -1075,7 +1083,7 @@ function correctProductsMenu(root: HTMLElement) {
     desktop.prepend(menu);
   }
   Array.from(desktop.children).forEach(child => {
-    if (child instanceof HTMLAnchorElement && ['/ai-sales-agent', '/ai-webstore-suite', '/ai-agent-console'].includes(child.getAttribute('href') ?? '')) child.hidden = true;
+    if (child instanceof HTMLAnchorElement && ['/ai-agent', '/ai-webstore-suite', '/ai-agent-console'].includes(child.getAttribute('href') ?? '')) child.hidden = true;
   });
   menu.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => {
     if (link.pathname === window.location.pathname) link.setAttribute('aria-current', 'page');
@@ -1221,11 +1229,11 @@ function navigateSalesAgentFromLink(event: MouseEvent | KeyboardEvent) {
   if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
   const destination = new URL(link.href, window.location.href);
   if (destination.origin !== window.location.origin
-    || !['/ai-sales-agent', '/aiagent'].includes(destination.pathname)) return;
+    || !['/ai-agent', '/ai-sales-agent', '/aiagent'].includes(destination.pathname)) return;
 
   // The copied navigation still owns its original destination internally.
   // Use the public page directly, before its router/loading handler runs.
-  destination.pathname = '/ai-sales-agent';
+  destination.pathname = '/ai-agent';
   event.preventDefault();
   event.stopImmediatePropagation();
   window.location.assign(destination.href);
@@ -1278,7 +1286,7 @@ function correctLinks(root: HTMLElement) {
 
   root.querySelectorAll<HTMLAnchorElement>('header a').forEach((link) => {
     const label = link.textContent?.trim();
-    if (label === 'AI Sales Agent') link.setAttribute('href', '/ai-sales-agent');
+    if (label === 'AI Sales Agent') link.setAttribute('href', '/ai-agent');
     if (label === 'AI Webstore Suite') link.setAttribute('href', '/ai-webstore-suite');
     if (label === 'Pricing') link.setAttribute('href', '/pricing');
     if (link.closest('.bright-nav-product-links')
@@ -1301,7 +1309,7 @@ function correctLinks(root: HTMLElement) {
   root.querySelectorAll<HTMLAnchorElement>('footer a').forEach((link) => {
     const label = link.textContent?.trim();
     if (label === 'AI Webstore Suite') link.setAttribute('href', '/ai-webstore-suite');
-    if (label === 'AI Sales Agent') link.setAttribute('href', '/ai-sales-agent');
+    if (label === 'AI Sales Agent') link.setAttribute('href', '/ai-agent');
     if (label === 'Resources') link.setAttribute('href', '/resources');
     if (label === 'AI Product FAQs') {
       link.textContent = 'AI FAQs';
@@ -1381,7 +1389,7 @@ function correctFooter(root: HTMLElement) {
   }
 
   const aiProducts = footer.querySelector<HTMLElement>('nav[aria-label="AI Products"]');
-  const salesAgentItem = aiProducts?.querySelector<HTMLAnchorElement>('a[href="/ai-sales-agent"]')?.closest('li');
+  const salesAgentItem = aiProducts?.querySelector<HTMLAnchorElement>('a[href="/ai-agent"]')?.closest('li');
   const webstoreItem = aiProducts?.querySelector<HTMLAnchorElement>('a[href="/ai-webstore-suite"]')?.closest('li');
   if (salesAgentItem && webstoreItem && salesAgentItem !== webstoreItem.previousElementSibling) {
     webstoreItem.parentElement?.insertBefore(salesAgentItem, webstoreItem);
@@ -1944,7 +1952,7 @@ function setupHomeHeroConversationRuntime(
 const HOME_HERO_EYEBROW = 'AI Agent for Sales & Rental Businesses';
 const HOME_HERO_TITLE_PRIMARY = 'Built for Complex';
 const HOME_HERO_TITLE_BRAND = 'Product Conversations';
-const HOME_HERO_DESCRIPTION = 'Understands specifications, inventory, availability and customer needs across sales, rental and support.';
+const HOME_HERO_DESCRIPTION = 'Help customers discover the right products, get accurate AI recommendations, and turn buying intent into revenue';
 
 function correctHomepage(root: HTMLElement) {
   const isHomepage = window.location.pathname === '/';
@@ -2027,7 +2035,7 @@ const HOME_AGENT_CARD_INVENTORY = {
   description: 'With connected inventory data, it helps customers compare products, check availability and enquire to buy or rent.',
   button: 'Explore AI Agent',
   buttonAria: 'Explore the Antbuildz AI Agent',
-  buttonHref: '/ai-sales-agent',
+  buttonHref: '/ai-agent',
   badge: 'AI Agent',
 } as const;
 
@@ -2567,7 +2575,14 @@ function removeWhoWeServeBreadcrumb(root: HTMLElement) {
     .forEach((trail) => trail.remove());
 }
 
+function removeLiveChatLauncher(root: HTMLElement) {
+  root
+    .querySelectorAll<HTMLElement>('.live-chat-launcher')
+    .forEach((launcher) => launcher.remove());
+}
+
 function applyAntbuildzAiCorrections(root: HTMLElement) {
+  removeLiveChatLauncher(root);
   correctRouteLoader(root);
   correctWordmarks(root);
   correctLinks(root);
@@ -2606,9 +2621,9 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   applyPublicMarketingSectionSystem(root, window.location.pathname);
   removeHeadingFullStops(root, window.location.pathname);
 
-  // Product links keep their established URL and DOM structure. Sales-role
-  // links retain their specific role names and destinations.
-  root.querySelectorAll<HTMLAnchorElement>('a[href="/ai-sales-agent"]').forEach(link => {
+  // Product links keep their established DOM structure. Sales-role links
+  // retain their specific role names and destinations.
+  root.querySelectorAll<HTMLAnchorElement>('a[href="/ai-agent"]').forEach(link => {
     const labels: Record<string, string> = {
       'AI Sales Agent': 'AI Agent',
       'Explore AI Sales Agent': 'Explore AI Agent',
@@ -2641,6 +2656,9 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     // fall back to localhost or the retired antbuildzai.com domain.
     const protectedPathname = window.location.pathname;
     const transferredResourcePath = getTransferredResourcePath(protectedPathname);
+    const transferredAppPath = protectedPathname === '/ai-agent'
+      ? '/ai-sales-agent'
+      : transferredResourcePath;
     const nativeReplaceState = window.history.replaceState.bind(window.history);
     const protectedTitle = document.title;
     const protectedCanonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href ?? '';
@@ -2720,14 +2738,16 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
         restoreServerMetadata();
       });
     };
-    const restoreTransferredResourcePath = (attempt = 0) => {
-      if (!transferredResourcePath || window.location.pathname !== transferredResourcePath) {
+    const restoreTransferredAppPath = (attempt = 0) => {
+      if (!transferredAppPath || window.location.pathname !== transferredAppPath) {
         scheduleCorrections();
         return;
       }
-      const articleHasRendered = Boolean(root.querySelector('article h1'));
-      if (!articleHasRendered && attempt < 120) {
-        resourceRestoreFrame = window.requestAnimationFrame(() => restoreTransferredResourcePath(attempt + 1));
+      const transferredViewHasRendered = transferredResourcePath
+        ? Boolean(root.querySelector('article h1'))
+        : Boolean(root.querySelector('.bright-hero'));
+      if (!transferredViewHasRendered && attempt < 120) {
+        resourceRestoreFrame = window.requestAnimationFrame(() => restoreTransferredAppPath(attempt + 1));
         return;
       }
       nativeReplaceState(window.history.state, '', `${protectedPathname}${window.location.search}${window.location.hash}`);
@@ -2743,15 +2763,15 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     }
 
     if (!document.getElementById(ORIGINAL_SCRIPT_ID)) {
-      if (transferredResourcePath) {
-        nativeReplaceState(window.history.state, '', `${transferredResourcePath}${window.location.search}${window.location.hash}`);
+      if (transferredAppPath) {
+        nativeReplaceState(window.history.state, '', `${transferredAppPath}${window.location.search}${window.location.hash}`);
       }
       const script = document.createElement('script');
       script.id = ORIGINAL_SCRIPT_ID;
       script.type = 'module';
       script.src = '/assets/index-i9-KQg8N.js';
       script.addEventListener('load', () => {
-        restoreTransferredResourcePath();
+        restoreTransferredAppPath();
       });
       document.body.appendChild(script);
     }

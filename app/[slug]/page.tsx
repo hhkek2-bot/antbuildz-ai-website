@@ -11,7 +11,7 @@ import { RESOURCE_LIBRARY_SEO } from '@/lib/resource-copy';
 
 const pageTitles: Record<string, [string, string]> = {
   'ai-webstore-suite': [WEBSTORE_TITLE, WEBSTORE_DESCRIPTION],
-  'ai-sales-agent': ['AI Agent for Complex Product Businesses', 'Antbuildz AI Agent uses product knowledge, inventory and workflows to guide sales, rental and support. Built from industrial equipment and B2B expertise.'],
+  'ai-agent': ['AI Agent for Complex Product Businesses', 'Antbuildz AI Agent uses product knowledge, inventory and workflows to guide sales, rental and support. Built from industrial equipment and B2B expertise.'],
   'ai-agent-console': ['AI Agent Console | Knowledge, Workflows & Conversations', 'Manage AI Agent knowledge, instructions, workflows and conversations across sales, rental and support. Review responses and control human handover.'],
   pricing: ['Antbuildz AI Pricing', 'Compare Antbuildz AI Agent plans: Agent, Sales and Rental+. Review AI Webstore Suite capabilities, included features and setup options.'],
   'book-a-demo': ['Book an Antbuildz AI Agent Demo', 'Book an Antbuildz AI Agent demo for your complex products, sales, rental or support workflows. Explore approved knowledge, recommendations and human handover.'],
@@ -27,7 +27,9 @@ const redirectTargets: Record<string, string> = {
   legal: '/agreements',
   'develop-admin': '/ai-agent-console',
   'ai-agent-roles': '/ai-roles',
-  assistant: '/ai-sales-agent',
+  'ai-sales-agent': '/ai-agent',
+  aiagent: '/ai-agent',
+  assistant: '/ai-agent',
   webstore: '/ai-webstore-suite',
   home: '/',
   'ai-platform': '/',
@@ -126,7 +128,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   const content = slug === 'ai-webstore-suite'
     ? <WebstoreConceptPage />
-    : slug === 'ai-sales-agent'
+    : slug === 'ai-agent'
       ? <AiSalesAgentPage />
       : <OriginalAntbuildzApp />;
 

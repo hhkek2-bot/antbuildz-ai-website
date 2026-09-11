@@ -4,14 +4,14 @@
 
 export const PUBLIC_CTA_PAGES = new Set([
   '/',
-  '/ai-sales-agent',
+  '/ai-agent',
   '/ai-webstore-suite',
 ]);
 
 export const PUBLIC_CTA_DESTINATIONS = {
   '/book-a-demo': { label: 'Book a Demo', variant: 'primary' },
   '/pricing': { label: 'View Pricing', variant: 'secondary' },
-  '/ai-sales-agent': { label: 'Explore AI Agent', variant: 'secondary' },
+  '/ai-agent': { label: 'Explore AI Agent', variant: 'secondary' },
   '/ai-webstore-suite': { label: 'Explore AI Webstore Suite', variant: 'secondary' },
 } as const;
 
@@ -96,9 +96,9 @@ export function applyPublicCtaSystem(root: HTMLElement, pathname: string) {
   // the Agent page. They keep their lighter link treatment, but share the
   // same destination-owned wording as the corresponding button.
   if (pathname === '/ai-webstore-suite') {
-    root.querySelectorAll<HTMLAnchorElement>('.webstore2-page a[href="/ai-sales-agent"]').forEach(link => {
+    root.querySelectorAll<HTMLAnchorElement>('.webstore2-page a[href="/ai-agent"]').forEach(link => {
       if (link.closest('header, footer')) return;
-      setCtaLabel(link, PUBLIC_CTA_DESTINATIONS['/ai-sales-agent'].label);
+      setCtaLabel(link, PUBLIC_CTA_DESTINATIONS['/ai-agent'].label);
       link.dataset.antbuildzTextCta = 'true';
     });
   }

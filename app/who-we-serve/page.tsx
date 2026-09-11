@@ -61,7 +61,7 @@ export default function WhoWeServePage() {
       </div></section>
 
       <section className={`${shared.section} ${styles.soft}`} aria-labelledby="business-fit"><div className={shared.frame}>
-        <div className={shared.split}><div><p className={shared.eyebrow}>A shared need</p><h2 id="business-fit">The fit starts<br /> with your products</h2><p className={styles.fitLead}>Whether you sell to a business or an individual, the key is how much guidance the product decision needs.</p><a className={shared.textLink} href="/ai-sales-agent">Explore AI Agent <span aria-hidden="true">↗</span></a></div>
+        <div className={shared.split}><div><p className={shared.eyebrow}>A shared need</p><h2 id="business-fit">The fit starts<br /> with your products</h2><p className={styles.fitLead}>Whether you sell to a business or an individual, the key is how much guidance the product decision needs.</p><a className={shared.textLink} href="/ai-agent">Explore AI Agent <span aria-hidden="true">↗</span></a></div>
           <ol className={styles.fitList}>{BUSINESS_FIT.map(([title, body], index) => <li key={title}><span className={styles.number}>0{index + 1}</span><div><h3>{title}</h3><p>{body}</p></div></li>)}</ol>
         </div>
       </div></section>
