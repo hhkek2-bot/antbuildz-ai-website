@@ -1079,7 +1079,7 @@ test('Preview Webstore copy preserves nodes, rich headings, links, comparison co
   assert.equal(heroEyebrow.textContent, 'AI WEBSTORE SUITE');
   assert.equal(hero.textContent, 'Make Your Products DiscoverablePower Better Recommendations');
   assert.equal(hero.childNodes.at(-1).textContent, '', 'the former gradient span is emptied so no headline words are highlighted');
-  assert.equal(heroDescription.textContent, 'Turn your catalogue into a structured product library that helps search engines and AI platforms understand your products — while giving your AI Agent accurate product knowledge to recommend the right solution to customers.');
+  assert.equal(heroDescription.textContent, 'Make your products discoverable through search and AI recommendations, while powering your AI Agent with product and inventory knowledge to recommend the right solution.');
   assert.equal(connectedEyebrow.textContent, WEBSTORE_CONNECTED_AGENT.eyebrow);
   assert.equal(connectedHeading.textContent, WEBSTORE_CONNECTED_AGENT.headline.join(''));
   assert.equal(connectedDescription.textContent, WEBSTORE_CONNECTED_AGENT.description);
@@ -2104,7 +2104,8 @@ test('the reversible marketing typography trial uses semantic roles and excludes
   assert.doesNotMatch(styles, /antbuildz-typography-trial\s+:is\(h1|antbuildz-typography-trial\s+h1/);
   assert.match(previewStyles, /\.ws2-hero-shell \.ws2-hero-title\)[^{]*\{[^}]*font-size: clamp\(34px, 4vw, 56px\) !important;[^}]*line-height: 1\.04 !important;/,
     'the user-requested Webstore hero title is one restrained step below the shared 64px maximum');
-  assert.doesNotMatch(previewStyles, /\.ws2-hero-shell \.ws2-hero-desc\)[^{]*\{[^}]*\b(?:font-size|max-width)\s*:/, 'the Webstore preview inherits the semantic introduction scale and frame');
+  assert.match(previewStyles, /@media \(min-width: 768px\)[\s\S]*?\.ws2-hero-shell \.ws2-hero-desc\)[^{]*\{[^}]*max-width: 1100px !important;/,
+    'the shortened Webstore hero description uses a wider desktop reading frame');
 });
 
 test('public marketing sections use approved responsive spacing and semantic surfaces', async () => {

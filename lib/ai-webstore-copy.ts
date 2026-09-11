@@ -6,7 +6,7 @@ import { setSalesAgentText as setText } from './ai-sales-agent-copy';
 export const WEBSTORE_TITLE = 'AI Webstore Suite for Complex Products';
 export const WEBSTORE_DESCRIPTION = "Extend your AI Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.";
 
-export const WEBSTORE_HERO = 'Turn your catalogue into a structured product library that helps search engines and AI platforms understand your products — while giving your AI Agent accurate product knowledge to recommend the right solution to customers.';
+export const WEBSTORE_HERO = 'Make your products discoverable through search and AI recommendations, while powering your AI Agent with product and inventory knowledge to recommend the right solution.';
 
 export const WEBSTORE_INVENTORY = "Connect your AI Agent to the AI Webstore Suite catalogue and supported inventory sources. Use product specifications and recorded availability to narrow suitable options. Inventory connections and update frequency depend on your plan and setup.";
 
