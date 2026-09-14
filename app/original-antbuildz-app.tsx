@@ -774,33 +774,69 @@ const HOME_INDUSTRY_CHAPTERS: ReadonlyArray<HomeIndustryChapter> = [
   },
 ];
 
-const HOME_HERO_CONVERSATION: ReadonlyArray<{
+type HomeHeroConversationMessage = {
   kind: 'buyer' | 'agent' | 'requirement';
   text: string;
-}> = [
+} | {
+  kind: 'summary';
+  title: string;
+  rows: ReadonlyArray<{
+    label: string;
+    value: string;
+    emphasis?: boolean;
+  }>;
+  recommendation: string;
+  note: string;
+};
+
+const HOME_HERO_CONVERSATION: ReadonlyArray<HomeHeroConversationMessage> = [
   {
     kind: 'buyer',
-    text: 'Need a 5 t electric forklift for our warehouse.',
+    text: 'We need 23 m working height, a 1.0 m access route and a combined platform load up to 200 kg.',
   },
   {
     kind: 'agent',
-    text: 'What lift height, aisle width and hire period do you need?',
+    text: 'That points to a tracked spider lift. The TEUPEN LEO23GT matches the stated height, retracted width and platform load.',
   },
   {
     kind: 'buyer',
-    text: '6 m lift, 4.2 m aisles and 12 weeks from 3 June.',
+    text: 'What is the monthly hire price, and what should we confirm before booking?',
+  },
+  {
+    kind: 'summary',
+    title: 'TEUPEN LEO23GT',
+    rows: [
+      { label: 'Working height', value: '23.0 m' },
+      { label: 'Retracted width', value: '0.98 m' },
+      { label: 'Max. platform load', value: '200 kg' },
+      { label: 'Monthly hire price', value: 'Supplier quote', emphasis: true },
+    ],
+    recommendation: 'Closest supported match for the stated height, access width and platform load. Confirm the working envelope, outrigger footprint and ground conditions before hire.',
+    note: 'Confirm the final hire price, availability, hire period, delivery and project-specific charges with the supplier.',
+  },
+  {
+    kind: 'buyer',
+    text: 'We need a one-person construction set-out instrument with 1″ angular accuracy and at least 800 m reflectorless range.',
   },
   {
     kind: 'agent',
-    text: 'Understood. I’m checking residual capacity, mast configuration and the approved fleet data.',
+    text: 'That points to a robotic total station. The Topcon GT-1501 matches the 1″ accuracy requirement and exceeds the requested reflectorless range.',
   },
   {
-    kind: 'requirement',
-    text: '5 t electric · 6 m lift · 4.2 m aisle · 12-week hire',
+    kind: 'buyer',
+    text: 'What are the key measuring ranges, and what should we budget for the instrument package?',
   },
   {
-    kind: 'agent',
-    text: 'The requirement is ready for your rental team to confirm availability and quotation.',
+    kind: 'summary',
+    title: 'Topcon GT-1501',
+    rows: [
+      { label: 'Angle accuracy', value: '1″' },
+      { label: 'Prism measuring range', value: '5,000 m' },
+      { label: 'Reflectorless range', value: '1,000 m' },
+      { label: 'Instrument package price', value: 'Supplier quote', emphasis: true },
+    ],
+    recommendation: 'Closest supported match for single-person construction set-out where 1″ angular accuracy is required.',
+    note: 'Reflectorless range depends on target and conditions. Confirm the controller, prism kit, software, support and final supplier quote.',
   },
 ];
 
@@ -1518,10 +1554,10 @@ function correctAboutEcosystem(root: HTMLElement) {
 }
 
 function createHomeHeroConversation(
-  messages: typeof HOME_HERO_CONVERSATION = HOME_HERO_CONVERSATION,
+  messages: ReadonlyArray<HomeHeroConversationMessage> = HOME_HERO_CONVERSATION,
   layer: 'centre' | 'left' | 'right' | 'outer-left' | 'outer-right' = 'centre',
-  label = 'Example industrial buyer qualification conversation',
-  summary = 'The AI Sales Agent gathers forklift capacity, lift height, aisle width and hire period, checks approved fleet information, and prepares the requirement for availability and quotation review by the rental team.',
+  label = 'Two example industrial product recommendation conversations',
+  summary = 'Emma compares approved specifications, pricing context and recommendation criteria for a TEUPEN LEO23GT spider lift and a Topcon GT-1501 robotic total station, then prepares each requirement for supplier confirmation.',
 ) {
   const conversation = document.createElement('section');
   conversation.className = `antbuildz-home-hero-conversation is-${layer}`;
@@ -1539,6 +1575,7 @@ function createHomeHeroConversation(
     const bubble = document.createElement('article');
     bubble.className = `antbuildz-home-hero-conversation__bubble is-${message.kind}`;
     bubble.dataset.step = String(index);
+    bubble.dataset.kind = message.kind;
     // Reuse Emma's shared identity and keep the illustrative buyer visually
     // distinct with the approved Asian industrial-buyer portrait.
     const isBuyer = message.kind === 'buyer';
@@ -1561,6 +1598,56 @@ function createHomeHeroConversation(
       note.textContent = 'Pending availability and quotation review';
       surface.appendChild(label);
       surface.appendChild(value);
+      surface.appendChild(note);
+    } else if (message.kind === 'summary') {
+      const heading = document.createElement('div');
+      heading.className = 'antbuildz-home-hero-conversation__summary-heading';
+      const title = document.createElement('strong');
+      title.textContent = message.title;
+      heading.appendChild(title);
+
+      const table = document.createElement('table');
+      table.className = 'antbuildz-home-hero-conversation__summary-table';
+      const tableHead = document.createElement('thead');
+      const headRow = document.createElement('tr');
+      ['Specification', 'Product data'].forEach((headingText) => {
+        const headingCell = document.createElement('th');
+        headingCell.scope = 'col';
+        headingCell.textContent = headingText;
+        headRow.appendChild(headingCell);
+      });
+      tableHead.appendChild(headRow);
+      const tableBody = document.createElement('tbody');
+      message.rows.forEach((row) => {
+        const tableRow = document.createElement('tr');
+        if (row.emphasis) tableRow.className = 'is-emphasis';
+        const labelCell = document.createElement('th');
+        labelCell.scope = 'row';
+        labelCell.textContent = row.label;
+        const valueCell = document.createElement('td');
+        valueCell.textContent = row.value;
+        tableRow.appendChild(labelCell);
+        tableRow.appendChild(valueCell);
+        tableBody.appendChild(tableRow);
+      });
+      table.appendChild(tableHead);
+      table.appendChild(tableBody);
+
+      const recommendation = document.createElement('p');
+      recommendation.className = 'antbuildz-home-hero-conversation__recommendation';
+      const recommendationLabel = document.createElement('span');
+      recommendationLabel.textContent = 'Recommendation';
+      const recommendationText = document.createElement('strong');
+      recommendationText.textContent = message.recommendation;
+      recommendation.appendChild(recommendationLabel);
+      recommendation.appendChild(recommendationText);
+
+      const note = document.createElement('small');
+      note.className = 'antbuildz-home-hero-conversation__summary-note';
+      note.textContent = message.note;
+      surface.appendChild(heading);
+      surface.appendChild(table);
+      surface.appendChild(recommendation);
       surface.appendChild(note);
     } else {
       surface.textContent = message.text;
@@ -1827,16 +1914,24 @@ function setupHomeHeroConversationRuntime(
   let currentStep = reducedMotion.matches ? messageNodes.length - 1 : 0;
   let conversationActive = true;
   let transcriptFrame = 0;
-  let transcriptTimer = 0;
 
   const updateTranscriptFade = () => {
     if (!transcript) return;
-    const top = transcript.getBoundingClientRect().top + 10;
-    messageNodes.forEach((message) => {
+    const transcriptBounds = transcript.getBoundingClientRect();
+    const fadeTop = transcriptBounds.top + 8;
+    const fadeZone = Math.min(96, Math.max(68, transcriptBounds.height * .24));
+    messageNodes.forEach((message, index) => {
+      if (index > currentStep) {
+        message.style.removeProperty('--home-chat-position-opacity');
+        return;
+      }
       const bounds = message.getBoundingClientRect();
-      const fadeDistance = Math.min(56, bounds.height || 1);
-      const opacity = transcript.scrollTop < 1 ? 1 : Math.min(1, Math.max(0, (bounds.top - top + fadeDistance) / fadeDistance));
-      message.style.setProperty('--home-chat-message-opacity', String(opacity));
+      const fadeAnchor = bounds.top + Math.min(104, bounds.height * .4);
+      const distanceFromTop = fadeAnchor - fadeTop;
+      const opacity = transcript.scrollTop < 1
+        ? 1
+        : Math.min(1, Math.max(0, distanceFromTop / fadeZone));
+      message.style.setProperty('--home-chat-position-opacity', String(opacity));
     });
   };
 
@@ -1848,48 +1943,35 @@ function setupHomeHeroConversationRuntime(
       updateTranscriptFade();
       return;
     }
-    if (maxScroll > 2) {
-      transcript.scrollTo({
-        top: maxScroll,
-        behavior: reducedMotion.matches ? 'auto' : 'smooth',
-      });
-    }
+    if (maxScroll > 2) transcript.scrollTop = maxScroll;
     updateTranscriptFade();
   };
 
   const scheduleTranscriptPosition = (resetToTop = false) => {
     if (transcriptFrame) window.cancelAnimationFrame(transcriptFrame);
-    if (transcriptTimer) window.clearTimeout(transcriptTimer);
-    transcriptFrame = window.requestAnimationFrame(() => {
-      transcriptFrame = 0;
+    let followGrowthFrames = resetToTop || reducedMotion.matches ? 1 : 28;
+    const followTranscriptGrowth = () => {
       updateTranscriptPosition(resetToTop);
-    });
-    transcriptTimer = window.setTimeout(() => {
-      transcriptTimer = 0;
-      updateTranscriptPosition(resetToTop);
-    }, 380);
+      followGrowthFrames -= 1;
+      if (followGrowthFrames > 0) {
+        transcriptFrame = window.requestAnimationFrame(followTranscriptGrowth);
+      } else {
+        transcriptFrame = 0;
+      }
+    };
+    transcriptFrame = window.requestAnimationFrame(followTranscriptGrowth);
   };
 
   const renderConversation = (resetToTop = false) => {
     messageNodes.forEach((message, index) => {
       message.classList.toggle('is-visible', index <= currentStep);
-      message.classList.toggle('is-fade-top', false);
-      message.classList.toggle('is-fade-near-top', false);
-      message.classList.toggle('is-fade-near-bottom', false);
-      message.classList.toggle('is-fade-bottom', false);
     });
-    const visibleMessages = messageNodes.slice(0, currentStep + 1);
-    if (visibleMessages.length > 1) {
-      visibleMessages[0]?.classList.toggle('is-fade-top', true);
-      visibleMessages.at(-1)?.classList.toggle('is-fade-bottom', true);
-    }
-    if (visibleMessages.length > 3) {
-      visibleMessages[1]?.classList.toggle('is-fade-near-top', true);
-      visibleMessages.at(-2)?.classList.toggle('is-fade-near-bottom', true);
-    }
     typing?.classList.toggle(
       'is-visible',
-      conversationActive && !reducedMotion.matches && currentStep < messageNodes.length - 1,
+      conversationActive
+        && !reducedMotion.matches
+        && currentStep < messageNodes.length - 1
+        && messageNodes[currentStep]?.dataset.kind !== 'summary',
     );
     scheduleTranscriptPosition(resetToTop);
   };
@@ -1902,7 +1984,7 @@ function setupHomeHeroConversationRuntime(
         : Math.min(370, Math.max(300, heroBounds.height * .46));
       hero.style.setProperty('--antbuildz-home-chat-height', `${chatHeight}px`);
       const copyBounds = hero.querySelector('.ai-marketplace-hero-copy')?.getBoundingClientRect();
-      if (heroBounds.width <= 767 && copyBounds) {
+      if (heroBounds.width <= 1179 && copyBounds) {
         hero.style.setProperty('--antbuildz-home-chat-top', `${copyBounds.bottom - heroBounds.top + 24}px`);
       } else {
         hero.style.removeProperty('--antbuildz-home-chat-top');
@@ -1921,7 +2003,7 @@ function setupHomeHeroConversationRuntime(
     const isRestarting = nextStep === 0;
     currentStep = nextStep;
     renderConversation(isRestarting);
-  }, [1900, 2500, 3100, 2800, 3400][layerIndex] ?? 1900);
+  }, [2600, 2500, 3100, 2800, 3400][layerIndex] ?? 2600);
 
   const handleMotionPreference = () => {
     currentStep = reducedMotion.matches ? messageNodes.length - 1 : 0;
@@ -1945,14 +2027,13 @@ function setupHomeHeroConversationRuntime(
     transcript?.removeEventListener('scroll', updateTranscriptFade);
     reducedMotion.removeEventListener('change', handleMotionPreference);
     if (transcriptFrame) window.cancelAnimationFrame(transcriptFrame);
-    if (transcriptTimer) window.clearTimeout(transcriptTimer);
   };
 }
 
 const HOME_HERO_EYEBROW = 'AI Agent for Sales & Rental Businesses';
 const HOME_HERO_TITLE_PRIMARY = 'Built for Complex';
 const HOME_HERO_TITLE_BRAND = 'Product Conversations';
-const HOME_HERO_DESCRIPTION = 'Help customers discover the right products, get accurate AI recommendations, and turn buying intent into revenue';
+const HOME_HERO_DESCRIPTION = 'Make every product easier to discover across search and AI, while your AI Agent understands complex needs, recommends the right product, and turns conversations into revenue.';
 
 function correctHomepage(root: HTMLElement) {
   const isHomepage = window.location.pathname === '/';

@@ -3171,3 +3171,144 @@ Remaining publication check: the previously flagged S$49/month additional-Agent
 FAQ versus USD plan pricing still requires the approved commercial source. No
 price was guessed. Search Console indexing/backlink authority has not been
 verified. No deployment, service restart or configuration change was performed.
+
+## 2026-09-14 — Homepage hero description update
+
+Fidelity-mode copy update scoped to the homepage hero description. The visible
+paragraph now uses the user-supplied wording about product discovery across
+search and AI, understanding complex needs, recommending the right product and
+turning conversations into revenue. The eyebrow, H1, hero imagery, conversation,
+layout, metadata, routes and interactions remain unchanged.
+
+Browser-inspected at 1440×900 and 390×844. The exact description is visible,
+there is no horizontal overflow or conversation overlap, and the mobile layout
+retains 24px clearance between the description and conversation. All 116 content
+tests, targeted ESLint and `git diff --check` pass. No configuration, service
+restart, reference-project, deployment or external-service change was made.
+
+## 2026-09-14 — Structured two-product hero conversations
+
+Fidelity-led design update scoped to the homepage hero conversation animation.
+The foreground sequence now demonstrates two distinct product enquiries in the
+response style supplied by the user: a buyer question, a concise Agent match,
+a structured specification-and-pricing table, a recommendation with commercial
+boundaries, and a clear supplier or quotation next step.
+
+The first conversation recommends a TEUPEN LEO23GT for a 23 m access requirement
+through a 1 m route. Its 23.0 m working height, 0.98 m transport width, 200 kg
+platform capacity and S$10,800 listed monthly Singapore rate were checked against
+TEUPEN technical data and the existing Antbuildz Marketplace listing. The second
+conversation recommends a Topcon GT-1501 for one-person robotic layout requiring
+1″ angle accuracy. Its 1″ accuracy, 5,000 m prism range, 1,000 m reflectorless
+range and US$34,230 list price were checked against Topcon's GT-1500/700 data and
+a dated 2026 Topcon optical price list. Both cards require supplier confirmation
+for local configuration, availability and final commercial terms.
+
+The new summary cards retain the approved blue/yellow glass language, Emma-left
+and buyer-right alignment, static mountain-logistics image and hero composition.
+Typing pauses while a table is displayed so the complete card remains readable.
+The existing measured copy-to-chat clearance now extends through the compact
+desktop breakpoint to protect the longer copy and response cards.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844 across both summary states.
+The tables fit inside the transcript, compact and mobile layouts retain 24px
+copy-to-chat clearance, and all checked widths have zero horizontal overflow.
+All 116 content tests, targeted ESLint, the production build and
+`git diff --check` pass. No route, metadata, CTA, configuration, service restart,
+reference-project, deployment or external-service change was made.
+
+### Follow-up — Specification-led exchange and unboxed Agent replies
+
+The two foreground examples now follow the intended sales conversation:
+the buyer first describes the required specifications, Emma identifies the
+equipment category and closest supported product, the buyer asks a pricing or
+specification follow-up, and Emma answers with the structured table and
+recommendation. This removes consecutive Agent messages and makes both examples
+feel like genuine buyer–Agent exchanges.
+
+Emma's conversational text and the area around each structured answer are now
+transparent, without an AI message box. Buyer messages retain their yellow-tinted
+glass surface, while specification tables use a lighter contained surface for
+readability over the hero photograph. The previously checked product data,
+commercial qualifiers, supplier-confirmation notes, speaker alignment and
+reduced-motion behaviour remain intact.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844, including both product
+summary states. The tables remain fully visible, the compact and mobile layouts
+retain 24px copy-to-chat clearance, and all checked widths have zero horizontal
+overflow. No shared design-system rule, route, CTA or metadata changed.
+
+### Follow-up — Glass specification tables and industrial fact review
+
+Fidelity refinement against the supplied hero screenshot. The opaque pale table
+surface is replaced with a dark translucent glass treatment using the approved
+ink token, 18px backdrop blur, a restrained inner highlight, low-contrast row
+separators and a soft depth shadow. Emma's prose remains unboxed and buyer
+messages retain their yellow-tinted glass treatment. A solid ink fallback is
+provided for reduced-transparency preferences.
+
+Both exchanges were tightened after checking the source material. The LEO23GT
+conversation now identifies a tracked spider-lift requirement from working
+height, retracted access width and platform load, then flags the working envelope,
+outrigger footprint and ground conditions before hire. Its S$10,800 monthly rate
+is explicitly identified as the Antbuildz 2013 Singapore listing. The GT-1501
+conversation now uses construction set-out language, distinguishes angular
+accuracy from measuring range, notes that reflectorless performance depends on
+the target and conditions, and labels US$34,230 as the 2026 GT-1501/PSBW US
+package list figure rather than a universal instrument price.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844 across both product answers.
+The glass tables remain readable and fully visible, compact and mobile retain
+24px copy-to-chat clearance, and all checked widths have zero horizontal
+overflow. No shared design-system rule, route, CTA or metadata changed.
+
+## 2026-09-15 — Continuous hero transcript push and consistent dimming
+
+Audit-to-Fidelity motion correction scoped to the homepage hero conversation.
+Removed four chronology-based fade classes that applied conflicting opacity to
+newest, oldest and summary rows. Every active message, avatar, buyer surface and
+structured answer now shares one restrained 84% base opacity. A single
+position-based value provides the additional fade only as a row approaches the
+top of the transcript.
+
+The transcript now follows the growing height of each incoming row for 28
+animation frames. This keeps the view anchored to the latest message while the
+new row expands, so the second product conversation visibly pushes the first
+conversation upward instead of waiting and then jumping. The fade anchor scales
+with row height, allowing both short chat bubbles and tall specification tables
+to fade gradually before their upper content clips. Reduced-motion behaviour
+still presents the complete static transcript without an animated sequence.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. Sampled the transition from
+the first summary into the second buyer message frame-by-frame, then inspected
+the final second-product state. New rows settle at the same base opacity, older
+rows progressively reach zero near the top, compact and mobile retain 24px
+copy-to-chat clearance, and all checked widths have zero horizontal overflow.
+No conversation facts, route, CTA, metadata or shared design-system rule changed.
+
+## 2026-09-15 — Remove hero answer sequence labels
+
+Fidelity refinement scoped to the homepage hero conversation. Removed the
+editorial `Pricing & Specification Answer · 1 of 2` and `Specification & Pricing
+Answer · 2 of 2` labels above the two specification tables. Each structured
+answer now begins directly with the relevant product name, keeping the exchange
+closer to a natural industrial sales conversation while preserving the table,
+recommendation, pricing qualifiers and continuous push-and-fade animation.
+
+Browser-inspected at 1440×900 and 390×844 after the first structured answer
+appeared. Both sizes omit the sequence labels, retain the equipment title and
+glass table, and show zero horizontal page overflow.
+
+### Follow-up — Globally neutral conversation pricing
+
+Removed geographic references from both foreground hero exchanges, including
+Singapore-specific hire wording and US-package terminology. The buyer now asks
+for a monthly hire price without naming a market. Both commercial rows use
+`Supplier quote` because publishing a currency amount without its market would
+be ambiguous, while the verified equipment specifications and practical quote
+qualifiers remain unchanged.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844 across both product
+answers. The foreground transcript contains no geographic or market-specific
+pricing references, both quote rows remain readable, and all checked widths
+have zero horizontal overflow.

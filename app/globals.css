@@ -3205,6 +3205,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   --home-chat-glass-radius: 22px;
   --home-chat-glass-blur: 6px;
   --home-chat-text: rgb(255 255 255 / 96%);
+  --home-chat-base-opacity: .84;
   --home-chat-shadow: 0 8px 24px -18px rgb(0 0 0 / 20%);
   --home-chat-reply-edge: color-mix(in srgb, var(--blue) 65%, white);
   --home-chat-reply-halo: color-mix(in srgb, var(--blue) 18%, transparent);
@@ -3248,7 +3249,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
 @media (min-width: 768px) and (max-width: 1179px) {
   .antbuildz-ai-home .antbuildz-home-hero-conversation.is-centre {
-    top: clamp(350px, 40svh, 400px);
+    top: max(clamp(350px, 40svh, 400px), var(--antbuildz-home-chat-top, 0px));
     right: calc(var(--public-frame-gutter) + clamp(12px, 2vw, 20px));
     bottom: auto;
   }
@@ -3471,7 +3472,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   margin: 0;
   opacity: 0;
   transform: translateY(12px) scale(.98);
-  transition: opacity .34s ease, transform .34s ease, max-height .34s ease;
+  transition: opacity .22s linear, transform .34s ease, max-height .34s ease;
   color: var(--home-chat-text);
   font-size: var(--home-chat-font-size);
   font-weight: 400;
@@ -3482,28 +3483,10 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 }
 
 .antbuildz-home-hero-conversation__bubble.is-visible {
-  max-height: 240px;
+  max-height: 360px;
   overflow: visible;
-  opacity: calc(var(--home-chat-message-opacity, 1) * var(--home-chat-edge-opacity, 1));
+  opacity: calc(var(--home-chat-base-opacity) * var(--home-chat-position-opacity, 1));
   transform: none;
-}
-
-/* Soften the first and last rows of all five conversation layers without
-   masking their ancestor, which would flatten the glass backdrop effect. */
-.antbuildz-home-hero-conversation__bubble.is-fade-top {
-  --home-chat-edge-opacity: .58;
-}
-
-.antbuildz-home-hero-conversation__bubble.is-fade-near-top {
-  --home-chat-edge-opacity: .8;
-}
-
-.antbuildz-home-hero-conversation__bubble.is-fade-near-bottom {
-  --home-chat-edge-opacity: .84;
-}
-
-.antbuildz-home-hero-conversation__bubble.is-fade-bottom {
-  --home-chat-edge-opacity: .64;
 }
 
 .antbuildz-home-hero-conversation__bubble:not(.is-visible),
@@ -3518,8 +3501,13 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 }
 
 .antbuildz-home-hero-conversation__bubble.is-agent,
-.antbuildz-home-hero-conversation__bubble.is-requirement {
+.antbuildz-home-hero-conversation__bubble.is-requirement,
+.antbuildz-home-hero-conversation__bubble.is-summary {
   align-self: flex-start;
+}
+
+.antbuildz-home-hero-conversation__bubble.is-summary {
+  width: min(430px, 100%);
 }
 
 .antbuildz-home-hero-conversation__avatar {
@@ -3558,15 +3546,129 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   box-shadow: inset 0 0 1px .75px color-mix(in srgb, var(--yellow) 42%, transparent), var(--home-chat-shadow);
 }
 
-.antbuildz-home-hero-conversation__bubble:is(.is-agent, .is-requirement) > .antbuildz-home-hero-conversation__surface {
+.antbuildz-home-hero-conversation__bubble:is(.is-agent, .is-requirement, .is-summary) > .antbuildz-home-hero-conversation__surface {
   border-top-left-radius: 8px;
   box-shadow: inset 0 0 1px .75px var(--home-chat-reply-edge),
     0 0 14px -4px var(--home-chat-reply-halo), var(--home-chat-shadow);
 }
 
+/* Emma's conversational replies sit directly on the hero, matching the
+   unboxed Agent response pattern used in the product experience. */
+.antbuildz-home-hero-conversation__bubble.is-agent > .antbuildz-home-hero-conversation__surface {
+  padding: 4px 2px;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  text-shadow: 0 1px 5px rgb(0 0 0 / 55%);
+}
+
 .antbuildz-home-hero-conversation__bubble.is-requirement > .antbuildz-home-hero-conversation__surface {
   display: grid;
   gap: 6px;
+}
+
+.antbuildz-home-hero-conversation__bubble.is-summary > .antbuildz-home-hero-conversation__surface {
+  display: grid;
+  gap: 8px;
+  padding: 4px 2px;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  text-shadow: 0 1px 5px rgb(0 0 0 / 55%);
+}
+
+.antbuildz-home-hero-conversation__summary-heading {
+  display: block;
+}
+
+.antbuildz-home-hero-conversation__summary-heading > strong {
+  color: #fff;
+  font-size: .88rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.antbuildz-home-hero-conversation__summary-table {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 10px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: color-mix(in srgb, var(--ink) 58%, transparent);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 14%),
+    0 18px 44px -28px rgb(2 6 23 / 72%);
+  color: rgb(255 255 255 / 96%);
+  font-size: .68rem;
+  line-height: 1.25;
+  text-shadow: none;
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  backdrop-filter: blur(18px) saturate(110%);
+}
+
+.antbuildz-home-hero-conversation__summary-table :is(th, td) {
+  padding: 5px 7px;
+  border-bottom: 1px solid rgb(255 255 255 / 11%);
+  text-align: left;
+}
+
+.antbuildz-home-hero-conversation__summary-table tr:last-child > * {
+  border-bottom: 0;
+}
+
+.antbuildz-home-hero-conversation__summary-table thead th {
+  background: rgb(255 255 255 / 8%);
+  color: rgb(255 255 255 / 72%);
+  font-size: .59rem;
+  font-weight: 750;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.antbuildz-home-hero-conversation__summary-table tbody th {
+  width: 52%;
+  color: rgb(255 255 255 / 76%);
+  font-weight: 500;
+}
+
+.antbuildz-home-hero-conversation__summary-table tbody td {
+  font-weight: 700;
+}
+
+.antbuildz-home-hero-conversation__summary-table .is-emphasis > * {
+  color: var(--yellow);
+}
+
+.antbuildz-home-hero-conversation__recommendation {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  color: #fff;
+}
+
+.antbuildz-home-hero-conversation__recommendation > span {
+  color: var(--yellow);
+  font-size: .59rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.antbuildz-home-hero-conversation__recommendation > strong {
+  font-size: .69rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.antbuildz-home-hero-conversation__summary-note {
+  color: rgb(255 255 255 / 66%);
+  font-size: .6rem;
+  line-height: 1.35;
 }
 
 .antbuildz-home-hero-conversation__surface > span {
@@ -3622,6 +3724,10 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
     --home-chat-glass-fill: color-mix(in srgb, var(--blue) 30%, var(--ink));
     --home-chat-glass-buyer-fill: color-mix(in srgb, var(--yellow) 22%, var(--ink));
   }
+
+  .antbuildz-home-hero-conversation__summary-table {
+    background: color-mix(in srgb, var(--ink) 88%, transparent);
+  }
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -3632,12 +3738,18 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
     --home-chat-reply-edge: transparent;
     --home-chat-reply-halo: transparent;
   }
+
+  .antbuildz-home-hero-conversation__summary-table {
+    background: var(--ink);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 .antbuildz-home-hero-conversation__typing.is-visible {
   max-height: 38px;
   padding-block: 11px;
-  opacity: 1;
+  opacity: var(--home-chat-base-opacity);
 }
 
 .antbuildz-home-hero-conversation__typing span {

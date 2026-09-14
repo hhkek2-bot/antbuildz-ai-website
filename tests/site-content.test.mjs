@@ -1771,7 +1771,7 @@ test('homepage uses the approved static mountain-logistics hero with an immediat
   assert.match(source, /Heavy-haul truck transporting an excavator along a mountain road above an industrial valley at blue hour/);
   assert.match(source, /heroImage\.fetchPriority = 'high'/);
   assert.match(source, /AI Agent for Sales & Rental Businesses/);
-  assert.match(source, /Help customers discover the right products, get accurate AI recommendations, and turn buying intent into revenue/);
+  assert.match(source, /Make every product easier to discover across search and AI, while your AI Agent understands complex needs, recommends the right product, and turns conversations into revenue\./);
   assert.doesNotMatch(source, /home-hero-industrial-story\.mp4/);
   assert.doesNotMatch(source, /function setupHomeHeroVideo/);
   assert.match(source, /prefers-reduced-motion: reduce/);
@@ -1784,7 +1784,7 @@ test('homepage uses the approved static mountain-logistics hero with an immediat
   assert.match(styles, /right: var\(--public-frame-gutter\)/);
   assert.match(styles, /bottom: clamp\(56px, 7svh, 78px\)/);
   assert.match(styles, /@media \(min-width: 1180px\) \{[\s\S]*?\.antbuildz-ai-home \.antbuildz-home-hero-conversation\.is-centre \{[\s\S]*?top: clamp\(300px, 35svh, 380px\);[\s\S]*?right: calc\(var\(--public-frame-gutter\) \+ clamp\(24px, 2\.5vw, 40px\)\);[\s\S]*?bottom: auto;/);
-  assert.match(styles, /@media \(min-width: 768px\) and \(max-width: 1179px\) \{[\s\S]*?\.antbuildz-ai-home \.antbuildz-home-hero-conversation\.is-centre \{[\s\S]*?top: clamp\(350px, 40svh, 400px\);[\s\S]*?right: calc\(var\(--public-frame-gutter\) \+ clamp\(12px, 2vw, 20px\)\);[\s\S]*?bottom: auto;/);
+  assert.match(styles, /@media \(min-width: 768px\) and \(max-width: 1179px\) \{[\s\S]*?\.antbuildz-ai-home \.antbuildz-home-hero-conversation\.is-centre \{[\s\S]*?top: max\(clamp\(350px, 40svh, 400px\), var\(--antbuildz-home-chat-top, 0px\)\);[\s\S]*?right: calc\(var\(--public-frame-gutter\) \+ clamp\(12px, 2vw, 20px\)\);[\s\S]*?bottom: auto;/);
   assert.match(styles, /\.antbuildz-home-hero-conversation \{\s*right: var\(--public-frame-gutter\);\s*bottom: 32px;\s*width: var\(--public-frame-width\);/);
   assert.match(styles, /@media \(max-width: 640px\) \{[\s\S]*?\.antbuildz-ai-home \.antbuildz-home-hero-conversation\.is-centre \{\s*top: max\(clamp\(312px, 38svh, 328px\), var\(--antbuildz-home-chat-top, 0px\)\);\s*bottom: auto;/);
   assert.match(styles, /opacity: var\(--antbuildz-home-chat-opacity, 1\)/);
@@ -1792,7 +1792,7 @@ test('homepage uses the approved static mountain-logistics hero with an immediat
   await access(new URL('../public/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png', import.meta.url));
 });
 
-test('homepage conversation uses role-tinted glass without restoring the profile box', async () => {
+test('homepage conversation contains buyer messages and renders Agent answers without message boxes', async () => {
   const [styles, source] = await Promise.all([
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
     readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
@@ -1809,6 +1809,17 @@ test('homepage conversation uses role-tinted glass without restoring the profile
   const buyer = glass.match(/\.antbuildz-home-hero-conversation__bubble\.is-buyer > \.antbuildz-home-hero-conversation__surface \{([^}]+)\}/)?.[1];
   assert.match(buyer, /var\(--home-chat-glass-buyer-fill\)/);
   assert.doesNotMatch(buyer, /linear-gradient|255 197 1/);
+  const agent = glass.match(/\.antbuildz-home-hero-conversation__bubble\.is-agent > \.antbuildz-home-hero-conversation__surface \{([^}]+)\}/)?.[1];
+  assert.match(agent, /background: transparent/);
+  assert.match(agent, /box-shadow: none/);
+  assert.match(agent, /backdrop-filter: none/);
+  const summary = glass.match(/\.antbuildz-home-hero-conversation__bubble\.is-summary > \.antbuildz-home-hero-conversation__surface \{([^}]+)\}/)?.[1];
+  assert.match(summary, /background: transparent/);
+  assert.match(summary, /box-shadow: none/);
+  assert.match(summary, /backdrop-filter: none/);
+  assert.match(glass, /background: color-mix\(in srgb, var\(--ink\) 58%, transparent\)/);
+  assert.match(glass, /-webkit-backdrop-filter: blur\(18px\) saturate\(110%\)/);
+  assert.match(glass, /box-shadow: inset 0 1px 0 rgb\(255 255 255 \/ 14%\)/);
   assert.doesNotMatch(source, /antbuildz-home-hero-conversation__status/);
   assert.doesNotMatch(glass, /mask-image/);
   assert.match(glass, /--home-chat-bubble-width: 340px/);
@@ -1856,7 +1867,9 @@ test('every homepage conversation uses round Emma and buyer portraits with stabl
     const transcript = chat.children[1];
     assert.equal(transcript.attributes['aria-hidden'], 'true', 'avoid announcing every animation frame');
     for (const [index, message] of messages.entries()) {
-      const [avatar, surface] = transcript.children[index].children;
+      const messageElement = transcript.children[index];
+      const [avatar, surface] = messageElement.children;
+      assert.equal(messageElement.dataset.kind, message.kind);
       assert.equal(avatar.tag, 'img');
       assert.equal(avatar.width, 24);
       assert.equal(avatar.height, 24);
@@ -1880,7 +1893,7 @@ test('every homepage conversation uses round Emma and buyer portraits with stabl
 test('homepage conversations place AI replies and typing on the left and buyers on the right', async () => {
   const styles = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
   const buyer = styles.match(/\.antbuildz-home-hero-conversation__bubble\.is-buyer \{([^}]+)\}/)?.[1];
-  const replies = styles.match(/\.antbuildz-home-hero-conversation__bubble\.is-agent,\s*\.antbuildz-home-hero-conversation__bubble\.is-requirement \{([^}]+)\}/)?.[1];
+  const replies = styles.match(/\.antbuildz-home-hero-conversation__bubble\.is-agent,\s*\.antbuildz-home-hero-conversation__bubble\.is-requirement,\s*\.antbuildz-home-hero-conversation__bubble\.is-summary \{([^}]+)\}/)?.[1];
   const typing = styles.match(/\.antbuildz-home-hero-conversation__typing \{([^}]+)\}/)?.[1];
   assert.match(buyer, /align-self: flex-end/);
   assert.match(replies, /align-self: flex-start/);
@@ -1907,6 +1920,41 @@ test('homepage depth layers reuse four unique Who We Serve transcripts and share
     compilerOptions: { target: ts.ScriptTarget.ES2022 },
   }).outputText;
   const { centre, background } = JSON.parse(runInNewContext(code));
+  const summaries = centre.filter((message) => message.kind === 'summary');
+  assert.deepEqual(centre.map((message) => message.kind), [
+    'buyer', 'agent', 'buyer', 'summary',
+    'buyer', 'agent', 'buyer', 'summary',
+  ], 'each product example is a buyer-Agent exchange ending in a structured answer');
+  assert.match(centre[1].text, /tracked spider lift/);
+  assert.match(centre[5].text, /robotic total station/);
+  assert.match(centre[2].text, /monthly hire price/);
+  assert.match(centre[6].text, /key measuring ranges/);
+  assert.equal(summaries.length, 2, 'each conversation contains one structured product summary');
+  assert.ok(summaries.every((summary) => !('eyebrow' in summary)), 'summary cards omit editorial sequence labels');
+  assert.deepEqual(summaries.map((summary) => summary.title), ['TEUPEN LEO23GT', 'Topcon GT-1501']);
+  assert.deepEqual(summaries[0].rows.map(({ label, value }) => [label, value]), [
+    ['Working height', '23.0 m'],
+    ['Retracted width', '0.98 m'],
+    ['Max. platform load', '200 kg'],
+    ['Monthly hire price', 'Supplier quote'],
+  ]);
+  assert.deepEqual(summaries[1].rows.map(({ label, value }) => [label, value]), [
+    ['Angle accuracy', '1″'],
+    ['Prism measuring range', '5,000 m'],
+    ['Reflectorless range', '1,000 m'],
+    ['Instrument package price', 'Supplier quote'],
+  ]);
+  assert.ok(summaries.every((summary) => /confirm/i.test(summary.note)), 'price and configuration details retain a supplier-confirmation boundary');
+  assert.match(summaries[0].recommendation, /outrigger footprint and ground conditions/);
+  assert.match(summaries[0].note, /final hire price, availability, hire period, delivery and project-specific charges/);
+  assert.match(summaries[1].note, /target and conditions/);
+  assert.match(summaries[1].note, /controller, prism kit, software, support and final supplier quote/);
+  assert.doesNotMatch(JSON.stringify(centre), /Singapore|S\$|US package|US\$|local kit/i, 'foreground conversations remain location-neutral');
+  assert.match(source, /antbuildz-home-hero-conversation__summary-table/);
+  assert.doesNotMatch(source, /PRICING & SPECIFICATION ANSWER|SPECIFICATION & PRICING ANSWER/);
+  assert.match(styles, /\.antbuildz-home-hero-conversation__summary-table \{/);
+  assert.doesNotMatch(styles, /\.antbuildz-home-hero-conversation__summary-heading > span/);
+  assert.match(styles, /\.antbuildz-home-hero-conversation__recommendation \{/);
   assert.deepEqual(background.map((chat) => chat.source), ['/manufacturers-brands', '/parts-aftermarket', '/hardware-trade-supplies', '/buggies-commercial-vehicles']);
   assert.deepEqual(background.map((chat) => chat.layer), ['left', 'right', 'outer-left', 'outer-right']);
   const messages = [...centre.map((message) => message.text)];
@@ -1922,11 +1970,12 @@ test('homepage depth layers reuse four unique Who We Serve transcripts and share
   assert.match(source, /createHomeHeroConversation\(messages, layer, label, summary\)/);
   assert.match(source, /setupHomeHeroConversationRuntime\(hero, chat, layerIndex\)/);
   assert.doesNotMatch(source, /const updateScrollProgress/);
-  assert.match(source, /\[1900, 2500, 3100, 2800, 3400\]\[layerIndex\]/);
+  assert.match(source, /\[2600, 2500, 3100, 2800, 3400\]\[layerIndex\]/);
   assert.match(source, /cleanups\.forEach\(\(cleanup\) => cleanup\(\)\)/);
   assert.match(source, /window\.clearInterval\(advanceConversation\)/);
   assert.match(source, /!conversationActive \|\| reducedMotion\.matches \|\| document\.hidden/);
   assert.match(source, /transcript\.setAttribute\('aria-hidden', 'true'\)/);
+  assert.match(source, /messageNodes\[currentStep\]\?\.dataset\.kind !== 'summary'/);
   const left = styles.match(/\.antbuildz-home-hero-conversation\.is-left \{([^}]+)\}/)?.[1];
   const right = styles.match(/\.antbuildz-home-hero-conversation\.is-right \{([^}]+)\}/)?.[1];
   assert.match(left, /z-index: 3/);
@@ -2012,7 +2061,7 @@ test('hero conversations are visible immediately, animate independently and clea
   runInNewContext(`${code}\nsetupHomeHeroRuntime(root); setupHomeHeroRuntime(root);`, context);
   assert.equal(intervals.size, 5, 'repeated setup must not install duplicate timers');
   const timers = [...intervals.values()];
-  assert.deepEqual(timers.map(({ delay }) => delay), [1900, 2500, 3100, 2800, 3400]);
+  assert.deepEqual(timers.map(({ delay }) => delay), [2600, 2500, 3100, 2800, 3400]);
   const visibleCounts = () => chats.map((chat) => chat.messages.filter((message) => message.visible).length);
   assert.deepEqual(visibleCounts(), [1, 1, 1, 1, 1]);
   timers[0].callback();
@@ -2242,11 +2291,17 @@ test('transferred public shell is corrected for the Antbuildz AI brand', async (
   assert.match(source, /function createHomeHeroConversation/);
   assert.match(source, /const HOME_HERO_CONVERSATION/);
   assert.match(source, /message\.classList\.toggle\('is-visible', index <= currentStep\)/);
-  assert.match(source, /visibleMessages\[0\]\?\.classList\.toggle\('is-fade-top', true\)/);
-  assert.match(source, /visibleMessages\.at\(-1\)\?\.classList\.toggle\('is-fade-bottom', true\)/);
-  assert.match(source, /transcript\.scrollTo/);
-  assert.match(styles, /--home-chat-message-opacity/);
-  assert.match(styles, /--home-chat-edge-opacity/);
+  assert.match(source, /const fadeZone = Math\.min\(96, Math\.max\(68, transcriptBounds\.height \* \.24\)\)/);
+  assert.match(source, /const fadeAnchor = bounds\.top \+ Math\.min\(104, bounds\.height \* \.4\)/);
+  assert.match(source, /const distanceFromTop = fadeAnchor - fadeTop/);
+  assert.match(source, /message\.style\.setProperty\('--home-chat-position-opacity', String\(opacity\)\)/);
+  assert.match(source, /let followGrowthFrames = resetToTop \|\| reducedMotion\.matches \? 1 : 28/);
+  assert.match(source, /transcript\.scrollTop = maxScroll/);
+  assert.doesNotMatch(source, /is-fade-(?:top|near-top|near-bottom|bottom)/);
+  assert.doesNotMatch(source, /transcript\.scrollTo\(/);
+  assert.match(styles, /--home-chat-base-opacity: \.84/);
+  assert.match(styles, /--home-chat-position-opacity/);
+  assert.doesNotMatch(styles, /--home-chat-edge-opacity/);
   assert.doesNotMatch(source, /antbuildz-home-hero-conversation__status/);
   assert.match(source, /'\/develop-admin': '\/ai-agent-console'/);
   assert.match(source, /bindHeaderNavigation/);
