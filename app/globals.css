@@ -3138,6 +3138,21 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   object-position: center;
 }
 
+.antbuildz-ai-home .has-antbuildz-home-hero-video .ai-marketplace-hero-image {
+  opacity: 0;
+}
+
+.antbuildz-ai-home .antbuildz-home-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(.7) contrast(.86) brightness(.9);
+}
+
 .antbuildz-ai-home .ai-marketplace-hero-overlay {
   background:
     linear-gradient(180deg, rgb(4 16 34 / .5), rgb(4 17 35 / .58) 52%, rgb(2 10 23 / .88)),
@@ -3197,17 +3212,17 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 }
 
 .antbuildz-home-hero-conversation {
-  /* Role-tinted glass keeps the industrial scene visible beneath each exchange. */
+  /* Role-tinted material glass keeps the moving industrial scene visible without competing with it. */
   --home-chat-agent-accent: var(--blue);
   --home-chat-buyer-accent: var(--yellow);
   --home-chat-glass-fill: color-mix(in srgb, var(--home-chat-agent-accent) 34%, transparent);
   --home-chat-glass-buyer-fill: color-mix(in srgb, var(--home-chat-buyer-accent) 24%, transparent);
-  --home-chat-glass-radius: 22px;
-  --home-chat-glass-blur: 6px;
+  --home-chat-glass-radius: 20px;
+  --home-chat-glass-blur: 20px;
   --home-chat-text: rgb(255 255 255 / 96%);
   --home-chat-base-opacity: .84;
-  --home-chat-shadow: 0 8px 24px -18px rgb(0 0 0 / 20%);
-  --home-chat-reply-edge: color-mix(in srgb, var(--blue) 65%, white);
+  --home-chat-shadow: 0 22px 50px -30px rgb(0 0 0 / 62%);
+  --home-chat-reply-edge: transparent;
   --home-chat-reply-halo: color-mix(in srgb, var(--blue) 18%, transparent);
   --home-chat-scale: 1;
   --home-chat-rotation: 0deg;
@@ -3543,19 +3558,19 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 .antbuildz-home-hero-conversation__bubble.is-buyer > .antbuildz-home-hero-conversation__surface {
   background: var(--home-chat-glass-buyer-fill);
   border-top-right-radius: 8px;
-  box-shadow: inset 0 0 1px .75px color-mix(in srgb, var(--yellow) 42%, transparent), var(--home-chat-shadow);
+  box-shadow: var(--home-chat-shadow);
 }
 
 .antbuildz-home-hero-conversation__bubble:is(.is-agent, .is-requirement, .is-summary) > .antbuildz-home-hero-conversation__surface {
   border-top-left-radius: 8px;
-  box-shadow: inset 0 0 1px .75px var(--home-chat-reply-edge),
-    0 0 14px -4px var(--home-chat-reply-halo), var(--home-chat-shadow);
+  box-shadow: 0 0 14px -4px var(--home-chat-reply-halo), var(--home-chat-shadow);
 }
 
 /* Emma's conversational replies sit directly on the hero, matching the
    unboxed Agent response pattern used in the product experience. */
 .antbuildz-home-hero-conversation__bubble.is-agent > .antbuildz-home-hero-conversation__surface {
   padding: 4px 2px;
+  border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
@@ -3573,6 +3588,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   display: grid;
   gap: 8px;
   padding: 4px 2px;
+  border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
@@ -3595,19 +3611,18 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 .antbuildz-home-hero-conversation__summary-table {
   width: 100%;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 22%);
-  border-radius: 10px;
+  border: 0;
+  border-radius: 14px;
   border-collapse: separate;
   border-spacing: 0;
   background: color-mix(in srgb, var(--ink) 58%, transparent);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 14%),
-    0 18px 44px -28px rgb(2 6 23 / 72%);
+  box-shadow: 0 22px 46px -30px rgb(2 6 23 / 78%);
   color: rgb(255 255 255 / 96%);
   font-size: .68rem;
   line-height: 1.25;
   text-shadow: none;
-  -webkit-backdrop-filter: blur(18px) saturate(110%);
-  backdrop-filter: blur(18px) saturate(110%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
+  backdrop-filter: blur(24px) saturate(120%);
 }
 
 .antbuildz-home-hero-conversation__summary-table :is(th, td) {
@@ -3703,6 +3718,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   border: 0;
   border-radius: var(--home-chat-glass-radius);
   background: var(--home-chat-glass-fill);
+  box-shadow: var(--home-chat-shadow);
   opacity: 0;
   transition: opacity .25s ease, max-height .25s ease, padding .25s ease;
   -webkit-backdrop-filter: blur(var(--home-chat-glass-blur));
@@ -4260,7 +4276,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   }
 
   .antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-description {
-    max-width: 34ch;
+    max-width: none;
     margin-top: 16px;
     font-size: 15px;
     line-height: 1.55;
@@ -4297,11 +4313,11 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 
   .antbuildz-home-hero-conversation__transcript {
     gap: 16px;
-    padding-inline: 8px;
+    padding-inline: 0;
   }
 
   .antbuildz-home-hero-conversation__bubble {
-    max-width: 92%;
+    max-width: 100%;
     font-size: .875rem;
     line-height: 1.5;
   }
@@ -4901,6 +4917,8 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   .antbuildz-ai-home .ai-marketplace-hero-image { z-index: -3 !important; }
+  .antbuildz-ai-home .antbuildz-home-hero-video { display: none; }
+  .antbuildz-ai-home .has-antbuildz-home-hero-video .ai-marketplace-hero-image { opacity: 1; }
 }
 
 /* Unified pricing — one capability-led Launch → Growth → Enterprise → Custom path. */

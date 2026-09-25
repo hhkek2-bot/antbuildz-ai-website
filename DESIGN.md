@@ -180,19 +180,26 @@ four graphic panels. Do not change the section frame, alternating structure,
 order, typography hierarchy or copy placement unless the user explicitly asks
 to unlock the layout.
 
-The homepage hero uses the approved static mountain-logistics photograph at
-`/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png`. Do not
-replace it with a video or a scroll-controlled media reveal. The Agent
-conversation is part of the initial hero composition and must be visible when
-the page first loads; page scrolling must not control its appearance. Preserve
-the high-left title and description, aligned to the public-header wordmark rail,
-with one concentrated Agent conversation
-anchored at the lower right. The four supporting depth conversations stay
-hidden in this composition. Keep the foreground conversation inside the shared
-header rail, with its outer right edge aligned to the Book a Demo utility edge
-rather than to the viewport. Routine hero refinements may adjust the contents
-of the primary conversation, but must not reverse this spatial hierarchy unless
-the user explicitly asks to unlock it.
+The homepage hero uses the approved local `AI Agent product match` video at
+`/videos/home-hero-ai-agent-product-match-v2-trial.mp4`, with its first-frame
+poster as the static and reduced-motion fallback. It is a muted, looping,
+non-scroll-controlled background: phone enquiry, inventory verification,
+technical checking and handover. The Agent conversation is part of the initial
+hero composition and must be visible when the page first loads; page scrolling
+must not control its appearance. Preserve the high-left title and description,
+aligned to the public-header wordmark rail, with one concentrated Agent
+conversation anchored at the lower right. The four supporting depth
+conversations stay hidden in this composition. Keep the foreground conversation
+inside the shared header rail, with its outer right edge aligned to the Book a
+Demo utility edge rather than to the viewport. Routine hero refinements may
+adjust the contents of the primary conversation, but must not reverse this
+spatial hierarchy unless the user explicitly asks to unlock it.
+
+The foreground conversation uses restrained role-tinted material glass: blue
+for Agent product proof and yellow for buyer messages, with strong blur, soft
+depth and no visible box outlines. Keep yellow recommendation labels concise;
+the treatment must keep product proof clear over moving footage without
+competing with the hero heading.
 
 When a component changes, check every route that consumes it. New variants need a functional reason, not only a different appearance.
 

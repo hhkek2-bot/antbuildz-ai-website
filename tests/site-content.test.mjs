@@ -283,7 +283,7 @@ test('homepage metadata stays canonical, truthful, idempotent and route-scoped',
   const page = await readFile(new URL('../app/page.tsx', import.meta.url), 'utf8');
   assert.match(page, /absolute: HOMEPAGE_SEO.title/);
   assert.match(page, /canonical: HOMEPAGE_SEO.url/);
-  assert.match(page, /rel="preload" as="image" href="\/marketplace\/how-it-works\/assets\/hero-option-2-mountain-logistics.png" fetchPriority="high"/);
+  assert.match(page, /rel="preload" as="image" href="\/videos\/home-hero-ai-agent-product-match-v2-poster.jpg" fetchPriority="high"/);
 });
 
 test('shared metadata uses the exact extracted Antbuildz wordmark glyphs', async () => {
@@ -1761,19 +1761,21 @@ test('homepage uses the approved Antbuildz AI industrial hero', async () => {
   assert.match(source, /\/images\/industrial-ai\.png/);
 });
 
-test('homepage uses the approved static mountain-logistics hero with an immediate conversation', async () => {
+test('homepage uses the approved AI Agent product-match video with an immediate conversation', async () => {
   const [source, styles] = await Promise.all([
     readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
   ]);
   assert.match(source, /function setupHomeHeroMedia/);
-  assert.match(source, /hero-option-2-mountain-logistics\.png/);
-  assert.match(source, /Heavy-haul truck transporting an excavator along a mountain road above an industrial valley at blue hour/);
+  assert.match(source, /home-hero-ai-agent-product-match-v2-trial\.mp4/);
+  assert.match(source, /home-hero-ai-agent-product-match-v2-poster\.jpg/);
+  assert.match(source, /Asian business professional using a smartphone to find industrial product options with an AI Agent/);
   assert.match(source, /heroImage\.fetchPriority = 'high'/);
+  assert.match(source, /video\.autoplay = true/);
+  assert.match(source, /video\.muted = true/);
+  assert.match(source, /video\.playsInline = true/);
   assert.match(source, /AI Agent for Sales & Rental Businesses/);
   assert.match(source, /Make every product easier to discover across search and AI, while your AI Agent understands complex needs, recommends the right product, and turns conversations into revenue\./);
-  assert.doesNotMatch(source, /home-hero-industrial-story\.mp4/);
-  assert.doesNotMatch(source, /function setupHomeHeroVideo/);
   assert.match(source, /prefers-reduced-motion: reduce/);
   assert.match(styles, /\.antbuildz-ai-home \.ai-marketplace-hero-stage \{\s*height: max\(100svh, 720px\)/);
   assert.match(styles, /filter: saturate\(\.88\) contrast\(1\.06\) brightness\(\.82\)/);
@@ -1787,9 +1789,13 @@ test('homepage uses the approved static mountain-logistics hero with an immediat
   assert.match(styles, /@media \(min-width: 768px\) and \(max-width: 1179px\) \{[\s\S]*?\.antbuildz-ai-home \.antbuildz-home-hero-conversation\.is-centre \{[\s\S]*?top: max\(clamp\(350px, 40svh, 400px\), var\(--antbuildz-home-chat-top, 0px\)\);[\s\S]*?right: calc\(var\(--public-frame-gutter\) \+ clamp\(12px, 2vw, 20px\)\);[\s\S]*?bottom: auto;/);
   assert.match(styles, /\.antbuildz-home-hero-conversation \{\s*right: var\(--public-frame-gutter\);\s*bottom: 32px;\s*width: var\(--public-frame-width\);/);
   assert.match(styles, /@media \(max-width: 640px\) \{[\s\S]*?\.antbuildz-ai-home \.antbuildz-home-hero-conversation\.is-centre \{\s*top: max\(clamp\(312px, 38svh, 328px\), var\(--antbuildz-home-chat-top, 0px\)\);\s*bottom: auto;/);
+  assert.match(source, /Math\.min\(430, Math\.max\(360, heroBounds\.height \* \.48\)\)/);
+  assert.match(styles, /\.antbuildz-ai-home \.ai-marketplace-hero-copy \.antbuildz-ai-home-description \{\s*max-width: none;/);
   assert.match(styles, /opacity: var\(--antbuildz-home-chat-opacity, 1\)/);
-  assert.doesNotMatch(styles, /\.antbuildz-ai-home \.antbuildz-home-hero-video/);
-  await access(new URL('../public/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png', import.meta.url));
+  assert.match(styles, /\.antbuildz-ai-home \.antbuildz-home-hero-video \{/);
+  assert.match(styles, /\.antbuildz-ai-home \.antbuildz-home-hero-video \{ display: none; \}/);
+  await access(new URL('../public/videos/home-hero-ai-agent-product-match-v2-trial.mp4', import.meta.url));
+  await access(new URL('../public/videos/home-hero-ai-agent-product-match-v2-poster.jpg', import.meta.url));
 });
 
 test('homepage conversation contains buyer messages and renders Agent answers without message boxes', async () => {
@@ -1802,7 +1808,7 @@ test('homepage conversation contains buyer messages and renders Agent answers wi
   assert.match(glass, /--home-chat-buyer-accent: var\(--yellow\)/);
   assert.match(glass, /--home-chat-glass-fill: color-mix\(in srgb, var\(--home-chat-agent-accent\) 34%, transparent\)/);
   assert.match(glass, /--home-chat-glass-buyer-fill: color-mix\(in srgb, var\(--home-chat-buyer-accent\) 24%, transparent\)/);
-  assert.match(glass, /--home-chat-glass-radius: 22px/);
+  assert.match(glass, /--home-chat-glass-radius: 20px/);
   assert.match(glass, /-webkit-backdrop-filter: blur\(var\(--home-chat-glass-blur\)\)/);
   assert.match(glass, /prefers-reduced-transparency: reduce/);
   assert.doesNotMatch(glass, /will-change: opacity/);
@@ -1818,8 +1824,8 @@ test('homepage conversation contains buyer messages and renders Agent answers wi
   assert.match(summary, /box-shadow: none/);
   assert.match(summary, /backdrop-filter: none/);
   assert.match(glass, /background: color-mix\(in srgb, var\(--ink\) 58%, transparent\)/);
-  assert.match(glass, /-webkit-backdrop-filter: blur\(18px\) saturate\(110%\)/);
-  assert.match(glass, /box-shadow: inset 0 1px 0 rgb\(255 255 255 \/ 14%\)/);
+  assert.match(glass, /-webkit-backdrop-filter: blur\(24px\) saturate\(120%\)/);
+  assert.match(glass, /box-shadow: 0 22px 46px -30px rgb\(2 6 23 \/ 78%\)/);
   assert.doesNotMatch(source, /antbuildz-home-hero-conversation__status/);
   assert.doesNotMatch(glass, /mask-image/);
   assert.match(glass, /--home-chat-bubble-width: 340px/);
@@ -1830,7 +1836,7 @@ test('homepage conversation contains buyer messages and renders Agent answers wi
   assert.match(surface, /border: 0/);
   assert.match(surface, /background: var\(--home-chat-glass-fill\)/);
   assert.doesNotMatch(surface, /linear-gradient|saturate\(140%\)/);
-  assert.match(glass, /inset 0 0 1px \.75px var\(--home-chat-reply-edge\)/);
+  assert.doesNotMatch(glass, /inset 0 0 1px \.75px var\(--home-chat-reply-edge\)/);
   assert.match(glass, /0 0 14px -4px var\(--home-chat-reply-halo\)/);
   assert.doesNotMatch(buyer, /reply-edge|reply-halo/);
   assert.doesNotMatch(glass, /glass-rim|glass-glow/);

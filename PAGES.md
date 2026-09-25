@@ -3312,3 +3312,48 @@ Browser-inspected at 1440×900, 1024×768 and 390×844 across both product
 answers. The foreground transcript contains no geographic or market-specific
 pricing references, both quote rows remain readable, and all checked widths
 have zero horizontal overflow.
+
+## 2026-09-25 — Homepage AI Agent product-match video hero
+
+Design-mode update, approved after the background-video review. Home now uses
+the muted, looping AI Agent product-match video as its non-scroll-controlled
+hero background. The sequence begins with a phone-led enquiry, moves through
+stock and product verification, then ends with a product handover. The existing
+high-left copy, CTA hierarchy, header, and immediate lower-right Agent
+conversation remain unchanged. Its first frame is an eager poster fallback, and
+reduced-motion preferences receive that still image instead of the video.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. The video was playing
+muted at each size, the hero copy remained visible, and the media filled the
+hero without overflow. `node --test tests/site-content.test.mjs`, targeted
+ESLint, `git diff --check`, and `npm run build` all pass. This is a local
+implementation only; no deployment was made.
+
+### Follow-up — Mobile hero copy and conversation fill
+
+The phone description now uses the complete shared content frame instead of a
+34-character cap, so it takes fewer lines without changing the title frame. The
+foreground conversation now takes the full mobile transcript width and its
+runtime height grows from the former 280–340px range to 360–430px. Its top still
+follows the copy with 24px clearance, allowing the animation to use the empty
+lower hero space without overlap. Desktop and compact desktop behaviour remain
+unchanged.
+
+Browser-inspected at 390×844 and 1024×768. At 390px the description and
+transcript each occupy the full 351px shared frame, the conversation is 405px
+tall, the video still plays, and horizontal overflow is zero. Targeted ESLint,
+all 116 content tests, `git diff --check`, and `npm run build` pass.
+
+### Follow-up — Tinted material conversation glass
+
+The homepage conversation now retains its blue Agent and yellow buyer colour
+roles while using a high-end material treatment over the product-match video.
+Message and table outlines are removed in favour of strong blur and soft depth;
+the rows inside the specification table remain readable. The conversation
+hierarchy, content, motion and accessibility fallbacks remain unchanged.
+
+Browser-inspected at 1440×900 and 390×844. At desktop, the Agent and buyer
+colour roles remain visible through a 20px blur while the specification table
+uses a 24px blur. At mobile, the 351px chat frame has zero horizontal overflow
+and the video continues playing. All 116 content tests pass; targeted ESLint,
+`git diff --check`, and `npm run build` pass.

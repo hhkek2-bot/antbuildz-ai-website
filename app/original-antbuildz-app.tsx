@@ -1873,15 +1873,35 @@ function correctPublicHeroHeader(root: HTMLElement) {
 function setupHomeHeroMedia(hero: HTMLElement) {
   const heroImage = hero.querySelector<HTMLImageElement>('.ai-marketplace-hero-image');
   if (heroImage) {
-    heroImage.src = '/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png';
-    heroImage.alt = 'Heavy-haul truck transporting an excavator along a mountain road above an industrial valley at blue hour';
-    heroImage.width = 1672;
-    heroImage.height = 941;
+    heroImage.src = '/videos/home-hero-ai-agent-product-match-v2-poster.jpg';
+    heroImage.alt = 'Asian business professional using a smartphone to find industrial product options with an AI Agent';
+    heroImage.width = 1280;
+    heroImage.height = 720;
     heroImage.loading = 'eager';
     heroImage.decoding = 'async';
     heroImage.fetchPriority = 'high';
   }
-  hero.querySelector<HTMLVideoElement>('.antbuildz-home-hero-video')?.remove();
+
+  let video = hero.querySelector<HTMLVideoElement>('.antbuildz-home-hero-video');
+  if (!video) {
+    video = document.createElement('video');
+    video.className = 'antbuildz-home-hero-video';
+    video.autoplay = true;
+    video.defaultMuted = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.setAttribute('aria-hidden', 'true');
+    video.setAttribute('tabindex', '-1');
+    hero.insertBefore(video, heroImage ?? hero.firstChild);
+  }
+  if (video.src !== `${window.location.origin}/videos/home-hero-ai-agent-product-match-v2-trial.mp4`) {
+    video.src = '/videos/home-hero-ai-agent-product-match-v2-trial.mp4';
+    video.load();
+  }
+  hero.classList.add('has-antbuildz-home-hero-video');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) void video.play().catch(() => undefined);
 }
 
 function setupHomeHeroRuntime(root: HTMLElement) {
@@ -1980,7 +2000,7 @@ function setupHomeHeroConversationRuntime(
     if (conversation.dataset.layer === 'centre') {
       const heroBounds = hero.getBoundingClientRect();
       const chatHeight = heroBounds.width <= 767
-        ? Math.min(340, Math.max(280, heroBounds.height * .38))
+        ? Math.min(430, Math.max(360, heroBounds.height * .48))
         : Math.min(370, Math.max(300, heroBounds.height * .46));
       hero.style.setProperty('--antbuildz-home-chat-height', `${chatHeight}px`);
       const copyBounds = hero.querySelector('.ai-marketplace-hero-copy')?.getBoundingClientRect();

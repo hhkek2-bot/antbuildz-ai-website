@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <link rel="preload" as="image" href="/marketplace/how-it-works/assets/hero-option-2-mountain-logistics.png" fetchPriority="high" />
+      <link rel="preload" as="image" href="/videos/home-hero-ai-agent-product-match-v2-poster.jpg" fetchPriority="high" />
       <script
         id="route-jsonld"
         type="application/ld+json"
