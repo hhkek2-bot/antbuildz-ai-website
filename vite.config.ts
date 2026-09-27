@@ -36,6 +36,7 @@ export default defineConfig(async () => {
     server: {
       port: 8081,
       strictPort: true,
+      allowedHosts: ['.trycloudflare.com'],
       ...(isCodexSeatbeltSandbox
         ? { watch: { useFsEvents: false, usePolling: true } }
         : {}),

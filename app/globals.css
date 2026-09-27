@@ -3150,14 +3150,14 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: saturate(.7) contrast(.86) brightness(.9);
+  filter: saturate(.76) contrast(.9) brightness(.98);
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-overlay {
   background:
-    linear-gradient(180deg, rgb(4 16 34 / .5), rgb(4 17 35 / .58) 52%, rgb(2 10 23 / .88)),
+    linear-gradient(180deg, rgb(4 16 34 / .46), rgb(4 17 35 / .54) 52%, rgb(2 10 23 / .82)),
     radial-gradient(70% 64% at 50% 34%, rgb(31 91 146 / .08), transparent 68%),
-    linear-gradient(90deg, rgb(3 12 25 / .62), rgb(3 12 25 / .18) 52%, rgb(3 12 25 / .42));
+    linear-gradient(90deg, rgb(3 12 25 / .56), rgb(3 12 25 / .16) 52%, rgb(3 12 25 / .38));
 }
 
 .antbuildz-ai-home .ai-marketplace-hero-copy {
@@ -5291,6 +5291,19 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
   .antbuildz-ai-home .antbuildz-home-hero-conversation.is-outer-left,
   .antbuildz-ai-home .antbuildz-home-hero-conversation.is-outer-right {
     display: none;
+  }
+
+  /* The opening home hero should finish at the bottom of the phone viewport.
+     Do not preserve the desktop's 720–844px minimum on shorter phones. */
+  .antbuildz-ai-home .ai-marketplace-hero-stage {
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 0;
+  }
+
+  .antbuildz-ai-home .ai-marketplace-hero-stage > .ai-marketplace-hero {
+    height: 100% !important;
+    min-height: 0;
   }
 }
 
