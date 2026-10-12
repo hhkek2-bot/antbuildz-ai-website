@@ -40,13 +40,79 @@ test('source public pages reuse the established header dropdowns instead of sepa
   assert.match(runtime, /description: role.summary/);
 });
 
+test('conversation features is a canonical, illustrative page with editable rendered assets', async () => {
+  const page = await readFile(new URL('../app/conversational-experience/page.tsx', import.meta.url), 'utf8');
+  const legacyPage = await readFile(new URL('../app/features/conversational-experience/page.tsx', import.meta.url), 'utf8');
+  const media = await readFile(new URL('../app/features/conversational-experience/experience-media.tsx', import.meta.url), 'utf8');
+  const sourceFooter = await readFile(new URL('../app/agreements/legal-shell.tsx', import.meta.url), 'utf8');
+  const transferredFooter = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
+  const sitemap = await readFile(new URL('../app/sitemap.ts', import.meta.url), 'utf8');
+  const llms = await readFile(new URL('../public/llms.txt', import.meta.url), 'utf8');
+  const pages = await readFile(new URL('../PAGES.md', import.meta.url), 'utf8');
+  const remotionRoot = await readFile(new URL('../remotion-conversations/src/root.tsx', import.meta.url), 'utf8');
+  const remotionPoster = await readFile(new URL('../remotion-conversations/src/conversation-experience.tsx', import.meta.url), 'utf8');
+
+  assert.equal((page.match(/<h1/g) ?? []).length, 1);
+  assert.match(page, /Beyond Just a/);
+  assert.match(page, /Text Answer/);
+  assert.match(page, /conversation-features-sales-customer\.jpg/);
+  assert.match(page, /heroShade/);
+  assert.doesNotMatch(page, /heroEyebrow/);
+  assert.doesNotMatch(page, /HeroMedia/);
+  assert.match(page, /canonical: url/);
+  assert.match(page, /openGraph:/);
+  assert.match(page, /BreadcrumbList/);
+  assert.match(page, /href="\/pricing">Start Trial/);
+  assert.doesNotMatch(page, /Start with your conversations/);
+  assert.match(page, /closingTitle/);
+  assert.match(page, /aria-label="Breadcrumb"/);
+  assert.match(page, /className={styles\.heroLead}/);
+  assert.match(page, /The Antbuildz AI Agent helps complex product teams/);
+  assert.match(page, /Not just an answer/);
+  assert.match(page, /An easier way to understand, compare and act/);
+  assert.match(page, /technical diagrams, product guidance and configured next steps/);
+  assert.match(page, /The Antbuildz AI Agent can return approved comparisons/);
+  assert.match(page, /start-trial-emma-industrial-consultation\.jpg/);
+  assert.doesNotMatch(media, /Illustrative conversation demonstrations built from approved product knowledge/);
+  assert.doesNotMatch(page, /View Actual Conversation/i);
+  assert.match(media, /function ConversationPhone/);
+  assert.match(media, /function PhoneHeader/);
+  assert.match(media, /visual-references/);
+  assert.match(media, /e450-reach-diagram\.png/);
+  assert.match(media, /Illustrative product catalogue link/);
+  assert.doesNotMatch(media, /-example\.png/);
+  assert.match(media, /galleryNumber/);
+  assert.doesNotMatch(media, /galleryNote/);
+  assert.match(media, /demonstrations\.map\(\(item, index\) => <article/);
+  assert.doesNotMatch(media, /<video|ResponsiveVideo|role="tablist"|role="tab"/);
+  assert.match(sourceFooter, /Conversation Features', '\/conversational-experience/);
+  assert.doesNotMatch(sourceFooter.slice(sourceFooter.indexOf('function LegalHeader'), sourceFooter.indexOf('function LegalFooter')), /Conversation Features/);
+  assert.match(transferredFooter, /data-antbuildz-conversational-experience/);
+  assert.match(legacyPage, /permanentRedirect\('\/conversational-experience'\)/);
+  assert.match(sitemap, /conversational-experience/);
+  assert.match(llms, /Conversation Features/);
+  assert.match(pages, /\| `\/conversational-experience`/);
+  assert.match(remotionRoot, /Technical-Poster/);
+  assert.match(remotionRoot, /Interactive-Actions-Poster-Mobile/);
+  assert.match(remotionPoster, /function Poster/);
+  assert.match(remotionPoster, /Human review remains essential/);
+
+  const assets = ['technical-comparison', 'product-recommendations', 'structured-explanations', 'interactive-actions'];
+  for (const asset of assets) {
+    await access(new URL(`../public/images/conversational-experience/${asset}.jpg`, import.meta.url));
+    await access(new URL(`../public/images/conversational-experience/${asset}-mobile.jpg`, import.meta.url));
+  }
+  await access(new URL('../public/images/conversational-experience/e450-reach-diagram.png', import.meta.url));
+});
+
 test('public headers group products and place pricing after discovery links', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const parsed = ts.createSourceFile('header.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   const grouping = parsed.statements.find(node => ts.isFunctionDeclaration(node) && node.name?.text === 'correctProductsMenu').getText(parsed);
   for (const path of ['/ai-agent', '/ai-webstore-suite', '/ai-agent-console']) assert.ok(grouping.includes(`href: '${path}'`));
-  assert.match(grouping, /label: 'AI Agent Console'[\s\S]*?unavailable: true/);
-  assert.match(grouping, /link\.removeAttribute\('href'\)[\s\S]*?aria-disabled[\s\S]*?data-antbuildz-unavailable/);
+  assert.match(grouping, /label: 'AI Agent Console'[\s\S]*?href: '\/ai-agent-console'/);
+  assert.match(grouping, /createIndustryLink\(product, 'antbuildz-industries-menu__link', true\)[\s\S]*?bindHeaderNavigation\(link\)/);
+  assert.doesNotMatch(grouping, /data-antbuildz-unavailable|aria-disabled/);
   assert.match(grouping, /createHeaderMenuIntro/);
   assert.match(grouping, /bindHeaderDropdown\(menu, trigger\)/);
   assert.match(grouping, /child.hidden = true/);
@@ -1473,10 +1539,8 @@ test('shared footer keeps Company navigation focused on Antbuildz AI', async () 
   assert.equal(marketplaceLinks.length, 1, 'repeated observer passes must not duplicate Marketplace');
   assert.equal(marketplaceLinks[0].textContent, 'Marketplace');
   assert.equal(marketplaceLinks[0].attributes.href, 'https://antbuildz.com');
-  assert.equal(brand.textContent, "Product Intelligence for Complex Product Businesses.");
-  assert.equal(footerEmails.length, 1, 'repeated observer passes must not duplicate Email Us');
-  assert.equal(footerEmails[0].textContent, 'Email Us');
-  assert.equal(footerEmails[0].attributes.href, 'mailto:help@antbuildz.ai?subject=Antbuildz%20AI%20enquiry');
+  assert.equal(brand.textContent, "We build better conversations for complex products.");
+  assert.equal(footerEmails.length, 0, 'footer correction must not add an Email Us button');
   assert.deepEqual(aiProductOrder, [salesAgentItem, webstoreItem]);
   assert.equal(duplicateRow.attributes.hidden, '');
   assert.equal(languageMoves, 1, 'the React-owned language control moves into the footer only once');
@@ -1489,9 +1553,7 @@ test('shared footer keeps Company navigation focused on Antbuildz AI', async () 
   assert.doesNotThrow(() => correctFooter({ querySelector: () => null }));
   const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
   assert.match(css, /\.abz-public-footer__link-column li\[hidden\],[\s\S]*?display: none !important/);
-  assert.match(source, /data-antbuildz-footer-email/);
-  assert.match(source, /Email Us/);
-  assert.match(css, /\.antbuildz-footer-email \{[\s\S]*?min-height: 44px;[\s\S]*?border-radius: 999px;/);
+  assert.doesNotMatch(source, /data-antbuildz-footer-email/);
   assert.match(css, /\.abz-public-footer__grid \{\s*grid-template-columns: minmax\(220px, 1\.3fr\) repeat\(4, minmax\(105px, \.82fr\)\) !important;/);
   assert.doesNotMatch(source, /data-antbuildz-footer-legal|antbuildz-footer-legal/);
 });
@@ -2583,7 +2645,7 @@ test('AI Webstore Suite links open the selected canonical page on the first clic
   assert.match(source, /document\.removeEventListener\('keydown', navigateWebstoreFromLink, true\)/);
 });
 
-test('public hamburger has six flat native links and retains the account shell', async () => {
+test('public hamburger includes the Console link and retains the account shell', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const parsed = ts.createSourceFile('drawer.tsx', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   const statements = parsed.statements.filter(statement =>
@@ -2623,19 +2685,21 @@ test('public hamburger has six flat native links and retains the account shell',
   const list = navigation.children[3];
   assert.deepEqual(list.children.map(link => [link.textContent, link.href]), [
     ["AI Agent", '/ai-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
+    ['Conversation Features', '/conversational-experience'],
+    ['AI Agent Console', '/ai-agent-console'],
     ['Pricing', '/pricing'],
     ['Industries', '/who-we-serve'],
     ['Resources', '/resources'], ['About Us', '/about'],
   ]);
-  assert.equal(list.children[2].attributes['aria-current'], 'page');
+  assert.equal(list.children[4].attributes['aria-current'], 'page');
   window.location.pathname = '/resources/ai-sales-agent-for-industrial-businesses';
   correct();
-  assert.equal(list.children[2].attributes['aria-current'], undefined);
-  assert.equal(list.children[4].attributes['aria-current'], 'location');
+  assert.equal(list.children[4].attributes['aria-current'], undefined);
+  assert.equal(list.children[6].attributes['aria-current'], 'location');
   assert.deepEqual([...new Set(createdTags)], ['div', 'a'], 'no collapse controls or extra account controls are introduced');
   navigation = node('nav');
   correct();
-  assert.equal(navigation.children[0].children.length, 6, 'reopening a remounted drawer rebuilds the same list');
+  assert.equal(navigation.children[0].children.length, 8, 'reopening a remounted drawer rebuilds the same list');
   const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
   assert.match(css, /\.antbuildz-flat-navigation > \[hidden\]\s*\{ display: none !important;/);
 });
@@ -2998,6 +3062,7 @@ test('approved pricing content applies the September plan prices, allowances and
 
 test('legacy marketplace admin route redirects to the AI Agent Console', async () => {
   const source = await readFile(new URL('../app/[slug]/page.tsx', import.meta.url), 'utf8');
+  assert.match(source, /app: '\/ai-agent-console'/);
   assert.match(source, /'develop-admin': '\/ai-agent-console'/);
   assert.match(source, /permanentRedirect\(redirectTargets\[slug\]\)/);
 });

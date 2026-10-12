@@ -658,9 +658,10 @@ changed files, sources, unresolved launch gates and required legal review.
 | `/ai-webstore-suite` | Understand the Webstore product and industrial catalogue workflows | Book a Demo | Selected Webstore listing workflow formerly reviewed at `/webstore-2-ai-webstore-preview` | Canonical product page uses the approved dusty-ochre listing workflow, mixed-category catalogue enrichment, product-page handoff and Emma recommendation experience. At 767px and below, the complete hero ends exactly at the phone viewport boundary throughout all three animated stages. The final conversation stage now uses a larger, deliberately cropped phone with a lower fade on mobile and desktop. Canonical metadata remains indexable at `https://antbuildz.ai/ai-webstore-suite`; the former preview URL redirects here |
 | `/who-we-serve` | Find the right industry application for a complex product business | Find Your Business → Book a Demo | Shared source-rendered public shell and AI Roles editorial hero | Eight existing industry destinations, dedicated instruments/electronics/technical-consumer examples, business-fit guidance and closing CTA. Desktop and mobile QA recorded below |
 | `/ai-sales-agent` | Understand the core AI Agent for complex product knowledge, recommendations, sales, rental, support and human handover | Book a Demo | `/aiagent` on 8080 | URL retained by explicit user decision on 2026-09-06. Desktop retains the reference split composition. Its repeated actions use the shared destination-owned CTA contract: Book a Demo is primary and View Pricing is secondary. At 767px and below, the hero fits exactly one small viewport, places the animated phone before both actions and keeps the persistent Agent launcher clear of the secondary action. Responsive QA details are recorded below |
-| `/ai-agent-console` | Understand how teams control knowledge, instructions and conversations | Book a Demo | `/app` on 8080 | Reference matched; operational typography unchanged against baseline |
+| `/ai-agent-console` | Configure and explore an AI Agent workspace | Return to Antbuildz website | `/app` on 8080, served from the copied local Console bundle | Complete local Console demo with operational navigation, sample data and browser-local state. Website-crawl submissions generate local demo pages and never request the supplied site. The Products menu and mobile navigation both open the Console. |
 | `/pricing` | Compare approved product plans and choose a next step | Start 14-Day Free Trial or Talk to Sales | Transferred content; Gorgias-inspired wider plan layout | Standard plans present one cumulative Agent → Sales → Rental+ path, with one side-by-side comparison table. Current approved prices, allowances, billing mechanics, Custom panel and commercial terms are recorded below |
 | `/resources` | Discover practical industrial AI education | Explore a Guide | `/resources` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA; grouped header dropdown, all topic destinations and mobile access verified |
+| `/conversational-experience` | See how the Antbuildz AI Agent structures complex product questions into useful comparisons and next steps | Start Trial → Pricing | Project-original source-rendered Conversation Features page aligned to the AI Webstore Suite feature layout | The hero is a contained industrial-photo card with breadcrumb, centred “Beyond Just a Text Answer” copy, a darkened readability overlay and shared public rail. Its visible and discovery copy names the Antbuildz AI Agent, complex product enquiries, specification comparisons, technical diagrams, product guidance and human handover clearly. Five static React/CSS phone conversations follow the AI Webstore Suite’s numbered, alternating visual layout on desktop and stack copy before phones on mobile. The borderless white phone shell, Emma header, message styles, response patterns and soft shadow are shared across all examples. The conversations include a complete source-diagram example and do not claim live availability, prices, product suitability or booking confirmation. The closing Start Trial action appears over a generated Emma industrial-workshop photograph and links to Pricing. Desktop and mobile visual inspection confirms the shared public rail, section rhythm, CTA treatment and zero horizontal overflow. The former `/features/conversational-experience` URL redirects here. |
 | `/ai-roles` | Choose a role for your AI Agent | Build Your AI Agent | Source-owned Who We Serve-style overview | Overview plus five detail pages; canonical replacement for the former Resources role collection. Desktop/mobile navigation and redirects verified |
 | `/help/ai` | Resolve Antbuildz AI product and setup questions | Browse AI FAQs | Transferred AI Help Centre | AI-only FAQ library; Marketplace-specific questions are excluded. `/help` and `/faqs` redirect here; Marketplace help routes leave this website for antbuildz.com |
 | `/about` | Understand the industrial history and reason Antbuildz AI exists | Book a Demo | `/about` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA |
@@ -3357,3 +3358,138 @@ colour roles remain visible through a 20px blur while the specification table
 uses a 24px blur. At mobile, the 351px chat frame has zero horizontal overflow
 and the video continues playing. All 116 content tests pass; targeted ESLint,
 `git diff --check`, and `npm run build` pass.
+
+## 2026-10-10 — Conversation Features borderless phone graphics
+
+Design-mode refinement of `/conversational-experience`. Replaced the four wide
+rendered conversation cards with one shared static React/CSS phone system:
+borderless white surfaces, 44px rounded corners, a layered soft shadow, Emma
+header, message composer and consistent response patterns. The four scenes now
+show a technical comparison, product shortlist and catalogue affordance,
+structured explanation and illustrative booking action. They remain explicitly
+illustrative; product suitability, live availability and booking confirmation
+are not represented.
+
+Browser-inspected at 1440×900, 1024×768 and 390×844. All four phones retain
+their intended proportions, fit their content without internal clipping, have
+zero decorative focus targets and introduce no horizontal overflow. The focused
+conversation page test and the production build pass. Existing full-suite test
+and lint failures remain outside this change: the homepage overlay test expects
+an older opacity, and the conversation page shell still uses pre-existing
+internal anchor elements.
+
+### Follow-up — Source conversation tables and copy
+
+The four shared phone scenes now follow the supplied conversation examples
+directly. Each includes the complete customer prompt, response copy, headings
+and table structure from its source: the 13-row LEO 35 comparison, three-row
+scissor-lift rental table, AI Agent versus chatbot comparison and the
+30-minute-session booking action. The supplied rental figures remain part of
+the labelled illustrative conversation only; they are not a live price or
+availability claim.
+
+Browser-inspected at 1440×1000, 1024×900 and 390×844. All three tables fit
+within their phone at each checked width, the page has no horizontal overflow,
+and the phones have no keyboard-focusable decorative controls. Focused content
+test, targeted ESLint and `npm run build` pass.
+
+### Follow-up — Softer type and phone hardware detail
+
+The page and phone headings now use a softer slate instead of near-black. Phone
+body copy and table content use a calmer grey while preserving readable contrast.
+Each borderless phone now has a subtle top hardware island and an internal
+light reflection, retaining its white surface, rounded corners and soft shadow.
+
+Browser-inspected locally with no horizontal overflow; the phone remains
+borderless and the focused content test and targeted ESLint pass.
+
+### Follow-up — Standard table scale and alignment
+
+All four static phones now use one fixed screen height: 760px on desktop and
+720px on mobile. The three tables share a light data surface, restrained row
+separators, aligned headers and centred value columns. The technical scene now
+shows six key specification rows, preserving a readable phone-scale excerpt.
+
+Browser-inspected at compact and desktop widths: all phones share the same
+height and all tables fit without horizontal overflow. Focused content test,
+targeted ESLint and `npm run build` pass.
+
+
+## 2026-10-11 — Conversation wording and footer action
+
+Refined the five illustrative conversations on `/conversational-experience`
+while preserving the original alternating layout, table structures, complete
+three-model diagram, phone surfaces and message styling. The hero now uses
+“Beyond Just a Text Answer”. Removed the phone status strip (island, time and
+signal indicators) at the user’s request; Emma’s header remains.
+
+The specification example compares LEO30Tplus with LEO35Tplus using Teupen’s
+manufacturer product pages, with separate maxima clearly qualified by the load
+chart. The diagram example no longer asserts unverified chart readings. Rental
+qualification clarifies working versus platform height; the originally supplied sample prices were restored on explicit user request: SGD 350 daily, weekly and monthly, and SGD 0 delivery for each example. These remain illustrative, with rates subject to team confirmation. Structured requirements and meeting
+copy now stay within the equipment-buyer scenario. The temporary product-photo
+card, cropped diagram and heading-only checklist were reverted at the user’s
+request.
+
+Removed the injected “Email Us” action below the shared transferred footer’s
+brand description. Existing footer social contact links remain. Browser checks
+at 1440×1000, 1024×900 and 390×844 confirm no page horizontal overflow or clipped
+conversation content. Focused conversation/footer tests and production build
+pass. The demonstrations remain static illustrations.
+
+
+### Follow-up — Restore original section 04 content
+
+At the user’s request, restored the original AI Agent versus Chatbot conversation,
+comparison table, heading, description and accessibility label in section 04.
+The other conversations, restored rental prices, status-strip removal and footer
+changes remain as previously requested.
+
+### Follow-up — Conversation Features navigation
+
+Removed the visible Home / Conversation Features breadcrumb from the page.
+Added Conversation Features beneath AI Agent in the shared Products mega menu
+and to both public mobile navigation variants. Verified the desktop menu
+visually and passed the focused public-header check.
+
+### Follow-up — Products menu arrangement
+
+Moved Conversation Features into the third Products column and placed AI Agent
+Console centered beneath the three columns.
+
+### 2026-10-11 — AI Agent Console access and local demo
+
+Enabled the complete copied Console on `/ai-agent-console` from both the Products
+menu and the shared mobile navigation. The Console is served by the current
+build copied from the 8080 reference into this project's local assets and keeps
+its sample workspace data and browser-local demo state; it has no runtime
+dependency on port 8080. Browser checks confirmed the Products-menu journey
+plus Agent Setup, Knowledge Base and Workflows. Focused navigation tests,
+source-scoped ESLint and the production build pass.
+
+### 2026-10-12 — Store Profile clarity and local settings
+
+The protected `/main-dashboard/store-builder/store-profile` route replaces the
+inherited profile form only after the authenticated dashboard form has rendered.
+It keeps the flat form card, logo preview and upload, one primary
+colour, existing storage key, logo limit, URL copy, subdomain validation, and
+Save/Cancel behaviour. The header-name checkbox sits with the name field;
+Show announcement reveals its text field. Equipment page contact channels stay
+in a compact disclosure, with a checkbox for each channel that reveals its
+input. Older saved contact values automatically enable their matching channel.
+The duplicate local summary card has been folded into the main form, while the
+existing subscription snapshot remains beside it. Its progress
+label now describes elapsed days out of 30 and calculates days remaining from
+the displayed percentage. The redundant form title and outer white card were
+removed. The settings card and subscription card share one top edge; below
+1180px they stack to keep the form usable. The store URL uses an accessible copy
+icon. Each contact option shows a local brand SVG from Simple Icons, and the
+announcement title uses a compact text field. Visible sample wording was
+removed, including the generated starter store name; other saved values remain
+intact. The copied
+production bundle and access gate remain unchanged. QA: the signed-out view
+still presents the sign-in gate. Authenticated browser inspection at 1440px,
+1024px and 390px confirmed aligned desktop cards, a usable stacked tablet
+layout, and no mobile document overflow. All six channel SVGs loaded at 390px.
+Contact and announcement toggles, Cancel and the URL copy icon were exercised.
+Focused source test, ESLint and the production build pass.

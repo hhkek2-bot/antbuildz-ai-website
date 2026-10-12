@@ -62,6 +62,7 @@ function LegalHeader() {
             <nav aria-label="Mobile navigation">
               <a href="/ai-agent">AI Agent</a>
               <a href="/ai-webstore-suite">AI Webstore Suite</a>
+              <a href="/conversational-experience">Conversation Features</a>
               <a href="/pricing">Pricing</a>
               <a href="/who-we-serve">Industries</a>
               <a href="/ai-roles">AI Roles</a>
@@ -79,6 +80,7 @@ function LegalFooter() {
   const columns = [
     ['AI Products', [
       ['AI Agent', '/ai-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
+      ['Conversation Features', '/conversational-experience'],
       ['AI FAQs', '/help/ai'], ['Pricing', '/pricing'], ['Book a Demo', '/book-a-demo'],
     ]],
     ['Who We Serve', industryLinks],
@@ -101,7 +103,7 @@ function LegalFooter() {
                 </span><span className="antbuildz-ai-wordmark__ai">.ai</span>
               </span>
             </a>
-            <p>Product Intelligence for Complex Product Businesses.</p>
+            <p>We build better conversations for complex products.</p>
           </div>
           {columns.map(([label, links]) => <nav className={`abz-public-footer__link-column${label === 'Who We Serve' ? ' abz-public-footer__link-column--who-we-serve' : ''}`} aria-label={label} key={label}>
             <h2>{label}</h2><ul>{links.map(([text, href]) => <li key={href}><a href={href}>{text}</a></li>)}</ul>

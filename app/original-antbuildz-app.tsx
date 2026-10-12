@@ -20,6 +20,9 @@ import { AI_ROLES, AI_ROLE_LINKS, AI_ROLE_REDIRECTS } from '../lib/ai-roles';
 import { syncAiRoleNavigation } from '../lib/ai-role-navigation';
 import { getTransferredResourcePath, syncResourceNavigation } from '../lib/resource-navigation';
 import { correctResourceCopy, RESOURCE_LIBRARY_SEO } from '../lib/resource-copy';
+import { installConsoleCrawlerDemo } from '../lib/console-crawler-demo';
+import { syncStoreProfileDemo } from './store-profile-demo';
+import { syncStoreBuilderPresentation } from './store-builder-presentation';
 
 const ORIGINAL_STYLESHEET_ID = 'antbuildz-original-styles';
 const ORIGINAL_SCRIPT_ID = 'antbuildz-original-app';
@@ -206,6 +209,8 @@ const RESOURCE_MENU_GROUPS: {label:string;topics: {label:string;displayLabel?:st
 const DRAWER_LINKS = [
   { label: 'AI Agent', href: '/ai-agent' },
   { label: 'AI Webstore Suite', href: '/ai-webstore-suite' },
+  { label: 'Conversation Features', href: '/conversational-experience' },
+  { label: 'AI Agent Console', href: '/ai-agent-console' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Industries', href: '/who-we-serve' },
   { label: 'Resources', href: '/resources' },
@@ -1089,11 +1094,13 @@ function correctProductsMenu(root: HTMLElement) {
     const products = [
       { group: 'Engage customers', label: 'AI Agent', href: '/ai-agent', description: 'Deploy a 24/7 AI Agent to answer enquiries across your online channels and supported languages.' },
       { group: 'Guide product discovery', label: 'AI Webstore Suite', href: '/ai-webstore-suite', description: 'Connect your sales and rental catalogue and inventory for more accurate product recommendations.' },
-      { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Train and deploy an on-brand AI Agent with your company knowledge, inventory and selected role.', unavailable: true },
+      { group: 'Guide richer conversations', label: 'Conversation Features', href: '/conversational-experience', description: 'Explore visual answers, product comparisons and guided next steps in one conversation.' },
+      { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Train and deploy an on-brand AI Agent with your company knowledge, inventory and selected role.' },
     ];
     products.forEach((product, index) => {
       const group = document.createElement('section');
       group.className = 'antbuildz-industries-menu__group';
+      if (product.unavailable) group.classList.add('antbuildz-products-menu__console');
       const title = document.createElement('p');
       title.id = `antbuildz-product-group-${index + 1}`;
       title.textContent = product.group;
@@ -1101,14 +1108,7 @@ function correctProductsMenu(root: HTMLElement) {
       const groupLinks = document.createElement('div');
       groupLinks.className = 'antbuildz-industries-menu__group-links';
       const link = createIndustryLink(product, 'antbuildz-industries-menu__link', true);
-      if (product.unavailable) {
-        link.removeAttribute('href');
-        link.setAttribute('aria-disabled', 'true');
-        link.setAttribute('data-antbuildz-unavailable', 'true');
-        link.tabIndex = -1;
-      } else {
-        bindHeaderNavigation(link);
-      }
+      bindHeaderNavigation(link);
       groupLinks.appendChild(link);
       group.append(title, groupLinks);
       links.appendChild(group);
@@ -1430,20 +1430,19 @@ function correctFooter(root: HTMLElement) {
   if (salesAgentItem && webstoreItem && salesAgentItem !== webstoreItem.previousElementSibling) {
     webstoreItem.parentElement?.insertBefore(salesAgentItem, webstoreItem);
   }
+  const productList = webstoreItem?.parentElement;
+  if (productList?.querySelector && !productList.querySelector('[data-antbuildz-conversational-experience="true"]')) {
+    const conversationItem = footer.ownerDocument.createElement('li');
+    const conversationLink = footer.ownerDocument.createElement('a');
+    conversationLink.dataset.antbuildzConversationalExperience = 'true';
+    conversationLink.href = '/conversational-experience';
+    conversationLink.textContent = 'Conversation Features';
+    conversationItem.appendChild(conversationLink);
+    productList.insertBefore(conversationItem, webstoreItem.nextSibling);
+  }
 
   const brandCopy = footer.querySelector<HTMLElement>('.abz-public-footer__brand p');
-  setPricingText(brandCopy, 'Product Intelligence for Complex Product Businesses.');
-
-  const footerBrand = footer.querySelector<HTMLElement>('.abz-public-footer__brand');
-  if (footerBrand && !footerBrand.querySelector('[data-antbuildz-footer-email="true"]')) {
-    const emailAction = footer.ownerDocument.createElement('a');
-    emailAction.className = 'antbuildz-footer-email';
-    emailAction.dataset.antbuildzFooterEmail = 'true';
-    emailAction.href = 'mailto:help@antbuildz.ai?subject=Antbuildz%20AI%20enquiry';
-    emailAction.setAttribute('aria-label', 'Email Antbuildz AI');
-    emailAction.textContent = 'Email Us';
-    footerBrand.appendChild(emailAction);
-  }
+  setPricingText(brandCopy, 'We build better conversations for complex products.');
 
   const companyResources = footer.querySelector<HTMLAnchorElement>(
     'nav[aria-label="Company"] a[href="/blogs"], nav[aria-label="Company"] a[href="/resources"]',
@@ -2684,6 +2683,8 @@ function removeLiveChatLauncher(root: HTMLElement) {
 
 function applyAntbuildzAiCorrections(root: HTMLElement) {
   removeLiveChatLauncher(root);
+  syncStoreProfileDemo(root);
+  syncStoreBuilderPresentation(root);
   correctRouteLoader(root);
   correctWordmarks(root);
   correctLinks(root);
@@ -2756,10 +2757,13 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     // authoritative metadata rendered by the Next route so canonicals never
     // fall back to localhost or the retired antbuildzai.com domain.
     const protectedPathname = window.location.pathname;
+    const useCurrentConsoleBundle = protectedPathname === '/ai-agent-console';
     const transferredResourcePath = getTransferredResourcePath(protectedPathname);
-    const transferredAppPath = protectedPathname === '/ai-agent'
-      ? '/ai-sales-agent'
-      : transferredResourcePath;
+    const transferredAppPath = useCurrentConsoleBundle
+      ? '/app'
+      : protectedPathname === '/ai-agent'
+        ? '/ai-sales-agent'
+        : transferredResourcePath;
     const nativeReplaceState = window.history.replaceState.bind(window.history);
     const protectedTitle = document.title;
     const protectedCanonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href ?? '';
@@ -2844,9 +2848,11 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
         scheduleCorrections();
         return;
       }
-      const transferredViewHasRendered = transferredResourcePath
-        ? Boolean(root.querySelector('article h1'))
-        : Boolean(root.querySelector('.bright-hero'));
+      const transferredViewHasRendered = useCurrentConsoleBundle
+        ? Boolean(root.querySelector('.exact-ai-console'))
+        : transferredResourcePath
+          ? Boolean(root.querySelector('article h1'))
+          : Boolean(root.querySelector('.bright-hero'));
       if (!transferredViewHasRendered && attempt < 120) {
         resourceRestoreFrame = window.requestAnimationFrame(() => restoreTransferredAppPath(attempt + 1));
         return;
@@ -2859,18 +2865,28 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
       const stylesheet = document.createElement('link');
       stylesheet.id = ORIGINAL_STYLESHEET_ID;
       stylesheet.rel = 'stylesheet';
-      stylesheet.href = '/assets/index-DZYh9Xyx.css';
+      stylesheet.href = useCurrentConsoleBundle
+        ? '/assets/index-Dum4fmqG.css'
+        : '/assets/index-DZYh9Xyx.css';
       document.head.appendChild(stylesheet);
     }
 
     if (!document.getElementById(ORIGINAL_SCRIPT_ID)) {
+      // The transferred Console expects a separate crawler service. Its source
+      // is unavailable locally, so preserve the original API contract with a
+      // browser-local demo before the copied bundle starts making requests.
+      if (useCurrentConsoleBundle) installConsoleCrawlerDemo();
       if (transferredAppPath) {
         nativeReplaceState(window.history.state, '', `${transferredAppPath}${window.location.search}${window.location.hash}`);
       }
       const script = document.createElement('script');
       script.id = ORIGINAL_SCRIPT_ID;
       script.type = 'module';
-      script.src = '/assets/index-i9-KQg8N.js';
+      // Keep public marketing routes on their established transferred bundle.
+      // The Console loads the current build copied from the 8080 reference.
+      script.src = useCurrentConsoleBundle
+        ? '/assets/index-COldvpLY.js'
+        : '/assets/index-i9-KQg8N.js';
       script.addEventListener('load', () => {
         restoreTransferredAppPath();
       });

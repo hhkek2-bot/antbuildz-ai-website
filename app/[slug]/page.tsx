@@ -25,6 +25,7 @@ const pageTitles: Record<string, [string, string]> = {
 const redirectTargets: Record<string, string> = {
   ...LEGAL_ALIASES,
   legal: '/agreements',
+  app: '/ai-agent-console',
   'develop-admin': '/ai-agent-console',
   'ai-agent-roles': '/ai-roles',
   'ai-sales-agent': '/ai-agent',

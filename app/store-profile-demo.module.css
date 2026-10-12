@@ -1,0 +1,79 @@
+.page { min-width: 0; color: var(--ink); font-family: var(--font-body); }
+.profileHeader h2 { margin: 0; font-family: var(--font-heading); font-weight: 800; letter-spacing: -.03em; }
+.layout { display: block; }
+.form { border: 1px solid var(--line); border-radius: 24px; background: var(--clean); box-shadow: 0 3px 12px rgb(15 23 42 / 5%); }
+.profileHeader { display: flex; align-items: center; gap: 14px; padding: 26px 28px; border-bottom: 1px solid var(--line); }
+.logoControl { position: relative; width: 70px; height: 70px; flex: 0 0 70px; }
+.logoPreview { display: grid; width: 70px; height: 70px; flex: 0 0 70px; place-items: center; overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+.logoPreview img { width: 82%; height: 82%; object-fit: contain; }
+.profileHeader h2 { font-size: 20px; line-height: 1.2; }
+.profileHeader span { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; }
+.uploadButton { position: absolute; right: -6px; bottom: -6px; display: grid; width: 28px; height: 28px; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--clean); color: var(--store-primary, #2563eb); box-shadow: 0 2px 6px rgb(15 23 42 / 14%); cursor: pointer; }
+.uploadButton:hover { color: var(--ink); border-color: var(--store-primary, #2563eb); }
+.formBody { padding: 26px 28px 0; }
+.fieldGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.fieldColumn { display: grid; align-content: start; gap: 20px; min-width: 0; }
+.fieldGroup { display: grid; gap: 9px; align-content: start; min-width: 0; }
+.field, .colourControl { display: grid; gap: 7px; align-content: start; color: var(--ink); font: 700 13px/1.25 var(--font-body); }
+.field input, .field select, .field textarea, .announcementField input, .contactInput, .colourControl input:last-child { box-sizing: border-box; width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; outline: none; background: var(--clean); color: var(--ink); font: 400 14px/1.35 var(--font-body); }
+.field textarea { min-height: 90px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus, .announcementField input:focus, .contactInput:focus, .colourControl input:last-child:focus, .contacts summary:focus-visible, .uploadButton:focus-visible, .storeUrl button:focus-visible, .cancelButton:focus-visible, .saveButton:focus-visible, .accountLinks button:focus-visible { border-color: var(--blue); outline: 2px solid color-mix(in srgb, var(--blue) 22%, transparent); outline-offset: 2px; }
+.storeUrl { display: flex; align-items: center; gap: 4px; min-width: 0; color: var(--muted); font: 400 12px/1.3 var(--font-body); }
+.storeUrl span { overflow-wrap: anywhere; }
+.storeUrl button { display: grid; width: 28px; height: 28px; flex: 0 0 28px; place-items: center; padding: 0; border: 0; border-radius: 7px; background: transparent; color: var(--muted); cursor: pointer; }
+.colourControl small { color: var(--muted); font: 400 12px/1.4 var(--font-body); }
+.colourOptions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.colourOption { display: grid; gap: 5px; min-width: 0; color: var(--muted); font: 400 12px/1.25 var(--font-body); }
+.colourOption > div { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 5px; align-items: center; min-height: 44px; padding: 2px 7px; border: 1px solid var(--line); border-radius: 9px; }
+.colourControl input[type="color"] { width: 30px; height: 30px; padding: 0; border: 0; border-radius: 6px; background: transparent; cursor: pointer; }
+.colourControl input:last-child { min-height: 34px; padding: 6px; border: 0; }
+.contacts { margin: 24px 0; border: 1px solid var(--line); border-radius: 11px; }
+.contacts summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; cursor: pointer; list-style: none; }
+.contacts summary::-webkit-details-marker { display: none; }
+.contacts summary span { display: grid; gap: 4px; }
+.contacts summary strong { font: 700 13px/1.25 var(--font-body); }
+.contacts summary small { color: var(--muted); font: 400 12px/1.4 var(--font-body); }
+.contacts summary b { color: var(--store-primary, #2563eb); font: 400 12px/1 var(--font-body); }
+.contacts[open] summary { border-bottom: 1px solid var(--line); }
+.contacts .fieldGrid { padding: 18px 16px; }
+.contacts .checkOption, .fieldGroup .checkOption { margin: 0; }
+.contactInput { margin: 0; }
+.checkOption { display: inline-flex; align-items: center; gap: 10px; margin: 20px 0 0; cursor: pointer; color: var(--body); font: 400 13px/1.25 var(--font-body); }
+.checkOptionSubtle { color: var(--body); }
+.checkOption input { width: 18px; height: 18px; margin: 0; accent-color: var(--red); }
+.channelLogo { width: 20px; height: 20px; flex: 0 0 20px; object-fit: contain; }
+.announcement { display: grid; gap: 12px; margin-top: 24px; }
+.announcementField { display: grid; gap: 7px; }
+.announcementField > span { color: var(--ink); font: 700 13px/1.25 var(--font-body); }
+.announcementField > p { margin: 0; color: var(--muted); font: 400 12px/1.4 var(--font-body); }
+.announcement .checkOption { margin: 0; }
+.homePageControl { display: grid; gap: 7px; color: var(--ink); font: 700 13px/1.25 var(--font-body); }
+.homePageDropdown { position: relative; }
+.homePageDropdown summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; box-sizing: border-box; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--clean); color: var(--ink); cursor: pointer; font: 400 14px/1.35 var(--font-body); list-style: none; }
+.homePageDropdown summary::-webkit-details-marker { display: none; }
+.homePageDropdown summary svg { transition: transform 160ms ease; }
+.homePageDropdown[open] summary { border-color: var(--blue); box-shadow: 0 0 0 2px color-mix(in srgb, var(--blue) 22%, transparent); }
+.homePageDropdown[open] summary svg { transform: rotate(180deg); }
+.homePageDropdown summary:focus-visible { outline: 2px solid color-mix(in srgb, var(--blue) 22%, transparent); outline-offset: 2px; }
+.homePageOptions { position: absolute; z-index: 5; top: calc(100% + 6px); right: 0; left: 0; display: grid; gap: 2px; padding: 4px; border: 1px solid var(--line); border-radius: 9px; background: var(--clean); box-shadow: 0 8px 18px rgb(15 23 42 / 14%); }
+.homePageOption { min-height: 38px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; color: var(--body); cursor: pointer; text-align: left; font: 400 13px/1.2 var(--font-body); }
+.homePageOption:hover, .homePageOption:focus-visible, .homePageOptionActive { background: color-mix(in srgb, var(--store-primary, var(--blue)) 12%, var(--clean)); color: var(--ink); outline: none; }
+.contentOptions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); }
+.contentOptions > p { width: 100%; margin: 0 0 2px; color: var(--ink); font: 700 13px/1.25 var(--font-body); }
+.contentOptions .checkOption { margin: 0; }
+.accountLinks { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); font: 700 12px/1.3 var(--font-body); }
+.accountLinks span { color: var(--muted); }
+.accountLinks button { padding: 0; border: 0; background: transparent; color: #2563eb; cursor: pointer; font: inherit; }
+.accountLinks button:hover { text-decoration: underline; }
+.storeUrl button:hover { color: var(--ink); }
+.actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 28px; padding: 18px 28px; border-top: 1px solid var(--line); }
+.notice { min-height: 18px; color: var(--muted); font-size: 12px; }
+.actions > div:last-child { display: flex; gap: 10px; }
+.cancelButton, .saveButton { min-height: 40px; padding: 0 16px; border-radius: 8px; cursor: pointer; font: 700 13px/1 var(--font-body); }
+.cancelButton { border: 1px solid var(--line); background: var(--clean); color: var(--body); }
+.saveButton { border: 1px solid var(--store-primary, var(--red)); background: var(--store-primary, var(--red)); color: #fff; }
+.cancelButton:disabled, .saveButton:disabled { cursor: not-allowed; opacity: .45; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (max-width: 1179px) { :global([data-antbuildz-store-profile-layout]) { grid-template-columns: minmax(0, 1fr) !important; } }
+@media (max-width: 720px) { .profileHeader, .formBody { padding-left: 18px; padding-right: 18px; } .fieldGrid { grid-template-columns: 1fr; } .contacts .fieldGrid { padding: 18px; } .contentOptions { align-items: flex-start; flex-direction: column; gap: 15px; } .actions { align-items: stretch; flex-direction: column; padding: 18px; } .actions > div:last-child { width: 100%; } .cancelButton, .saveButton { flex: 1; } }
+@media (max-width: 480px) { .colourOptions { grid-template-columns: 1fr; } }

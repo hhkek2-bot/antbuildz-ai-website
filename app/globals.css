@@ -2783,6 +2783,17 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   gap: 8px;
 }
 
+.antbuildz-products-menu__console {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 480px);
+  text-align: center;
+}
+
+.antbuildz-products-menu__console .antbuildz-industries-menu__link {
+  text-align: center;
+}
+
 .antbuildz-industries-menu__link {
   display: block;
   min-height: 112px;
