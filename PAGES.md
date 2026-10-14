@@ -3570,3 +3570,13 @@ Back, Finish and replay at desktop and mobile widths. The Blog, FAQ and Policies
 guides and their matching content controls were opened in the browser. The
 store's saved content was not changed by these checks. Source lint, scoped
 TypeScript and the production build pass.
+
+### 2026-10-14 — Store Builder quick-access tabs
+
+Rental Store, Sales Store, Blog, FAQs, Policies and Store Profile now appear in
+one top tab row in the same order as the workspace sidebar. The existing tab
+style and route navigation remain; Store Profile gains the same row. On narrow
+screens the row scrolls horizontally and brings the current page into view.
+The builder tutorial's opening step names these top destinations. Desktop,
+compact and mobile layouts were inspected, and top-tab navigation between
+store content, Store Profile and Rental Store was exercised.

@@ -76,7 +76,7 @@ function stepsFor(route: string): Step[] {
 
   if (section === 'rental' || section === 'sales') {
     return [
-      { ...workspace, body: 'Choose Rental Store or Sales Store. The canvas shows your storefront; each section has a pencil and other controls for updating its content and position.' },
+      { ...workspace, body: 'Use the top tabs or left menu to open Rental Store, Sales Store, Blog, FAQs, Policies or Store Profile. The store canvas shows your storefront; each section has controls for updating its content and position.' },
       { title: 'Add a section', body: 'Click a plus button where you want new content. The library slides in from the right. We have selected Value propositions: a detailed example with a heading, benefit cards, formatting, a picture and a link.', drawer: 'library', selectTemplate: true, find: () => activeDrawer()?.querySelector<HTMLElement>('button[aria-pressed="true"]') || null },
       { title: 'Try the layout in your draft', body: 'Add section inserts this example into your draft. To learn without adding anything, choose Skip adding and we will open an existing section instead.', drawer: 'library', insert: true, find: () => drawerButton('Add to page') },
       { title: 'Edit content and formatting', body: 'The pencil opens this editor. Edit the heading, introduction and individual benefit cards. Each text field has controls for font, size, bold or italic. The live preview shows your changes. Other sections use the same editing pattern.', drawer: 'example', find: () => activeDrawer()?.querySelector<HTMLElement>('[role="toolbar"]') || editorField() },

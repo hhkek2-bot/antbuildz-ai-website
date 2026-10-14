@@ -5,6 +5,80 @@ const STORE_BUILDER_ROUTES = new Set([
   '/main-dashboard/store-builder/sales',
 ]);
 
+const QUICK_ACCESS_PAGES = [
+  ['rental', 'Rental Store'],
+  ['sales', 'Sales Store'],
+  ['blog', 'Blog'],
+  ['faqs', 'FAQs'],
+  ['policies', 'Policies'],
+  ['store-profile', 'Store Profile'],
+] as const;
+const QUICK_ACCESS_PREFIX = '/main-dashboard/store-builder/';
+const QUICK_ACCESS_LINK_CLASS = 'shrink-0 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50';
+
+function syncQuickAccess(root: HTMLElement) {
+  const route = window.location.pathname;
+  if (!QUICK_ACCESS_PAGES.some(([slug]) => route === `${QUICK_ACCESS_PREFIX}${slug}`)) return;
+
+  const sidebar = root.querySelector<HTMLElement>('aside[aria-label="Antbuildz Workspace navigation"]');
+  const main = Array.from(sidebar?.parentElement?.children || []).find((child) => child.tagName === 'MAIN') as HTMLElement | undefined;
+  if (!main) return;
+
+  let nav = main.querySelector<HTMLElement>('nav[aria-label="Store Builder views"], nav[aria-label="Store Content views"]');
+  if (!nav) {
+    const row = document.createElement('div');
+    row.className = 'shrink-0 border-b border-border/70 bg-card/80 px-4 py-2.5 backdrop-blur-md md:px-6';
+    const group = document.createElement('div');
+    group.className = 'flex min-w-0 items-center gap-3';
+    const label = document.createElement('span');
+    label.className = 'hidden shrink-0 text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground lg:block';
+    label.textContent = 'Store Builder';
+    nav = document.createElement('nav');
+    nav.className = 'flex min-w-0 flex-1 items-center gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden';
+    group.append(label, nav);
+    row.append(group);
+    main.prepend(row);
+  } else {
+    const label = nav.previousElementSibling;
+    if (label && label.textContent !== 'Store Builder') label.textContent = 'Store Builder';
+  }
+
+  if (nav.getAttribute('aria-label') !== 'Store Builder views') nav.setAttribute('aria-label', 'Store Builder views');
+  QUICK_ACCESS_PAGES.forEach(([slug, text], index) => {
+    const href = `${QUICK_ACCESS_PREFIX}${slug}`;
+    let link = Array.from(nav.querySelectorAll<HTMLAnchorElement>('a')).find((anchor) => anchor.getAttribute('href') === href);
+    if (!link) {
+      link = document.createElement('a');
+      link.href = href;
+      link.textContent = text;
+      link.addEventListener('click', (event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const sidebarLink = sidebar?.querySelector<HTMLAnchorElement>(`a[href="${href}"]`);
+        if (!sidebarLink) return;
+        event.preventDefault();
+        sidebarLink.click();
+      });
+      const next = QUICK_ACCESS_PAGES.slice(index + 1)
+        .map(([nextSlug]) => nav!.querySelector<HTMLAnchorElement>(`a[href="${QUICK_ACCESS_PREFIX}${nextSlug}"]`))
+        .find(Boolean);
+      nav.insertBefore(link, next || null);
+    }
+    const active = route === href;
+    const className = `${QUICK_ACCESS_LINK_CLASS} ${active ? 'bg-primary/15 text-foreground ring-1 ring-primary/30' : 'text-muted-foreground hover:bg-muted hover:text-foreground'}`;
+    if (link.className !== className) link.className = className;
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+
+  const activeTab = nav.querySelector<HTMLElement>('[aria-current="page"]');
+  if (activeTab && nav.scrollWidth > nav.clientWidth) {
+    const tab = activeTab.getBoundingClientRect();
+    const strip = nav.getBoundingClientRect();
+    if (tab.right > strip.right) nav.scrollLeft += tab.right - strip.right + 8;
+    else if (tab.left < strip.left) nav.scrollLeft -= strip.left - tab.left + 8;
+  }
+}
+
 const brandLabels = ['Brand 1', 'Brand 2', 'Brand 3', 'Brand 4', 'Brand 5'];
 
 const categoryIcons: Record<string, string> = {
@@ -49,6 +123,7 @@ function syncBrandLabels(root: HTMLElement) {
 }
 
 export function syncStoreBuilderPresentation(root: HTMLElement) {
+  syncQuickAccess(root);
   if (!STORE_BUILDER_ROUTES.has(window.location.pathname)) return;
   syncBrandLabels(root);
   syncCategoryIcons(root);
