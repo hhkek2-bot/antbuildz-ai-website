@@ -23,6 +23,12 @@ import { correctResourceCopy, RESOURCE_LIBRARY_SEO } from '../lib/resource-copy'
 import { installConsoleCrawlerDemo } from '../lib/console-crawler-demo';
 import { syncStoreProfileDemo } from './store-profile-demo';
 import { syncStoreBuilderPresentation } from './store-builder-presentation';
+import { resetWebstoreTutorial, syncWebstoreTutorial } from './webstore-tutorial';
+import './webstore-tutorial.css';
+import { syncConsoleAiRulesDesign } from './console-ai-rules-design';
+import './console-ai-rules-design.css';
+import { syncConsoleDeployChannels } from './console-deploy-channels';
+import './console-deploy-channels.css';
 
 const ORIGINAL_STYLESHEET_ID = 'antbuildz-original-styles';
 const ORIGINAL_SCRIPT_ID = 'antbuildz-original-app';
@@ -1311,6 +1317,20 @@ function correctLinks(root: HTMLElement) {
   root.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) => {
     const currentHref = link.getAttribute('href');
     if (currentHref && ROUTE_ALIASES[currentHref]) link.setAttribute('href', ROUTE_ALIASES[currentHref]);
+
+    if (window.location.pathname.startsWith('/main-dashboard')
+      && link.getAttribute('aria-label') === 'Open AI Agent Console') {
+      link.setAttribute('href', '/ai-agent-console');
+      if (link.dataset.antbuildzConsoleDestination !== 'true') {
+        link.dataset.antbuildzConsoleDestination = 'true';
+        link.addEventListener('click', (event) => {
+          if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          window.location.assign(new URL('/ai-agent-console', window.location.origin).href);
+        }, true);
+      }
+    }
 
     const label = link.textContent?.trim();
     if (label === 'Book Demo' || label === 'Book a Demo') {
@@ -2685,6 +2705,9 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   removeLiveChatLauncher(root);
   syncStoreProfileDemo(root);
   syncStoreBuilderPresentation(root);
+  syncWebstoreTutorial(root);
+  syncConsoleAiRulesDesign(root);
+  syncConsoleDeployChannels(root);
   correctRouteLoader(root);
   correctWordmarks(root);
   correctLinks(root);
@@ -2913,6 +2936,7 @@ export function OriginalAntbuildzApp({ className = '' }: { className?: string })
     scheduleCorrections();
 
     return () => {
+      resetWebstoreTutorial();
       resetHomeHeroRuntime();
       resetPublicHeroHeader();
       resetSalesAgentHeroThemes();

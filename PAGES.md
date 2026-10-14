@@ -3493,3 +3493,80 @@ still presents the sign-in gate. Authenticated browser inspection at 1440px,
 layout, and no mobile document overflow. All six channel SVGs loaded at 390px.
 Contact and announcement toggles, Cancel and the URL copy icon were exercised.
 Focused source test, ESLint and the production build pass.
+
+### 2026-10-13 — AI Rules presentation in the local Console
+
+The copied Console's Agent Setup → AI Rules panels now present the business
+domain as “What Your AI Knows” with a prominent editable focus field,
+templates and a tip, and guardrail drafts as “Rules & Restrictions” with
+recommended safeguards and editable business-specific rules. Existing agent
+fields and draft actions remain owned by the Console bundle. The displayed
+safeguards are guidance; business focus and guardrail drafts remain browser-only
+review settings that do not affect Test Agent or customer chats. The `/app`
+alias redirects to `/ai-agent-console` and retains Console tab query parameters
+for direct links and refreshes. Desktop and mobile panels were visually inspected,
+tab switching and mobile overflow checked. Focused ESLint and production build
+pass; the repository-wide TypeScript check still has existing unrelated errors.
+
+### 2026-10-13 — Simpler business rules and deployment choices
+
+Business rules now have one draft editor. Three example buttons fill it with
+editable wording; Add rule passes the result to the Console's existing per-agent
+draft list, and the existing Save/Cancel controls remain authoritative. The old
+quick-add controls are hidden to avoid creating rules before users can review
+them. Deploy now presents only Chat bubble and Center Stage as large visual
+choices. Each Manage button reveals its original embed or chat-link controls;
+the Chat bubble installation guide appears with that channel. The local preview
+and disabled sharing/copy states remain explicit. Both changes use the existing
+operational Console palette and card language; no external channel was connected.
+
+### 2026-10-13 — Deploy channel reference fidelity
+
+The two Deploy choices now use the reference's saturated blue Chat bubble and
+green Center Stage preview panels, with simple centred chat mockups, white cards,
+and outlined Manage controls. The desktop card area is wider and the previews
+grow with the viewport to reduce unused space below them. Mobile retains stacked
+cards and shorter previews. Existing Manage actions and local sharing limits remain.
+
+### 2026-10-14 — Balanced Deploy layout and visible instructions
+
+The two channel previews now use shorter, more balanced proportions, with their
+mock chat windows scaled to match. The original Installation guide and its
+three website steps remain visible below the cards, including the existing
+Send to developer and Get help actions. Manage still reveals each channel's
+original link or embed controls. Desktop, compact desktop and mobile layouts
+were visually checked; both Manage actions and mobile overflow were checked.
+
+### 2026-10-14 — Workspace Console shortcut
+
+The AI Agent Console tile in the authenticated workspace sidebar now links
+directly to the local `/ai-agent-console` route. Its ordinary click performs a
+full navigation so the copied dashboard router cannot retain the old `/app`
+destination; modified clicks keep normal link behaviour. The destination is
+served locally, while the signed-out workspace gate limits direct browser
+verification of the authenticated tile.
+
+### 2026-10-14 — Webstore builder guided tutorial
+
+The protected Store Builder pages use the AI Agent Console's onboarding pattern:
+a first-visit welcome with Start tutorial / Not now, cream step cards, dark
+Next / Finish controls, a step counter, a close control, and a small circular
+replay icon. The Rental/Sales tour has eleven steps. It demonstrates adding one
+Value propositions section from the actual right-side library, with Add section
+and Skip adding options. It then opens that section's editor to explain text,
+formatting, benefit cards, pictures, links, and Apply Changes once. Skipping
+uses an existing section, preferring Value propositions. The final steps combine
+arranging and removing, then give Blog, FAQs and Policies for Terms & Conditions
+or Rental Agreements a separate highlighted menu step each before previewing and
+saving. The mobile tour opens the Store Builder menu for those steps. Blog, FAQs
+and Policies each have four focused steps on their own pages. Billing guidance is
+excluded; Store Profile keeps its separate guide.
+Dismissal is stored in this browser; saving the store remains a separate user
+action. Toolbar actions are revealed while highlighted, and the guide respects
+the right drawer's focus and slide animation. The builder heading is detected
+inside main content so the workspace header cannot prevent the tutorial from
+appearing. Browser checks covered the eleven-step Rental flow, Skip adding,
+Back, Finish and replay at desktop and mobile widths. The Blog, FAQ and Policies
+guides and their matching content controls were opened in the browser. The
+store's saved content was not changed by these checks. Source lint, scoped
+TypeScript and the production build pass.

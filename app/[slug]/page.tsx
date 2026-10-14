@@ -89,8 +89,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams: Promise<{ tab?: string }> }) {
   const { slug } = await params;
+  if (slug === 'app') {
+    const { tab } = await searchParams;
+    permanentRedirect(tab && /^[a-z][a-z-]{0,31}$/.test(tab) ? `/ai-agent-console?tab=${tab}` : '/ai-agent-console');
+  }
   if (redirectTargets[slug]) permanentRedirect(redirectTargets[slug]);
 
   if (nonIndexableClientPages[slug]) return <OriginalAntbuildzApp />;
