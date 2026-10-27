@@ -1,0 +1,98 @@
+.widget {
+  position: fixed;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 2147483647;
+  font-family: var(--font-body);
+}
+
+.widget [hidden] {
+  display: none;
+}
+
+.launcher {
+  display: block;
+  width: 68px;
+  height: 68px;
+  padding: 3px;
+  overflow: hidden;
+  border: 2px solid var(--yellow);
+  border-radius: 50%;
+  background: var(--clean);
+  box-shadow: 0 14px 38px rgb(15 23 42 / 25%);
+  cursor: pointer;
+}
+
+.launcher img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.launcher:hover {
+  border-color: var(--yellow-hover);
+}
+
+.launcher:focus-visible,
+.minimise:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+.panel {
+  position: relative;
+  width: min(420px, calc(100vw - 48px));
+  height: min(720px, calc(100dvh - 48px));
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--clean);
+  box-shadow: 0 24px 70px rgb(15 23 42 / 28%);
+}
+
+.panel iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--clean);
+}
+
+.minimise {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--clean);
+  color: var(--ink);
+  box-shadow: 0 4px 14px rgb(15 23 42 / 18%);
+  font: 25px/1 var(--font-body);
+  cursor: pointer;
+}
+
+.minimise:hover {
+  background: var(--canvas);
+}
+
+@media (max-width: 979px) {
+  .widget {
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
+  .launcher {
+    width: 56px;
+    height: 56px;
+  }
+
+  .panel {
+    width: min(420px, calc(100vw - 32px));
+    height: min(720px, calc(100dvh - 32px));
+  }
+}

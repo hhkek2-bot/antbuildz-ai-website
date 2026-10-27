@@ -1,0 +1,184 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Return to Antbuildz website":
+    - img "Antbuildz.com"
+    - generic: AI Agent Console
+  - button "Overview":
+    - text: Overview
+  - button "Collapse sidebar":
+  - generic: Active Agent
+  - 'button "Switch active agent: Emma Tomato"':
+    - generic: 🏗️
+    - paragraph: Emma Tomato
+    - paragraph: AI Agent
+  - generic: Navigation
+  - navigation:
+    - paragraph: Build your agent
+    - button "Agent Setup":
+      - text: Agent Setup
+    - button "Knowledge Base":
+      - text: Knowledge Base
+    - button "Workflows":
+      - text: Workflows
+    - button "Inventory":
+      - text: Inventory
+    - button "Integrations":
+      - text: Integrations
+    - paragraph: Design and deploy
+    - button "Settings":
+      - text: Settings
+    - button "Test Agent":
+      - text: Test Agent
+    - button "Deploy":
+      - text: Deploy
+    - paragraph: Run and improve
+    - button "Conversations":
+      - text: Conversations
+    - button "Leads" [active]:
+      - text: Leads
+    - button "Deals":
+      - text: Deals
+    - button "User Activities":
+      - text: User Activities
+    - paragraph: Account and help
+    - button "Billing":
+      - text: Billing
+    - button "Help":
+      - text: Help
+  - generic: Usage
+  - generic: 76 / 150
+  - paragraph: Sales Plan · 50 Extra Credits
+  - button "Account":
+    - text: Account
+- main:
+  - button "2 casual":
+    - paragraph: "2"
+    - paragraph: casual
+  - button "2 prospect":
+    - paragraph: "2"
+    - paragraph: prospect
+  - button "2 hot":
+    - paragraph: "2"
+    - paragraph: hot
+  - textbox "Search by name, email or company…"
+  - table:
+    - rowgroup:
+      - row "Lead Company Interested in Profile Status Agent":
+        - columnheader "Lead"
+        - columnheader "Company"
+        - columnheader "Interested in"
+        - columnheader "Profile"
+        - columnheader "Status"
+        - columnheader "Agent"
+        - columnheader
+    - rowgroup:
+      - row "Sarah Johnson sarah.j@example.com Johnson Civil Works Excavator spare parts 85% Casual 🏗️ Emma Tomato View Sarah Johnson lead":
+        - cell "Sarah Johnson sarah.j@example.com":
+          - paragraph: Sarah Johnson
+          - paragraph:
+            - text: sarah.j@example.com
+        - cell "Johnson Civil Works"
+        - cell "Excavator spare parts"
+        - cell "85%":
+          - progressbar
+          - generic: 85%
+        - cell "Casual":
+          - generic: Casual
+        - cell "🏗️ Emma Tomato":
+          - generic: 🏗️
+          - generic: Emma Tomato
+        - cell "View Sarah Johnson lead":
+          - button "View Sarah Johnson lead":
+      - row "Mike Chen Deal intent mike.chen@acme.co Acme Builders Concrete mixers 100% Prospect 🏗️ Emma Tomato View Mike Chen lead":
+        - cell "Mike Chen Deal intent mike.chen@acme.co":
+          - paragraph: Mike Chen
+          - text: Deal intent
+          - paragraph:
+            - text: mike.chen@acme.co
+        - cell "Acme Builders"
+        - cell "Concrete mixers"
+        - cell "100%":
+          - progressbar
+          - generic: 100%
+        - cell "Prospect":
+          - generic: Prospect
+        - cell "🏗️ Emma Tomato":
+          - generic: 🏗️
+          - generic: Emma Tomato
+        - cell "View Mike Chen lead":
+          - button "View Mike Chen lead":
+      - row "Lisa Park Deal intent lisa.park@buildco.com BuildCo Sdn Bhd 20-ton excavator 100% Hot 🏗️ Emma Tomato View Lisa Park lead":
+        - cell "Lisa Park Deal intent lisa.park@buildco.com":
+          - paragraph: Lisa Park
+          - text: Deal intent
+          - paragraph:
+            - text: lisa.park@buildco.com
+        - cell "BuildCo Sdn Bhd"
+        - cell "20-ton excavator"
+        - cell "100%":
+          - progressbar
+          - generic: 100%
+        - cell "Hot":
+          - generic: Hot
+        - cell "🏗️ Emma Tomato":
+          - generic: 🏗️
+          - generic: Emma Tomato
+        - cell "View Lisa Park lead":
+          - button "View Lisa Park lead":
+      - row "James Wright Deal intent j.wright@construct.io Wright Construct 50-ton mobile crane 100% Hot 🏗️ Emma Tomato View James Wright lead":
+        - cell "James Wright Deal intent j.wright@construct.io":
+          - paragraph: James Wright
+          - text: Deal intent
+          - paragraph:
+            - text: j.wright@construct.io
+        - cell "Wright Construct"
+        - cell "50-ton mobile crane"
+        - cell "100%":
+          - progressbar
+          - generic: 100%
+        - cell "Hot":
+          - generic: Hot
+        - cell "🏗️ Emma Tomato":
+          - generic: 🏗️
+          - generic: Emma Tomato
+        - cell "View James Wright lead":
+          - button "View James Wright lead":
+      - row "Emma Davis emma.d@siteworks.com Siteworks Pte Ltd Safety equipment catalog 31% Casual 🏗️ Emma Tomato View Emma Davis lead":
+        - cell "Emma Davis emma.d@siteworks.com":
+          - paragraph: Emma Davis
+          - paragraph:
+            - text: emma.d@siteworks.com
+        - cell "Siteworks Pte Ltd"
+        - cell "Safety equipment catalog"
+        - cell "31%":
+          - progressbar
+          - generic: 31%
+        - cell "Casual":
+          - generic: Casual
+        - cell "🏗️ Emma Tomato":
+          - generic: 🏗️
+          - generic: Emma Tomato
+        - cell "View Emma Davis lead":
+          - button "View Emma Davis lead":
+      - row "Robert Kim r.kim@heavyduty.co HeavyDuty Co Maintenance service plans 85% Prospect 🏗️ Emma Tomato View Robert Kim lead":
+        - cell "Robert Kim r.kim@heavyduty.co":
+          - paragraph: Robert Kim
+          - paragraph:
+            - text: r.kim@heavyduty.co
+        - cell "HeavyDuty Co"
+        - cell "Maintenance service plans"
+        - cell "85%":
+          - progressbar
+          - generic: 85%
+        - cell "Prospect":
+          - generic: Prospect
+        - cell "🏗️ Emma Tomato":
+          - generic: 🏗️
+          - generic: Emma Tomato
+        - cell "View Robert Kim lead":
+          - button "View Robert Kim lead":
+- button "Open quick Test Agent":
+  - text: Test Agent
+- button "Replay console tutorial":

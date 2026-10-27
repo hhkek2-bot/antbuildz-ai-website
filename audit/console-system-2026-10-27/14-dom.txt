@@ -1,0 +1,96 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Return to Antbuildz website":
+    - img "Antbuildz.com"
+    - generic: AI Agent Console
+  - button "Overview":
+    - text: Overview
+  - button "Collapse sidebar":
+  - generic: Active Agent
+  - 'button "Switch active agent: Emma Tomato"':
+    - generic: 🏗️
+    - paragraph: Emma Tomato
+    - paragraph: AI Agent
+  - generic: Navigation
+  - navigation:
+    - paragraph: Build your agent
+    - button "Agent Setup":
+      - text: Agent Setup
+    - button "Knowledge Base":
+      - text: Knowledge Base
+    - button "Workflows":
+      - text: Workflows
+    - button "Inventory":
+      - text: Inventory
+    - button "Integrations":
+      - text: Integrations
+    - paragraph: Design and deploy
+    - button "Settings":
+      - text: Settings
+    - button "Test Agent":
+      - text: Test Agent
+    - button "Deploy":
+      - text: Deploy
+    - paragraph: Run and improve
+    - button "Conversations":
+      - text: Conversations
+    - button "Leads":
+      - text: Leads
+    - button "Deals":
+      - text: Deals
+    - button "User Activities" [active]:
+      - text: User Activities
+    - paragraph: Account and help
+    - button "Billing":
+      - text: Billing
+    - button "Help":
+      - text: Help
+  - generic: Usage
+  - generic: 76 / 150
+  - paragraph: Sales Plan · 50 Extra Credits
+  - button "Account":
+    - text: Account
+- main:
+  - paragraph: "0"
+  - paragraph: Sessions
+  - paragraph: AI chats
+  - paragraph: No change
+  - paragraph: "0"
+  - paragraph: Quotes
+  - paragraph: Quote intent
+  - paragraph: No change
+  - paragraph: "0"
+  - paragraph: Follow Ups
+  - paragraph: Need action
+  - paragraph: No change
+  - paragraph: "0"
+  - paragraph: Captured
+  - paragraph: Contact details
+  - paragraph: No change
+  - textbox "Search email, name, company, phone, or activity..."
+  - combobox:
+    - generic: This Month
+  - combobox:
+    - generic: All sessions
+  - heading "User Activities" [level=2]
+  - paragraph: Signed-in users and their AI agent session activity.
+  - table:
+    - rowgroup:
+      - row "# Email Name Company Phone Activity Created":
+        - columnheader "#"
+        - columnheader "Email"
+        - columnheader "Name"
+        - columnheader "Company"
+        - columnheader "Phone"
+        - columnheader "Activity"
+        - columnheader "Created"
+    - rowgroup:
+      - row "No agent sessions yet User activity will appear here after signed-in users chat with the AI agent.":
+        - cell "No agent sessions yet User activity will appear here after signed-in users chat with the AI agent.":
+          - paragraph: No agent sessions yet
+          - paragraph: User activity will appear here after signed-in users chat with the AI agent.
+- button "Open quick Test Agent":
+  - text: Test Agent
+- button "Replay console tutorial":

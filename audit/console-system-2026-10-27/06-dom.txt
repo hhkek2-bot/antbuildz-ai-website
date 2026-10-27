@@ -1,0 +1,110 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Return to Antbuildz website":
+    - img "Antbuildz.com"
+    - generic: AI Agent Console
+  - button "Overview":
+    - text: Overview
+  - button "Collapse sidebar":
+  - generic: Active Agent
+  - 'button "Switch active agent: Emma Tomato"':
+    - generic: 🏗️
+    - paragraph: Emma Tomato
+    - paragraph: AI Agent
+  - generic: Navigation
+  - navigation:
+    - paragraph: Build your agent
+    - button "Agent Setup":
+      - text: Agent Setup
+    - button "Knowledge Base":
+      - text: Knowledge Base
+    - button "Workflows":
+      - text: Workflows
+    - button "Inventory" [active]:
+      - text: Inventory
+    - button "Integrations":
+      - text: Integrations
+    - paragraph: Design and deploy
+    - button "Settings":
+      - text: Settings
+    - button "Test Agent":
+      - text: Test Agent
+    - button "Deploy":
+      - text: Deploy
+    - paragraph: Run and improve
+    - button "Conversations":
+      - text: Conversations
+    - button "Leads":
+      - text: Leads
+    - button "Deals":
+      - text: Deals
+    - button "User Activities":
+      - text: User Activities
+    - paragraph: Account and help
+    - button "Billing":
+      - text: Billing
+    - button "Help":
+      - text: Help
+  - generic: Usage
+  - generic: 76 / 150
+  - paragraph: Sales Plan · 50 Extra Credits
+  - button "Account":
+    - text: Account
+- main:
+  - text: Webstore auto-sync active
+  - generic: Changes are saved in the shared workspace
+  - button "Integrations":
+    - text: Integrations
+  - tablist "Inventory type":
+    - tab "rental 0" [selected]:
+      - generic: rental
+      - generic: "0"
+    - tab "sales 0":
+      - generic: sales
+      - generic: "0"
+  - textbox "Search rental inventory..."
+  - link "Manage listings":
+    - /url: /main-dashboard/listings/rental
+    - text: Manage listings
+  - button "Add Inventory":
+    - text: Add Inventory
+  - checkbox "Select all visible inventory rows"
+  - generic: No rows to select
+  - button "Edit" [disabled]:
+    - text: Edit
+  - button "Archive" [disabled]:
+    - text: Archive
+  - table:
+    - rowgroup:
+      - 'row "Select all visible inventory rows # Product Brand Model Category Price Availability Source Actions"':
+        - columnheader "Select all visible inventory rows":
+          - checkbox "Select all visible inventory rows"
+        - columnheader "#"
+        - columnheader "Product":
+          - generic: Product
+        - columnheader "Brand":
+          - generic: Brand
+        - columnheader "Model":
+          - generic: Model
+        - columnheader "Category":
+          - generic: Category
+        - columnheader "Price":
+          - generic: Price
+        - columnheader "Availability":
+          - generic: Availability
+        - columnheader "Source"
+        - columnheader "Actions"
+    - rowgroup:
+      - row "No connected rental inventory yet. Add a rental listing, upload inventory, or connect a Google Sheet.":
+        - cell "No connected rental inventory yet. Add a rental listing, upload inventory, or connect a Google Sheet."
+  - paragraph: No inventory rows
+  - button "Prev" [disabled]:
+    - text: Prev
+  - generic: 1 / 1
+  - button "Next" [disabled]:
+    - text: Next
+- button "Open quick Test Agent":
+  - text: Test Agent
+- button "Replay console tutorial":

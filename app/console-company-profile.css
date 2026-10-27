@@ -1,0 +1,40 @@
+#root main.company-profile-open > :not(.company-profile-page) { display: none !important; }
+#root .company-profile-legacy { display: none !important; }
+#root .company-profile-active .bright-nav-item-active:not(.company-profile-nav) { background: transparent; box-shadow: none; }
+#root .company-profile-active .company-profile-nav { background: var(--console-primary); color: var(--console-ink); font-weight: 600; }
+.company-profile-page { max-width: 1180px; margin: auto; padding: 24px 24px 80px; }
+.company-profile-intro { margin-bottom: 24px; }
+.company-profile-step { display: block; color: var(--console-muted); font-size: 11px; font-weight: 650; letter-spacing: .12em; margin-bottom: 10px; }
+#root .company-profile-intro h2 { font-size: 28px; margin: 0 0 8px; }
+.company-profile-intro p, .company-profile-form-intro p { color: var(--console-muted); font-size: 14px; line-height: 1.65; }
+.company-profile-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
+.company-profile-form { border: 1px solid var(--console-line); border-radius: var(--console-radius-card); background: var(--console-surface); box-shadow: var(--console-shadow); }
+.company-profile-form { padding: 28px; }
+.company-profile-form-intro { padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--console-line); }
+#root .company-profile-form-intro h3 { font-size: 16px; margin: 0 0 8px; }
+.company-profile-form-intro > span { display: block; font-size: 12px; color: var(--console-muted); margin-top: 12px; }
+.company-profile-fields { display: grid; grid-template-columns: 1fr; gap: 22px; }
+.company-profile-fields label { display: block; font-weight: 600; font-size: 14px; }
+.company-profile-optional { float: right; color: var(--console-muted); font-size: 12px; font-weight: 400; }
+#root .company-profile-fields :is(input,textarea) { display: block; box-sizing: border-box; width: 100%; min-height: 46px; margin-top: 8px; padding: 12px 14px; background: var(--console-canvas); border: 1px solid var(--console-line); border-radius: 12px; color: var(--console-ink); font: 400 14px/1.6 var(--console-font-body); }
+#root .company-profile-fields textarea { resize: vertical; min-height: 100px; }
+#root .company-profile-fields :is(input,textarea)::placeholder { color: var(--console-muted); opacity: 1; }
+.company-profile-fields small { display: block; margin-top: 8px; font-weight: 400; color: var(--console-muted); font-size: 12px; line-height: 1.6; }
+.company-profile-actions { display: flex; gap: 18px; align-items: center; justify-content: space-between; padding-top: 24px; margin-top: 28px; border-top: 1px solid var(--console-line); }
+.company-profile-save-status { color: var(--console-muted); font-size: 12px; }
+.company-profile-local { margin-top: 18px; font-size: 12px; color: var(--console-muted); }
+.company-profile-prompt { display: flex; gap: 14px; align-items: center; border: 1px solid var(--console-line); background: var(--console-surface); border-radius: 16px; padding: 18px 20px; }
+.company-profile-prompt > svg { flex-shrink: 0; }
+.company-profile-prompt > div { flex: 1; }
+.company-profile-prompt strong { font-size: 14px; }
+.company-profile-prompt p { margin-top: 4px; color: var(--console-muted); font-size: 12px; }
+.company-profile-shared-link { margin-top: 12px; min-height: 44px; color: var(--console-body); text-decoration: underline; text-underline-offset: 4px; }
+.company-profile-page :is(input,textarea,button):focus-visible, .company-profile-nav:focus-visible, .company-profile-shared-link:focus-visible { outline: 2px solid var(--console-focus); outline-offset: 3px; }
+@media (max-width: 767px) { .company-profile-page { padding: 20px 16px 100px; } .company-profile-form { padding: 20px; } #root .company-profile-intro h2 { font-size: 24px; } .company-profile-actions, .company-profile-prompt { align-items: stretch; flex-direction: column; } }
+#root [data-console-system] .company-profile-intro h2 { font-size: var(--console-type-section); }
+#root [data-console-system] .company-profile-form-intro h3 { font-size: var(--console-type-heading); }
+#root .company-profile-active .bright-nav-item-active:not(.company-profile-nav) { font-weight: 400; }
+
+@media (max-width: 767px) { #root .company-profile-fields textarea[name="industry"] { min-height: 150px; } }
+#root [data-console-system] .company-profile-page .company-profile-intro h2 { font-size: var(--console-type-section); }
+@media (max-width: 767px) { #root [data-console-system] .company-profile-fields textarea[name="industry"] { min-height: 150px !important; } }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { PublicPageShell } from '../agreements/legal-shell';
 import { SOCIAL_SHARE_IMAGE } from '@/lib/social-share';
 import { ExperienceGallery } from '../features/conversational-experience/experience-media';
+import { IntroVideo } from '../features/conversational-experience/intro-video';
 import styles from '../features/conversational-experience/experience.module.css';
 
 const path = '/conversational-experience';
@@ -44,6 +45,8 @@ export default function ConversationalExperiencePage() {
           </div>
         </div>
       </section>
+
+      <IntroVideo videoId="6Dml7rBf9CU" />
 
       <section className={styles.proof} aria-labelledby="demonstrations">
         <div className={styles.frame}>

@@ -1,0 +1,187 @@
+/* Console-only semantic foundations. Marketing pages and customer chat themes
+   remain component-owned. Keep the values and role table in DESIGN.md together. */
+[data-console-system] {
+  --console-font-body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --console-font-heading: "Plus Jakarta Sans", Inter, sans-serif;
+  --console-canvas: #f8f7ff;
+  --console-surface: #fff;
+  --console-soft: #f1eff8;
+  --console-ink: #0f172a;
+  --console-body: #475569;
+  --console-muted: #64748b;
+  --console-line: #e2e8f0;
+  --console-line-strong: #94a3b8;
+  --console-primary: #ffc501;
+  --console-primary-hover: #f5b70a;
+  --console-focus: #2563eb;
+  --console-danger: #b91c1c;
+  --console-success: #166534;
+  --console-warning: #92400e;
+  --console-info: #1d4ed8;
+  --console-type-section: 20px;
+  --console-type-heading: 16px;
+  --console-type-body: 14px;
+  --console-type-table: 13px;
+  --console-type-small: 12px;
+  --console-control: 44px;
+  --console-control-compact: 36px;
+  --console-radius-card: 20px;
+  --console-radius-control: 12px;
+  --console-radius-pill: 999px;
+  --console-space-1: 4px;
+  --console-space-2: 8px;
+  --console-space-3: 12px;
+  --console-space-4: 16px;
+  --console-space-5: 20px;
+  --console-space-6: 24px;
+  --console-space-8: 32px;
+  --console-shadow: 0 1px 2px rgb(15 23 42 / 4%), 0 12px 32px -18px rgb(15 23 42 / 12%);
+  font-family: var(--console-font-body);
+  font-size: var(--console-type-body);
+  line-height: 1.5;
+  color: var(--console-ink);
+}
+
+/* The ID prevents later-loaded bundle utilities from overriding semantic roles. */
+:is(#root [data-console-system], [data-console-portal]) :is(h1, h2, h3, .dashboard-title, .bright-display):not(.live-chat-preview-panel *) {
+  font-family: var(--console-font-heading);
+  letter-spacing: -.02em;
+  line-height: 1.4;
+}
+:is(#root [data-console-system], [data-console-portal]) :is(h2, .dashboard-title):not(.live-chat-preview-panel *) {
+  font-size: var(--console-type-heading);
+  font-weight: 700;
+  color: var(--console-ink);
+}
+:is(#root [data-console-system], [data-console-portal]) h3:not(.live-chat-preview-panel *) {
+  font-size: var(--console-type-body);
+  font-weight: 600;
+}
+#root [data-console-system] .bright-topbar h1 {
+  font-size: var(--console-type-heading);
+  font-weight: 700;
+}
+#root [data-console-system] :is(.console-overview__guide h2, .console-overview__agents-heading h2, .antbuildz-ai-rules .dashboard-title, main h2.text-2xl, main > .dashboard-content > .dashboard-page-frame > div > h2) {
+  font-size: var(--console-type-section);
+  line-height: 1.4;
+  font-weight: 700;
+}
+#root [data-console-system] .console-overview__agent h3 { font-size: var(--console-type-heading); font-weight: 700; }
+#root [data-console-system] main :is(h3.text-base, h3.text-lg):not(.live-chat-preview-panel *) { font-size: var(--console-type-heading); font-weight: 700; }
+#root [data-console-system] .antbuildz-ai-rules > .glass-card { padding: var(--console-space-6); gap: var(--console-space-5); }
+#root [data-console-system] .bright-shell { background-color: var(--console-canvas); }
+:is(#root [data-console-system], [data-console-portal]) :is([class~="text-[#202124]"], [class~="text-[#171717]"]) { color: var(--console-ink); }
+:is(#root [data-console-system], [data-console-portal]) [class~="text-[#3c4043]"] { color: var(--console-body); }
+:is(#root [data-console-system], [data-console-portal]) :is([class~="text-[#5f6368]"], [class~="text-[#71717a]"]) { color: var(--console-muted); }
+:is(#root [data-console-system], [data-console-portal]) :is([class~="text-[10px]"], [class~="text-[11px]"]):not(.live-chat-preview-panel *) { font-size: var(--console-type-small); line-height: 1.5; }
+[data-console-portal][role="dialog"] { border-color: var(--console-line); border-radius: var(--console-radius-card); }
+[data-console-portal][role="dialog"] h2 { font-size: var(--console-type-section); }
+#root [data-console-system] :is(.text-muted-foreground, .antbuildz-deploy__intro, .antbuildz-deploy__card-heading p, .console-video-banner__copy p, .console-overview__guide > p, .antbuildz-ai-rules__tip, .antbuildz-ai-rules__rule-prompt-label, .antbuildz-ai-rules__rule-footer span) { color: var(--console-muted); }
+
+:is(#root [data-console-system], [data-console-portal]) [data-console-button] {
+  min-height: var(--console-control);
+  height: auto;
+  min-width: 0;
+  padding: 10px 18px;
+  border-radius: var(--console-radius-pill);
+  font-family: var(--console-font-body);
+  font-size: var(--console-type-body);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: normal;
+  gap: var(--console-space-2);
+  box-shadow: none;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+:is(#root [data-console-system], [data-console-portal]) [data-console-button="primary"] {
+  border: 1px solid transparent;
+  background: var(--console-primary);
+  color: var(--console-ink);
+  transform: none;
+}
+:is(#root [data-console-system], [data-console-portal]) [data-console-button="primary"]:hover:not(:disabled) { background: var(--console-primary-hover); transform: none; box-shadow: none; }
+:is(#root [data-console-system], [data-console-portal]) [data-console-button="secondary"] { border: 1px solid var(--console-line); background: var(--console-surface); color: var(--console-ink); }
+:is(#root [data-console-system], [data-console-portal]) [data-console-button="secondary"]:hover:not(:disabled) { background: var(--console-canvas); border-color: var(--console-line-strong); }
+:is(#root [data-console-system], [data-console-portal]) [data-console-button="ghost"] { border: 1px solid transparent; background: transparent; color: var(--console-body); }
+:is(#root [data-console-system], [data-console-portal]) [data-console-button="ghost"]:hover:not(:disabled) { background: var(--console-soft); color: var(--console-ink); }
+:is(#root [data-console-system], [data-console-portal]) [data-console-button="danger"] { border: 1px solid var(--console-danger); background: var(--console-surface); color: var(--console-danger); }
+:is(#root [data-console-system], [data-console-portal]) [data-console-button="icon"] { width: var(--console-control-compact); height: var(--console-control-compact); min-height: var(--console-control-compact); flex: 0 0 auto; padding: var(--console-space-2); }
+:is(#root [data-console-system], [data-console-portal]) [data-console-button]:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+#root [data-console-system] :is(td [data-console-button], .antbuildz-ai-rules__rule-examples [data-console-button], .antbuildz-ai-rules__templates [data-console-button]) { min-height: var(--console-control-compact); padding: 7px 12px; font-size: var(--console-type-small); }
+
+:is(#root [data-console-system], [data-console-portal]) :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]), textarea, select, button[role="combobox"]):not(.live-chat-preview-panel *) {
+  min-height: var(--console-control);
+  border: 1px solid var(--console-line);
+  border-radius: var(--console-radius-control);
+  background-color: var(--console-canvas);
+  color: var(--console-ink);
+  font-family: var(--console-font-body);
+  font-size: var(--console-type-body);
+  line-height: 1.5;
+  letter-spacing: normal;
+  box-shadow: none;
+}
+:is(#root [data-console-system], [data-console-portal]) textarea { padding: 12px 14px; }
+:is(#root [data-console-system], [data-console-portal]) :is(input, textarea)::placeholder { color: var(--console-muted); opacity: 1; }
+:is(#root [data-console-system], [data-console-portal]) :is(input, textarea, select)[aria-invalid="true"] { border-color: var(--console-danger); }
+:is(#root [data-console-system], [data-console-portal]) :is(input, textarea, select):disabled { background-color: var(--console-soft); cursor: not-allowed; opacity: .6; }
+#root [data-console-system] main label { font-family: var(--console-font-body); font-size: var(--console-type-body); font-weight: 600; letter-spacing: normal; line-height: 1.5; }
+
+#root [data-console-system] [role="tablist"] { max-width: 100%; height: auto; min-height: var(--console-control); background: var(--console-soft); border-radius: var(--console-radius-control); }
+#root [data-console-system] [role="tab"] { min-height: var(--console-control-compact); padding: 8px 12px; border-radius: 8px; font-family: var(--console-font-body); font-size: var(--console-type-body); font-weight: 600; letter-spacing: normal; line-height: 1.4; }
+#root [data-console-system] [role="tab"][aria-selected="true"] { background: var(--console-surface); color: var(--console-ink); box-shadow: 0 1px 2px rgb(15 23 42 / 8%); }
+#root [data-console-system] .bright-nav-item-active { background: var(--console-primary); color: var(--console-ink); box-shadow: none; }
+#root [data-console-system] :is([role="switch"], [role="checkbox"])[data-state="checked"] { background-color: var(--console-primary); color: var(--console-ink); }
+#root [data-console-system] main button.shrink-0.rounded-full:not([role]) { min-height: var(--console-control-compact); font-size: var(--console-type-small); }
+#root [data-console-system] :is(.bright-nav-item, .bright-nav-item-active) { font-family: var(--console-font-body); font-size: var(--console-type-body); }
+
+#root [data-console-system] :is(.glass-card, .console-video-banner, .console-overview__summary > button, .console-overview__guide, .antbuildz-deploy__card, .antbuildz-deploy__guide) { border-color: var(--console-line); border-radius: var(--console-radius-card); box-shadow: var(--console-shadow); }
+#root [data-console-system] .glass-card:hover { border-color: var(--console-line); box-shadow: var(--console-shadow); }
+#root [data-console-system] :is(.antbuildz-ai-rules__badge, .antbuildz-ai-rules__tip strong) { color: var(--console-ink); }
+#root [data-console-system] .antbuildz-ai-rules__badge { background: var(--console-soft); }
+#root [data-console-system] :is(.antbuildz-ai-rules__tip, .antbuildz-ai-rules__business-rules, .antbuildz-ai-rules__safeguards) { border-color: var(--console-line); }
+#root [data-console-system] .antbuildz-ai-rules :is(p, li) { line-height: 1.6; }
+#root [data-console-system] :is(.antbuildz-deploy__card-heading p, .console-overview__summary small, .console-video-banner__copy p) { font-size: var(--console-type-body); }
+#root [data-console-system] .console-overview__summary strong { font-size: 32px; font-weight: 700; font-variant-numeric: tabular-nums; }
+#root [data-console-system] .console-overview__summary small { font-size: var(--console-type-small); }
+#root [data-console-system] .antbuildz-deploy__manage { min-width: 114px; }
+#root [data-console-system] .antbuildz-deploy__grid { align-items: stretch; }
+#root [data-console-system] .antbuildz-deploy__card > section { height: 100%; }
+#root [data-console-system] .antbuildz-deploy__card-heading { flex: 1; min-height: 164px; }
+#root [data-console-system] .antbuildz-deploy__visual { flex-shrink: 0; }
+
+#root [data-console-system] table { font-family: var(--console-font-body); font-size: var(--console-type-table); line-height: 1.5; }
+#root [data-console-system] th { color: var(--console-muted); font-size: var(--console-type-small); font-weight: 600; letter-spacing: .02em; }
+#root [data-console-system] td { font-size: var(--console-type-table); color: var(--console-body); }
+#root [data-console-system] td :is(p, span, button:not([data-console-button])) { font-size: inherit; }
+#root [data-console-system] td p + p { color: var(--console-muted); font-size: var(--console-type-small); }
+@media (min-width: 1024px) {
+  #root [data-console-page="integrations"] main .dashboard-panel > [role="tabpanel"] > .grid { overflow-y: auto; align-content: start; padding: 2px 2px 8px; }
+}
+
+:is(#root [data-console-system], [data-console-portal]) :is(button, a, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--console-focus);
+  outline-offset: 3px;
+  --tw-ring-color: transparent;
+}
+@media (min-width: 768px) and (max-width: 1179px) {
+  #root [data-console-system] .antbuildz-deploy__card-heading { min-height: 188px; padding: 20px 20px 76px; }
+}
+@media (max-width: 767px) {
+  #root [data-console-system] { --console-type-section: 18px; }
+  #root [data-console-system] .dashboard-content { padding-left: 16px; padding-right: 16px; }
+  #root [data-console-system] .antbuildz-ai-rules > .glass-card { padding: var(--console-space-5); }
+  #root [data-console-system] [role="tablist"] { overflow-x: auto; justify-content: flex-start; }
+  :is(#root [data-console-system], [data-console-portal]) :is([data-console-button], [role="tab"]) { min-height: var(--console-control); }
+  :is(#root [data-console-system], [data-console-portal]) [data-console-button="icon"] { width: var(--console-control); height: var(--console-control); }
+  #root [data-console-system] :is(td [data-console-button], .antbuildz-ai-rules__rule-examples [data-console-button], .antbuildz-ai-rules__templates [data-console-button]) { min-height: var(--console-control); }
+  #root [data-console-system] main button.shrink-0.rounded-full:not([role]) { min-height: var(--console-control); }
+  #root [data-console-system] .console-video-banner__copy p { font-size: var(--console-type-small); }
+  #root [data-console-system] .antbuildz-deploy__card-heading { min-height: 164px; padding: 20px 20px 64px; }
+  #root [data-console-system] .antbuildz-deploy__manage { right: 20px; bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(#root [data-console-system], [data-console-portal]) *,
+  :is(#root [data-console-system], [data-console-portal]) *::before,
+  :is(#root [data-console-system], [data-console-portal]) *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

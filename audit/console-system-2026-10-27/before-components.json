@@ -1,0 +1,285 @@
+[
+  {
+    "num": 5,
+    "label": "Workflows",
+    "firstText": "Workflow builder",
+    "headings": [
+      {
+        "cls": "mt-2 text-2xl font-semibold tracking-tight text-foreground",
+        "size": "24px",
+        "text": "Design the agent logic as a node flow",
+        "weight": "600"
+      },
+      {
+        "cls": "mt-4 text-base font-semibold leading-snug text-foreground",
+        "size": "16px",
+        "text": "Parts Quotation",
+        "weight": "600"
+      },
+      {
+        "cls": "mt-4 text-base font-semibold leading-snug text-foreground",
+        "size": "16px",
+        "text": "Equipment Troubleshooting",
+        "weight": "600"
+      },
+      {
+        "cls": "mt-4 text-base font-semibold leading-snug text-foreground",
+        "size": "16px",
+        "text": "Deal Intent Capture",
+        "weight": "600"
+      },
+      {
+        "cls": "mt-4 text-base font-semibold leading-snug text-foreground",
+        "size": "16px",
+        "text": "After-Hours Lead Capture",
+        "weight": "600"
+      },
+      {
+        "cls": "text-base font-semibold text-foreground",
+        "size": "16px",
+        "text": "Your workflows",
+        "weight": "800"
+      }
+    ],
+    "page": "max-w-6xl space-y-6 pb-24"
+  },
+  {
+    "num": 6,
+    "label": "Inventory",
+    "firstText": "Changes are saved in the shared workspace",
+    "headings": [],
+    "page": "flex min-h-full max-w-6xl flex-col gap-2 xl:h-full xl:min-h-0"
+  },
+  {
+    "num": 7,
+    "label": "Integrations",
+    "firstText": "All",
+    "headings": [
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "Google Drive",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "OneDrive / SharePoint",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "Notion",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "Google Docs",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "Confluence",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "Dropbox",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "HubSpot",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "Salesforce",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title truncate",
+        "size": "16px",
+        "text": "Pipedrive",
+        "weight": "800"
+      }
+    ],
+    "page": "flex min-h-full max-w-6xl flex-col gap-4 lg:h-full lg:min-h-0"
+  },
+  {
+    "num": 8,
+    "label": "Settings",
+    "firstText": "Plan & Usage",
+    "headings": [
+      {
+        "cls": "dashboard-title",
+        "size": "16px",
+        "text": "Plan & Usage",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title",
+        "size": "16px",
+        "text": "Email Alerts",
+        "weight": "800"
+      },
+      {
+        "cls": "dashboard-title",
+        "size": "16px",
+        "text": "Team Permissions",
+        "weight": "800"
+      }
+    ],
+    "page": "max-w-5xl space-y-6"
+  },
+  {
+    "num": 9,
+    "label": "Test Agent",
+    "firstText": "Test your AI Agent",
+    "headings": [
+      {
+        "cls": "text-lg font-semibold text-foreground",
+        "size": "18px",
+        "text": "Test your AI Agent",
+        "weight": "600"
+      },
+      {
+        "cls": "live-chat-title",
+        "size": "16px",
+        "text": "Emma Tomato",
+        "weight": "700"
+      },
+      {
+        "cls": "text-lg font-semibold text-foreground",
+        "size": "18px",
+        "text": "Test records",
+        "weight": "600"
+      }
+    ],
+    "page": "mx-auto w-full max-w-[66rem] min-w-0 space-y-5"
+  },
+  {
+    "num": 10,
+    "label": "Deploy",
+    "firstText": "Choose how customers open your AI Agent. Manage a layout to see its link or website installation options.",
+    "headings": [
+      {
+        "cls": "text-base font-semibold text-foreground",
+        "size": "16px",
+        "text": "Center Stage",
+        "weight": "800"
+      },
+      {
+        "cls": "text-base font-semibold text-foreground",
+        "size": "16px",
+        "text": "Chat bubble",
+        "weight": "800"
+      }
+    ],
+    "page": "mx-auto w-full max-w-[58rem] space-y-5 antbuildz-deploy"
+  },
+  {
+    "num": 11,
+    "label": "Conversations",
+    "firstText": "4",
+    "headings": [],
+    "page": "relative "
+  },
+  {
+    "num": 12,
+    "label": "Leads",
+    "firstText": "2",
+    "headings": [],
+    "page": "space-y-6"
+  },
+  {
+    "num": 13,
+    "label": "Deals",
+    "firstText": "Open tickets",
+    "headings": [
+      {
+        "cls": "mt-2 text-lg font-bold tracking-tight text-foreground",
+        "size": "18px",
+        "text": "CAT 320 GC Excavator",
+        "weight": "700"
+      },
+      {
+        "cls": "text-[13px] font-bold text-foreground",
+        "size": "13px",
+        "text": "Request details",
+        "weight": "700"
+      },
+      {
+        "cls": "text-[13px] font-bold text-foreground",
+        "size": "13px",
+        "text": "Automatic confirmation",
+        "weight": "700"
+      },
+      {
+        "cls": "text-[13px] font-bold text-foreground",
+        "size": "13px",
+        "text": "Internal notes",
+        "weight": "700"
+      },
+      {
+        "cls": "text-[13px] font-bold text-foreground",
+        "size": "13px",
+        "text": "Activity",
+        "weight": "700"
+      },
+      {
+        "cls": "text-[13px] font-bold text-foreground",
+        "size": "13px",
+        "text": "Close outcome",
+        "weight": "700"
+      }
+    ],
+    "page": "mx-auto w-full max-w-[1500px] space-y-4"
+  },
+  {
+    "num": 14,
+    "label": "User Activities",
+    "firstText": "0",
+    "headings": [
+      {
+        "cls": "text-sm font-semibold text-foreground",
+        "size": "14px",
+        "text": "User Activities",
+        "weight": "600"
+      }
+    ],
+    "page": "mx-auto w-full max-w-6xl space-y-4"
+  },
+  {
+    "num": 15,
+    "label": "Billing",
+    "firstText": "UI mock-up",
+    "headings": [
+      {
+        "cls": "text-2xl font-bold tracking-tight",
+        "size": "24px",
+        "text": "Sales",
+        "weight": "700"
+      },
+      {
+        "cls": "text-lg font-bold",
+        "size": "18px",
+        "text": "Conversation balance",
+        "weight": "700"
+      },
+      {
+        "cls": "text-base font-bold",
+        "size": "16px",
+        "text": "Auto Top-Up",
+        "weight": "700"
+      }
+    ],
+    "page": "mx-auto w-full max-w-[1050px]"
+  }
+]

@@ -303,22 +303,20 @@
   transform: translateY(-2px);
 }
 
-/* The header demo action is a compact utility, not a full content CTA. Keep
-   its touch target while using a quieter yellow so it does not dominate the
-   page title or the centred navigation. */
+/* Keep the header demo action compact while using the primary CTA colours. */
 #root a.antbuildz-header-demo[data-antbuildz-cta="true"] {
   height: 44px !important;
   min-height: 44px !important;
   padding-inline: 18px !important;
-  border-color: color-mix(in srgb, var(--yellow) 58%, var(--clean)) !important;
-  background: color-mix(in srgb, var(--yellow) 34%, var(--clean)) !important;
+  border-color: var(--yellow) !important;
+  background: var(--yellow) !important;
   font-size: 14px !important;
   box-shadow: none !important;
 }
 
 #root a.antbuildz-header-demo[data-antbuildz-cta="true"]:hover {
-  border-color: color-mix(in srgb, var(--yellow) 72%, var(--clean)) !important;
-  background: color-mix(in srgb, var(--yellow) 50%, var(--clean)) !important;
+  border-color: var(--yellow-hover) !important;
+  background: var(--yellow-hover) !important;
 }
 
 #root a[data-antbuildz-cta-variant="secondary"]:hover {
@@ -2055,9 +2053,9 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
   height: 44px;
   min-height: 44px;
   padding: 0 18px;
-  border: 1px solid color-mix(in srgb, var(--yellow) 58%, var(--clean));
+  border: 1px solid var(--yellow);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--yellow) 34%, var(--clean));
+  background: var(--yellow);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 14px;
@@ -2068,8 +2066,8 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 }
 
 .antbuildz-public-header .antbuildz-header-demo:hover {
-  border-color: color-mix(in srgb, var(--yellow) 72%, var(--clean));
-  background: color-mix(in srgb, var(--yellow) 50%, var(--clean));
+  border-color: var(--yellow-hover);
+  background: var(--yellow-hover);
 }
 .antbuildz-public-header .antbuildz-header-demo:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
@@ -2792,6 +2790,30 @@ body:has(#root.antbuildz-original-root.antbuildz-ai-pricing),
 
 .antbuildz-products-menu__console .antbuildz-industries-menu__link {
   text-align: center;
+  text-wrap: balance;
+}
+
+
+.antbuildz-products-menu__console::before {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 18px;
+  background: var(--menu-border);
+}
+.antbuildz-products-menu__console .antbuildz-industries-menu__link > span {
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+body:has(.antbuildz-public-header) .antbuildz-products-menu__console .antbuildz-industries-menu__link:is(:hover, :focus-visible) {
+  background: transparent;
+  border-color: transparent;
+}
+.antbuildz-products-menu__console .antbuildz-industries-menu__link:hover > span {
+  text-decoration-color: currentColor;
 }
 
 .antbuildz-industries-menu__link {
@@ -5387,3 +5409,33 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
 @media (max-width: 359px) {
   .abz-public-footer__grid { grid-template-columns: 1fr !important; }
 }
+
+.antbuildz-home-hero-conversation__diagram { display: block; width: 100%; height: 230px; object-fit: contain; margin-top: 12px; background: white; border-radius: 12px; }
+
+.antbuildz-ai-home .home-boomlift-floating.is-centre { top: auto; bottom: 64px; height: min(420px, calc(100% - 300px)); pointer-events: auto; display: flex; flex-direction: column; }
+.home-boom-viewport { overflow: auto; scrollbar-width: none; flex: 1; min-height: 0; mask-image: linear-gradient(transparent, #000 20px, #000); }
+.home-boom-thread { padding: 20px 12px 8px; color: white; font-size: 14px; line-height: 1.5; }
+.home-boom-turn { margin-bottom: 18px; }
+.home-boom-question { margin: 0 0 14px auto; max-width: 85%; padding: 12px 16px; border-radius: 20px 20px 5px 20px; background: #ffc50125; }
+.home-boom-answer { padding: 12px 14px; border-radius: 18px; background: #ffffff0a; }
+.home-boom-working, .home-boom-note { display: block; color: #ffffffb8; font-size: 11px; margin-bottom: 10px; }
+.home-boom-answer p { margin: 0 0 12px; }
+.home-boom-details { margin: 12px 0; overflow: hidden; border-radius: 10px; }
+.home-boom-details table { width: 100%; border-collapse: collapse; font-size: 12px; background: #ffffff12; }
+.home-boom-details th, .home-boom-details td { text-align: left; padding: 7px 9px; border-bottom: 1px solid #ffffff20; }
+.home-boom-details th { background: #29333f; font-weight: 600; position: sticky; top: 0; }
+.home-boom-details td:first-child { width: 40%; color: #ffffffbb; }
+.home-boom-details.is-full-specifications { max-height: 220px; overflow-y: auto; scrollbar-width: thin; }
+.home-boom-details a { display: block; color: #fff; border: 1px solid #ffffff40; padding: 16px; text-decoration: underline; border-radius: 12px; }
+.home-boom-reach-values { font-size: 12px; padding: 10px; background: #ffffff15; }
+.home-boom-picture { position: relative; margin: 12px 0; height: 190px; }
+.home-boom-picture img { height: 100%; max-width: 100%; object-fit: contain; background: white; border-radius: 10px; }
+.home-boom-expand { position: absolute; bottom: 10px; left: 100px; background: white; color: #172536; padding: 4px 10px; border-radius: 8px; }
+.home-boom-picture.is-pressing .home-boom-expand { outline: 3px solid #ffc501; transform: scale(.9); }
+.home-boom-outcome { padding: 10px; background: #ffc50120; border-left: 2px solid #ffc501; }
+.home-boom-next { font-size: 12px; border-left: 2px solid #ffc501; padding-left: 10px; }
+.home-boom-zoom { position: absolute; inset: 0; z-index: 8; padding: 10px; background: #ffffffed; border-radius: 16px; pointer-events: none; }
+.home-boom-zoom img { width: 100%; height: 100%; object-fit: contain; }
+.home-boomlift-floating [hidden] { display: none !important; }
+@media (max-width: 1179px) { .antbuildz-ai-home .home-boomlift-floating.is-centre { top: auto; height: min(390px, calc(100% - 390px)); } }
+@media (max-width: 767px) { .antbuildz-ai-home .home-boomlift-floating.is-centre { top: 382px; bottom: auto; height: min(370px, calc(100% - 434px)); } .home-boom-thread { font-size: 13px; } }

@@ -1,0 +1,88 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Return to Antbuildz website":
+    - img "Antbuildz.com"
+    - generic: AI Agent Console
+  - button "Overview":
+    - text: Overview
+  - button "Collapse sidebar":
+  - generic: Active Agent
+  - 'button "Switch active agent: Emma Tomato"':
+    - generic: 🏗️
+    - paragraph: Emma Tomato
+    - paragraph: AI Agent
+  - generic: Navigation
+  - navigation:
+    - paragraph: Build your agent
+    - button "Agent Setup":
+      - text: Agent Setup
+    - button "Knowledge Base":
+      - text: Knowledge Base
+    - button "Workflows":
+      - text: Workflows
+    - button "Inventory":
+      - text: Inventory
+    - button "Integrations":
+      - text: Integrations
+    - paragraph: Design and deploy
+    - button "Settings":
+      - text: Settings
+    - button "Test Agent":
+      - text: Test Agent
+    - button "Deploy" [active]:
+      - text: Deploy
+    - paragraph: Run and improve
+    - button "Conversations":
+      - text: Conversations
+    - button "Leads":
+      - text: Leads
+    - button "Deals":
+      - text: Deals
+    - button "User Activities":
+      - text: User Activities
+    - paragraph: Account and help
+    - button "Billing":
+      - text: Billing
+    - button "Help":
+      - text: Help
+  - generic: Usage
+  - generic: 76 / 150
+  - paragraph: Sales Plan · 50 Extra Credits
+  - button "Account":
+    - text: Account
+- main:
+  - region "Share your chat page":
+    - generic: "1"
+    - heading "Share your chat page" [level=2]
+    - paragraph: Give customers a direct link to Emma Tomato. It works in email, WhatsApp and a QR code.
+    - paragraph: localhost:8081/chat
+    - paragraph: This chat address works on this computer only. Host the console at a public address before sharing the link or embed code.
+    - link "Open local preview":
+      - /url: http://localhost:8081/chat?tenant=sembang-sg&fresh=1&lcTheme=midnight&lcAccent=%23FF6B6B&lcBackground=theme&lcTypography=theme&lcText=theme&lcTextSize=comfortable&lcLineFit=eight&lcPattern=none&lcLauncher=dynamic-island
+      - text: Open local preview
+    - button "Copy link" [disabled]:
+      - text: Copy link
+  - region "Embed on your website":
+    - generic: "2"
+    - heading "Embed on your website" [level=2]
+    - paragraph: Add the chat to any page, or send the code and instructions to your developer.
+    - code: <iframe src="http://localhost:8081/chat?tenant=sembang-sg&amp;fresh=1&amp;lcTheme=midnight&amp;lcAccent=%23FF6B6B&amp;lcBackground=theme&amp;lcTypography=theme&amp;lcText=theme&amp;lcTextSize=comfortable&amp;lcLineFit=eight&amp;lcPattern=none&amp;lcLauncher=dynamic-island" title="Antbuildz AI Agent" style="position:fixed;right:24px;bottom:24px;width:min(420px,calc(100vw - 32px));height:min(720px,calc(100vh - 48px));border:0;border-radius:24px;box-shadow:0 24px 70px rgba(15,23,42,0.28);z-index:2147483647;background:oklch(0.17 0.012 260);" loading="lazy" allow="clipboard-write; microphone"></iframe>
+    - button "Copy embed code" [disabled]:
+      - text: Copy embed code
+  - paragraph: Installation guide
+  - list:
+    - listitem: 1. Copy the website embed code.
+    - text: 2. Paste it before
+    - code: </body>
+    - text: ", or into a Custom HTML tag in GTM."
+    - listitem: 3. Publish the page and open it as a customer would.
+  - button "Send to developer" [disabled]:
+    - text: Send to developer
+  - link "Get help":
+    - /url: /book-a-demo
+    - text: Get help
+- button "Open quick Test Agent":
+  - text: Test Agent
+- button "Replay console tutorial":

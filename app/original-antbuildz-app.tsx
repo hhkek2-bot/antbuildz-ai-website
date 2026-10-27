@@ -1,5 +1,6 @@
 'use client';
 
+import { mountBoomliftAnimation } from './home-boomlift-animation';
 import { useEffect } from 'react';
 import { RESOURCE_TUTORIAL_CATEGORIES, RESOURCE_LEARNING_LABELS } from '../lib/resource-tutorial-categories';
 import { WEBSTORE_TITLE } from '../lib/ai-webstore-copy';
@@ -29,6 +30,14 @@ import { syncConsoleAiRulesDesign } from './console-ai-rules-design';
 import './console-ai-rules-design.css';
 import { syncConsoleDeployChannels } from './console-deploy-channels';
 import './console-deploy-channels.css';
+import { syncConsoleVideoBanner } from './console-video-banner';
+import './console-video-banner.css';
+import { syncConsoleOverviewDesign } from './console-overview-design';
+import './console-overview-design.css';
+import { syncConsoleDesignSystem } from './console-design-system';
+import './console-design-system.css';
+import { syncConsoleCompanyProfile } from './console-company-profile';
+import './console-company-profile.css';
 
 const ORIGINAL_STYLESHEET_ID = 'antbuildz-original-styles';
 const ORIGINAL_SCRIPT_ID = 'antbuildz-original-app';
@@ -789,6 +798,10 @@ type HomeHeroConversationMessage = {
   kind: 'buyer' | 'agent' | 'requirement';
   text: string;
 } | {
+  kind: 'diagram';
+  text: string;
+  src: string;
+} | {
   kind: 'summary';
   title: string;
   rows: ReadonlyArray<{
@@ -801,54 +814,23 @@ type HomeHeroConversationMessage = {
 };
 
 const HOME_HERO_CONVERSATION: ReadonlyArray<HomeHeroConversationMessage> = [
-  {
-    kind: 'buyer',
-    text: 'We need 23 m working height, a 1.0 m access route and a combined platform load up to 200 kg.',
-  },
-  {
-    kind: 'agent',
-    text: 'That points to a tracked spider lift. The TEUPEN LEO23GT matches the stated height, retracted width and platform load.',
-  },
-  {
-    kind: 'buyer',
-    text: 'What is the monthly hire price, and what should we confirm before booking?',
-  },
-  {
-    kind: 'summary',
-    title: 'TEUPEN LEO23GT',
-    rows: [
-      { label: 'Working height', value: '23.0 m' },
-      { label: 'Retracted width', value: '0.98 m' },
-      { label: 'Max. platform load', value: '200 kg' },
-      { label: 'Monthly hire price', value: 'Supplier quote', emphasis: true },
-    ],
-    recommendation: 'Closest supported match for the stated height, access width and platform load. Confirm the working envelope, outrigger footprint and ground conditions before hire.',
-    note: 'Confirm the final hire price, availability, hire period, delivery and project-specific charges with the supplier.',
-  },
-  {
-    kind: 'buyer',
-    text: 'We need a one-person construction set-out instrument with 1″ angular accuracy and at least 800 m reflectorless range.',
-  },
-  {
-    kind: 'agent',
-    text: 'That points to a robotic total station. The Topcon GT-1501 matches the 1″ accuracy requirement and exceeds the requested reflectorless range.',
-  },
-  {
-    kind: 'buyer',
-    text: 'What are the key measuring ranges, and what should we budget for the instrument package?',
-  },
-  {
-    kind: 'summary',
-    title: 'Topcon GT-1501',
-    rows: [
-      { label: 'Angle accuracy', value: '1″' },
-      { label: 'Prism measuring range', value: '5,000 m' },
-      { label: 'Reflectorless range', value: '1,000 m' },
-      { label: 'Instrument package price', value: 'Supplier quote', emphasis: true },
-    ],
-    recommendation: 'Closest supported match for single-person construction set-out where 1″ angular accuracy is required.',
-    note: 'Reflectorless range depends on target and conditions. Confirm the controller, prism kit, software, support and final supplier quote.',
-  },
+  { kind: 'buyer', text: 'Do you have JLG 1250AJP boom lift specifications?' },
+  { kind: 'agent', text: 'Yes. Here are the key specifications for the JLG 1250AJP articulating boom lift.' },
+  { kind: 'summary', title: 'JLG 1250AJP · Reach envelope', rows: [
+    { label: 'Maximum platform height', value: '38.1 m' },
+    { label: 'Unrestricted outreach', value: '19.3 m' },
+    { label: 'Unrestricted capacity', value: '230 kg' },
+    { label: 'Restricted capacity', value: '450 kg' },
+  ], recommendation: 'The heavier load applies within a smaller operating envelope.', note: 'Illustrative model data. Maximum height and outreach are not simultaneous; verify the actual machine’s chart.' },
+  { kind: 'buyer', text: 'Do you have the reach diagram?' },
+  { kind: 'diagram', text: 'Here’s the reach diagram. It shows how height, outreach and platform load relate.', src: '/images/home-jlg-1250ajp-reach.png' },
+  { kind: 'buyer', text: 'Can I work at 30 m platform height and 18 m outreach with a 200 kg load?' },
+  { kind: 'agent', text: 'We need to check that exact position on the reach diagram, together with your load and site conditions. Maximum height and outreach alone cannot confirm suitability.' },
+  { kind: 'buyer', text: '请用中文解释，简单一点。' },
+  { kind: 'agent', text: '不能只看最大高度和最大伸距。需要把30米平台高度、18米伸距和200公斤载荷一起核对设备的作业范围图，再确认现场条件。' },
+  { kind: 'buyer', text: 'One day next Monday in Tuas. How do I confirm the price and booking?' },
+  { kind: 'agent', text: 'Please share your name, phone number and exact site address. Our team will confirm a suitable boom lift, availability, delivery and final pricing before booking.' },
+  { kind: 'requirement', text: 'Boom lift enquiry · 30 m platform height · 18 m outreach · 200 kg · 1 day · Tuas' },
 ];
 
 let homeHeroRuntimeElement: HTMLElement | null = null;
@@ -1101,12 +1083,12 @@ function correctProductsMenu(root: HTMLElement) {
       { group: 'Engage customers', label: 'AI Agent', href: '/ai-agent', description: 'Deploy a 24/7 AI Agent to answer enquiries across your online channels and supported languages.' },
       { group: 'Guide product discovery', label: 'AI Webstore Suite', href: '/ai-webstore-suite', description: 'Connect your sales and rental catalogue and inventory for more accurate product recommendations.' },
       { group: 'Guide richer conversations', label: 'Conversation Features', href: '/conversational-experience', description: 'Explore visual answers, product comparisons and guided next steps in one conversation.' },
-      { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Train and deploy an on-brand AI Agent with your company knowledge, inventory and selected role.' },
+      { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Build your AI Agent with approved business knowledge. Manage its behaviour, deployment and conversations.' },
     ];
     products.forEach((product, index) => {
       const group = document.createElement('section');
       group.className = 'antbuildz-industries-menu__group';
-      if (product.unavailable) group.classList.add('antbuildz-products-menu__console');
+      if (product.href === '/ai-agent-console') group.classList.add('antbuildz-products-menu__console');
       const title = document.createElement('p');
       title.id = `antbuildz-product-group-${index + 1}`;
       title.textContent = product.group;
@@ -1575,13 +1557,14 @@ function correctAboutEcosystem(root: HTMLElement) {
 function createHomeHeroConversation(
   messages: ReadonlyArray<HomeHeroConversationMessage> = HOME_HERO_CONVERSATION,
   layer: 'centre' | 'left' | 'right' | 'outer-left' | 'outer-right' = 'centre',
-  label = 'Two example industrial product recommendation conversations',
-  summary = 'Emma compares approved specifications, pricing context and recommendation criteria for a TEUPEN LEO23GT spider lift and a Topcon GT-1501 robotic total station, then prepares each requirement for supplier confirmation.',
+  label = 'Example boom lift conversation with specifications and a reach diagram',
+  summary = 'Emma answers a JLG 1250AJP boom lift enquiry with a specifications table, reach diagram, Chinese explanation and rental handover for team confirmation.',
 ) {
   const conversation = document.createElement('section');
   conversation.className = `antbuildz-home-hero-conversation is-${layer}`;
   conversation.setAttribute('aria-label', label);
   conversation.dataset.layer = layer;
+  if (layer === 'centre') return conversation;
 
   const accessibleSummary = document.createElement('p');
   accessibleSummary.className = 'sr-only';
@@ -1608,7 +1591,15 @@ function createHomeHeroConversation(
     bubble.appendChild(avatar);
     const surface = document.createElement('div');
     surface.className = 'antbuildz-home-hero-conversation__surface';
-    if (message.kind === 'requirement') {
+    if (message.kind === 'diagram') {
+      const caption = document.createElement('p');
+      caption.textContent = message.text;
+      const diagram = document.createElement('img');
+      diagram.src = message.src;
+      diagram.alt = 'JLG 1250AJP reach diagram — check the actual machine configuration';
+      diagram.className = 'antbuildz-home-hero-conversation__diagram';
+      surface.append(caption, diagram);
+    } else if (message.kind === 'requirement') {
       const label = document.createElement('span');
       label.textContent = 'REQUIREMENT PROFILE';
       const value = document.createElement('strong');
@@ -1931,7 +1922,7 @@ function setupHomeHeroRuntime(root: HTMLElement) {
   resetHomeHeroRuntime();
   homeHeroRuntimeElement = conversation;
   const cleanups = Array.from(hero.querySelectorAll<HTMLElement>('.antbuildz-home-hero-conversation'))
-    .map((chat, layerIndex) => setupHomeHeroConversationRuntime(hero, chat, layerIndex));
+    .map((chat, layerIndex) => chat.dataset.layer === 'centre' ? mountBoomliftAnimation(chat) : setupHomeHeroConversationRuntime(hero, chat, layerIndex));
   homeHeroRuntimeCleanup = () => {
     cleanups.forEach((cleanup) => cleanup());
     hero.style.removeProperty('--antbuildz-home-chat-top');
@@ -2019,8 +2010,8 @@ function setupHomeHeroConversationRuntime(
     if (conversation.dataset.layer === 'centre') {
       const heroBounds = hero.getBoundingClientRect();
       const chatHeight = heroBounds.width <= 767
-        ? Math.min(430, Math.max(360, heroBounds.height * .48))
-        : Math.min(370, Math.max(300, heroBounds.height * .46));
+        ? Math.min(454, Math.max(384, heroBounds.height * .48 + 24))
+        : Math.min(402, Math.max(332, heroBounds.height * .46 + 32));
       hero.style.setProperty('--antbuildz-home-chat-height', `${chatHeight}px`);
       const copyBounds = hero.querySelector('.ai-marketplace-hero-copy')?.getBoundingClientRect();
       if (heroBounds.width <= 1179 && copyBounds) {
@@ -2708,6 +2699,10 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   syncWebstoreTutorial(root);
   syncConsoleAiRulesDesign(root);
   syncConsoleDeployChannels(root);
+  syncConsoleVideoBanner(root);
+  syncConsoleOverviewDesign(root);
+  syncConsoleDesignSystem(root);
+  syncConsoleCompanyProfile(root);
   correctRouteLoader(root);
   correctWordmarks(root);
   correctLinks(root);

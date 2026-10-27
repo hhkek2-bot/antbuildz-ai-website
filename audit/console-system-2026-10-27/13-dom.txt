@@ -1,0 +1,180 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Return to Antbuildz website":
+    - img "Antbuildz.com"
+    - generic: AI Agent Console
+  - button "Overview":
+    - text: Overview
+  - button "Collapse sidebar":
+  - generic: Active Agent
+  - 'button "Switch active agent: Emma Tomato"':
+    - generic: 🏗️
+    - paragraph: Emma Tomato
+    - paragraph: AI Agent
+  - generic: Navigation
+  - navigation:
+    - paragraph: Build your agent
+    - button "Agent Setup":
+      - text: Agent Setup
+    - button "Knowledge Base":
+      - text: Knowledge Base
+    - button "Workflows":
+      - text: Workflows
+    - button "Inventory":
+      - text: Inventory
+    - button "Integrations":
+      - text: Integrations
+    - paragraph: Design and deploy
+    - button "Settings":
+      - text: Settings
+    - button "Test Agent":
+      - text: Test Agent
+    - button "Deploy":
+      - text: Deploy
+    - paragraph: Run and improve
+    - button "Conversations":
+      - text: Conversations
+    - button "Leads":
+      - text: Leads
+    - button "Deals" [active]:
+      - text: Deals
+    - button "User Activities":
+      - text: User Activities
+    - paragraph: Account and help
+    - button "Billing":
+      - text: Billing
+    - button "Help":
+      - text: Help
+  - generic: Usage
+  - generic: 76 / 150
+  - paragraph: Sales Plan · 50 Extra Credits
+  - button "Account":
+    - text: Account
+- main:
+  - paragraph: Open tickets
+  - paragraph: "4"
+  - paragraph: Active pipeline
+  - paragraph: RM 482,200
+  - paragraph: Won deals
+  - paragraph: "1"
+  - complementary:
+    - textbox "Search buyer, company, equipment…"
+    - combobox:
+      - generic: All statuses
+    - combobox:
+      - generic: Rental & sales
+    - button "FR Farid Rahman Apr 6, 2026 Maju Quarry Mobile Crusher Purchase Package New sale":
+      - generic: FR
+      - paragraph: Farid Rahman
+      - generic: Apr 6, 2026
+      - paragraph: Maju Quarry
+      - paragraph: Mobile Crusher Purchase Package
+      - generic: New
+      - generic: sale
+    - button "LC Lim Chee Keong Apr 6, 2026 Keong Infra Wheel Loader Purchase Package Won sale":
+      - generic: LC
+      - paragraph: Lim Chee Keong
+      - generic: Apr 6, 2026
+      - paragraph: Keong Infra
+      - paragraph: Wheel Loader Purchase Package
+      - generic: Won
+      - generic: sale
+    - button "NA Nurul Aini Apr 6, 2026 Skyline Piling Komatsu PC200-8 Excavator New rental":
+      - generic: NA
+      - paragraph: Nurul Aini
+      - generic: Apr 6, 2026
+      - paragraph: Skyline Piling
+      - paragraph: Komatsu PC200-8 Excavator
+      - generic: New
+      - generic: rental
+    - button "SJ Sarah Johnson Apr 5, 2026 Delta Build Co Hydraulic Pump 320-HP-A1 In progress sale":
+      - generic: SJ
+      - paragraph: Sarah Johnson
+      - generic: Apr 5, 2026
+      - paragraph: Delta Build Co
+      - paragraph: Hydraulic Pump 320-HP-A1
+      - generic: In progress
+      - generic: sale
+    - button "TW Tan Wei Ming Apr 4, 2026 Metro Civil Works CAT 320 GC Excavator In progress rental":
+      - generic: TW
+      - paragraph: Tan Wei Ming
+      - generic: Apr 4, 2026
+      - paragraph: Metro Civil Works
+      - paragraph: CAT 320 GC Excavator
+      - generic: In progress
+      - generic: rental
+  - main:
+    - generic: In progress
+    - generic: DEAL-EDRES1
+    - generic: Created Apr 4, 2026, 5:15 PM
+    - heading "CAT 320 GC Excavator" [level=2]
+    - paragraph: Tan Wei Ming · Metro Civil Works · Rental intent
+    - link "Email buyer":
+      - /url: mailto:tan.wei@example.com?subject=Re%3A%20CAT%20320%20GC%20Excavator%20%C2%B7%20DEAL-EDRES1
+      - text: Email buyer
+    - link "Call buyer":
+      - /url: tel:+60 12-4418 8210
+      - text: Call buyer
+    - button "Conversations":
+      - text: Conversations
+    - paragraph: Confirmed intent locked by the AI Agent
+    - paragraph: “Customer wants a 14-day excavator rental and asked the AI to hold the first immediately available CAT 320 GC unit.”
+    - generic: Strong intent
+    - generic: Buyer confirmed
+    - generic: "Source: AI Chat"
+    - heading "Request details" [level=3]
+    - paragraph: The facts sales should verify before quoting.
+    - generic: RM 35,000
+    - paragraph: Equipment / product
+    - paragraph: CAT 320 GC excavator, 14-day rental
+    - paragraph: Deal type
+    - paragraph: Rental
+    - paragraph: Quantity
+    - paragraph: "1"
+    - paragraph: Required timing
+    - paragraph: "Start: 10 Apr"
+    - paragraph: Delivery / site
+    - paragraph: Metro Civil Works, Johor
+    - paragraph: Price context
+    - paragraph: RM 35,000
+    - heading "Automatic confirmation" [level=3]
+    - paragraph: Both messages are queued when confirmed intent becomes a deal ticket.
+    - paragraph: Buyer confirmation
+    - generic: Queued
+    - paragraph: tan.wei@example.com
+    - paragraph: Apr 4, 2026, 5:15 PM
+    - paragraph: Subscriber notification
+    - generic: Needs setup
+    - paragraph: Add a sales email in Agent setup
+    - heading "Internal notes" [level=3]
+    - paragraph: Keep sales context and next actions on the ticket.
+    - button "Save notes":
+      - generic: Save notes
+    - textbox "Add qualification details, quotation notes, or the agreed next step…"
+    - complementary:
+      - paragraph: Ticket status
+      - combobox:
+        - generic: In progress
+      - paragraph: Owner
+      - combobox:
+        - generic: Unassigned
+      - paragraph: Next follow-up
+      - textbox
+      - button "Mark contacted":
+        - text: Mark contacted
+      - heading "Activity" [level=3]
+      - paragraph: Intent ticket created
+      - paragraph: Apr 4, 2026, 5:15 PM
+      - paragraph: Buyer email queued
+      - paragraph: Apr 4, 2026, 5:15 PM
+      - heading "Close outcome" [level=3]
+      - paragraph: Close only after the subscriber records the commercial result.
+      - button "Won":
+        - text: Won
+      - button "Lost":
+        - text: Lost
+- button "Open quick Test Agent":
+  - text: Test Agent
+- button "Replay console tutorial":

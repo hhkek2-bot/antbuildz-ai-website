@@ -1,0 +1,419 @@
+[
+  {
+    "label": "Overview",
+    "chatInput": [],
+    "controls": [],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Meet AI Agents",
+        "weight": "700"
+      },
+      {
+        "size": "20px",
+        "text": "Build your agent, step by step.",
+        "weight": "700"
+      },
+      {
+        "size": "20px",
+        "text": "Your Agents",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Emma Tomato",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Agent Setup",
+    "chatInput": [],
+    "controls": [
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": "Save changes"
+      }
+    ],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Agent Identity",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Company Information",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Tone & Style",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Chat Welcome",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Knowledge Base",
+    "chatInput": [],
+    "controls": [
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Upload knowledge"
+      }
+    ],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Build your AI Agent’s knowledge",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Workflows",
+    "chatInput": [],
+    "controls": [
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " New workflow"
+      }
+    ],
+    "headings": [
+      {
+        "size": "20px",
+        "text": "Design the agent logic as a node flow",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Parts Quotation",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Equipment Troubleshooting",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Deal Intent Capture",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "After-Hours Lead Capture",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Your workflows",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Inventory",
+    "chatInput": [],
+    "controls": [
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Add Inventory"
+      }
+    ],
+    "headings": [],
+    "overflow": 0
+  },
+  {
+    "label": "Integrations",
+    "chatInput": [],
+    "controls": [
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "38.2254px",
+        "text": "All"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      },
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Connect"
+      }
+    ],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Google Drive",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "OneDrive / SharePoint",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Notion",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Google Docs",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Confluence",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Dropbox",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "HubSpot",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Salesforce",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Pipedrive",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Settings",
+    "chatInput": [],
+    "controls": [],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Plan & Usage",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Email Alerts",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Team Permissions",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Test Agent",
+    "chatInput": [
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "font": "14px"
+      }
+    ],
+    "controls": [],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Test your AI Agent",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Emma Tomato",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Test records",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Deploy",
+    "chatInput": [],
+    "controls": [],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Center Stage",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Chat bubble",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Conversations",
+    "chatInput": [],
+    "controls": [
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": "4"
+      }
+    ],
+    "headings": [],
+    "overflow": 0
+  },
+  {
+    "label": "Leads",
+    "chatInput": [],
+    "controls": [],
+    "headings": [],
+    "overflow": 0
+  },
+  {
+    "label": "Deals",
+    "chatInput": [],
+    "controls": [
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": " Mark contacted"
+      }
+    ],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "CAT 320 GC Excavator",
+        "weight": "700"
+      },
+      {
+        "size": "14px",
+        "text": "Request details",
+        "weight": "600"
+      },
+      {
+        "size": "14px",
+        "text": "Automatic confirmation",
+        "weight": "600"
+      },
+      {
+        "size": "14px",
+        "text": "Internal notes",
+        "weight": "600"
+      },
+      {
+        "size": "14px",
+        "text": "Activity",
+        "weight": "600"
+      },
+      {
+        "size": "14px",
+        "text": "Close outcome",
+        "weight": "600"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "User Activities",
+    "chatInput": [],
+    "controls": [],
+    "headings": [
+      {
+        "size": "16px",
+        "text": "User Activities",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  },
+  {
+    "label": "Billing",
+    "chatInput": [],
+    "controls": [
+      {
+        "bg": "rgb(255, 197, 1)",
+        "height": "43.9955px",
+        "text": "Change Plan"
+      }
+    ],
+    "headings": [
+      {
+        "size": "20px",
+        "text": "Sales",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Conversation balance",
+        "weight": "700"
+      },
+      {
+        "size": "16px",
+        "text": "Auto Top-Up",
+        "weight": "700"
+      }
+    ],
+    "overflow": 0
+  }
+]

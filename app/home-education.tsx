@@ -8,6 +8,7 @@ import { mountHomeEducation, type HomeEducationTargets } from '../lib/home-educa
 import styles from './home-education.module.css';
 import { AgentGraphic, SelectionOverviewGraphic, WebstoreGraphic } from './home-graphics';
 import { HomeAgentFoundations } from './home-agent-foundations';
+import { HomeAgentChat } from './home-agent-chat';
 
 export const HOME_INDUSTRIES = [
   ['Rental & Leasing', '/rental-businesses', 'Clarify capacity, site conditions and hire dates before fleet review.', '/images/solution-rental.jpg', 'Rental boom lift fleet prepared for industrial hire'],
@@ -270,5 +271,5 @@ export function HomeEducation() {
     return mountHomeEducation(root, styles.retired, setTargets);
   }, []);
   if (!targets) return null;
-  return <>{createPortal(<HomeEducationBody />, targets.body)}{createPortal(<><HomeTrustPanel /><HomeEducationFaq /></>, targets.faq)}</>;
+  return <><HomeAgentChat />{createPortal(<HomeEducationBody />, targets.body)}{createPortal(<><HomeTrustPanel /><HomeEducationFaq /></>, targets.faq)}</>;
 }

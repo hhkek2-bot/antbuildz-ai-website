@@ -1,0 +1,91 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Return to Antbuildz website":
+    - img "Antbuildz.com"
+    - generic: AI Agent Console
+  - button "Overview":
+    - text: Overview
+  - button "Collapse sidebar":
+  - generic: Active Agent
+  - 'button "Switch active agent: Emma Tomato"':
+    - generic: 🏗️
+    - paragraph: Emma Tomato
+    - paragraph: AI Agent
+  - generic: Navigation
+  - navigation:
+    - paragraph: Build your agent
+    - button "Agent Setup":
+      - text: Agent Setup
+    - button "Knowledge Base":
+      - text: Knowledge Base
+    - button "Workflows" [active]:
+      - text: Workflows
+    - button "Inventory":
+      - text: Inventory
+    - button "Integrations":
+      - text: Integrations
+    - paragraph: Design and deploy
+    - button "Settings":
+      - text: Settings
+    - button "Test Agent":
+      - text: Test Agent
+    - button "Deploy":
+      - text: Deploy
+    - paragraph: Run and improve
+    - button "Conversations":
+      - text: Conversations
+    - button "Leads":
+      - text: Leads
+    - button "Deals":
+      - text: Deals
+    - button "User Activities":
+      - text: User Activities
+    - paragraph: Account and help
+    - button "Billing":
+      - text: Billing
+    - button "Help":
+      - text: Help
+  - generic: Usage
+  - generic: 76 / 150
+  - paragraph: Sales Plan · 50 Extra Credits
+  - button "Account":
+    - text: Account
+- main:
+  - paragraph: Workflow builder
+  - heading "Design the agent logic as a node flow" [level=2]
+  - paragraph: Use templates or describe the process in plain language. Each node stores what the AI should check, ask, or say.
+  - button "New workflow":
+    - text: New workflow
+  - button "Sales Parts Quotation Customer asks for a part price → look up catalog → reply with quote.":
+    - generic: Sales
+    - heading "Parts Quotation" [level=3]
+    - paragraph: Customer asks for a part price → look up catalog → reply with quote.
+  - button "Support Equipment Troubleshooting Diagnose equipment issue from model number using technical guides.":
+    - generic: Support
+    - heading "Equipment Troubleshooting" [level=3]
+    - paragraph: Diagnose equipment issue from model number using technical guides.
+  - button "Sales Deal Intent Capture Qualify strong buyer intent, ask for explicit confirmation, lock the evidence, and create a sales follow-up ticket.":
+    - generic: Sales
+    - heading "Deal Intent Capture" [level=3]
+    - paragraph: Qualify strong buyer intent, ask for explicit confirmation, lock the evidence, and create a sales follow-up ticket.
+  - button "Operations After-Hours Lead Capture If confirmed purchase or rental intent comes after hours, lock the ticket and queue buyer and subscriber confirmations.":
+    - generic: Operations
+    - heading "After-Hours Lead Capture" [level=3]
+    - paragraph: If confirmed purchase or rental intent comes after hours, lock the ticket and queue buyer and subscriber confirmations.
+  - heading "Your workflows" [level=2]
+  - paragraph: Workflow drafts are stored in this browser.
+  - button "Parts Quotation Customer asks for a part price → look up catalog → reply with quote. 5 nodes Open":
+    - generic: Parts Quotation
+    - generic: Customer asks for a part price → look up catalog → reply with quote.
+    - text: 5 nodes
+    - generic: Open
+  - button "Equipment Troubleshooting Diagnose equipment issue from model number using technical guides. 4 nodes Open":
+    - generic: Equipment Troubleshooting
+    - generic: Diagnose equipment issue from model number using technical guides.
+    - text: 4 nodes
+    - generic: Open
+- button "Open quick Test Agent":
+  - text: Test Agent
+- button "Replay console tutorial":

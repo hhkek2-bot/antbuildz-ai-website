@@ -1,0 +1,98 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Return to Antbuildz website":
+    - img "Antbuildz.com"
+    - generic: AI Agent Console
+  - button "Overview":
+    - text: Overview
+  - button "Collapse sidebar":
+  - generic: Active Agent
+  - 'button "Switch active agent: Emma Tomato"':
+    - generic: 🏗️
+    - paragraph: Emma Tomato
+    - paragraph: AI Agent
+  - generic: Navigation
+  - navigation:
+    - paragraph: Build your agent
+    - button "Agent Setup":
+      - text: Agent Setup
+    - button "Knowledge Base":
+      - text: Knowledge Base
+    - button "Workflows":
+      - text: Workflows
+    - button "Inventory":
+      - text: Inventory
+    - button "Integrations":
+      - text: Integrations
+    - paragraph: Design and deploy
+    - button "Settings":
+      - text: Settings
+    - button "Test Agent":
+      - text: Test Agent
+    - button "Deploy":
+      - text: Deploy
+    - paragraph: Run and improve
+    - button "Conversations" [active]:
+      - text: Conversations
+    - button "Leads":
+      - text: Leads
+    - button "Deals":
+      - text: Deals
+    - button "User Activities":
+      - text: User Activities
+    - paragraph: Account and help
+    - button "Billing":
+      - text: Billing
+    - button "Help":
+      - text: Help
+  - generic: Usage
+  - generic: 76 / 150
+  - paragraph: Sales Plan · 50 Extra Credits
+  - button "Account":
+    - text: Account
+- main:
+  - button "Fullscreen":
+    - text: Fullscreen
+  - textbox "Search conversations..."
+  - button "4":
+    - generic: "4"
+  - button "1":
+    - generic: "1"
+  - button "1":
+    - generic: "1"
+  - button "1":
+    - generic: "1"
+  - button "1":
+    - generic: "1"
+  - combobox:
+    - generic: All Agents
+  - button "Ahmad Razak I need a hydraulic pump for CAT 320 🏗️ Emma Tomato 2 min ago":
+    - generic: Ahmad Razak
+    - paragraph: I need a hydraulic pump for CAT 320
+    - generic: 🏗️
+    - generic: Emma Tomato
+    - generic: 2 min ago
+  - button "Sarah Lee This is not what I ordered! 🏗️ Emma Tomato 15 min ago":
+    - generic: Sarah Lee
+    - paragraph: This is not what I ordered!
+    - generic: 🏗️
+    - generic: Emma Tomato
+    - generic: 15 min ago
+  - button "Tan Wei Ming Thanks, the quote looks good! 🏗️ Emma Tomato 1 hour ago":
+    - generic: Tan Wei Ming
+    - paragraph: Thanks, the quote looks good!
+    - generic: 🏗️
+    - generic: Emma Tomato
+    - generic: 1 hour ago
+  - button "Lim Chee Keong Can someone from your team call me? 🏗️ Emma Tomato 30 min ago":
+    - generic: Lim Chee Keong
+    - paragraph: Can someone from your team call me?
+    - generic: 🏗️
+    - generic: Emma Tomato
+    - generic: 30 min ago
+  - paragraph: Select a conversation to view details
+- button "Open quick Test Agent":
+  - text: Test Agent
+- button "Replay console tutorial":

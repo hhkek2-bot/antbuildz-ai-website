@@ -166,3 +166,5 @@
   .orbit,
   .chip { animation: none; }
 }
+
+.videoMount { padding-block: 24px; background: var(--clean); }

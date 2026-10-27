@@ -1,0 +1,175 @@
+[
+  {
+    "label": "Overview",
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Meet AI Agents"
+      },
+      {
+        "size": "18px",
+        "text": "Build your agent, step by step."
+      },
+      {
+        "size": "18px",
+        "text": "Your Agents"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Knowledge Base",
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Build your AI Agent’s knowledge"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Workflows",
+    "headings": [
+      {
+        "size": "18px",
+        "text": "Design the agent logic as a node flow"
+      },
+      {
+        "size": "16px",
+        "text": "Your workflows"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Inventory",
+    "headings": [],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Integrations",
+    "headings": [],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Settings",
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Plan & Usage"
+      },
+      {
+        "size": "16px",
+        "text": "Email Alerts"
+      },
+      {
+        "size": "16px",
+        "text": "Team Permissions"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Test Agent",
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Test your AI Agent"
+      },
+      {
+        "size": "16px",
+        "text": "Test records"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": [
+      {
+        "cls": "live-chat-composer",
+        "tag": "FORM"
+      }
+    ]
+  },
+  {
+    "label": "Deploy",
+    "headings": [
+      {
+        "size": "16px",
+        "text": "Center Stage"
+      },
+      {
+        "size": "16px",
+        "text": "Chat bubble"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Conversations",
+    "headings": [],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Leads",
+    "headings": [],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Deals",
+    "headings": [
+      {
+        "size": "16px",
+        "text": "CAT 320 GC Excavator"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "User Activities",
+    "headings": [
+      {
+        "size": "16px",
+        "text": "User Activities"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  },
+  {
+    "label": "Billing",
+    "headings": [
+      {
+        "size": "18px",
+        "text": "Sales"
+      },
+      {
+        "size": "16px",
+        "text": "Conversation balance"
+      }
+    ],
+    "mainWidth": 390,
+    "overflow": 0,
+    "preview": []
+  }
+]

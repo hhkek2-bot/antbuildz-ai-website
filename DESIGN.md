@@ -90,6 +90,18 @@ The `--type-*` tokens in `app/globals.css` support source-owned additions. New h
 - Shadows: broad and soft; use them to separate important layers, not every component.
 - The AI Agent Console may use darker, tighter and more operational surfaces than public marketing pages.
 
+## Operational Console system
+
+The operational Console has a dedicated, source-owned system established on
+27 October 2026. See [CONSOLE-DESIGN-SYSTEM.md](CONSOLE-DESIGN-SYSTEM.md) for
+its full type, colour, button, field, spacing, shape and state contracts.
+`app/console-design-system.css` owns its executable `--console-*` tokens.
+Console headings use Plus Jakarta Sans (20px section / 16px card), UI text
+uses Inter (14px body / 13px table / 12px helper), standard actions and fields
+are 44px high, buttons are pills, fields have 12px corners and main cards have
+20px corners. Mobile section headings use 18px. Preserve customer chat themes
+and task-specific metric/illustration layouts as deliberate exceptions.
+
 ## Colour discipline
 
 - Public section backgrounds use the four canonical surface roles: canvas, clean, soft and dark. Do not introduce a new near-white or neutral shade when a canonical role works.

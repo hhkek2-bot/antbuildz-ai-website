@@ -1,0 +1,31 @@
+.console-video-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 20px;
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+}
+.console-video-banner__thumbnail { position: relative; flex: 0 0 168px; overflow: hidden; aspect-ratio: 16 / 9; border-radius: 12px; background: hsl(var(--muted)); }
+.console-video-banner__thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+.console-video-banner__thumbnail span { position: absolute; inset: 0; display: grid; place-items: center; color: white; background: rgb(15 23 42 / 12%); }
+.console-video-banner__thumbnail svg { width: 36px; height: 36px; filter: drop-shadow(0 2px 5px rgb(0 0 0 / 45%)); }
+.console-video-banner__copy { flex: 1; min-width: 0; }
+.console-video-banner__copy h2 { margin: 0 0 5px; font-size: 16px; font-weight: 650; line-height: 1.4; }
+.console-video-banner__copy p { margin: 0; max-width: 46ch; color: hsl(var(--muted-foreground)); font-size: 14px; line-height: 1.55; }
+.console-video-banner__watch { display: inline-flex; flex-shrink: 0; justify-content: center; align-items: center; gap: 8px; min-height: 44px; padding: 8px 20px; border: 1px solid hsl(var(--border)); border-radius: 12px; font-size: 14px; font-weight: 600; text-decoration: none; }
+.console-video-banner__watch svg, .console-video-banner__dismiss svg { width: 20px; height: 20px; }
+.console-video-banner__dismiss { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: hsl(var(--muted-foreground)); cursor: pointer; }
+.console-video-banner__watch:hover, .console-video-banner__dismiss:hover { background: hsl(var(--muted)); }
+.console-video-banner :is(a, button):focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 3px; }
+@media (max-width: 767px) {
+  .console-video-banner { position: relative; display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; padding: 16px; }
+  .console-video-banner__thumbnail { width: 104px; }
+  .console-video-banner__copy { padding-right: 20px; }
+  .console-video-banner__copy h2 { font-size: 14px; }
+  .console-video-banner__copy p { font-size: 12px; }
+  .console-video-banner__watch { grid-column: 1 / -1; }
+  .console-video-banner__dismiss { position: absolute; top: 2px; right: 2px; }
+}

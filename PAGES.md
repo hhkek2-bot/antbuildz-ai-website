@@ -1,5 +1,33 @@
 # Antbuildz.AI Page Register
 
+## Homepage-only Emma chat embed — 24 October 2026
+
+Added the supplied Emma agent embed to `/` only, using the existing route-aware
+homepage mount. This is a homepage exception to the earlier site-wide launcher
+removal; the old transferred launcher remains removed on all routes. The new
+source-owned control preserves the supplied agent URL and identical shared Emma
+portrait, yellow circular launcher, rounded panel and minimise action. It uses
+the shared colour tokens, a 56px launcher below 980px, viewport-bounded panel,
+44px minimise target, visible keyboard focus and focus restoration. The hosted
+iframe first loads when opened and stays mounted while minimised on Home.
+
+Fidelity-mode browser QA passed at 1440×900, 1024×768 and 390×844 with no horizontal
+overflow. Opening, minimising, reopening, host-page Escape, focus restoration,
+navigation to Pricing and history return to Home were checked. The supplied
+hosted agent currently shows an identity/sign-in gate; no message was sent and
+an authenticated AI reply was not tested. Source ESLint and production build pass.
+Local implementation only; no deployment.
+
+### Replacement — Global AI Agent bubble
+
+Replaced the homepage widget with the user's second supplied embed: the Global
+AI Agent portrait, accessible labels and title, white panel surface, and
+`https://globalteam.antbuildz.com/ai?agent=6acc6b78f44483031be24c94`.
+The homepage-only mount and existing responsive controls remain. Browser checks
+at desktop and 390×844 confirmed the replacement portrait, correct hosted agent,
+opening/minimising and no horizontal overflow. Source ESLint passed. This hosted
+agent also presents a sign-in gate; no message was sent. No deployment.
+
 ## AI Agent canonical URL simplified — 11 September 2026
 
 The core product page now uses `/ai-agent` as its canonical URL, matching the
@@ -659,6 +687,7 @@ changed files, sources, unresolved launch gates and required legal review.
 | `/who-we-serve` | Find the right industry application for a complex product business | Find Your Business → Book a Demo | Shared source-rendered public shell and AI Roles editorial hero | Eight existing industry destinations, dedicated instruments/electronics/technical-consumer examples, business-fit guidance and closing CTA. Desktop and mobile QA recorded below |
 | `/ai-sales-agent` | Understand the core AI Agent for complex product knowledge, recommendations, sales, rental, support and human handover | Book a Demo | `/aiagent` on 8080 | URL retained by explicit user decision on 2026-09-06. Desktop retains the reference split composition. Its repeated actions use the shared destination-owned CTA contract: Book a Demo is primary and View Pricing is secondary. At 767px and below, the hero fits exactly one small viewport, places the animated phone before both actions and keeps the persistent Agent launcher clear of the secondary action. Responsive QA details are recorded below |
 | `/ai-agent-console` | Configure and explore an AI Agent workspace | Return to Antbuildz website | `/app` on 8080, served from the copied local Console bundle | Complete local Console demo with operational navigation, sample data and browser-local state. Website-crawl submissions generate local demo pages and never request the supplied site. The Products menu and mobile navigation both open the Console. |
+
 | `/pricing` | Compare approved product plans and choose a next step | Start 14-Day Free Trial or Talk to Sales | Transferred content; Gorgias-inspired wider plan layout | Standard plans present one cumulative Agent → Sales → Rental+ path, with one side-by-side comparison table. Current approved prices, allowances, billing mechanics, Custom panel and commercial terms are recorded below |
 | `/resources` | Discover practical industrial AI education | Explore a Guide | `/resources` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA; grouped header dropdown, all topic destinations and mobile access verified |
 | `/conversational-experience` | See how the Antbuildz AI Agent structures complex product questions into useful comparisons and next steps | Start Trial → Pricing | Project-original source-rendered Conversation Features page aligned to the AI Webstore Suite feature layout | The hero is a contained industrial-photo card with breadcrumb, centred “Beyond Just a Text Answer” copy, a darkened readability overlay and shared public rail. Its visible and discovery copy names the Antbuildz AI Agent, complex product enquiries, specification comparisons, technical diagrams, product guidance and human handover clearly. Five static React/CSS phone conversations follow the AI Webstore Suite’s numbered, alternating visual layout on desktop and stack copy before phones on mobile. The borderless white phone shell, Emma header, message styles, response patterns and soft shadow are shared across all examples. The conversations include a complete source-diagram example and do not claim live availability, prices, product suitability or booking confirmation. The closing Start Trial action appears over a generated Emma industrial-workshop photograph and links to Pricing. Desktop and mobile visual inspection confirms the shared public rail, section rhythm, CTA treatment and zero horizontal overflow. The former `/features/conversational-experience` URL redirects here. |
@@ -667,6 +696,19 @@ changed files, sources, unresolved launch gates and required legal review.
 | `/about` | Understand the industrial history and reason Antbuildz AI exists | Book a Demo | `/about` on 8080 | Transferred composition retained; shared typography passed 1440px/390px QA |
 | `/book-a-demo` | Share contact details, then choose a demo time | Continue to Calendly | Existing transferred demo-request form | Uses the lean shared account-entry form system with decorative eyebrows removed and consistent field, label and action typography. Responsive QA is recorded below. No separate lead storage or booking confirmation implemented |
 | `/agreements` | Find the terms and privacy documents governing Antbuildz AI | View Terms | Project-original Antbuildz AI legal suite | Source-rendered AI-only hub linking Terms of Service, Privacy Policy, Data Processing Addendum and Acceptable Use Policy. Cookies are incorporated into Privacy and the old Cookie URL redirects there. Antbuildz Pte. Ltd., UEN 202007699D; contact help@antbuildz.ai. Operational/legal launch checks remain open in LEGAL-IMPLEMENTATION-REVIEW.md |
+
+
+Console design QA — 27 October 2026: Audit → System standardisation now applies
+the source-owned `--console-*` foundations to typography, neutral colours,
+button roles, fields, tabs, cards, table text, focus and mobile controls. The
+customer chat preview keeps its own theme. Deploy cards share row height and
+compact action placement; integration cards scroll above pagination. Desktop
+1280×800, compact 1024×900 and mobile 390×844 were inspected, with no document
+overflow in the recorded main-section checks. Navigation, AI Rules draft UI,
+Knowledge Base filtering/dialog dismissal and Deploy disclosures were exercised.
+Focused ESLint, four existing regression tests and the production build pass.
+The Console is still a local copied-bundle demo; no deployment occurred. See
+`CONSOLE-DESIGN-SYSTEM.md` and `audit/console-system-2026-10-27/REPORT.md`.
 
 ## 2026-09-03 — Webstore hero follows the established title gap
 
@@ -3580,3 +3622,137 @@ screens the row scrolls horizontally and brings the current page into view.
 The builder tutorial's opening step names these top destinations. Desktop,
 compact and mobile layouts were inspected, and top-tab navigation between
 store content, Store Profile and Rental Store was exercised.
+
+### 2026-10-26 — Overview introduction video
+
+Fidelity-mode addition to the local AI Agent Console Overview: a compact white
+banner follows the supplied reference with the actual Meet Antbuildz AI YouTube
+thumbnail, “Meet AI Agents” introduction, outlined Watch video link and dismiss
+control. Both video links open the supplied video in a new tab. Dismissal lasts
+until reload; the existing guided tutorial remains available. The source-level
+Console adapter keeps the copied production bundle unchanged.
+
+Visually checked at 1440×900, 1024×900 and 390×844. Thumbnail loading, video link
+opening, dismissal/focus return and Overview-only navigation were verified;
+no document overflow at desktop or mobile. Focused ESLint, production build and
+whitespace checks pass. This is local only; no deployment was made.
+
+### 2026-10-26 — Updated Overview screenshot fidelity
+
+Matched the user's newer Console Overview composition: the video banner is
+first, followed by two spacious summary cards, the five-step setup guide using
+the matching Antbuildz worker photo, the Your Agents introduction, the supplied
+additional-agent availability notice, and simplified existing agent cards.
+The old New Agent toolbar, four-metric row and Conversation Usage card are
+hidden on Overview. Existing agent identity, editing and menu actions remain
+owned by the Console. Screenshot figures (1,201 conversations / 201 leads) are
+explicitly labelled sample data, not connected live totals; agent readiness is
+not invented. The copied production bundle remains unchanged.
+
+Browser QA passed at 1440px, 1024px and 390px with no horizontal overflow.
+All five setup-guide destinations, both summary-card destinations, navigation
+back to Overview without duplicates, and banner dismissal/focus return were
+exercised. Focused ESLint and production build pass. Local preview only.
+
+### 2026-10-27 — Separate Chatbase-inspired Console mockup
+
+Added `/console-mockup` as a source-owned, non-indexable Design-mode concept.
+The existing `/ai-agent-console`, `/app` alias and copied Console bundle are
+unchanged. The reference was the user's open Chatbase Guardrails and Backstage
+screens: compact grouped navigation, flat white workspace, fine borders,
+underlined section navigation and restrained controls. The mockup reuses the
+Antbuildz wordmark treatment, Inter and canonical surface/colour tokens, with
+yellow reserved for primary actions. This is an experiment, not a shared-system
+change or replacement Console.
+
+Seven preview views cover Overview, Agent Setup, Knowledge Base, Inventory,
+Conversations, Test Agent and Deploy. Primary action: Test your agent. Editing,
+filtering, conversation selection and scripted test replies operate only in
+React session state. All figures, contacts, products, readiness and channel
+states are illustrative; no live service, customer message, training, upload
+or deployment occurs. Reload clears preview state. The page uses noindex,
+nofollow and is intentionally excluded from public navigation, sitemap and
+llms discovery lists; the public route catalogue is unchanged.
+
+Rendered QA: 1440×1000 desktop, 1024×900 compact desktop, 390×844 mobile.
+Checked navigation, mobile menu, setup form and rules, source search including
+no results, sample review, inventory filtering, conversation filters/selection,
+scripted chat send/reset, channel preview feedback, one H1 and noindex metadata.
+No document horizontal overflow at the checked sizes. Focused ESLint and
+production build pass. Repository-wide TypeScript checking reports existing
+errors in other source files, with none reported in the new mockup route.
+Local preview only; no deployment.
+
+### 2026-10-27 — Conversation Features introduction video
+
+Added a compact Meet AI Agents banner between the hero and feature introduction
+on `/conversational-experience`, following the supplied Console-banner reference
+with public-page type, pill controls and shared frame. The existing YouTube
+video expands inline on activation. The privacy-enhanced iframe is mounted only
+after a click; closing unmounts it to stop playback. A Watch on YouTube fallback
+remains available while expanded. No Console changes or deployment.
+
+Visually inspected at 1440px, 1024px and 390px. Actual video playback was observed,
+keyboard activation and both close controls worked, footer-close restored focus,
+and mobile had no horizontal overflow. Focused ESLint and production build pass.
+
+### 2026-10-27 — Video popup refinement
+
+The compact 880px introduction banner now opens a centred native modal dialog
+instead of expanding inline. A dimmed, blurred backdrop preserves page context;
+background scrolling is locked while open. Close button, Escape and backdrop
+click close the dialog, unmount playback and return focus to the triggering
+thumbnail or Watch video button. Browser-verified at 1440px and 390px with actual
+YouTube playback, all three dismissal paths, focus return and no mobile overflow.
+Focused lint and production build pass. Local only.
+
+### 2026-10-27 — AI Agent introduction video
+
+Reused the compact Meet AI Agents banner and native video popup on `/ai-agent`,
+inserted between the hero and AI Agent Capabilities through the existing
+source-owned portal pattern. The copied bundle remains unchanged. The shared
+component now owns its body typography and keyboard focus styles on both pages.
+Desktop and mobile banner placement, YouTube playback, closing/unmounting and
+single-instance rendering were checked in the browser. Focused ESLint and
+production build pass. Local only.
+
+### 2026-10-27 — Hero thumbnail and Console tutorial replacement
+
+The AI Agent page now uses a small thumbnail and “Meet Antbuildz AI / Watch the
+introduction” directly beneath the hero actions, replacing its standalone video
+bar. The existing popup is shared with Conversation Features, which retains
+its compact banner. Desktop, compact and mobile ordering and popup playback
+were visually checked; mobile has no overflow.
+
+Console Overview now links to the supplied `0NHrVM3s8Yw` five-step setup tutorial,
+with matching title and description. Both link targets were verified. YouTube
+currently returns a placeholder thumbnail, so the existing local Console cover
+is used as a fallback. The public marketing introduction keeps its original
+video. Focused lint and production build pass; no deployment.
+
+### 2026-10-27 — Restore separate AI Agent video bar
+
+At the user's request, restored the centred 880px video banner between the
+AI Agent hero and capabilities instead of the thumbnail beneath the hero CTAs.
+Popup playback and the updated Console tutorial link remain. Desktop/mobile
+rendering and popup open/close were checked.
+
+### 2026-10-27 — Correct Console tutorial thumbnail
+
+YouTube now serves the actual 1280px setup-tutorial cover. Refreshed its image
+URL to bypass the earlier cached placeholder and removed the unrelated Console
+illustration fallback. Browser inspection confirms the correct tutorial photo;
+focused lint passes.
+
+### Company Profile and Products menu update — 27 October 2026
+- Console includes Company Profile before Agent Setup, using the supplied placeholder and helper copy. Company name and business description are required; other fields are optional. Saves are browser-local demonstration data, not live agent context.
+- Overview starts its setup guide with Company Profile; Agent Setup links to the shared form instead of showing duplicate company fields.
+- Products dropdown centres the Manage your Agent / AI Agent Console group below the three product columns, reusing the existing centred-group styling.
+- QA: Company Profile desktop/mobile layouts and navigation inspected; production build passed. Live backend integration remains out of scope.
+
+- Homepage hero conversation updated to the JLG 1250AJP boom lift sequence from Conversation Feature Animation: specifications, original reach diagram, suitability clarification, Chinese follow-up and rental handover. Uses the website’s existing reveal/scroll animation; surrounding hero media is unchanged.
+
+
+- Homepage floating conversation viewport extends downward by 32px on desktop and 24px on mobile, preserving its starting position.
+
+- Homepage floating boom lift animation now uses six English exchanges from the original source, excluding translation and final booking-confirmation exchanges. Preserves the 18-row specification scroll, reach diagram enlargement, suitability reply, catalogue and rental options. Compact viewport capped at 420px desktop; faster typing and approximately 27-second loop.

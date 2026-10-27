@@ -1989,35 +1989,14 @@ test('homepage depth layers reuse four unique Who We Serve transcripts and share
   }).outputText;
   const { centre, background } = JSON.parse(runInNewContext(code));
   const summaries = centre.filter((message) => message.kind === 'summary');
-  assert.deepEqual(centre.map((message) => message.kind), [
-    'buyer', 'agent', 'buyer', 'summary',
-    'buyer', 'agent', 'buyer', 'summary',
-  ], 'each product example is a buyer-Agent exchange ending in a structured answer');
-  assert.match(centre[1].text, /tracked spider lift/);
-  assert.match(centre[5].text, /robotic total station/);
-  assert.match(centre[2].text, /monthly hire price/);
-  assert.match(centre[6].text, /key measuring ranges/);
-  assert.equal(summaries.length, 2, 'each conversation contains one structured product summary');
-  assert.ok(summaries.every((summary) => !('eyebrow' in summary)), 'summary cards omit editorial sequence labels');
-  assert.deepEqual(summaries.map((summary) => summary.title), ['TEUPEN LEO23GT', 'Topcon GT-1501']);
-  assert.deepEqual(summaries[0].rows.map(({ label, value }) => [label, value]), [
-    ['Working height', '23.0 m'],
-    ['Retracted width', '0.98 m'],
-    ['Max. platform load', '200 kg'],
-    ['Monthly hire price', 'Supplier quote'],
-  ]);
-  assert.deepEqual(summaries[1].rows.map(({ label, value }) => [label, value]), [
-    ['Angle accuracy', '1″'],
-    ['Prism measuring range', '5,000 m'],
-    ['Reflectorless range', '1,000 m'],
-    ['Instrument package price', 'Supplier quote'],
-  ]);
-  assert.ok(summaries.every((summary) => /confirm/i.test(summary.note)), 'price and configuration details retain a supplier-confirmation boundary');
-  assert.match(summaries[0].recommendation, /outrigger footprint and ground conditions/);
-  assert.match(summaries[0].note, /final hire price, availability, hire period, delivery and project-specific charges/);
-  assert.match(summaries[1].note, /target and conditions/);
-  assert.match(summaries[1].note, /controller, prism kit, software, support and final supplier quote/);
-  assert.doesNotMatch(JSON.stringify(centre), /Singapore|S\$|US package|US\$|local kit/i, 'foreground conversations remain location-neutral');
+  assert.match(centre[0].text, /JLG 1250AJP/);
+  assert.equal(summaries.length, 1);
+  assert.match(summaries[0].note, /not simultaneous/);
+  const diagram = centre.find(message => message.kind === 'diagram');
+  assert.equal(diagram.src, '/images/home-jlg-1250ajp-reach.png');
+  assert.ok((await readFile(new URL(`../public${diagram.src}`, import.meta.url))).length > 0);
+  assert.match(centre.at(-1).text, /Tuas/);
+  assert.match(centre.at(-2).text, /confirm.*final pricing/);
   assert.match(source, /antbuildz-home-hero-conversation__summary-table/);
   assert.doesNotMatch(source, /PRICING & SPECIFICATION ANSWER|SPECIFICATION & PRICING ANSWER/);
   assert.match(styles, /\.antbuildz-home-hero-conversation__summary-table \{/);
@@ -4411,4 +4390,14 @@ test('resource metadata shares current headings and article links avoid unpublis
     const html = await readFile(new URL(file, articleDirectory), 'utf8');
     assert.doesNotMatch(html, /href=["']\/content\/[^"']+\.md/, `${slug} links to published pages`);
   }
+});
+
+test('homepage boom lift animation retains rich replies and omits final confirmation', async () => {
+  const turns = JSON.parse(await readFile(new URL('../app/home-boomlift-turns.json', import.meta.url), 'utf8'));
+  assert.equal(turns.length, 6);
+  assert.equal(turns.find(turn => turn.fullSpecifications).rows.length, 18);
+  assert.ok(turns.some(turn => turn.image === 'boom'));
+  assert.ok(turns.some(turn => turn.catalogue));
+  assert.ok(turns.every(turn => !/[\u3040-\u30ff\u4e00-\u9fff]/.test(turn.q)));
+  assert.doesNotMatch(turns.at(-1).q, /next Monday/);
 });

@@ -3,6 +3,7 @@
 import { useEffect, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
+import { IntroVideo } from './features/conversational-experience/intro-video';
 import { OriginalAntbuildzApp } from './original-antbuildz-app';
 import styles from './ai-sales-agent-global-reach.module.css';
 
@@ -54,14 +55,24 @@ export function AiSalesAgentGlobalReach() {
 
 export function AiSalesAgentPage() {
   const [mount, setMount] = useState<HTMLElement | null>(null);
+  const [videoMount, setVideoMount] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     const root = document.getElementById('root');
     if (!root) return;
     let container: HTMLDivElement | null = null;
+    let videoContainer: HTMLDivElement | null = null;
     let frame = 0;
     const attach = () => {
-      if (window.location.pathname !== '/ai-agent' || container?.isConnected) return;
+      if (window.location.pathname !== '/ai-agent') return;
+      const hero = root.querySelector<HTMLElement>('[data-antbuildz-sales-agent] .bright-hero');
+      if (hero && !videoContainer?.isConnected) {
+        videoContainer = document.createElement('div');
+        videoContainer.className = styles.videoMount;
+        hero.insertAdjacentElement('afterend', videoContainer);
+        setVideoMount(videoContainer);
+      }
+      if (container?.isConnected) return;
       const faq = root.querySelector<HTMLElement>('[data-antbuildz-sales-agent] .bright-faq-accordion');
       if (!faq) return;
       container = document.createElement('div');
@@ -84,8 +95,9 @@ export function AiSalesAgentPage() {
       observer.disconnect();
       if (frame) window.cancelAnimationFrame(frame);
       container?.remove();
+      videoContainer?.remove();
     };
   }, []);
 
-  return <><OriginalAntbuildzApp />{mount && createPortal(<AiSalesAgentGlobalReach />, mount)}</>;
+  return <><OriginalAntbuildzApp />{mount && createPortal(<AiSalesAgentGlobalReach />, mount)}{videoMount && createPortal(<IntroVideo />, videoMount)}</>;
 }

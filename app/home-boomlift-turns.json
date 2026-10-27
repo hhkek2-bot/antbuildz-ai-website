@@ -1,0 +1,175 @@
+[
+  {
+    "q": "Do you have JLG 1250AJP boom lift specifications?",
+    "a": "Here are the key specifications for the JLG 1250AJP. Next, we can check its reach at your required height.",
+    "rows": [
+      [
+        "Platform height",
+        "38.1 m (125 ft)"
+      ],
+      [
+        "Horizontal outreach",
+        "19.3 m (63 ft 2 in)"
+      ],
+      [
+        "Up-and-over height",
+        "18.5 m (60 ft 7 in)"
+      ],
+      [
+        "Continuous swing",
+        "360°"
+      ]
+    ],
+    "note": "",
+    "h": 820
+  },
+  {
+    "q": "Can you show me the full specifications?",
+    "a": "Here are the detailed specifications. These cover capacity, movement and dimensions for site planning.",
+    "fullSpecifications": true,
+    "rows": [
+      [
+        "Platform height",
+        "38.1 m"
+      ],
+      [
+        "Outreach · two load zones",
+        "19.3 m / 16.2 m"
+      ],
+      [
+        "Up-and-over height",
+        "18.5 m"
+      ],
+      [
+        "Capacity · two load zones",
+        "230 kg / 450 kg (CE & Australia)"
+      ],
+      [
+        "Boom swing",
+        "360° continuous"
+      ],
+      [
+        "Jib length",
+        "2.44 m"
+      ],
+      [
+        "Jib horizontal motion",
+        "125° working / 210° stowed"
+      ],
+      [
+        "Jib vertical motion",
+        "130° (+75° / −55°)"
+      ],
+      [
+        "Platform rotation",
+        "±90°"
+      ],
+      [
+        "Width · retracted / extended",
+        "2.49 m / 3.8 m"
+      ],
+      [
+        "Stowed height",
+        "3.05 m"
+      ],
+      [
+        "Transport length",
+        "11.46 m"
+      ],
+      [
+        "Wheelbase",
+        "3.81 m"
+      ],
+      [
+        "Ground clearance · axle",
+        "0.304 m"
+      ],
+      [
+        "Drive speed · stowed / elevated",
+        "5.2 km/h / 1.2 km/h"
+      ],
+      [
+        "Gradeability · boom stowed",
+        "45%"
+      ],
+      [
+        "Weight · empty platform",
+        "19,958 kg"
+      ],
+      [
+        "Fuel tank",
+        "117 litres"
+      ]
+    ],
+    "note": "",
+    "h": 900
+  },
+  {
+    "q": "Do you have the reach diagram?",
+    "a": "Here’s the reach diagram. Find your required height, then check the horizontal reach for the platform load.",
+    "image": "boom",
+    "note": "JLG 1250AJP · Reach diagram",
+    "h": 1000
+  },
+  {
+    "q": "Can it reach a platform height of 30 m at 18 m horizontal outreach?",
+    "a": "At 30 m platform height, the available horizontal reach is below your required 18 m.",
+    "rows": [
+      [
+        "Platform height",
+        "30 m"
+      ],
+      [
+        "Horizontal reach · 230 kg",
+        "Approx. 15–16 m at this height"
+      ],
+      [
+        "Horizontal reach · 450 kg",
+        "Approx. 12–13 m at this height"
+      ]
+    ],
+    "outcome": "Result: this unit cannot reach the requested position.",
+    "note": "These are approximate chart readings. We can assess a different model or a closer machine position.",
+    "h": 890
+  },
+  {
+    "q": "Can you share the JLG 1250AJP catalogue?",
+    "a": "Here’s the product brochure. Open the PDF for the specifications and reach diagram.",
+    "catalogue": {
+      "title": "JLG 1250AJP",
+      "url": "https://www.amsales.com.au/wp-content/uploads/2025/01/1250AJP_EN_Updated_SEAsia.pdf",
+      "host": "",
+      "detail": "Southeast Asia brochure · PDF · 2 pages"
+    },
+    "note": "Specifications vary by market and edition. Confirm the brochure for the actual machine.",
+    "h": 600
+  },
+  {
+    "q": "How can I rent a suitable boom lift, and what will it cost?",
+    "a": "I recommend assessing the JLG 1500SJ telescopic boom lift as an alternative. Its daily rental rate is 10% above the 1250AJP rate.",
+    "tableHeaders": [
+      "Recommended model",
+      "Rental details"
+    ],
+    "rows": [
+      [
+        "Equipment",
+        "JLG 1500SJ telescopic boom lift"
+      ],
+      [
+        "Daily rental",
+        "1250AJP daily rate × 1.10"
+      ],
+      [
+        "Delivery",
+        "—"
+      ],
+      [
+        "Required position",
+        "30 m platform height × 18 m outreach"
+      ]
+    ],
+    "note": "Our team will check the actual reach chart for your 200 kg load and confirm site suitability and availability.",
+    "h": 750
+  }
+]

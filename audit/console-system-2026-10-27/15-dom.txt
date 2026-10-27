@@ -1,0 +1,123 @@
+- region "Notifications (F8)":
+  - list
+- region "Notifications alt+T"
+- complementary:
+  - button "Return to Antbuildz website":
+    - img "Antbuildz.com"
+    - generic: AI Agent Console
+  - button "Overview":
+    - text: Overview
+  - button "Collapse sidebar":
+  - generic: Active Agent
+  - 'button "Switch active agent: Emma Tomato"':
+    - generic: 🏗️
+    - paragraph: Emma Tomato
+    - paragraph: AI Agent
+  - generic: Navigation
+  - navigation:
+    - paragraph: Build your agent
+    - button "Agent Setup":
+      - text: Agent Setup
+    - button "Knowledge Base":
+      - text: Knowledge Base
+    - button "Workflows":
+      - text: Workflows
+    - button "Inventory":
+      - text: Inventory
+    - button "Integrations":
+      - text: Integrations
+    - paragraph: Design and deploy
+    - button "Settings":
+      - text: Settings
+    - button "Test Agent":
+      - text: Test Agent
+    - button "Deploy":
+      - text: Deploy
+    - paragraph: Run and improve
+    - button "Conversations":
+      - text: Conversations
+    - button "Leads":
+      - text: Leads
+    - button "Deals":
+      - text: Deals
+    - button "User Activities":
+      - text: User Activities
+    - paragraph: Account and help
+    - button "Billing" [active]:
+      - text: Billing
+    - button "Help":
+      - text: Help
+  - generic: Usage
+  - generic: 76 / 150
+  - paragraph: Sales Plan · 50 Extra Credits
+  - button "Account":
+    - text: Account
+- main:
+  - tablist:
+    - tab "Subscription & Usage" [selected]:
+      - text: Subscription & Usage
+    - tab "Payment Method":
+      - text: Payment Method
+    - tab "Billing History":
+      - text: Billing History
+  - tabpanel "Subscription & Usage":
+    - generic: UI mock-up
+    - paragraph: Preview billing state
+    - paragraph: Local preview only. No subscription or payment is changed.
+    - combobox "Preview billing state":
+      - generic: Sales — Active
+    - heading "Sales" [level=2]
+    - generic: Active
+    - paragraph: $199 / month
+    - paragraph: Next billing
+    - paragraph: 1 Oct 2026
+    - paragraph: Monthly · $199 next charge
+    - button "Change Plan"
+    - button "Manage subscription"
+    - paragraph:
+      - text: Today is 3 September 2026
+    - heading "Conversation balance" [level=2]
+    - button "How conversations are counted":
+    - paragraph: Total Available Conversations
+    - paragraph: "124"
+    - paragraph: conversations
+    - generic: "1"
+    - paragraph: Monthly conversations
+    - paragraph: 74 remaining
+    - paragraph: 150 included
+    - progressbar "Monthly conversations remaining"
+    - paragraph: Resets 1 Oct 2026 · Used first
+    - generic: "2"
+    - paragraph: Extra credits
+    - paragraph: 50 remaining
+    - progressbar "Extra credits remaining"
+    - paragraph: No expiry while subscription is active
+    - heading "Auto Top-Up" [level=3]
+    - generic: "ON"
+    - paragraph: When your balance is low, we’ll automatically top up your conversations.
+    - button "Edit settings":
+      - text: Edit settings
+    - paragraph: Balance reaches
+    - paragraph: 5 conversations
+    - paragraph: Add
+    - paragraph: 50 conversations
+    - paragraph: $45 charged to
+    - paragraph: Visa •••• 8821
+    - paragraph: Total Available Conversations = Monthly Conversations Remaining + Extra Credits Remaining. Monthly Conversations are used first. Auto Top-Up pauses when the monthly reset is within 24 hours and usable balance remains.
+    - generic "Account and billing shortcuts":
+      - paragraph: Webstore usage
+      - paragraph: 67 of 100 active listings
+      - link "Manage listings":
+        - /url: /app?tab=inventory
+        - text: Manage listings
+      - paragraph: Payment method
+      - paragraph: Visa •••• 8821 · Expires 08/29
+      - button "Update payment method":
+        - text: Update payment method
+      - paragraph: Billing history
+      - paragraph: Sales monthly plan · Sep 1, 2026 · $199.00
+      - button "View billing history":
+        - text: View billing history
+- button "Open quick Test Agent":
+  - text: Test Agent
+- button "Replay console tutorial":
