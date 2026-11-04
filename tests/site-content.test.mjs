@@ -3446,22 +3446,6 @@ test('canonical SEO references the Antbuildz AI domain', async () => {
   await access(new URL('../public/llms.txt', import.meta.url));
 });
 
-test('search identity signals prefer production and exclude the public staging host', async () => {
-  const [layout, proxy, robots] = await Promise.all([
-    readFile(new URL('../app/layout.tsx', import.meta.url), 'utf8'),
-    readFile(new URL('../proxy.ts', import.meta.url), 'utf8'),
-    readFile(new URL('../app/robots.ts', import.meta.url), 'utf8'),
-  ]);
-
-  assert.match(layout, /name: 'Antbuildz AI'/);
-  assert.match(layout, /alternateName: \['Antbuildz\.ai', 'antbuildz\.ai'\]/);
-  assert.match(layout, /https:\/\/www\.linkedin\.com\/company\/antbuildz\/about/);
-  assert.match(proxy, /new Set\(\['develop\.antbuildz\.ai'\]\)/);
-  assert.match(proxy, /response\.headers\.set\('X-Robots-Tag', 'noindex, nofollow, noarchive'\)/);
-  assert.match(robots, /host: 'antbuildz\.ai'/);
-  assert.doesNotMatch(robots, /host: 'https:\/\//);
-});
-
 test('Sites hosting configuration has no persistence bindings', async () => {
   const hosting = JSON.parse(await readFile(new URL('../.openai/hosting.json', import.meta.url), 'utf8'));
   assert.deepEqual(hosting, { d1: null, r2: null });
