@@ -64,16 +64,22 @@ const structuredData = {
     {
       '@type': 'Organization',
       '@id': 'https://antbuildz.ai/#organization',
-      name: 'Antbuildz',
+      name: 'Antbuildz AI',
+      alternateName: 'Antbuildz',
       url: 'https://antbuildz.ai',
       logo: 'https://antbuildz.ai/images/antbuildz-wordmark.png',
       description: 'AI Agents for complex product businesses, specialising in industrial equipment, rental and technical B2B products.',
+      sameAs: [
+        'https://www.linkedin.com/company/antbuildz/about',
+        'https://www.facebook.com/antbuildz',
+      ],
     },
     {
       '@type': 'WebSite',
       '@id': 'https://antbuildz.ai/#website',
       url: 'https://antbuildz.ai',
       name: 'Antbuildz AI',
+      alternateName: ['Antbuildz.ai', 'antbuildz.ai'],
       publisher: { '@id': 'https://antbuildz.ai/#organization' },
       inLanguage: 'en-SG',
     },
