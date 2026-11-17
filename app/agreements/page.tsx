@@ -13,7 +13,7 @@ export const metadata: Metadata = {
       images: [SOCIAL_SHARE_IMAGE],
     title: 'Antbuildz AI Agreements & Policies',
     description: 'Legal terms and privacy information governing Antbuildz AI services.',
-    url: '/agreements', siteName: 'Antbuildz AI', type: 'website', locale: 'en_SG',
+    url: '/agreements', siteName: 'Antbuildz AI', type: 'website', locale: 'en_US',
   },
 };
 

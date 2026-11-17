@@ -18,11 +18,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://antbuildz.ai'),
   title: {
-    default: 'Antbuildz AI | AI Agent for Complex Products',
+    default: 'Antbuildz AI | Customer AI Agent for Complex Products',
     template: '%s | Antbuildz AI',
   },
-  description: 'AI Agent for complex product businesses, with AI Webstore Suite and AI Agent Console. Built from industrial equipment, rental and technical B2B expertise.',
-  keywords: ['AI Agent for complex products', 'Industrial AI Sales Agent', 'AI Webstore Suite', 'equipment rental AI', 'industrial product sales'],
+  description: 'Customer AI Agent for complex product businesses, with AI Webstore Suite and AI Agent Console. Built from industrial equipment, rental and technical B2B expertise.',
+  keywords: ['Customer AI Agent', 'Customer AI Agent for complex products', 'Industrial AI Sales Agent', 'AI Webstore Suite', 'equipment rental AI', 'industrial product sales'],
   applicationName: 'Antbuildz AI',
   category: 'AI software for complex product businesses',
   authors: [{ name: 'Antbuildz', url: 'https://antbuildz.ai' }],
@@ -37,18 +37,18 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
   openGraph: {
-    title: 'Antbuildz AI | AI Agent for Complex Products',
-    description: 'Turn product conversations into qualified demand with an AI Agent, connected AI Webstore Suite and one operational Console.',
+    title: 'Antbuildz AI | Customer AI Agent for Complex Products',
+    description: 'Turn customer conversations into qualified demand with a Customer AI Agent, connected AI Webstore Suite and one operational Console.',
     url: 'https://antbuildz.ai',
     siteName: 'Antbuildz AI',
-    locale: 'en_SG',
+    locale: 'en_US',
     type: 'website',
     images: [SOCIAL_SHARE_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Antbuildz AI | AI Agent for Complex Products',
-    description: 'AI Agent, AI Webstore Suite and AI Agent Console for complex product businesses.',
+    title: 'Antbuildz AI | Customer AI Agent for Complex Products',
+    description: 'Customer AI Agent, AI Webstore Suite and AI Agent Console for complex product businesses.',
     images: [SOCIAL_SHARE_IMAGE_PATH],
   },
 };
@@ -67,7 +67,8 @@ const structuredData = {
       name: 'Antbuildz',
       url: 'https://antbuildz.ai',
       logo: 'https://antbuildz.ai/images/antbuildz-wordmark.png',
-      description: 'AI Agents for complex product businesses, specialising in industrial equipment, rental and technical B2B products.',
+      description: 'Customer AI Agents for complex product businesses, specialising in industrial equipment, rental and technical B2B products.',
+      areaServed: 'Worldwide',
     },
     {
       '@type': 'WebSite',
@@ -75,21 +76,21 @@ const structuredData = {
       url: 'https://antbuildz.ai',
       name: 'Antbuildz AI',
       publisher: { '@id': 'https://antbuildz.ai/#organization' },
-      inLanguage: 'en-SG',
+      inLanguage: 'en',
     },
     {
       '@type': 'SoftwareApplication',
       '@id': 'https://antbuildz.ai/#software',
-      name: 'Antbuildz AI Agent',
+      name: 'Antbuildz Customer AI Agent',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       url: 'https://antbuildz.ai/ai-agent',
-      description: 'AI Agent for complex products, supporting sales, rental and product guidance with approved knowledge, AI Webstore Suite and AI Agent Console.',
+      description: 'Customer AI Agent for complex products, handling customer sales, rental, support and product guidance with approved knowledge, AI Webstore Suite and AI Agent Console.',
       provider: { '@id': 'https://antbuildz.ai/#organization' },
     },
   ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en-SG" className={`${plusJakartaSans.variable} ${inter.variable}`}><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />{children}</body></html>;
+  return <html lang="en" className={`${plusJakartaSans.variable} ${inter.variable}`}><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />{children}</body></html>;
 }

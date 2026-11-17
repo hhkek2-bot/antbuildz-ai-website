@@ -90,7 +90,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
         description: article.description,
         url,
         mainEntityOfPage: { '@id': url },
-        inLanguage: 'en-SG',
+        inLanguage: 'en',
         image,
         articleSection,
         keywords: [
@@ -100,7 +100,7 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
           'approved business knowledge',
           ...(discussesWebstore ? ['AI Webstore Suite', 'structured product data', 'inventory context'] : []),
         ],
-        about: { '@type': 'SoftwareApplication', '@id': `${siteUrl}/#software`, name: 'Antbuildz AI Agent', applicationCategory: 'BusinessApplication' },
+        about: { '@type': 'SoftwareApplication', '@id': `${siteUrl}/#software`, name: 'Antbuildz Customer AI Agent', applicationCategory: 'BusinessApplication' },
         ...(discussesWebstore ? { mentions: { '@type': 'SoftwareApplication', name: 'Antbuildz AI Webstore Suite', applicationCategory: 'BusinessApplication' } } : {}),
         ...(article.datePublished ? { datePublished: article.datePublished } : {}),
         ...(article.dateModified ? { dateModified: article.dateModified } : {}),

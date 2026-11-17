@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ document:
     openGraph: {
       images: [SOCIAL_SHARE_IMAGE],
       title: document.title, description: document.description, url: canonical,
-      siteName: 'Antbuildz AI', type: 'article', locale: 'en_SG',
+      siteName: 'Antbuildz AI', type: 'article', locale: 'en_US',
     },
     twitter: { images: [SOCIAL_SHARE_IMAGE], card: 'summary_large_image', title: document.title, description: document.description },
   };
@@ -40,7 +40,7 @@ export default async function AgreementDocumentPage({ params }: { params: Promis
     '@graph': [
       {
         '@type': 'WebPage', '@id': `${url}#webpage`, name: document.title,
-        description: document.description, url, inLanguage: 'en-SG',
+        description: document.description, url, inLanguage: 'en',
         isPartOf: { '@id': 'https://antbuildz.ai/#website' }, dateModified: '2026-09-02',
       },
       {

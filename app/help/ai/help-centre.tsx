@@ -5,7 +5,7 @@ import { HELP_FAQ_GROUPS, searchHelpFaqs, type HelpFaq } from '@/lib/help-faq-co
 import styles from './help-centre.module.css';
 
 const tabs = [
-  { id: 'primary', label: 'AI Agent', description: 'Setup, product intelligence, controls and integrations.' },
+  { id: 'primary', label: 'Customer AI Agent', description: 'Setup, product intelligence, controls and integrations.' },
   { id: 'secondary', label: 'AI Webstore Suite', description: 'Webstore, catalogue, transactions and subscriptions.' },
 ] as const;
 function Chevron({ open = false }: { open?: boolean }) {
@@ -25,7 +25,7 @@ export function HelpCentre() {
   const results = searchHelpFaqs(query);
   const groups = HELP_FAQ_GROUPS.filter(group => searching ? results.some(faq => faq.group === group.id) : active === 'primary' ? group.id !== 'webstore-suite' : ['webstore-suite','subscriptions'].includes(group.id));
   return <div className="help-centre-page antbuildz-ai-help-centre">
-    <section className="help-centre-hero"><div className="faq-master-container"><div className="help-centre-hero__intro"><p className="faq-master-eyebrow">Antbuildz AI Help Centre</p><h1>Antbuildz AI Help</h1><p>Clear answers for the AI Agent, AI Webstore Suite and AI Agent Console, including product knowledge, setup, controls and subscriptions.</p></div>
+    <section className="help-centre-hero"><div className="faq-master-container"><div className="help-centre-hero__intro"><p className="faq-master-eyebrow">Antbuildz AI Help Centre</p><h1>Antbuildz AI Help</h1><p>Clear answers for the Customer AI Agent, AI Webstore Suite and AI Agent Console, including product knowledge, setup, controls and subscriptions.</p></div>
       <label className="help-centre-search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Search Antbuildz AI help" aria-label="Search Help Centre answers" /></label>
     </div></section>
     <section className="help-centre-content" aria-label="AI product help topics"><div className="faq-master-container">

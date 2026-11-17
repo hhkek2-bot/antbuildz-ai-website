@@ -2821,7 +2821,7 @@ test('pricing presents Agent, Sales and Rental+ as one clear upgrade path', asyn
   assert.match(source, /Purchased credits do not expire/);
   assert.match(source, /setPricingText\(headings\[1\], 'Price'\)/);
   assert.match(source, /\$\{pack\.sessions\} credits/);
-  assert.match(source, /US\$\$\{formatUsdAmount\(pack\.usd\)\}/);
+  assert.match(source, /\$\$\{formatUsdAmount\(pack\.usd\)\}/);
   assert.doesNotMatch(source, /Price per credit|¢\/credit/);
   assert.doesNotMatch(source, /Buyer Enquiry Credits/);
   assert.doesNotMatch(source, /Buy more AI Enquiry Sessions upfront and save on each session/);

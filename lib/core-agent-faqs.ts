@@ -1,8 +1,8 @@
 /** The eight FAQs on the retained /ai-sales-agent core product page. */
 export const CORE_AGENT_FAQS = [
   {
-    "question": "What is the Antbuildz AI Agent?",
-    "answer": "Antbuildz AI Agent is the core product for complex product businesses. It uses approved knowledge, specifications, inventory and workflows to support recommendations, sales, rental and customer conversations. Sales Specialist is its AI Sales Agent role; other roles cover product guidance, customer service, technical support and after-sales support. Built from industrial equipment and B2B expertise, it can also support technical consumer products. Your team confirms suitability and commercial commitments."
+    "question": "What is the Antbuildz Customer AI Agent?",
+    "answer": "Antbuildz Customer AI Agent is the core product for complex product businesses. It uses approved knowledge, specifications, inventory and workflows to handle customer recommendations, sales, rental and support conversations. Sales Specialist is its AI Sales Agent role; other roles cover product guidance, customer service, technical support and after-sales support. Built from industrial equipment and B2B expertise, it can also support technical consumer products. Your team confirms suitability and commercial commitments."
   },
   {
     "question": "How long does setup typically take?",

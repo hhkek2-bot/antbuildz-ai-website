@@ -13,7 +13,7 @@ export const metadata = roleMetadata(seo.title, seo.description, seo.path);
 const base = 'https://antbuildz.ai';
 const schema = {
   '@context': 'https://schema.org', '@graph': [
-    { '@type': 'CollectionPage', '@id': `${base}${seo.path}#webpage`, url: `${base}${seo.path}`, name: 'Who We Serve', description: seo.description, isPartOf: { '@id': `${base}/#website` }, about: { '@id': `${base}/#software` }, inLanguage: 'en-SG' },
+    { '@type': 'CollectionPage', '@id': `${base}${seo.path}#webpage`, url: `${base}${seo.path}`, name: 'Who We Serve', description: seo.description, isPartOf: { '@id': `${base}/#website` }, about: { '@id': `${base}/#software` }, inLanguage: 'en' },
     { '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: base },
       { '@type': 'ListItem', position: 2, name: 'Who We Serve', item: `${base}${seo.path}` },

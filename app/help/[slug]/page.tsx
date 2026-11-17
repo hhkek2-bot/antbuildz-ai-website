@@ -30,7 +30,7 @@ export default async function HelpPage({ params }: { params: Promise<{ slug: str
     name: AI_HELP_SEO.title,
     description: AI_HELP_SEO.description,
     url: 'https://antbuildz.ai/help/ai',
-    inLanguage: 'en-SG',
+    inLanguage: 'en',
     isPartOf: { '@id': 'https://antbuildz.ai/#website' },
   };
 

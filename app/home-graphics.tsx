@@ -108,7 +108,7 @@ export function SelectionOverviewGraphic({ step }: { step: number }) {
       <div className={`${styles.agentPanel} ${styles.overviewPhone}`}>
         <div className={styles.agentHeader}>
           <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" />
-          <span><strong>Emma</strong><small>AI Sales Agent</small></span>
+          <span><strong>Emma</strong><small>Customer AI Agent</small></span>
           <i aria-hidden="true" />
         </div>
         <div className={styles.agentConversation}>
@@ -226,7 +226,7 @@ export function SelectionGraphic({ step }: { step: number }) {
     </div>}
     {step === 3 && <div className={styles.recommendScene}>
       <div className={styles.recommendPhone}>
-        <span className={styles.selectionAgent}><img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" /><span><strong>Emma</strong><small>AI Sales Agent</small></span></span>
+        <span className={styles.selectionAgent}><img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" /><span><strong>Emma</strong><small>Customer AI Agent</small></span></span>
         <div className={styles.recommendBuyerMessage}>Show me the best options for a 5 t electric forklift.</div>
         <div className={styles.answerBubble}>I found one close catalogue match for review. Toyota 8FBMT50 is rated at 4,990 kg; mast, load centre and site suitability still need confirmation.</div>
         <div className={styles.recommendTable}>
@@ -252,7 +252,7 @@ export function AgentGraphic() {
       <div className={styles.agentPanel}>
         <div className={styles.agentHeader}>
           <img src="/images/emma-sales-agent.jpg" alt="" loading="lazy" width="40" height="40" />
-          <span><strong>Emma</strong><small>AI Sales Agent</small></span>
+          <span><strong>Emma</strong><small>Customer AI Agent</small></span>
           <i aria-hidden="true" />
         </div>
         <div className={styles.agentConversation}>

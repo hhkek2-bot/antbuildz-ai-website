@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: HOMEPAGE_SEO.url },
   openGraph: {
     title: HOMEPAGE_SEO.title, description: HOMEPAGE_SEO.description,
-    url: HOMEPAGE_SEO.url, siteName: 'Antbuildz AI', type: 'website', locale: 'en_SG',
+    url: HOMEPAGE_SEO.url, siteName: 'Antbuildz AI', type: 'website', locale: 'en_US',
     images: [SOCIAL_SHARE_IMAGE],
   },
   twitter: { card: 'summary_large_image', title: HOMEPAGE_SEO.title, description: HOMEPAGE_SEO.description, images: [HOMEPAGE_SEO.image] },

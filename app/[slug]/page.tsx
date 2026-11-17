@@ -11,14 +11,14 @@ import { RESOURCE_LIBRARY_SEO } from '@/lib/resource-copy';
 
 const pageTitles: Record<string, [string, string]> = {
   'ai-webstore-suite': [WEBSTORE_TITLE, WEBSTORE_DESCRIPTION],
-  'ai-agent': ['AI Agent for Complex Product Businesses', 'Antbuildz AI Agent uses product knowledge, inventory and workflows to guide sales, rental and support. Built from industrial equipment and B2B expertise.'],
+  'ai-agent': ['Customer AI Agent for Complex Product Businesses', 'Antbuildz Customer AI Agent uses approved product knowledge, inventory and workflows to handle customer sales, rental and support. Built from industrial equipment and B2B expertise.'],
   'ai-agent-console': ['AI Agent Console | Knowledge, Workflows & Conversations', 'Manage AI Agent knowledge, instructions, workflows and conversations across sales, rental and support. Review responses and control human handover.'],
-  pricing: ['Antbuildz AI Pricing', 'Compare Antbuildz AI Agent plans: Agent, Sales and Rental+. Review AI Webstore Suite capabilities, included features and setup options.'],
-  'book-a-demo': ['Book an Antbuildz AI Agent Demo', 'Book an Antbuildz AI Agent demo for your complex products, sales, rental or support workflows. Explore approved knowledge, recommendations and human handover.'],
+  pricing: ['Antbuildz AI Pricing', 'Compare Antbuildz Customer AI Agent plans: Agent, Sales and Rental+. Review AI Webstore Suite capabilities, included features and setup options.'],
+  'book-a-demo': ['Book a Customer AI Agent Demo', 'Book an Antbuildz Customer AI Agent demo for your complex products, sales, rental or support workflows. Explore approved knowledge, recommendations and human handover.'],
   resources: [RESOURCE_LIBRARY_SEO.title, RESOURCE_LIBRARY_SEO.description],
   'ai-agent-roles': ['AI Agent Roles', 'Specialised AI roles for sales, product, service, technical support and after-sales workflows.'],
-  faqs: ['AI FAQs', 'Answers about the Antbuildz AI Agent, AI Webstore Suite and AI Agent Console.'],
-  about: ['About Antbuildz AI', 'Learn how Antbuildz brings industrial equipment, rental and B2B experience to AI Agents for complex product businesses.'],
+  faqs: ['AI FAQs', 'Answers about the Antbuildz Customer AI Agent, AI Webstore Suite and AI Agent Console.'],
+  about: ['About Antbuildz AI', 'Learn how Antbuildz brings industrial equipment, rental and B2B experience to Customer AI Agents for complex product businesses.'],
   agreements: ['Antbuildz AI Agreements & Policies', 'Find the published privacy, data-handling and product policy documents that apply to Antbuildz AI services and customers.'],
 };
 
@@ -42,7 +42,7 @@ const redirectTargets: Record<string, string> = {
 };
 
 const nonIndexableClientPages: Record<string, [string, string]> = {
-  trial: ['Start an Antbuildz AI Trial', 'Create and configure an Antbuildz AI Agent for your business.'],
+  trial: ['Start an Antbuildz AI Trial', 'Create and configure a Customer AI Agent for your business.'],
   contact: ['Contact Antbuildz AI', 'Contact the Antbuildz AI team about products, demos and industrial sales workflows.'],
   'sign-in': ['Sign In to Antbuildz AI', 'Sign in to your Antbuildz AI account.'],
   signup: ['Create an Antbuildz AI Account', 'Create an account to start using Antbuildz AI.'],
@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const solution = getSolution(slug);
   if (!solution && !pageTitles[slug]) notFound();
   const [title, description] = solution
-    ? [`AI Sales Agent for ${solution.accent}`, solution.summary]
+    ? [`Customer AI Agent for ${solution.accent}`, solution.summary]
     : pageTitles[slug];
   const images = solution
     ? [{ url: solution.image, alt: `${solution.navLabel} industrial operations` }]
@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description,
     alternates: { canonical: `/${slug}` },
     robots: { index: true, follow: true },
-    openGraph: { title, description, url: `/${slug}`, siteName: 'Antbuildz AI', type: 'website', locale: 'en_SG', images },
+    openGraph: { title, description, url: `/${slug}`, siteName: 'Antbuildz AI', type: 'website', locale: 'en_US', images },
     twitter: { card: 'summary_large_image', title, description, images },
   };
 }
@@ -101,7 +101,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
 
   const solution = getSolution(slug);
   const routeSeo = solution
-    ? { title: `AI Sales Agent for ${solution.accent}`, description: solution.summary }
+    ? { title: `Customer AI Agent for ${solution.accent}`, description: solution.summary }
     : pageTitles[slug]
       ? { title: pageTitles[slug][0], description: pageTitles[slug][1] }
       : null;
@@ -117,7 +117,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
         name: routeSeo.title,
         description: routeSeo.description,
         url,
-        inLanguage: 'en-SG',
+        inLanguage: 'en',
         isPartOf: { '@id': 'https://antbuildz.ai/#website' },
       },
       {

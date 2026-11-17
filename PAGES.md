@@ -1,5 +1,34 @@
 # Antbuildz.AI Page Register
 
+## Additional storage and restored agent add-on — 4 November 2026
+
+At the user's request, Additional AI Agent is restored below Additional Storage
+in the right-hand column, with Conversation Credits on the left. Its original
+$49/month price, description and Add Agent action are visible again. The agent
+card uses a compact price/action row. The credits card stretches across the two
+desktop rows so its bottom aligns exactly with the agent card; storage retains
+its compact content height. Mobile stacks credits, storage, then agent.
+
+Storage retains its large, left-aligned price, 100 MB plus/minus selector,
+knowledge-base explanation and **$10 per 100 MB per month** rate. There is no
+storage enquiry link or purchase button. The storage FAQ remains. The user
+confirmed all pricing is US dollars, including the $49 additional agent. All
+visible prices now use only `$`, including monthly plans, annual equivalents
+and totals, credits, storage descriptions, the selector and expanded storage FAQ.
+The USD/SGD explanation has been removed; numeric amounts remain unchanged.
+The storage price uses the same `pricing-agent-price` element as Additional
+AI Agent: 28.8px/800 Inter, matching monthly-label styling, a shared left edge
+and matching row gaps. Storage controls remain on the right where space allows.
+
+Rendered inspection at 1440×1000, 1024×900 and 390×844 confirms the restored
+agent card/button, matching desktop/tablet bottom edges (0px difference), compact
+placement, working storage controls and no horizontal
+overflow. Monthly/annual prices, totals, storage changes and the expanded FAQ
+were checked for dollar-sign-only display; six focused pricing tests, source
+ESLint and whitespace checks pass. This restores the existing
+agent offer's presentation; it does not repair the previously reported
+unavailable agent-creation function or connect storage billing. Local only.
+
 ## Homepage-only Emma chat embed — 24 October 2026
 
 Added the supplied Emma agent embed to `/` only, using the existing route-aware
@@ -1789,7 +1818,7 @@ Refined the three-layer hero chat in Fidelity mode against the user's latest Gor
 
 ## Pricing decisions required before publication
 
-- **Additional AI Agent:** The live add-on and existing FAQ retain **S$49/month** and a separate knowledge base. Confirm its intended USD price, eligible plans, and whether extra agents share or add conversation allowances. No new entitlement was inferred.
+- **Additional AI Agent:** Restored to Pricing on 4 November 2026 at the user’s request, below Additional Storage, with its $49/month price and Add Agent action. The user confirmed on 4 November that the price is US dollars and should display only the dollar sign. The user previously reported agent creation unavailable; restoring the card does not establish that the underlying function works. Shared/additional conversation allowances remain unconfirmed.
 - **Legacy comparison limits:** The existing four-column Agent table retains storage of 50 MB / 100 MB / 300 MB / 1 GB; the three-column Webstore table retains 100 MB / 300 MB / 1 GB. Confirm these against the new plans rather than treating the inherited numbers as newly approved.
 - **Unspecified capability mappings:** Existing values for Multi-Agent Support, Google Sheets Sync, generic data synchronisation, Real-Time Alerts, AI Learning, Behaviour Insights, Shareable Cart, Order & Reservation Panel and AI Testing Playground were left unchanged where not explicitly covered by the supplied specification. These inherited mappings need commercial confirmation, as do numeric workflow, integration, support and onboarding limits. Only explicitly approved inventory/workflow/lead-intelligence mappings were updated.
 - **Payments:** This is still a UI demonstration. Automatic-payment eligibility, invoicing approval, credit expiry/consumption and actual subscription checkout require a separately authorised billing implementation.

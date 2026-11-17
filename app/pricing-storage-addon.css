@@ -1,0 +1,109 @@
+/* Credits on the left; compact storage and agent cards share the right. */
+.antbuildz-ai-pricing .pricing-addons-grid:has([data-storage-addon]) {
+  align-items: start;
+}
+
+.antbuildz-ai-pricing .pricing-addons-grid:has([data-storage-addon]) > .pricing-addon-card:first-child {
+  grid-row: 1 / span 2;
+  align-self: stretch;
+}
+
+.antbuildz-ai-pricing .antbuildz-storage-addon {
+  align-self: start;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.antbuildz-ai-pricing [data-storage-agent] {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.antbuildz-ai-pricing [data-storage-agent] > :is(h3, p) {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.antbuildz-ai-pricing [data-storage-agent] > div:last-child {
+  margin-top: 0 !important;
+}
+
+.antbuildz-ai-pricing [data-storage-agent] :is(.pricing-agent-price, .pricing-cta) {
+  margin-top: 0;
+}
+
+/* Reuse the existing add-on title gradient instead of the second-card variant. */
+.antbuildz-ai-pricing .pricing-addons-grid .antbuildz-storage-addon h3 {
+  background-image: linear-gradient(135deg, var(--purple), var(--blue) 48%, #f59e0b);
+}
+
+.storage-addon-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-top: 8px;
+}
+
+.storage-addon-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.storage-addon-stepper output {
+  min-width: 80px;
+  color: var(--ink);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.storage-addon-stepper button {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--clean);
+  color: var(--ink);
+  cursor: pointer;
+  font: 500 20px/1 var(--font-body);
+}
+
+.storage-addon-stepper button:disabled {
+  opacity: .4;
+  cursor: default;
+}
+
+.storage-addon-stepper button:hover:not(:disabled) {
+  background: var(--soft);
+}
+
+.antbuildz-ai-pricing .antbuildz-storage-addon .storage-addon-total {
+  margin: 0;
+}
+
+.storage-addon-total strong {
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.antbuildz-storage-addon button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .antbuildz-ai-pricing .pricing-addons-grid:has([data-storage-addon]) > .pricing-addon-card {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+

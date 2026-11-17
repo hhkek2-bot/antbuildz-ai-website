@@ -1,7 +1,7 @@
 /** Homepage metadata shared by the server and the transferred app's head adapter. */
 export const HOMEPAGE_SEO = {
-  title: 'Antbuildz AI | AI Agent for Complex Products',
-  description: 'AI Agent for complex products, built from industrial expertise. Guide sales, rental and support with approved product knowledge, specifications and inventory.',
+  title: 'Antbuildz AI | Customer AI Agent for Complex Products',
+  description: 'Customer AI Agent for complex products, built from industrial expertise. Handle customer sales, rental and support conversations with approved product knowledge, specifications and inventory.',
   url: 'https://antbuildz.ai',
   image: 'https://antbuildz.ai/images/antbuildz-ai-social-share-v2.jpg',
 } as const;
@@ -13,7 +13,7 @@ export const HOMEPAGE_WEBPAGE = {
   name: HOMEPAGE_SEO.title,
   description: HOMEPAGE_SEO.description,
   url: HOMEPAGE_SEO.url,
-  inLanguage: 'en-SG',
+  inLanguage: 'en',
   isPartOf: { '@id': `${HOMEPAGE_SEO.url}/#website` },
   about: { '@id': `${HOMEPAGE_SEO.url}/#software` },
 };
