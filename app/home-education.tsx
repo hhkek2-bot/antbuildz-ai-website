@@ -24,7 +24,7 @@ export const HOME_INDUSTRIES = [
 export const HOME_QUESTIONS = [
   ['What catalogue or product information should we prepare?', 'Start with approved catalogues, specifications, manuals and business guidance. Include model variants, compatibility, availability and sales or rental rules where relevant. Confirm supported sources and inventory fields during setup.'],
   ['How does the Agent narrow down suitable products?', 'It considers the buyer’s requirements alongside supplied product information and supported inventory fields. Missing specifications prompt clarification; a related description alone does not establish suitability.'],
-  ['Do we need AI Webstore Suite to use the Customer AI Agent?', 'No. Start with the Customer AI Agent and your approved knowledge. Add AI Webstore Suite for structured product pages and inventory context. Sales supports product discovery and enquiries; Rental+ includes sales plus rental availability, rental periods, bookings and rental workflows.'],
+  ['Do we need AI Webstore Suite to use AI Agent?', 'No. Start with AI Agent and your approved knowledge. Add AI Webstore Suite for structured product pages and inventory context. Sales supports product discovery and enquiries; Rental+ includes sales plus rental availability, rental periods, bookings and rental workflows.'],
   ['What should our team review before confirming a recommendation?', 'Your team checks technical suitability, unresolved requirements, availability and commercial terms before confirming a recommendation or issuing a quotation.'],
   ['Is Antbuildz AI only for industrial businesses?', 'Industrial equipment, rental and B2B products are our strongest specialisation. The same approach can support instruments, electronics, components and technical consumer products such as 3D printers. Bring a catalogue and a typical customer question to a demo so we can assess the fit.'],
 ] as const;
@@ -162,24 +162,24 @@ export function HomeEducationBody() {
       <section className={styles.section} aria-labelledby="home-product-relationship">
         <div className={styles.frame}>
           <div className={`${styles.intro} ${styles.productIntro}`}>
-            <p className={styles.eyebrow}>Customer AI Agent + AI Webstore Suite</p>
+            <p className={styles.eyebrow}>AI Agent + AI Webstore Suite</p>
             <h2 id="home-product-relationship" className={styles.productHeading}><span>AI That Understands</span>{' '}<span>What You Sell</span></h2>
             <p className={styles.connection}>Built around equipment rental and industrial sales, Antbuildz AI handles products where specifications, applications, compatibility and availability shape the decision. That product intelligence helps customers compare complex products and find a supported match, with your team confirming suitability and commercial terms.</p>
           </div>
           <div className={styles.products}>
             <article className={styles.agentProduct}>
               <AgentGraphic />
-              <div className={styles.productIdentity}><p className={styles.productLabel}>Customer AI Agent</p><span className={styles.productBadge}>The core product</span></div>
-              <h3>Guide customer conversations</h3>
-              <p>Handle customer sales, rental, product and support conversations using approved knowledge, with a clear handover to your team.</p>
-              <a className={styles.textLink} href="/ai-agent" aria-label="Explore Customer AI Agent"><Arrow /></a>
+              <div className={styles.productIdentity}><p className={styles.productLabel}>AI Agent</p><span className={styles.productBadge}>The core product</span></div>
+              <h3>Guide product conversations</h3>
+              <p>Guide product choices, sales, rental and support using approved knowledge, with a clear handover to your team.</p>
+              <a className={styles.textLink} href="/ai-agent" aria-label="Explore AI Agent"><Arrow /></a>
             </article>
             <ProductConnector />
             <article className={styles.webstoreProduct}>
               <WebstoreGraphic />
               <div className={styles.productIdentity}><p className={styles.productLabel}>AI Webstore Suite</p><span className={styles.productBadge}>Available as an add-on</span></div>
               <h3>Turn your catalogue into a sales channel</h3>
-              <p>Structure products, specifications and inventory so customers can discover them and your Customer AI Agent can recommend supported options.</p>
+              <p>Structure products, specifications and inventory so customers can discover them and your AI Agent can recommend supported options.</p>
               <a className={styles.textLink} href="/ai-webstore-suite" aria-label="Explore AI Webstore Suite"><Arrow /></a>
             </article>
           </div>
@@ -245,7 +245,7 @@ export function HomeEducationFaq() {
         <div className="si-container">
           <div className="si-sierra-heading si-sierra-heading--centered">
             <span className={`si-eyebrow ${styles.faqEyebrow}`}>FAQ</span>
-            <h2 id="home-faq-heading">Your Customer AI Agent questions, answered</h2>
+            <h2 id="home-faq-heading">Your AI Agent questions, answered</h2>
             <p>What to prepare, how recommendations work and where your team stays involved.</p>
           </div>
           <div className="si-sierra-faq-list">

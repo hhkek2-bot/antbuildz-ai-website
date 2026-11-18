@@ -333,12 +333,12 @@ test('homepage metadata stays canonical, truthful, idempotent and route-scoped',
   assert.equal(description.value, exports.HOMEPAGE_SEO.description);
   assert.equal(
     exports.HOMEPAGE_SEO.description,
-    'AI Agent for complex products, built from industrial expertise. Guide sales, rental and support with approved product knowledge, specifications and inventory.',
+    'Answer everyday customer questions and guide complex product and service enquiries. Gather requirements and hand over with context using Antbuildz AI.',
   );
   assert.equal(image.value, exports.HOMEPAGE_SEO.image);
   assert.equal(doc.title, exports.HOMEPAGE_SEO.title);
   assert.equal(JSON.parse(schema.textContent)['@type'], 'WebPage');
-  assert.equal(JSON.parse(schema.textContent).inLanguage, 'en-SG');
+  assert.equal(JSON.parse(schema.textContent).inLanguage, 'en');
   assert.doesNotMatch(schema.textContent, /localhost|antbuildzai\.com|rating|offers/);
   const firstWrites = writes;
   exports.syncHomepageMetadata(doc, '/');
@@ -406,7 +406,7 @@ test('public pages declare a device-width viewport for responsive layouts', asyn
 test('homepage mobile refinements preserve typography and keep the hero title concise', async () => {
   const source = await readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8');
   const css = await readFile(new URL('../app/globals.css', import.meta.url), 'utf8');
-  assert.match(source, /AI Agent for Sales & Rental Businesses/);
+  assert.match(source, /AI for product and service businesses/);
   assert.match(source, /querySelector\('\.antbuildz-ai-home-intro'\)\?\.remove\(\)/);
   assert.match(source, /textContent !== HOME_HERO_TITLE_PRIMARY/, 'unchanged titles must not continually trigger the root observer');
   assert.match(source, /description.textContent !== HOME_HERO_DESCRIPTION/, 'the approved description must update without repeating DOM mutations');
@@ -674,8 +674,8 @@ test('Sales Agent copy covers animated clones and all Console states while using
   assert.equal(page.getAttribute('data-antbuildz-sales-agent'), 'true');
   assert.equal(heroFirst.textContent, "AI Agent for ");
   assert.equal(heroMiddle.textContent, '');
-  assert.equal(heroLast.textContent, "Complex Product Businesses");
-  assert.equal(SALES_AGENT_COPY.hero, "Use approved product knowledge, inventory and workflows to guide complex product questions across sales, rental and support.");
+  assert.equal(heroLast.textContent, 'Customer Conversations');
+  assert.equal(SALES_AGENT_COPY.hero, 'Answer everyday questions and qualify detailed enquiries. Your AI Agent uses approved knowledge to explain products and services, ask follow-up questions and hand over to your team.');
   assert.equal(heroPrimary.textContent, 'Book a Demo');
   assert.equal(heroSecondary.textContent, 'View Pricing');
   assert.equal(heroPrimary.attributes.href, '/book-a-demo');
@@ -927,7 +927,7 @@ test('Sales Agent copy retains the approved plan qualification and avoids the su
   assert.match(source, /setSalesAgentText\(highlight, 'Current Inventory'\)/);
   assert.equal((source.match(/\beyebrow\('/g) || []).length, 5);
   for (const label of [
-    'ANTBUILDZ AI AGENT',
+    'BUILT FOR COMPLEX PRODUCTS AND SERVICES',
     'AI AGENT CAPABILITIES',
     'ENQUIRY CHALLENGES',
     'ONE AI AGENT',
@@ -1836,8 +1836,8 @@ test('homepage uses the approved AI Agent product-match video with an immediate 
   assert.match(source, /video\.autoplay = true/);
   assert.match(source, /video\.muted = true/);
   assert.match(source, /video\.playsInline = true/);
-  assert.match(source, /AI Agent for Sales & Rental Businesses/);
-  assert.match(source, /Make every product easier to discover across search and AI, while your AI Agent understands complex needs, recommends the right product, and turns conversations into revenue\./);
+  assert.match(source, /AI for product and service businesses/);
+  assert.match(source, /Built for complex product and service conversations\. Your AI Agent answers everyday questions, compares options and asks for the details your team needs\./);
   assert.match(source, /prefers-reduced-motion: reduce/);
   assert.match(styles, /\.antbuildz-ai-home \.ai-marketplace-hero-stage \{\s*height: max\(100svh, 720px\)/);
   assert.match(styles, /filter: saturate\(\.88\) contrast\(1\.06\) brightness\(\.82\)/);
@@ -2324,8 +2324,8 @@ test('transferred public shell is corrected for the Antbuildz AI brand', async (
     readFile(new URL('../app/original-antbuildz-app.tsx', import.meta.url), 'utf8'),
     readFile(new URL('../app/globals.css', import.meta.url), 'utf8'),
   ]);
-  assert.match(source, /HOME_HERO_TITLE_PRIMARY = 'Built for Complex'/);
-  assert.match(source, /HOME_HERO_TITLE_BRAND = 'Product Conversations'/);
+  assert.match(source, /HOME_HERO_TITLE_PRIMARY = 'Help customers find'/);
+  assert.match(source, /HOME_HERO_TITLE_BRAND = 'the right solution'/);
   assert.match(source, /antbuildz-ai-wordmark/);
   assert.match(source, /brandImage\.src = '\/images\/antbuildz-wordmark\.png'/);
   assert.match(source, /brandImage\.width = 1471/);
@@ -2809,7 +2809,7 @@ test('pricing presents Agent, Sales and Rental+ as one clear upgrade path', asyn
   assert.match(source, /Deploy Your /);
   assert.match(source, /AI Agent/);
   assert.match(source, /Across Your Customer Channels\./);
-  assert.match(source, /One business conversation may turn into thousands in revenue\./);
+  assert.match(source, /Choose a plan for everyday questions and complex customer enquiries\./);
   assert.match(source, /duplicateSectionHeader\.hidden = true/);
   assert.match(source, /duplicateSectionHeader\.setAttribute\('aria-hidden', 'true'\)/);
   assert.match(source, /Conversation credits/);
@@ -3051,7 +3051,7 @@ test('legacy AI Agent routes redirect directly to the canonical product URL', as
   assert.match(source, /'ai-sales-agent': '\/ai-agent'/);
   assert.match(source, /aiagent: '\/ai-agent'/);
   assert.match(source, /assistant: '\/ai-agent'/);
-  assert.match(source, /'ai-agent': \['AI Agent for Complex Product Businesses'/);
+  assert.match(source, /'ai-agent': \['AI Agent for Customer Conversations'/);
   assert.doesNotMatch(source, /'ai-agent': '\/ai-sales-agent'/);
 });
 

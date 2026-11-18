@@ -4,11 +4,11 @@ import { setSalesAgentText as setText } from './ai-sales-agent-copy';
 // Select only the canonical Webstore route. Exact text replacements preserve the
 // transferred React nodes, layouts, animations, FAQ behaviour and link targets.
 export const WEBSTORE_TITLE = 'AI Webstore Suite for Complex Products';
-export const WEBSTORE_DESCRIPTION = "Extend your Customer AI Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.";
+export const WEBSTORE_DESCRIPTION = "Extend your AI Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.";
 
-export const WEBSTORE_HERO = 'Make your products discoverable through search and AI recommendations, while powering your Customer AI Agent with product and inventory knowledge to recommend the right solution.';
+export const WEBSTORE_HERO = 'Make your products discoverable through search and AI recommendations, while powering your AI Agent with product and inventory knowledge to recommend the right solution.';
 
-export const WEBSTORE_INVENTORY = "Connect your Customer AI Agent to the AI Webstore Suite catalogue and supported inventory sources. Use product specifications and recorded availability to narrow suitable options. Inventory connections and update frequency depend on your plan and setup.";
+export const WEBSTORE_INVENTORY = "Connect your AI Agent to the AI Webstore Suite catalogue and supported inventory sources. Use product specifications and recorded availability to narrow suitable options. Inventory connections and update frequency depend on your plan and setup.";
 
 export const WEBSTORE_MARKET_SHIFT = {
   eyebrow: 'THE AI-ERA BUYER',
@@ -110,11 +110,11 @@ export const WEBSTORE_CLOSING_CTA = {
 
 export const WEBSTORE_FAQS = [
   ['The Antbuildz AI Webstore Suite is an AI Webstore for industrial products. It combines a structured product library, branded Webstore, sales, rental and enquiry workflows, quotation tools, analytics, multilingual capabilities, and a built-in AI Sales Agent. It supports businesses selling machinery, equipment, tools, components, spare parts, hardware, materials, and supplies.',
-    "AI Webstore Suite is the connected product, inventory and store layer for your Customer AI Agent. It adds a browsable catalogue and dedicated pages for complex products, including equipment, instruments, electronics and parts. Sales and rental capabilities depend on your plan and setup."],
+    "AI Webstore Suite is the connected product, inventory and store layer for your AI Agent. It adds a browsable catalogue and dedicated pages for complex products, including equipment, instruments, electronics and parts. Sales and rental capabilities depend on your plan and setup."],
   ['The AI Webstore Suite combines a structured product library, branded Webstore, rental and sales workflows, quotation tools, analytics, and the built-in AI Sales Agent. The Antbuildz AI Sales Agent is for companies that already have a website or digital catalogue and want to add AI-guided product engagement without launching a new Webstore.',
-    "The Customer AI Agent answers questions, recommends products and qualifies enquiries using your approved knowledge. The AI Webstore Suite adds structured listings, product pages and supported inventory context. You can use the agent without a webstore or choose a combined plan from the beginning."],
+    "The AI Agent answers questions, recommends products and qualifies enquiries using your approved knowledge. The AI Webstore Suite adds structured listings, product pages and supported inventory context. You can use the agent without a webstore or choose a combined plan from the beginning."],
   ['Yes. The AI Sales Agent is included in the AI Webstore Suite. It uses approved product information to answer enquiries, recommend suitable options, and capture buyer requirements before quotation or human sales handover.',
-    "Yes. The Sales and Rental+ plans combine the Customer AI Agent with AI Webstore Suite capabilities. The Agent uses approved knowledge to guide product questions, recommendations and enquiries. You can also start with the Agent plan without launching a Webstore."],
+    "Yes. The Sales and Rental+ plans combine the AI Agent with AI Webstore Suite capabilities. The Agent uses approved knowledge to guide product questions, recommendations and enquiries. You can also start with the Agent plan without launching a Webstore."],
   ['The Suite includes a Webstore Builder, Product Catalogue and Inventory Management, sales, rental and enquiry workflows, quotation tools, buyer analytics, multilingual content, and a built-in AI Sales Agent.',
     'Available capabilities include the Webstore Builder, product catalogue, inventory management, enquiry tools, buyer analytics and multilingual content. Sales adds sales Webstore capabilities; Rental+ includes sales plus rental capabilities. Features, integrations and workflows depend on your plan and setup.'],
   ['Yes — Antbuildz Webstore is available globally with AI-powered translation supporting 21 languages, enabling businesses to reach both local and international customers.',

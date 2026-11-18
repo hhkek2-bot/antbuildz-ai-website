@@ -29,7 +29,7 @@ function BrandScene() {
       <span className={styles.guidanceNote}><GraphicIcon kind="review" />Your sales approach</span>
     </div>
     <div className={styles.chatPanel}>
-      <div className={styles.panelHeader}><EmmaAvatar size={32} decorative /><span><strong>Emma</strong><small>Your Customer AI Agent</small></span></div>
+      <div className={styles.panelHeader}><EmmaAvatar size={32} decorative /><span><strong>Emma</strong><small>Your AI Agent</small></span></div>
       <div className={styles.chatMessages}>
         <span className={styles.buyerMessage}>Can you help me choose?</span>
         <span className={styles.agentMessage}>Tell me what you need the equipment to do.</span>
@@ -89,8 +89,8 @@ export function HomeAgentFoundations() {
     <div className={styles.introFrame}>
       <div className={styles.intro}>
         <p className={styles.eyebrow}>Built around your business</p>
-        <h2 id="home-agent-foundations">One Customer AI Agent. <span>Built Around Your Products.</span></h2>
-        <p>Antbuildz AI is a Customer AI Agent platform that uses your products, inventory, company knowledge and workflows to understand customer requirements and guide each conversation. From sales and rental to product recommendations, technical questions and after-sales support, your team controls its knowledge and handover rules.</p>
+        <h2 id="home-agent-foundations">One AI Agent. <span>Built Around Your Products.</span></h2>
+        <p>Antbuildz AI uses your products, inventory, company knowledge and workflows to understand customer requirements and guide each conversation. From sales and rental to product recommendations, technical questions and after-sales support, your team controls its knowledge and handover rules.</p>
       </div>
     </div>
     <div className={styles.frame}>

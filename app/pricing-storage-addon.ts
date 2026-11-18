@@ -11,7 +11,7 @@ export function syncPricingStorageAddon(root: HTMLElement) {
   card.setAttribute('aria-labelledby', 'storage-addon-title');
   card.innerHTML = `
     <h3 id="storage-addon-title">Additional Storage</h3>
-    <p id="storage-addon-rate" class="pricing-addon-desc">Store catalogues, manuals and FAQs in your knowledge base to train and guide your Customer AI Agent. $10 per 100 MB/month.</p>
+    <p id="storage-addon-rate" class="pricing-addon-desc">Store catalogues, manuals and FAQs in your knowledge base to train and guide your AI Agent. $10 per 100 MB/month.</p>
     <div class="storage-addon-controls">
       <div class="pricing-agent-price storage-addon-total" aria-live="polite" aria-atomic="true"><strong data-storage-price>$10</strong><span> / month</span></div>
       <div class="storage-addon-stepper" role="group" aria-label="Extra knowledge storage" aria-describedby="storage-addon-rate">

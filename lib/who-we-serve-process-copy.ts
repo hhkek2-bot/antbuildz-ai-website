@@ -51,12 +51,12 @@ const WHO_WE_SERVE_PROCESS_COPY: Record<string, readonly [string, string, string
 
 const PRODUCT_RANGE_INTRO: Record<string, { hero: string; context: string }> = {
   '/manufacturers-brands': {
-    hero: 'Guide technical product questions across machinery, instruments and electronics. Your Customer AI Agent uses approved data to compare models and prepare enquiries for sales or engineering.',
-    context: 'Manufacturers of equipment, precision instruments and electronic products share a need: helping customers choose from complex ranges. The Sales Specialist role of Antbuildz Customer AI Agent uses approved catalogues, datasheets and configuration rules to guide those conversations.',
+    hero: 'Guide technical product questions across machinery, instruments and electronics. Your AI Sales Agent uses approved data to compare models and prepare enquiries for sales or engineering.',
+    context: 'Manufacturers of equipment, precision instruments and electronic products share a need: helping customers choose from complex ranges. The Sales Specialist role of Antbuildz AI Agent uses approved catalogues, datasheets and configuration rules to guide those conversations.',
   },
   '/dealers-distributors': {
-    hero: 'Guide buyers across equipment, instruments, electronics and component ranges. Your Customer AI Agent compares approved product options and routes enquiries to the right sales team.',
-    context: 'From equipment dealers to electronics and instrument distributors, multi-brand catalogues bring detailed product questions. The Sales Specialist role of Antbuildz Customer AI Agent helps compare approved options and route enquiries by brand, category, branch or territory.',
+    hero: 'Guide buyers across equipment, instruments, electronics and component ranges. Your AI Sales Agent compares approved product options and routes enquiries to the right sales team.',
+    context: 'From equipment dealers to electronics and instrument distributors, multi-brand catalogues bring detailed product questions. The Sales Specialist role of Antbuildz AI Agent helps compare approved options and route enquiries by brand, category, branch or territory.',
   },
 };
 

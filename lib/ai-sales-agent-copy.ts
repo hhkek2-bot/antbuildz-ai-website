@@ -3,9 +3,9 @@ import { CORE_AGENT_FAQS } from './core-agent-faqs';
 // /ai-agent; the transferred layout, demonstrations and FAQs stay owned
 // by their existing components. Stable visual selectors cover animated clones.
 export const SALES_AGENT_COPY = {
-  hero: 'A Customer AI Agent that uses approved product knowledge, inventory and workflows to handle complex product questions across sales, rental and support.',
+  hero: 'Answer everyday questions and qualify detailed enquiries. Your AI Agent uses approved knowledge to explain products and services, ask follow-up questions and hand over to your team.',
   capabilitiesIntro: [
-    'Built from industrial equipment, B2B sales and rental expertise, your Customer AI Agent helps buyers understand complex products, compare options and take the next step.',
+    'Built from industrial equipment, B2B sales and rental expertise, your AI Agent helps customers understand complex products, compare options and take the next step.',
     '',
   ],
   capabilities: [
@@ -28,7 +28,7 @@ export const SALES_AGENT_COPY = {
   intentLabels: ['Requirements shared', 'Timeline confirmed', 'Budget discussed'],
   controlLabels: ['Business Knowledge', 'Agent Instructions', 'Response Rules'],
   quotationLabels: ['Requirements Confirmed', 'Products Recommended', 'Buyer Intent Captured', 'Qualified Enquiry'],
-  featuresIntro: 'Give your Customer AI Agent the knowledge, controls and connections to recommend products and handle sales, rental and customer conversations.',
+  featuresIntro: 'Give your AI Agent the knowledge, controls and connections to recommend products and support sales, rental and customer conversations.',
   features: [
     ['knowledge', 'Knowledge Base', 'Add catalogues, manuals, FAQs, pricing guidance and business policies to support product conversations.'],
     ['lead', 'Lead Capture', 'Collect contact details, product interest, quantity, location and timing for follow-up.'],
@@ -49,7 +49,7 @@ export const SALES_AGENT_COPY = {
     ['c2', 'Follow-Up Without Context', 'Without the buyer’s requirements and conversation history, your team has to ask the same questions again.'],
   ],
   consoleIntro: [
-    'Configure one Customer AI Agent around your products, knowledge, inventory and workflows. Choose roles such as Sales Specialist, Product Specialist, Customer Service, Technical Support and After-Sales Support.',
+    'Configure one AI Agent around your products, knowledge, inventory and workflows. Choose roles such as Sales Specialist, Product Specialist, Customer Service, Technical Support and After-Sales Support.',
     '',
   ],
   consoleTabs: [
@@ -61,7 +61,7 @@ export const SALES_AGENT_COPY = {
     ['Understand Quotation Interest', 'Review urgency, budget and quotation interest to prioritise enquiries.'],
   ],
   connection: 'Connect your Agent to AI Webstore Suite inventory, Google Sheets, Excel or supported third-party systems. Recommend products using current stock and rental availability.',
-  channelsIntro: 'Connect your website, webstore, ads, emails, social posts and QR codes to the same Customer AI Agent. Buyers can ask questions immediately—without calling, completing a form or waiting for a reply.',
+  channelsIntro: 'Connect your website, webstore, ads, emails, social posts and QR codes to the same AI Agent. Buyers can ask questions immediately—without calling, completing a form or waiting for a reply.',
   channels: [
     ['Website & Webstore', 'Embed your Agent as live chat so buyers can ask product questions, clarify requirements and receive recommendations.'],
     ['Campaigns & QR Codes', 'Let buyers move directly from advertisements, social posts, brochures or QR codes into a product conversation.'],
@@ -141,11 +141,11 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     });
   };
 
-  set('.bright-hero h1 .bright-hero-title-line:nth-child(1)', 'Customer AI Agent for ');
+  set('.bright-hero h1 .bright-hero-title-line:nth-child(1)', 'AI Agent for ');
   set('.bright-hero h1 .bright-hero-title-line:nth-child(2)', '');
-  set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Complex Product Businesses']);
+  set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Customer Conversations']);
   set('.bright-subtitle', SALES_AGENT_COPY.hero);
-  set('.bright-chat-title', 'Antbuildz Customer AI Agent');
+  set('.bright-chat-title', 'Antbuildz AI Agent');
   CORE_AGENT_FAQS.forEach((faq, index) => {
     set(`.bright-faq-item:nth-child(${index + 1}) .bright-faq-item-trigger > span:first-child`, faq.question);
     set(`.bright-faq-item:nth-child(${index + 1}) .bright-faq-item-content p`, faq.answer);
@@ -153,11 +153,11 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
 
   action('.bright-hero-actions-block .bright-btn-primary', 'Book a Demo', '/book-a-demo');
   action('.bright-hero-actions-block .bright-btn-secondary', 'View Pricing', '/pricing');
-  eyebrow('.bright-hero-text-block', 'h1', 'CUSTOMER AI AGENT');
-  eyebrow('.bento-section-header', 'h2', 'CUSTOMER AI AGENT CAPABILITIES');
+  eyebrow('.bright-hero-text-block', 'h1', 'BUILT FOR COMPLEX PRODUCTS AND SERVICES');
+  eyebrow('.bento-section-header', 'h2', 'AI AGENT CAPABILITIES');
   eyebrow('.pain-bento-header', 'h2', 'ENQUIRY CHALLENGES');
-  eyebrow('.dt-header', 'h2', 'ONE CUSTOMER AI AGENT');
-  eyebrow('.bright-faq-accordion > .bright-container', 'h2', 'CUSTOMER AI AGENT FAQS');
+  eyebrow('.dt-header', 'h2', 'ONE AI AGENT');
+  eyebrow('.bright-faq-accordion > .bright-container', 'h2', 'AI AGENT FAQS');
 
   SALES_AGENT_COPY.capabilitiesIntro.forEach((text, i) => set(`.bento-desc-line:nth-child(${i + 1})`, text));
   set('.bento-title-line:first-child', 'More Than Answers');
@@ -317,11 +317,11 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     setSalesAgentText(card.querySelector('.dt-card-desc'), copy[1]);
   });
   page.querySelectorAll('strong').forEach(element => {
-    if (element.textContent?.trim() === 'AI Sales Agent') setSalesAgentText(element, 'Customer AI Agent');
+    if (element.textContent?.trim() === 'AI Sales Agent') setSalesAgentText(element, 'AI Agent');
   });
   const inventoryGraphic = page.querySelector('[aria-label^="The Antbuildz AI Sales Agent connects"]');
-  if (inventoryGraphic) inventoryGraphic.setAttribute('aria-label', 'The Antbuildz Customer AI Agent connects approved product knowledge with AI Webstore Suite and supported inventory sources.');
-  set('.dt-chat-name', 'Customer AI Agent');
+  if (inventoryGraphic) inventoryGraphic.setAttribute('aria-label', 'The Antbuildz AI Agent connects approved product knowledge with AI Webstore Suite and supported inventory sources.');
+  set('.dt-chat-name', 'AI Agent');
   set('.dt-chat-status', 'Online');
   set('.dt-chat-widget-body .dt-bubble:nth-child(1)', 'Hi—what product or equipment are you looking for?');
   set('.dt-chat-widget-body .dt-bubble:nth-child(2)', 'I need a 3-ton forklift for indoor use.');
@@ -334,7 +334,7 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     nextStepSection.setAttribute('data-antbuildz-sales-agent-removed', 'true');
   }
 
-  set('.ws-cta-title', ['Build', ' Your Customer AI Agent']);
+  set('.ws-cta-title', ['Build', ' Your AI Agent']);
   action('.ws-cta-btn-primary', 'Book a Demo', '/book-a-demo');
   action('.ws-cta-btn-outline', 'View Pricing', '/pricing');
   const closingCta = page.querySelector<HTMLElement>('.ws-cta-section');
@@ -367,7 +367,7 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
       }
       setSalesAgentText(
         supportingCopy,
-        'Configure your Customer AI Agent around your products, sales, rental, support and human handover rules.',
+        'Configure your AI Agent around your products, sales, rental, support and human handover rules.',
       );
     }
   }

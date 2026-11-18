@@ -7,8 +7,8 @@ import styles from '../features/conversational-experience/experience.module.css'
 
 const path = '/conversational-experience';
 const url = `https://antbuildz.ai${path}`;
-const title = 'AI Conversation Features for Complex Product Sales | Antbuildz Customer AI Agent';
-const description = 'See how the Antbuildz Customer AI Agent helps complex product teams answer enquiries with specification comparisons, technical diagrams, product guidance and human handover.';
+const title = 'AI Conversation Features for Complex Product Sales | Antbuildz AI Agent';
+const description = 'See how the Antbuildz AI Agent helps complex product teams answer enquiries with specification comparisons, technical diagrams, product guidance and human handover.';
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: 'Antbuildz Customer AI Agent Conversation Features for Complex Product Sales', description, inLanguage: 'en', isPartOf: { '@id': 'https://antbuildz.ai/#website' }, about: { '@id': 'https://antbuildz.ai/#software' } },
+    { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: 'Antbuildz AI Agent Conversation Features for Complex Product Sales', description, inLanguage: 'en', isPartOf: { '@id': 'https://antbuildz.ai/#website' }, about: { '@id': 'https://antbuildz.ai/#software' } },
     { '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://antbuildz.ai' },
       { '@type': 'ListItem', position: 2, name: 'Conversation Features', item: url },
@@ -40,7 +40,7 @@ export default function ConversationalExperiencePage() {
             <div className={styles.heroShade} aria-hidden="true" />
             <div className={styles.heroContent}>
               <h1>Beyond Just a<br />Text Answer</h1>
-              <p className={styles.heroLead}>The Antbuildz Customer AI Agent helps complex product teams turn product enquiries into guided conversations with specification comparisons, technical diagrams, product guidance and human handover.</p>
+              <p className={styles.heroLead}>The Antbuildz AI Agent helps complex product teams turn product enquiries into guided conversations with specification comparisons, technical diagrams, product guidance and human handover.</p>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function ConversationalExperiencePage() {
           <div className={styles.intro}>
             <p className={styles.eyebrow}>AI conversation features for complex product enquiries</p>
             <h2 id="demonstrations">Not just an answer.<br />An easier way to understand, compare and act.</h2>
-            <p>The Antbuildz Customer AI Agent can return approved comparisons, relevant technical diagrams, product guidance and configured next steps in one conversation — with human handover for decisions that need confirmation. Examples below are illustrative.</p>
+            <p>The Antbuildz AI Agent can return approved comparisons, relevant technical diagrams, product guidance and configured next steps in one conversation — with human handover for decisions that need confirmation. Examples below are illustrative.</p>
           </div>
           <ExperienceGallery />
         </div>

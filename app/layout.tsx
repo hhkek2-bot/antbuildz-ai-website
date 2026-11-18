@@ -18,13 +18,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://antbuildz.ai'),
   title: {
-    default: 'Antbuildz AI | Customer AI Agent for Complex Products',
+    default: 'Antbuildz AI | AI Agent for Products & Services',
     template: '%s | Antbuildz AI',
   },
-  description: 'Customer AI Agent for complex product businesses, with AI Webstore Suite and AI Agent Console. Built from industrial equipment, rental and technical B2B expertise.',
-  keywords: ['Customer AI Agent', 'Customer AI Agent for complex products', 'Industrial AI Sales Agent', 'AI Webstore Suite', 'equipment rental AI', 'industrial product sales'],
+  description: 'AI Agent for customer conversations about products and services, with AI Webstore Suite and AI Agent Console. Built for complex enquiries.',
+  keywords: ['AI Agent for customer conversations', 'AI Agent for complex products and services', 'Industrial AI Sales Agent', 'AI Webstore Suite', 'equipment rental AI'],
   applicationName: 'Antbuildz AI',
-  category: 'AI software for complex product businesses',
+  category: 'AI software for customer conversations',
   authors: [{ name: 'Antbuildz', url: 'https://antbuildz.ai' }],
   creator: 'Antbuildz',
   publisher: 'Antbuildz',
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
   openGraph: {
-    title: 'Antbuildz AI | Customer AI Agent for Complex Products',
-    description: 'Turn customer conversations into qualified demand with a Customer AI Agent, connected AI Webstore Suite and one operational Console.',
+    title: 'Antbuildz AI | AI Agent for Products & Services',
+    description: 'Answer everyday customer questions and guide complex product and service enquiries with the Antbuildz AI Agent.',
     url: 'https://antbuildz.ai',
     siteName: 'Antbuildz AI',
     locale: 'en_US',
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Antbuildz AI | Customer AI Agent for Complex Products',
-    description: 'Customer AI Agent, AI Webstore Suite and AI Agent Console for complex product businesses.',
+    title: 'Antbuildz AI | AI Agent for Products & Services',
+    description: 'AI Agent, AI Webstore Suite and AI Agent Console for product and service businesses.',
     images: [SOCIAL_SHARE_IMAGE_PATH],
   },
 };
@@ -67,7 +67,7 @@ const structuredData = {
       name: 'Antbuildz',
       url: 'https://antbuildz.ai',
       logo: 'https://antbuildz.ai/images/antbuildz-wordmark.png',
-      description: 'Customer AI Agents for complex product businesses, specialising in industrial equipment, rental and technical B2B products.',
+      description: 'Antbuildz AI helps product and service businesses handle customer conversations, with a specialism in complex product and service enquiries.',
       areaServed: 'Worldwide',
     },
     {
@@ -81,11 +81,11 @@ const structuredData = {
     {
       '@type': 'SoftwareApplication',
       '@id': 'https://antbuildz.ai/#software',
-      name: 'Antbuildz Customer AI Agent',
+      name: 'Antbuildz AI Agent',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       url: 'https://antbuildz.ai/ai-agent',
-      description: 'Customer AI Agent for complex products, handling customer sales, rental, support and product guidance with approved knowledge, AI Webstore Suite and AI Agent Console.',
+      description: 'AI Agent that uses approved knowledge to answer everyday customer questions, explain product and service options, gather requirements for complex enquiries and hand over to the team.',
       provider: { '@id': 'https://antbuildz.ai/#organization' },
     },
   ],

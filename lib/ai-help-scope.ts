@@ -5,7 +5,7 @@
  */
 export const AI_HELP_SEO = {
   title: 'AI Help Centre | Antbuildz AI',
-  description: 'Find answers about the Antbuildz Customer AI Agent, AI Webstore Suite, AI Agent Console, product knowledge, setup, controls and subscriptions.',
+  description: 'Find answers about the Antbuildz AI Agent, AI Webstore Suite, AI Agent Console, product knowledge, setup, controls and subscriptions.',
   url: 'https://antbuildz.ai/help/ai',
 } as const;
 

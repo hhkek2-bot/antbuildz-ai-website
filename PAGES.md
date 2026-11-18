@@ -1,5 +1,42 @@
 # Antbuildz.AI Page Register
 
+## Conversation billing copy preview · 18 November 2026
+
+The local Console Billing preview now labels the monthly allowance and
+purchased credits, explains the combined balance and Auto Top-Up trigger,
+and identifies purchased credit packs in Billing History. The Console
+tooltip and local Pricing describe one credit per customer session, with
+unlimited messages, following the owner's correction. The copied Console
+assets are read-only.
+
+Verified the Console tooltip, balance labels and Billing History in Chrome,
+checked for horizontal overflow at 390px, and verified the Pricing wording.
+The suite has the same nine existing failures. Production metering, the
+exact Auto Top-Up trigger and the 24-hour pause require confirmation before
+release. The published Terms still describe five exchanges and need review
+alongside production metering before release. This update changes local copy only.
+
+## Customer conversation positioning preview · 18 November 2026
+
+Local copy refinement based on the live antbuildz.ai pages. Home leads with
+“Help customers find the right solution” and introduces the specialism in
+complex product and service conversations in the hero paragraph. The AI
+Agent page leads with “AI Agent for Customer Conversations” and “Built for
+complex products and services” above it. The shared Products menu describes
+answering questions and capturing the details behind complex enquiries.
+Shared product labels and discovery metadata use Antbuildz AI Agent. Role
+pages retain names such as AI Sales Agent. The Pricing subtitle introduces
+choosing a plan, with billing detail in the plan and credit sections. The
+existing demos and shared design are used for the preview.
+
+Checked Home at 1440 × 900, 1024 × 900, 390 × 844 and 320 × 740, and AI Agent
+at 1440 × 900, 390 × 844 and 320 × 740. The home copy clears the demo at both mobile
+widths. Verified the Products menu destination, AI Agent CTA targets, product
+names on supporting pages and search and social metadata for both heroes.
+109 of 118 tests pass, compared with 100 of 118 before the edit. The nine
+remaining failures and the Conversation Features lint findings were present
+before the change. Local preview only.
+
 ## Additional storage and restored agent add-on — 4 November 2026
 
 At the user's request, Additional AI Agent is restored below Additional Storage

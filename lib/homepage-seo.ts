@@ -1,7 +1,7 @@
 /** Homepage metadata shared by the server and the transferred app's head adapter. */
 export const HOMEPAGE_SEO = {
-  title: 'Antbuildz AI | Customer AI Agent for Complex Products',
-  description: 'Customer AI Agent for complex products, built from industrial expertise. Handle customer sales, rental and support conversations with approved product knowledge, specifications and inventory.',
+  title: 'AI Agent for Products & Services | Antbuildz AI',
+  description: 'Answer everyday customer questions and guide complex product and service enquiries. Gather requirements and hand over with context using Antbuildz AI.',
   url: 'https://antbuildz.ai',
   image: 'https://antbuildz.ai/images/antbuildz-ai-social-share-v2.jpg',
 } as const;
