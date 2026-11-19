@@ -7,7 +7,7 @@ export const HELP_FAQS: readonly HelpFaq[] = [
     "id": "ai-1",
     "group": "about-antbuildz",
     "question": "What is Antbuildz AI?",
-    "answer": "Antbuildz AI provides an AI Agent for complex product businesses. It uses approved product knowledge, specifications, inventory and workflows to support sales, rental, product guidance and customer support. Industrial equipment and B2B rental are its strongest specialisations; instruments, electronics, components and technical consumer products can also fit.",
+    "answer": "Antbuildz AI provides a Customer AI Agent for product and service businesses. It answers questions, guides decisions and captures enquiries using approved business knowledge. Its speciality is handling complex and technical conversations.",
     "href": "/about",
     "reference": "Learn more: About Antbuildz"
   },
@@ -15,15 +15,15 @@ export const HELP_FAQS: readonly HelpFaq[] = [
     "id": "ai-2",
     "group": "about-antbuildz",
     "question": "What does Antbuildz AI build?",
-    "answer": "Antbuildz AI builds a configurable AI Agent for product conversations. AI Webstore Suite adds the connected product, inventory and store layer. AI Agent Console is where your team manages knowledge, instructions, testing, conversations and handover rules.",
+    "answer": "Our flagship product is the Customer AI Agent. AI Webstore Suite is an optional extension for product discovery and connected catalogue and inventory. AI Agent Console manages the Agent.",
     "href": "/about",
     "reference": "Learn more: About Antbuildz"
   },
   {
     "id": "ai-3",
     "group": "about-antbuildz",
-    "question": "Who is Antbuildz built for?",
-    "answer": "Antbuildz AI is built for businesses whose customers need help understanding, comparing, choosing or using complex products. Examples include equipment rental companies, manufacturers, dealers, industrial suppliers, instrument makers, electronics distributors and technical consumer-product brands.",
+    "question": "Who is Antbuildz AI built for?",
+    "answer": "Product and service businesses that need to engage customers, with particular strength in industrial equipment, technical products, sales and rental.",
     "href": "/who-we-serve",
     "reference": "Explore Who We Serve"
   },
@@ -36,10 +36,18 @@ export const HELP_FAQS: readonly HelpFaq[] = [
     "reference": "Learn more: About Antbuildz"
   },
   {
+    "id": "ai-internal-use",
+    "group": "about-antbuildz",
+    "question": "Can an AI Agent support internal employee questions?",
+    "answer": "An Agent can be configured with approved company policies or procedures to answer staff questions. Confirm that the deployment method and access controls suit the information before sharing it with employees.",
+    "href": "/ai-agent-console",
+    "reference": "Explore AI Agent Console"
+  },
+  {
     "id": "ai-7",
     "group": "about-antbuildz",
     "question": "What is the Antbuildz AI Agent?",
-    "answer": "Antbuildz AI Agent is the core product for complex product businesses. It uses approved knowledge and connected product data to answer questions, clarify requirements, compare supported options and prepare the next step across sales, rental and support. Your team controls its scope and human handover.",
+    "answer": "Antbuildz Customer AI Agent helps product and service businesses handle everyday questions and complex customer conversations. It uses approved knowledge and connected product data to clarify requirements, compare options and prepare enquiries for your team.",
     "href": "/ai-agent",
     "reference": "Learn more: AI Agent"
   },
@@ -79,7 +87,7 @@ export const HELP_FAQS: readonly HelpFaq[] = [
     "id": "ai-12",
     "group": "ai-sales-agent",
     "question": "Do I need AI Webstore Suite to use AI Agent?",
-    "answer": "No. AI Agent can be deployed independently and use approved company knowledge and product information. However, combining it with AI Webstore Suite gives the Agent access to a more structured product environment, including listings, specifications, categories, images, links and other connected business data.",
+    "answer": "No. Start with the Customer AI Agent on your existing website or dedicated AI Terminal. Add AI Webstore Suite if you need searchable product pages and connected catalogue or inventory data.",
     "href": "/resources/why-ai-agents-work-with-an-integrated-webstore",
     "reference": "Read the guide: Why Antbuildz AI Agent Works Better With an Integrated Webstore"
   },

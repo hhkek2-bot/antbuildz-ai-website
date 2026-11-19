@@ -3205,6 +3205,35 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   text-align: left;
 }
 
+.antbuildz-home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  pointer-events: auto;
+}
+.antbuildz-home-hero-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 24px;
+  border: 1px solid white;
+  border-radius: 999px;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+.antbuildz-home-hero-actions a:first-child {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+}
+@media (max-width: 767px) {
+  .antbuildz-home-hero-actions { margin-top: 16px; gap: 8px; }
+  .antbuildz-home-hero-actions a { min-height: 54px; padding: 0 16px; font-size: 14px; }
+}
+
 .antbuildz-ai-home .ai-marketplace-hero-copy h1 {
   max-width: 680px;
   margin-inline: 0;
@@ -3214,7 +3243,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 .antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-eyebrow {
   position: static;
   width: fit-content;
-  margin: 0 0 18px;
+  margin: 0 0 8px;
   color: rgb(255 255 255 / 84%);
   font: 700 var(--type-caption)/1.4 var(--font-body);
   letter-spacing: .01em;
@@ -3241,6 +3270,27 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
 @media (min-width: 768px) {
   .antbuildz-ai-home .ai-marketplace-hero-copy h1 .ai-hero-line:first-child {
     white-space: nowrap;
+  }
+}
+
+@media (min-width: 1180px) {
+  .antbuildz-ai-home .ai-marketplace-hero-copy h1 {
+    max-width: min(1180px, 90vw);
+    width: max-content;
+  }
+  .antbuildz-ai-home .ai-marketplace-hero-copy h1 .ai-hero-line:last-child {
+    white-space: nowrap;
+  }
+  .antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-description {
+    width: 700px;
+    max-width: min(700px, 65vw);
+  }
+}
+
+@media (min-width: 980px) and (max-width: 1179px) {
+  .antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-description {
+    width: 700px;
+    max-width: min(700px, 85vw);
   }
 }
 
@@ -4305,7 +4355,7 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   }
 
   .antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-eyebrow {
-    margin-bottom: 14px;
+    margin-bottom: 8px;
   }
 
   .antbuildz-ai-home .ai-marketplace-hero-copy .antbuildz-ai-home-description {
@@ -4367,8 +4417,9 @@ body:has(.antbuildz-public-header) :is(.antbuildz-drawer-shell, .antbuildz-drawe
   .webstore2-page > section:first-of-type .ws2-hero-shell > .mkt-section-eyebrow { order: 1; }
   .webstore2-page > section:first-of-type .ws2-hero-title { order: 2; }
   .webstore2-page > section:first-of-type .ws2-hero-desc { order: 3; }
-  .webstore2-page > section:first-of-type .ws2-hero-cta-wrap { order: 4; }
-  .webstore2-page > section:first-of-type .ws2-hero-secondary-link { order: 5; }
+  .webstore2-page > section:first-of-type .antbuildz-webstore-plan-note { order: 4; }
+  .webstore2-page > section:first-of-type .ws2-hero-cta-wrap { order: 5; }
+  .webstore2-page > section:first-of-type .ws2-hero-secondary-link { order: 6; }
   .webstore2-page > section:first-of-type .ws2-hero-visual { order: 6; }
 
   .webstore2-page > section:first-of-type .ws2-hero-actions {
@@ -5437,5 +5488,9 @@ blockquote { margin: 0; padding: 28px; border-left: 5px solid var(--yellow); bor
 .home-boom-zoom { position: absolute; inset: 0; z-index: 8; padding: 10px; background: #ffffffed; border-radius: 16px; pointer-events: none; }
 .home-boom-zoom img { width: 100%; height: 100%; object-fit: contain; }
 .home-boomlift-floating [hidden] { display: none !important; }
-@media (max-width: 1179px) { .antbuildz-ai-home .home-boomlift-floating.is-centre { top: auto; height: min(390px, calc(100% - 390px)); } }
-@media (max-width: 767px) { .antbuildz-ai-home .home-boomlift-floating.is-centre { top: 382px; bottom: auto; height: min(370px, calc(100% - 434px)); } .home-boom-thread { font-size: 13px; } }
+@media (max-width: 1179px) { .antbuildz-ai-home .home-boomlift-floating.is-centre { top: max(382px, var(--antbuildz-home-chat-top, 0px)); bottom: auto; height: min(390px, calc(100% - var(--antbuildz-home-chat-top, 382px) - 24px)); } }
+@media (max-width: 767px) { .antbuildz-ai-home .home-boomlift-floating.is-centre { top: max(382px, var(--antbuildz-home-chat-top, 0px)); bottom: auto; height: min(370px, calc(100% - var(--antbuildz-home-chat-top, 382px) - 24px)); } .home-boom-thread { font-size: 13px; } }
+
+.webstore2-page .antbuildz-webstore-plan-note {
+  color: #fff;
+}

@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://antbuildz.ai'),
   title: {
-    default: 'Antbuildz AI | AI Agent for Products & Services',
+    default: 'Customer AI Agent for Complex Conversations | Antbuildz AI',
     template: '%s | Antbuildz AI',
   },
   description: 'AI Agent for customer conversations about products and services, with AI Webstore Suite and AI Agent Console. Built for complex enquiries.',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
   openGraph: {
-    title: 'Antbuildz AI | AI Agent for Products & Services',
+    title: 'Customer AI Agent for Complex Conversations | Antbuildz AI',
     description: 'Answer everyday customer questions and guide complex product and service enquiries with the Antbuildz AI Agent.',
     url: 'https://antbuildz.ai',
     siteName: 'Antbuildz AI',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Antbuildz AI | AI Agent for Products & Services',
+    title: 'Customer AI Agent for Complex Conversations | Antbuildz AI',
     description: 'AI Agent, AI Webstore Suite and AI Agent Console for product and service businesses.',
     images: [SOCIAL_SHARE_IMAGE_PATH],
   },
@@ -67,7 +67,7 @@ const structuredData = {
       name: 'Antbuildz',
       url: 'https://antbuildz.ai',
       logo: 'https://antbuildz.ai/images/antbuildz-wordmark.png',
-      description: 'Antbuildz AI helps product and service businesses handle customer conversations, with a specialism in complex product and service enquiries.',
+      description: 'Antbuildz AI provides a Customer AI Agent for complex conversations and an optional AI Webstore Suite for product discovery and structured product knowledge.',
       areaServed: 'Worldwide',
     },
     {
@@ -81,11 +81,11 @@ const structuredData = {
     {
       '@type': 'SoftwareApplication',
       '@id': 'https://antbuildz.ai/#software',
-      name: 'Antbuildz AI Agent',
+      name: 'Antbuildz Customer AI Agent',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       url: 'https://antbuildz.ai/ai-agent',
-      description: 'AI Agent that uses approved knowledge to answer everyday customer questions, explain product and service options, gather requirements for complex enquiries and hand over to the team.',
+      description: 'Customer AI Agent using approved business knowledge, catalogues, specifications and connected inventory to guide complex conversations and capture enquiries.',
       provider: { '@id': 'https://antbuildz.ai/#organization' },
     },
   ],

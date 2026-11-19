@@ -11,7 +11,7 @@ import { PublicFooterLanguage } from '../public-footer-language';
 import '../public-footer.css';
 
 const productLinks = [
-  ['AI Agent', '/ai-agent'],
+  ['Customer AI Agent', '/ai-agent'],
   ['AI Webstore Suite', '/ai-webstore-suite'],
   ['Pricing', '/pricing'],
 ] as const;
@@ -60,7 +60,7 @@ function LegalHeader() {
           <details className={styles.mobileMenu}>
             <summary aria-label="Open navigation"><span /><span /><span /></summary>
             <nav aria-label="Mobile navigation">
-              <a href="/ai-agent">AI Agent</a>
+              <a href="/ai-agent">Customer AI Agent</a>
               <a href="/ai-webstore-suite">AI Webstore Suite</a>
               <a href="/conversational-experience">Conversation Features</a>
               <a href="/pricing">Pricing</a>
@@ -79,7 +79,7 @@ function LegalHeader() {
 function LegalFooter() {
   const columns = [
     ['AI Products', [
-      ['AI Agent', '/ai-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
+      ['Customer AI Agent', '/ai-agent'], ['AI Webstore Suite', '/ai-webstore-suite'],
       ['Conversation Features', '/conversational-experience'],
       ['AI FAQs', '/help/ai'], ['Pricing', '/pricing'], ['Book a Demo', '/book-a-demo'],
     ]],
@@ -87,7 +87,7 @@ function LegalFooter() {
     ['AI Agent Roles', agentRoleLinks],
     ['Company', [
       ['About Us', '/about'], ['Terms & Policy', '/agreements'],
-      ['AI Help Centre', '/help/ai'], ['Resources', '/resources'], ['Marketplace', 'https://antbuildz.com'],
+      ['AI Help Centre', '/help/ai'], ['Resources', '/resources'], ['Antbuildz Marketplace', 'https://antbuildz.com'],
     ]],
   ] as const;
   return (
@@ -103,7 +103,7 @@ function LegalFooter() {
                 </span><span className="antbuildz-ai-wordmark__ai">.ai</span>
               </span>
             </a>
-            <p>We build better conversations for complex products.</p>
+            <p>AI Agents and Webstores for customer conversations and product discovery</p>
           </div>
           {columns.map(([label, links]) => <nav className={`abz-public-footer__link-column${label === 'Who We Serve' ? ' abz-public-footer__link-column--who-we-serve' : ''}`} aria-label={label} key={label}>
             <h2>{label}</h2><ul>{links.map(([text, href]) => <li key={href}><a href={href}>{text}</a></li>)}</ul>

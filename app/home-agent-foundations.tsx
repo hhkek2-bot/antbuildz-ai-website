@@ -89,8 +89,8 @@ export function HomeAgentFoundations() {
     <div className={styles.introFrame}>
       <div className={styles.intro}>
         <p className={styles.eyebrow}>Built around your business</p>
-        <h2 id="home-agent-foundations">One AI Agent. <span>Built Around Your Products.</span></h2>
-        <p>Antbuildz AI uses your products, inventory, company knowledge and workflows to understand customer requirements and guide each conversation. From sales and rental to product recommendations, technical questions and after-sales support, your team controls its knowledge and handover rules.</p>
+        <h2 id="home-agent-foundations">One AI Agent. <span>Built Around Your Business.</span></h2>
+        <p>Your Customer AI Agent uses approved company knowledge, product and service information, policies, business rules and workflows to guide customer conversations. Your team controls its knowledge and handover rules.</p>
       </div>
     </div>
     <div className={styles.frame}>

@@ -1,5 +1,66 @@
 # Antbuildz.AI Page Register
 
+## Brand and product discovery positioning · 19 November 2026
+
+Home presents both customer conversations and product discovery, with the
+Customer AI Agent as the core product and AI Webstore Suite as an optional
+extension. The Agent hero emphasises complex conversations; the Webstore
+hero explains search and AI discovery, structured catalogue and inventory
+data. Homepage search, social and WebPage metadata follow the approved copy.
+Local preview only; production has not been updated.
+
+## AI Agent live-page match · 19 November 2026
+
+The local AI Agent hero and metadata were corrected to match the current live
+page: “AI Agent for Customer Conversations”, with the complex products and
+services eyebrow and live introductory copy. This supersedes the older
+baseline described in the restoration note below. Local only.
+
+## AI Agent page restoration · 19 November 2026
+
+Restored the local AI Agent page's previously inspected live headline, copy,
+sections, FAQ and search metadata at the owner's request. The homepage keeps
+the newer complex-conversations positioning. Checked the restored local hero
+at desktop and mobile sizes; the live page did not finish rendering during
+the latest comparison, so the restoration uses the earlier observed baseline.
+Local only.
+
+## Complex conversations positioning · 19 November 2026
+
+Home now leads with “AI Agent Built for Complex Conversations”. The AI Agent
+page leads with “AI Agent Built for Complex Customer Conversations” and its
+capabilities section explains business knowledge, follow-up questions,
+comparisons, business rules and handover. The Customer AI Agent remains the
+core product and AI Webstore Suite the optional extension. Homepage and Agent
+search and social titles, descriptions, structured data, no-JavaScript
+headings and the Agent definition FAQ reflect the final positioning.
+
+Checked both pages at 1440, 1024, 390 and 320px, including metadata and the
+expanded Agent FAQ. No horizontal overflow or mobile hero overlap was found.
+Focused lint and production build pass. The previously recorded billing,
+industry routing and full server-rendering issues remain open. Local only.
+
+## Customer AI Agent positioning · 19 November 2026
+
+Local Design-mode copy and hierarchy update. Home, AI Agent, AI Webstore
+Suite, Pricing, About, AI Roles and Help now introduce the Customer AI Agent
+as the core offer and the Webstore as an optional extension. Product-specific
+industry narratives and sales-role terminology remain. The homepage hero
+includes Explore AI Agent and Book a Demo actions, and the mobile conversation
+clears those actions. Search and social metadata reflect the updated copy.
+The source-owned no-JavaScript fallback supplies a short public navigation
+and overview for the transferred marketing pages.
+
+Checked desktop and mobile page headings, canonicals, homepage and Webstore
+navigation, pricing and no-JavaScript fallbacks. Before and after screenshots
+are in output/reposition-review-2026-11-19. The production billing metering
+implementation, conversation boundaries, pack prices and US-dollar additional
+agent amount were not verified. The published Terms retain the older
+five-exchange definition. The production industry paths differ from the local
+root routes, staging has conflicting page-level robots meta despite a
+noindex response header, and full server rendering remains unfinished.
+Review these issues before release. The local work has not been deployed.
+
 ## Conversation billing copy preview · 18 November 2026
 
 The local Console Billing preview now labels the monthly allowance and

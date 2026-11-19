@@ -14,11 +14,11 @@ export type AiRoleCopy = {
 };
 
 export const AI_ROLES_OVERVIEW_COPY = {
-  title: 'AI Agent Roles for Sales & Product Support',
-  seoTitle: 'AI Agent Roles for Complex Product Businesses',
-  metaDescription: 'AI agents for inbound sales and support conversations. Share your dedicated AI Terminal through websites, ads and campaigns to help customers find answers.',
-  headline: ['AI Agent Roles', 'for customer conversations'] as const,
-  intro: 'Turn website visits and ad clicks into helpful conversations. Share your dedicated AI Terminal so anyone can ask your Agent about products, sales or support.',
+  title: 'Customer AI Agent Roles',
+  seoTitle: 'Customer AI Agent Roles',
+  metaDescription: 'One Customer AI Agent for sales, product recommendations, customer service, technical support and after-sales support.',
+  headline: ['Customer AI Agent', 'Roles'] as const,
+  intro: 'One configurable Customer AI Agent. Choose the roles your customers need across sales, product guidance, customer service, technical support and after-sales support.',
 };
 
 export const AI_ROLE_COPY: Record<string, AiRoleCopy> = {
@@ -41,15 +41,15 @@ export const AI_ROLE_COPY: Record<string, AiRoleCopy> = {
     ],
   },
   'product-specialist': {
-    title: 'AI Agent for Product Specialist',
+    title: 'AI Product Recommendation Agent',
     seoTitle: 'AI Product Recommendation Agent',
     metaDescription: 'AI product recommendation agent for industrial catalogues. Help buyers compare specifications and find suitable products using approved knowledge and connected inventory.',
-    headline: ['AI Agent for', 'Product Specialist'],
+    headline: ['AI Product', 'Recommendation Agent'],
     intro: 'Use an AI product recommendation agent to compare specifications and find suitable options from your approved catalogue and connected inventory.',
-    capabilityHeading: 'What an AI Agent for Product Specialist can do',
+    capabilityHeading: 'What an AI Product Recommendation Agent Can Do',
     description: 'Your AI product recommendation agent turns catalogue data into practical product guidance. It compares equipment, spare parts and other technical products against customer requirements. When inventory is connected, it can recommend from current stock or rental availability. Missing dimensions and compatibility questions stay visible for your team to check.',
     useCaseIntro: 'Deploy this role when an online visitor wants to understand a product before choosing. Link product pages, launch ads and marketing posts to your AI Terminal for questions about features, specifications and fit.',
-    deploymentHeading: 'How to deploy an AI Agent for Product Specialist',
+    deploymentHeading: 'How to deploy an AI Product Recommendation Agent',
     deploymentIntro: 'Add your product knowledge in AI Agent Console, then give visitors a dedicated AI Terminal for product conversations.',
     workflow: [
       ['Add your knowledge', 'Add specifications, product manuals and comparison tables. Include model references so similar products can be distinguished.'],

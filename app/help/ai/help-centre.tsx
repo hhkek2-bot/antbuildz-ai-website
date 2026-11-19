@@ -5,7 +5,7 @@ import { HELP_FAQ_GROUPS, searchHelpFaqs, type HelpFaq } from '@/lib/help-faq-co
 import styles from './help-centre.module.css';
 
 const tabs = [
-  { id: 'primary', label: 'AI Agent', description: 'Setup, product intelligence, controls and integrations.' },
+  { id: 'primary', label: 'Customer AI Agent', description: 'Setup, product intelligence, controls and integrations.' },
   { id: 'secondary', label: 'AI Webstore Suite', description: 'Webstore, catalogue, transactions and subscriptions.' },
 ] as const;
 function Chevron({ open = false }: { open?: boolean }) {

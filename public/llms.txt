@@ -1,12 +1,12 @@
 # Antbuildz AI
 
-> Antbuildz AI provides an AI Agent for customer conversations about products and services. It uses approved business knowledge to answer everyday questions and specialises in guiding complex enquiries, including industrial equipment, rental and engineering services.
+> Antbuildz AI provides a Customer AI Agent built for complex conversations. It uses approved business knowledge, catalogues, specifications and business rules to guide everyday questions and complex product and service enquiries.
 
 Canonical website: https://antbuildz.ai
 
 ## Product model
 
-- [AI Agent](https://antbuildz.ai/ai-agent): The core Antbuildz product for customer conversations. It explains product and service options, gathers requirements for sales, rental and support, and hands over to the team for review. An engineering service enquiry can include project scope, site conditions and timing.
+- [Customer AI Agent](https://antbuildz.ai/ai-agent): The flagship Antbuildz product for customer conversations. It explains product and service options, gathers requirements for sales, rental and support, and hands over to the team for review. An engineering service enquiry can include project scope, site conditions and timing.
 - [AI Webstore Suite](https://antbuildz.ai/ai-webstore-suite): The optional product, inventory and store layer connected to the AI Agent. It adds structured product pages, dedicated product URLs and connected inventory context for more accurate recommendations, SEO and AI search discovery.
 - [AI Agent Console](https://antbuildz.ai/ai-agent-console): Manages knowledge, instructions, testing, conversations, workflows and performance.
 - [Conversation Features](https://antbuildz.ai/conversational-experience): AI conversation features for complex product enquiries. Illustrative demonstrations show how the AI Agent can use approved knowledge to present specification comparisons, technical diagrams, product guidance and configured next actions, while final technical suitability, availability, pricing and commercial confirmation remain with the team.

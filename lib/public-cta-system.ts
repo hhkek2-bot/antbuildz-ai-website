@@ -92,6 +92,15 @@ export function applyPublicCtaSystem(root: HTMLElement, pathname: string) {
 
   placeDemoBeforePricing(root);
 
+  if (pathname === '/ai-webstore-suite') {
+    root.querySelectorAll<HTMLAnchorElement>('.webstore2-page .ws2-hero-actions a[href="/pricing"]').forEach(link => {
+      setCtaLabel(link, 'Explore Plans');
+      if (link.hasAttribute('aria-label')) link.setAttribute('aria-label', 'Explore Plans');
+      const demo = link.parentElement?.querySelector<HTMLAnchorElement>('a[href="/book-a-demo"]');
+      if (demo && demo.previousElementSibling !== link) demo.before(link);
+    });
+  }
+
   // Webstore uses a small number of intentional text CTAs to cross-link to
   // the Agent page. They keep their lighter link treatment, but share the
   // same destination-owned wording as the corresponding button.

@@ -8,17 +8,18 @@ import { AiSalesAgentPage } from '../ai-sales-agent-global-reach';
 import { WebstoreConceptPage } from '../webstore-2-ai-webstore-preview/webstore-concept';
 import { LEGAL_ALIASES } from '@/lib/legal-navigation';
 import { RESOURCE_LIBRARY_SEO } from '@/lib/resource-copy';
+import { MarketingNoScript } from '../marketing-no-script';
 
 const pageTitles: Record<string, [string, string]> = {
   'ai-webstore-suite': [WEBSTORE_TITLE, WEBSTORE_DESCRIPTION],
-  'ai-agent': ['AI Agent for Customer Conversations', 'Use approved knowledge to answer customer questions, explain product and service options and qualify complex enquiries for your team to review.'],
+  'ai-agent': ['AI Agent Built for Complex Conversations', 'Handle everyday questions and complex product and service enquiries using business knowledge, specifications and connected inventory.'],
   'ai-agent-console': ['AI Agent Console | Knowledge, Workflows & Conversations', 'Manage AI Agent knowledge, instructions, workflows and conversations across sales, rental and support. Review responses and control human handover.'],
-  pricing: ['Antbuildz AI Pricing', 'Compare Antbuildz AI Agent plans: Agent, Sales and Rental+. Review AI Webstore Suite capabilities, included features and setup options.'],
+  pricing: ['Customer AI Agent Pricing', 'Compare Agent, Sales and Rental+ plans, included customer conversations and optional AI Webstore Suite capabilities.'],
   'book-a-demo': ['Book an Antbuildz AI Agent Demo', 'Book an Antbuildz AI Agent demo for your complex products, sales, rental or support workflows. Explore approved knowledge, recommendations and human handover.'],
   resources: [RESOURCE_LIBRARY_SEO.title, RESOURCE_LIBRARY_SEO.description],
   'ai-agent-roles': ['AI Agent Roles', 'Specialised AI roles for sales, product, service, technical support and after-sales workflows.'],
   faqs: ['AI FAQs', 'Answers about the Antbuildz AI Agent, AI Webstore Suite and AI Agent Console.'],
-  about: ['About Antbuildz AI', 'Learn how Antbuildz brings industrial equipment, rental and B2B experience to AI Agents for complex product businesses.'],
+  about: ['About Antbuildz AI | Customer AI Agent', 'Learn how our industrial know-how led to a Customer AI Agent for product and service businesses, with optional AI Webstore Suite.'],
   agreements: ['Antbuildz AI Agreements & Policies', 'Find the published privacy, data-handling and product policy documents that apply to Antbuildz AI services and customers.'],
 };
 
@@ -79,13 +80,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const images = solution
     ? [{ url: solution.image, alt: `${solution.navLabel} industrial operations` }]
     : [SOCIAL_SHARE_IMAGE];
+  const socialTitle = slug === 'about' ? title : `${title} | Antbuildz AI`;
   return {
-    title,
+    title: slug === 'about' ? { absolute: title } : title,
     description,
     alternates: { canonical: `/${slug}` },
     robots: { index: true, follow: true },
-    openGraph: { title, description, url: `/${slug}`, siteName: 'Antbuildz AI', type: 'website', locale: 'en_US', images },
-    twitter: { card: 'summary_large_image', title, description, images },
+    openGraph: { title: socialTitle, description, url: `/${slug}`, siteName: 'Antbuildz AI', type: 'website', locale: 'en_US', images },
+    twitter: { card: 'summary_large_image', title: socialTitle, description, images },
   };
 }
 
@@ -144,6 +146,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(routeSchema).replace(/</g, '\\u003c') }}
       />
+      <MarketingNoScript title={slug === 'ai-webstore-suite' ? 'Make Your Products Discoverable in the AI Era' : slug === 'about' ? 'Building AI for Customer Conversations' : slug === 'ai-agent' ? 'AI Agent Built for Complex Conversations' : routeSeo.title} description={routeSeo.description} pricing={slug === 'pricing'} />
       {content}
     </>
   );

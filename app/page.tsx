@@ -3,6 +3,7 @@ import { HomeEducation } from './home-education';
 import type { Metadata } from 'next';
 import { HOMEPAGE_SEO, HOMEPAGE_WEBPAGE } from '../lib/homepage-seo';
 import { SOCIAL_SHARE_IMAGE } from '../lib/social-share';
+import { MarketingNoScript } from './marketing-no-script';
 
 export const metadata: Metadata = {
   title: { absolute: HOMEPAGE_SEO.title },
@@ -26,6 +27,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(HOMEPAGE_WEBPAGE).replace(/</g, '\\u003c') }}
       />
       <OriginalAntbuildzApp />
+      <MarketingNoScript title="Get Discovered Make Conversations Count" description="Engage customers 24/7 with an AI Agent built for complex product and service conversations. Boost product visibility across search engines and AI platforms with AI Webstore Suite." />
       <HomeEducation />
     </>
   );

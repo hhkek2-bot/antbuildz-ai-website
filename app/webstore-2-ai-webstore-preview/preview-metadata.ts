@@ -17,11 +17,11 @@ export function syncWebstoreMetadata(doc: Document, pathname: string) {
     'meta[name="description"]': AI_WEBSTORE_PAGE.description,
     'meta[name="robots"]': 'index, follow',
     'meta[name="googlebot"]': 'index, follow',
-    'meta[property="og:title"]': AI_WEBSTORE_PAGE.title,
+    'meta[property="og:title"]': title,
     'meta[property="og:description"]': AI_WEBSTORE_PAGE.description,
     'meta[property="og:url"]': AI_WEBSTORE_PAGE.url,
     'meta[property="og:image"]': AI_WEBSTORE_PAGE.image,
-    'meta[name="twitter:title"]': AI_WEBSTORE_PAGE.title,
+    'meta[name="twitter:title"]': title,
     'meta[name="twitter:description"]': AI_WEBSTORE_PAGE.description,
     'meta[name="twitter:image"]': AI_WEBSTORE_PAGE.image,
   };

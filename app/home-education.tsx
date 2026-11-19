@@ -163,24 +163,24 @@ export function HomeEducationBody() {
         <div className={styles.frame}>
           <div className={`${styles.intro} ${styles.productIntro}`}>
             <p className={styles.eyebrow}>AI Agent + AI Webstore Suite</p>
-            <h2 id="home-product-relationship" className={styles.productHeading}><span>AI That Understands</span>{' '}<span>What You Sell</span></h2>
-            <p className={styles.connection}>Built around equipment rental and industrial sales, Antbuildz AI handles products where specifications, applications, compatibility and availability shape the decision. That product intelligence helps customers compare complex products and find a supported match, with your team confirming suitability and commercial terms.</p>
+            <h2 id="home-product-relationship" className={styles.productHeading}><span>One AI Agent,</span>{' '}<span>Built Around Your Business</span></h2>
+            <p className={styles.connection}>Start with your Customer AI Agent to answer, guide and qualify customer conversations. Add AI Webstore Suite when you want to improve product discovery and connect structured catalogue and inventory data to your Agent.</p>
           </div>
           <div className={styles.products}>
             <article className={styles.agentProduct}>
               <AgentGraphic />
-              <div className={styles.productIdentity}><p className={styles.productLabel}>AI Agent</p><span className={styles.productBadge}>The core product</span></div>
-              <h3>Guide product conversations</h3>
-              <p>Guide product choices, sales, rental and support using approved knowledge, with a clear handover to your team.</p>
-              <a className={styles.textLink} href="/ai-agent" aria-label="Explore AI Agent"><Arrow /></a>
+              <div className={styles.productIdentity}><p className={styles.productLabel}>Customer AI Agent</p><span className={styles.productBadge}>Core Product</span></div>
+              <h3>Engage Customers 24/7</h3>
+              <p>Answer questions, recommend suitable options, capture customer requirements and hand enquiries over to your team.</p>
+              <a className={styles.textLink} href="/ai-agent">Explore AI Agent <Arrow /></a>
             </article>
             <ProductConnector />
             <article className={styles.webstoreProduct}>
               <WebstoreGraphic />
-              <div className={styles.productIdentity}><p className={styles.productLabel}>AI Webstore Suite</p><span className={styles.productBadge}>Available as an add-on</span></div>
-              <h3>Turn your catalogue into a sales channel</h3>
-              <p>Structure products, specifications and inventory so customers can discover them and your AI Agent can recommend supported options.</p>
-              <a className={styles.textLink} href="/ai-webstore-suite" aria-label="Explore AI Webstore Suite"><Arrow /></a>
+              <div className={styles.productIdentity}><p className={styles.productLabel}>AI Webstore Suite</p><span className={styles.productBadge}>Optional Add-on</span></div>
+              <h3>Make Your Products Discoverable</h3>
+              <p>Publish search-ready product pages for SEO and AI discovery, while giving your Agent structured product and inventory knowledge.</p>
+              <a className={styles.textLink} href="/ai-webstore-suite">Explore AI Webstore Suite <Arrow /></a>
             </article>
           </div>
         </div>

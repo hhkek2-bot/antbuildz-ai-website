@@ -3,13 +3,13 @@ import { CORE_AGENT_FAQS } from './core-agent-faqs';
 // /ai-agent; the transferred layout, demonstrations and FAQs stay owned
 // by their existing components. Stable visual selectors cover animated clones.
 export const SALES_AGENT_COPY = {
-  hero: 'Answer everyday questions and qualify detailed enquiries. Your AI Agent uses approved knowledge to explain products and services, ask follow-up questions and hand over to your team.',
+  hero: 'Handle everyday questions and complex product and service enquiries using your business knowledge, catalogues, specifications and connected inventory. Guide customers and capture enquiries for your team.',
   capabilitiesIntro: [
     'Built from industrial equipment, B2B sales and rental expertise, your AI Agent helps customers understand complex products, compare options and take the next step.',
     '',
   ],
   capabilities: [
-    ['knowledge', 'Complex Product Knowledge', 'Explain specifications, applications and compatibility using approved product information, sales guidance and rental terms.'],
+    ['knowledge', 'Complex Product Knowledge', 'Use catalogues, datasheets, specifications, charts, tables and diagrams to explain products and services, applications and compatibility.'],
     ['training', 'Product & Support Knowledge', 'Answer product, customer service and technical questions using approved catalogues, manuals, policies and company knowledge.'],
     ['matching', 'Product Recommendations', 'Systematically compare confirmed buyer requirements with approved product data to recommend the closest supported options.'],
     ['signals', 'Buyer Intent Signals', 'Recognise urgency, budget, application and sales or rental intent as the conversation develops.'],
@@ -141,9 +141,9 @@ export function correctSalesAgentCopy(root: HTMLElement, pathname: string) {
     });
   };
 
-  set('.bright-hero h1 .bright-hero-title-line:nth-child(1)', 'AI Agent for ');
+  set('.bright-hero h1 .bright-hero-title-line:nth-child(1)', 'AI Agent Built for ');
   set('.bright-hero h1 .bright-hero-title-line:nth-child(2)', '');
-  set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Customer Conversations']);
+  set('.bright-hero h1 .bright-hero-title-line:nth-child(3)', ['', 'Complex Conversations']);
   set('.bright-subtitle', SALES_AGENT_COPY.hero);
   set('.bright-chat-title', 'Antbuildz AI Agent');
   CORE_AGENT_FAQS.forEach((faq, index) => {

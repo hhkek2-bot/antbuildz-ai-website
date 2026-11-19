@@ -106,13 +106,13 @@ const WHO_WE_SERVE_PATHS = new Set([
 const PAGE_TITLES: Record<string, string> = {
   '/': HOMEPAGE_SEO.title,
   '/ai-webstore-suite': `${WEBSTORE_TITLE} | Antbuildz AI`,
-  '/ai-agent': 'AI Agent for Customer Conversations | Antbuildz AI',
+  '/ai-agent': 'AI Agent Built for Complex Conversations | Antbuildz AI',
   '/ai-agent-console': 'AI Agent Console | Knowledge, Workflows & Conversations | Antbuildz AI',
-  '/pricing': 'Antbuildz AI Pricing | Antbuildz AI',
+  '/pricing': 'Customer AI Agent Pricing | Antbuildz AI',
   '/resources': `${RESOURCE_LIBRARY_SEO.title} | Antbuildz AI`,
   '/faqs': 'AI FAQs | Antbuildz AI',
   '/help/ai': 'AI Help Centre | Antbuildz AI',
-  '/about': 'About Antbuildz AI | Antbuildz AI',
+  '/about': 'About Antbuildz AI | Customer AI Agent',
   '/book-a-demo': 'Book an Antbuildz AI Agent Demo | Antbuildz AI',
   '/agreements': 'Antbuildz AI Agreements & Policies | Antbuildz AI',
 };
@@ -536,12 +536,12 @@ const PURCHASED_CREDIT_PACKS = [
 ] as const;
 
 const PRICING_USAGE_COPY = {
-  session: '1 credit = 1 full customer enquiry (unlimited messages until the customer leaves)—even 100 messages in one session counts as just 1 credit. Console test prompts do not count.',
+  session: 'One conversation is one customer session, with unlimited messages within the same session. Lead capture is included, but a conversation does not guarantee a captured lead. Console test prompts do not count.',
   monthly: 'Monthly allowances reset each month and do not roll over, including on annual plans.',
-  purchased: 'Purchased AI Conversation Credits do not expire. Auto Top-Up is optional. The threshold applies to your combined monthly allowance remaining and purchased credits. Authorised purchases use the pack and payment method shown in Billing and may repeat. Change or disable Auto Top-Up in your account, or contact help@antbuildz.ai.',
-  order: 'Usage order: included monthly AI conversations first, then purchased AI Conversation Credits.',
-  cancellation: 'Purchased AI Conversation Credits do not expire, but using them requires access to the applicable Services. They have no cash value and are generally non-refundable, except for verified billing errors or where required by law.',
-  principle: 'Plan upgrades unlock more business capability. AI Conversation Credits add enquiry capacity without forcing a plan upgrade.',
+  purchased: 'Purchased additional conversations do not expire. Auto Top-Up is optional. The threshold applies to your combined monthly allowance remaining and purchased credits. Authorised purchases use the pack and payment method shown in Billing and may repeat. Change or disable Auto Top-Up in your account, or contact help@antbuildz.ai.',
+  order: 'Usage order: included monthly AI conversations first, then purchased conversations.',
+  cancellation: 'Purchased additional conversations do not expire, but using them requires access to the applicable Services. They have no cash value and are generally non-refundable, except for verified billing errors or where required by law.',
+  principle: 'Plan upgrades unlock more business capability. Additional conversations add enquiry capacity without forcing a plan upgrade.',
 } as const;
 
 const PRICING_FAQS = [
@@ -554,11 +554,11 @@ const PRICING_FAQS = [
     answer: 'Yes. Use your product catalogue, manuals, FAQs and business knowledge to guide the AI Agent. Sales adds AI Webstore Suite sales capabilities with catalogue and inventory management; Rental+ includes sales plus rental inventory, pricing, availability and booking workflows.',
   },
   {
-    question: 'How does 1 conversation credit work, and what if I use my monthly allowance?',
-    answer: `Agent includes 50, Sales 75 and Rental+ 100 customer sessions per month. ${PRICING_USAGE_COPY.session} ${PRICING_USAGE_COPY.monthly} You can buy Conversation Credits or enable Auto Top-Up for extra capacity. ${PRICING_USAGE_COPY.order}`,
+    question: 'How are Customer Conversations counted?',
+    answer: `Agent includes 50, Sales 75 and Rental+ 100 customer sessions per month. ${PRICING_USAGE_COPY.session} ${PRICING_USAGE_COPY.monthly} You can buy additional conversations or enable Auto Top-Up for extra capacity. ${PRICING_USAGE_COPY.order}`,
   },
   {
-    question: 'How do AI Conversation Credits and Auto Top-Up work?',
+    question: 'How do additional conversations and Auto Top-Up work?',
     answer: `${PRICING_USAGE_COPY.purchased} They are used only after your included monthly AI conversations are exhausted. ${PRICING_USAGE_COPY.cancellation}`,
   },
   {
@@ -1082,7 +1082,7 @@ function correctProductsMenu(root: HTMLElement) {
     const links = document.createElement('div');
     links.className = 'antbuildz-industries-menu__links antbuildz-resources-menu__links';
     const products = [
-      { group: 'Engage customers', label: 'AI Agent', href: '/ai-agent', description: 'Answer questions about products and services. Capture the details behind complex enquiries.' },
+      { group: 'Engage customers', label: 'Customer AI Agent', href: '/ai-agent', description: 'Answer customer questions about products and services and capture enquiry details.' },
       { group: 'Guide product discovery', label: 'AI Webstore Suite', href: '/ai-webstore-suite', description: 'Connect your sales and rental catalogue and inventory for more accurate product recommendations.' },
       { group: 'Guide richer conversations', label: 'Conversation Features', href: '/conversational-experience', description: 'Explore visual answers, product comparisons and guided next steps in one conversation.' },
       { group: 'Manage your Agent', label: 'AI Agent Console', href: '/ai-agent-console', description: 'Build your AI Agent with approved business knowledge. Manage its behaviour, deployment and conversations.' },
@@ -1446,7 +1446,7 @@ function correctFooter(root: HTMLElement) {
   }
 
   const brandCopy = footer.querySelector<HTMLElement>('.abz-public-footer__brand p');
-  setPricingText(brandCopy, 'We build better conversations for complex products.');
+  setPricingText(brandCopy, 'AI Agents and Webstores for customer conversations and product discovery');
 
   const companyResources = footer.querySelector<HTMLAnchorElement>(
     'nav[aria-label="Company"] a[href="/blogs"], nav[aria-label="Company"] a[href="/resources"]',
@@ -1487,7 +1487,7 @@ function correctFooter(root: HTMLElement) {
     const marketplaceLink = footer.ownerDocument.createElement('a');
     marketplaceLink.dataset.antbuildzMarketplaceLink = 'true';
     marketplaceLink.href = 'https://antbuildz.com';
-    marketplaceLink.textContent = 'Marketplace';
+    marketplaceLink.textContent = 'Antbuildz Marketplace';
     marketplaceItem.appendChild(marketplaceLink);
     companyList.appendChild(marketplaceItem);
   }
@@ -1518,16 +1518,28 @@ function correctAboutEcosystem(root: HTMLElement) {
 
   const buildSection = root.querySelector<HTMLElement>('.about-build-section');
   if (buildSection) {
+    setSalesAgentText(buildSection.querySelector('h2'), ['Our AI Products', '']);
     const headingCopy = buildSection.querySelector<HTMLElement>('.about-section-heading > p');
     setPricingText(
       headingCopy,
-      'Antbuildz brings Agentic AI, Webstore Suite, and Marketplace together to power the full industrial rental and sales journey — from product discovery and customer intent to smart recommendations, qualified enquiries, and closed opportunities.',
+      'Our flagship Customer AI Agent handles customer conversations. AI Webstore Suite extends it with product discovery and structured catalogue and inventory capabilities.',
     );
-    const pillarTitles = Array.from(buildSection.querySelectorAll<HTMLElement>('.about-build-card > h3'));
-    ['Agentic AI', 'Webstore Suite', 'Marketplace'].forEach((title, index) => {
-      setPricingText(pillarTitles[index], title);
+    const cards = Array.from(buildSection.querySelectorAll<HTMLElement>('.about-build-card'));
+    const products = [
+      ['Customer AI Agent', 'Answer customer questions, guide product and service choices, qualify enquiries and prepare an informed handover.'],
+      ['AI Webstore Suite', 'Publish dedicated product pages for search and AI discovery and connect product knowledge to your Customer AI Agent.'],
+    ];
+    products.forEach(([title, description], index) => {
+      setPricingText(cards[index]?.querySelector('h3'), title);
+      setPricingText(cards[index]?.querySelector('p'), description);
     });
+    if (cards[2]) cards[2].hidden = true;
   }
+  setSalesAgentText(root.querySelector('.about-hero-copy h1'), ['Building AI for ', 'Customer Conversations', '']);
+  setPricingText(root.querySelector('.about-hero-copy > p'), 'Antbuildz AI helps businesses answer customer questions, guide decisions and capture opportunities with a Customer AI Agent built on their own knowledge.');
+  setPricingText(root.querySelector('.about-ai-section h2'), 'From Industrial Expertise to Customer AI');
+  setPricingText(root.querySelector('.about-vision-section h2'), 'Making Customer AI Agents Accessible to Businesses');
+  setPricingText(root.querySelector('.about-vision-section p:not(.about-section-eyebrow)'), 'We help product and service businesses engage customers through knowledgeable AI Agents. Our industrial experience gives us a strong foundation in complex conversations.');
 
   const finalSection = root.querySelector<HTMLElement>('.about-final-section');
   if (!finalSection) return;
@@ -1925,7 +1937,17 @@ function setupHomeHeroRuntime(root: HTMLElement) {
   homeHeroRuntimeElement = conversation;
   const cleanups = Array.from(hero.querySelectorAll<HTMLElement>('.antbuildz-home-hero-conversation'))
     .map((chat, layerIndex) => chat.dataset.layer === 'centre' ? mountBoomliftAnimation(chat) : setupHomeHeroConversationRuntime(hero, chat, layerIndex));
+  const copy = hero.querySelector<HTMLElement>('.ai-marketplace-hero-copy');
+  const positionConversation = () => {
+    if (!copy || hero.getBoundingClientRect().width > 1179) return;
+    const top = copy.getBoundingClientRect().bottom - hero.getBoundingClientRect().top + 24;
+    hero.style.setProperty('--antbuildz-home-chat-top', `${top}px`);
+  };
+  const copyObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(positionConversation);
+  if (copy) copyObserver?.observe(copy);
+  positionConversation();
   homeHeroRuntimeCleanup = () => {
+    copyObserver?.disconnect();
     cleanups.forEach((cleanup) => cleanup());
     hero.style.removeProperty('--antbuildz-home-chat-top');
     hero.style.removeProperty('--antbuildz-home-chat-height');
@@ -2062,10 +2084,10 @@ function setupHomeHeroConversationRuntime(
   };
 }
 
-const HOME_HERO_EYEBROW = 'AI for product and service businesses';
-const HOME_HERO_TITLE_PRIMARY = 'Help customers find';
-const HOME_HERO_TITLE_BRAND = 'the right solution';
-const HOME_HERO_DESCRIPTION = 'Built for complex product and service conversations. Your AI Agent answers everyday questions, compares options and asks for the details your team needs.';
+const HOME_HERO_EYEBROW = 'ANTBUILDZ AI';
+const HOME_HERO_TITLE_PRIMARY = 'Get Discovered';
+const HOME_HERO_TITLE_BRAND = 'Make Conversations Count';
+const HOME_HERO_DESCRIPTION = 'Engage customers 24/7 with an AI Agent built for complex product and service conversations. Boost product visibility across search engines and AI platforms with AI Webstore Suite.';
 
 function correctHomepage(root: HTMLElement) {
   const isHomepage = window.location.pathname === '/';
@@ -2104,6 +2126,18 @@ function correctHomepage(root: HTMLElement) {
     heroCopy.querySelector('h1')?.after(description);
   }
   if (description && description.textContent !== HOME_HERO_DESCRIPTION) description.textContent = HOME_HERO_DESCRIPTION;
+  if (heroCopy && !heroCopy.querySelector('.antbuildz-home-hero-actions')) {
+    const actions = document.createElement('div');
+    actions.className = 'antbuildz-home-hero-actions';
+    const agent = document.createElement('a');
+    agent.href = '/ai-agent';
+    agent.textContent = 'Explore AI Agent';
+    const demo = document.createElement('a');
+    demo.href = '/book-a-demo';
+    demo.textContent = 'Book a Demo';
+    actions.append(agent, demo);
+    heroCopy.append(actions);
+  }
   heroCopy?.querySelector('.antbuildz-ai-home-intro')?.remove();
 
   const hero = root.querySelector<HTMLElement>('.ai-marketplace-hero');
@@ -2315,7 +2349,7 @@ function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLEleme
     setPricingText(additionalAgent.querySelector('h3'), 'Additional AI Agent');
     const agentDesc = additionalAgent.querySelector('.pricing-addon-desc');
     if (agentDesc?.textContent?.includes('AI sales agent')) {
-      setPricingText(agentDesc, agentDesc.textContent.replace(/AI sales agent/gi, 'AI Agent'));
+    setPricingText(agentDesc, 'Deploy another Customer AI Agent with its own knowledge base for a different brand, product line or business unit.');
     }
   }
   const additionalAgentAmount = root.querySelector('[data-storage-agent] .pricing-agent-price')?.firstChild;
@@ -2335,18 +2369,16 @@ function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLEleme
   if (heroTitle && heroTitle.dataset.antbuildzPricingTitle !== 'channels') {
     heroTitle.dataset.antbuildzPricingTitle = 'channels';
     heroTitle.replaceChildren(
-      document.createTextNode('Deploy Your '),
+      document.createTextNode('Customer '),
       Object.assign(document.createElement('span'), {
         className: 'pricing-gradient-text',
-        textContent: 'AI Agent',
+        textContent: 'AI Agent Pricing',
       }),
-      document.createElement('br'),
-      document.createTextNode('Across All Your Channels.'),
     );
   }
   setPricingText(
     root.querySelector('.pricing-hero p'),
-    'Choose a plan for everyday questions and complex customer enquiries.',
+    'Start with your Customer AI Agent. Add AI Webstore Suite when you need product discovery, sales or rental capabilities.',
   );
 
   // The copied page repeats the product title directly above the billing
@@ -2360,24 +2392,24 @@ function correctPricingSupportingCopy(root: HTMLElement, agentSection: HTMLEleme
   }
   setPricingText(
     agentSection.querySelector('.pricing-conversation-note p'),
-    `${PRICING_USAGE_COPY.session} ${PRICING_USAGE_COPY.monthly}`,
+    `One conversation = one session, with unlimited messages within the same session. Lead capture included. ${PRICING_USAGE_COPY.monthly}`,
   );
 
   const packCard = root.querySelector('.pricing-topup-table')?.closest('.pricing-addon-card');
   if (packCard) {
-    setPricingText(packCard.querySelector('h3'), 'AI Conversation Credits');
+    setPricingText(packCard.querySelector('h3'), 'Additional Customer Conversations');
     const descriptions = packCard.querySelectorAll('.pricing-addon-desc');
-    setPricingText(descriptions[0], '1 credit = 1 full customer enquiry (unlimited messages until the customer leaves)—so you only pay per potential lead.');
-    setPricingText(descriptions[1], 'Choose a credit pack or enable Auto Top-Up. Purchased credits do not expire.');
+    setPricingText(descriptions[0], 'Add more conversations when you need them. Each billable session counts once, regardless of message count.');
+    setPricingText(descriptions[1], 'Choose a conversation pack or enable Auto Top-Up. Purchased conversations do not expire.');
     const headings = packCard.querySelectorAll('thead th');
-    setPricingText(headings[0], 'Credit pack');
+    setPricingText(headings[0], 'Conversation pack');
     setPricingText(headings[1], 'Price');
     packCard.querySelectorAll('tbody tr').forEach((row, index) => {
       const pack = PURCHASED_CREDIT_PACKS[index];
       if (!pack) return;
       const cells = row.querySelectorAll('td');
-      setPricingText(cells[0], `${pack.sessions} credits`);
-      setPricingText(cells[1], `$${formatUsdAmount(pack.usd)}`);
+      setPricingText(cells[0], `${pack.sessions} conversations`);
+      setPricingText(cells[1], `US$${formatUsdAmount(pack.usd)}`);
     });
   }
 
@@ -2556,7 +2588,7 @@ function correctPricing(root: HTMLElement) {
       const monthlyEquivalent = billingCycle === 'annual'
         ? getAnnualMonthlyUsd(plan.monthlyUsd)
         : plan.monthlyUsd;
-      setPricingText(price, `$${formatUsdAmount(monthlyEquivalent)}`);
+      setPricingText(price, `US$${formatUsdAmount(monthlyEquivalent)}`);
       if (period) {
         period.hidden = false;
         setPricingText(period, '/mo');
@@ -2567,7 +2599,7 @@ function correctPricing(root: HTMLElement) {
           const annualTotal = monthlyEquivalent * 12;
           setPricingText(
             annualNote,
-            `$${formatUsdAmount(annualTotal)} billed annually · Save 20%`,
+            `US$${formatUsdAmount(annualTotal)} billed annually · Save 20%`,
           );
         }
       }
@@ -2638,7 +2670,7 @@ function correctPricing(root: HTMLElement) {
       details.prepend(detailsHeading);
     }
     setPricingText(detailsHeading, 'Plan allowances');
-    setPricingDetail(details, 'usage', 'Customer sessions', plan.usage);
+    setPricingDetail(details, 'usage', 'Customer conversations', plan.usage);
     setPricingDetail(details, 'listings', 'Listings', plan.listings);
     details.querySelector('[data-antbuildz-pricing-detail="overage"]')?.remove();
 
@@ -2761,7 +2793,8 @@ function applyAntbuildzAiCorrections(root: HTMLElement) {
   // retain their specific role names and destinations.
   root.querySelectorAll<HTMLAnchorElement>('a[href="/ai-agent"]').forEach(link => {
     const labels: Record<string, string> = {
-      'AI Sales Agent': 'AI Agent',
+      'AI Sales Agent': 'Customer AI Agent',
+      'AI Agent': 'Customer AI Agent',
       'Explore AI Sales Agent': 'Explore AI Agent',
       'Meet Your AI Sales Agent': 'Meet Your AI Agent',
     };

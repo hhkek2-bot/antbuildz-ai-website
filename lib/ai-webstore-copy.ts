@@ -3,10 +3,10 @@ import { setSalesAgentText as setText } from './ai-sales-agent-copy';
 
 // Select only the canonical Webstore route. Exact text replacements preserve the
 // transferred React nodes, layouts, animations, FAQ behaviour and link targets.
-export const WEBSTORE_TITLE = 'AI Webstore Suite for Complex Products';
-export const WEBSTORE_DESCRIPTION = "Extend your AI Agent with a browsable product catalogue, dedicated product pages and supported inventory workflows through the AI Webstore Suite.";
+export const WEBSTORE_TITLE = 'AI Webstore for Product Discovery and AI Search';
+export const WEBSTORE_DESCRIPTION = "Publish dedicated product pages for SEO and AI discovery, manage catalogue and inventory data, and extend your Customer AI Agent with structured product knowledge.";
 
-export const WEBSTORE_HERO = 'Make your products discoverable through search and AI recommendations, while powering your AI Agent with product and inventory knowledge to recommend the right solution.';
+export const WEBSTORE_HERO = 'Build a digital product catalogue with dedicated product pages and URLs, ready for SEO and GEO. Help customers discover products through search engines and AI platforms, and support AI Agent recommendations with structured product and inventory data.';
 
 export const WEBSTORE_INVENTORY = "Connect your AI Agent to the AI Webstore Suite catalogue and supported inventory sources. Use product specifications and recorded availability to narrow suitable options. Inventory connections and update frequency depend on your plan and setup.";
 
@@ -277,9 +277,16 @@ export function correctWebstoreCopy(root: HTMLElement, pathname: string) {
 
   // Preserve the existing line break and React-owned spans. The former
   // highlighted span stays empty so both headline lines share one treatment.
-  setText(page.querySelector('.ws2-hero-shell > .mkt-section-eyebrow'), 'AI WEBSTORE SUITE');
-  setText(page.querySelector('.ws2-hero-title'), ['Make Your Products Discoverable', 'Power Better Recommendations', '']);
+  setText(page.querySelector('.ws2-hero-shell > .mkt-section-eyebrow'), 'AI WEBSTORE SUITE — OPTIONAL ADD-ON');
+  setText(page.querySelector('.ws2-hero-title'), ['Make Your Products Discoverable', 'in the AI Era', '']);
   setText(page.querySelector('.ws2-hero-desc'), WEBSTORE_HERO);
+  const heroDescription = page.querySelector<HTMLElement>('.ws2-hero-desc');
+  if (heroDescription && !page.querySelector('.antbuildz-webstore-plan-note')) {
+    const note = document.createElement('p');
+    note.className = 'antbuildz-webstore-plan-note';
+    note.textContent = 'Extend your Customer AI Agent with AI Webstore Suite, available with Sales and Rental+ plans.';
+    heroDescription.after(note);
+  }
   const connectedAgent = page.querySelector('.ws2-sales-cycle-copy');
   setText(connectedAgent?.querySelector('.mkt-section-eyebrow') ?? null, WEBSTORE_CONNECTED_AGENT.eyebrow);
   setText(connectedAgent?.querySelector('h2') ?? null, WEBSTORE_CONNECTED_AGENT.headline);
